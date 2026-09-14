@@ -340,3 +340,8 @@ python3 -m unittest discover -s tests -q
 ```
 
 本地模拟输出与教材一致；90项Node、23项Python通过。新增4项测试核验教材同步、过期/缺行/空解释拒绝、模拟行为、UTF-16偏移与定位歧义。未对产品运行代码做本轮修改，也未替换overlay。下一组需继续主构建器/UI/更新器的逐行说明；完整工程缺失仍按恢复计划推进，不能将134行教材称为全面完成。
+
+
+### 12 跨平台复验
+
+运行 [34870756579](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34870756579) 成功，测试代码提交 `0cda23e6a215ca1928686642da408de71030a456`。Windows 2022和Ubuntu 24.04的Node测试（含教材同步与模拟实验）均成功；Python回归仅在Linux运行。保存作业/步骤API证据，不宣称已取得逐项远端完整日志。课程、人工注解、生成器和实验已推送；全工程逐行讲解仍明确未完成。
