@@ -56,10 +56,12 @@ export function patchUiClass(original,card) {
   }
   return { code:updated, preservedMethods:preserved };
 }
-export async function buildUiPatch() {
-  const evidence = JSON.parse(await readFile(path.join(ROOT,'docs/evidence/bridge-ui.json'),'utf8'));
+export async function buildUiPatch(variant = 'workbench') {
+  if (!['workbench','sessions'].includes(variant)) throw new Error('Unknown UI variant');
+  const suffix = variant === 'sessions' ? '-sessions' : '';
+  const evidence = JSON.parse(await readFile(path.join(ROOT,'docs/evidence/bridge-ui'+suffix+'.json'),'utf8'));
   const target = only(evidence.classes,c => c.methods.includes('toggleBridge') && c.methods.includes('renderCustomTools'),'Bridge UI class');
-  const original = await readFile(path.join(ROOT,'recovered/bridge-ui',target.file),'utf8');
+  const original = await readFile(path.join(ROOT,'recovered/bridge-ui'+suffix,target.file),'utf8');
   if (hash(original) !== target.sha256) throw new Error('Original Bridge UI evidence changed');
   const card = await readFile(path.join(ROOT,'community/ui/access-card.js.txt'),'utf8');
   return { original, ...patchUiClass(original,card) };

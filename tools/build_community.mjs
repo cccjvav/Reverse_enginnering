@@ -113,18 +113,21 @@ export async function build(output = path.join(ROOT,'.work/community-overlay')) 
     files.push({path:`resources/app/extensions/shuncode/${relative}`, originalSha256:hash(await readOriginal(relative)), sha256:hash(contents), size:Buffer.byteLength(contents)});
   }
   const { buildUiPatch } = await import('./patch_bridge_ui.mjs');
-  const ui = await buildUiPatch();
   await mkdir(path.join(output,'ui'),{recursive:true});
-  await writeFile(path.join(output,'ui/bridge.original.txt'),ui.original);
-  await writeFile(path.join(output,'ui/bridge.community.txt'),ui.code);
-  const core = originals.core_code_index;
-  const uiPatches = ['out/vs/workbench/workbench.desktop.main.js','out/vs/sessions/sessions.desktop.main.js'].map(relative => {
-    const entry = only(core,e => e.path === relative,relative);
-    return {path:'resources/app/'+relative,originalSha256:entry.sha256,
-      find:'ui/bridge.original.txt', findSha256:hash(ui.original), replace:'ui/bridge.community.txt', replaceSha256:hash(ui.code)};
-  });
+  const uiPatches = [], preservedUiMethods = {};
+  for (const variant of ['workbench','sessions']) {
+    const ui = await buildUiPatch(variant);
+    const relative = variant === 'workbench' ? 'out/vs/workbench/workbench.desktop.main.js' : 'out/vs/sessions/sessions.desktop.main.js';
+    const entry = only(originals.core_code_index,e => e.path === relative,relative);
+    const find = `ui/bridge.${variant}.original.txt`, replacement = `ui/bridge.${variant}.community.txt`;
+    await writeFile(path.join(output,find),ui.original);
+    await writeFile(path.join(output,replacement),ui.code);
+    preservedUiMethods[variant] = ui.preservedMethods;
+    uiPatches.push({path:'resources/app/'+relative,originalSha256:entry.sha256,
+      find,findSha256:hash(ui.original),replace:replacement,replaceSha256:hash(ui.code)});
+  }
   const report = { edition:'community', baseVersion:'0.7.4', scope:'Version-locked extension overlay, not a complete source rebuild or tested Windows installer.',
-    protectedModules:patched.protectedModules,preservedUiMethods:ui.preservedMethods,files,uiPatches };
+    protectedModules:patched.protectedModules,preservedUiMethods,files,uiPatches };
   await writeFile(path.join(output,'overlay-manifest.json'),JSON.stringify(report,null,2)+'\n');
   return report;
 }

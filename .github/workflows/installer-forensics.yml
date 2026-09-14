@@ -69,6 +69,7 @@ jobs:
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
           node --max-old-space-size=6144 tools/capture_bridge_ui.mjs .work/windows-extracted
+          node --max-old-space-size=6144 tools/capture_bridge_ui.mjs .work/windows-extracted sessions
       - name: Test community policy and validate patch against both real host bundles
         if: steps.build.outcome == 'success'
         id: community
@@ -90,7 +91,7 @@ jobs:
             git add -f -- recovered/shuncode-extension
           fi
           if test -f docs/evidence/bridge-ui.json; then
-            git add -- docs/evidence/bridge-ui.json recovered/bridge-ui
+            git add -- docs/evidence/bridge-ui.json docs/evidence/bridge-ui-sessions.json recovered/bridge-ui recovered/bridge-ui-sessions
           fi
           if test -f docs/evidence/community-validation.json; then
             git add -- docs/evidence/community-validation.json

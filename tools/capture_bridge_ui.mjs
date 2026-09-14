@@ -4,7 +4,10 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 
-const file = path.join(process.argv[2], 'code$GetDestDir/resources/app/out/vs/workbench/workbench.desktop.main.js');
+const variant = process.argv[3] ?? 'workbench';
+if (!['workbench','sessions'].includes(variant)) throw new Error('Unknown host');
+const relative = variant === 'workbench' ? 'out/vs/workbench/workbench.desktop.main.js' : 'out/vs/sessions/sessions.desktop.main.js';
+const file = path.join(process.argv[2], 'code$GetDestDir/resources/app',relative);
 const bytes = await readFile(file);
 const text = bytes.toString('utf8');
 const targets = [...text.matchAll(/shuncode\.bridge\.(?:access\.getStatus|license\.[A-Za-z]+|payment\.[A-Za-z]+)/g)]
@@ -48,10 +51,11 @@ for (const cls of classes) {
   }
   if (hit) selected.set(cls.start,cls);
 }
-const out = 'recovered/bridge-ui';
+const suffix = variant === 'sessions' ? '-sessions' : '';
+const out = 'recovered/bridge-ui'+suffix;
 await mkdir(out, { recursive: true });
 const unique = [...selected.values()].sort((a,b) => a.start-b.start);
-const report = { origin: 'out/vs/workbench/workbench.desktop.main.js', sha256: createHash('sha256').update(bytes).digest('hex'),
+const report = { origin: relative, sha256: createHash('sha256').update(bytes).digest('hex'),
   scope: 'Compiled custom UI class excerpts, not original TypeScript; offsets are UTF-16 JavaScript string positions.', constant_bindings: bindings, constants: [], classes: [], unmatched: targets.filter(t => !owners.has(t.offset)) };
 let total = 0;
 for (const [index, node] of declarations.entries()) {
@@ -74,5 +78,5 @@ for (const [index, node] of unique.entries()) {
     methods: node.body.body.filter(m => m.type === 'MethodDefinition').map(m => m.key.name ?? m.key.value),
     commands: [...new Set(targets.filter(t => owners.get(t.offset)?.start === node.start).map(t => t.command))] });
 }
-await writeFile('docs/evidence/bridge-ui.json', JSON.stringify(report, null, 2) + '\n');
+await writeFile('docs/evidence/bridge-ui'+suffix+'.json', JSON.stringify(report, null, 2) + '\n');
 console.log(`Captured ${unique.length} custom UI classes (${total} bytes)`);

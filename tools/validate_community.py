@@ -14,6 +14,7 @@ def main():
     args = parser.parse_args()
     report = {'scope': 'Validation against statically extracted Windows 0.7.4 files. JS parsed only; no Windows GUI, extension activation or live MCP tests.', 'success': False, 'files': []}
     try:
+        report['overlayManifestSha256'] = sha((args.payload / 'overlay-manifest.json').read_bytes())
         plan = prepare(args.tree / 'code$GetDestDir', args.payload)
         for relative, old, new in plan:
             item = {'path': relative, 'originalSha256': sha(old), 'sha256': sha(new), 'size': len(new)}
