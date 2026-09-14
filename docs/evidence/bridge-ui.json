@@ -1,0 +1,48 @@
+{
+  "origin": "out/vs/workbench/workbench.desktop.main.js",
+  "sha256": "c10a82c4aabcbd84ae4038a251d5f2c8d903c5fdb1c929c77a136ca4f56135a5",
+  "scope": "Compiled custom UI class excerpts, not original TypeScript; offsets are UTF-16 JavaScript string positions.",
+  "classes": [],
+  "unmatched": [
+    {
+      "command": "shuncode.bridge.access.getStatus",
+      "offset": 24542967
+    },
+    {
+      "command": "shuncode.bridge.license.signIn",
+      "offset": 24543032
+    },
+    {
+      "command": "shuncode.bridge.license.signInWithGitee",
+      "offset": 24543101
+    },
+    {
+      "command": "shuncode.bridge.license.refreshSession",
+      "offset": 24543181
+    },
+    {
+      "command": "shuncode.bridge.license.refresh",
+      "offset": 24543252
+    },
+    {
+      "command": "shuncode.bridge.license.signOut",
+      "offset": 24543317
+    },
+    {
+      "command": "shuncode.bridge.license.redeem",
+      "offset": 24543380
+    },
+    {
+      "command": "shuncode.bridge.payment.getPlans",
+      "offset": 24543445
+    },
+    {
+      "command": "shuncode.bridge.payment.createOrder",
+      "offset": 24543515
+    },
+    {
+      "command": "shuncode.bridge.payment.getOrder",
+      "offset": 24543585
+    }
+  ]
+}
