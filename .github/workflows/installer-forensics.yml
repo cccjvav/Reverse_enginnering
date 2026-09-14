@@ -29,19 +29,31 @@ jobs:
       - name: Install static archive readers (not the application)
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends innoextract p7zip-full
+          sudo apt-get install -y --no-install-recommends p7zip-full cmake g++ make libboost-filesystem-dev libboost-iostreams-dev libboost-system-dev libboost-program-options-dev liblzma-dev
+      - name: Read pinned upstream extractor source (supports Inno 6.4.0.1)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: dscharrer/innoextract
+          ref: 6e9e34ed0876014fdb46e684103ef8c3605e382e
+          path: .work/innoextract-source
+          persist-credentials: false
+      - name: Build the static extractor, not the application
+        run: |
+          cmake -S .work/innoextract-source -B .work/innoextract-build -DCMAKE_BUILD_TYPE=Release
+          cmake --build .work/innoextract-build --parallel 2
+          echo "$GITHUB_WORKSPACE/.work/innoextract-build" >> "$GITHUB_PATH"
       - name: Identify the format and attempt static extraction
         run: |
           python3 tools/installer_forensics.py \
             --package ShunCode-0.7.4-win32-x64-Setup.exe \
             --extract-dir .work/windows-extracted \
-            --output docs/evidence/installer-forensics.json
+            --output docs/evidence/windows-extraction.json
       - name: Save bounded report on this branch, not extracted binaries
         run: |
-          test $(stat -c%s docs/evidence/installer-forensics.json) -lt 4000000
+          test $(stat -c%s docs/evidence/windows-extraction.json) -lt 4000000
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- docs/evidence/installer-forensics.json
+          git add -- docs/evidence/windows-extraction.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Record installer identification and static extraction evidence"
           git push origin HEAD:refs/heads/arena/01a09d2c-reverse-enginnering-of-shun

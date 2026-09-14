@@ -71,3 +71,36 @@ git show FETCH_HEAD:ShunCode-0.7.4-win32-x64-Setup.exe
 - 不是 Inno：根据 PE 与标记信息选择别的格式解析工具。
 
 这一节先记录实验设计；实际运行结果将随后补记，不能视为已解包成功。
+
+### 03 实测结果与修正
+
+运行 [34850939922](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34850939922)，证据保存于 [`evidence/installer-forensics.json`](evidence/installer-forensics.json)。
+
+- 在文件偏移 **698,348** 和 **238,601,591** 发现 `Inno Setup Setup Data (6.4.0.1)`。专用解析器也检测到 6.4.0.1，格式判断获得第二项佐证。
+- PE 机器类型为 `0x14c`（x86 启动 stub），节末尾为 **932,352**；其后的 **239,626,901** 字节与“大部分体积是安装载荷”相符。仍不能用这个 stub 的架构推断最终应用是 x86。
+- 去掉编码参数重新运行 7-Zip 23.01，仍报 `Cannot open the file as archive`，不是仅由该参数造成的失败。
+- 系统 `innoextract 1.9` 的版本输出明确标称支持到 **6.0.5**；实际解析 6.4.0.1 报 `Stream error while parsing setup headers`。
+
+**判断：** 输入哈希正确且解析器落后，优先解决版本兼容，而不是修改原安装包或猜测存在密码。
+
+查证上游版本支持：
+
+```bash
+gh api repos/dscharrer/innoextract/commits \
+  --jq '.[0] | {sha,date:.commit.committer.date,message:.commit.message}'
+gh api repos/dscharrer/innoextract/contents/src/setup/version.cpp \
+  --jq .content | base64 -d | grep '6, 4'
+```
+
+上游提交 `6e9e34ed0876014fdb46e684103ef8c3605e382e` 的格式表包含 `Inno Setup Setup Data (6.4.0.1)`。这只是选择工具的依据，**仍要用真实包检验是否能成功提取**。
+
+### 04 — 从固定源码构建匹配的解析器
+
+在 runner 内安装 CMake、G++、Boost 和 LZMA 开发库，获取上述固定提交，然后：
+
+```bash
+cmake -S .work/innoextract-source -B .work/innoextract-build -DCMAKE_BUILD_TYPE=Release
+cmake --build .work/innoextract-build --parallel 2
+```
+
+只构建解包工具，不构建或运行待分析应用。新版路径加入 runner PATH 后，复用同一套识别和提取脚本。保留上一轮失败报告，新报告另存为 `docs/evidence/windows-extraction.json`，不覆盖失败证据。
