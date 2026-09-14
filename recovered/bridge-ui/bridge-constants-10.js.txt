@@ -1,0 +1,1 @@
+BRIDGE_ACCESS_GET_STATUS = "shuncode.bridge.access.getStatus"

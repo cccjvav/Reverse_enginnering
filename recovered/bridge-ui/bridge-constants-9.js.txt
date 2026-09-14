@@ -1,0 +1,1 @@
+BRIDGE_LICENSE_SIGN_IN = "shuncode.bridge.license.signIn"

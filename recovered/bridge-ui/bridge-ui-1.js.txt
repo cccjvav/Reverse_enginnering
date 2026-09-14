@@ -1,0 +1,1846 @@
+class extends Disposable {
+  constructor(container3, commandService, clipboardService, openerService, dialogService, fileDialogService, configurationService) {
+    super();
+    this.commandService = commandService;
+    this.clipboardService = clipboardService;
+    this.openerService = openerService;
+    this.dialogService = dialogService;
+    this.fileDialogService = fileDialogService;
+    this.configurationService = configurationService;
+    this.providerChoiceCards = /* @__PURE__ */ new Map();
+    this.highlightedSkillAt = 0;
+    this.quickLinkButtons = [];
+    this.quickLinkRowButtons = [];
+    this.busy = false;
+    this.domainInputDirty = false;
+    this.namedTunnelInputDirty = false;
+    this.installingCloudflared = false;
+    this.lastCopiedQuickTunnelUrl = "";
+    this.paymentPlansFetchAttempted = false;
+    this.paymentPlansLoading = false;
+    this.refreshingCustomTools = false;
+    this.diagnosingSkills = false;
+    this.disposed = false;
+    this.accessErrorOverride = "";
+    this.root = append(container3, $(".shuncode-bridge"));
+    this.copyToast = append(this.root, $(".shuncode-bridge-copy-toast"));
+    this.copyToast.setAttribute("role", "status");
+    this.copyToast.setAttribute("aria-live", "polite");
+    const heroCard = append(this.root, $(".shuncode-bridge-card.shuncode-bridge-hero"));
+    const heroHeader = append(heroCard, $(".shuncode-bridge-card-header"));
+    append(heroHeader, $("h2", void 0, localizeBridge("shuncodeBridge.title", "ShunCode Bridge")));
+    this.stateBadge = append(heroHeader, $(".shuncode-bridge-state state-stopped"));
+    append(heroCard, $(
+      "p.shuncode-bridge-hero-description",
+      void 0,
+      localizeBridge("shuncodeBridge.descriptionShort", "Connect the current workspace tools to ChatGPT or another remote MCP client.")
+    ));
+    this.statusMessage = this._register(new ShunCodeBridgeStatusMessage(heroCard));
+    this.statusMessage.render({
+      message: localizeBridge("shuncodeBridge.loadingStatus", "Checking Bridge status\u2026"),
+      error: false
+    });
+    this.publicUrlField = this._register(new ShunCodeBridgePublicUrlField(heroCard, (url) => this.copyText(url)));
+    const heroControls = append(heroCard, $(".shuncode-bridge-controls.shuncode-bridge-hero-actions"));
+    this.startStopButton = this._register(new Button(heroControls, { ...defaultButtonStyles, supportIcons: true }));
+    this.startStopButton.label = `$(${Codicon.play.id}) ${localizeBridge("shuncodeBridge.start", "Start Bridge")}`;
+    this._register(this.startStopButton.onDidClick(() => this.toggleBridge()));
+    const copyPromptButton = this._register(new Button(heroControls, { ...defaultButtonStyles, supportIcons: true }));
+    copyPromptButton.label = `$(${Codicon.copy.id}) ${localizeBridge("shuncodeBridge.copyPrompt", "Copy prompt")}`;
+    copyPromptButton.setTitle(localizeBridge("shuncodeBridge.copyPromptTitle", "Copy the current MCP address and connection prompt to the clipboard"));
+    this._register(copyPromptButton.onDidClick(() => this.copyArenaPrompt()));
+    const tutorialButton = this._register(new Button(heroControls, { ...defaultButtonStyles, supportIcons: true }));
+    tutorialButton.label = `$(${Codicon.book.id}) ${localizeBridge("shuncodeBridge.openTutorial", "Open tutorial")}`;
+    tutorialButton.setTitle(localizeBridge("shuncodeBridge.openTutorialInBrowser", "Open docs.shuncode.top in the ShunCode built-in browser"));
+    this._register(tutorialButton.onDidClick(() => this.commandService.executeCommand("simpleBrowser.show", "https://docs.shuncode.top")));
+    this.quickLinkButtonsContainer = append(heroControls, $(".shuncode-bridge-quick-links"));
+    this.renderQuickLinkButtons();
+    const securityNote = append(heroCard, $(".shuncode-bridge-security-note"));
+    const warningIcon3 = append(securityNote, $("span"));
+    warningIcon3.classList.add(...ThemeIcon.asClassNameArray(Codicon.warning));
+    append(securityNote, $(
+      "span",
+      void 0,
+      localizeBridge("shuncodeBridge.securityWarningShort", "Bridge can edit files and run terminal commands. Keep the MCP address private.")
+    ));
+    this.accessCard = append(this.root, $("details.shuncode-bridge-card.shuncode-bridge-access-card"));
+    this.accessCard.open = false;
+    const accessSummary = append(this.accessCard, $("summary"));
+    const accessSummaryMain = append(accessSummary, $(".shuncode-bridge-access-summary-main"));
+    append(accessSummaryMain, $("h3", void 0, localizeBridge("shuncodeBridge.accountAccess", "Account & access")));
+    this.accessDetails = append(accessSummaryMain, $(
+      ".shuncode-bridge-access-details",
+      void 0,
+      localizeBridge("shuncodeBridge.accessLoading", "Checking your GitHub account and Bridge license\u2026")
+    ));
+    this.accessBadge = append(accessSummary, $(".shuncode-bridge-state state-stopped"));
+    const accessBody = append(this.accessCard, $(".shuncode-bridge-access-body"));
+    this.accessMessage = append(accessBody, $(".shuncode-bridge-access-message"));
+    this.installationSection = append(accessBody, $(".shuncode-bridge-installation"));
+    append(this.installationSection, $(
+      ".shuncode-bridge-label",
+      void 0,
+      localizeBridge("shuncodeBridge.installationId", "This installation ID")
+    ));
+    const installationIdRow = append(this.installationSection, $(".shuncode-bridge-url-row"));
+    this.installationIdValue = append(installationIdRow, $("input.shuncode-bridge-url-value"));
+    this.installationIdValue.type = "text";
+    this.installationIdValue.readOnly = true;
+    this.installationIdValue.spellcheck = false;
+    this.installationIdValue.setAttribute("aria-label", localizeBridge("shuncodeBridge.installationId", "This installation ID"));
+    this._register(addDisposableListener(this.installationIdValue, "focus", () => this.installationIdValue.select()));
+    const copyInstallationIdButton = append(installationIdRow, $("button.shuncode-bridge-copy-url"));
+    copyInstallationIdButton.type = "button";
+    copyInstallationIdButton.textContent = localizeBridge("copy", "Copy");
+    copyInstallationIdButton.title = localizeBridge("shuncodeBridge.copyInstallationId", "Copy installation ID");
+    this._register(addDisposableListener(copyInstallationIdButton, "click", async () => {
+      if (this.lastAccessStatus?.installationId) await this.copyText(this.lastAccessStatus.installationId);
+    }));
+    append(this.installationSection, $(
+      ".shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.installationIdHelp", "Use this ID to identify this device in the license administration console.")
+    ));
+    const accessActions = append(accessBody, $(".shuncode-bridge-controls.shuncode-bridge-access-actions"));
+    this.signInButton = this._register(new Button(accessActions, { ...defaultButtonStyles, supportIcons: true }));
+    this.signInButton.label = `$(${Codicon.github.id}) ${localizeBridge("shuncodeBridge.githubSignIn", "Sign in with GitHub")}`;
+    this._register(this.signInButton.onDidClick(() => this.runAccessCommand(BRIDGE_LICENSE_SIGN_IN)));
+    this.giteeSignInButton = this._register(new Button(accessActions, { ...defaultButtonStyles, supportIcons: true }));
+    this.giteeSignInButton.label = `$(${Codicon.cloud.id}) ${localizeBridge("shuncodeBridge.giteeSignIn", "Sign in with Gitee")}`;
+    this._register(this.giteeSignInButton.onDidClick(() => this.runAccessCommand(BRIDGE_LICENSE_SIGN_IN_GITEE)));
+    this.refreshSessionButton = this._register(new Button(accessActions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.refreshSessionButton.label = `$(${Codicon.sync.id}) ${localizeBridge("shuncodeBridge.refreshLoginStatus", "Refresh login status")}`;
+    this._register(this.refreshSessionButton.onDidClick(() => this.runAccessCommand(BRIDGE_LICENSE_REFRESH_SESSION)));
+    this.refreshLicenseButton = this._register(new Button(accessActions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.refreshLicenseButton.label = `$(${Codicon.refresh.id}) ${localizeBridge("shuncodeBridge.refreshLicense", "Refresh license")}`;
+    this._register(this.refreshLicenseButton.onDidClick(() => this.refreshAccessAndPlans()));
+    this.signOutButton = this._register(new Button(accessActions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.signOutButton.label = `$(${Codicon.signOut.id}) ${localizeBridge("shuncodeBridge.signOut", "Sign out")}`;
+    this._register(this.signOutButton.onDidClick(() => this.signOut()));
+    this.purchaseSection = append(accessBody, $(".shuncode-bridge-purchase"));
+    this.purchaseTitle = append(this.purchaseSection, $("h4", void 0, localizeBridge("shuncodeBridge.purchaseTitle", "Purchase Bridge access")));
+    this.purchaseHelp = append(this.purchaseSection, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.purchaseHelp", "Select a server-provided plan. Checkout opens in your browser and ShunCode activates Bridge automatically after payment is confirmed.")
+    ));
+    const purchaseGrid = append(this.purchaseSection, $(".shuncode-bridge-purchase-grid"));
+    const planField = this.createField(purchaseGrid, localizeBridge("shuncodeBridge.paymentPlan", "Plan"));
+    this.planSelect = append(planField, $("select.shuncode-bridge-select"));
+    const paymentField = this.createField(purchaseGrid, localizeBridge("shuncodeBridge.paymentType", "Payment method"));
+    this.paymentTypeSelect = append(paymentField, $("select.shuncode-bridge-select"));
+    const purchaseControls = append(this.purchaseSection, $(".shuncode-bridge-controls"));
+    this.purchaseButton = this._register(new Button(purchaseControls, { ...defaultButtonStyles, supportIcons: true }));
+    this.purchaseButton.label = `$(${Codicon.creditCard.id}) ${localizeBridge("shuncodeBridge.purchase", "Purchase")}`;
+    this._register(this.purchaseButton.onDidClick(() => this.createPayment()));
+    this.reloadPaymentPlansButton = this._register(new Button(purchaseControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.reloadPaymentPlansButton.label = `$(${Codicon.refresh.id}) ${localizeBridge("shuncodeBridge.reloadPlans", "Reload plans")}`;
+    this._register(this.reloadPaymentPlansButton.onDidClick(() => {
+      this.paymentPlansFetchAttempted = true;
+      void this.fetchPaymentPlans(true);
+    }));
+    this.checkPaymentButton = this._register(new Button(purchaseControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.checkPaymentButton.label = `$(${Codicon.sync.id}) ${localizeBridge("shuncodeBridge.checkPayment", "Check payment")}`;
+    this._register(this.checkPaymentButton.onDidClick(() => this.runAccessCommand(BRIDGE_PAYMENT_GET_ORDER, this.lastAccessStatus?.paymentOrder.id ?? "")));
+    this.paymentDetails = append(this.purchaseSection, $(".shuncode-bridge-payment-details"));
+    this.activationSection = append(accessBody, $(".shuncode-bridge-activation"));
+    append(this.activationSection, $(".shuncode-bridge-label", void 0, localizeBridge("shuncodeBridge.activationCode", "Activation code")));
+    const activationRow = append(this.activationSection, $(".shuncode-bridge-activation-row"));
+    this.activationInput = append(activationRow, $("input.shuncode-bridge-input"));
+    this.activationInput.type = "text";
+    this.activationInput.spellcheck = false;
+    this.activationInput.autocomplete = "off";
+    this.activationInput.placeholder = "SHUN-XXXXX-XXXXX-XXXXX-XXXXX";
+    this.redeemButton = this._register(new Button(activationRow, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.redeemButton.label = `$(${Codicon.key.id}) ${localizeBridge("shuncodeBridge.redeem", "Redeem")}`;
+    this._register(this.redeemButton.onDidClick(() => this.redeemActivationCode()));
+    this._register(addDisposableListener(this.activationInput, "input", () => this.updateControls()));
+    this._register(addDisposableListener(this.activationInput, "keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        void this.redeemActivationCode();
+      }
+    }));
+    this.connectionCard = append(this.root, $("details.shuncode-bridge-card.shuncode-bridge-connection-card"));
+    this.connectionCard.open = false;
+    const connectionSummary = append(this.connectionCard, $("summary"));
+    const connectionSummaryMain = append(connectionSummary, $(".shuncode-bridge-connection-summary-main"));
+    append(connectionSummaryMain, $("h3", void 0, localizeBridge("shuncodeBridge.connectionSettings", "Connection settings")));
+    this.connectionDetails = append(connectionSummaryMain, $(
+      ".shuncode-bridge-connection-details",
+      void 0,
+      localizeBridge("shuncodeBridge.connectionChecking", "Checking tunnel settings\u2026")
+    ));
+    this.connectionBadge = append(connectionSummary, $(
+      ".shuncode-bridge-state state-stopped",
+      void 0,
+      localizeBridge("shuncodeBridge.checking", "Checking")
+    ));
+    const configurationCard = append(this.connectionCard, $(".shuncode-bridge-connection-body"));
+    const providerField = this.createField(configurationCard, localizeBridge("shuncodeBridge.tunnelProvider", "Tunnel mode"));
+    const providerChoices = append(providerField, $(".shuncode-bridge-provider-choices"));
+    providerChoices.setAttribute("role", "radiogroup");
+    this.cloudflareProviderButton = this.createTunnelProviderChoice(
+      providerChoices,
+      "cloudflare",
+      localizeBridge("shuncodeBridge.cloudflareQuickTunnel", "Cloudflare Quick Tunnel (no account or domain)"),
+      localizeBridge("shuncodeBridge.cloudflareRecommended", "Default \xB7 zero configuration"),
+      localizeBridge("shuncodeBridge.cloudflareModeSummary", "A new address is created after every Bridge restart. Best when setup simplicity matters more than keeping one permanent URL."),
+      [
+        localizeBridge("shuncodeBridge.cloudflareModeAddress", "Address: temporary; changes after restart"),
+        localizeBridge("shuncodeBridge.cloudflareModeLimits", "Limits: no listed monthly request quota; 200 concurrent requests; no SLA"),
+        localizeBridge("shuncodeBridge.cloudflareModeSetup", "Setup: install cloudflared and allow Cloudflare Tunnel egress on port 7844 (or enable a global/TUN proxy); no account or domain")
+      ]
+    );
+    [this.quickInstallCloudflaredShortcutButton] = this.createProviderShortcutActions("cloudflare", [{
+      labelKey: "shuncodeBridge.quickInstallCloudflared",
+      label: "Install now",
+      titleKey: "shuncodeBridge.quickInstallCloudflaredHelp",
+      title: "Run the cloudflared install and verification steps below",
+      run: () => this.installAndCheckCloudflared()
+    }]);
+    this.cloudflareNamedProviderButton = this.createTunnelProviderChoice(
+      providerChoices,
+      "cloudflare-named",
+      localizeBridge("shuncodeBridge.cloudflareNamedTunnel", "Cloudflare Named Tunnel"),
+      localizeBridge("shuncodeBridge.cloudflareNamedStableAddress", "Stable address"),
+      localizeBridge("shuncodeBridge.cloudflareNamedModeSummary", "Use a Cloudflare-managed hostname that remains unchanged after ShunCode restarts."),
+      [
+        localizeBridge("shuncodeBridge.cloudflareNamedModeAddress", "Address: stable hostname on your Cloudflare-managed domain"),
+        localizeBridge("shuncodeBridge.cloudflareNamedModeLimits", "Limits: no ngrok-style 20,000 monthly request quota"),
+        localizeBridge("shuncodeBridge.cloudflareNamedModeSetup", "Setup: Cloudflare account, domain, Tunnel Token, and published application route")
+      ]
+    );
+    this.ngrokProviderButton = this.createTunnelProviderChoice(
+      providerChoices,
+      "ngrok",
+      localizeBridge("shuncodeBridge.ngrokReservedTunnel", "ngrok development domain"),
+      localizeBridge("shuncodeBridge.ngrokStableAddress", "Stable address"),
+      localizeBridge("shuncodeBridge.ngrokModeSummary", "The account-assigned development domain can be reused after restart, so the ChatGPT MCP address normally stays unchanged."),
+      [
+        localizeBridge("shuncodeBridge.ngrokModeAddress", "Address: stable; reusable after restart"),
+        localizeBridge("shuncodeBridge.ngrokModeLimits", "Free limits: 20,000 HTTP/S requests and 1 GB outbound data per month"),
+        localizeBridge("shuncodeBridge.ngrokModeSetup", "Setup: ngrok account, Authtoken, and assigned development domain")
+      ]
+    );
+    this.createProviderShortcutActions("ngrok", [
+      {
+        labelKey: "shuncodeBridge.jumpToNgrokSetup",
+        label: "Setup commands",
+        titleKey: "shuncodeBridge.jumpToNgrokSetupHelp",
+        title: "Jump to the ngrok setup commands below",
+        run: () => this.revealNgrokSetup()
+      },
+      {
+        labelKey: "shuncodeBridge.openNgrokVideoTutorial",
+        label: "Video tutorial",
+        titleKey: "shuncodeBridge.openNgrokVideoTutorialHelp",
+        title: "Open the ngrok video tutorial",
+        run: () => this.openerService.open(URI.parse(NGROK_VIDEO_TUTORIAL_URL), { openExternal: true })
+      }
+    ]);
+    append(providerField, $(
+      ".shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.tunnelProviderHelp", "Select a mode above. Stop Bridge before switching tunnel modes.")
+    ));
+    this.domainField = this.createField(configurationCard, localizeBridge("shuncodeBridge.domain", "ngrok domain"));
+    this.domainInput = append(this.domainField, $("input.shuncode-bridge-input"));
+    this.domainInput.type = "text";
+    this.domainInput.spellcheck = false;
+    this.domainInput.placeholder = "your-name.ngrok-free.dev";
+    this._register(addDisposableListener(this.domainInput, "input", () => {
+      this.domainInputDirty = true;
+    }));
+    this._register(addDisposableListener(this.domainInput, "blur", () => void this.persistDomain()));
+    this._register(addDisposableListener(this.domainInput, "keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        void this.persistDomain();
+        this.domainInput.blur();
+      }
+    }));
+    append(this.domainField, $(
+      ".shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.domainHelpShort", "Enter the reserved hostname from your ngrok dashboard.")
+    ));
+    this.namedTunnelConfiguration = append(configurationCard, $(".shuncode-bridge-named-configuration"));
+    append(this.namedTunnelConfiguration, $(
+      "h4",
+      void 0,
+      localizeBridge("shuncodeBridge.cloudflareNamedConfiguration", "Cloudflare Named Tunnel configuration")
+    ));
+    const namedGrid = append(this.namedTunnelConfiguration, $(".shuncode-bridge-named-grid"));
+    const namedDomainField = this.createField(namedGrid, localizeBridge("shuncodeBridge.cloudflareNamedHostname", "Public hostname"));
+    this.namedTunnelDomainInput = append(namedDomainField, $("input.shuncode-bridge-input"));
+    this.namedTunnelDomainInput.type = "text";
+    this.namedTunnelDomainInput.spellcheck = false;
+    this.namedTunnelDomainInput.placeholder = "mcp.example.com";
+    const namedTokenField = this.createField(namedGrid, localizeBridge("shuncodeBridge.cloudflareTunnelToken", "Tunnel Token"));
+    this.namedTunnelTokenInput = append(namedTokenField, $("input.shuncode-bridge-input"));
+    this.namedTunnelTokenInput.type = "password";
+    this.namedTunnelTokenInput.spellcheck = false;
+    this.namedTunnelTokenInput.autocomplete = "off";
+    this.namedTunnelTokenInput.placeholder = localizeBridge("shuncodeBridge.cloudflareTunnelTokenPlaceholder", "Paste token to set or replace it");
+    this.namedTunnelTokenStatus = append(namedTokenField, $(".shuncode-bridge-help"));
+    const namedPortField = this.createField(namedGrid, localizeBridge("shuncodeBridge.cloudflareNamedLocalPort", "Fixed local port"));
+    this.namedTunnelPortInput = append(namedPortField, $("input.shuncode-bridge-input"));
+    this.namedTunnelPortInput.type = "number";
+    this.namedTunnelPortInput.min = "1024";
+    this.namedTunnelPortInput.max = "65535";
+    this.namedTunnelPortInput.step = "1";
+    const namedOriginField = this.createField(namedGrid, localizeBridge("shuncodeBridge.cloudflareNamedServiceUrl", "Cloudflare Service URL"));
+    const namedOriginRow = append(namedOriginField, $(".shuncode-bridge-named-origin-row"));
+    this.namedTunnelOriginValue = append(namedOriginRow, $("input.shuncode-bridge-input"));
+    this.namedTunnelOriginValue.type = "text";
+    this.namedTunnelOriginValue.readOnly = true;
+    const copyNamedOriginButton = append(namedOriginRow, $("button.shuncode-bridge-copy-url"));
+    copyNamedOriginButton.type = "button";
+    copyNamedOriginButton.textContent = localizeBridge("copy", "Copy");
+    this._register(addDisposableListener(copyNamedOriginButton, "click", () => this.copyText(this.namedTunnelOriginValue.value)));
+    append(this.namedTunnelConfiguration, $(
+      ".shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.cloudflareNamedServiceHelp", "In Cloudflare Tunnels, the published application hostname must match the public hostname above and the Service URL must exactly match this local URL.")
+    ));
+    const namedActions = append(this.namedTunnelConfiguration, $(".shuncode-bridge-controls"));
+    this.saveNamedTunnelButton = this._register(new Button(namedActions, { ...defaultButtonStyles, supportIcons: true }));
+    this.saveNamedTunnelButton.label = `$(${Codicon.save.id}) ${localizeBridge("shuncodeBridge.saveNamedTunnel", "Save Named Tunnel")}`;
+    this._register(this.saveNamedTunnelButton.onDidClick(() => this.saveNamedTunnel()));
+    this.clearNamedTunnelTokenButton = this._register(new Button(namedActions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.clearNamedTunnelTokenButton.label = `$(${Codicon.clearAll.id}) ${localizeBridge("shuncodeBridge.clearTunnelToken", "Clear token")}`;
+    this._register(this.clearNamedTunnelTokenButton.onDidClick(() => this.clearNamedTunnelToken()));
+    for (const input of [this.namedTunnelDomainInput, this.namedTunnelTokenInput, this.namedTunnelPortInput]) {
+      this._register(addDisposableListener(input, "input", () => {
+        this.namedTunnelInputDirty = true;
+        this.updateNamedTunnelOriginPreview();
+        this.updateControls();
+      }));
+    }
+    this.tunnelSetupPanel = append(configurationCard, $(".shuncode-bridge-tunnel-panel"));
+    const tunnelStatusRow = append(this.tunnelSetupPanel, $(".shuncode-bridge-tunnel-status-row"));
+    const tunnelStatusText = append(tunnelStatusRow, $(".shuncode-bridge-tunnel-status-text"));
+    append(tunnelStatusText, $(
+      ".shuncode-bridge-label",
+      void 0,
+      localizeBridge("shuncodeBridge.tunnelStatus", "Tunnel status")
+    ));
+    this.tunnelState = append(tunnelStatusText, $(
+      ".shuncode-bridge-tunnel-state",
+      void 0,
+      localizeBridge("shuncodeBridge.tunnelUnchecked", "The tunnel client has not been checked yet.")
+    ));
+    const tunnelStatusActions = append(tunnelStatusRow, $(".shuncode-bridge-controls.shuncode-bridge-tunnel-actions"));
+    this.checkButton = this._register(new Button(tunnelStatusActions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.checkButton.label = `$(${Codicon.check.id}) ${localizeBridge("shuncodeBridge.checkTunnel", "Check tunnel")}`;
+    this._register(this.checkButton.onDidClick(() => this.runCommand(BRIDGE_CHECK_TUNNEL)));
+    this.installCloudflaredButton = this._register(new Button(tunnelStatusActions, { ...defaultButtonStyles, supportIcons: true }));
+    this.installCloudflaredButton.label = `$(${Codicon.cloudDownload.id}) ${localizeBridge("shuncodeBridge.installCloudflaredNow", "Install cloudflared")}`;
+    this._register(this.installCloudflaredButton.onDidClick(() => this.installCloudflared()));
+    const cloudflareSetup = this.createCloudflareSetupSection(this.tunnelSetupPanel);
+    this.cloudflareSetupDetails = cloudflareSetup.details;
+    this.cloudflareSetupSummary = cloudflareSetup.summary;
+    const cloudflareNamedSetup = this.createCloudflareNamedSetupSection(this.tunnelSetupPanel);
+    this.cloudflareNamedSetupDetails = cloudflareNamedSetup.details;
+    this.cloudflareNamedSetupSummary = cloudflareNamedSetup.summary;
+    const ngrokSetup = this.createNgrokSetupSection(this.tunnelSetupPanel);
+    this.ngrokSetupDetails = ngrokSetup.details;
+    this.ngrokSetupSummary = ngrokSetup.summary;
+    const persistentRow = append(configurationCard, $(".shuncode-bridge-persistent-row"));
+    const persistentText = append(persistentRow, $(".shuncode-bridge-persistent-text"));
+    const persistentLabel = append(persistentText, $("label.shuncode-bridge-label"));
+    persistentLabel.textContent = localizeBridge("shuncodeBridge.persistentMode", "Start Bridge with ShunCode");
+    append(persistentText, $(
+      ".shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.persistentModeHelpShort", "Automatically open and start Bridge after the app is ready.")
+    ));
+    this.persistentModeToggle = append(persistentRow, $("button.shuncode-bridge-switch"));
+    this.persistentModeToggle.type = "button";
+    this.persistentModeToggle.setAttribute("role", "switch");
+    this.persistentModeToggle.setAttribute("aria-label", localizeBridge("shuncodeBridge.persistentMode", "Start Bridge with ShunCode"));
+    append(this.persistentModeToggle, $("span.shuncode-bridge-switch-track"));
+    this.renderPersistentModeToggle(this.configurationService.getValue(BRIDGE_PERSISTENT_MODE) === true);
+    this._register(addDisposableListener(this.persistentModeToggle, "click", () => {
+      const enabled = this.persistentModeToggle.getAttribute("aria-checked") !== "true";
+      if (enabled && !this.lastAccessStatus?.licensed) {
+        this.renderAccessError(localizeBridge("shuncodeBridge.persistentLicenseRequired", "Activate Bridge access before enabling startup mode."));
+        return;
+      }
+      this.renderPersistentModeToggle(enabled);
+      void this.configurationService.updateValue(BRIDGE_PERSISTENT_MODE, enabled, 2 /* USER */).catch((error) => {
+        this.renderPersistentModeToggle(this.configurationService.getValue(BRIDGE_PERSISTENT_MODE) === true);
+        this.renderLocalError(error instanceof Error ? error.message : String(error));
+      });
+    }));
+    this._register(this.configurationService.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration(BRIDGE_PERSISTENT_MODE)) {
+        this.renderPersistentModeToggle(this.configurationService.getValue(BRIDGE_PERSISTENT_MODE) === true);
+      }
+    }));
+    this.quickLinksCard = append(this.root, $("details.shuncode-bridge-card.shuncode-bridge-quick-links-card"));
+    this.quickLinksCard.open = false;
+    const quickLinksSummary = append(this.quickLinksCard, $("summary"));
+    append(quickLinksSummary, $("h3", void 0, localizeBridge("shuncodeBridge.quickLinks", "Quick open")));
+    const quickLinksBody = append(this.quickLinksCard, $(".shuncode-bridge-quick-links-body"));
+    append(quickLinksBody, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.quickLinksHelp", "Shortcuts you add here appear as buttons at the top of this page and open in the ShunCode built-in browser.")
+    ));
+    const quickLinkForm = append(quickLinksBody, $(".shuncode-bridge-quick-link-form"));
+    this.quickLinkNameInput = append(quickLinkForm, $("input.shuncode-bridge-input.shuncode-bridge-quick-link-name-input"));
+    this.quickLinkNameInput.type = "text";
+    this.quickLinkNameInput.spellcheck = false;
+    this.quickLinkNameInput.placeholder = localizeBridge("shuncodeBridge.quickLinkNamePlaceholder", "Name");
+    this.quickLinkUrlInput = append(quickLinkForm, $("input.shuncode-bridge-input.shuncode-bridge-quick-link-url-input"));
+    this.quickLinkUrlInput.type = "text";
+    this.quickLinkUrlInput.spellcheck = false;
+    this.quickLinkUrlInput.placeholder = localizeBridge("shuncodeBridge.quickLinkUrlPlaceholder", "https://\u2026");
+    this.quickLinkAddButton = this._register(new Button(quickLinkForm, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.quickLinkAddButton.label = `$(${Codicon.add.id}) ${localizeBridge("shuncodeBridge.quickLinkAdd", "Add")}`;
+    this._register(this.quickLinkAddButton.onDidClick(() => this.addQuickLink()));
+    for (const input of [this.quickLinkNameInput, this.quickLinkUrlInput]) {
+      this._register(addDisposableListener(input, "input", () => this.updateControls()));
+      this._register(addDisposableListener(input, "keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          void this.addQuickLink();
+        }
+      }));
+    }
+    this.quickLinkMessage = append(quickLinksBody, $(".shuncode-bridge-quick-link-message"));
+    this.quickLinkList = append(quickLinksBody, $(".shuncode-bridge-quick-link-list"));
+    this.renderQuickLinksList();
+    const quickLinkFooter = append(quickLinksBody, $(".shuncode-bridge-quick-link-footer"));
+    this.quickLinkRestoreButton = this._register(new Button(quickLinkFooter, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.quickLinkRestoreButton.label = `$(${Codicon.refresh.id}) ${localizeBridge("shuncodeBridge.quickLinkRestoreDefaults", "Restore defaults")}`;
+    this._register(this.quickLinkRestoreButton.onDidClick(() => void this.restoreQuickLinksDefaults()));
+    this._register(this.configurationService.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration(BRIDGE_QUICK_LINKS_SETTING)) {
+        this.renderQuickLinkButtons();
+        this.renderQuickLinksList();
+      }
+    }));
+    const advanced = append(this.root, $("details.shuncode-bridge-card.shuncode-bridge-advanced-card"));
+    advanced.open = false;
+    const advancedSummary = append(advanced, $("summary"));
+    append(advancedSummary, $("h3", void 0, localizeBridge("shuncodeBridge.advancedSettings", "Advanced settings")));
+    const advancedBody = append(advanced, $(".shuncode-bridge-advanced-body"));
+    const transportRow = append(advancedBody, $(".shuncode-bridge-static-row"));
+    append(transportRow, $(".shuncode-bridge-label", void 0, localizeBridge("shuncodeBridge.transport", "Transport protocol")));
+    append(transportRow, $(
+      ".shuncode-bridge-static-value",
+      void 0,
+      localizeBridge("shuncodeBridge.streamableHttp", "Streamable HTTP")
+    ));
+    const workScopeSection = append(advancedBody, $(".shuncode-bridge-advanced-section"));
+    append(workScopeSection, $("h4", void 0, localizeBridge("shuncodeBridge.workScope", "Work scope")));
+    append(workScopeSection, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.workScopeHelp", "Choose the default target described to remote agents. Entire device still prioritizes the current workspace; Project files expands outside it only when you explicitly name another local path. Workspace file tools remain workspace-scoped.")
+    ));
+    const workScopeControls = append(workScopeSection, $(".shuncode-bridge-controls"));
+    this.workspaceScopeButton = this._register(new Button(workScopeControls, { ...defaultButtonStyles, secondary: true }));
+    this.renderWorkspaceScopeButton();
+    this._register(this.workspaceScopeButton.onDidClick(() => void this.toggleWorkspaceScope()));
+    this._register(this.configurationService.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration(BRIDGE_WORKSPACE_SCOPE_SETTING)) {
+        this.renderWorkspaceScopeButton();
+      }
+    }));
+    const windowRestoreSection = append(advancedBody, $(".shuncode-bridge-advanced-section"));
+    append(windowRestoreSection, $("h4", void 0, localizeBridge("shuncodeBridge.windowRestore", "Window restore")));
+    append(windowRestoreSection, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.windowRestoreHelp", "Choose what ShunCode reopens on startup. Restoring only the last closed window avoids a pile of workspace windows; restoring everything keeps the previous session intact.")
+    ));
+    const windowRestoreControls = append(windowRestoreSection, $(".shuncode-bridge-controls"));
+    this.windowRestoreButton = this._register(new Button(windowRestoreControls, { ...defaultButtonStyles, secondary: true }));
+    this.renderWindowRestoreButton();
+    this._register(this.windowRestoreButton.onDidClick(() => void this.toggleWindowRestore()));
+    this._register(this.configurationService.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration(WINDOW_RESTORE_SETTING)) {
+        this.renderWindowRestoreButton();
+      }
+    }));
+    const diagnosticsSection = append(advancedBody, $(".shuncode-bridge-advanced-section"));
+    append(diagnosticsSection, $("h4", void 0, localizeBridge("shuncodeBridge.connectionDiagnostics", "Connection diagnostics")));
+    const diagnosticControls = append(diagnosticsSection, $(".shuncode-bridge-controls.shuncode-bridge-diagnostic-actions"));
+    const openSessionButton = this._register(new Button(diagnosticControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    openSessionButton.label = `$(${Codicon.openPreview.id}) ${localizeBridge("shuncodeBridge.openSession", "Open Bridge Session")}`;
+    this._register(openSessionButton.onDidClick(() => this.commandService.executeCommand(BRIDGE_OPEN_SESSION)));
+    const securitySection = append(advancedBody, $(".shuncode-bridge-advanced-section.shuncode-bridge-security-section"));
+    append(securitySection, $("h4", void 0, localizeBridge("shuncodeBridge.securityAccess", "Security & access")));
+    append(securitySection, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.resetAddressHelp", "Reset the secret path if the MCP address was exposed. Every client using the old address will stop working.")
+    ));
+    const securityControls = append(securitySection, $(".shuncode-bridge-controls"));
+    this.rotateButton = this._register(new Button(securityControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.rotateButton.label = `$(${Codicon.key.id}) ${localizeBridge("shuncodeBridge.resetMcpAddress", "Reset MCP address")}`;
+    this._register(this.rotateButton.onDidClick(() => this.resetMcpAddress()));
+    const promptSection = append(advancedBody, $(".shuncode-bridge-advanced-section"));
+    append(promptSection, $("h4", void 0, localizeBridge("shuncodeBridge.copyPromptText", "Copy prompt text")));
+    append(promptSection, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.copyPromptTextHelp", "Text placed after the MCP address by the Copy prompt button. The address itself is always taken from the running Bridge and cannot be edited here. Leave empty to restore the default.")
+    ));
+    this.copyPromptInput = append(promptSection, $("textarea.shuncode-bridge-input.shuncode-bridge-copy-prompt-input"));
+    this.copyPromptInput.rows = 3;
+    this.copyPromptInput.spellcheck = false;
+    this.copyPromptInput.placeholder = DEFAULT_ARENA_PROMPT;
+    this.copyPromptInput.value = this.resolveArenaPrompt();
+    const promptControls = append(promptSection, $(".shuncode-bridge-controls"));
+    const savePromptButton = this._register(new Button(promptControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    savePromptButton.label = `$(${Codicon.save.id}) ${localizeBridge("shuncodeBridge.copyPromptSave", "Save prompt text")}`;
+    this._register(savePromptButton.onDidClick(() => this.saveCopyPromptText()));
+    const resetPromptButton = this._register(new Button(promptControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    resetPromptButton.label = `$(${Codicon.discard.id}) ${localizeBridge("shuncodeBridge.copyPromptReset", "Restore default")}`;
+    this._register(resetPromptButton.onDidClick(() => this.resetCopyPromptText()));
+    this.copyPromptMessage = append(promptSection, $("p.shuncode-bridge-inline-message"));
+    const customToolsSection = append(advancedBody, $(".shuncode-bridge-advanced-section"));
+    append(customToolsSection, $("h4", void 0, localizeBridge("shuncodeBridge.customTools", "Custom tools")));
+    append(customToolsSection, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.customToolsHelp", "User-added MCP tools live in .shuncode/mcp-tools: one JSON manifest per command tool and one subfolder per imported Agent Skill. Imported skills are copied into that folder, so no separate skills folder is created. Toggle to enable or disable; delete removes the file from disk.")
+    ));
+    const customToolsControls = append(customToolsSection, $(".shuncode-bridge-controls"));
+    const importSkillButton = this._register(new Button(customToolsControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    importSkillButton.label = `$(${Codicon.cloudDownload.id}) ${localizeBridge("shuncodeBridge.importSkill", "Import Skill\u2026")}`;
+    importSkillButton.setTitle(localizeBridge("shuncodeBridge.importSkillTitle", "Choose an Agent Skill folder or .zip; it is copied into .shuncode/mcp-tools"));
+    this._register(importSkillButton.onDidClick(() => this.importSkill()));
+    this.skillsToggleButton = this._register(new Button(customToolsControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this._register(this.skillsToggleButton.onDidClick(() => this.toggleSkillsEnabled()));
+    this.renderSkillsToggle();
+    this.refreshCustomToolsButton = this._register(new Button(customToolsControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.refreshCustomToolsButton.label = `$(${Codicon.refresh.id}) ${localizeBridge("shuncodeBridge.customToolsRefresh", "\u5237\u65B0\u5DE5\u5177\u5217\u8868")}`;
+    this.refreshCustomToolsButton.setTitle(localizeBridge("shuncodeBridge.customToolsRefreshTitle", "\u91CD\u65B0\u626B\u63CF .shuncode/mcp-tools \u5E76\u66F4\u65B0\u5DF2\u52A0\u8F7D\u7684\u81EA\u5B9A\u4E49\u5DE5\u5177"));
+    this._register(this.refreshCustomToolsButton.onDidClick(() => void this.refreshCustomTools()));
+    this.diagnoseSkillsButton = this._register(new Button(customToolsControls, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+    this.diagnoseSkillsButton.label = `$(${Codicon.tools.id}) ${localizeBridge("shuncodeBridge.skillsDiagnose", "Diagnose Skills")}`;
+    this.diagnoseSkillsButton.setTitle(localizeBridge("shuncodeBridge.skillsDiagnoseTitle", "Check every skill under .shuncode/mcp-tools and offer one-click fixes for the ones that fail to load"));
+    this._register(this.diagnoseSkillsButton.onDidClick(() => void this.diagnoseSkills()));
+    this.skillsCard = append(customToolsSection, $("details.shuncode-bridge-card.shuncode-bridge-skills-card"));
+    this.skillsCard.open = false;
+    const skillsSummary = append(this.skillsCard, $("summary"));
+    const skillsSummaryMain = append(skillsSummary, $(".shuncode-bridge-skills-summary-main"));
+    append(skillsSummaryMain, $("h3", void 0, localizeBridge("shuncodeBridge.skillsCardTitle", "Agent Skills")));
+    this.skillsCardSummaryText = append(skillsSummaryMain, $(".shuncode-bridge-skills-summary-count"));
+    const skillsBody = append(this.skillsCard, $(".shuncode-bridge-skills-body"));
+    this.skillsCardStatus = append(skillsBody, $("p.shuncode-bridge-help"));
+    this.skillsCardStatus.setAttribute("role", "status");
+    this.skillsCardStatus.setAttribute("aria-live", "polite");
+    this.skillsCardContainer = append(skillsBody, $(".shuncode-bridge-custom-tools"));
+    this.customToolsStatus = append(customToolsSection, $("p.shuncode-bridge-help"));
+    this.customToolsStatus.setAttribute("role", "status");
+    this.customToolsStatus.setAttribute("aria-live", "polite");
+    this.customToolsContainer = append(customToolsSection, $(".shuncode-bridge-custom-tools"));
+    const toolsSection = append(advancedBody, $(".shuncode-bridge-advanced-section"));
+    append(toolsSection, $("h4", void 0, localizeBridge("shuncodeBridge.exposedTools", "Exposed tools")));
+    this.toolsContainer = append(toolsSection, $(".shuncode-bridge-tools"));
+    const timer = setInterval(() => void this.refresh(), 1e3);
+    this._register(toDisposable(() => clearInterval(timer)));
+    void this.refresh();
+  }
+  createField(parent, label3) {
+    const field = append(parent, $(".shuncode-bridge-field"));
+    append(field, $("label.shuncode-bridge-label", void 0, label3));
+    return field;
+  }
+  createTunnelProviderChoice(parent, provider, title, badge, summary, facts) {
+    const card = append(parent, $(".shuncode-bridge-provider-choice-card"));
+    this.providerChoiceCards.set(provider, card);
+    const button = append(card, $("button.shuncode-bridge-provider-choice"));
+    button.type = "button";
+    button.dataset.provider = provider;
+    button.setAttribute("role", "radio");
+    button.setAttribute("aria-checked", "false");
+    const header2 = append(button, $(".shuncode-bridge-provider-header"));
+    append(header2, $(".shuncode-bridge-provider-title", void 0, title));
+    append(header2, $(".shuncode-bridge-provider-badge", void 0, badge));
+    append(button, $(".shuncode-bridge-provider-summary", void 0, summary));
+    const factList = append(button, $("ul.shuncode-bridge-provider-facts"));
+    for (const fact of facts) append(factList, $("li", void 0, fact));
+    this._register(addDisposableListener(button, "click", () => void this.selectTunnelProvider(provider)));
+    return button;
+  }
+  createProviderShortcutActions(provider, actions) {
+    const card = this.providerChoiceCards.get(provider);
+    if (!card) throw new Error(`Provider choice card not found for ${provider}`);
+    const host = append(card, $(".shuncode-bridge-provider-shortcut-host"));
+    const row = append(host, $(".shuncode-bridge-controls.shuncode-bridge-provider-shortcuts"));
+    return actions.map((action) => {
+      const button = this._register(new Button(row, { ...defaultButtonStyles, supportIcons: true }));
+      button.label = localizeBridge(action.labelKey, action.label);
+      button.setTitle(localizeBridge(action.titleKey, action.title));
+      this._register(button.onDidClick(() => void action.run()));
+      return button;
+    });
+  }
+  async installAndCheckCloudflared() {
+    this.revealedSetupProvider = "cloudflare";
+    this.cloudflareSetupDetails.open = true;
+    this.updateControls();
+    if (this.busy || this.lastStatus?.state === "running" || this.lastStatus?.state === "starting") return;
+    if (this.lastStatus?.tunnelInstalled !== true) await this.installCloudflared();
+    const statusAfterInstall = this.lastStatus;
+    if (this.busy || statusAfterInstall?.state === "starting") return;
+    await this.runCommand(BRIDGE_CHECK_TUNNEL);
+  }
+  revealNgrokSetup() {
+    this.revealedSetupProvider = "ngrok";
+    this.ngrokSetupDetails.open = true;
+    if (this.lastStatus) this.render(this.lastStatus);
+    this.updateControls();
+    setTimeout(() => {
+      this.ngrokSetupDetails.scrollIntoView({ block: "start", behavior: "smooth" });
+      this.ngrokSetupSummary.focus();
+    }, 0);
+  }
+  async selectTunnelProvider(provider) {
+    this.revealedSetupProvider = void 0;
+    if (this.busy || this.lastStatus?.state === "running" || this.lastStatus?.state === "starting" || this.lastStatus?.tunnelProvider === provider) return;
+    await this.runCommand(BRIDGE_SET_TUNNEL_PROVIDER, provider);
+  }
+  createCloudflareSetupSection(parent) {
+    const details = append(parent, $("details.shuncode-bridge-setup"));
+    const summary = append(details, $("summary"));
+    summary.textContent = localizeBridge("shuncodeBridge.configureCloudflare", "Install cloudflared");
+    const body = append(details, $(".shuncode-bridge-setup-body"));
+    append(body, $(
+      "p",
+      void 0,
+      localizeBridge("shuncodeBridge.cloudflareSetupIntro", "Install cloudflared once and allow Cloudflare Tunnel egress on port 7844 (or enable a global/TUN proxy). No Cloudflare account, token, or domain is required for Quick Tunnel.")
+    ));
+    this.createSetupStep(body, "1", localizeBridge("shuncodeBridge.installCloudflared", "Install or update cloudflared"), [
+      "winget install --id Cloudflare.cloudflared --exact --accept-package-agreements --accept-source-agreements",
+      "winget upgrade --id Cloudflare.cloudflared --exact --accept-package-agreements --accept-source-agreements"
+    ], localizeBridge("shuncodeBridge.downloadCloudflared", "Open official download page"), "https://developers.cloudflare.com/tunnel/downloads/");
+    this.createSetupStep(body, "2", localizeBridge("shuncodeBridge.verifyCloudflared", "Verify cloudflared"), [
+      "cloudflared --version"
+    ]);
+    append(body, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.cloudflareAddressHelp", "Each Bridge start creates a new temporary MCP address. ShunCode copies it automatically; update the address in ChatGPT.")
+    ));
+    return { details, summary };
+  }
+  createCloudflareNamedSetupSection(parent) {
+    const details = append(parent, $("details.shuncode-bridge-setup"));
+    const summary = append(details, $("summary"));
+    summary.textContent = localizeBridge("shuncodeBridge.configureCloudflareNamed", "Configure Cloudflare Named Tunnel");
+    const body = append(details, $(".shuncode-bridge-setup-body"));
+    append(body, $(
+      "p",
+      void 0,
+      localizeBridge("shuncodeBridge.cloudflareNamedSetupIntro", "Create a remotely managed Cloudflare Tunnel, copy its token, and publish your hostname to the fixed ShunCode Service URL shown above.")
+    ));
+    this.createSetupStep(body, "1", localizeBridge("shuncodeBridge.installCloudflared", "Install or update cloudflared"), [
+      "winget install --id Cloudflare.cloudflared --exact --accept-package-agreements --accept-source-agreements"
+    ], localizeBridge("shuncodeBridge.downloadCloudflared", "Open official download page"), "https://developers.cloudflare.com/tunnel/downloads/");
+    this.createSetupStep(
+      body,
+      "2",
+      localizeBridge("shuncodeBridge.createCloudflareTunnel", "Create or open a Cloudflare Tunnel and copy its token"),
+      [],
+      localizeBridge("shuncodeBridge.openCloudflareTunnels", "Open Cloudflare Tunnels"),
+      "https://dash.cloudflare.com/?to=%2F%3Aaccount%2Ftunnels"
+    );
+    this.createSetupStep(body, "3", localizeBridge("shuncodeBridge.publishCloudflareHostname", "Add a published application route"), []);
+    append(body, $(
+      "p.shuncode-bridge-help",
+      void 0,
+      localizeBridge("shuncodeBridge.publishCloudflareHostnameHelp", "Set the public hostname to the value saved above and set the Service URL to the exact http://127.0.0.1:<port> value shown by ShunCode.")
+    ));
+    this.createSetupStep(
+      body,
+      "4",
+      localizeBridge("shuncodeBridge.reviewCloudflareDns", "Review the hostname DNS record"),
+      [],
+      localizeBridge("shuncodeBridge.openCloudflareDns", "Open Cloudflare DNS"),
+      "https://dash.cloudflare.com/?to=%2F%3Aaccount%2F%3Azone%2Fdns%2Frecords"
+    );
+    return { details, summary };
+  }
+  createNgrokSetupSection(parent) {
+    const details = append(parent, $("details.shuncode-bridge-setup"));
+    const summary = append(details, $("summary"));
+    summary.textContent = localizeBridge("shuncodeBridge.configureNgrok", "Configure ngrok");
+    const body = append(details, $(".shuncode-bridge-setup-body"));
+    append(body, $(
+      "p",
+      void 0,
+      localizeBridge("shuncodeBridge.setupIntro", "Run the following once in Windows PowerShell. After installation, restart ShunCode so ngrok is available to the Extension Host.")
+    ));
+    this.createSetupStep(body, "1", localizeBridge("shuncodeBridge.installNgrok", "Install or update ngrok"), [
+      "winget install --id 9MVS1J51GMK6 --source msstore --accept-package-agreements --accept-source-agreements",
+      "winget upgrade --id 9MVS1J51GMK6 --source msstore --accept-package-agreements --accept-source-agreements"
+    ], localizeBridge("shuncodeBridge.downloadNgrok", "Open official download page"), "https://ngrok.com/download/windows");
+    this.createSetupStep(body, "2", localizeBridge("shuncodeBridge.addAuthtoken", "Add your ngrok Authtoken"), [
+      "ngrok config add-authtoken YOUR_AUTHTOKEN"
+    ], localizeBridge("shuncodeBridge.openAuthtoken", "Open Authtoken page"), "https://dashboard.ngrok.com/get-started/your-authtoken");
+    this.createSetupStep(body, "3", localizeBridge("shuncodeBridge.verifyNgrok", "Verify installation and configuration"), [
+      "ngrok version; ngrok config check"
+    ]);
+    this.createSetupStep(
+      body,
+      "4",
+      localizeBridge("shuncodeBridge.reserveDomain", "Choose your free reserved domain"),
+      [],
+      localizeBridge("shuncodeBridge.openDomains", "Open Domains page"),
+      "https://dashboard.ngrok.com/domains"
+    );
+    return { details, summary };
+  }
+  createSetupStep(parent, number, title, commands, linkLabel, link2) {
+    const step = append(parent, $(".shuncode-bridge-setup-step"));
+    append(step, $("h4", void 0, `${number}. ${title}`));
+    for (const command4 of commands) {
+      const row = append(step, $(".shuncode-bridge-command-row"));
+      append(row, $("code", void 0, command4));
+      const copy = this._register(new Button(row, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+      copy.label = `$(${Codicon.copy.id})`;
+      copy.setTitle(localizeBridge("copy", "Copy"));
+      this._register(copy.onDidClick(() => this.copyText(command4)));
+    }
+    if (linkLabel && link2) {
+      const open2 = this._register(new Button(step, { ...defaultButtonStyles, secondary: true }));
+      open2.label = linkLabel;
+      this._register(open2.onDidClick(() => this.openerService.open(URI.parse(link2))));
+    }
+  }
+  async persistDomain() {
+    if (this.busy || this.lastStatus?.tunnelProvider !== "ngrok" || this.lastStatus?.state === "running" || this.lastStatus?.state === "starting") return;
+    if (!this.domainInputDirty) return;
+    const domain = this.domainInput.value.trim();
+    if (domain === (this.lastStatus?.configuredDomain ?? "")) {
+      this.domainInputDirty = false;
+      return;
+    }
+    const status2 = await this.runCommand(BRIDGE_CONFIGURE, domain);
+    if (status2) {
+      this.domainInputDirty = false;
+      this.domainInput.value = status2.configuredDomain;
+    }
+  }
+  updateNamedTunnelOriginPreview() {
+    const port = Number(this.namedTunnelPortInput.value) || this.lastStatus?.namedTunnelLocalPort || 48271;
+    this.namedTunnelOriginValue.value = `http://127.0.0.1:${port}`;
+    this.namedTunnelOriginValue.title = this.namedTunnelOriginValue.value;
+  }
+  async saveNamedTunnel() {
+    if (this.busy || this.lastStatus?.state === "running" || this.lastStatus?.state === "starting") return;
+    const domain = this.namedTunnelDomainInput.value.trim();
+    const token = this.namedTunnelTokenInput.value.trim();
+    const localPort = Number(this.namedTunnelPortInput.value);
+    if (!domain) {
+      this.renderLocalError(localizeBridge("shuncodeBridge.cloudflareNamedHostnameRequired", "Enter the Cloudflare public hostname."));
+      this.namedTunnelDomainInput.focus();
+      return;
+    }
+    if (!Number.isInteger(localPort) || localPort < 1024 || localPort > 65535) {
+      this.renderLocalError(localizeBridge("shuncodeBridge.cloudflareNamedPortRequired", "Enter a local port from 1024 to 65535."));
+      this.namedTunnelPortInput.focus();
+      return;
+    }
+    if (!token && !this.lastStatus?.namedTunnelTokenConfigured) {
+      this.renderLocalError(localizeBridge("shuncodeBridge.cloudflareTunnelTokenRequired", "Paste the Cloudflare Tunnel Token before saving."));
+      this.namedTunnelTokenInput.focus();
+      return;
+    }
+    const status2 = await this.runCommand(BRIDGE_CONFIGURE_NAMED_TUNNEL, {
+      domain,
+      localPort,
+      ...token ? { token } : {}
+    });
+    if (status2) {
+      this.namedTunnelInputDirty = false;
+      this.namedTunnelTokenInput.value = "";
+    }
+  }
+  async clearNamedTunnelToken() {
+    if (this.busy || !this.lastStatus?.namedTunnelTokenConfigured) return;
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.clearTunnelTokenConfirm", "Clear the Cloudflare Tunnel Token?"),
+      detail: localizeBridge("shuncodeBridge.clearTunnelTokenConfirmDetail", "Cloudflare Named Tunnel cannot start until a new token is saved."),
+      primaryButton: localizeBridge("shuncodeBridge.clearTunnelToken", "Clear token")
+    });
+    if (!result.confirmed) return;
+    await this.runCommand(BRIDGE_CLEAR_NAMED_TUNNEL_TOKEN);
+  }
+  async toggleBridge() {
+    if (this.busy) return;
+    if (this.lastStatus?.state === "running") {
+      await this.runCommand(BRIDGE_STOP);
+      return;
+    }
+    if (!this.lastAccessStatus?.licensed) {
+      this.renderAccessError(this.lastAccessStatus?.signedIn ? localizeBridge("shuncodeBridge.purchaseRequired", "Purchase or activate Bridge access before starting the Bridge.") : localizeBridge("shuncodeBridge.signInRequired", "Sign in with GitHub before starting the Bridge."));
+      return;
+    }
+    const provider = this.lastStatus?.tunnelProvider ?? "cloudflare";
+    const domain = this.domainInput.value.trim();
+    if (provider === "ngrok" && !domain) {
+      this.connectionCard.open = true;
+      this.renderLocalError(localizeBridge("shuncodeBridge.domainRequired", "Enter your ngrok reserved domain before starting the Bridge."));
+      this.domainInput.focus();
+      return;
+    }
+    if (provider === "cloudflare-named" && (!this.lastStatus?.configuredNamedDomain || !this.lastStatus.namedTunnelTokenConfigured)) {
+      this.connectionCard.open = true;
+      this.renderLocalError(localizeBridge("shuncodeBridge.namedTunnelConfigurationRequired", "Save the Cloudflare hostname and Tunnel Token before starting Bridge."));
+      (this.lastStatus?.configuredNamedDomain ? this.namedTunnelTokenInput : this.namedTunnelDomainInput).focus();
+      return;
+    }
+    await this.runCommand(BRIDGE_START, provider === "ngrok" ? domain : void 0);
+  }
+  async installCloudflared() {
+    if (this.busy) return;
+    this.installingCloudflared = true;
+    this.tunnelState.textContent = localizeBridge("shuncodeBridge.installingCloudflared", "Installing cloudflared with Winget\u2026");
+    this.updateControls();
+    try {
+      await this.runCommand(BRIDGE_INSTALL_CLOUDFLARED);
+    } finally {
+      this.installingCloudflared = false;
+      await this.refresh();
+      this.updateControls();
+    }
+  }
+  async signOut() {
+    if (this.busy) return;
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.signOutConfirm", "Sign out of Bridge?"),
+      detail: localizeBridge("shuncodeBridge.signOutConfirmDetail", "A running Bridge will stop. Your paid entitlement remains attached to this GitHub account."),
+      primaryButton: localizeBridge("shuncodeBridge.signOut", "Sign out")
+    });
+    if (!result.confirmed) return;
+    await this.runAccessCommand(BRIDGE_LICENSE_SIGN_OUT);
+  }
+  async createPayment() {
+    const planId = this.planSelect.value;
+    if (!planId) {
+      this.renderAccessError(localizeBridge("shuncodeBridge.planRequired", "Select a Bridge payment plan."));
+      return;
+    }
+    await this.runAccessCommand(BRIDGE_PAYMENT_CREATE_ORDER, planId, this.paymentTypeSelect.value || "alipay");
+  }
+  async redeemActivationCode() {
+    const code = this.activationInput.value.trim();
+    if (!code) {
+      this.renderAccessError(localizeBridge("shuncodeBridge.activationRequired", "Enter a Bridge activation code."));
+      this.activationInput.focus();
+      return;
+    }
+    const status2 = await this.runAccessCommand(BRIDGE_LICENSE_REDEEM, code);
+    if (status2?.licensed) this.activationInput.value = "";
+  }
+  resolveArenaPrompt() {
+    const configured = this.configurationService.getValue(BRIDGE_COPY_PROMPT_SETTING);
+    const trimmed = typeof configured === "string" ? configured.trim() : "";
+    return trimmed || DEFAULT_ARENA_PROMPT;
+  }
+  async copyArenaPrompt() {
+    const url = this.lastStatus?.publicUrl?.trim();
+    const prompt = this.resolveArenaPrompt();
+    const text2 = url ? `${url}
+
+${prompt}` : prompt;
+    await this.copyText(text2);
+  }
+  async copyText(text2) {
+    if (!text2) return;
+    try {
+      await this.clipboardService.writeText(text2);
+      this.showCopyToast(localizeBridge("shuncodeBridge.copySucceeded", "Copied to clipboard"));
+    } catch {
+      this.showCopyToast(localizeBridge("shuncodeBridge.copyFailed", "Copy failed. Try again."), true);
+    }
+  }
+  showCopyToast(message, isError = false) {
+    if (this.copyToastTimer !== void 0) clearTimeout(this.copyToastTimer);
+    this.copyToast.textContent = message;
+    this.copyToast.classList.toggle("error", isError);
+    this.copyToast.classList.add("visible");
+    this.copyToastTimer = setTimeout(() => {
+      this.copyToast.classList.remove("visible");
+      this.copyToastTimer = void 0;
+    }, 1800);
+  }
+  async resetMcpAddress() {
+    if (this.busy || this.lastStatus?.state === "running" || this.lastStatus?.state === "starting") return;
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.resetAddressConfirm", "Reset the MCP address?"),
+      detail: localizeBridge("shuncodeBridge.resetAddressConfirmDetail", "The current MCP address will stop working immediately. Update the address in ChatGPT and every other connected client."),
+      primaryButton: localizeBridge("shuncodeBridge.resetMcpAddress", "Reset MCP address")
+    });
+    if (!result.confirmed) return;
+    await this.runCommand(BRIDGE_ROTATE_ENDPOINT);
+  }
+  async runCommand(command4, ...args2) {
+    if (this.busy) return void 0;
+    this.busy = true;
+    this.updateControls();
+    try {
+      const status2 = await this.commandService.executeCommand(command4, ...args2);
+      if (status2) this.render(status2);
+      return status2;
+    } catch (error) {
+      if (command4 === BRIDGE_START || command4 === BRIDGE_CHECK_TUNNEL || command4 === BRIDGE_INSTALL_CLOUDFLARED || command4 === BRIDGE_CONFIGURE || command4 === BRIDGE_CONFIGURE_NAMED_TUNNEL || command4 === BRIDGE_CLEAR_NAMED_TUNNEL_TOKEN || command4 === BRIDGE_SET_TUNNEL_PROVIDER) {
+        this.connectionCard.open = true;
+      }
+      this.renderLocalError(error instanceof Error ? error.message : String(error));
+      return void 0;
+    } finally {
+      this.busy = false;
+      this.updateControls();
+      void this.refresh();
+    }
+  }
+  async refreshAccessAndPlans() {
+    this.paymentPlansFetchAttempted = false;
+    const status2 = await this.runAccessCommand(BRIDGE_LICENSE_REFRESH);
+    if (status2 && !status2.plans.length) {
+      await this.fetchPaymentPlans(true);
+    }
+  }
+  async fetchPaymentPlans(force) {
+    if (this.disposed || this.paymentPlansLoading) return;
+    this.paymentPlansLoading = true;
+    if (this.lastAccessStatus) this.renderAccess(this.lastAccessStatus);
+    try {
+      const status2 = await this.commandService.executeCommand(BRIDGE_PAYMENT_GET_PLANS, force);
+      this.paymentPlansLoading = false;
+      if (status2) {
+        this.renderAccess(status2);
+      }
+    } catch (error) {
+      this.paymentPlansLoading = false;
+      if (this.lastAccessStatus) this.renderAccess(this.lastAccessStatus);
+      this.renderAccessError(error instanceof Error ? error.message : String(error));
+    } finally {
+      this.paymentPlansLoading = false;
+      this.updateControls();
+    }
+  }
+  async runAccessCommand(command4, ...args2) {
+    if (this.busy) {
+      this.renderAccessError(localizeBridge("shuncodeBridge.signInInProgress", "A Bridge sign-in is already in progress. Finish or cancel it, then try again."));
+      return void 0;
+    }
+    this.busy = true;
+    this.accessErrorOverride = "";
+    if (command4 === BRIDGE_LICENSE_SIGN_IN_GITEE) {
+      this.accessDetails.textContent = localizeBridge("shuncodeBridge.giteeWaitingTitle", "Waiting for Gitee authorization\u2026");
+      this.accessMessage.textContent = localizeBridge("shuncodeBridge.giteeWaiting", "The Gitee authorization page should open in your browser. Complete it to finish signing in.");
+    }
+    this.updateControls();
+    try {
+      const status2 = await this.commandService.executeCommand(command4, ...args2);
+      if (status2) this.renderAccess(status2);
+      if (status2 && (command4 === BRIDGE_LICENSE_SIGN_IN || command4 === BRIDGE_LICENSE_SIGN_IN_GITEE || command4 === BRIDGE_LICENSE_SIGN_OUT)) {
+        this.paymentPlansFetchAttempted = false;
+      }
+      return status2;
+    } catch (error) {
+      this.renderAccessError(error instanceof Error ? error.message : String(error));
+      return void 0;
+    } finally {
+      this.busy = false;
+      this.updateControls();
+      void this.refresh();
+    }
+  }
+  async refresh() {
+    if (this.disposed || this.busy) return;
+    try {
+      const [status2, accessStatus] = await Promise.all([
+        this.commandService.executeCommand(BRIDGE_GET_STATUS),
+        this.commandService.executeCommand(BRIDGE_ACCESS_GET_STATUS)
+      ]);
+      if (status2) this.render(status2);
+      if (accessStatus) this.renderAccess(accessStatus);
+      return status2;
+    } catch (error) {
+      this.renderLocalError(error instanceof Error ? error.message : String(error));
+      return void 0;
+    }
+  }
+  renderAccess(status2) {
+    const previousStatus = this.lastAccessStatus;
+    const needsAttention = !status2.serverConfigured || Boolean(status2.error) || !status2.signedIn || !status2.licensed;
+    const previouslyNeededAttention = previousStatus ? !previousStatus.serverConfigured || Boolean(previousStatus.error) || !previousStatus.signedIn || !previousStatus.licensed : true;
+    this.lastAccessStatus = status2;
+    if (needsAttention) {
+      this.accessCard.open = true;
+    } else if (!previousStatus || previouslyNeededAttention) {
+      this.accessCard.open = false;
+    }
+    this.installationIdValue.value = status2.installationId;
+    this.installationIdValue.title = status2.installationId;
+    if (status2.error) this.accessErrorOverride = status2.error;
+    else if (status2.signedIn) this.accessErrorOverride = "";
+    const error = status2.error || this.accessErrorOverride;
+    const badgeState = !status2.serverConfigured || error ? "error" : status2.licensed ? "running" : "stopped";
+    this.accessBadge.className = `shuncode-bridge-state state-${badgeState}`;
+    this.accessBadge.textContent = !status2.serverConfigured || error ? localizeBridge("shuncodeBridge.actionRequired", "Action required") : status2.licensed ? localizeBridge("shuncodeBridge.authorized", "Authorized") : status2.signedIn ? localizeBridge("shuncodeBridge.notActive", "Not active") : localizeBridge("shuncodeBridge.signInRequiredBadge", "Sign in");
+    const accountLabel = this.accessAccountLabel(status2);
+    if (!status2.serverConfigured) {
+      this.accessDetails.textContent = localizeBridge("shuncodeBridge.serviceUnavailableSummary", "Bridge license service unavailable");
+      this.accessMessage.textContent = localizeBridge("shuncodeBridge.notConfigured", "This ShunCode build does not contain a Bridge licensing trust anchor.");
+    } else if (error) {
+      this.accessDetails.textContent = status2.signedIn && accountLabel ? localizeBridge("shuncodeBridge.accountNeedsAttention", "{0} \xB7 access needs attention", accountLabel) : localizeBridge("shuncodeBridge.accessNeedsAttention", "Bridge access needs attention");
+      this.accessMessage.textContent = error;
+    } else if (!status2.signedIn) {
+      this.accessDetails.textContent = localizeBridge("shuncodeBridge.accountNotConnected", "Account not connected");
+      this.accessMessage.textContent = localizeBridge("shuncodeBridge.signedOutDetailShort", "Sign in with GitHub or Gitee to check or purchase Bridge access.");
+    } else if (status2.licensed) {
+      const entitlement = status2.permanent ? localizeBridge("shuncodeBridge.lifetimeAccess", "shunlimited access") : status2.expiresAt ? localizeBridge("shuncodeBridge.expiresAt", "access through {0}", new Date(status2.expiresAt).toLocaleString()) : localizeBridge("shuncodeBridge.activeAccess", "active access");
+      this.accessDetails.textContent = localizeBridge("shuncodeBridge.accountLicensedCompact", "{0} \xB7 {1} \xB7 current device authorized", accountLabel, entitlement);
+      this.accessMessage.textContent = status2.permanent ? localizeBridge("shuncodeBridge.accountManagementPermanent", "Your permanent Bridge access remains active. You can still purchase a plan below to support ongoing ShunCode development.") : localizeBridge("shuncodeBridge.accountManagement", "Manage the installation ID, refresh the license, or sign out.");
+    } else {
+      this.accessDetails.textContent = localizeBridge("shuncodeBridge.accountUnlicensedCompact", "{0} \xB7 Bridge access not active", accountLabel);
+      this.accessMessage.textContent = localizeBridge("shuncodeBridge.accountUnlicensed", "Purchase a plan or redeem an activation code to enable Bridge.");
+    }
+    this.installationSection.style.display = status2.signedIn ? "" : "none";
+    this.signInButton.element.style.display = status2.signedIn ? "none" : "";
+    this.giteeSignInButton.element.style.display = status2.signedIn ? "none" : "";
+    this.refreshSessionButton.element.style.display = status2.signedIn ? "none" : "";
+    this.refreshLicenseButton.element.style.display = status2.signedIn ? "" : "none";
+    this.signOutButton.element.style.display = status2.signedIn ? "" : "none";
+    const showPurchaseOptions = status2.signedIn && !error;
+    const showActivationOptions = status2.signedIn && !status2.licensed && !error;
+    this.purchaseSection.style.display = showPurchaseOptions ? "" : "none";
+    this.activationSection.style.display = showActivationOptions ? "" : "none";
+    const plansError = status2.plansError?.trim() ?? "";
+    const initialPlanLoadPending = status2.signedIn && !status2.plans.length && !this.paymentPlansFetchAttempted;
+    const purchasePresentation = getShunCodeBridgePurchasePresentation({
+      licensed: status2.licensed,
+      permanent: status2.permanent,
+      planCount: status2.plans.length,
+      plansError,
+      loading: this.paymentPlansLoading || initialPlanLoadPending
+    });
+    if (purchasePresentation.mode === "support") {
+      this.purchaseTitle.textContent = localizeBridge("shuncodeBridge.supportTitle", "Continue supporting ShunCode");
+      this.purchaseHelp.textContent = localizeBridge("shuncodeBridge.supportHelp", "Your permanent Bridge access will not change. Choose any plan to support continued ShunCode development; checkout opens in your browser.");
+      this.purchaseButton.label = `$(${Codicon.creditCard.id}) ${localizeBridge("shuncodeBridge.support", "Support")}`;
+    } else if (purchasePresentation.mode === "renew") {
+      this.purchaseTitle.textContent = localizeBridge("shuncodeBridge.renewTitle", "Renew Bridge access");
+      this.purchaseHelp.textContent = localizeBridge("shuncodeBridge.purchaseHelp", "Select a server-provided plan. Checkout opens in your browser and ShunCode activates Bridge automatically after payment is confirmed.");
+      this.purchaseButton.label = `$(${Codicon.creditCard.id}) ${localizeBridge("shuncodeBridge.renew", "Renew")}`;
+    } else {
+      this.purchaseTitle.textContent = localizeBridge("shuncodeBridge.purchaseTitle", "Purchase Bridge access");
+      this.purchaseHelp.textContent = localizeBridge("shuncodeBridge.purchaseHelp", "Select a server-provided plan. Checkout opens in your browser and ShunCode activates Bridge automatically after payment is confirmed.");
+      this.purchaseButton.label = `$(${Codicon.creditCard.id}) ${localizeBridge("shuncodeBridge.purchase", "Purchase")}`;
+    }
+    const planOptions = status2.plans.length ? status2.plans.map((plan) => ({ value: plan.id, label: `${plan.name} \xB7 \xA5${plan.amount}` })) : [{
+      value: "",
+      label: purchasePresentation.planState === "loading" ? localizeBridge("shuncodeBridge.plansLoading", "Loading payment plans\u2026") : purchasePresentation.planState === "failed" ? localizeBridge("shuncodeBridge.plansLoadFailedOption", "Payment plans failed to load") : localizeBridge("shuncodeBridge.plansUnavailableOption", "No payment plans available"),
+      disabled: true
+    }];
+    syncShunCodeBridgeSelectOptions(this.planSelect, planOptions);
+    syncShunCodeBridgeSelectOptions(this.paymentTypeSelect, status2.paymentTypes.map((paymentType) => ({
+      value: paymentType,
+      label: paymentType === "alipay" ? localizeBridge("shuncodeBridge.alipay", "Alipay") : paymentType
+    })));
+    const order = status2.paymentOrder;
+    this.paymentDetails.title = "";
+    if (!order.id) {
+      if (purchasePresentation.planState === "available") this.paymentDetails.textContent = "";
+      else if (purchasePresentation.planState === "loading") this.paymentDetails.textContent = localizeBridge("shuncodeBridge.plansLoading", "Loading payment plans\u2026");
+      else if (purchasePresentation.planState === "failed") {
+        this.paymentDetails.textContent = localizeBridge("shuncodeBridge.plansLoadFailedFriendly", "Could not connect to the payment service. Check your network or proxy settings, then reload the plans.");
+        this.paymentDetails.title = plansError;
+      } else this.paymentDetails.textContent = localizeBridge("shuncodeBridge.plansUnavailable", "Payment plans are currently unavailable. Reload the plans and try again.");
+    } else if (order.status === "pending") {
+      this.paymentDetails.textContent = localizeBridge("shuncodeBridge.paymentPending", "Payment pending \xB7 {0} \xB7 \xA5{1}. Complete checkout in your browser; this page checks the order automatically.", order.planName, order.amount);
+    } else if (order.status === "paid") {
+      this.paymentDetails.textContent = localizeBridge("shuncodeBridge.paymentPaid", "Payment confirmed. Refreshing your Bridge license\u2026");
+    } else {
+      const paymentStatus = order.status ? localizeBridge(`shuncodeBridge.paymentOrderStatus.${order.status}`, order.status) : localizeBridge("shuncodeBridge.unknown", "unknown");
+      this.paymentDetails.textContent = localizeBridge("shuncodeBridge.paymentStatus", "Last payment: {0} \xB7 {1}.", order.planName || order.id, paymentStatus);
+    }
+    this.reloadPaymentPlansButton.element.style.display = purchasePresentation.canRetry ? "" : "none";
+    this.checkPaymentButton.element.style.display = order.status === "pending" ? "" : "none";
+    this.updateControls();
+    if (status2.signedIn && !status2.plans.length && !this.paymentPlansFetchAttempted && !this.busy) {
+      this.paymentPlansFetchAttempted = true;
+      void this.fetchPaymentPlans(true);
+    }
+  }
+  errorDetailText(status2) {
+    const lastError = status2.lastError ?? localizeBridge("shuncodeBridge.bridgeErrorDetail", "Bridge could not start.");
+    if (!status2.lastError) {
+      return lastError;
+    }
+    if (/trycloudflare\.com URL/i.test(status2.lastError) || /cloudflared/i.test(status2.lastError) && /edge|quic|unable to establish/i.test(status2.lastError)) {
+      return `${lastError} ${localizeBridge("shuncodeBridge.cloudflaredEdgeBlockedHint", "cloudflared could not reach the Cloudflare edge (QUIC/UDP 7844). HTTP proxies do not affect cloudflared; use a system/global (TUN) proxy and retry.")}`;
+    }
+    if (/health check timed out/i.test(status2.lastError)) {
+      return `${lastError} ${localizeBridge("shuncodeBridge.healthCheckTimedOutHint", "The public health check timed out. This machine may not be able to reach the endpoint directly. Configure http.proxy or a system/global (TUN) proxy and retry.")}`;
+    }
+    if (/health endpoint unreachable/i.test(status2.lastError)) {
+      return `${lastError} ${localizeBridge("shuncodeBridge.healthCheckUnreachableHint", "This machine cannot reach the public Bridge endpoint (possibly blocked by the network). Configure http.proxy or a system/global (TUN) proxy and retry.")}`;
+    }
+    return lastError;
+  }
+  render(status2) {
+    const previousStatus = this.lastStatus;
+    this.lastStatus = status2;
+    const isQuick = status2.tunnelProvider === "cloudflare";
+    const isNamed = status2.tunnelProvider === "cloudflare-named";
+    const isNgrok = status2.tunnelProvider === "ngrok";
+    this.cloudflareProviderButton.classList.toggle("selected", isQuick);
+    this.cloudflareProviderButton.setAttribute("aria-checked", String(isQuick));
+    this.providerChoiceCards.get("cloudflare")?.classList.toggle("selected", isQuick);
+    this.cloudflareNamedProviderButton.classList.toggle("selected", isNamed);
+    this.cloudflareNamedProviderButton.setAttribute("aria-checked", String(isNamed));
+    this.providerChoiceCards.get("cloudflare-named")?.classList.toggle("selected", isNamed);
+    this.ngrokProviderButton.classList.toggle("selected", isNgrok);
+    this.ngrokProviderButton.setAttribute("aria-checked", String(isNgrok));
+    this.providerChoiceCards.get("ngrok")?.classList.toggle("selected", isNgrok);
+    if (status2.tunnelInstalled === void 0 && this.autoCheckedTunnelProvider !== status2.tunnelProvider && !this.busy) {
+      this.autoCheckedTunnelProvider = status2.tunnelProvider;
+      void this.runCommand(BRIDGE_CHECK_TUNNEL);
+    }
+    this.domainField.style.display = isNgrok ? "" : "none";
+    this.namedTunnelConfiguration.style.display = isNamed ? "" : "none";
+    if (this.domainInputDirty && this.domainInput.value.trim().toLowerCase() === status2.configuredDomain) {
+      this.domainInputDirty = false;
+    }
+    if (!this.domainInputDirty && this.domainInput.value !== status2.configuredDomain) {
+      this.domainInput.value = status2.configuredDomain;
+    }
+    if (!this.namedTunnelInputDirty) {
+      this.namedTunnelDomainInput.value = status2.configuredNamedDomain;
+      this.namedTunnelPortInput.value = String(status2.namedTunnelLocalPort);
+    }
+    this.namedTunnelTokenStatus.textContent = status2.namedTunnelTokenConfigured ? localizeBridge("shuncodeBridge.cloudflareTunnelTokenSaved", "Token saved securely. Leave the field blank to keep it.") : localizeBridge("shuncodeBridge.cloudflareTunnelTokenMissing", "No token saved.");
+    this.updateNamedTunnelOriginPreview();
+    this.stateBadge.className = `shuncode-bridge-state state-${status2.state}`;
+    this.stateBadge.textContent = status2.state === "running" ? localizeBridge("shuncodeBridge.running", "Running") : status2.state === "starting" ? localizeBridge("shuncodeBridge.starting", "Starting\u2026") : status2.state === "error" ? localizeBridge("shuncodeBridge.error", "Error") : localizeBridge("shuncodeBridge.stopped", "Stopped");
+    let stateDetail = status2.state === "running" ? localizeBridge("shuncodeBridge.runningDetailCompact", "Remote endpoint active \xB7 {0} active request(s)", status2.activeRequests) : status2.state === "starting" ? isQuick ? localizeBridge("shuncodeBridge.quickTunnelStartingDetail", "Generating a new temporary Cloudflare MCP address\u2026") : isNamed ? localizeBridge("shuncodeBridge.namedTunnelStartingDetail", "Connecting the fixed Cloudflare hostname\u2026") : localizeBridge("shuncodeBridge.startingDetail", "Opening the secure MCP endpoint\u2026") : status2.state === "error" ? this.errorDetailText(status2) : isQuick ? localizeBridge("shuncodeBridge.quickTunnelStoppedDetail", "Start Bridge to generate a temporary Cloudflare MCP address.") : isNamed ? status2.configuredNamedDomain ? localizeBridge("shuncodeBridge.namedTunnelStoppedDetail", "Bridge is stopped. The fixed Cloudflare hostname is not connected.") : localizeBridge("shuncodeBridge.namedHostnameRequiredSummary", "Configure the Cloudflare hostname and Tunnel Token before starting.") : status2.configuredDomain ? localizeBridge("shuncodeBridge.stoppedDetailCompact", "Bridge is stopped. No public endpoint is open.") : localizeBridge("shuncodeBridge.domainRequiredSummary", "Enter an ngrok domain in Connection settings before starting.");
+    if (isQuick && previousStatus?.publicUrl && previousStatus.publicUrl !== status2.publicUrl && status2.state === "starting") {
+      stateDetail = localizeBridge("shuncodeBridge.quickTunnelRecoveryDetail", "The previous temporary address expired. Generating and copying a replacement address\u2026");
+    }
+    this.statusMessage.render({ message: stateDetail, error: status2.state === "error" });
+    const providerDomainMissing = isNgrok ? !status2.configuredDomain : isNamed ? !status2.configuredNamedDomain : false;
+    const connectionNeedsAttention = status2.state === "error" || status2.tunnelInstalled !== true || status2.tunnelConfigValid !== true || providerDomainMissing;
+    if (connectionNeedsAttention) {
+      this.connectionCard.open = true;
+    }
+    const connectionState = status2.state === "error" ? "error" : connectionNeedsAttention ? "stopped" : "running";
+    this.connectionBadge.className = `shuncode-bridge-state state-${connectionState}`;
+    if (status2.state === "error") {
+      this.connectionBadge.textContent = localizeBridge("shuncodeBridge.actionRequired", "Action required");
+      this.connectionDetails.textContent = localizeBridge("shuncodeBridge.connectionErrorSummary", "Bridge connection needs attention");
+    } else if (status2.tunnelInstalled === void 0) {
+      this.connectionBadge.textContent = localizeBridge("shuncodeBridge.checking", "Checking");
+      this.connectionDetails.textContent = localizeBridge("shuncodeBridge.connectionChecking", "Checking tunnel settings\u2026");
+    } else if (!status2.tunnelInstalled) {
+      this.connectionBadge.textContent = localizeBridge("shuncodeBridge.setupRequired", "Setup required");
+      this.connectionDetails.textContent = isQuick || isNamed ? localizeBridge("shuncodeBridge.cloudflareNotInstalledSummary", "cloudflared is not installed") : localizeBridge("shuncodeBridge.ngrokNotInstalledSummary", "ngrok is not installed");
+    } else if (!status2.tunnelConfigValid) {
+      this.connectionBadge.textContent = localizeBridge("shuncodeBridge.actionRequired", "Action required");
+      this.connectionDetails.textContent = isNamed ? localizeBridge("shuncodeBridge.cloudflareNamedConfigAttentionSummary", "Cloudflare Named Tunnel configuration needs attention") : localizeBridge("shuncodeBridge.ngrokConfigAttentionSummary", "ngrok configuration needs attention");
+    } else if (providerDomainMissing) {
+      this.connectionBadge.textContent = localizeBridge("shuncodeBridge.setupRequired", "Setup required");
+      this.connectionDetails.textContent = isNamed ? localizeBridge("shuncodeBridge.namedHostnameMissingSummary", "Cloudflare hostname not set") : localizeBridge("shuncodeBridge.domainMissingSummary", "Reserved domain not set");
+    } else {
+      this.connectionBadge.textContent = localizeBridge("shuncodeBridge.ready", "Ready");
+      this.connectionDetails.textContent = isQuick ? localizeBridge("shuncodeBridge.cloudflareReadySummary", "Cloudflare Quick Tunnel ready \xB7 temporary address changes after restart") : isNamed ? localizeBridge("shuncodeBridge.cloudflareNamedReadySummary", "Cloudflare Named Tunnel ready \xB7 {0}", status2.configuredNamedDomain) : localizeBridge("shuncodeBridge.connectionReadySummary", "ngrok ready \xB7 {0}", status2.configuredDomain);
+    }
+    if (status2.tunnelInstalled === void 0) {
+      this.tunnelState.textContent = localizeBridge("shuncodeBridge.tunnelUnchecked", "The tunnel client has not been checked yet.");
+    } else if (!status2.tunnelInstalled) {
+      this.tunnelState.textContent = isQuick || isNamed ? localizeBridge("shuncodeBridge.cloudflareMissingAction", "cloudflared is not installed. Complete the one-time setup below.") : localizeBridge("shuncodeBridge.ngrokMissingAction", "ngrok is not installed. Complete the setup below.");
+    } else if (!status2.tunnelConfigValid) {
+      this.tunnelState.textContent = isNamed ? localizeBridge("shuncodeBridge.cloudflareNamedInvalidAction", "cloudflared is installed, but the hostname, Tunnel Token, or Service URL needs attention.") : localizeBridge("shuncodeBridge.ngrokInvalidAction", "ngrok is installed, but its Authtoken or configuration needs attention.");
+    } else if (providerDomainMissing) {
+      this.tunnelState.textContent = localizeBridge("shuncodeBridge.ngrokDomainMissing", "ngrok is ready. Add your reserved domain above.");
+    } else {
+      this.tunnelState.textContent = `${status2.tunnelVersion ?? (isQuick || isNamed ? "cloudflared" : "ngrok")} \xB7 ${localizeBridge("shuncodeBridge.tunnelReady", "ready")}`;
+    }
+    const visibleSetupProvider = this.revealedSetupProvider ?? status2.tunnelProvider;
+    const needsTunnelSetup = status2.tunnelInstalled === false || status2.tunnelConfigValid === false || providerDomainMissing;
+    this.tunnelSetupPanel.classList.toggle("needs-attention", needsTunnelSetup);
+    this.cloudflareSetupDetails.style.display = visibleSetupProvider === "cloudflare" ? "" : "none";
+    this.cloudflareNamedSetupDetails.style.display = visibleSetupProvider === "cloudflare-named" ? "" : "none";
+    this.ngrokSetupDetails.style.display = visibleSetupProvider === "ngrok" ? "" : "none";
+    this.installCloudflaredButton.element.style.display = isQuick || isNamed ? "" : "none";
+    this.cloudflareSetupSummary.textContent = needsTunnelSetup ? localizeBridge("shuncodeBridge.configureCloudflare", "Install cloudflared") : localizeBridge("shuncodeBridge.cloudflareConfigurationHelp", "cloudflared setup help");
+    this.ngrokSetupSummary.textContent = needsTunnelSetup ? localizeBridge("shuncodeBridge.configureNgrok", "Configure ngrok") : localizeBridge("shuncodeBridge.ngrokConfigurationHelp", "ngrok configuration help");
+    this.cloudflareNamedSetupSummary.textContent = needsTunnelSetup ? localizeBridge("shuncodeBridge.configureCloudflareNamed", "Configure Cloudflare Named Tunnel") : localizeBridge("shuncodeBridge.cloudflareNamedConfigurationHelp", "Cloudflare Named Tunnel setup help");
+    const activeSetupDetails = visibleSetupProvider === "cloudflare" ? this.cloudflareSetupDetails : visibleSetupProvider === "cloudflare-named" ? this.cloudflareNamedSetupDetails : this.ngrokSetupDetails;
+    const tunnelProviderChanged = this.tunnelSetupProvider !== visibleSetupProvider;
+    if (needsTunnelSetup && (this.tunnelNeedsSetup !== true || tunnelProviderChanged)) {
+      activeSetupDetails.open = true;
+    }
+    this.tunnelNeedsSetup = needsTunnelSetup;
+    this.tunnelSetupProvider = visibleSetupProvider;
+    const activePublicUrl = status2.state === "running" ? status2.publicUrl : void 0;
+    this.publicUrlField.render({
+      url: activePublicUrl,
+      notice: isQuick && activePublicUrl ? localizeBridge("shuncodeBridge.quickTunnelAddressCopied", "Temporary MCP address copied. Replace the MCP address in ChatGPT after each Bridge restart.") : void 0
+    });
+    if (isQuick && activePublicUrl && activePublicUrl !== this.lastCopiedQuickTunnelUrl) {
+      this.lastCopiedQuickTunnelUrl = activePublicUrl;
+      void this.clipboardService.writeText(activePublicUrl);
+    }
+    this.renderCustomTools(status2.customTools);
+    clearNode(this.toolsContainer);
+    for (const tool of status2.toolNames) {
+      const badge = append(this.toolsContainer, $(".shuncode-bridge-tool", void 0, tool));
+      if (tool === "report_progress" || tool === "set_todos") {
+        badge.classList.add("bridge-only");
+        badge.title = tool === "set_todos" ? localizeBridge("shuncodeBridge.bridgeOnlyTodos", "Bridge-only durable task-state tool") : localizeBridge("shuncodeBridge.bridgeOnly", "Bridge-only progress reporting tool");
+      }
+    }
+    this.updateControls();
+  }
+  renderPersistentModeToggle(enabled) {
+    this.persistentModeToggle.setAttribute("aria-checked", String(enabled));
+    this.persistentModeToggle.title = enabled ? localizeBridge("shuncodeBridge.persistentModeOn", "Bridge will open and start automatically after restart") : localizeBridge("shuncodeBridge.persistentModeOff", "ShunCode will start in Chat mode");
+  }
+  readWorkspaceScope() {
+    return this.configurationService.getValue(BRIDGE_WORKSPACE_SCOPE_SETTING) === "workspace" ? "workspace" : "device";
+  }
+  renderWorkspaceScopeButton() {
+    const scope = this.readWorkspaceScope();
+    this.workspaceScopeButton.label = scope === "workspace" ? localizeBridge("shuncodeBridge.workScopeProject", "Project files") : localizeBridge("shuncodeBridge.workScopeDevice", "Entire device");
+    this.workspaceScopeButton.setTitle(scope === "workspace" ? localizeBridge("shuncodeBridge.workScopeProjectTitle", "Current workspace first; another local path only when explicitly named") : localizeBridge("shuncodeBridge.workScopeDeviceTitle", "This Windows device by default; current workspace remains the priority"));
+  }
+  async toggleWorkspaceScope() {
+    const next = this.readWorkspaceScope() === "workspace" ? "device" : "workspace";
+    try {
+      await this.configurationService.updateValue(BRIDGE_WORKSPACE_SCOPE_SETTING, next, 2 /* USER */);
+      this.renderWorkspaceScopeButton();
+    } catch (error) {
+      this.renderLocalError(error instanceof Error ? error.message : String(error));
+    }
+  }
+  readWindowRestore() {
+    return this.configurationService.getValue(WINDOW_RESTORE_SETTING) === "all" ? "all" : "last";
+  }
+  renderWindowRestoreButton() {
+    const mode = this.readWindowRestore();
+    this.windowRestoreButton.label = mode === "last" ? localizeBridge("shuncodeBridge.windowRestoreLast", "Restore last closed window") : localizeBridge("shuncodeBridge.windowRestoreAll", "Restore all windows");
+    this.windowRestoreButton.setTitle(mode === "last" ? localizeBridge("shuncodeBridge.windowRestoreLastTitle", "Only the last closed window reopens on startup (default)") : localizeBridge("shuncodeBridge.windowRestoreAllTitle", "Every window from the previous session reopens on startup"));
+  }
+  async toggleWindowRestore() {
+    const next = this.readWindowRestore() === "last" ? "all" : "last";
+    try {
+      await this.configurationService.updateValue(WINDOW_RESTORE_SETTING, next, 2 /* USER */);
+      this.renderWindowRestoreButton();
+    } catch (error) {
+      this.renderLocalError(error instanceof Error ? error.message : String(error));
+    }
+  }
+  renderLocalError(message) {
+    this.stateBadge.className = "shuncode-bridge-state state-error";
+    this.stateBadge.textContent = localizeBridge("shuncodeBridge.error", "Error");
+    this.statusMessage.render({ message, error: true });
+  }
+  renderAccessError(message) {
+    this.accessCard.open = true;
+    this.accessErrorOverride = message;
+    this.accessBadge.className = "shuncode-bridge-state state-error";
+    this.accessBadge.textContent = localizeBridge("shuncodeBridge.actionRequired", "Action required");
+    const previous = this.lastAccessStatus;
+    const accountLabel = previous ? this.accessAccountLabel(previous) : "";
+    this.accessDetails.textContent = previous?.signedIn && accountLabel ? localizeBridge("shuncodeBridge.accountNeedsAttention", "{0} \xB7 access needs attention", accountLabel) : localizeBridge("shuncodeBridge.accessNeedsAttention", "Bridge access needs attention");
+    this.accessMessage.textContent = message;
+  }
+  accessAccountLabel(status2) {
+    return status2.githubLogin ? `GitHub @${status2.githubLogin}` : status2.giteeLogin ? `Gitee @${status2.giteeLogin}` : "";
+  }
+  updateControls() {
+    const running = this.lastStatus?.state === "running";
+    const starting = this.lastStatus?.state === "starting";
+    const signedIn = this.lastAccessStatus?.signedIn === true;
+    const isNgrok = this.lastStatus?.tunnelProvider === "ngrok";
+    const isQuick = this.lastStatus?.tunnelProvider === "cloudflare";
+    const isNamed = this.lastStatus?.tunnelProvider === "cloudflare-named";
+    this.cloudflareProviderButton.disabled = this.busy || running || starting;
+    this.cloudflareNamedProviderButton.disabled = this.busy || running || starting;
+    this.ngrokProviderButton.disabled = this.busy || running || starting;
+    this.domainInput.disabled = this.busy || running || starting || !isNgrok;
+    this.namedTunnelDomainInput.disabled = this.busy || running || starting || !isNamed;
+    this.namedTunnelTokenInput.disabled = this.busy || running || starting || !isNamed;
+    this.namedTunnelPortInput.disabled = this.busy || running || starting || !isNamed;
+    this.saveNamedTunnelButton.enabled = !this.busy && !running && !starting && isNamed && Boolean(this.namedTunnelDomainInput.value.trim()) && Number.isInteger(Number(this.namedTunnelPortInput.value));
+    this.clearNamedTunnelTokenButton.enabled = !this.busy && !running && !starting && isNamed && this.lastStatus?.namedTunnelTokenConfigured === true;
+    this.checkButton.enabled = !this.busy && !starting;
+    this.installCloudflaredButton.enabled = !this.busy && !running && !starting && (isQuick || isNamed) && this.lastStatus?.tunnelInstalled !== true;
+    this.installCloudflaredButton.label = this.installingCloudflared ? `$(${Codicon.loading.id}) ${localizeBridge("shuncodeBridge.installingCloudflaredShort", "Installing\u2026")}` : this.lastStatus?.tunnelInstalled ? `$(${Codicon.check.id}) ${localizeBridge("shuncodeBridge.cloudflaredInstalled", "Installed")}` : `$(${Codicon.cloudDownload.id}) ${localizeBridge("shuncodeBridge.installCloudflaredNow", "Install cloudflared")}`;
+    this.quickInstallCloudflaredShortcutButton.enabled = !this.busy && !running && !starting;
+    this.quickInstallCloudflaredShortcutButton.label = this.installingCloudflared ? `$(${Codicon.loading.id}) ${localizeBridge("shuncodeBridge.installingCloudflaredShort", "Installing\u2026")}` : this.lastStatus?.tunnelInstalled ? `$(${Codicon.check.id}) ${localizeBridge("shuncodeBridge.checkTunnel", "Check tunnel")}` : `$(${Codicon.cloudDownload.id}) ${localizeBridge("shuncodeBridge.quickInstallCloudflared", "Install now")}`;
+    this.rotateButton.enabled = !this.busy && !running && !starting;
+    this.startStopButton.enabled = !this.busy && !starting;
+    this.signInButton.enabled = !this.busy;
+    this.giteeSignInButton.enabled = !this.busy;
+    this.refreshSessionButton.enabled = !this.busy;
+    this.refreshLicenseButton.enabled = !this.busy;
+    this.refreshCustomToolsButton.enabled = !this.busy && !this.refreshingCustomTools;
+    this.refreshCustomToolsButton.label = this.refreshingCustomTools ? `$(${Codicon.loading.id}) ${localizeBridge("shuncodeBridge.customToolsRefreshing", "\u5237\u65B0\u4E2D\u2026")}` : `$(${Codicon.refresh.id}) ${localizeBridge("shuncodeBridge.customToolsRefresh", "\u5237\u65B0\u5DE5\u5177\u5217\u8868")}`;
+    this.diagnoseSkillsButton.enabled = !this.busy && !this.diagnosingSkills;
+    this.diagnoseSkillsButton.label = this.diagnosingSkills ? `$(${Codicon.loading.id}) ${localizeBridge("shuncodeBridge.skillsDiagnosing", "Diagnosing\u2026")}` : `$(${Codicon.tools.id}) ${localizeBridge("shuncodeBridge.skillsDiagnose", "Diagnose Skills")}`;
+    this.signOutButton.enabled = !this.busy;
+    const hasPaymentPlans = Boolean(this.lastAccessStatus?.plans.length);
+    this.planSelect.disabled = this.busy || this.paymentPlansLoading || !hasPaymentPlans;
+    this.paymentTypeSelect.disabled = this.busy || this.paymentPlansLoading || !hasPaymentPlans;
+    this.purchaseButton.enabled = !this.busy && !this.paymentPlansLoading && signedIn && hasPaymentPlans && Boolean(this.planSelect.value);
+    this.reloadPaymentPlansButton.enabled = !this.busy && !this.paymentPlansLoading && signedIn;
+    this.checkPaymentButton.enabled = !this.busy;
+    this.activationInput.disabled = this.busy;
+    this.redeemButton.enabled = !this.busy && Boolean(this.activationInput.value.trim());
+    this.persistentModeToggle.disabled = this.busy;
+    this.quickLinkAddButton.enabled = !this.busy && Boolean(this.quickLinkNameInput.value.trim()) && Boolean(this.quickLinkUrlInput.value.trim());
+    this.startStopButton.label = running ? `$(${Codicon.debugStop.id}) ${localizeBridge("shuncodeBridge.stop", "Stop Bridge")}` : starting ? `$(${Codicon.loading.id}) ${localizeBridge("shuncodeBridge.starting", "Starting\u2026")}` : `$(${Codicon.play.id}) ${localizeBridge("shuncodeBridge.start", "Start Bridge")}`;
+  }
+  focus() {
+    if (this.lastStatus?.tunnelProvider === "ngrok") this.domainInput.focus();
+    else if (this.lastStatus?.tunnelProvider === "cloudflare-named") this.namedTunnelDomainInput.focus();
+    else this.cloudflareProviderButton.focus();
+  }
+  renderCustomTools(tools) {
+    const toolList = tools ?? [];
+    const skillList = toolList.filter((tool) => tool.source === "skill");
+    const jsonList = toolList.filter((tool) => tool.source !== "skill");
+    const jsonEnabledCount = jsonList.filter((tool) => tool.enabled).length;
+    this.customToolsStatus.textContent = jsonList.length ? localizeBridge("shuncodeBridge.jsonToolsLoaded", "{0} JSON tools loaded ({1} enabled).", jsonList.length, jsonEnabledCount) : localizeBridge("shuncodeBridge.jsonToolsEmpty", "No JSON manifest tools loaded.");
+    clearNode(this.customToolsContainer);
+    if (jsonList.length === 0) {
+      append(this.customToolsContainer, $(
+        "p.shuncode-bridge-help",
+        void 0,
+        localizeBridge("shuncodeBridge.noJsonTools", "No JSON manifest tools. Add a .json manifest under .shuncode/mcp-tools.")
+      ));
+    }
+    for (const tool of jsonList) this.renderCustomToolRow(this.customToolsContainer, tool, false);
+    this.renderSkillsCard(skillList);
+  }
+  renderSkillsCard(skills) {
+    const enabledCount = skills.filter((tool) => tool.enabled).length;
+    this.skillsCardSummaryText.textContent = skills.length ? localizeBridge("shuncodeBridge.skillsCardCount", "{0} skills \xB7 {1} enabled", skills.length, enabledCount) : localizeBridge("shuncodeBridge.skillsCardEmpty", "No skills loaded");
+    this.skillsCardStatus.textContent = skills.length ? localizeBridge("shuncodeBridge.skillsCardLoaded", "{0} skills loaded ({1} enabled).", skills.length, enabledCount) : localizeBridge("shuncodeBridge.skillsCardEmptyHelp", "Use the Import Skill\u2026 button above to import a skill folder or .zip; it will appear here once loaded.");
+    clearNode(this.skillsCardContainer);
+    for (const tool of skills) this.renderCustomToolRow(this.skillsCardContainer, tool, true);
+  }
+  renderCustomToolRow(container3, tool, isSkill) {
+    const row = append(container3, $(".shuncode-bridge-custom-tool"));
+    row.classList.toggle("disabled", !tool.enabled);
+    row.dataset.toolName = tool.name;
+    if (isSkill && this.highlightedSkill === tool.name && Date.now() - this.highlightedSkillAt < 5e3) {
+      row.classList.add("shuncode-bridge-flash");
+    }
+    const label3 = append(row, $(".shuncode-bridge-custom-tool-name", void 0, isSkill ? tool.name : `JSON \xB7 ${tool.name}`));
+    label3.title = tool.description;
+    const toggleText = tool.enabled ? localizeBridge("shuncodeBridge.disableTool", "Disable") : localizeBridge("shuncodeBridge.enableTool", "Enable");
+    this.appendRowButton(row, toggleText, toggleText, () => this.toggleCustomTool(tool.name));
+    const deleteText = localizeBridge("shuncodeBridge.deleteTool", "Delete");
+    this.appendRowButton(row, deleteText, deleteText, () => this.deleteCustomTool(tool.name, tool.source));
+    if (!isSkill) return;
+    this.appendRowButton(
+      row,
+      localizeBridge("shuncodeBridge.openToolFolder", "Folder"),
+      localizeBridge("shuncodeBridge.openToolFolderTitle", "Open the skill folder"),
+      () => this.openSkillFolder(tool.name)
+    );
+    this.appendRowButton(
+      row,
+      localizeBridge("shuncodeBridge.diagnoseSkillRow", "Diagnose"),
+      localizeBridge("shuncodeBridge.diagnoseSkillRowTitle", "Diagnose why this skill does or does not load"),
+      () => this.diagnoseSkillRow(tool.name)
+    );
+    this.appendRowButton(
+      row,
+      localizeBridge("shuncodeBridge.regenerateSkillEntry", "Rebuild entry"),
+      localizeBridge("shuncodeBridge.regenerateSkillEntryTitle", "Generate scripts/run.mjs when the skill has no entry script"),
+      () => this.regenerateSkillEntry(tool.name)
+    );
+  }
+  appendRowButton(row, text2, title, onClick4) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "shuncode-bridge-small-button";
+    button.textContent = text2;
+    button.title = title;
+    button.onclick = () => {
+      void onClick4();
+    };
+    row.appendChild(button);
+  }
+  findSkillDiagnosis(diagnoses, toolName) {
+    const target = toolName.trim();
+    const folded = target.replace(/-/g, "_");
+    return diagnoses.find((item) => item.name === target || item.dirName === target || item.name === folded || item.dirName === folded);
+  }
+  async openSkillFolder(toolName) {
+    const diagnoses = await this.fetchSkillDiagnoses();
+    if (!diagnoses) return;
+    const match2 = this.findSkillDiagnosis(diagnoses, toolName);
+    if (!match2) {
+      this.showCopyToast(localizeBridge("shuncodeBridge.skillRowDirMissing", "Skill '{0}': folder not found under .shuncode/mcp-tools; press Refresh.", toolName), true);
+      return;
+    }
+    await this.openCustomToolPath(`${CUSTOM_TOOLS_DIR_REL}/${match2.dirName}`, true);
+  }
+  async diagnoseSkillRow(toolName) {
+    const diagnoses = await this.fetchSkillDiagnoses();
+    if (!diagnoses) return;
+    const match2 = this.findSkillDiagnosis(diagnoses, toolName);
+    if (!match2) {
+      this.showCopyToast(localizeBridge("shuncodeBridge.skillRowDirMissing", "Skill '{0}': folder not found under .shuncode/mcp-tools; press Refresh.", toolName), true);
+      return;
+    }
+    if (match2.loaded) {
+      this.showCopyToast(localizeBridge("shuncodeBridge.skillRowLoadedOk", "Skill '{0}' is loaded and callable.", toolName));
+      return;
+    }
+    await this.showSkillDiagnosisDialog(match2);
+  }
+  async regenerateSkillEntry(toolName) {
+    const diagnoses = await this.fetchSkillDiagnoses();
+    if (!diagnoses) return;
+    const match2 = this.findSkillDiagnosis(diagnoses, toolName);
+    if (!match2) {
+      this.showCopyToast(localizeBridge("shuncodeBridge.skillRowDirMissing", "Skill '{0}': folder not found under .shuncode/mcp-tools; press Refresh.", toolName), true);
+      return;
+    }
+    if (match2.loaded) {
+      this.showCopyToast(localizeBridge("shuncodeBridge.skillRowEntryExists", "Skill '{0}' already has an entry script; nothing was changed.", toolName));
+      return;
+    }
+    await this.generateRunnerAndRecheck(match2.dirName);
+  }
+  revealSkillsCard() {
+    this.skillsCard.open = true;
+  }
+  locateSkillRow(toolName) {
+    this.highlightedSkill = toolName;
+    this.highlightedSkillAt = Date.now();
+    this.skillsCard.open = true;
+    if (this.lastStatus) this.renderCustomTools(this.lastStatus.customTools);
+    for (const child of Array.from(this.skillsCardContainer.children)) {
+      if (child instanceof HTMLElement && child.dataset.toolName === toolName) {
+        child.scrollIntoView({ block: "nearest" });
+        break;
+      }
+    }
+  }
+  skillsEnabled() {
+    return this.configurationService.getValue(BRIDGE_SKILLS_ENABLED_SETTING) !== false;
+  }
+  renderSkillsToggle() {
+    if (!this.skillsToggleButton) return;
+    const on = this.skillsEnabled();
+    this.skillsToggleButton.label = on ? `$(${Codicon.check.id}) ${localizeBridge("shuncodeBridge.skillsOn", "Skills enabled")}` : `$(${Codicon.circleSlash.id}) ${localizeBridge("shuncodeBridge.skillsOff", "Skills disabled")}`;
+    this.skillsToggleButton.setTitle(localizeBridge(
+      "shuncodeBridge.skillsToggleTitle",
+      "Load Agent Skills from skill subfolders in .shuncode/mcp-tools. JSON manifests are unaffected."
+    ));
+  }
+  async refreshCustomTools() {
+    if (this.refreshingCustomTools) return;
+    this.refreshingCustomTools = true;
+    this.customToolsStatus.textContent = localizeBridge("shuncodeBridge.customToolsLoading", "\u6B63\u5728\u5237\u65B0\u81EA\u5B9A\u4E49\u5DE5\u5177\u2026");
+    this.updateControls();
+    try {
+      const status2 = await this.refresh();
+      if (status2) {
+        const count2 = status2.customTools?.length ?? 0;
+        this.showCopyToast(localizeBridge("shuncodeBridge.customToolsRefreshed", "\u5DF2\u5237\u65B0\uFF1A\u52A0\u8F7D\u4E86 {0} \u4E2A\u81EA\u5B9A\u4E49\u5DE5\u5177\u3002", count2));
+      } else {
+        this.showCopyToast(localizeBridge("shuncodeBridge.customToolsRefreshFailed", "\u5237\u65B0\u81EA\u5B9A\u4E49\u5DE5\u5177\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5 Bridge \u72B6\u6001\u3002"), true);
+      }
+    } finally {
+      this.refreshingCustomTools = false;
+      this.updateControls();
+    }
+  }
+  async toggleSkillsEnabled() {
+    const next = !this.skillsEnabled();
+    try {
+      await this.configurationService.updateValue(BRIDGE_SKILLS_ENABLED_SETTING, next, 2 /* USER */);
+      this.renderSkillsToggle();
+      this.showCopyToast(next ? localizeBridge("shuncodeBridge.skillsOn", "Skills enabled") : localizeBridge("shuncodeBridge.skillsOff", "Skills disabled"));
+      await this.refresh();
+    } catch (error) {
+      this.showCopyToast(error instanceof Error ? error.message : String(error), true);
+    }
+  }
+  async importSkill() {
+    const picked = await this.fileDialogService.showOpenDialog({
+      canSelectFiles: true,
+      canSelectFolders: true,
+      canSelectMany: false,
+      title: localizeBridge("shuncodeBridge.importSkillTitle", "Choose an Agent Skill folder or .zip; it is copied into .shuncode/mcp-tools"),
+      filters: [{ name: "Agent Skill", extensions: ["zip"] }]
+    });
+    const source = picked?.[0];
+    if (!source) return;
+    try {
+      const outcome = await this.commandService.executeCommand(BRIDGE_SKILLS_IMPORT, source.fsPath);
+      const name = outcome?.result?.name;
+      const importNote = outcome?.result?.renamedFrom ? localizeBridge("shuncodeBridge.skillImportedRenamed", "Imported as '{0}' \u2014 '{1}' already existed.", name ?? "", outcome.result.renamedFrom) : outcome?.result?.generatedRunner ? localizeBridge("shuncodeBridge.skillImportedRunner", "Imported Skill '{0}': no entry script was present, so ShunCode generated scripts/run.mjs that returns the skill instructions when called.", name ?? "") : localizeBridge("shuncodeBridge.skillImported", "Imported Skill '{0}'.", name ?? "");
+      const status2 = await this.refresh();
+      const normalizedName = name?.replace(/-/g, "_");
+      const loaded = status2?.customTools?.find((tool) => tool.name === name || tool.name === normalizedName);
+      this.showCopyToast(loaded ? `${importNote} ${localizeBridge("shuncodeBridge.skillImportedLoaded", "\u5DF2\u52A0\u8F7D\u5E76\u663E\u793A\u5728\u81EA\u5B9A\u4E49\u5DE5\u5177\u5217\u8868\u4E2D\u3002")}${this.runningSuffix(status2)}` : `${importNote} ${localizeBridge("shuncodeBridge.skillImportedNotLoaded", "\u5DF2\u590D\u5236\uFF0C\u4F46\u5237\u65B0\u540E\u4ECD\u672A\u52A0\u8F7D\u4E3A\u53EF\u7528\u5DE5\u5177\uFF1B\u8BF7\u68C0\u67E5 Skill \u5F00\u5173\u3001SKILL.md \u548C\u5165\u53E3\u811A\u672C\u3002")}`, !loaded);
+      if (loaded) this.locateSkillRow(loaded.name);
+      if (!loaded) await this.showImportDiagnosis(name);
+    } catch (error) {
+      this.showCopyToast(error instanceof Error ? error.message : String(error), true);
+    }
+  }
+  async fetchSkillDiagnoses() {
+    try {
+      const outcome = await this.commandService.executeCommand(BRIDGE_SKILLS_DIAGNOSE);
+      if (outcome?.status) this.render(outcome.status);
+      return outcome?.diagnoses ?? [];
+    } catch (error) {
+      this.showCopyToast(error instanceof Error ? error.message : String(error), true);
+      return void 0;
+    }
+  }
+  async showImportDiagnosis(name) {
+    const diagnoses = await this.fetchSkillDiagnoses();
+    if (!diagnoses) return;
+    const target = name?.trim();
+    const match2 = target ? diagnoses.find((item) => item.dirName === target || item.name === target || item.name === target.replace(/-/g, "_")) : void 0;
+    if (!match2 || match2.loaded) return;
+    await this.showSkillDiagnosisDialog(match2);
+  }
+  async diagnoseSkills() {
+    if (this.diagnosingSkills) return;
+    this.diagnosingSkills = true;
+    this.updateControls();
+    try {
+      const diagnoses = await this.fetchSkillDiagnoses();
+      if (!diagnoses) return;
+      const pending = diagnoses.filter((item) => !item.loaded);
+      if (pending.length === 0) {
+        this.showCopyToast(diagnoses.length ? localizeBridge("shuncodeBridge.skillsDiagnoseAllLoaded", "Diagnosis complete: all {0} skills loaded.", diagnoses.length) : localizeBridge("shuncodeBridge.skillsDiagnoseNoSkills", "No skill folders found under .shuncode/mcp-tools."));
+        return;
+      }
+      if (pending.length === 1) {
+        await this.showSkillDiagnosisDialog(pending[0]);
+        return;
+      }
+      await this.showMultiSkillDiagnosisDialog(pending);
+    } finally {
+      this.diagnosingSkills = false;
+      this.updateControls();
+    }
+  }
+  async toggleCustomTool(name) {
+    const status2 = await this.runCommand(BRIDGE_CUSTOM_TOOLS_TOGGLE, name);
+    if (!status2) return;
+    const tool = status2.customTools?.find((item) => item.name === name);
+    this.showCopyToast(tool?.enabled ? localizeBridge("shuncodeBridge.customToolEnabled", "Custom tool '{0}' enabled.", name) : localizeBridge("shuncodeBridge.customToolDisabled", "Custom tool '{0}' disabled.", name));
+  }
+  async deleteCustomTool(name, source) {
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.deleteCustomToolConfirm", "Delete custom tool '{0}'?", name),
+      detail: source === "skill" ? localizeBridge("shuncodeBridge.deleteSkillDetail", "Its skill directory will be removed. This cannot be undone.") : localizeBridge("shuncodeBridge.deleteCustomToolDetail", "Its manifest file will be removed. This cannot be undone."),
+      primaryButton: localizeBridge("shuncodeBridge.deleteTool", "Delete")
+    });
+    if (!result.confirmed) return;
+    const status2 = await this.runCommand(BRIDGE_CUSTOM_TOOLS_DELETE, name);
+    if (status2) this.showCopyToast(localizeBridge("shuncodeBridge.customToolDeleted", "Custom tool '{0}' deleted.", name));
+  }
+  async showSkillDiagnosisDialog(diagnosis) {
+    const fix = diagnosis.fix ?? "open-folder";
+    const reason = diagnosis.reason ?? "";
+    if (fix === "generate-runner") {
+      const result2 = await this.dialogService.confirm({
+        type: "warning",
+        message: localizeBridge("shuncodeBridge.skillFixEntryTitle", "Skill '{0}' is copied but has no executable entry.", diagnosis.dirName),
+        detail: localizeBridge("shuncodeBridge.skillFixEntryDetail", "No entry script (scripts/run.* or run.*) was found in the skill folder. Generate scripts/run.mjs in one click: calling the tool will then return the SKILL.md instructions, and the list refreshes automatically afterwards."),
+        primaryButton: localizeBridge("shuncodeBridge.skillFixEntryAction", "Generate entry and refresh")
+      });
+      if (!result2.confirmed) return;
+      await this.generateRunnerAndRecheck(diagnosis.dirName);
+      return;
+    }
+    if (fix === "enable-skills") {
+      const result2 = await this.dialogService.confirm({
+        type: "warning",
+        message: localizeBridge("shuncodeBridge.skillFixToggleTitle", "Skills are switched off, so '{0}' is not loaded.", diagnosis.dirName),
+        detail: localizeBridge("shuncodeBridge.skillFixToggleDetail", "JSON manifests are unaffected. Turn the Skill switch on and the list refreshes automatically."),
+        primaryButton: localizeBridge("shuncodeBridge.skillFixToggleAction", "Enable Skills and refresh")
+      });
+      if (!result2.confirmed) return;
+      await this.toggleSkillsEnabled();
+      if (!this.skillsEnabled()) return;
+      await this.recheckSkillLoaded(diagnosis);
+      return;
+    }
+    const openSkillMd = fix === "open-skill-md";
+    const guidance = this.skillDiagnosisGuidance(diagnosis.reasonCode);
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.skillFixManualTitle", "Skill '{0}' failed the load check: {1}", diagnosis.dirName, reason),
+      detail: openSkillMd ? `${guidance} ${localizeBridge("shuncodeBridge.skillFixManualMdHint", "Open SKILL.md, fix it, then press Refresh.")}` : `${guidance} ${localizeBridge("shuncodeBridge.skillFixManualFolderHint", "Open the skill folder, fix it, then press Refresh.")}`,
+      primaryButton: openSkillMd ? localizeBridge("shuncodeBridge.skillFixOpenMd", "Open SKILL.md") : localizeBridge("shuncodeBridge.skillFixOpenFolder", "Open skill folder")
+    });
+    if (!result.confirmed) return;
+    await this.openCustomToolPath(openSkillMd ? `${CUSTOM_TOOLS_DIR_REL}/${diagnosis.dirName}/SKILL.md` : `${CUSTOM_TOOLS_DIR_REL}/${diagnosis.dirName}`, !openSkillMd);
+  }
+  skillDiagnosisGuidance(reasonCode) {
+    switch (reasonCode) {
+      case "invalid-frontmatter":
+        return localizeBridge("shuncodeBridge.skillGuideFrontmatter", "The --- frontmatter block at the top of SKILL.md is unfinished or missing its closing ---.");
+      case "description-too-short":
+        return localizeBridge("shuncodeBridge.skillGuideDescription", "The skill description is under 80 characters: add a description in the SKILL.md frontmatter or extend the body text.");
+      case "skill-md-too-large":
+        return localizeBridge("shuncodeBridge.skillGuideTooLarge", "SKILL.md exceeds the 64KB limit; trim it down.");
+      case "entry-configured-missing":
+        return localizeBridge("shuncodeBridge.skillGuideEntryConfigured", "The entry file declared in the SKILL.md frontmatter does not exist; fix the entry or remove that line so an entry can be generated.");
+      case "entry-escapes-workspace":
+        return localizeBridge("shuncodeBridge.skillGuideEntryEscapes", "The entry points outside the workspace, which is not allowed; use a relative path inside the skill folder.");
+      case "entry-unsupported":
+        return localizeBridge("shuncodeBridge.skillGuideEntryUnsupported", "The entry script extension is not supported; use .mjs/.js/.cjs/.ps1/.cmd/.bat/.py/.sh.");
+      case "no-skill-md":
+        return localizeBridge("shuncodeBridge.skillGuideNoSkillMd", "There is no SKILL.md in the folder.");
+      case "invalid-name":
+        return localizeBridge("shuncodeBridge.skillGuideName", "The skill name is invalid: start with a lowercase letter, then lowercase letters/digits/_/- (max 64 chars), via the folder name or the frontmatter name.");
+      case "reserved-name":
+        return localizeBridge("shuncodeBridge.skillGuideReserved", "The skill name collides with a built-in tool; rename it.");
+      case "over-cap":
+        return localizeBridge("shuncodeBridge.skillGuideOverCap", "Only 32 skills load per workspace; extras are skipped.");
+      case "duplicate-name":
+        return localizeBridge("shuncodeBridge.skillGuideDuplicate", "A JSON tool in the same folder already uses this name; rename one of them.");
+      default:
+        return localizeBridge("shuncodeBridge.skillGuideUnknown", "It did not pass the loader checks.");
+    }
+  }
+  async showMultiSkillDiagnosisDialog(pending) {
+    const lines = pending.slice(0, 8).map((item) => `\u2022 ${item.dirName}\uFF1A${item.reason ?? ""}`);
+    if (pending.length > 8) lines.push(`\u2022 ${localizeBridge("shuncodeBridge.skillsDiagnoseMore", "{0} more\u2026", pending.length - 8)}`);
+    const allDisabled = pending.every((item) => item.fix === "enable-skills");
+    const allMissingEntry = pending.every((item) => item.fix === "generate-runner");
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.skillsDiagnoseMultiTitle", "{0} skills are not loaded.", pending.length),
+      detail: lines.join("\n"),
+      primaryButton: allDisabled ? localizeBridge("shuncodeBridge.skillFixToggleAction", "Enable Skills and refresh") : allMissingEntry ? localizeBridge("shuncodeBridge.skillFixAllEntriesAction", "Generate all entries and refresh") : localizeBridge("shuncodeBridge.skillFixOpenToolsFolder", "Open custom tools folder")
+    });
+    if (!result.confirmed) return;
+    if (allDisabled) {
+      await this.toggleSkillsEnabled();
+      return;
+    }
+    if (allMissingEntry) {
+      await this.generateAllRunners(pending);
+      return;
+    }
+    await this.openCustomToolPath(CUSTOM_TOOLS_DIR_REL, true);
+  }
+  async generateAllRunners(pending) {
+    let generated = 0;
+    for (const item of pending) {
+      try {
+        const outcome = await this.commandService.executeCommand(BRIDGE_SKILLS_GENERATE_RUNNER, item.dirName);
+        if (outcome?.result?.generated !== false) generated += 1;
+      } catch (error) {
+        this.showCopyToast(localizeBridge("shuncodeBridge.skillFixAllEntriesFailed", "Failed to generate an entry for '{0}': {1}", item.dirName, error instanceof Error ? error.message : String(error)), true);
+        return;
+      }
+    }
+    const status2 = await this.refresh();
+    const loadedCount = status2?.customTools?.filter((tool) => tool.source === "skill").length ?? 0;
+    this.showCopyToast(`${localizeBridge("shuncodeBridge.skillFixAllEntriesDone", "Entries ready for {0} skills; {1} skills now loaded.", generated, loadedCount)}${this.runningSuffix(status2)}`);
+    this.revealSkillsCard();
+  }
+  async generateRunnerAndRecheck(dirName) {
+    try {
+      const outcome = await this.commandService.executeCommand(BRIDGE_SKILLS_GENERATE_RUNNER, dirName);
+      if (outcome?.status) this.render(outcome.status);
+      const status2 = await this.refresh();
+      const toolName = dirName.replace(/-/g, "_");
+      const loaded = status2?.customTools?.find((tool) => tool.name === toolName || tool.name === dirName);
+      if (loaded) {
+        this.showCopyToast(`${localizeBridge("shuncodeBridge.skillFixEntryDone", "Entry script ready: '{0}' is now loaded.", dirName)}${this.runningSuffix(status2)}`);
+        return;
+      }
+      this.showCopyToast(localizeBridge("shuncodeBridge.skillFixEntryStillFailing", "Still not loaded after generating the entry; press Diagnose Skills to see why."), true);
+      const diagnoses = await this.fetchSkillDiagnoses();
+      const again = diagnoses?.find((item) => item.dirName === dirName && !item.loaded);
+      if (again) await this.showSkillDiagnosisDialog(again);
+    } catch (error) {
+      this.showCopyToast(error instanceof Error ? error.message : String(error), true);
+    }
+  }
+  async recheckSkillLoaded(diagnosis) {
+    const tools = this.lastStatus?.customTools ?? [];
+    const wanted = diagnosis.dirName.replace(/-/g, "_");
+    const loaded = tools.some((tool) => tool.name === wanted || tool.name === diagnosis.dirName || diagnosis.name !== void 0 && tool.name === diagnosis.name);
+    if (loaded) {
+      this.showCopyToast(`${localizeBridge("shuncodeBridge.skillFixToggleDone", "'{0}' is now loaded.", diagnosis.dirName)}${this.runningSuffix(this.lastStatus)}`);
+      this.revealSkillsCard();
+      return;
+    }
+    const diagnoses = await this.fetchSkillDiagnoses();
+    const again = diagnoses?.find((item) => item.dirName === diagnosis.dirName && !item.loaded);
+    if (again) await this.showSkillDiagnosisDialog(again);
+    else this.showCopyToast(localizeBridge("shuncodeBridge.skillFixToggleStillFailing", "Still not loaded; press Diagnose Skills to see why."), true);
+  }
+  async openCustomToolPath(relativePath2, folder) {
+    try {
+      await this.commandService.executeCommand(BRIDGE_OPEN_RESOURCE, folder ? { path: relativePath2, folder: true } : { path: relativePath2 });
+    } catch (error) {
+      this.showCopyToast(error instanceof Error ? error.message : String(error), true);
+    }
+  }
+  runningSuffix(status2) {
+    const state = status2?.state ?? this.lastStatus?.state;
+    return state === "running" || state === "starting" ? "" : localizeBridge("shuncodeBridge.skillLoadedNotRunningHint", " Bridge is not running; start Bridge to call it over MCP.");
+  }
+  readQuickLinks() {
+    return readQuickLinks(this.configurationService);
+  }
+  isValidQuickLinkUrl(value2) {
+    return isValidQuickLinkUrl(value2);
+  }
+  renderQuickLinkButtons() {
+    clearNode(this.quickLinkButtonsContainer);
+    this.quickLinkButtons.forEach((button) => button.dispose());
+    this.quickLinkButtons = [];
+    for (const link2 of this.readQuickLinks()) {
+      if (!this.isValidQuickLinkUrl(link2.url)) continue;
+      const button = this._register(new Button(this.quickLinkButtonsContainer, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+      button.label = `$(${Codicon.linkExternal.id}) ${link2.name}`;
+      button.setTitle(link2.url);
+      this._register(button.onDidClick(() => this.commandService.executeCommand("simpleBrowser.show", link2.url)));
+      this.quickLinkButtons.push(button);
+    }
+  }
+  renderQuickLinksList() {
+    clearNode(this.quickLinkList);
+    this.quickLinkRowButtons.forEach((button) => button.dispose());
+    this.quickLinkRowButtons = [];
+    const links = this.readQuickLinks();
+    if (!links.length) {
+      this.quickLinkList.classList.add("empty");
+      this.quickLinkList.textContent = localizeBridge("shuncodeBridge.quickLinksEmpty", "No custom shortcuts yet.");
+      return;
+    }
+    this.quickLinkList.classList.remove("empty");
+    for (const link2 of links) {
+      const row = append(this.quickLinkList, $(".shuncode-bridge-quick-link-row"));
+      const text2 = append(row, $(".shuncode-bridge-quick-link-text"));
+      append(text2, $(".shuncode-bridge-quick-link-name-text", void 0, link2.name));
+      append(text2, $(".shuncode-bridge-quick-link-url-text", void 0, link2.url));
+      const actions = append(row, $(".shuncode-bridge-quick-link-actions"));
+      const openButton = this._register(new Button(actions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+      openButton.label = `$(${Codicon.linkExternal.id}) ${localizeBridge("shuncodeBridge.quickLinkOpen", "Open")}`;
+      this._register(openButton.onDidClick(() => this.commandService.executeCommand("simpleBrowser.show", link2.url)));
+      this.quickLinkRowButtons.push(openButton);
+      const deleteButton2 = this._register(new Button(actions, { ...defaultButtonStyles, secondary: true, supportIcons: true }));
+      deleteButton2.label = `$(${Codicon.trash.id}) ${localizeBridge("shuncodeBridge.quickLinkDelete", "Delete")}`;
+      this._register(deleteButton2.onDidClick(() => this.removeQuickLink(link2)));
+      this.quickLinkRowButtons.push(deleteButton2);
+    }
+  }
+  async addQuickLink() {
+    const name = this.quickLinkNameInput.value.trim();
+    const url = this.quickLinkUrlInput.value.trim();
+    if (!name) {
+      this.renderQuickLinkMessage(localizeBridge("shuncodeBridge.quickLinkNameRequired", "Enter a name for the shortcut."));
+      this.quickLinkNameInput.focus();
+      return;
+    }
+    if (!this.isValidQuickLinkUrl(url)) {
+      this.renderQuickLinkMessage(localizeBridge("shuncodeBridge.quickLinkUrlInvalid", "Enter a valid http:// or https:// address."));
+      this.quickLinkUrlInput.focus();
+      return;
+    }
+    const normalizedUrl = url.slice(0, QUICK_LINK_MAX_URL_LENGTH);
+    const links = this.readQuickLinks();
+    if (links.some((link2) => link2.url.toLowerCase() === normalizedUrl.toLowerCase())) {
+      this.renderQuickLinkMessage(localizeBridge("shuncodeBridge.quickLinkUrlDuplicate", "This address is already in the list."));
+      this.quickLinkUrlInput.focus();
+      return;
+    }
+    const next = [...links, { name: name.slice(0, QUICK_LINK_MAX_NAME_LENGTH), url: normalizedUrl }];
+    try {
+      await this.configurationService.updateValue(BRIDGE_QUICK_LINKS_SETTING, next, 2 /* USER */);
+      this.quickLinkNameInput.value = "";
+      this.quickLinkUrlInput.value = "";
+      this.renderQuickLinkMessage("");
+      this.updateControls();
+    } catch (error) {
+      this.renderQuickLinkMessage(error instanceof Error ? error.message : String(error));
+    }
+  }
+  async removeQuickLink(link2) {
+    const result = await this.dialogService.confirm({
+      type: "warning",
+      message: localizeBridge("shuncodeBridge.quickLinkDeleteConfirm", "Delete the quick open shortcut \u201C{0}\u201D?", link2.name),
+      detail: localizeBridge("shuncodeBridge.quickLinkDeleteConfirmDetail", "The button is removed from the top of this page."),
+      primaryButton: localizeBridge("shuncodeBridge.quickLinkDelete", "Delete")
+    });
+    if (!result.confirmed) return;
+    const next = this.readQuickLinks().filter((candidate) => candidate.url !== link2.url || candidate.name !== link2.name);
+    try {
+      await this.configurationService.updateValue(BRIDGE_QUICK_LINKS_SETTING, next, 2 /* USER */);
+    } catch (error) {
+      this.renderQuickLinkMessage(error instanceof Error ? error.message : String(error));
+    }
+  }
+  async restoreQuickLinksDefaults() {
+    try {
+      await this.configurationService.updateValue(BRIDGE_QUICK_LINKS_SETTING, DEFAULT_QUICK_LINKS.map((link2) => ({ ...link2 })), 2 /* USER */);
+      this.renderQuickLinkMessage(localizeBridge("shuncodeBridge.quickLinkRestored", "Restored the default shortcuts."));
+    } catch (error) {
+      this.renderQuickLinkMessage(error instanceof Error ? error.message : String(error));
+    }
+  }
+  async saveCopyPromptText() {
+    const value2 = this.copyPromptInput.value.trim();
+    try {
+      await this.configurationService.updateValue(BRIDGE_COPY_PROMPT_SETTING, value2 || void 0, 2 /* USER */);
+      this.copyPromptInput.value = this.resolveArenaPrompt();
+      this.renderCopyPromptMessage(value2 ? localizeBridge("shuncodeBridge.copyPromptSaved", "Saved. The Copy prompt button will use this text.") : localizeBridge("shuncodeBridge.copyPromptCleared", "Cleared. The default text is in use again."));
+    } catch (error) {
+      this.renderCopyPromptMessage(error instanceof Error ? error.message : String(error));
+    }
+  }
+  async resetCopyPromptText() {
+    try {
+      await this.configurationService.updateValue(BRIDGE_COPY_PROMPT_SETTING, void 0, 2 /* USER */);
+      this.copyPromptInput.value = DEFAULT_ARENA_PROMPT;
+      this.renderCopyPromptMessage(localizeBridge("shuncodeBridge.copyPromptCleared", "Cleared. The default text is in use again."));
+    } catch (error) {
+      this.renderCopyPromptMessage(error instanceof Error ? error.message : String(error));
+    }
+  }
+  renderCopyPromptMessage(message) {
+    this.copyPromptMessage.textContent = message;
+    this.copyPromptMessage.classList.toggle("visible", Boolean(message));
+  }
+  renderQuickLinkMessage(message) {
+    this.quickLinkMessage.textContent = message;
+    this.quickLinkMessage.classList.toggle("visible", Boolean(message));
+  }
+  dispose() {
+    this.disposed = true;
+    if (this.copyToastTimer !== void 0) clearTimeout(this.copyToastTimer);
+    super.dispose();
+  }
+}

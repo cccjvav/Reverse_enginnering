@@ -1,0 +1,1 @@
+BRIDGE_LICENSE_SIGN_OUT = "shuncode.bridge.license.signOut"
