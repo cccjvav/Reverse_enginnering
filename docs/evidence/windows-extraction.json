@@ -1,0 +1,1564 @@
+{
+  "file": "ShunCode-0.7.4-win32-x64-Setup.exe",
+  "size": 240559253,
+  "sha256": "fdc2328b2520a128fd3449ed2015a7383e2b7dafaae05c3892d5a4c11a671272",
+  "markers": [
+    {
+      "kind": "inno",
+      "matches": [
+        {
+          "offset": 698348,
+          "signature": "Inno Setup Setup Data (6.4.0.1)"
+        },
+        {
+          "offset": 238601591,
+          "signature": "Inno Setup Setup Data (6.4.0.1)"
+        }
+      ]
+    }
+  ],
+  "scope": "Static parsing only. Installer code is never executed.",
+  "pe": {
+    "machine_hex": "0x14c",
+    "timestamp_raw": 1739339596,
+    "sections": [
+      {
+        "name": ".text",
+        "raw_size": 677888,
+        "raw_offset": 1024
+      },
+      {
+        "name": ".itext",
+        "raw_size": 6144,
+        "raw_offset": 678912
+      },
+      {
+        "name": ".data",
+        "raw_size": 14848,
+        "raw_offset": 685056
+      },
+      {
+        "name": ".bss",
+        "raw_size": 0,
+        "raw_offset": 0
+      },
+      {
+        "name": ".idata",
+        "raw_size": 4096,
+        "raw_offset": 699904
+      },
+      {
+        "name": ".didata",
+        "raw_size": 512,
+        "raw_offset": 704000
+      },
+      {
+        "name": ".edata",
+        "raw_size": 512,
+        "raw_offset": 704512
+      },
+      {
+        "name": ".tls",
+        "raw_size": 0,
+        "raw_offset": 0
+      },
+      {
+        "name": ".rdata",
+        "raw_size": 512,
+        "raw_offset": 705024
+      },
+      {
+        "name": ".reloc",
+        "raw_size": 69120,
+        "raw_offset": 705536
+      },
+      {
+        "name": ".rsrc",
+        "raw_size": 157696,
+        "raw_offset": 774656
+      }
+    ],
+    "section_data_end": 932352,
+    "bytes_after_sections": 239626901,
+    "note": "Installer stub architecture is not necessarily the application architecture; trailing bytes may include certificates."
+  },
+  "seven_zip": {
+    "command": [
+      "7z",
+      "l",
+      "-slt",
+      "ShunCode-0.7.4-win32-x64-Setup.exe"
+    ],
+    "exit_code": 2,
+    "log_bytes": 478,
+    "log_head": "\n7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20\n 64-bit locale=C.UTF-8 Threads:4 OPEN_MAX:65536\n\nScanning the drive for archives:\n1 file, 240559253 bytes (230 MiB)\n\nListing archive: ShunCode-0.7.4-win32-x64-Setup.exe\n\n\nERROR: ShunCode-0.7.4-win32-x64-Setup.exe : Cannot open the file as archive\n\n\n\nErrors: 1\n",
+    "log_truncated": false
+  },
+  "innoextract_version": {
+    "command": [
+      "innoextract",
+      "--version"
+    ],
+    "exit_code": 0,
+    "log_bytes": 89,
+    "log_head": "innoextract 1.10-dev + 6e9e34e\nExtracts installers created by Inno Setup 1.2.10 to 6.3.3\n",
+    "log_truncated": false
+  },
+  "innoextract_list": {
+    "command": [
+      "innoextract",
+      "--list",
+      "ShunCode-0.7.4-win32-x64-Setup.exe"
+    ],
+    "exit_code": 0,
+    "log_bytes": 1123244,
+    "log_head": "Listing \"ShunCode\" - setup data version 6.4.0.1 (unicode)\n - \"code$GetDestDir/resources/app/extensions/shuncode/runtime/git/dev/mqueue/\"\n - \"code$GetDestDir/resources/app/extensions/shuncode/runtime/git/dev/shm/\"\n - \"code$GetDestDir/resources/app/extensions/shuncode/runtime/git/tmp/\"\n - \"code$GetDestDir/resources/app/node_modules.asar.unpacked/@github/\"\n - \"code$GetDestDir/chrome_100_percent.pak\" (702 KiB)\n - \"code$GetDestDir/chrome_200_percent.pak\" (1.21 MiB)\n - \"code$GetDestDir/d3dcompiler_47.dll\" (4.52 MiB)\n - \"code$GetDestDir/dxcompiler.dll\" (24.6 MiB)\n - \"code$GetDestDir/dxil.dll\" (1.44 MiB)\n - \"code$GetDestDir/ffmpeg.dll\" (2.97 MiB)\n - \"code$GetDestDir/icudtl.dat\" (10.4 MiB)\n - \"code$GetDestDir/LICENSES.chromium.html\" (19.5 MiB)\n - \"code$GetDestDir/resources.pak\" (11.9 MiB)\n - \"code$GetDestDir/snapshot_blob.bin\" (360 KiB)\n - \"code$GetDestDir/v8_context_snapshot.bin\" (724 KiB)\n - \"code$GetDestDir/vk_swiftshader.dll\" (5.26 MiB)\n - \"code$GetDestDir/vk_swiftshader_icd.json\" (106 B)\n - \"code$GetDestDir/vulkan-1.dll\" (917 KiB)\n - \"code$GetDestDir/locales/en-US.pak\" (572 KiB)\n - \"code$GetDestDir/locales/zh-CN.pak\" (578 KiB)\n - \"code$GetDestDir/locales/zh-TW.pak\" (570 KiB)\n - \"code$GetDestDir/resources/app/LICENSE.txt\" (1.08 KiB)\n - \"code$GetDestDir/resources/app/node_modules.asar\" (81.6 MiB)\n - \"code$GetDestDir/resources/app/package.json\" (14.3 KiB)\n - \"code$GetDestDir/resources/app/ThirdPartyNotices.txt\" (178 KiB)\n - \"code$GetDestDir/resources/app/extensions/bat/language-configuration.json\" (365 B)\n - \"code$GetDestDir/resources/app/extensions/bat/package.json\" (772 B)\n - \"code$GetDestDir/resources/app/extensions/bat/package.nls.json\" (154 B)\n - \"code$GetDestDir/resources/app/extensions/bat/snippets/batchfile.code-snippets\" (191 B)\n - \"code$GetDestDir/resources/app/extensions/bat/syntaxes/batchfile.tmLanguage.json\" (12.8 KiB)\n - \"code$GetDestDir/resources/app/extensions/clojure/language-configuration.json\" (263 B)\n - \"code$GetDestDir/resources/app/extensions/clojure/package.json\" (812 B)\n - \"code$GetDestDir/resources/app/extensions/clojure/package.nls.json\" (125 B)\n - \"code$GetDestDir/resources/app/extensions/clojure/syntaxes/clojure.tmLanguage.json\" (6.75 KiB)\n - \"code$GetDestDir/resources/app/extensions/coffeescript/language-configuration.json\" (420 B)\n - \"code$GetDestDir/resources/app/extensions/coffeescript/package.json\" (1020 B)\n - \"code$GetDestDir/resources/app/extensions/coffeescript/package.nls.json\" (154 B)\n - \"code$GetDestDir/resources/app/extensions/coffeescript/snippets/coffeescript.code-snippets\" (187 B)\n - \"code$GetDestDir/resources/app/extensions/coffeescript/syntaxes/coffeescript.tmLanguage.json\" (27 KiB)\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/package.json\" (3.54 KiB)\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/package.nls.json\" (196 B)\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/dist/configurationEditingMain.js\" (124 KiB)\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/images/icon.png\" (2.76 KiB)\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/schemas/attachContainer.schema.json\" (6.13 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/language-configuration.json\" (1.14 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/package.json\" (1.71 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/package.nls.json\" (140 B)\n - \"code$GetDestDir/resources/app/extensions/cpp/snippets/c.code-snippets\" (204 B)\n - \"code$GetDestDir/resources/app/extensions/cpp/snippets/cpp.code-snippets\" (204 B)\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/c.tmLanguage.json\" (70.4 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/cpp.embedded.macro.tmLanguage.json\" (287 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/cpp.tmLanguage.json\" (504 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/cuda-cpp.tmLanguage.json\" (472 KiB)\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/platform.tmLanguage.json\" (548 KiB)\n - \"code$GetDestDir/resources/app/extensions/csharp/language-configuration.json\" (696 B)\n - \"code$GetDestDir/resources/app/extensions/csharp/package.json\" (1.08 KiB)\n - \"code$GetDestDir/resources/app/extensions/csharp/package.nls.json\" (134 B)\n - \"code$GetDestDir/resources/app/extensions/csharp/snippets/csharp.code-snippets\" (190 B)\n - \"code$GetDestDir/resources/app/extensions/csharp/syntaxes/csharp.tmLanguage.json\" (98.2 KiB)\n - \"code$GetDestDir/resources/app/extensions/css/language-configuration.json\" (767 B)\n - \"code$GetDestDir/resources/app/extensions/css/package.json\" (740 B)\n - \"code$GetDestDir/resources/app/extensions/css/package.nls.json\" (133 B)\n - \"code$GetDestDir/resources/app/extensions/css/syntaxes/css.tmLanguage.json\" (54.7 KiB)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/package.json\" (16.6 KiB)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/package.nls.json\" (10.9 KiB)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/README.md\" (485 B)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/client/dist/node/cssClientMain.js\" (451 KiB)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/icons/css.png\" (3.63 KiB)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/schemas/package.schema.json\" (722 B)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/server/.npmrc\" (39 B)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/server/package.json\" (966 B)\n - \"code$GetDestDir/resources/app/extensions/css-language-features/server/dist/node/cssServerMain.js\" (1.16 MiB)\n - \"code$GetDestDir/resources/app/extensions/dart/language-configuration.json\" (494 B)\n - \"code$GetDestDir/resources/app/extensions/dart/package.json\" (596 B)\n - \"code$GetDestDir/resources/app/extensions/dart/package.nls.json\" (117 B)\n - \"code$GetDestDir/resources/app/extensions/dart/syntaxes/dart.tmLanguage.json\" (8.47 KiB)\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/package.json\" (649 B)\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/package.nls.json\" (172 B)\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/dist/extension.js\" (5.68 KiB)\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/media/icon.png\" (7.02 KiB)\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/package.json\" (4.18 KiB)\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/package.nls.json\" (1.54 KiB)\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/dist/extension.js\" (6.17 KiB)\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/media/icon.png\" (8.11 KiB)\n - \"code$GetDestDir/resources/app/extensions/diff/language-configuration.json\" (100 B)\n - \"code$GetDestDir/resources/app/extensions/diff/package.json\" (611 B)\n - \"code$GetDestDir/resources/app/extensions/diff/package.nls.json\" (117 B)\n - \"code$GetDestDir/resources/app/extensions/diff/syntaxes/diff.tmLanguage.json\" (2.84 KiB)\n - \"code$GetDestDir/resources/app/extensions/docker/language-configuration.json\" (358 B)\n - \"code$GetDestDir/resources/app/extensions/docker/package.json\" (777 B)\n - \"code$GetDestDir/resources/app/extensions/docker/package.nls.json\" (123 B)\n - \"code$GetDestDir/resources/app/extensions/docker/syntaxes/docker.tmLanguage.json\" (2.02 KiB)\n - \"code$GetDestDir/resources/app/extensions/dotenv/language-configuration.json\" (221 B)\n - \"code$GetDestDir/resources/app/extensions/dotenv/package.json\" (766 B)\n - \"code$GetDestDir/resources/app/extensions/dotenv/package.nls.json\" (123 B)\n - \"code$GetDestDir/resources/app/extensions/dotenv/syntaxes/dotenv.tmLanguage.json\" (1.95 KiB)\n - \"code$GetDestDir/resources/app/extensions/emmet/package.json\" (9.7 KiB)\n - \"code$GetDestDir/resources/app/extensions/emmet/package.nls.json\" (6.79 KiB)\n - \"code$GetDestDir/resources/app/extensions/emmet/README.md\" (458 B)\n - \"code$GetDestDir/resources/app/extensions/emmet/dist/node/emmetNodeMain.js\" (227 KiB)\n - \"code$GetDestDir/resources/app/extensions/emmet/images/icon.png\" (11 KiB)\n - \"code$GetDestDir/resources/app/extensions/extension-editing/package.json\" (1 KiB)\n - \"code$GetDestDir/resources/app/extensions/extension-editing/package.nls.json\" (109 B)\n - \"code$GetDestDir/resources/app/extensions/extension-editing/dist/extensionEditingMain.js\" (362 KiB)\n - \"code$GetDestDir/resources/app/extensions/extension-editing/images/icon.png\" (1.96 KiB)\n - \"code$GetDestDir/resources/app/extensions/fsharp/language-configuration.json\" (491 B)\n - \"code$GetDestDir/resources/app/extensions/fsharp/package.json\" (868 B)\n - \"code$GetDestDir/resources/app/extensions/fsharp/package.nls.json\" (134 B)\n - \"code$GetDestDir/resources/app/extensions/fsharp/snippets/fsharp.code-snippets\" (194 B)\n - \"code$GetDestDir/resources/app/extensions/fsharp/syntaxes/fsharp.tmLanguage.json\" (24.7 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/package.json\" (91 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/package.nls.json\" (37.2 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/README.md\" (982 B)\n - \"code$GetDestDir/resources/app/extensions/git/dist/askpass-empty.sh\" (17 B)\n - \"code$GetDestDir/resources/app/extensions/git/dist/askpass-main.js\" (1.83 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/dist/askpass.sh\" (296 B)\n - \"code$GetDestDir/resources/app/extensions/git/dist/git-editor-empty.sh\" (10 B)\n - \"code$GetDestDir/resources/app/extensions/git/dist/git-editor-main.js\" (1.28 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/dist/git-editor.sh\" (125 B)\n - \"code$GetDestDir/resources/app/extensions/git/dist/main.js\" (739 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/dist/ssh-askpass-empty.sh\" (17 B)\n - \"code$GetDestDir/resources/app/extensions/git/dist/ssh-askpass.sh\" (294 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/.gitattributes\" (59 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/binding.gyp\" (565 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/package.json\" (524 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/README.md\" (2.86 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/SECURITY.md\" (542 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/cp.d.ts\" (137 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/cp.js\" (12.4 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/index.d.ts\" (114 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/index.js\" (114 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/native.d.ts\" (439 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/native.js\" (938 B)\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/src/copyfile.cc\" (9.49 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/resources/emojis.json\" (39 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/git.png\" (2.33 KiB)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-added.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-conflict.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-copied.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-deleted.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-ignored.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-modified.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-renamed.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-type-changed.svg\" (432 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-untracked.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-added.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-conflict.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-copied.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-deleted.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-ignored.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-modified.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-renamed.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-type-changed.svg\" (432 B)\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-untracked.svg\" (431 B)\n - \"code$GetDestDir/resources/app/extensions/git-base/package.json\" (1.56 KiB)\n - \"code$GetDestDir/resources/app/extensions/git-base/package.nls.json\" (132 B)\n - \"code$GetDestDir/resources/app/extensions/git-base/README.md\" (639 B)\n - \"code$GetDestDir/resources/app/extensions/git-base/dist/extension.js\" (7.76 KiB)\n - \"code$GetDestDir/resources/app/extensions/git-base/languages/git-commit.language-configuration.json\" (398 B)\n - \"code$GetDestDir/resources/app/extensions/git-base/languages/git-rebase.language-configuration.json\" (398 B)\n - \"code$GetDestDir/resources/app/extensions/git-base/languages/ignore.language-configuration.json\" (282 B)\n - \"code$GetDestDir/resources/app/extensions/git-base/resources/icons/git.png\" (2.33 KiB)\n - \"code$GetDestDir/resources/app/extensions/git-base/syntaxes/git-commit.tmLanguage.json\" (1.78 KiB)\n - \"code$GetDestDir/resources/app/extensions/git-base/syntaxes/git-rebase.tmLanguage.json\" (1.2 KiB)\n - \"code$GetDestDir/resources/app/extensions/git-base/syntaxes/ignore.tmLanguage.json\" (116 B)\n - \"code$GetDestDir/resources/app/extensions/github/markdown.css\" (608 B)\n - \"code$GetDestDir/resources/app/extensions/github/package.json\" (4.92 KiB)\n - \"code$GetDestDir/resources/app/extensions/github/package.nls.json\" (1.97 KiB)\n - \"code$GetDestDir/resources/app/extensions/github/README.md\" (509 B)\n - \"code$GetDestDir/resources/app/extensions/github/dist/extension.js\" (295 KiB)\n - \"code$GetDestDir/resources/app/extensions/github/images/icon.png\" (3.57 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/package.json\" (1.52 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/package.nls.json\" (1.17 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/README.md\" (388 B)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/dist/extension.js\" (208 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/images/icon.png\" (3.57 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/auth.css\" (2.98 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/code-icon.svg\" (12.8 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/favicon.ico\" (33.7 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/icon.png\" (3.73 KiB)\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/index.html\" (2.97 KiB)\n - \"code$GetDestDir/resources/app/extensions/go/language-configuration.json\" (844 B)\n - \"code$GetDestDir/resources/app/extensions/go/package.json\" (711 B)\n - \"code$GetDestDir/resources/app/extensions/go/package.nls.json\" (115 B)\n - \"code$GetDestDir/resources/app/extensions/go/syntaxes/go.tmLanguage.json\" (50.6 KiB)\n - \"code$GetDestDir/resources/app/extensions/groovy/language-configuration.json\" (450 B)\n - \"code$GetDestDir/resources/app/extensions/groovy/package.json\" (903 B)\n - \"code$GetD\n[... middle omitted ...]\non/scripts/psreadline/PSReadLine.psd1\" (836 B)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/PSReadLine.psm1\" (422 B)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/net6plus/Microsoft.PowerShell.PSReadLine.Polyfiller.dll\" (4.5 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/netstd/Microsoft.PowerShell.PSReadLine.Polyfiller.dll\" (6.5 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/webview/browser/pre/fake.html\" (188 B)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/webview/browser/pre/index.html\" (38.8 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/webview/browser/pre/service-worker.js\" (19.7 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/ai-powered-suggestions.svg\" (69.2 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/commandPalette.svg\" (9.42 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/customize-ai.svg\" (85.3 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/dark-hc.png\" (10.4 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/dark.png\" (10.3 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/debug.svg\" (63.1 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/extensions-web.svg\" (155 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/extensions.svg\" (423 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/git.svg\" (73.5 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/languages.svg\" (73.6 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/learn.svg\" (39.2 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/light-hc.png\" (10.4 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/light.png\" (9.92 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/menuBar.svg\" (9.07 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/multi-file-edits.svg\" (335 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/openFolder.svg\" (31.7 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/profiles.svg\" (13 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/runTask.svg\" (16.9 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/search.svg\" (26.9 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/settings.svg\" (58.5 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/settingsSync.svg\" (15.8 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/shortcuts.svg\" (42.3 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/terminal.svg\" (104 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/workspaceTrust.svg\" (25.1 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/colab.png\" (2.42 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/default.png\" (2.42 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/jupyter.png\" (2.43 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-dark-2026.svg\" (1.31 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-hc-dark.svg\" (1.31 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-hc-light.svg\" (1.31 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-light-2026.svg\" (1.31 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-solarized-dark.svg\" (1.31 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-solarized-light.svg\" (1.31 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/extensions/worker/webWorkerExtensionHostIframe.html\" (5.87 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/languageDetection/browser/languageDetectionWebWorkerMain.js\" (286 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/search/worker/localFileSearchMain.js\" (296 KiB)\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/textMate/browser/backgroundTokenization/worker/textMateTokenizationWorker.workerMain.js\" (473 KiB)\n - \"code$GetDestDir/resources/app/out/vscode-dts/vscode.d.ts\" (724 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/bower.ico\" (149 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/c.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/code.ico\" (140 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/code_150x150.png\" (35.5 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/code_70x70.png\" (10 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/config.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/cpp.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/csharp.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/css.ico\" (145 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/default.ico\" (144 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/go.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/html.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/jade.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/java.ico\" (148 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/javascript.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/json.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/less.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/markdown.ico\" (145 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/php.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/powershell.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/python.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/react.ico\" (150 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/ruby.ico\" (145 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/sass.ico\" (148 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/shell.ico\" (144 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/sql.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/typescript.ico\" (146 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/vue.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/xml.ico\" (147 KiB)\n - \"code$GetDestDir/resources/app/resources/win32/yaml.ico\" (145 KiB)\n - \"code$GetDestDir/code$GetExeBasename\" (234 MiB)\n - \"code$GetDestDir/code$GetVisualElementsManifest\" (370 B)\n - \"app/tools/inno_updater.exe\" (526 KiB)\n - \"app/tools/vcruntime140.dll\" (81.6 KiB)\n - \"code$GetDestDir/bin/code$GetBinDirApplicationCmdFilename\" (182 B)\n - \"code$GetDestDir/bin/code$GetBinDirApplicationFilename\" (1.97 KiB)\n - \"code$GetDestDir/resources/app/product.json\" (6.75 KiB)\nDone.\n",
+    "log_truncated": true
+  },
+  "extraction": {
+    "command": [
+      "innoextract",
+      "--extract",
+      "--output-dir",
+      "windows-extracted",
+      "ShunCode-0.7.4-win32-x64-Setup.exe"
+    ],
+    "exit_code": 0,
+    "log_bytes": 1026309,
+    "log_head": "Extracting \"ShunCode\" - setup data version 6.4.0.1 (unicode)\n - \"code$GetDestDir/resources/app/extensions/shuncode/runtime/git/dev/mqueue/\"\n - \"code$GetDestDir/resources/app/extensions/shuncode/runtime/git/dev/shm/\"\n - \"code$GetDestDir/resources/app/extensions/shuncode/runtime/git/tmp/\"\n - \"code$GetDestDir/resources/app/node_modules.asar.unpacked/@github/\"\n - \"code$GetDestDir/chrome_100_percent.pak\"\n - \"code$GetDestDir/chrome_200_percent.pak\"\n - \"code$GetDestDir/d3dcompiler_47.dll\"\n - \"code$GetDestDir/dxcompiler.dll\"\n - \"code$GetDestDir/dxil.dll\"\n - \"code$GetDestDir/ffmpeg.dll\"\n - \"code$GetDestDir/icudtl.dat\"\n - \"code$GetDestDir/LICENSES.chromium.html\"\n - \"code$GetDestDir/resources.pak\"\n - \"code$GetDestDir/snapshot_blob.bin\"\n - \"code$GetDestDir/v8_context_snapshot.bin\"\n - \"code$GetDestDir/vk_swiftshader.dll\"\n - \"code$GetDestDir/vk_swiftshader_icd.json\"\n - \"code$GetDestDir/vulkan-1.dll\"\n - \"code$GetDestDir/locales/en-US.pak\"\n - \"code$GetDestDir/locales/zh-CN.pak\"\n - \"code$GetDestDir/locales/zh-TW.pak\"\n - \"code$GetDestDir/resources/app/LICENSE.txt\"\n - \"code$GetDestDir/resources/app/node_modules.asar\"\n - \"code$GetDestDir/resources/app/package.json\"\n - \"code$GetDestDir/resources/app/ThirdPartyNotices.txt\"\n - \"code$GetDestDir/resources/app/extensions/bat/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/bat/package.json\"\n - \"code$GetDestDir/resources/app/extensions/bat/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/bat/snippets/batchfile.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/bat/syntaxes/batchfile.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/clojure/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/clojure/package.json\"\n - \"code$GetDestDir/resources/app/extensions/clojure/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/clojure/syntaxes/clojure.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/coffeescript/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/coffeescript/package.json\"\n - \"code$GetDestDir/resources/app/extensions/coffeescript/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/coffeescript/snippets/coffeescript.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/coffeescript/syntaxes/coffeescript.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/package.json\"\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/dist/configurationEditingMain.js\"\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/images/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/configuration-editing/schemas/attachContainer.schema.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/package.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/snippets/c.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/cpp/snippets/cpp.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/c.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/cpp.embedded.macro.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/cpp.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/cuda-cpp.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/cpp/syntaxes/platform.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/csharp/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/csharp/package.json\"\n - \"code$GetDestDir/resources/app/extensions/csharp/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/csharp/snippets/csharp.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/csharp/syntaxes/csharp.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/css/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/css/package.json\"\n - \"code$GetDestDir/resources/app/extensions/css/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/css/syntaxes/css.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/package.json\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/README.md\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/client/dist/node/cssClientMain.js\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/icons/css.png\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/schemas/package.schema.json\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/server/.npmrc\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/server/package.json\"\n - \"code$GetDestDir/resources/app/extensions/css-language-features/server/dist/node/cssServerMain.js\"\n - \"code$GetDestDir/resources/app/extensions/dart/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/dart/package.json\"\n - \"code$GetDestDir/resources/app/extensions/dart/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/dart/syntaxes/dart.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/package.json\"\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/dist/extension.js\"\n - \"code$GetDestDir/resources/app/extensions/debug-auto-launch/media/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/package.json\"\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/dist/extension.js\"\n - \"code$GetDestDir/resources/app/extensions/debug-server-ready/media/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/diff/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/diff/package.json\"\n - \"code$GetDestDir/resources/app/extensions/diff/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/diff/syntaxes/diff.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/docker/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/docker/package.json\"\n - \"code$GetDestDir/resources/app/extensions/docker/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/docker/syntaxes/docker.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/dotenv/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/dotenv/package.json\"\n - \"code$GetDestDir/resources/app/extensions/dotenv/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/dotenv/syntaxes/dotenv.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/emmet/package.json\"\n - \"code$GetDestDir/resources/app/extensions/emmet/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/emmet/README.md\"\n - \"code$GetDestDir/resources/app/extensions/emmet/dist/node/emmetNodeMain.js\"\n - \"code$GetDestDir/resources/app/extensions/emmet/images/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/extension-editing/package.json\"\n - \"code$GetDestDir/resources/app/extensions/extension-editing/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/extension-editing/dist/extensionEditingMain.js\"\n - \"code$GetDestDir/resources/app/extensions/extension-editing/images/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/fsharp/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/fsharp/package.json\"\n - \"code$GetDestDir/resources/app/extensions/fsharp/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/fsharp/snippets/fsharp.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/fsharp/syntaxes/fsharp.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/git/package.json\"\n - \"code$GetDestDir/resources/app/extensions/git/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/git/README.md\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/askpass-empty.sh\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/askpass-main.js\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/askpass.sh\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/git-editor-empty.sh\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/git-editor-main.js\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/git-editor.sh\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/main.js\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/ssh-askpass-empty.sh\"\n - \"code$GetDestDir/resources/app/extensions/git/dist/ssh-askpass.sh\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/.gitattributes\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/binding.gyp\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/package.json\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/README.md\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/SECURITY.md\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/cp.d.ts\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/cp.js\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/index.d.ts\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/index.js\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/native.d.ts\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/lib/native.js\"\n - \"code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/src/copyfile.cc\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/emojis.json\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/git.png\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-added.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-conflict.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-copied.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-deleted.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-ignored.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-modified.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-renamed.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-type-changed.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/dark/status-untracked.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-added.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-conflict.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-copied.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-deleted.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-ignored.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-modified.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-renamed.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-type-changed.svg\"\n - \"code$GetDestDir/resources/app/extensions/git/resources/icons/light/status-untracked.svg\"\n - \"code$GetDestDir/resources/app/extensions/git-base/package.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/README.md\"\n - \"code$GetDestDir/resources/app/extensions/git-base/dist/extension.js\"\n - \"code$GetDestDir/resources/app/extensions/git-base/languages/git-commit.language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/languages/git-rebase.language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/languages/ignore.language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/resources/icons/git.png\"\n - \"code$GetDestDir/resources/app/extensions/git-base/syntaxes/git-commit.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/syntaxes/git-rebase.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/git-base/syntaxes/ignore.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/github/markdown.css\"\n - \"code$GetDestDir/resources/app/extensions/github/package.json\"\n - \"code$GetDestDir/resources/app/extensions/github/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/github/README.md\"\n - \"code$GetDestDir/resources/app/extensions/github/dist/extension.js\"\n - \"code$GetDestDir/resources/app/extensions/github/images/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/package.json\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/README.md\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/dist/extension.js\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/images/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/auth.css\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/code-icon.svg\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/favicon.ico\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/icon.png\"\n - \"code$GetDestDir/resources/app/extensions/github-authentication/media/index.html\"\n - \"code$GetDestDir/resources/app/extensions/go/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/go/package.json\"\n - \"code$GetDestDir/resources/app/extensions/go/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/go/syntaxes/go.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/groovy/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/groovy/package.json\"\n - \"code$GetDestDir/resources/app/extensions/groovy/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/groovy/snippets/groovy.code-snippets\"\n - \"code$GetDestDir/resources/app/extensions/groovy/syntaxes/groovy.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/grunt/package.json\"\n - \"code$GetDestDir/resources/app/extensions/grunt/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/grunt/README.md\"\n - \"code$GetDestDir/resources/app/extensions/grunt/dist/main.js\"\n - \"code$GetDestDir/resources/app/extensions/grunt/images/grunt.png\"\n - \"code$GetDestDir/resources/app/extensions/gulp/package.json\"\n - \"code$GetDestDir/resources/app/extensions/gulp/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/gulp/README.md\"\n - \"code$GetDestDir/resources/app/extensions/gulp/dist/main.js\"\n - \"code$GetDestDir/resources/app/extensions/gulp/images/gulp.png\"\n - \"code$GetDestDir/resources/app/extensions/handlebars/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/handlebars/package.json\"\n - \"code$GetDestDir/resources/app/extensions/handlebars/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/handlebars/syntaxes/Handlebars.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/hlsl/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/hlsl/package.json\"\n - \"code$GetDestDir/resources/app/extensions/hlsl/package.nls.json\"\n - \"code$GetDestDir/resources/app/extensions/hlsl/syntaxes/hlsl.tmLanguage.json\"\n - \"code$GetDestDir/resources/app/extensions/html/language-configuration.json\"\n - \"code$GetDestDir/resources/app/extensions/html/package.json\"\n - \"code$GetDestDir/resources/app/extensions/html/packag\n[... middle omitted ...]\nvs/workbench/contrib/terminal/common/scripts/shellIntegration-profile.zsh\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-rc.zsh\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration.fish\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration.ps1\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/Microsoft.PowerShell.Pager.dll\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/Microsoft.PowerShell.PSReadLine.dll\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/PSReadLine.format.ps1xml\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/PSReadLine.psd1\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/PSReadLine.psm1\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/net6plus/Microsoft.PowerShell.PSReadLine.Polyfiller.dll\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/terminal/common/scripts/psreadline/netstd/Microsoft.PowerShell.PSReadLine.Polyfiller.dll\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/webview/browser/pre/fake.html\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/webview/browser/pre/index.html\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/webview/browser/pre/service-worker.js\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/ai-powered-suggestions.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/commandPalette.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/customize-ai.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/dark-hc.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/dark.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/debug.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/extensions-web.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/extensions.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/git.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/languages.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/learn.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/light-hc.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/light.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/menuBar.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/multi-file-edits.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/openFolder.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/profiles.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/runTask.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/search.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/settings.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/settingsSync.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/shortcuts.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/terminal.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/workspaceTrust.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/colab.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/default.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/jupyter.png\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-dark-2026.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-hc-dark.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-hc-light.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-light-2026.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-solarized-dark.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/contrib/welcomeOnboarding/browser/media/theme-preview-solarized-light.svg\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/extensions/worker/webWorkerExtensionHostIframe.html\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/languageDetection/browser/languageDetectionWebWorkerMain.js\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/search/worker/localFileSearchMain.js\"\n - \"code$GetDestDir/resources/app/out/vs/workbench/services/textMate/browser/backgroundTokenization/worker/textMateTokenizationWorker.workerMain.js\"\n - \"code$GetDestDir/resources/app/out/vscode-dts/vscode.d.ts\"\n - \"code$GetDestDir/resources/app/resources/win32/bower.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/c.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/code.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/code_150x150.png\"\n - \"code$GetDestDir/resources/app/resources/win32/code_70x70.png\"\n - \"code$GetDestDir/resources/app/resources/win32/config.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/cpp.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/csharp.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/css.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/default.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/go.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/html.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/jade.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/java.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/javascript.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/json.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/less.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/markdown.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/php.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/powershell.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/python.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/react.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/ruby.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/sass.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/shell.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/sql.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/typescript.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/vue.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/xml.ico\"\n - \"code$GetDestDir/resources/app/resources/win32/yaml.ico\"\n - \"code$GetDestDir/code$GetExeBasename\"\n - \"code$GetDestDir/code$GetVisualElementsManifest\"\n - \"app/tools/inno_updater.exe\"\n - \"app/tools/vcruntime140.dll\"\n - \"code$GetDestDir/bin/code$GetBinDirApplicationCmdFilename\"\n - \"code$GetDestDir/bin/code$GetBinDirApplicationFilename\"\n - \"code$GetDestDir/resources/app/product.json\"\nDone.\n",
+    "log_truncated": true
+  },
+  "inventory": {
+    "file_count": 9875,
+    "total_bytes": 1032221550,
+    "suffix_counts": {
+      "": 2949,
+      ".vim": 1973,
+      ".pm": 811,
+      ".pl": 619,
+      ".json": 499,
+      ".exe": 360,
+      ".dll": 357,
+      ".txt": 267,
+      ".js": 227,
+      ".tcl": 173,
+      ".msg": 147,
+      ".ts": 143,
+      ".svg": 118,
+      ".png": 100,
+      ".cjs": 90,
+      ".cts": 88,
+      ".enc": 83,
+      ".al": 75,
+      ".md": 59,
+      ".nanorc": 45,
+      ".mo": 44,
+      ".html": 39,
+      ".ico": 36,
+      ".wav": 36,
+      ".ps": 33,
+      ".mp3": 31,
+      ".awk": 30,
+      ".sh": 28,
+      ".gif": 23,
+      ".node": 20,
+      ".css": 17,
+      ".code-snippets": 15,
+      ".sample": 14,
+      ".po": 13,
+      ".wasm": 12,
+      ".crt": 10,
+      ".tutor": 10,
+      ".pem": 9,
+      ".mts": 8,
+      ".lib": 7,
+      ".pak": 6,
+      ".tm": 6,
+      ".xbm": 6,
+      ".e2x": 6,
+      ".zsh": 5,
+      ".scm": 5,
+      ".mjs": 4,
+      ".cnf": 4,
+      ".dist": 4,
+      ".tab": 4,
+      ".eterm": 4,
+      ".gnome": 4,
+      ".konsole": 4,
+      ".linux": 4,
+      ".mrxvt": 4,
+      ".rxvt": 4,
+      ".xterm-new": 4,
+      ".cmd": 3,
+      ".1": 3,
+      ".putty": 3,
+      ".spl": 3,
+      ".sug": 3,
+      ".yml": 2,
+      ".config": 2,
+      ".example": 2,
+      ".csh": 2,
+      ".eps": 2,
+      ".module": 2,
+      ".konsole-256color": 2,
+      ".linux-m1": 2,
+      ".linux-m1b": 2,
+      ".linux-m2": 2,
+      ".linux-s": 2,
+      ".minitel1": 2,
+      ".minitel1-nb": 2,
+      ".minitel12-80": 2,
+      ".minitel1b": 2,
+      ".minitel1b-80": 2,
+      ".minitel1b-nb": 2,
+      ".minitel2-80": 2,
+      ".mlterm": 2,
+      ".mlterm-256color": 2,
+      ".putty-256color": 2,
+      ".putty-m1": 2,
+      ".putty-m1b": 2,
+      ".putty-m2": 2,
+      ".teraterm": 2,
+      ".vte": 2,
+      ".vte-256color": 2,
+      ".xterm-256color": 2,
+      ".xterm-r6": 2,
+      ".xterm-xfree86": 2,
+      ".desktop": 2,
+      ".fish": 2,
+      ".template": 2,
+      ".me": 2,
+      ".es": 2,
+      ".fr": 2,
+      ".gl": 2,
+      ".it": 2,
+      ".ja": 2,
+      ".ru": 2,
+      ".sr": 2,
+      ".sv": 2,
+      ".ps1xml": 2,
+      ".psd1": 2,
+      ".psm1": 2,
+      ".ps1": 2,
+      ".c": 2,
+      ".scpt": 2,
+      ".bin": 2,
+      ".dat": 1,
+      ".gyp": 1,
+      ".cc": 1,
+      ".tmlanguage": 1,
+      ".portable": 1,
+      ".bashrc": 1,
+      ".conf": 1,
+      ".uuid": 1,
+      ".ppm": 1,
+      ".terms": 1,
+      ".bash": 1,
+      ".tcsh": 1,
+      ".build": 1,
+      ".runtime": 1,
+      ".lesserv2": 1,
+      ".0bsd": 1,
+      ".gplv2": 1,
+      ".gplv3": 1,
+      ".list": 1,
+      ".zi": 1,
+      ".ld": 1,
+      ".ix": 1,
+      ".ldif": 1,
+      ".gpg": 1,
+      ".devhelp2": 1,
+      ".exception": 1,
+      ".gpl": 1,
+      ".oxygen": 1,
+      ".bundling": 1,
+      ".pot": 1,
+      ".mgc": 1,
+      ".pc": 1,
+      ".types": 1,
+      ".dict": 1,
+      ".bat": 1,
+      ".78": 1,
+      ".psf": 1,
+      ".py": 1,
+      ".bar": 1,
+      ".bg": 1,
+      ".ca": 1,
+      ".cs": 1,
+      ".da": 1,
+      ".de": 1,
+      ".el": 1,
+      ".eo": 1,
+      ".hr": 1,
+      ".hu": 1,
+      ".ko": 1,
+      ".lt": 1,
+      ".lv": 1,
+      ".nb": 1,
+      ".nl": 1,
+      ".no": 1,
+      ".pt": 1,
+      ".sk": 1,
+      ".tr": 1,
+      ".uk": 1,
+      ".vi": 1,
+      ".zh_cn": 1,
+      ".zh_tw": 1,
+      ".cat": 1,
+      ".sha256": 1,
+      ".woff": 1,
+      ".asar": 1,
+      ".ttf": 1
+    },
+    "manifests": [
+      {
+        "path": "code$GetDestDir/resources/app/extensions/bat/package.json",
+        "sha256": "66ffb8129d72bb99b7a80d030ff364e71c17439dd800a61aa76dcc0cce54d414",
+        "name": "bat",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/clojure/package.json",
+        "sha256": "55c2cebdaea83c14f4557bedeccc1fe13c56934f3bee19f1527aa6c400b37940",
+        "name": "clojure",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/coffeescript/package.json",
+        "sha256": "121e1b11cfbe47c821efd180e8f094162838166e00d69efd43497464d5917167",
+        "name": "coffeescript",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/configuration-editing/package.json",
+        "sha256": "dcfab9e0ee216af4044a7876c956be1ac1fff69db446be173832fe9a2a6613bd",
+        "name": "configuration-editing",
+        "version": "10.0.0",
+        "main": "./dist/configurationEditingMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/cpp/package.json",
+        "sha256": "d062980dcbd50e4afdd9ebe205344cd9d74a178769d5c084d4ad60451d14d810",
+        "name": "cpp",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/csharp/package.json",
+        "sha256": "2c3900dc42fe4ac5fcb75519155817ebdfecc82394604038ce13c9d05045d41a",
+        "name": "csharp",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/css/package.json",
+        "sha256": "89c6d5ccc0a41361d7e5714ca36671f5262d8f516a4d73cfb9a0d97b7ca3b31b",
+        "name": "css",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/css-language-features/package.json",
+        "sha256": "c8e0b79937b8faf5905d73543e3780798f6ed0ec2110ba953cb02bc7d84ddbfb",
+        "name": "css-language-features",
+        "version": "10.0.0",
+        "main": "./client/dist/node/cssClientMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/css-language-features/server/package.json",
+        "sha256": "35733c0bf62c627f27a5c713feb355488dd5359ad38fbe2f97d8a4de1734df5d",
+        "name": "vscode-css-languageserver",
+        "version": "10.0.0",
+        "main": "./out/node/cssServerMain",
+        "dependencies": {
+          "@vscode/l10n": "^0.0.18",
+          "vscode-css-languageservice": "<non-semver omitted>",
+          "vscode-languageserver": "<non-semver omitted>",
+          "vscode-uri": "^3.1.0"
+        },
+        "devDependencies": {
+          "@types/node": "24.x"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/dart/package.json",
+        "sha256": "f58325879a6eb1e34d8af3f0089c9e8acf7ef05ee7f912909918b7a22b1b97c9",
+        "name": "dart",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/debug-auto-launch/package.json",
+        "sha256": "81f5e17ab62513798ba55a151a23ea238bbea46ab197819ca4e7f7d4e9a58dde",
+        "name": "debug-auto-launch",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/debug-server-ready/package.json",
+        "sha256": "948efd8eaaf8ebff6f430454619075df7cd58b7ef900f2bf3a7fcbc0058a26ca",
+        "name": "debug-server-ready",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/diff/package.json",
+        "sha256": "6d5741dd61ab3b385d2913f507ae53e13caa15320ad203db4088e1168acc638f",
+        "name": "diff",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/docker/package.json",
+        "sha256": "78324ede79c21541d88a9b171895ee915119e2b6e8b40b36386314d99aaf9ede",
+        "name": "docker",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/dotenv/package.json",
+        "sha256": "75c4e7e31c9606e1d17b70a60fbaa291549d9512d2ec2afaebe68067e0204f07",
+        "name": "dotenv",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/emmet/package.json",
+        "sha256": "dba2538e2f900a9fd70b145234c3b7484b7e48d69f326b90e05e418f16b294b0",
+        "name": "emmet",
+        "version": "10.0.0",
+        "main": "./dist/node/emmetNodeMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/extension-editing/package.json",
+        "sha256": "d6aebb05c3cc3ba7b7167c56f07ed1b2aeab31ab08044e635dc0643d1ef80d49",
+        "name": "extension-editing",
+        "version": "10.0.0",
+        "main": "./dist/extensionEditingMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/fsharp/package.json",
+        "sha256": "9beaab63cea4945ba68d34a04e318b6d895e7ecddd9125a9e21282f152b9d0fb",
+        "name": "fsharp",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/git/node_modules/@vscode/fs-copyfile/package.json",
+        "sha256": "792d402f3e94103a7c675dd3619b80b11a5b6491a78b2c877e4e0f493d901a63",
+        "name": "@vscode/fs-copyfile",
+        "version": "2.0.0",
+        "main": "lib/index.js",
+        "dependencies": {
+          "node-addon-api": "^7.0.0"
+        },
+        "devDependencies": {
+          "@types/node": "^22.19.11",
+          "typescript": "^5.7.0"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/git/package.json",
+        "sha256": "be3bd2fd6f1308603c53d2cf42d0d43dc2b13c51f9f197d8de95325f5d0c8ea4",
+        "name": "git",
+        "version": "10.0.0",
+        "main": "./dist/main"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/git-base/package.json",
+        "sha256": "40070e223b059fa8f8716592b3da43795f37932f87d3e6a16a6509eecc8a049c",
+        "name": "git-base",
+        "version": "10.0.0",
+        "main": "./dist/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/github/package.json",
+        "sha256": "c5ffc210b28668fdace07eacf5933d3b6cb55d645b697f3e83c201bda3887f19",
+        "name": "github",
+        "version": "0.0.1",
+        "main": "./dist/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/github-authentication/package.json",
+        "sha256": "cbe87ebc0e2d1274c396b669794bec0f1f10c01985f9bb9ae6135f3af7ed97b7",
+        "name": "github-authentication",
+        "version": "0.0.2",
+        "main": "./dist/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/go/package.json",
+        "sha256": "8660e6a868df27ff6bb33d3e3b17c059979bc1bd9dcfa854a32b89b7683c8465",
+        "name": "go",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/groovy/package.json",
+        "sha256": "404932c33ec06899163d7e19683ac94ff83adc73caf61fe8d8b1176cdf9ef6d8",
+        "name": "groovy",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/grunt/package.json",
+        "sha256": "79e44495ac4d990a80d14b8b68151221b73e948e8923bf1de15308aff823fa9c",
+        "name": "grunt",
+        "version": "10.0.0",
+        "main": "./dist/main"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/gulp/package.json",
+        "sha256": "4da621e31aa6a746dee84162cd49a904e5b122f01eaecd89736364822549f7a5",
+        "name": "gulp",
+        "version": "10.0.0",
+        "main": "./dist/main"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/handlebars/package.json",
+        "sha256": "1429a4d12d4a1c25010cc4e64f803a9883246d0b44b04a52d8f3894ab2ac48e3",
+        "name": "handlebars",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/hlsl/package.json",
+        "sha256": "ff8a7d957c6d22d90571fd5e27c287e7617fb75e80f71904866e17791c8b0826",
+        "name": "hlsl",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/html/package.json",
+        "sha256": "053502df0e3599d9937f58184dda3784f5d3df2b2bc3fa3c7db7cf25ae2e9299",
+        "name": "html",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/html-language-features/package.json",
+        "sha256": "241e2240a13e35b63320b6c7bfe825cfabda1c8ccc9227fd88c0e63e45d9e6b0",
+        "name": "html-language-features",
+        "version": "10.0.0",
+        "main": "./client/dist/node/htmlClientMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/html-language-features/server/package.json",
+        "sha256": "f29dfa4602c334dedfc2eb170e0fbbc33de96e99ae231f4431c72031be0c9870",
+        "name": "vscode-html-languageserver",
+        "version": "10.0.0",
+        "main": "./out/node/htmlServerMain",
+        "dependencies": {
+          "@vscode/l10n": "^0.0.18",
+          "vscode-css-languageservice": "<non-semver omitted>",
+          "vscode-html-languageservice": "<non-semver omitted>",
+          "vscode-languageserver": "<non-semver omitted>",
+          "vscode-languageserver-textdocument": "^1.0.12",
+          "vscode-uri": "^3.1.0"
+        },
+        "devDependencies": {
+          "@types/node": "24.x"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ini/package.json",
+        "sha256": "2618b7826d41b4b81e149ad93b4b0a04f6aa26edba13f77dd0f92e14c715c66c",
+        "name": "ini",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ipynb/package.json",
+        "sha256": "0920e5d362d28e8c9ec468d7410fc713df928d12de88a04feb18ef6f0be9e881",
+        "name": "ipynb",
+        "version": "10.0.0",
+        "main": "./dist/ipynbMain.node.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/jake/package.json",
+        "sha256": "96f61ba38c33694a95976f18cdbd0731f7abf547a7628e8884c61657c61ea806",
+        "name": "jake",
+        "version": "10.0.0",
+        "main": "./dist/main"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/java/package.json",
+        "sha256": "0a7d7405a22a5cc7587852d8b0139486a2286fa06a1ae53ab00f47677192e7ab",
+        "name": "java",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/javascript/package.json",
+        "sha256": "46497fcc12aaf67f4b6c5554250061f64b42f11711c2059960083f4e7bfb9f0b",
+        "name": "javascript",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/json/package.json",
+        "sha256": "6df3ed7d55d66db89c2c55ca612367098093a6d207ba743e6e0ea6d2dbadfcda",
+        "name": "json",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/json-language-features/package.json",
+        "sha256": "e0bc7874c8fae8a8e8e5cb13fe813d355c7ff444b0a8aecf10006dd5e4bde551",
+        "name": "json-language-features",
+        "version": "10.0.0",
+        "main": "./client/dist/node/jsonClientMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/json-language-features/server/package.json",
+        "sha256": "7c4ba2bbab56c65388edf92cc858ea8b03daf80ff9406854f20e7a77a6e04a0d",
+        "name": "vscode-json-languageserver",
+        "version": "1.3.4",
+        "main": "./out/node/jsonServerMain",
+        "dependencies": {
+          "@vscode/l10n": "^0.0.18",
+          "jsonc-parser": "<non-semver omitted>",
+          "request-light": "^0.8.0",
+          "vscode-json-languageservice": "<non-semver omitted>",
+          "vscode-languageserver": "<non-semver omitted>",
+          "vscode-uri": "^3.1.0"
+        },
+        "devDependencies": {
+          "@types/node": "24.x"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/julia/package.json",
+        "sha256": "372f535f84b1bedb59d5c638c0d35d0837849aa7a947138b42a266d1af59a034",
+        "name": "julia",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/latex/package.json",
+        "sha256": "3a03c9f44d869b0a4f2bb4a6030675accfc2382194e26acc51287c3249fa6f57",
+        "name": "latex",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/less/package.json",
+        "sha256": "417c62778b90f4493ba2d84cc2485ed6333db5d77d1f4fcf7cf7249270d06ceb",
+        "name": "less",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/log/package.json",
+        "sha256": "d48d6ee89872ceaef31c123e9b4fc058f85291d2d62fdcfb730409c437f3b43a",
+        "name": "log",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/lua/package.json",
+        "sha256": "5d53744e0728b508f451b1b6505f7908d7ccfd9df6632b6cd0761e5e925b52ac",
+        "name": "lua",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/make/package.json",
+        "sha256": "527bf1e0b1bd20ee5d7b9cb2a57ffc7700033a67f2150dbc5af2a5f0b9daf718",
+        "name": "make",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/markdown-basics/package.json",
+        "sha256": "3bdac026317b02487c3142e92802c71e27787410b6cbc97cda4ac91b5a528b67",
+        "name": "markdown",
+        "version": "30.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/markdown-language-features/package.json",
+        "sha256": "673d5a2b9f3e4f19d68fde2480639c9ed19a0704e839fb6177b1ad3af3c88df4",
+        "name": "markdown-language-features",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/markdown-math/package.json",
+        "sha256": "623c56e2cde59ca310e059f07929b25a5a1283e09803f37e531ccfa3eb58b474",
+        "name": "markdown-math",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/media-preview/package.json",
+        "sha256": "c39d441607ebcc1126122023f82ee6dcffdb92413e0dadef53eedaae9b742ea3",
+        "name": "media-preview",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/merge-conflict/package.json",
+        "sha256": "b883f72adfa20729d54415fec5d2e0ce561ff7d774665ca94032f69ca7dc72fc",
+        "name": "merge-conflict",
+        "version": "10.0.0",
+        "main": "./dist/mergeConflictMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/mermaid-markdown-features/package.json",
+        "sha256": "be2a02b0f45674568a4b623190ec26ceb43c9fbfd3b1dbe6f244729c7f665b9f",
+        "name": "mermaid-markdown-features",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/microsoft-authentication/package.json",
+        "sha256": "e71dd1f2222d59f07b76ba86e4e73221419ecf6a151ef2aeb36565813329abe3",
+        "name": "microsoft-authentication",
+        "version": "0.0.1",
+        "main": "./dist/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ms-vscode.js-debug/package.json",
+        "sha256": "040d62ddaa7ca7e27091c76b10d84d7584721f482473bc77ebae771d4261a0cb",
+        "name": "js-debug",
+        "version": "1.117.0",
+        "main": "./src/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ms-vscode.js-debug-companion/package.json",
+        "sha256": "44999350991f42897c4f81ae3ef66e26582f08fb66696119f1aaefdc7d63af77",
+        "name": "js-debug-companion",
+        "version": "1.1.3",
+        "main": "./out/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ms-vscode.vscode-js-profile-table/package.json",
+        "sha256": "81cfb4e5ec2b68bc3b131560fc424029e2cce7e153819a90cf3343ce71104fd4",
+        "name": "vscode-js-profile-table",
+        "version": "1.0.10",
+        "main": "out/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/node_modules/typescript/package.json",
+        "sha256": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9",
+        "name": "typescript",
+        "version": "6.0.3",
+        "main": "./lib/typescript.js",
+        "devDependencies": {
+          "@dprint/formatter": "^0.4.1",
+          "@dprint/typescript": "0.93.4",
+          "@esfx/canceltoken": "^1.0.0",
+          "@eslint/js": "^10.0.1",
+          "@octokit/rest": "^22.0.1",
+          "@types/chai": "^4.3.20",
+          "@types/minimist": "^1.2.5",
+          "@types/mocha": "^10.0.10",
+          "@types/ms": "^2.1.0",
+          "@types/node": "<non-semver omitted>",
+          "@types/source-map-support": "^0.5.10",
+          "@types/which": "^3.0.4",
+          "@typescript-eslint/rule-tester": "^8.56.1",
+          "@typescript-eslint/type-utils": "^8.56.1",
+          "@typescript-eslint/utils": "^8.56.1",
+          "azure-devops-node-api": "^15.1.3",
+          "c8": "^10.1.3",
+          "chai": "^4.5.0",
+          "chokidar": "^4.0.3",
+          "diff": "^8.0.3",
+          "dprint": "^0.49.1",
+          "esbuild": "^0.27.3",
+          "eslint": "^10.0.2",
+          "eslint-plugin-regexp": "^3.0.0",
+          "fast-xml-parser": "^5.4.1",
+          "glob": "^10.5.0",
+          "globals": "^17.4.0",
+          "hereby": "^1.12.0",
+          "jsonc-parser": "^3.3.1",
+          "knip": "^5.85.0",
+          "minimist": "^1.2.8",
+          "mocha": "^10.8.2",
+          "mocha-fivemat-progress-reporter": "^0.1.0",
+          "monocart-coverage-reports": "^2.12.9",
+          "ms": "^2.1.3",
+          "picocolors": "^1.1.1",
+          "playwright": "^1.58.2",
+          "source-map-support": "^0.5.21",
+          "tslib": "^2.8.1",
+          "typescript": "^5.9.3",
+          "typescript-eslint": "^8.56.1",
+          "which": "^3.0.1"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/notebook-renderers/package.json",
+        "sha256": "1c2f3dd221a1f8a886869ab978b6b7754a25b2c7991000ff77c9c779cc9d785e",
+        "name": "builtin-notebook-renderers",
+        "version": "10.0.0",
+        "devDependencies": {
+          "@types/jsdom": "^21.1.0",
+          "@types/node": "24.x",
+          "@types/vscode-notebook-renderer": "^1.60.0",
+          "jsdom": "^28.1.0"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/npm/package.json",
+        "sha256": "3566b92fa8990ce42e061c016955738213bc1698ddaddc9d2726ff9f91de9820",
+        "name": "npm",
+        "version": "10.0.0",
+        "main": "./dist/npmMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/objective-c/package.json",
+        "sha256": "2237381cf95eb93926212edaa10cb68ee6f80bd627b2bb919c5d479e6e9682d8",
+        "name": "objective-c",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/perl/package.json",
+        "sha256": "c930d66c4c68f8dca9ba8a553cf1111f7b2c124100e3692fdfd2cb521b26aa88",
+        "name": "perl",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/php/package.json",
+        "sha256": "89ed11c388f6ed15c8812e83aceebf87e61f32aab639fb18f801bf67f566db01",
+        "name": "php",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/php-language-features/package.json",
+        "sha256": "f7fbf0081245bfd6f1ce146f6f86eedd9a73286c96098ef642a7728fe571c038",
+        "name": "php-language-features",
+        "version": "10.0.0",
+        "main": "./dist/phpMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/powershell/package.json",
+        "sha256": "2a2129c2b298def75800e96565665391ef3818274497e2b2b92dd615a1c6aa8f",
+        "name": "powershell",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/prompt-basics/package.json",
+        "sha256": "1805e488b226f5ba7f6f06f881736c2617cc1c095f2f0cbbaddf56a3984d6ceb",
+        "name": "prompt",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/pug/package.json",
+        "sha256": "2338d284300a8c7942ce4b9ffe1bd28588bc6e100a099e146da6433a7790b023",
+        "name": "pug",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/python/package.json",
+        "sha256": "f773e6fe5de9ccfb23db98bf57ee99f8a1b721a43df94a6642300c83a44df48d",
+        "name": "python",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/r/package.json",
+        "sha256": "2f967e508f7bb9fe4d3063c1a3e198b2b112d6f989898c616434f65e00fb868f",
+        "name": "r",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/razor/package.json",
+        "sha256": "ab672fbe405a449d1578c2eb09adaf3187ad2d772229efe01f902004b47818a3",
+        "name": "razor",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/references-view/package.json",
+        "sha256": "d04adb5be56a8f87728b7850562399dfe020fce8ad7b631ff6476766ba2f0ac3",
+        "name": "references-view",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/restructuredtext/package.json",
+        "sha256": "0186942c4b2341803a579caf4ea06483184b75ebdb9378179e6a53476c335d22",
+        "name": "restructuredtext",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ruby/package.json",
+        "sha256": "56f84eacbf994cc977d6fe6a91d6007f58ff7675e00e617c87e9cdd9d204a1a4",
+        "name": "ruby",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/rust/package.json",
+        "sha256": "611d667bd28e5b95b70922524799572cd2cebf89fff2f0668c7cab37968ef943",
+        "name": "rust",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/scss/package.json",
+        "sha256": "3cc4aabbb9a4bc9870fd246936024b076fbec6484a346c431cc5c8387bf06d24",
+        "name": "scss",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/search-result/package.json",
+        "sha256": "a7a4fd20f8a2b9cb5ab12f7e4b4579e67dde2074a7befc657ba69a5e3669793d",
+        "name": "search-result",
+        "version": "10.0.0",
+        "main": "./dist/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/shaderlab/package.json",
+        "sha256": "250dd8421fcb3bfc53e5f5ada671fae170a5ac3a12dc789f047d41821018b995",
+        "name": "shaderlab",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/shellscript/package.json",
+        "sha256": "9de568c12f63ec2dc23e9e5c9da657e4cd4cba2bbc1ba447513fa9b72bfb2cc0",
+        "name": "shellscript",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/shuncode/package.json",
+        "sha256": "ad0a5b107caa5fa9f332202d3e4b5732b16d8ec8395a6078545658123beffb9a",
+        "name": "shuncode",
+        "version": "0.7.4",
+        "main": "./dist/extension.js"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/simple-browser/package.json",
+        "sha256": "35bb00614cbc4a46410253ad799573b0268b1bcbb3c4fa447f0bbda32c726b17",
+        "name": "simple-browser",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/sql/package.json",
+        "sha256": "72c9a9c6d9a990e719dfff53c64105b22b6a0795178a26c99affe7c06b1ea660",
+        "name": "sql",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/swift/package.json",
+        "sha256": "075334e1e4e28543ff436f7d5c7361b8db828651e57f5e771d2c718d980fa2ab",
+        "name": "swift",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/terminal-suggest/package.json",
+        "sha256": "d1ddc9a8e92b6949157487eed00988f9ba15fb31fa487d78ce05b2080c91e2e4",
+        "name": "terminal-suggest",
+        "version": "1.0.1",
+        "main": "./dist/terminalSuggestMain"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-abyss/package.json",
+        "sha256": "19e6c781e9b7b9eee085af2b95ef4540db9f13ca29a89ee31f6309667cd1bf95",
+        "name": "theme-abyss",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-defaults/package.json",
+        "sha256": "1188ab40303da2345797c509f81c87c3e168249e50009bdec24a1ea28b515bb4",
+        "name": "theme-defaults",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-kimbie-dark/package.json",
+        "sha256": "c223e1c42002741d612ed7b42cbf25fc21746d423d63a5f374a8c6e28fb3c873",
+        "name": "theme-kimbie-dark",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-monokai/package.json",
+        "sha256": "62b76501fc7451fb009b240d063bc12f33de2e5ee32cce0195408889d7afbd78",
+        "name": "theme-monokai",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-monokai-dimmed/package.json",
+        "sha256": "2852f6f3b61fc96bed4772898afd7d19b3161b93a5d831689caafb5677a81fab",
+        "name": "theme-monokai-dimmed",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-quietlight/package.json",
+        "sha256": "b1afbced1fd665f0be0dff41fb07e8dcc52401ce79fefccf48bd7250baef58ea",
+        "name": "theme-quietlight",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-red/package.json",
+        "sha256": "9c9d4ff4310d601f17caa87e10db29987729df8942d33589a40f1b0e5a563e69",
+        "name": "theme-red",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-seti/package.json",
+        "sha256": "4b2a385edf0c4adab91d44a35074519b7dc81cc5ae9ff4a43a52b279107792b0",
+        "name": "vscode-theme-seti",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-solarized-dark/package.json",
+        "sha256": "cd52cde5ef26e07be97d4b4d421f478211464c489c0df11c67a191be118444a0",
+        "name": "theme-solarized-dark",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-solarized-light/package.json",
+        "sha256": "565dfd0cba01886978452fb84bfbb959fd269984e58910c45c35f5fdf101133e",
+        "name": "theme-solarized-light",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/theme-tomorrow-night-blue/package.json",
+        "sha256": "924a37ca984144ff11e2a9df900f2c38fe7d920ac10b48769b0e84988744a2fc",
+        "name": "theme-tomorrow-night-blue",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/tunnel-forwarding/package.json",
+        "sha256": "aca49d2eed066ec8ef1ade4ec852a3e18a4702101fa233f63bd68e881244c72a",
+        "name": "tunnel-forwarding",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/typescript-basics/package.json",
+        "sha256": "6f8e666d1c6d177439a03b0c94c05b101ff1eb97c673cbddfc855e0c1b12430d",
+        "name": "typescript",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/typescript-language-features/package.json",
+        "sha256": "d1c13b741bb7b18dd6d029d8ba69dc6d2021dc484a92fede7e787148401fb0d4",
+        "name": "typescript-language-features",
+        "version": "10.0.0",
+        "main": "./dist/extension"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/vb/package.json",
+        "sha256": "181f21488384547e04abf7400367a1ad453089e50a874e9a8ab870b4bc91095a",
+        "name": "vb",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/vscode-language-pack-zh-hans/package.json",
+        "sha256": "03c0e507c93ec38a2f590c60b0f021d78f9ee47218e95e8c03082f8d153193a2",
+        "name": "vscode-language-pack-zh-hans",
+        "version": "1.131.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/xml/package.json",
+        "sha256": "072e98c906b6fdade3f5cdbae9bea7e1908aaa01daf0c991ec97fe2d6258a410",
+        "name": "xml",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/yaml/package.json",
+        "sha256": "c25fbf7548ba848d167d114216db2e3d8440dab03f45ac4cdaadfd4ef2641e89",
+        "name": "yaml",
+        "version": "10.0.0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules/@pondwader/socks5-server/package.json",
+        "sha256": "8eadc55dfb785dd26a477766447a37a0de8fcdb69ca187cf2224318d1386722c",
+        "name": "@pondwader/socks5-server",
+        "version": "1.0.10",
+        "main": "dist/index.js",
+        "devDependencies": {
+          "@types/node": "^18.19.39",
+          "jest": "^29.7.0",
+          "tsup": "^8.1.0",
+          "typescript": "^5.5.2"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules/@vscode/sandbox-runtime/node_modules/commander/package.json",
+        "sha256": "4ee3239971f47b1be752b2a9510184a5ece7c2d888890772b6ab69443ce089de",
+        "name": "commander",
+        "version": "12.1.0",
+        "main": "./index.js",
+        "devDependencies": {
+          "@eslint/js": "^8.56.0",
+          "@types/jest": "^29.2.4",
+          "@types/node": "^20.2.5",
+          "eslint": "^8.30.0",
+          "eslint-config-prettier": "^9.1.0",
+          "eslint-plugin-jest": "^28.3.0",
+          "eslint-plugin-jsdoc": "^48.1.0",
+          "globals": "^13.24.0",
+          "jest": "^29.3.1",
+          "prettier": "^3.2.5",
+          "prettier-plugin-jsdoc": "^1.3.0",
+          "ts-jest": "^29.0.3",
+          "tsd": "^0.31.0",
+          "typescript": "^5.0.4",
+          "typescript-eslint": "^7.0.1"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules/@vscode/sandbox-runtime/package.json",
+        "sha256": "0d3461c5045766676d1b9af54f2a129e324b907774ae1787dc5efaac3b460c22",
+        "name": "@vscode/sandbox-runtime",
+        "version": "0.0.1",
+        "main": "./dist/index.js",
+        "dependencies": {
+          "@pondwader/socks5-server": "^1.0.10",
+          "commander": "^12.1.0",
+          "shell-quote": "^1.8.3",
+          "zod": "^3.24.1"
+        },
+        "devDependencies": {
+          "@eslint/js": "^9.14.0",
+          "@types/bun": "^1.3.2",
+          "@types/node": "^18",
+          "@types/shell-quote": "^1.7.5",
+          "eslint": "^9.14.0",
+          "eslint-config-prettier": "^8.10.0",
+          "eslint-import-resolver-typescript": "^3.6.3",
+          "eslint-plugin-import": "^2.31.0",
+          "eslint-plugin-n": "^17.16.2",
+          "eslint-plugin-prettier": "^5.1.3",
+          "globals": "^15.12.0",
+          "husky": "^9.1.7",
+          "lint-staged": "^16.2.6",
+          "prettier": "3.3.3",
+          "typescript": "^5.6.3",
+          "typescript-eslint": "^8.13.0"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules/shell-quote/package.json",
+        "sha256": "24258f48c755803f8e056f7af0bd021ba998f2368f38c6c85398fb83920fe5de",
+        "name": "shell-quote",
+        "version": "1.10.0",
+        "main": "index.js",
+        "devDependencies": {
+          "@arethetypeswrong/cli": "^0.18.5",
+          "@ljharb/eslint-config": "^22.2.3",
+          "@ljharb/tsconfig": "^0.3.2",
+          "auto-changelog": "^2.6.0",
+          "eslint": "^10.6.0",
+          "evalmd": "^0.0.20",
+          "in-publish": "^2.0.1",
+          "jiti": "^0.0.0",
+          "npmignore": "^0.3.5",
+          "nyc": "^10.3.2",
+          "safe-publish-latest": "^2.0.0",
+          "tape": "^5.10.2",
+          "typescript": "<non-semver omitted>"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules/zod/package.json",
+        "sha256": "70eedbe34fd52385a4ae2f3e5759b19682189f0118ea73a6e7c32c677f61668e",
+        "name": "zod",
+        "version": "3.25.76",
+        "main": "./index.cjs"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/node-pty/package.json",
+        "sha256": "68e1b916e13e114ff2f1b52043f496e7bd2cf5ba4289f09f79c0a798e9341172",
+        "name": "node-pty",
+        "version": "1.2.0-beta.13",
+        "main": "./lib/index.js",
+        "dependencies": {
+          "node-addon-api": "^7.1.0"
+        },
+        "devDependencies": {
+          "@types/mocha": "^7.0.2",
+          "@types/node": "12",
+          "@typescript-eslint/eslint-plugin": "^8.0.0",
+          "@typescript-eslint/parser": "^8.0.0",
+          "cross-env": "^5.1.4",
+          "eslint": "^9.0.0",
+          "mocha": "10",
+          "node-gyp": "^11.4.2",
+          "ps-list": "^6.0.0",
+          "typescript": "^5.0.0"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/package.json",
+        "sha256": "f455e3e1cb7c0fcc5ca79c3463814c630ffffc4c93652075091e884f9bf74d93",
+        "name": "ShunCode",
+        "version": "1.132.0",
+        "main": "./out/main.js",
+        "dependencies": {
+          "@anthropic-ai/sdk": "^0.82.0",
+          "@github/copilot": "^1.0.73",
+          "@github/copilot-sdk": "^1.0.8",
+          "@microsoft/1ds-core-js": "^3.2.13",
+          "@microsoft/1ds-post-js": "^3.2.13",
+          "@microsoft/dev-tunnels-connections": "^1.3.41",
+          "@microsoft/dev-tunnels-contracts": "^1.3.41",
+          "@microsoft/dev-tunnels-management": "^1.3.41",
+          "@microsoft/dev-tunnels-ssh": "^3.12.22",
+          "@microsoft/dev-tunnels-ssh-tcp": "^3.12.22",
+          "@microsoft/mxc-sdk": "0.6.1",
+          "@parcel/watcher": "^2.5.6",
+          "@types/semver": "^7.5.8",
+          "@vscode/codicons": "^0.0.46-27",
+          "@vscode/copilot-api": "^0.4.2",
+          "@vscode/deviceid": "^0.1.1",
+          "@vscode/diff": "0.0.2-7",
+          "@vscode/fs-copyfile": "2.0.0",
+          "@vscode/iconv-lite-umd": "0.7.1",
+          "@vscode/native-watchdog": "^1.4.6",
+          "@vscode/os-proxy-resolver": "^0.3.0",
+          "@vscode/policy-watcher": "^1.4.0",
+          "@vscode/proxy-agent": "^0.44.0",
+          "@vscode/ripgrep-universal": "^1.18.0",
+          "@vscode/sandbox-runtime": "0.0.1",
+          "@vscode/spdlog": "^0.15.8",
+          "@vscode/sqlite3": "<non-semver omitted>",
+          "@vscode/sudo-prompt": "9.3.2",
+          "@vscode/tree-sitter-wasm": "^0.3.1",
+          "@vscode/vscode-languagedetection": "1.0.23",
+          "@vscode/windows-mutex": "^0.5.0",
+          "@vscode/windows-process-tree": "^0.8.0",
+          "@vscode/windows-registry": "^1.2.0",
+          "@xterm/addon-clipboard": "<non-semver omitted>",
+          "@xterm/addon-image": "<non-semver omitted>",
+          "@xterm/addon-ligatures": "<non-semver omitted>",
+          "@xterm/addon-progress": "<non-semver omitted>",
+          "@xterm/addon-search": "<non-semver omitted>",
+          "@xterm/addon-serialize": "<non-semver omitted>",
+          "@xterm/addon-unicode11": "<non-semver omitted>",
+          "@xterm/addon-webgl": "<non-semver omitted>",
+          "@xterm/headless": "<non-semver omitted>",
+          "@xterm/xterm": "<non-semver omitted>",
+          "chrome-remote-interface": "^0.33.0",
+          "detect-libc": "^2.1.2",
+          "foundry-local-sdk": "1.2.3",
+          "http-proxy-agent": "^7.0.0",
+          "https-proxy-agent": "^7.0.2",
+          "jschardet": "3.1.4",
+          "katex": "^0.16.22",
+          "kerberos": "2.1.1",
+          "minimist": "^1.2.8",
+          "native-is-elevated": "0.9.0",
+          "native-keymap": "^3.3.5",
+          "node-addon-api": "^6.0.0",
+          "node-pty": "<non-semver omitted>",
+          "open": "^10.1.2",
+          "playwright-core": "<non-semver omitted>",
+          "ssh2": "^1.16.0",
+          "tar": "^7.5.20",
+          "tas-client": "0.3.1",
+          "undici": "^7.28.0",
+          "vscode-oniguruma": "1.7.0",
+          "vscode-regexpp": "^3.1.0",
+          "vscode-textmate": "^9.3.2",
+          "ws": "^8.19.0",
+          "yauzl": "^3.3.1",
+          "yazl": "^2.4.3",
+          "zod": "^3.25.76"
+        },
+        "devDependencies": {
+          "@anthropic-ai/claude-agent-sdk": "0.3.220",
+          "@openai/codex": "0.142.0",
+          "@playwright/cli": "^0.1.9",
+          "@playwright/test": "^1.61.1",
+          "@stylistic/eslint-plugin-ts": "^2.8.0",
+          "@types/chrome-remote-interface": "^0.33.0",
+          "@types/cookie": "^0.3.3",
+          "@types/debug": "^4.1.5",
+          "@types/eslint": "^9.6.1",
+          "@types/gulp-svgmin": "^1.2.1",
+          "@types/http-proxy-agent": "^2.0.1",
+          "@types/js-yaml": "^4.0.9",
+          "@types/kerberos": "^1.1.2",
+          "@types/minimist": "^1.2.1",
+          "@types/mocha": "^10.0.10",
+          "@types/node": "24.x",
+          "@types/sinon": "^10.0.2",
+          "@types/sinon-test": "^2.4.2",
+          "@types/source-map-support": "^0.5.10",
+          "@types/ssh2": "^1.15.4",
+          "@types/trusted-types": "^2.0.7",
+          "@types/vscode-notebook-renderer": "^1.72.0",
+          "@types/wicg-file-system-access": "^2023.10.7",
+          "@types/windows-foreground-love": "^0.3.0",
+          "@types/winreg": "^1.2.30",
+          "@types/ws": "^8.18.1",
+          "@types/yauzl": "^2.10.0",
+          "@types/yazl": "^2.4.2",
+          "@typescript-eslint/utils": "^8.45.0",
+          "@typescript/native": "<non-semver omitted>",
+          "@vscode/component-explorer": "^0.2.1-58",
+          "@vscode/component-explorer-cli": "^0.2.1-59",
+          "@vscode/gulp-electron": "^1.42.0",
+          "@vscode/l10n-dev": "0.0.35",
+          "@vscode/telemetry-extractor": "^1.20.4",
+          "@vscode/test-cli": "^0.0.6",
+          "@vscode/test-electron": "^2.4.0",
+          "@vscode/test-web": "^0.0.81",
+          "@vscode/v8-heap-parser": "^0.1.0",
+          "@vscode/vscode-perf": "^0.0.19",
+          "@webgpu/types": "^0.1.66",
+          "ansi-colors": "^3.2.3",
+          "asar": "^3.0.3",
+          "c8": "^9.1.0",
+          "chromium-pickle-js": "^0.2.0",
+          "cookie": "^0.7.2",
+          "debounce": "^1.0.0",
+          "deemon": "^1.13.6",
+          "electron": "44.2.0",
+          "eslint": "^9.36.0",
+          "eslint-formatter-compact": "^8.40.0",
+          "eslint-plugin-header": "3.1.1",
+          "eslint-plugin-import": "^2.32.0",
+          "eslint-plugin-jsdoc": "^50.3.1",
+          "event-stream": "3.3.4",
+          "fancy-log": "^1.3.3",
+          "glob": "^5.0.13",
+          "gulp": "^4.0.0",
+          "gulp-azure-storage": "^0.12.1",
+          "gulp-bom": "^3.0.0",
+          "gulp-buffer": "0.0.2",
+          "gulp-filter": "^5.1.0",
+          "gulp-flatmap": "^1.0.2",
+          "gulp-gunzip": "^1.0.0",
+          "gulp-gzip": "^1.4.2",
+          "gulp-json-editor": "^2.5.0",
+          "gulp-plumber": "^1.2.0",
+          "gulp-rename": "^1.2.0",
+          "gulp-replace": "^0.5.4",
+          "gulp-sourcemaps": "^3.0.0",
+          "gulp-svgmin": "^4.1.0",
+          "husky": "^0.13.1",
+          "innosetup": "^6.4.1",
+          "istanbul-lib-coverage": "^3.2.0",
+          "istanbul-lib-instrument": "^6.0.1",
+          "istanbul-lib-report": "^3.0.0",
+          "istanbul-lib-source-maps": "^4.0.1",
+          "istanbul-reports": "^3.1.5",
+          "js-yaml": "^4.2.0",
+          "lazy.js": "^0.4.2",
+          "merge-options": "^1.0.1",
+          "mime": "^1.4.1",
+          "minimatch": "^3.1.5",
+          "mocha": "^10.8.2",
+          "mocha-junit-reporter": "^2.2.1",
+          "mocha-multi-reporters": "^1.5.1",
+          "npm-run-all2": "^8.0.4",
+          "os-browserify": "^0.3.0",
+          "p-all": "^1.0.0",
+          "path-browserify": "^1.0.1",
+          "pump": "^1.0.1",
+          "rcedit": "^1.1.0",
+          "rimraf": "^2.2.8",
+          "sinon": "^12.0.1",
+          "sinon-test": "^3.1.3",
+          "source-map": "0.6.1",
+          "source-map-support": "^0.5.21",
+          "tsec": "0.2.7",
+          "tslib": "^2.6.3",
+          "typescript": "<non-semver omitted>",
+          "typescript-eslint": "^8.45.0",
+          "util": "^0.12.4",
+          "xml2js": "^0.5.0",
+          "yaserver": "^0.4.0"
+        }
+      },
+      {
+        "path": "code$GetDestDir/resources/app/product.json",
+        "sha256": "cd5f64c9f2e2e7bcff6fb94b28c696648c69d8e0330921f98ffe8486e96ad752",
+        "version": "1.132.0",
+        "commit": "09533f921029d9d073c06e70f566ebe31e43cebc",
+        "date": "2026-09-14T04:52:07.956Z",
+        "applicationName": "shuncode",
+        "nameShort": "ShunCode",
+        "nameLong": "ShunCode"
+      }
+    ],
+    "maps": [],
+    "asars": [
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar",
+        "size": 85578099,
+        "sha256": "0c9782f8b7671e816817545053ee541b3791c42a05c0f8a664fe46f2da130895"
+      }
+    ],
+    "native_modules": [
+      {
+        "path": "code$GetDestDir/resources/app/extensions/microsoft-authentication/dist/msal-node-runtime.node",
+        "size": 349696,
+        "sha256": "13f7bb2387c5618603d26b93c08787bd6a96a17a2f1d2c77a01cdaf5e3a49f5f"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ms-vscode.js-debug/src/win32-app-container-tokens.win32-arm64-msvc-4ZJZ3U55.node",
+        "size": 179712,
+        "sha256": "39463f333b6c1f4eb10f6b7955ab29ad8b430c68e335b2e3e04c1817a78fe00a"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/extensions/ms-vscode.js-debug/src/win32-app-container-tokens.win32-x64-msvc-VCQE7GJP.node",
+        "size": 290304,
+        "sha256": "4cc925083fbad99b9d8b7c1179bfbcecfaa683d716cd552dcecaf76aa3da4940"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@parcel/watcher/build/Release/watcher.node",
+        "size": 524288,
+        "sha256": "0fea58b5cebbfe3f9721c5e8c909db91e861a9a68ba9c969054887e526141cc9"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/deviceid/build/Release/windows.node",
+        "size": 116224,
+        "sha256": "0994a1e9af0dbce55f97c646d32ef7e420f676e3c77a3633f5357a8a413f4e3d"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/native-watchdog/build/Release/watchdog.node",
+        "size": 111616,
+        "sha256": "62395b2d46073a35ce301988d7d1e5fa9e02e17f0a60d6fcb5d28576ee5d7f02"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/os-proxy-resolver-win32-x64-msvc/os_proxy_resolver.node",
+        "size": 1723904,
+        "sha256": "2ee665dbcb7264af660f1ef3ebe29eb44e06be7f3eb49a6a511fd360d7428833"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/policy-watcher/build/Release/vscode-policy-watcher.node",
+        "size": 174592,
+        "sha256": "d574dd9125d2b30028a4363e7d439ae1c8d63a6920eefae58438371f8b414961"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/spdlog/build/Release/spdlog.node",
+        "size": 566784,
+        "sha256": "9d3b98c0bf8b518bba968606f1e7d7d95584e5ba2ac59a00b357e4f316797cc3"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/sqlite3/build/Release/vscode-sqlite3.node",
+        "size": 1830400,
+        "sha256": "166e14c0b540c6ccb8f3643f132360a8e3153b2ff33c1960faea07077a076ffa"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/windows-ca-certs/build/Release/crypt32.node",
+        "size": 144896,
+        "sha256": "cdd82f15a4901abf08d0bb6f5f2420dcfb59912df3bd75d2b127a09d8085def0"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/windows-mutex/build/Release/CreateMutex.node",
+        "size": 144384,
+        "sha256": "95d4b32cd2b45d3c876fd9b149a1fd02efc4e56da5d025c13ed6fecdec3cf802"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/windows-process-tree/build/Release/windows_process_tree.node",
+        "size": 152064,
+        "sha256": "62d097c8b8dcadc94d6ec59c18fd40ef6a1e34343ae9e13a00d6a52039f6b215"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/@vscode/windows-registry/build/Release/winregistry.node",
+        "size": 119296,
+        "sha256": "b77d0678547d81f17525198b668c1bcb29aa7fc4cfa517e5c4038fac257739bf"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/kerberos/build/Release/kerberos.node",
+        "size": 195584,
+        "sha256": "eca7fd3bbee85da0a2df7da3c329297849f1f1869c75c27fe010c934ed253b9c"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/native-is-elevated/build/Release/iselevated.node",
+        "size": 110080,
+        "sha256": "3da3c6d8fd40bfc2e8ecb754183c4db65a092af9dfc8949557636cda51d7d77d"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/native-keymap/build/Release/keymapping.node",
+        "size": 169472,
+        "sha256": "c6c24413fd20ed21ba692276897cf1edbd7fba6e9634f8528c015bcbbf71c6ee"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/node-pty/build/Release/conpty.node",
+        "size": 291840,
+        "sha256": "2521bff5fcd2de3040713f8cfd41b563467471322c1f705308a63e845c55dbd3"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/node-pty/build/Release/conpty_console_list.node",
+        "size": 135680,
+        "sha256": "7aad7b28dbd64a1922969e2b0540d3a89d5215d364e870c9b4d12ac018e4e764"
+      },
+      {
+        "path": "code$GetDestDir/resources/app/node_modules.asar.unpacked/windows-foreground-love/build/Release/foreground_love.node",
+        "size": 111104,
+        "sha256": "066168b19f7c2a67d71fca870c0606c775dc757c0717c5ecf3491735d15bcd9f"
+      }
+    ],
+    "root_files": [
+      {
+        "path": "app/tools/inno_updater.exe",
+        "size": 538624
+      },
+      {
+        "path": "app/tools/vcruntime140.dll",
+        "size": 83600
+      },
+      {
+        "path": "code$GetDestDir/LICENSES.chromium.html",
+        "size": 20472830
+      },
+      {
+        "path": "code$GetDestDir/bin/code$GetBinDirApplicationCmdFilename",
+        "size": 182
+      },
+      {
+        "path": "code$GetDestDir/bin/code$GetBinDirApplicationFilename",
+        "size": 2014
+      },
+      {
+        "path": "code$GetDestDir/chrome_100_percent.pak",
+        "size": 719654
+      },
+      {
+        "path": "code$GetDestDir/chrome_200_percent.pak",
+        "size": 1269017
+      },
+      {
+        "path": "code$GetDestDir/code$GetExeBasename",
+        "size": 246308352
+      },
+      {
+        "path": "code$GetDestDir/code$GetVisualElementsManifest",
+        "size": 370
+      },
+      {
+        "path": "code$GetDestDir/d3dcompiler_47.dll",
+        "size": 4741488
+      },
+      {
+        "path": "code$GetDestDir/dxcompiler.dll",
+        "size": 25745408
+      },
+      {
+        "path": "code$GetDestDir/dxil.dll",
+        "size": 1509760
+      },
+      {
+        "path": "code$GetDestDir/ffmpeg.dll",
+        "size": 3113472
+      },
+      {
+        "path": "code$GetDestDir/icudtl.dat",
+        "size": 10876560
+      },
+      {
+        "path": "code$GetDestDir/locales/en-US.pak",
+        "size": 586582
+      },
+      {
+        "path": "code$GetDestDir/locales/zh-CN.pak",
+        "size": 592116
+      },
+      {
+        "path": "code$GetDestDir/locales/zh-TW.pak",
+        "size": 583860
+      },
+      {
+        "path": "code$GetDestDir/resources.pak",
+        "size": 12435436
+      },
+      {
+        "path": "code$GetDestDir/snapshot_blob.bin",
+        "size": 368776
+      },
+      {
+        "path": "code$GetDestDir/v8_context_snapshot.bin",
+        "size": 742208
+      },
+      {
+        "path": "code$GetDestDir/vk_swiftshader.dll",
+        "size": 5520384
+      },
+      {
+        "path": "code$GetDestDir/vk_swiftshader_icd.json",
+        "size": 106
+      },
+      {
+        "path": "code$GetDestDir/vulkan-1.dll",
+        "size": 939008
+      }
+    ],
+    "maps_total": 0,
+    "asars_total": 1,
+    "native_modules_total": 20,
+    "manifests_total": 108
+  }
+}
