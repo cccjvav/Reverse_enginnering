@@ -61,3 +61,5 @@ python3 -m unittest discover -s tests -v
 Windows 包已通过 Git LFS 上传到本分支：`ShunCode-0.7.4-win32-x64-Setup.exe`。本地环境能取得指针，但无法连接 LFS 实际下载域名。
 
 为避免再次要求上传大包，已添加 **Windows package static probe** GitHub Actions 工作流，尝试在 GitHub Windows runner 上校验并静态列出安装包结构，将小报告写回 `docs/evidence/windows-package.json`。只有报告实际生成后，才能确认包体已取得；当前工具不执行安装器、不恢复源码。
+
+**最新进展：远端下载已成功。** GitHub Windows runner 已下载完整的 240,559,253 字节安装包并通过 SHA-256 校验；[首轮报告](docs/evidence/windows-package.json) 已写回分支。不过 7-Zip 未能列出内部结构（退出码 2），尚未解包或恢复源码，下一步是识别安装器格式并选择合适提取器。无需再次上传安装包。
