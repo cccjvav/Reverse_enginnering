@@ -1,0 +1,12 @@
+{
+  "file": "ShunCode-0.7.4-win32-x64-Setup.exe",
+  "size": 240559253,
+  "sha256": "fdc2328b2520a128fd3449ed2015a7383e2b7dafaae05c3892d5a4c11a671272",
+  "has_mz_header": true,
+  "scope": "Static file fingerprint and archive listing only; no installer execution or source recovery.",
+  "archive_list_exit_code": 2,
+  "status": "7-Zip could not fully list this installer; another unpacker may be needed",
+  "listing_bytes": 418,
+  "listing_truncated": false,
+  "archive_records": []
+}
