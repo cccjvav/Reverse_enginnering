@@ -1,0 +1,8 @@
+{
+  "file": "shuncode-community-0.7.4-overlay.zip",
+  "size": 466543,
+  "sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268",
+  "scope": "Experimental, base-version-locked Windows overlay. Not a complete installer or Windows end-to-end certified build.",
+  "real_package_validation_success": true,
+  "windows_gui_tested": false
+}

@@ -1,8 +1,19 @@
 # ShunCode Windows 源码恢复
 
-从作者保留的 Windows 安装包恢复可维护代码，并重建可发布的 Windows 版本。所有工作在 `arena/01a09d2c-reverse-enginnering-of-shun` 分支进行。
+优先恢复作者自己的 MCP Bridge、工具、定制 UI 等内容；VS Code 只作为运行载体，不追求完整逆向本体。后续目标是建立可维护的定制工程和 Windows 社区版。所有工作在 `arena/01a09d2c-reverse-enginnering-of-shun` 分支进行。
 
-## 当前成果
+## 新进展：免费社区版测试补丁
+
+按作者的新要求，已将自有 Bridge 改为无需商业账号、付款或激活码的本地可用模式，移除收费 UI、支付轮询、商业授权复验与用量上报；保留 MCP 访问令牌、工具/路径校验、隧道凭证和第三方模型登录。
+
+- **[社区版说明与操作步骤](community/README.md)**
+- **[下载实验性 0.7.4 更新包（约 467 KB）](community/shuncode-community-0.7.4-overlay.zip)**：GitHub 文件页面使用 Download raw file；需已安装的精确 0.7.4 构建和 Python 3.10+，不是完整安装器。
+- [改造记录与安全边界](docs/COMMUNITY_MIGRATION.md)
+- [真实包文件验证结果](docs/evidence/community-validation.json)：8 个目标文件已验证，修改后的扩展、Workbench 和 Sessions 完整 JS 通过只解析检查。
+
+更新工具先验哈希，自动备份，失败尝试回滚；建议先在测试副本上使用。**尚未做 Windows 实机端到端验收。** 旧商业服务的停售、历史订单和退款仍需另行处理；客户端修改不会自动关闭远端收款。
+
+## 当前恢复成果
 
 **已成功静态解包，并直接取回发行包附带的 34 个 TypeScript / MTS 源文件。尚未恢复完整工程或构建新安装包。**
 

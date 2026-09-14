@@ -1,0 +1,17 @@
+{
+  "scope": "Tool/policy and isolated UI method tests, not a full extension activation or Windows GUI test.",
+  "python_tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "passed": 23,
+    "failed": 0
+  },
+  "node_tests": {
+    "command": "npm test",
+    "passed": 14,
+    "failed": 0
+  },
+  "node_version": "v22.22.3",
+  "real_package_validation_run": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34855446553",
+  "original_extension_file_hashes_match": true,
+  "windows_gui_tested": false
+}

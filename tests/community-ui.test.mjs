@@ -54,3 +54,11 @@ test('auto-start callback uses community capability rather than a paid licence',
   assert.ok(source.includes('enabled && (this.lastAccessStatus?.edition !== "community"'));
   assert.ok(!source.includes('.licensed'));
 });
+
+test('Sessions host uses its own verified class and retains its own variable bindings',async()=>{
+  const sessions=await buildUiPatch('sessions');
+  assert.notEqual(sessions.original,ui.original);
+  assert.equal(Object.keys(sessions.preservedMethods).length,73);
+  assert.ok(sessions.code.includes('append(container2, $(".shuncode-bridge"))'));
+  assert.ok(!sessions.code.includes('BRIDGE_PAYMENT_'));
+});
