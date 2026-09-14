@@ -8,6 +8,9 @@ on:
       - .gitattributes
       - package.json
       - package-lock.json
+      - tools/build_learning.mjs
+      - tools/learning_lab.mjs
+      - docs/learning/**
       - tools/audit_custom_boundary.mjs
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs

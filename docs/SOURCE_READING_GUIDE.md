@@ -80,3 +80,8 @@
 ## 第三组：写入前检查、提交与回滚
 
 按 `parsePatch → preflight → withFileLocks → preflight → commitPlans → rollbackPlans` 阅读新恢复的 `apply-patch.js`，并对照 `tests/bridge-core-patch.test.mjs`。显示 diff 在 `canonical-diff.js`。先读 [PATCH_WRITER.md](../reconstructed/bridge-core/PATCH_WRITER.md) 的风险与非原子边界，不要因为函数叫 rollback 或结果写着 staged 就假定所有操作可安全恢复。
+
+
+## 面向零基础的新版入口
+
+如果本指南仍太抽象，请先读 [分步实验课](learning/START_HERE.md)，再读 [134行逐行注解](learning/LINE_BY_LINE.md)。[覆盖清单](learning/COVERAGE.md)记录所有已纳入代码文件哪些尚未逐行讲，避免将技术概览误当作完整教学。

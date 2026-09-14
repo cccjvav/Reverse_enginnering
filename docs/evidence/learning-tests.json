@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-14",
+  "scope": "Beginner lessons and simulated maintenance-code exercises, not new application functionality",
+  "local": {
+    "passed": true,
+    "platform": "Linux",
+    "node": "v22.22.3",
+    "node_tests": 90,
+    "new_learning_tests": 4,
+    "python_tests": 23,
+    "node_log_sha256": "05161f1f8c6a6681e27cca273e41108e04f63fbb2d8a462c540cfd013e0270ef",
+    "python_log_sha256": "b2e44f5ffa762d8853c7c6ea9b500d2945339348b6ee7f03bbe2b7bb8b786ec1"
+  },
+  "line_coverage": {
+    "files": 127,
+    "lines": 26558,
+    "fullyExplainedFiles": 3,
+    "explainedLines": 134,
+    "projectWideExplanationComplete": false
+  },
+  "annotations_sha256": "82df860fc53f4ae6873af140a35ec981caa649d3df923a0cb6eda0a66c42a90a",
+  "coverage_sha256": "9afbde51706389b224ef2525ebd0d89c1ee1cea8e48fd03d1cb9de29b71b3374",
+  "lab_output_matches_guide": true,
+  "semantic_explanations_automatically_proven": false,
+  "real_bridge_started_by_lab": false,
+  "installed_application_modified": false,
+  "full_project_line_by_line_complete": false,
+  "remote_ci": {
+    "status": "pending",
+    "workflow": ".github/workflows/bridge-core-tests.yml"
+  },
+  "overlay_sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268"
+}

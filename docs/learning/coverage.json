@@ -1,0 +1,916 @@
+{
+  "scope": "Explicit code roots listed here, including maintenance, recovered source/UI, reconstructed JS, tools, tests and CI. Not an all-repository/all-upstream completion claim.",
+  "roots": [
+    "community",
+    "reconstructed/bridge-core/src",
+    "recovered/shuncode-extension/src",
+    "recovered/bridge-ui",
+    "recovered/bridge-ui-sessions",
+    "tools",
+    "tests",
+    ".github/workflows"
+  ],
+  "excluded": [
+    "Third-party node_modules and mixed original dist bundles (reference evidence, not counted as self-authored curriculum)",
+    "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
+  ],
+  "summary": {
+    "files": 127,
+    "lines": 26558,
+    "fullyExplainedFiles": 3,
+    "explainedLines": 134,
+    "projectWideExplanationComplete": false
+  },
+  "files": [
+    {
+      "source": ".github/workflows/bridge-core-tests.yml",
+      "sha256": "7622932cb139a26dfc0f1971fdef0c29e6dd76d445017967de60bf6cfd52253b",
+      "lines": 54,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": ".github/workflows/installer-forensics.yml",
+      "sha256": "2da2877545a503f3e605768b7a2e0ff795d288ff81f55d26b068b683eb3c8cf1",
+      "lines": 107,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": ".github/workflows/windows-static-probe.yml",
+      "sha256": "b5b16489afb1f3e851ae5d20a09d4a91791105ee39e255592722c0d994500f32",
+      "lines": 47,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/bridge-core/concurrency.mjs",
+      "sha256": "3c508831701a3a24b08c3c42fa9e7d2a20049745fc6b6572fa54777fef91fdf0",
+      "lines": 101,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/bridge-core/read-files.mjs",
+      "sha256": "8fe237dcc92eccf14edbabf5c8f8578e18abb5434b9b82ece28c722fed823143",
+      "lines": 412,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/extension/src/bridge-access-controller.ts",
+      "sha256": "3f5360261ac48e4df93be078ed15aa2836433ac4ae4b9e4b8a8cfac7e1a790e8",
+      "lines": 30,
+      "explainedLines": 30,
+      "status": "line-by-line-authored"
+    },
+    {
+      "source": "community/extension/src/bridge-license-service.ts",
+      "sha256": "30ed09b966c8addd6e55746ccf40fe988befaebc427b30f7084af448f6be0ed8",
+      "lines": 73,
+      "explainedLines": 73,
+      "status": "line-by-line-authored"
+    },
+    {
+      "source": "community/ui/access-card.js.txt",
+      "sha256": "76fa80cdd29615a26c09774778465a6b5a67c132fab59a4368b46a8844969f07",
+      "lines": 8,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/ui/access-methods.mjs",
+      "sha256": "f16c9c3c41c52ac3c80c3f9bc78a35e48abcb26e397da427ecbcd25c99640660",
+      "lines": 20,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/adaptive-concurrency.js",
+      "sha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7",
+      "lines": 68,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/apply-patch.js",
+      "sha256": "53921c589672601f011d72bb300ed929269586f2e0364d43d620199d44a57001",
+      "lines": 787,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-activity-tracker.js",
+      "sha256": "fc698f0ecb5df49b879713ab92df287d85414443d1f2604a69ecb34a5c90a662",
+      "lines": 102,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-coordination-validation.js",
+      "sha256": "247eaa0ac56408131d3a48c9c8769b766ee544effc20824839065020f59e9a66",
+      "lines": 90,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-event-store.js",
+      "sha256": "04f49f8c0300eae09795367f46f8ce611a1da0eb420c8615efb6eadd8be87995",
+      "lines": 44,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-http-router.js",
+      "sha256": "e62762f79c0119a9274474465e65a9cd361dfd30ad62d6241b493303596da1a1",
+      "lines": 130,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-session-registry.js",
+      "sha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56",
+      "lines": 74,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-tool-name.js",
+      "sha256": "7069bc0b4cdf9f5c403b9ee81066b2c786fbb32b61c2aedbfaf412be920b7119",
+      "lines": 23,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/bridge-usage-counter.js",
+      "sha256": "9f284c6ab520043a16a05259a24d4c1b9fc045b27864dc62bbfcba282420b795",
+      "lines": 27,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/build-info.js",
+      "sha256": "f3f7db262437cdf11e072ac86034b79110c74af064532f457cd4c4b23bfbea1d",
+      "lines": 25,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/canonical-diff.js",
+      "sha256": "71b81e6fd0c66efb76ee32b8e0a7df0098b708e895bfca30140f9559c839f62c",
+      "lines": 172,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/concurrency.js",
+      "sha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15",
+      "lines": 102,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-input-compat.js",
+      "sha256": "c07a9f151149dff602dbcbbf82a6aa58e72196056c63e7480818ed926713448c",
+      "lines": 160,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "sha256": "7405a7721b860405a74e07b5c9199ab208a9c562f0c5bf2fab73354f923688e9",
+      "lines": 644,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/ide-tool-definitions.js",
+      "sha256": "82586332fe707db7de18910374b7dd113ce94ec09b3e23a387c20508c7779d60",
+      "lines": 185,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/jsonrpc-request-id-registry.js",
+      "sha256": "d69e55e73f6d771b0710889360a79541c7c85475445e07cc73f0506ab149f977",
+      "lines": 43,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/managed-command-cancellation.js",
+      "sha256": "1a2d8cc585b0d64ea26aedf44d5f1c0a86aa8f91fb69c3b05bce7607b330a6b0",
+      "lines": 223,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/managed-command-id.js",
+      "sha256": "fc5664984cf72b2cea4f0430f350970bc2709b2e9c60af82081f1d99ccb23581",
+      "lines": 30,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/managed-command-retention.js",
+      "sha256": "92b73a406bb14d0279b5f13428eac39709b1ba3e25845a16e75370b68e88c3a5",
+      "lines": 29,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/managed-command-risk.js",
+      "sha256": "aea0023597c8fd6f7fa4663ab4f80fedf2378cfd1bac83ea206f1c0ce9fa035e",
+      "lines": 179,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/managed-terminal-lifecycle.js",
+      "sha256": "b0ca965c917998d8a6740ca38300e12e118b04306d8d44c88b5a40aa8708245f",
+      "lines": 15,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/mcp-protocol.js",
+      "sha256": "4594032d8415276341efa9c0a5d547500c2d488139ee25ac33ba01a71d7076b3",
+      "lines": 41,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/read-files.js",
+      "sha256": "748632eb72c187174296ce569402a29460a06906b70184b5c6dcf0eb88ec9820",
+      "lines": 403,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/snapshot-build-metadata.js",
+      "sha256": "2faee786a81af521a61174517a500c6fc72d477080f1d3165089de58138b698d",
+      "lines": 7,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/snapshot-sdk-versions.js",
+      "sha256": "681810ada246ca796d8bc0035d03f6e0b86088de4229bd2b1445ccf5f2f0653f",
+      "lines": 15,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/tool-input-validation.js",
+      "sha256": "3757e12f94795620a6e27ec7900e3d21ff4b76f7a718cf71cd3c14cf6db954b2",
+      "lines": 112,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/version.js",
+      "sha256": "46af4acba2c3a3ffa585fd54f3d47cf8674ee13cc102171cf9bd22ec1bc15065",
+      "lines": 7,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/workspace-paths.js",
+      "sha256": "2c896a3bb746d613d16cfed75c773392f0ec68e7a8cc9efcd43c38bff5c54a80",
+      "lines": 39,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-1.js.txt",
+      "sha256": "a2d0b6c32266c5a2d3b32b0d93940227b6296542363fb725e049540f3613be0d",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-10.js.txt",
+      "sha256": "c9ac6e55b53c404aaf59ff46ae599d2b1ac32f308575c790c572a797eb6a8b35",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-2.js.txt",
+      "sha256": "3828b40e6e8db3f2b764f7dec27fb862c40f43d09c49f3cdd39086e10871f79d",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-3.js.txt",
+      "sha256": "6b1335df76ed0579d7422fb403abb1d013e95711a9815171b7ba191e4c6ced7b",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-4.js.txt",
+      "sha256": "bc4d2bbe4eadd8bdf2462dc1117ec87bc7ba524b05f55670cd899f3ea51a073f",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-5.js.txt",
+      "sha256": "bf7b1074a04606dff43171fb75b8744b1944472909f2a5fa14210863b1833714",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-6.js.txt",
+      "sha256": "93627f05f4a651203fbbfc3730905d2a4f02ceccbf47aa3b6067da075bd8deed",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-7.js.txt",
+      "sha256": "5f29468c6f5c5a4cca3ba4a9123557dbee40ec30c6713685e667351010ab8cf9",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-8.js.txt",
+      "sha256": "18ebb7244f38a2737928da9fad354b4f72421d817cbf19c32882cca422348419",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-constants-9.js.txt",
+      "sha256": "418af438ac569160e0f54912edb3da1ca58c5c4b76b5ac1963aaa5e3c475cd24",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui-sessions/bridge-ui-1.js.txt",
+      "sha256": "c47df110f769739b285ed48e94109374b56d25679473c58e07026e710819b888",
+      "lines": 1846,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-1.js.txt",
+      "sha256": "a2d0b6c32266c5a2d3b32b0d93940227b6296542363fb725e049540f3613be0d",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-10.js.txt",
+      "sha256": "c9ac6e55b53c404aaf59ff46ae599d2b1ac32f308575c790c572a797eb6a8b35",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-2.js.txt",
+      "sha256": "3828b40e6e8db3f2b764f7dec27fb862c40f43d09c49f3cdd39086e10871f79d",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-3.js.txt",
+      "sha256": "6b1335df76ed0579d7422fb403abb1d013e95711a9815171b7ba191e4c6ced7b",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-4.js.txt",
+      "sha256": "bc4d2bbe4eadd8bdf2462dc1117ec87bc7ba524b05f55670cd899f3ea51a073f",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-5.js.txt",
+      "sha256": "bf7b1074a04606dff43171fb75b8744b1944472909f2a5fa14210863b1833714",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-6.js.txt",
+      "sha256": "93627f05f4a651203fbbfc3730905d2a4f02ceccbf47aa3b6067da075bd8deed",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-7.js.txt",
+      "sha256": "5f29468c6f5c5a4cca3ba4a9123557dbee40ec30c6713685e667351010ab8cf9",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-8.js.txt",
+      "sha256": "18ebb7244f38a2737928da9fad354b4f72421d817cbf19c32882cca422348419",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-constants-9.js.txt",
+      "sha256": "418af438ac569160e0f54912edb3da1ca58c5c4b76b5ac1963aaa5e3c475cd24",
+      "lines": 1,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/bridge-ui/bridge-ui-1.js.txt",
+      "sha256": "da0171ca1a978bb1782e7c10d8fa02beb760e98ca436fac5e0313c4f4b09c076",
+      "lines": 1846,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/agent-checkpoint-store.ts",
+      "sha256": "5d236820b67279a34e470019b607e0a4a4f4be45645f0630f5fb04be73ae1100",
+      "lines": 164,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/branch-state.ts",
+      "sha256": "6ca137af058f413dae0bce2fc4674428255af25c1b35d410d0ea29a6453ddca2",
+      "lines": 121,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-access-controller.ts",
+      "sha256": "eedc3cc7569c5e1661290a36731c8452a641b7ba13ef3a2a15a3237da08e4789",
+      "lines": 132,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-constants.ts",
+      "sha256": "1de73541dfb22f180a04bda374e8bd9bc78f5f77f6cad830212b6fa9d8a61902",
+      "lines": 366,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-license-config.ts",
+      "sha256": "d410fab21d2e7675dc5f340605d04eaddd03e9f5d562dbfd7c9bd7077e67758f",
+      "lines": 23,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-license-service.ts",
+      "sha256": "b59d05a515dea760bb6d6ecb1de169e65f312c85b91830817664dab38c45b23c",
+      "lines": 958,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-mcp-modern.ts",
+      "sha256": "f624d66e8d131676345ff9396c58644fd49a40dc74f36312b48be6402e023c56",
+      "lines": 158,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "sha256": "6776d4d4c6cce1cdba80d205a796f4301fb4630b588837ddf7da0fb29429260b",
+      "lines": 703,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "sha256": "e1e23bf52877be3c8399ae81dfb7c1f698ea276b57ce0d4eb5fbd3df564c8202",
+      "lines": 1617,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "sha256": "0016656e7a800e6c98a14346546c04ad31b24e4030993ad33529051d5755eb01",
+      "lines": 481,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-tunnel-lease.ts",
+      "sha256": "49b592e499820ec436ce443e99ffd0223e6bccb17b1a0db82cc0987c82b3f3ae",
+      "lines": 511,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-utils.ts",
+      "sha256": "ab11c87b637023fc126a6204cb3a36cbbbe0f93955dd73c1e85588b202b622b5",
+      "lines": 369,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/chat-history.mts",
+      "sha256": "ec47043d4fdd139bc3c38828f3577e2828ff91b0b3102be12cd1d506c6e151a8",
+      "lines": 217,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/codex-account-view.ts",
+      "sha256": "437c54da599fa933b04fe1621802983c11c703c222caca433bc29c656aea0d0c",
+      "lines": 398,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/codex-auth.ts",
+      "sha256": "b2769706de99514a28210df9d60a134084100deb9c5f5870a9e483c1871eff0e",
+      "lines": 495,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/config.ts",
+      "sha256": "9c6cbc96b2ba6c923ef0d15e6079fc6fe25802cb9aa11ad412cf14e5df4ca260",
+      "lines": 73,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/custom-agents.ts",
+      "sha256": "d74afadef6a9682c7eff49b0721ff712979e5fa9bc4c08fb752bbdbdb3c754f9",
+      "lines": 15,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/deepseek-compat.mts",
+      "sha256": "1282a9ec9b91c26955023889b9b2d6462427a56b9fb8401c45d2afd71bcbb939",
+      "lines": 32,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/extension-host-proxy.mts",
+      "sha256": "026ba584590a70ade13b4f4808d9ab63a2718cf97765bf4a3c6b15747828b494",
+      "lines": 291,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/extension.ts",
+      "sha256": "536a0437541d893b2dc275fbca450521770eace96e864bf061ecc00d89b94eca",
+      "lines": 512,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/ide-tool-broker.ts",
+      "sha256": "3ff0cd85881a8e0e1a3c72a2e5e0eaada01f99d256026fabda074021589d0531",
+      "lines": 2170,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/instance-launcher.ts",
+      "sha256": "bef1840f4c7424a0b3bba2c34b5bebd58654fb0b5c4946d6116402859d20d02a",
+      "lines": 197,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/lsp-tool.ts",
+      "sha256": "ee8349346a8ac498f822b4efca97c3d864fd90a9a760f631fe393dfd2265f195",
+      "lines": 515,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/merge-contract.ts",
+      "sha256": "ec28ec1ad910a717ff3a658e47cabf15efdc1113e8d53eb8f30df5ddcf5e1a53",
+      "lines": 57,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/model-defaults.mts",
+      "sha256": "438d55d602eba21d84f09986931672a4a8ef737fe5c69ca217845c8864c73285",
+      "lines": 18,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/model-provider-identifiers.mts",
+      "sha256": "1dc13b5a14e0d732efde77a081e045924a2e3e0ab30f3d9f21bcb76f7a209af5",
+      "lines": 32,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/model-provider.ts",
+      "sha256": "92434bd94126ba36c5665c38260d99175851d4ca491bf43094f249848710f2c5",
+      "lines": 1793,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/model-reasoning.mts",
+      "sha256": "855250d262f364896760812898f3a8ec9be5fe565bbf5ff790c2aa6e5cf5e47e",
+      "lines": 70,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/native-chat.ts",
+      "sha256": "6f04145dfdf78a6a469323c720182790fe92d5fcd1fdcc35cb60515baad29d5d",
+      "lines": 939,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/runtime-client.ts",
+      "sha256": "90724da0d72552307b3bab9f153dec937963252c26c292a26638b63f13ce1cd9",
+      "lines": 484,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "sha256": "0b70c8a2b0d77bb4ada282a08c5e6a0bd882f6b3b46c181eac9f51af7e6b0fe9",
+      "lines": 457,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/workspace-hub-store.ts",
+      "sha256": "a86533c65920c9ebe1e0646f468c22686be38fcbe7c548e235c6b8df88993f39",
+      "lines": 301,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/workspace-hub-types.ts",
+      "sha256": "60e0e7f584e8bb3bde8f70e360d7a9be7579c27d671aed8fd58258682934ad30",
+      "lines": 74,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/workspace-hub.ts",
+      "sha256": "439b8127baaccd3bb43761bf7b976140f37fac857bfa4299e46fa476883672a4",
+      "lines": 333,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-boundary.test.mjs",
+      "sha256": "c2f9858474bac0e5c4f1f8b94f9189279ee5d5402ac35c1363c6ca177a278a93",
+      "lines": 25,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-files.test.mjs",
+      "sha256": "e280cd1f732ef69d9d3fe9ce5787516aca336ebc5fb804916a2afbc21d7c6ace",
+      "lines": 245,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-http.test.mjs",
+      "sha256": "ba68f5681256515a17f969310e54e0f70688fdbd72827771efbdf45adfdda462",
+      "lines": 63,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-learning.test.mjs",
+      "sha256": "aaa58c48176632888af43979d667764797fb1bc9256e59f2a34d5e59651d04f6",
+      "lines": 40,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-patch.test.mjs",
+      "sha256": "8a85b12a55f5233c5746957e4ebfbb896f9f3646d7466d79da343b3bbdb8a165",
+      "lines": 136,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-reconstruction.test.mjs",
+      "sha256": "a9b38a00e3637cb2e88229513868e0dce8f1c3b915b4a8fadafb6b3c2dbc74ec",
+      "lines": 103,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-state.test.mjs",
+      "sha256": "a8e302acde8206924825009bb8f66dabb1e6b4cad49157b304506c86bfefccfb",
+      "lines": 113,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/community-policy.test.mjs",
+      "sha256": "1fb9bff7c4952ddddf67644b8d6f21f2bf94796d55524afd6d96899590bea015",
+      "lines": 98,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/community-ui.test.mjs",
+      "sha256": "3f091000a1756fea48ec53eb782b31bae5e10b5bdc7f244b3dfc1eadbb24e2a2",
+      "lines": 64,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/helpers/bridge-core-baseline.mjs",
+      "sha256": "87a0c541ecb80157aae1fcb245ba4515a08884bfad765bee3e0a343e7d77fe5d",
+      "lines": 30,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_apply_community.py",
+      "sha256": "92dd3c5117775171fd42208e93bcb3c4ff80c5e6a4564b6b256500955017e9f4",
+      "lines": 86,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_ci_windows_probe.py",
+      "sha256": "9ef29c9f633f4458e3b9286fb6ce7dc12693bc3626b70081d21a85df1aa20e6b",
+      "lines": 33,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_custom_recovery.py",
+      "sha256": "f5aa78d0478613abf1e7d065b34a01fd0015ec65d4836f5d6e1fbe2d500a480a",
+      "lines": 56,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_installer_forensics.py",
+      "sha256": "def00101ed0bf4b8772b2a0b75b640a9b64a2c9d97ba65d56932c12489e4d60b",
+      "lines": 53,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_recover.py",
+      "sha256": "779b06e53b3ec69eab3a10d1854d4470eec2b6acb28157fa91277202ef3b5822",
+      "lines": 47,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_windows_inspect.py",
+      "sha256": "b870f03bec7843b891672f5303c61d1cd3b9d41d9d94ef95e650a0f4fc99c772",
+      "lines": 71,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/apply_community.py",
+      "sha256": "2ccea15173ea9d7e2f84e2a7339c73e8f7af9cdd773665ad1609bdda1bd668e3",
+      "lines": 196,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/audit_custom_boundary.mjs",
+      "sha256": "3a65f11da94353b0841ac07e740a5e55e7648660cdd4dc626287c4288b225239",
+      "lines": 54,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/audit_recovered_extension.py",
+      "sha256": "f87daaf22015b638d004cc11eef4581edf6ba21c711c2e75e3e50501ed2c8608",
+      "lines": 79,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/build_community.mjs",
+      "sha256": "302cf892a3aa41a16eac6d6a10aa9103f5cfbd9755432371cf4abfbd9e6966c3",
+      "lines": 137,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/build_extractor.py",
+      "sha256": "6b751ce943cc09db9904403e4d21595c38f027a0f1177f96d14ed6b513ddfaaa",
+      "lines": 25,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/build_learning.mjs",
+      "sha256": "9dbee9d9ca997e415ab0cb02f1ca9b0f23f70faaec14448a787ab76512c43e0d",
+      "lines": 62,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/capture_bridge_ui.mjs",
+      "sha256": "c64c635730cffce5d73bd4e005f0c014be842feb00018e56f0c3a762da802bce",
+      "lines": 82,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/ci_windows_probe.py",
+      "sha256": "bba1a91ca71a1a5e437a249532b6df950484164276f7824228585e08e74c993c",
+      "lines": 82,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/installer_forensics.py",
+      "sha256": "c4a230fa42ae1894b104a3e13433503cbed01b999575550c00c4d0bb75620df2",
+      "lines": 172,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/learning_lab.mjs",
+      "sha256": "2fb5825452517f2233cd0372adc145a63b6e3363cc157cd39112845a2cb0ffb5",
+      "lines": 40,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/package_community.py",
+      "sha256": "2ca8af35b72788ed56ed3e97f9df3a68132eae30082ba4559bffca7b8fbe1d43",
+      "lines": 70,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/patch_bridge_ui.mjs",
+      "sha256": "4a562756281402090f92d30ff992da5c84536baf3ef6ed6a44e9dbaf9fd5a93a",
+      "lines": 68,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/patch_utils.mjs",
+      "sha256": "db740e6555b7631b873fa313372ad2f76498625ee431e72da07d8109a9d7fb4b",
+      "lines": 31,
+      "explainedLines": 31,
+      "status": "line-by-line-authored"
+    },
+    {
+      "source": "tools/reconstruct_bridge_core.mjs",
+      "sha256": "81a7a7d7dee75c83ff0838fbc4935641a5f2796530fbeefb10f2476ca5896a36",
+      "lines": 189,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/recover.py",
+      "sha256": "facb78242a8b3a40dc48cc334125b61b28df1e48bc6985c4d98cb437c5381003",
+      "lines": 135,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/recover_custom_extension.py",
+      "sha256": "57910875931ec6a12ce4ff62a9b8857c64b2f4b5b909ad1d897100b2415f567c",
+      "lines": 154,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/validate_community.py",
+      "sha256": "615a9bd2b227cf483f5754b96d9fbf9944fe2349e5712e4d63e17690cf56c68a",
+      "lines": 40,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/windows_inspect.py",
+      "sha256": "dadf8473fbf5204363d78011c41106060667320086fc69b89170c78c486a0beb",
+      "lines": 263,
+      "explainedLines": 0,
+      "status": "pending"
+    }
+  ],
+  "limits": "Tests verify coverage, exact source mapping and freshness, NOT that every explanation is semantically correct. Human review and exercises are still required."
+}

@@ -319,3 +319,24 @@ python3 -m unittest discover -s tests -q
 ### 11 复验与发布记录
 
 本地 86 项 Node 与 23 项 Python 通过。运行 [34868508275](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34868508275) 在 Windows 2022 / Ubuntu 24.04 均成功，测试代码提交 `d318c49e5ab9e0a0c942b41d7f680cab25fa2c24`。使用作业/步骤 API 与 watch 返回码保存证据，仍未做完整 Code OSS 构建、安装器构建或 GUI 验收。用户迁移教程与更新 ZIP 已可分别从本分支分享；本轮没有改变已发布 ZIP。
+
+
+## 12 — 从技术报告改为零基础实操与逐行课程
+
+作者指出此前文档仍不够指导化，要求覆盖细节甚至每行代码。本轮不把原有高级报告改名后冒充教程，而是新建 `docs/learning/`：课程路线、Windows零基础操作、逐行精读、逐文件覆盖账本与可执行模拟实验。全工程逐行讲解尚未完成，明确保留待办状态。
+
+先人工解释 `bridge-license-service.ts` 73行、`bridge-access-controller.ts` 30行、`patch_utils.mjs` 31行，共134行，含结构/注释/空行；同一行多个字段分别解释。重点纠正 readonly/类型擦除不等于运行时冻结、licensed兼容值不等于签名授权、async错误传播、控制器空构造体仍有参数属性赋值，以及 UTF-16 编辑坐标与UTF-8哈希的区别。
+
+`annotations.json` 存真实代码行、人工解释与SHA；`tools/build_learning.mjs` 检查逐行对应关系，生成 `LINE_BY_LINE.md`、`COVERAGE.md` 和机器清单。当前纳入范围127文件/26,558行，只有3文件完整逐行解释；不把二进制、混编第三方bundle和锁文件算成已讲。测试只能证明覆盖/同步，不能自动证明解释正确。为跨Windows/Linux保留精确字节，补充代码和学习材料的 -text 属性。
+
+`tools/learning_lab.mjs` 只转译两个新写的社区维护类，用stub代替BridgeManager，演示免费且未商业登录、支付/兑换/未知能力拒绝、登出不隐式停止、逆序文本替换、AST唯一定位和abc的SHA。它不启动真实服务、不改安装目录，也不把 Function 当安全沙箱。
+
+```bash
+npm run learn:build
+npm run learn:check
+npm run learn:lab
+npm test
+python3 -m unittest discover -s tests -q
+```
+
+本地模拟输出与教材一致；90项Node、23项Python通过。新增4项测试核验教材同步、过期/缺行/空解释拒绝、模拟行为、UTF-16偏移与定位歧义。未对产品运行代码做本轮修改，也未替换overlay。下一组需继续主构建器/UI/更新器的逐行说明；完整工程缺失仍按恢复计划推进，不能将134行教材称为全面完成。
