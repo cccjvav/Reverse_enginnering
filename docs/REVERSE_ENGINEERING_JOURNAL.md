@@ -216,3 +216,14 @@ python3 tools/audit_recovered_extension.py
 23 项 Python 回归测试也通过；原件审计仍为 34 个源码文件、原始哈希一致、32 处相对导入未解决。另起一个包不等于这些原 TS 导入已接通。
 
 Windows/Linux CI 使用 `bridge-core-tests.yml`，只拉文本证据，不下载 LFS 安装器、不运行 GUI。远端结果记录在 [bridge-core-tests.json](evidence/bridge-core-tests.json)；不把 Windows Node 测试称为 Windows 应用验收。
+
+
+### 08 复查与 Windows/Linux 实测
+
+另行扫描选中 22 个自有标签的非声明语句，确认全部仅为 22 次构建信息初始化调用，没有遗漏其他顶层赋值或启动副作用。给生成器追加明确拒绝其他语句的保护，并测试普通赋值、任意函数调用和带参初始化均被拒绝；生成 JS 与 provenance 字节不变。
+
+[34858129327](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34858129327) 与加固后的 [34858427519](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34858427519) 均成功。最终测试代码提交为 `837017dc17e3737eae6789c3a809e8846f119a4c`，Windows Server 2022、Ubuntu 24.04 两个任务的依赖安装、确定性重建检查和 Node 测试步骤全部成功；Python 回归只在 Linux 上运行。
+
+第一轮 `gh run view --log` 下载完整日志时，日志存储域名返回 EOF。没有把这个下载失败说成测试失败，也没有伪造逐项远端日志：使用 `gh run view --json ...jobs` 和 `gh run watch --exit-status` 核实作业/步骤成功，将有限结果保存为 `docs/evidence/bridge-core-tests.json`。Actions 有固定工具 action 使用旧 Node 目标、平台强制 Node 24 的警告，但任务本身成功；测试运行时由 setup-node 选择 Node 22。
+
+截至本轮：本地 40 Node + 23 Python 通过，Windows/Linux 核心 CI 通过；原 0.7.4 overlay ZIP 未改动。仍未做完整扩展激活、真实文件工具执行、Electron GUI 或新安装器构建。下一阶段从文件执行链与工作区路径保护继续。

@@ -8,7 +8,7 @@
     "new_core_tests": 26,
     "python_tests": 23,
     "passed": true,
-    "node_log_sha256": "4f8722c54c0df516d552017e0273d49ff225fc1d6e25191afc0aa0402bc81813",
+    "node_log_sha256": "401504e64a03639a1ca227157fde3d58d4af253d6b747f274664d2a44f972bd6",
     "python_log_sha256": "26ee45959be815666d310987555a11ec8583922b4e0aea2711b5a08cd09d70bd"
   },
   "reconstruction": {
@@ -20,8 +20,111 @@
   },
   "known_snapshot_issue": "Semaphore shrink admits queued work early; reproduced; separate tested community candidate not deployed",
   "remote_ci": {
-    "status": "pending",
-    "workflow": ".github/workflows/bridge-core-tests.yml"
+    "status": "completed",
+    "conclusion": "success",
+    "workflow": ".github/workflows/bridge-core-tests.yml",
+    "run_id": 34858427519,
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34858427519",
+    "tested_source_commit": "837017dc17e3737eae6789c3a809e8846f119a4c",
+    "jobs": [
+      {
+        "name": "core (windows-2022)",
+        "conclusion": "success",
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34858427519/job/104023960989",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install only the analysis/test tool dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify deterministic reconstruction and provenance",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run Node tests, not the full extension or Electron application",
+            "conclusion": "success"
+          },
+          {
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "core (ubuntu-24.04)",
+        "conclusion": "success",
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34858427519/job/104023961202",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install only the analysis/test tool dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify deterministic reconstruction and provenance",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run Node tests, not the full extension or Electron application",
+            "conclusion": "success"
+          },
+          {
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "previous_successful_run_id": 34858129327,
+    "evidence_basis": "GitHub Actions API job/step success and identical committed test commands; full log download on first run failed with EOF from the log storage host",
+    "windows_scope": "Node module/provenance/behavior tests only; Python regression step runs on Linux only"
   },
   "windows_gui_tested": false,
   "full_extension_activation_tested": false,

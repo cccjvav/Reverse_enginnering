@@ -19,7 +19,7 @@
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
 - 本地 **40 项 Node 测试 + 23 项 Python 回归测试通过**；Node 测试含 26 项新增核心测试，使用临时回环 HTTP 和桩执行器，不运行安装器。
-- [跨平台验证状态](docs/evidence/bridge-core-tests.json)：Windows runner 的 Node 测试与 Windows 图形界面验收不是一回事。
+- **Windows Server 2022 / Ubuntu 24.04 的 CI 均通过**：[验证记录](docs/evidence/bridge-core-tests.json)。这是 Node 模块测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 
 原件不变。文件工具当前只有定义与输入解析，实际文件操作及完整扩展构建仍在恢复中。
