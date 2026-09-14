@@ -1,0 +1,10 @@
+.work/
+node_modules/
+dist/
+__pycache__/
+
+*.inspection.json
+*.inspection-*.json
+*.deb
+*.exe
+*.msi
