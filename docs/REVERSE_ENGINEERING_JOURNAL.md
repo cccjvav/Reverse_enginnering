@@ -258,3 +258,10 @@ python3 tools/audit_recovered_extension.py
 **这不是完整竞态修复**：检查之后仍可能被替换，stat、探测与流读取还不是同一个固定句柄。后续需结合句柄复用、操作系统隔离和威胁模型继续设计。也记录了输出预算仅限制返回内容，完整版本计算仍扫描全文件，长行缓冲不由显示截断提供硬限额。
 
 因此本轮交付是可读、可复现、可测试的读取基线及有限防护候选，不部署到真实 MCP 服务，不改 overlay，不宣称整个文件工具链安全。跨平台运行状态另存 [bridge-read-tests.json](evidence/bridge-read-tests.json)。
+
+
+### 09 Windows / Linux 复验
+
+运行 [34861023069](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34861023069) 成功，测试代码提交 `568c2a3c14e9183930300e03fac6552a500603cf`。Windows 2022 与 Ubuntu 24.04 两个任务的确定性重建、Node 测试步骤均成功；Windows 测试实际创建 junction 夹具，没有因权限不足跳过关键路径用例。Python 回归仅在 Linux 上执行。
+
+通过 `gh run view --json ...jobs` 保存作业/步骤证据，没有再次尝试此前已知下载失败的完整日志域名，也没有编造远端逐项日志。原免费 overlay SHA-256 仍为 `83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268`；新增的安全发现另补充到社区迁移文档，明确已有 ZIP 不含检查点候选。

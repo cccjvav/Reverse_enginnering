@@ -19,7 +19,7 @@
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
 - 本地 **68 项 Node 测试 + 23 项 Python 回归测试通过**；本轮新增 28 项文件读取/防护测试，使用临时文件，不运行安装器。
-- [本轮 Windows / Linux 验证状态](docs/evidence/bridge-read-tests.json)。这是 Node 模块及临时文件测试，不是 Windows 图形界面验收。
+- **本轮 Windows / Linux CI 均通过**：[验证记录](docs/evidence/bridge-read-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 
 原件不变。文件读取已可独立运行，但发现并复现了确认期间目录替换的风险；[读取说明与防护局限](reconstructed/bridge-core/FILE_READER.md)明确记录。搜索、补丁写入、MCP 执行调度与完整扩展构建仍待恢复。
