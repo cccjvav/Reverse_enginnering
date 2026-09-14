@@ -80,6 +80,9 @@ def command_report(args, cwd=None, timeout=300):
         total = log.tell()
         log.seek(0)
         text = log.read(16000).decode('utf-8', errors='replace')
+        if total > 16000:
+            log.seek(max(16000, total - 8000))
+            text += '\n[... middle omitted ...]\n' + log.read().decode('utf-8', errors='replace')
     for arg in args:
         if Path(arg).is_absolute():
             text = text.replace(arg, Path(arg).name)

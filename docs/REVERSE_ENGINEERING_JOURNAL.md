@@ -104,3 +104,11 @@ cmake --build .work/innoextract-build --parallel 2
 ```
 
 只构建解包工具，不构建或运行待分析应用。新版路径加入 runner PATH 后，复用同一套识别和提取脚本。保留上一轮失败报告，新报告另存为 `docs/evidence/windows-extraction.json`，不覆盖失败证据。
+
+### 04 构建失败也属于证据
+
+首轮源码工具构建任务 [34851170110](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34851170110) 在 CMake/构建步骤失败，未进入安装包提取。尝试 `gh run view 34851170110 --log-failed` 时，Actions 日志下载域名同样出现 TLS EOF，检查注释只有退出码，无法据此声称具体失败原因。
+
+复查固定上游 `CMakeLists.txt` 的 `find_package(Boost ...)`，发现依赖还列出 `date_time`，前一版安装依赖列表未显式包含它。补齐该开发库以及 zlib/bzip2 开发库；是否为唯一故障原因不能从已有日志证实。
+
+同时修正可观测性：新增 `tools/build_extractor.py`，将 CMake 配置和编译的退出码、日志首尾、CMake 版本写入 `docs/evidence/extractor-build.json`。即使构建失败，也先把有限大小的诊断报告写回分支，再将任务标记为失败。禁用 LTO 以缩短工具编译时间，不修改格式解析源码。

@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/installer-forensics.yml
       - tools/installer_forensics.py
+      - tools/build_extractor.py
   workflow_dispatch:
 
 permissions:
@@ -29,7 +30,7 @@ jobs:
       - name: Install static archive readers (not the application)
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends p7zip-full cmake g++ make libboost-filesystem-dev libboost-iostreams-dev libboost-system-dev libboost-program-options-dev liblzma-dev
+          sudo apt-get install -y --no-install-recommends p7zip-full cmake g++ make libboost-date-time-dev zlib1g-dev libbz2-dev libboost-filesystem-dev libboost-iostreams-dev libboost-system-dev libboost-program-options-dev liblzma-dev
       - name: Read pinned upstream extractor source (supports Inno 6.4.0.1)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -38,11 +39,13 @@ jobs:
           path: .work/innoextract-source
           persist-credentials: false
       - name: Build the static extractor, not the application
+        id: build
+        continue-on-error: true
         run: |
-          cmake -S .work/innoextract-source -B .work/innoextract-build -DCMAKE_BUILD_TYPE=Release
-          cmake --build .work/innoextract-build --parallel 2
+          python3 tools/build_extractor.py
           echo "$GITHUB_WORKSPACE/.work/innoextract-build" >> "$GITHUB_PATH"
       - name: Identify the format and attempt static extraction
+        if: steps.build.outcome == 'success'
         run: |
           python3 tools/installer_forensics.py \
             --package ShunCode-0.7.4-win32-x64-Setup.exe \
@@ -50,10 +53,17 @@ jobs:
             --output docs/evidence/windows-extraction.json
       - name: Save bounded report on this branch, not extracted binaries
         run: |
-          test $(stat -c%s docs/evidence/windows-extraction.json) -lt 4000000
+          test $(stat -c%s docs/evidence/extractor-build.json) -lt 100000
+          if test -f docs/evidence/windows-extraction.json; then
+            test $(stat -c%s docs/evidence/windows-extraction.json) -lt 4000000
+            git add -- docs/evidence/windows-extraction.json
+          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- docs/evidence/windows-extraction.json
+          git add -- docs/evidence/extractor-build.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Record installer identification and static extraction evidence"
           git push origin HEAD:refs/heads/arena/01a09d2c-reverse-enginnering-of-shun
+      - name: Propagate extractor build failure after saving diagnostics
+        if: steps.build.outcome != 'success'
+        run: exit 1
