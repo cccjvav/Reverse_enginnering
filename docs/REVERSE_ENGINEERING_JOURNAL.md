@@ -160,3 +160,7 @@ python3 tools/audit_recovered_extension.py
 - 对 9 个恢复的 JS/CJS 文件运行 `node --check <file>`，均返回 0，记录在 [`evidence/javascript-syntax.json`](evidence/javascript-syntax.json)。这是只解析不执行，不是扩展激活或功能测试。
 
 **下一阶段：** 先整理缺失共享模块与 bundle 标签的对应关系，建立“原样源码 / 编译产物重建”分离的工作区，再补构建依赖和宿主 API 类型。核心 Code OSS 定制仍需另外定位。详细阅读顺序见 [源码阅读指南](SOURCE_READING_GUIDE.md)。
+
+### 06 精简规则复验
+
+运行 [34852425206](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34852425206) 用新规则从原包重新提取成功。51 个自定义文本文件保持不变；第三方 runtime/vendor 目录只留摘要，不再复制。同步报告后再次运行来源审计，34 个源码文件、51 个文件哈希一致的结果保持不变。恢复工具的 16 项模拟单元测试通过；不将这些工具测试计作应用功能测试。

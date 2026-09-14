@@ -32,10 +32,6 @@ class CustomRecoveryTests(unittest.TestCase):
     def test_secret_patterns_do_not_treat_variable_names_as_keys(self):
         self.assertEqual(mod.secret_findings('const apiKey = config.get("apiKey");'), [])
 
-
-if __name__ == '__main__':
-    unittest.main()
-
 class AuditTests(unittest.TestCase):
     def test_resolve_source_import(self):
         from audit_recovered_extension import resolve_reference
@@ -54,3 +50,7 @@ class AuditTests(unittest.TestCase):
             self.assertEqual(report['copied_count'], 1)
             self.assertEqual(report['excluded_trees']['runtime/git/']['files'], 1)
             self.assertFalse((root / 'output/runtime/git').exists())
+
+
+if __name__ == '__main__':
+    unittest.main()
