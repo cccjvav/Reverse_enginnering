@@ -6,5 +6,4 @@ __pycache__/
 *.inspection.json
 *.inspection-*.json
 *.deb
-*.exe
 *.msi
