@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-14",
+  "scope": "Reconstructed subset only; isolated reviewed declarations and loopback stub handlers, not the full extension/application",
+  "local": {
+    "platform": "Linux",
+    "node": "v22.22.3",
+    "node_tests": 40,
+    "new_core_tests": 26,
+    "python_tests": 23,
+    "passed": true,
+    "node_log_sha256": "4f8722c54c0df516d552017e0273d49ff225fc1d6e25191afc0aa0402bc81813",
+    "python_log_sha256": "26ee45959be815666d310987555a11ec8583922b4e0aea2711b5a08cd09d70bd"
+  },
+  "reconstruction": {
+    "modules": 24,
+    "declarations": 130,
+    "javascript_bytes": 96503,
+    "provenance_sha256": "a4f76b90067018e52b63845fe652db683346322e5e15367d66c78760dff7aa7a",
+    "origin_sha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb"
+  },
+  "known_snapshot_issue": "Semaphore shrink admits queued work early; reproduced; separate tested community candidate not deployed",
+  "remote_ci": {
+    "status": "pending",
+    "workflow": ".github/workflows/bridge-core-tests.yml"
+  },
+  "windows_gui_tested": false,
+  "full_extension_activation_tested": false,
+  "real_file_tool_execution_tested": false,
+  "complete_source_build": false,
+  "existing_overlay_changed": false
+}

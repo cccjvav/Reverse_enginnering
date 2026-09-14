@@ -1,0 +1,49 @@
+name: Reconstructed Bridge core tests
+
+on:
+  push:
+    branches: [arena/01a09d2c-reverse-enginnering-of-shun]
+    paths:
+      - .github/workflows/bridge-core-tests.yml
+      - .gitattributes
+      - package.json
+      - package-lock.json
+      - tools/reconstruct_bridge_core.mjs
+      - tools/patch_utils.mjs
+      - reconstructed/bridge-core/**
+      - community/bridge-core/**
+      - tests/bridge-core-*.test.mjs
+      - tests/community-*.test.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    if: github.ref == 'refs/heads/arena/01a09d2c-reverse-enginnering-of-shun'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - name: Checkout text evidence, without fetching or running the installer
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          lfs: false
+          persist-credentials: false
+      - name: Use Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install only the analysis/test tool dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify deterministic reconstruction and provenance
+        run: npm run check:bridge-core
+      - name: Run Node tests, not the full extension or Electron application
+        run: npm test
+      - name: Regression-test Python recovery and overlay tools on Linux
+        if: runner.os == 'Linux'
+        run: python3 -m unittest discover -s tests -q

@@ -4,11 +4,14 @@
   "private": true,
   "description": "Static recovery and community-edition tooling; not the recovered application manifest",
   "scripts": {
-    "test": "node --test tests/community-*.test.mjs",
-    "build:community": "node tools/build_community.mjs"
+    "test": "node --test tests/community-*.test.mjs tests/bridge-core-*.test.mjs",
+    "build:community": "node tools/build_community.mjs",
+    "build:bridge-core": "node tools/reconstruct_bridge_core.mjs",
+    "check:bridge-core": "node tools/reconstruct_bridge_core.mjs --check"
   },
   "devDependencies": {
     "acorn": "8.18.0",
-    "esbuild": "0.28.2"
+    "esbuild": "0.28.2",
+    "eslint-scope": "9.1.2"
   }
 }

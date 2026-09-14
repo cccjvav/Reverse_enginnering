@@ -1,0 +1,3108 @@
+{
+  "scope": "Dependency-closed runnable JavaScript reconstructed from a reviewed subset of shipped declarations. NOT original TypeScript, complete source recovery, or an application rebuild.",
+  "origin": "recovered/shuncode-extension/dist/extension.js",
+  "originSha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+  "offsetUnits": "UTF-16 string offsets",
+  "modules": [
+    {
+      "originLabel": "snapshot-build-metadata",
+      "file": "src/snapshot-build-metadata.js",
+      "sha256": "2faee786a81af521a61174517a500c6fc72d477080f1d3165089de58138b698d",
+      "bytes": 333,
+      "exports": [
+        "define_SHUNCODE_BUILD_INFO_default"
+      ],
+      "dependencies": [],
+      "coverage": "snapshot metadata/third-party version literals",
+      "declarations": [
+        {
+          "names": [
+            "define_SHUNCODE_BUILD_INFO_default"
+          ],
+          "start": 2014,
+          "end": 2107,
+          "originalSha256": "a0e9482fcb624ebc2d82fd11c45604ea67a75a22206b82c27896b688f89eb8f8",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": true
+        }
+      ]
+    },
+    {
+      "originLabel": "snapshot-sdk-versions",
+      "file": "src/snapshot-sdk-versions.js",
+      "sha256": "681810ada246ca796d8bc0035d03f6e0b86088de4229bd2b1445ccf5f2f0653f",
+      "bytes": 385,
+      "exports": [
+        "LATEST_PROTOCOL_VERSION",
+        "SUPPORTED_PROTOCOL_VERSIONS"
+      ],
+      "dependencies": [],
+      "coverage": "snapshot metadata/third-party version literals",
+      "declarations": [
+        {
+          "names": [
+            "LATEST_PROTOCOL_VERSION"
+          ],
+          "start": 265569,
+          "end": 265612,
+          "originalSha256": "6a39c060ce502dd22caa457d2cc68e31caf507adfa4f350d5a9129fe7dea850b",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SUPPORTED_PROTOCOL_VERSIONS"
+          ],
+          "start": 265669,
+          "end": 265797,
+          "originalSha256": "27a05947c8d65736781e72b15516dc3fc2b429f1d06188d1dd88ff86aee6de87",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/adaptive-concurrency.ts",
+      "file": "src/adaptive-concurrency.js",
+      "sha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7",
+      "bytes": 2411,
+      "exports": [
+        "AdaptiveConcurrencyController",
+        "DEFAULT_SLOW_CALL_MS",
+        "DEFAULT_WINDOW"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "DEFAULT_WINDOW"
+          ],
+          "start": 1191189,
+          "end": 1191213,
+          "originalSha256": "b057fd5115f3fbbd3fc4e276bb91b937c084346274bb32c08d02ee3bc7e5f568",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_SLOW_CALL_MS"
+          ],
+          "start": 1191214,
+          "end": 1191245,
+          "originalSha256": "b41bd0e7e08238f50ccd5af3c6cb6e034c8f7be6031f92b09595e25be359f40b",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "AdaptiveConcurrencyController"
+          ],
+          "start": 1191246,
+          "end": 1193365,
+          "originalSha256": "568d16c5996de9b62f36cb7ac4a0e5496203b90a39aa255095b8ce0dedb8a83e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-activity-tracker.ts",
+      "file": "src/bridge-activity-tracker.js",
+      "sha256": "fc698f0ecb5df49b879713ab92df287d85414443d1f2604a69ecb34a5c90a662",
+      "bytes": 3449,
+      "exports": [
+        "BridgeActivityTracker"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "BridgeActivityTracker"
+          ],
+          "start": 1180277,
+          "end": 1183536,
+          "originalSha256": "05cdfd175c998e42885a94177cc2e4c7688be1cf45644068d348300755bbf573",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-coordination-validation.ts",
+      "file": "src/bridge-coordination-validation.js",
+      "sha256": "247eaa0ac56408131d3a48c9c8769b766ee544effc20824839065020f59e9a66",
+      "bytes": 3982,
+      "exports": [
+        "asRecord2",
+        "assertSingleInProgress",
+        "assertTodoStatus",
+        "parseBridgePlan",
+        "parseBridgeProgress",
+        "parseBridgeTodos"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "asRecord2"
+          ],
+          "start": 1183614,
+          "end": 1183726,
+          "originalSha256": "2a22a535de59f7a285d56e1141eac57bdd4df136f1e2e003a5019ec39493bc01",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "assertTodoStatus"
+          ],
+          "start": 1183727,
+          "end": 1183943,
+          "originalSha256": "342a583eefea6c48e36aed218b29a8f22f6da31986cb84edd41215f1c4017202",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "assertSingleInProgress"
+          ],
+          "start": 1183944,
+          "end": 1184266,
+          "originalSha256": "3cc867787e51f53371d8651826595e9dc2fb0c5f2947b644f3762415f28d8379",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseBridgeTodos"
+          ],
+          "start": 1184267,
+          "end": 1185334,
+          "originalSha256": "5a2c63f09c66e1b860d0c4032f6203deae22c331c7517acfac1daa1d6d2d3266",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseBridgePlan"
+          ],
+          "start": 1185335,
+          "end": 1186126,
+          "originalSha256": "df88cb3bd596f964bcf72eaf74200be388abd4460a88b31d7c77f6c6ca794a1a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseBridgeProgress"
+          ],
+          "start": 1186127,
+          "end": 1187308,
+          "originalSha256": "5faf7bb6048f20583883625b1bed78938169517af89205c1d1cf4fc062a600a3",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-event-store.ts",
+      "file": "src/bridge-event-store.js",
+      "sha256": "04f49f8c0300eae09795367f46f8ce611a1da0eb420c8615efb6eadd8be87995",
+      "bytes": 1340,
+      "exports": [
+        "BoundedInMemoryEventStore",
+        "import_node_crypto5"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_crypto5"
+          ],
+          "start": 1124349,
+          "end": 1124398,
+          "originalSha256": "b2070fae6222560460a9c6ce2851cc24bd106b572ab2c662bad72dbc16670b17",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "BoundedInMemoryEventStore"
+          ],
+          "start": 1124399,
+          "end": 1125476,
+          "originalSha256": "9cb88f32ad3b1d14af71e53f8982ca60f60e2ec5583334eddbc272514ed1afe8",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-http-router.ts",
+      "file": "src/bridge-http-router.js",
+      "sha256": "e62762f79c0119a9274474465e65a9cd361dfd30ad62d6241b493303596da1a1",
+      "bytes": 5094,
+      "exports": [
+        "createBridgeHttpRoutes",
+        "handleBridgeHttpRequest",
+        "readJsonBody",
+        "writeBridgeJsonError",
+        "writeBridgeJsonRpcError"
+      ],
+      "dependencies": [
+        "build-info.js",
+        "mcp-protocol.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "createBridgeHttpRoutes"
+          ],
+          "start": 1127531,
+          "end": 1127675,
+          "originalSha256": "846431f594a3ce776b3298850cb1c574a6c2a65611e8e964f3ee8026ef10d7ef",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "writeBridgeJsonError"
+          ],
+          "start": 1127676,
+          "end": 1127841,
+          "originalSha256": "2087cc5c55222b6dea6460ed41030df2e52c80c61d2e0493ddde7766f8a26c81",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "writeBridgeJsonRpcError"
+          ],
+          "start": 1127842,
+          "end": 1128152,
+          "originalSha256": "55bad631483f3060c3b25063b9f529c728bfac531b601ee6e0c0c9e3dca7f3d4",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readJsonBody"
+          ],
+          "start": 1128153,
+          "end": 1128976,
+          "originalSha256": "2cde43789a45447c679cbe6565c201b84631f2b48afa2ee1991cf42394de82fa",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "handleBridgeHttpRequest"
+          ],
+          "start": 1128977,
+          "end": 1132241,
+          "originalSha256": "9701efd10123744c4bda86291d9566eed8b1b85a8116fa56d26b67317e5681df",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-session-registry.ts",
+      "file": "src/bridge-session-registry.js",
+      "sha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56",
+      "bytes": 2311,
+      "exports": [
+        "BridgeSessionRegistry"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "BridgeSessionRegistry"
+          ],
+          "start": 1133435,
+          "end": 1135556,
+          "originalSha256": "378de121e7d515c989309cc3df879e63a75fd057f4b41c2c1ce6458dd0413b3f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-tool-name.ts",
+      "file": "src/bridge-tool-name.js",
+      "sha256": "7069bc0b4cdf9f5c403b9ee81066b2c786fbb32b61c2aedbfaf412be920b7119",
+      "bytes": 825,
+      "exports": [
+        "resolveBridgeToolName"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "resolveBridgeToolName"
+          ],
+          "start": 1187372,
+          "end": 1188014,
+          "originalSha256": "a3e932d03c86a893b6eaf2e84dd74b14b2ea2244ab67021c014b3de666683763",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/bridge-usage-counter.ts",
+      "file": "src/bridge-usage-counter.js",
+      "sha256": "9f284c6ab520043a16a05259a24d4c1b9fc045b27864dc62bbfcba282420b795",
+      "bytes": 576,
+      "exports": [
+        "BridgeUsageCounter"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "BridgeUsageCounter"
+          ],
+          "start": 1188082,
+          "end": 1188474,
+          "originalSha256": "95370c95c492098c52bdea56a7bf04a49be03a41e5586bdc274788ff02904665",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/build-info.ts",
+      "file": "src/build-info.js",
+      "sha256": "f3f7db262437cdf11e072ac86034b79110c74af064532f457cd4c4b23bfbea1d",
+      "bytes": 939,
+      "exports": [
+        "asNonEmptyString",
+        "getBuildInfo",
+        "injectedBuildInfo"
+      ],
+      "dependencies": [
+        "snapshot-build-metadata.js",
+        "version.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "injectedBuildInfo"
+          ],
+          "start": 1125716,
+          "end": 1125875,
+          "originalSha256": "6e7a63ec63fc369991ee9bab80af4ddd8d4175466e1bb4ed0a53336f0ec7afe7",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "asNonEmptyString"
+          ],
+          "start": 1125876,
+          "end": 1125985,
+          "originalSha256": "8d9d846801d05505a9515f84b9d4b3dba5fca4da465409c3cf658a4aba137e1c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "getBuildInfo"
+          ],
+          "start": 1125986,
+          "end": 1126308,
+          "originalSha256": "b422d1e955b85cca8b2bbe522307ac6ebaf22d77f94f1656ed080e322733f623",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/concurrency.ts",
+      "file": "src/concurrency.js",
+      "sha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15",
+      "bytes": 2821,
+      "exports": [
+        "DEFAULT_MCP_CONCURRENCY",
+        "Semaphore",
+        "mcpConcurrencyLimiter",
+        "toAbortError"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "Semaphore"
+          ],
+          "start": 1188533,
+          "end": 1190920,
+          "originalSha256": "675ccc7d06ff311569c9bacee86a27da421f9fa629a5870febd72c1858170bec",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "toAbortError"
+          ],
+          "start": 1190921,
+          "end": 1191020,
+          "originalSha256": "dce6d2cec082b2c00f156c8c2cacf176f1c40afff4f590d2ce0fe66f28a9debf",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_MCP_CONCURRENCY"
+          ],
+          "start": 1191021,
+          "end": 1191053,
+          "originalSha256": "3cc8ad29f4400123388cb35514f757a3b75d8c42d0e40ad7146b96161977e4f8",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "mcpConcurrencyLimiter"
+          ],
+          "start": 1191054,
+          "end": 1191121,
+          "originalSha256": "e34d28d30f57d393d1426b48324852e7726ba3b12fc2bf1d54089d6301d28796",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/file-tool-input-compat.ts",
+      "file": "src/file-tool-input-compat.js",
+      "sha256": "c07a9f151149dff602dbcbbf82a6aa58e72196056c63e7480818ed926713448c",
+      "bytes": 5824,
+      "exports": [
+        "READ_END_KEYS",
+        "READ_START_KEYS",
+        "foldLineAliases",
+        "hasOwn",
+        "invalid",
+        "isFileToolCompatibilityAlias",
+        "isObject2",
+        "normalizeFileToolInput",
+        "normalizeFileToolName",
+        "normalizeReadCollection",
+        "normalizeReadInput",
+        "normalizeReadRequest",
+        "normalizeSearchInput",
+        "sameJsonValue",
+        "singleSearchScope"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "READ_START_KEYS"
+          ],
+          "start": 970303,
+          "end": 970376,
+          "originalSha256": "092f996671695f566f01fb8802e0521d7523aa35a69d6504ad46bc7a6007182d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "READ_END_KEYS"
+          ],
+          "start": 970377,
+          "end": 970440,
+          "originalSha256": "87df2e5955042b06e3afbfe32665b9811a67a1f4721326e9fc9ae592f032899e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isObject2"
+          ],
+          "start": 970441,
+          "end": 970549,
+          "originalSha256": "e52ab898e305526086cd76d39ed15a1cd061948b807a6cf74f5a4001d0a810f2",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "hasOwn"
+          ],
+          "start": 970550,
+          "end": 970636,
+          "originalSha256": "f3cbc5aca20932185f4f207be56a4a233a454aad761d3dbb56fc922e0b84add2",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "sameJsonValue"
+          ],
+          "start": 970637,
+          "end": 970820,
+          "originalSha256": "6068bbdefe557fd17ad64acd4e4449266d36e7db9d593da5e1a672c481230000",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "invalid"
+          ],
+          "start": 970821,
+          "end": 970901,
+          "originalSha256": "c8f33e7cb33a0e6bb3fc3be1555b6ff6046c8d5ceb08b5dd9bba7eb7b4785358",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "singleSearchScope"
+          ],
+          "start": 970902,
+          "end": 971206,
+          "originalSha256": "3834a9f8f0a1039a7a5bf6e8fb5b9456f93aa1bbf433998878e84e4aae602c2c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeSearchInput"
+          ],
+          "start": 971207,
+          "end": 972870,
+          "originalSha256": "a7813714be6e70b08f5c9d0e3bb13de207fb3db5a9153fe26557963b671ebe87",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "foldLineAliases"
+          ],
+          "start": 972871,
+          "end": 973322,
+          "originalSha256": "ad0ea81809a218c26ca0dea33f9d2a7ca9ea90bc8bafc9702c36f28f338ad0e6",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeReadRequest"
+          ],
+          "start": 973323,
+          "end": 973619,
+          "originalSha256": "703de221e64db55a365cef4ebb95ddf4a15914b3ba43c42570534e1ce8e6ae76",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeReadCollection"
+          ],
+          "start": 973620,
+          "end": 973838,
+          "originalSha256": "70607ed2931fec0bb44a9842b414316f66226c3caabb8bbff3420aa654537f00",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeReadInput"
+          ],
+          "start": 973839,
+          "end": 975184,
+          "originalSha256": "36090b109cbcc2c09e9b52320dddc32ede89c8538a9694615b158ef045cef973",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeFileToolName"
+          ],
+          "start": 975185,
+          "end": 975278,
+          "originalSha256": "e7b0d398aaf1b7e4a0512b754b4270612e8cc6f77f0f6febf6aaca3bcc34d1fb",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isFileToolCompatibilityAlias"
+          ],
+          "start": 975279,
+          "end": 975357,
+          "originalSha256": "25f7fd1e9a1ee101650a0c77d6304888d3fe90d3572a69d30d1900af5f2d633c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeFileToolInput"
+          ],
+          "start": 975358,
+          "end": 975670,
+          "originalSha256": "bdcadb6b2634e8e17c732d88151a3e8a49976108614c46d5b1695c05b8f5cfb0",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/file-tool-registry.ts",
+      "file": "src/file-tool-registry.js",
+      "sha256": "dd66edceb3a4fbd17aa8ec9069768c786f8d4a108c33d58713e7bb78828b966f",
+      "bytes": 26768,
+      "exports": [
+        "APPLY_PATCH_TOOL",
+        "FILE_TOOL_DEFINITIONS",
+        "FILE_TOOL_NAMES",
+        "FIND_FILES_TOOL",
+        "READ_FILES_TOOL",
+        "READ_IMAGE_TOOL",
+        "SEARCH_FILES_TOOL",
+        "asObjectRow",
+        "assertOptionalBooleans",
+        "assertOptionalIntegers",
+        "assertOptionalNonEmptyString",
+        "assertOptionalStringArrays",
+        "isFileToolName",
+        "parseApplyPatchInput",
+        "parseFindFilesInput",
+        "parseReadFilesInput",
+        "parseReadImageInput",
+        "parseSearchFilesInput"
+      ],
+      "dependencies": [],
+      "coverage": "selected declaration subset; other functionality not reconstructed",
+      "declarations": [
+        {
+          "names": [
+            "APPLY_PATCH_TOOL"
+          ],
+          "start": 1059049,
+          "end": 1063326,
+          "originalSha256": "38be4b4cff7a5ff2203464d4f4002d891585c02cdcbdab0f446a5bf435b3285d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "READ_FILES_TOOL"
+          ],
+          "start": 1063327,
+          "end": 1067395,
+          "originalSha256": "493af3b419d7d1b91212018103e4f69af4dd5280ff8386a48a3b719dac02b004",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "READ_IMAGE_TOOL"
+          ],
+          "start": 1067396,
+          "end": 1069386,
+          "originalSha256": "5faf22b569e1a802b65c1c7785d1daf0bf247739658c539eec6c2a10668d7549",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "FIND_FILES_TOOL"
+          ],
+          "start": 1069387,
+          "end": 1074077,
+          "originalSha256": "f949f9bb36843ad91256cee330ad3ad3976c0dbdedbb3d9bd5d227c18bac345a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SEARCH_FILES_TOOL"
+          ],
+          "start": 1074078,
+          "end": 1079110,
+          "originalSha256": "7b4a68acc137260e69cd34c6221db5da45de5ac9f7292fa1bba39810da23c898",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "FILE_TOOL_DEFINITIONS"
+          ],
+          "start": 1079111,
+          "end": 1079240,
+          "originalSha256": "848bae8038bbd2035a60257792d78c799626e7592523b0f45fcfa372527ad92b",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "FILE_TOOL_NAMES"
+          ],
+          "start": 1079241,
+          "end": 1079310,
+          "originalSha256": "d7c562909fa77a3f0745fccb52c9562b48eac2a42d5b61e7b9540c455a4e7704",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "asObjectRow"
+          ],
+          "start": 1079311,
+          "end": 1079469,
+          "originalSha256": "6ff17091d6d2376759b98901a213f9ea4ed95266a3545ee110038adcacb38f36",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "assertOptionalNonEmptyString"
+          ],
+          "start": 1079470,
+          "end": 1079737,
+          "originalSha256": "1c6b7227dd0bd0cb9500dbd8e0aee0f429a66ff4fcacffa9d75bc2b7f5feb9b5",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "assertOptionalBooleans"
+          ],
+          "start": 1079738,
+          "end": 1079970,
+          "originalSha256": "6bdea5daca41f38a275d78fe2574d6acb3748c5ff90082c803a60da3c8342bf6",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "assertOptionalIntegers"
+          ],
+          "start": 1079971,
+          "end": 1080202,
+          "originalSha256": "b16bd572458d94af84b3c1b12d1428a2623f78ad98232e1af9c182c13d362bc1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "assertOptionalStringArrays"
+          ],
+          "start": 1080203,
+          "end": 1080565,
+          "originalSha256": "9c0eee75eb92ccedcd0922ac089f89e49dd858850b83cecaafced549282de006",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseApplyPatchInput"
+          ],
+          "start": 1080566,
+          "end": 1081457,
+          "originalSha256": "ed73ddd2957c6aaf94986329557cf1005aa781311423d54db84aa9e81a1c55ce",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseReadFilesInput"
+          ],
+          "start": 1081458,
+          "end": 1082688,
+          "originalSha256": "5012d86184300284af54ef0877e640ab0658c2a98758cd0c52375fc3bfc9edae",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseReadImageInput"
+          ],
+          "start": 1082689,
+          "end": 1083036,
+          "originalSha256": "3d4e072ce2af8dadfbc3e74437c1b7693e803a70d10e818391b2709e96fdeda7",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseFindFilesInput"
+          ],
+          "start": 1083037,
+          "end": 1084213,
+          "originalSha256": "c93f144e90ad7bdb1baf4a6fbc098bc04077e6cad7e884420030fca664749238",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseSearchFilesInput"
+          ],
+          "start": 1084214,
+          "end": 1085102,
+          "originalSha256": "56b8ca4f463c8e84c3fde960ab97d49ef818bf4388cdf84c3f47cbba6ab0df8e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isFileToolName"
+          ],
+          "start": 1085103,
+          "end": 1085177,
+          "originalSha256": "fa4b7be2aa466b8a9c445e234cc861b316679b0d8b1c26927ebded816ec9560a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/ide-tool-definitions.ts",
+      "file": "src/ide-tool-definitions.js",
+      "sha256": "82586332fe707db7de18910374b7dd113ce94ec09b3e23a387c20508c7779d60",
+      "bytes": 11425,
+      "exports": [
+        "BRIDGE_EXCLUDED_TOOL_NAMES",
+        "GENERIC_OUTPUT_SCHEMA",
+        "IDE_TOOL_DEFINITIONS",
+        "IDE_TOOL_NAMES",
+        "MANAGED_SHELL_DESCRIPTION",
+        "RUN_COMMAND_OUTPUT_SCHEMA",
+        "getIdeToolDefinition"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "MANAGED_SHELL_DESCRIPTION"
+          ],
+          "start": 1089433,
+          "end": 1090037,
+          "originalSha256": "a581bd1802b510bb9d8ac7c8c4447f479e351f585d74759efea1231f00e4330d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "GENERIC_OUTPUT_SCHEMA"
+          ],
+          "start": 1090038,
+          "end": 1090113,
+          "originalSha256": "0e84954b6245a85091a2c3f1c893cb64df3230348aa5424dd0d15123b5b39227",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "RUN_COMMAND_OUTPUT_SCHEMA"
+          ],
+          "start": 1090114,
+          "end": 1090614,
+          "originalSha256": "5983da23ffccd8bc953f5704747bee87b56e72230e4dfba7f05b73a035c5fe85",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "IDE_TOOL_DEFINITIONS"
+          ],
+          "start": 1090615,
+          "end": 1100281,
+          "originalSha256": "4e12e93240ced4a1c23c5f69bd79bcc20e9c18c2d07a3dd96afb6c563c85338f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "IDE_TOOL_NAMES"
+          ],
+          "start": 1100282,
+          "end": 1100349,
+          "originalSha256": "f4ca61c51f24eefc052c825d06a471ce94464cf6ededf52b4370da5c75bf430c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "BRIDGE_EXCLUDED_TOOL_NAMES"
+          ],
+          "start": 1100350,
+          "end": 1100417,
+          "originalSha256": "bdf0bae34ac675b417de8b51cef7da4bb6cc7bfb1168d9049d98563b030d19f7",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "getIdeToolDefinition"
+          ],
+          "start": 1100418,
+          "end": 1100523,
+          "originalSha256": "7859f8645c4a6f64410fc2b2750e48e2c658ef576ddef19f63acd6a6ff56a99c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/jsonrpc-request-id-registry.ts",
+      "file": "src/jsonrpc-request-id-registry.js",
+      "sha256": "d69e55e73f6d771b0710889360a79541c7c85475445e07cc73f0506ab149f977",
+      "bytes": 1289,
+      "exports": [
+        "JsonRpcRequestIdRegistry",
+        "keyOf",
+        "requestIdOf",
+        "requestIdsOfRequest"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "keyOf"
+          ],
+          "start": 1132316,
+          "end": 1132377,
+          "originalSha256": "9708682fb748bc7cfa2464a81d7b1f2386ac5fd7ed6e8f00ec7f7d757dbdaca7",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "requestIdOf"
+          ],
+          "start": 1132378,
+          "end": 1132664,
+          "originalSha256": "dd64fe8bf3332e8a399a1db33d25b6d0d5974a89f6516d6acfd4b8caf00fc2b6",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "requestIdsOfRequest"
+          ],
+          "start": 1132665,
+          "end": 1132881,
+          "originalSha256": "7a8b811a1e927ae68047ccb234ffe8e895e660549239a84faf3a1f6c3e6ee8f8",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "JsonRpcRequestIdRegistry"
+          ],
+          "start": 1132882,
+          "end": 1133364,
+          "originalSha256": "941ba6d8afbe86eaa9e0435819533e30df2fd06db5568598053475c2584729c5",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/managed-command-cancellation.ts",
+      "file": "src/managed-command-cancellation.js",
+      "sha256": "1a2d8cc585b0d64ea26aedf44d5f1c0a86aa8f91fb69c3b05bce7607b330a6b0",
+      "bytes": 8893,
+      "exports": [
+        "DEFAULT_CANCELLATION_LIMIT",
+        "DEFAULT_CANCELLATION_WINDOW_MS",
+        "DEFAULT_FORCE_PROMPT_COOLDOWN_MS",
+        "DEFAULT_FORCE_PROMPT_LIMIT",
+        "DEFAULT_FORCE_PROMPT_WINDOW_MS",
+        "DEFAULT_FORCE_RESERVATION_TTL_MS",
+        "ManagedCommandCanceller",
+        "NATIVE_MANAGED_COMMAND_OWNER_ID",
+        "PerOwnerCancellationRateLimiter",
+        "bridgeManagedCommandOwnerId",
+        "forceCancellationRequiresConfirmation",
+        "managedCommandNotAccessibleError",
+        "waitForCommandOrGrace"
+      ],
+      "dependencies": [
+        "managed-command-risk.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "NATIVE_MANAGED_COMMAND_OWNER_ID"
+          ],
+          "start": 1143373,
+          "end": 1143425,
+          "originalSha256": "772e139cbce2c599a6f8f5e63c087eb225c566f707aa35a2568a996ae78381a0",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_CANCELLATION_LIMIT"
+          ],
+          "start": 1143426,
+          "end": 1143462,
+          "originalSha256": "fcd51e3dfb1d0423a974a13a70e913f293ed674b219e731131fb7ffe1d0b3d41",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_CANCELLATION_WINDOW_MS"
+          ],
+          "start": 1143463,
+          "end": 1143504,
+          "originalSha256": "49b859bead5e59cc19a5230961f220e236080b421cd65290722b06f3f07bee49",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_FORCE_PROMPT_LIMIT"
+          ],
+          "start": 1143505,
+          "end": 1143540,
+          "originalSha256": "c4f0a19163f3faac0598c036ce41b39e178c48f66c7ae98dfd7a8b44ed514c7c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_FORCE_PROMPT_WINDOW_MS"
+          ],
+          "start": 1143541,
+          "end": 1143582,
+          "originalSha256": "14949f670d873ca2962486c9f5d84ec809ca8ad438d7a733747cce23040493c5",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_FORCE_PROMPT_COOLDOWN_MS"
+          ],
+          "start": 1143583,
+          "end": 1143626,
+          "originalSha256": "427f2cc715aa3fb0630c750bac31f55d6dd6a1b40abe31df7ac37f803f5c2c46",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_FORCE_RESERVATION_TTL_MS"
+          ],
+          "start": 1143627,
+          "end": 1143674,
+          "originalSha256": "a0029ecc65a3cad8c3b2d95f8eea71daaadda574d865f822bf8fc58fcb9ba252",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "forceCancellationRequiresConfirmation"
+          ],
+          "start": 1143675,
+          "end": 1143805,
+          "originalSha256": "4a3f5097eddcbdb9083517393ede8a62991fdb7927309ed42028e75f0c9b2f05",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "bridgeManagedCommandOwnerId"
+          ],
+          "start": 1143806,
+          "end": 1144037,
+          "originalSha256": "768186c0abcd88014ec0e3710eb38c29669af6543f3887f28a853e03c89561bc",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "managedCommandNotAccessibleError"
+          ],
+          "start": 1144038,
+          "end": 1144215,
+          "originalSha256": "dd5fa88aafeaa2d88c7eb2be0dcefa61f6a678a7ce0184ebe104acbdfd511b5f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "waitForCommandOrGrace"
+          ],
+          "start": 1144216,
+          "end": 1144633,
+          "originalSha256": "a76b10c5f12c98b5786c755f391cd461b91250cc165dbe154aee65f8d2be6eb8",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "PerOwnerCancellationRateLimiter"
+          ],
+          "start": 1144634,
+          "end": 1148332,
+          "originalSha256": "74a3b8f8fad2e8a5c4234d7294ff3b6f2bc3fbbdc37b68d8bfbc4f8f2835669c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "ManagedCommandCanceller"
+          ],
+          "start": 1148333,
+          "end": 1151607,
+          "originalSha256": "986fe1b27d87f3dc63d22c75f9c84494549cf9a6a16d68c7e3774f76cdc51da9",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/managed-command-id.ts",
+      "file": "src/managed-command-id.js",
+      "sha256": "fc5664984cf72b2cea4f0430f350970bc2709b2e9c60af82081f1d99ccb23581",
+      "bytes": 1241,
+      "exports": [
+        "MANAGED_COMMAND_ENTROPY_BYTES",
+        "MANAGED_COMMAND_ID",
+        "MANAGED_COMMAND_ID_LABEL",
+        "createManagedCommandId",
+        "import_node_crypto10",
+        "normalizeManagedCommandId"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_crypto10"
+          ],
+          "start": 1345203,
+          "end": 1345253,
+          "originalSha256": "373a49bce8f8961dd99bd2f803f1e3132d32c05be96aa4955b500b0db3341a1d",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MANAGED_COMMAND_ENTROPY_BYTES"
+          ],
+          "start": 1345254,
+          "end": 1345293,
+          "originalSha256": "8a3bc191f3c231304346f8246f6b627d97fcf68cd3528027b22eb22b0a286550",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MANAGED_COMMAND_ID"
+          ],
+          "start": 1345294,
+          "end": 1345352,
+          "originalSha256": "048a043f388697b7f72f3859e534c51c418e01abc7c4f770283104d80726a48e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MANAGED_COMMAND_ID_LABEL"
+          ],
+          "start": 1345353,
+          "end": 1345405,
+          "originalSha256": "7f21eef9d7726b5aa56560be4ca1c9a6628a1a57b6489c66ff12a78d1e1d0d84",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "createManagedCommandId"
+          ],
+          "start": 1345406,
+          "end": 1345771,
+          "originalSha256": "3ad8f2c91e540942ae5efabf3a37e37414f2d1b98c5ce132e1b9ab192c7d0f81",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeManagedCommandId"
+          ],
+          "start": 1345772,
+          "end": 1346125,
+          "originalSha256": "7404a4715b4fe61637a8ef7e4728d99bf20c0ef1887a842a9febf90d0ad44227",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/managed-command-retention.ts",
+      "file": "src/managed-command-retention.js",
+      "sha256": "92b73a406bb14d0279b5f13428eac39709b1ba3e25845a16e75370b68e88c3a5",
+      "bytes": 1219,
+      "exports": [
+        "MANAGED_COMMAND_COMPLETED_STATE_TTL_MS",
+        "MAX_COMPLETED_COMMAND_STATES_PER_OWNER",
+        "managedCommandStateIdsToPrune"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "MANAGED_COMMAND_COMPLETED_STATE_TTL_MS"
+          ],
+          "start": 1346198,
+          "end": 1346257,
+          "originalSha256": "a2783665a094954696b4a157c76fa1f0d3ee388cf158780d6e740a0a8b6e920d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_COMPLETED_COMMAND_STATES_PER_OWNER"
+          ],
+          "start": 1346258,
+          "end": 1346306,
+          "originalSha256": "ef138dd718568e88cca0ff8f44447bb485889e12944365f732da44ee90e9a4be",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "managedCommandStateIdsToPrune"
+          ],
+          "start": 1346307,
+          "end": 1347135,
+          "originalSha256": "3763961dfd7454e70b525a4865a91ec33723d7bac947f5ab449d66cc3a3f788f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/managed-command-risk.ts",
+      "file": "src/managed-command-risk.js",
+      "sha256": "aea0023597c8fd6f7fa4663ab4f80fedf2378cfd1bac83ea206f1c0ce9fa035e",
+      "bytes": 8056,
+      "exports": [
+        "ARCHIVE_SCRIPT",
+        "NORMAL_RISK",
+        "PACKAGE_INSPECTION",
+        "PACKAGE_MUTATIONS",
+        "RELEASE_SCRIPT",
+        "classifyManagedCommandRisk",
+        "classifyPackageManager",
+        "classifyWords",
+        "executableName",
+        "highRisk",
+        "parseInvocations",
+        "stripLeadingOptions",
+        "tarMutates",
+        "unwrapInvocation"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "NORMAL_RISK"
+          ],
+          "start": 1135699,
+          "end": 1135737,
+          "originalSha256": "4a2e21c4b4f4d80780d82a67ddee3c4519030237e63e2b7955d5701be65c4218",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "highRisk"
+          ],
+          "start": 1135738,
+          "end": 1135829,
+          "originalSha256": "2c954a4608131675436d049ce1622ca5f2f1aa5ee8260a61cbd7080ab1c99519",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseInvocations"
+          ],
+          "start": 1135830,
+          "end": 1137109,
+          "originalSha256": "53e476086cd885985ea9d51dd9d3144a00bd283bfd495e8c061b98b8af5da38e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "executableName"
+          ],
+          "start": 1137110,
+          "end": 1137222,
+          "originalSha256": "4b8d20567d2ae27215c427cfa44f70186e1dbe62fb40c43835bb49de55dbb5f9",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "stripLeadingOptions"
+          ],
+          "start": 1137223,
+          "end": 1137603,
+          "originalSha256": "5aed8ece25ae713cbd1166ce2d0a496bb8f645f89bba8032396b3a6c5f28b571",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "unwrapInvocation"
+          ],
+          "start": 1137604,
+          "end": 1138818,
+          "originalSha256": "8836229eb43be1beb0e24d25f0a5e5af834ba19d182b3c3e688d000b676f4e55",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "RELEASE_SCRIPT"
+          ],
+          "start": 1138819,
+          "end": 1138891,
+          "originalSha256": "8449001f49944249e7be2167effad3cb877068057d22ad7e76465cda1cba161c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "ARCHIVE_SCRIPT"
+          ],
+          "start": 1138892,
+          "end": 1138949,
+          "originalSha256": "89f30cab6208b0ae72e205b66ac5fc3ee17bbc11ee3245886362a28b9232e6a5",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "PACKAGE_MUTATIONS"
+          ],
+          "start": 1138950,
+          "end": 1139076,
+          "originalSha256": "7588a8b9d341d71d4c3f0986278bb207bc434ae4a783ded81416623e8c0c7a72",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "PACKAGE_INSPECTION"
+          ],
+          "start": 1139077,
+          "end": 1139203,
+          "originalSha256": "233093e9e14ed1306f5bbab905d218caebb5db3dad4f15c6973bf526ea9baaae",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "classifyPackageManager"
+          ],
+          "start": 1139204,
+          "end": 1139918,
+          "originalSha256": "00979e23b0d47908220d5ab5dfe4c91d26fb81f4cfe72c5557a3f4ff7f30cb62",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "tarMutates"
+          ],
+          "start": 1139919,
+          "end": 1140333,
+          "originalSha256": "e417234d0545360db4642e090e775384845a1ca1f6557fefbb9e65289d57e153",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "classifyWords"
+          ],
+          "start": 1140334,
+          "end": 1143113,
+          "originalSha256": "3d4b1c738e98af1278197e28e4b3cfec0f7002e82e770c32c0a76d121b2096c1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "classifyManagedCommandRisk"
+          ],
+          "start": 1143114,
+          "end": 1143332,
+          "originalSha256": "56f6f02a93dfeea9633a279d1c1bd65dcd0fe357903934f3bb28406ce4a1b985",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/managed-terminal-lifecycle.ts",
+      "file": "src/managed-terminal-lifecycle.js",
+      "sha256": "b0ca965c917998d8a6740ca38300e12e118b04306d8d44c88b5a40aa8708245f",
+      "bytes": 592,
+      "exports": [
+        "MANAGED_TERMINAL_IDLE_TIMEOUT_MS",
+        "isManagedTerminalIdleExpired",
+        "managedTerminalIdleDelay"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "MANAGED_TERMINAL_IDLE_TIMEOUT_MS"
+          ],
+          "start": 1347209,
+          "end": 1347266,
+          "originalSha256": "9b6c38e1eafa1796d827137f4a48b0da61fc232d0b1235de89a9fa1b0c478322",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "managedTerminalIdleDelay"
+          ],
+          "start": 1347267,
+          "end": 1347409,
+          "originalSha256": "c9560da128bf966d0d639683070c86cb6ad40da6daf79221058d264609b1eef2",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isManagedTerminalIdleExpired"
+          ],
+          "start": 1347410,
+          "end": 1347539,
+          "originalSha256": "38a7f8583574bb5ce31ef64d92c390370c77115498c8b0c955d198d4856a2f1f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/mcp-protocol.ts",
+      "file": "src/mcp-protocol.js",
+      "sha256": "4594032d8415276341efa9c0a5d547500c2d488139ee25ac33ba01a71d7076b3",
+      "bytes": 1611,
+      "exports": [
+        "LEGACY_PROTOCOL_VERSIONS",
+        "MODERN_ERA_MIN_VERSION",
+        "MODERN_PROTOCOL_VERSION",
+        "NEGOTIABLE_LATEST_PROTOCOL_VERSION",
+        "NEGOTIABLE_PROTOCOL_VERSIONS",
+        "PROTOCOL_TRANSPORT_MODE",
+        "SUPPORTS_STATELESS_TRANSPORT",
+        "classifyProtocolEra",
+        "describeProtocolSupport"
+      ],
+      "dependencies": [
+        "snapshot-sdk-versions.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "MODERN_ERA_MIN_VERSION"
+          ],
+          "start": 1126368,
+          "end": 1126410,
+          "originalSha256": "d435310f2ccd2362d0abaca40558a0a225242b8ae5328c9523f33e4686a5d1cf",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MODERN_PROTOCOL_VERSION"
+          ],
+          "start": 1126411,
+          "end": 1126454,
+          "originalSha256": "ad7b8eb9a41fe4030172ac0b7d3b0ae912727a81a363d61d80a1f692d0e825ff",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "LEGACY_PROTOCOL_VERSIONS"
+          ],
+          "start": 1126455,
+          "end": 1126581,
+          "originalSha256": "c6ca25328d78074715c35768412581ec7a1559821e653ac2ac0b87c82b8516d1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "NEGOTIABLE_LATEST_PROTOCOL_VERSION"
+          ],
+          "start": 1126582,
+          "end": 1126647,
+          "originalSha256": "a5c66e20b187cc50e61c1ec0db749ec5527b9bce49d61d6e4df821ccd8e3705f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "NEGOTIABLE_PROTOCOL_VERSIONS"
+          ],
+          "start": 1126648,
+          "end": 1126757,
+          "originalSha256": "c06546713ff682901eb65bb771ee129a7be602b6c0103a93e47ff94abd2fae24",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "classifyProtocolEra"
+          ],
+          "start": 1126758,
+          "end": 1126901,
+          "originalSha256": "30f8febdd3f77b14f6522c2a2dcd9a622a5fa42ae0e76fad00502aaf83509332",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SUPPORTS_STATELESS_TRANSPORT"
+          ],
+          "start": 1126902,
+          "end": 1127033,
+          "originalSha256": "94a81ca3f1d35689777522c12c492ca49e001683c487257eed30b30ebd5799f1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "PROTOCOL_TRANSPORT_MODE"
+          ],
+          "start": 1127034,
+          "end": 1127163,
+          "originalSha256": "375c7784c6e4ac258c6c2109feb7e4079c1bab17ecc02d44fb5a74d26af3eedd",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "describeProtocolSupport"
+          ],
+          "start": 1127164,
+          "end": 1127500,
+          "originalSha256": "e797cf0b77a25ee80f4d1c67aa027fd2b37c57a926cb5911d8d567c6e8432d85",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/tool-input-validation.ts",
+      "file": "src/tool-input-validation.js",
+      "sha256": "3757e12f94795620a6e27ec7900e3d21ff4b76f7a718cf71cd3c14cf6db954b2",
+      "bytes": 4901,
+      "exports": [
+        "fail",
+        "sameJsonValue2",
+        "schemaObject",
+        "validateSchema",
+        "validateToolInput",
+        "validateType",
+        "valueType"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "schemaObject"
+          ],
+          "start": 1054384,
+          "end": 1054503,
+          "originalSha256": "a4da90d0a71d9e9cc9dab3392eae65c3f1f0be9dcb0bcbeb091aad68f44feb0e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "valueType"
+          ],
+          "start": 1054504,
+          "end": 1054686,
+          "originalSha256": "1496730597c9ca50eb30d4e9e077083c6625e807913a573bf724de0adbcfec39",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "sameJsonValue2"
+          ],
+          "start": 1054687,
+          "end": 1054965,
+          "originalSha256": "9b4b252dbafef9a4876ba2c31f21a27394dfa26a5d21e0085d31cdd6e779338d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "fail"
+          ],
+          "start": 1054966,
+          "end": 1055061,
+          "originalSha256": "f5b8209dbea7c8f052ccdf1401ab775c83a90daf5043d15fd4daed36b0d93764",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "validateType"
+          ],
+          "start": 1055062,
+          "end": 1055675,
+          "originalSha256": "fdf4a9b9cd420a09c7e14dd3e75a6c243101180987f73c492243708f24e62aeb",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "validateSchema"
+          ],
+          "start": 1055676,
+          "end": 1058792,
+          "originalSha256": "69ac1ad74a3b20f90f78c4f6fa7de4032157be89dce7df03790fa2e18223ce88",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "validateToolInput"
+          ],
+          "start": 1058793,
+          "end": 1059018,
+          "originalSha256": "2d7270802a9957cbe70f397bdb7f7ced8427d0706294c02d530ae7da54f481c6",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/version.ts",
+      "file": "src/version.js",
+      "sha256": "46af4acba2c3a3ffa585fd54f3d47cf8674ee13cc102171cf9bd22ec1bc15065",
+      "bytes": 218,
+      "exports": [
+        "SHUNCODE_BEHAVIOR_VERSION"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "SHUNCODE_BEHAVIOR_VERSION"
+          ],
+          "start": 1125653,
+          "end": 1125693,
+          "originalSha256": "4ef859e9f3d8e3431397ed9877a4b81b8c0bcd1109c256150955ea28dd21b48d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    }
+  ],
+  "sourceLabelIndex": [
+    {
+      "label": "src/adaptive-concurrency.ts",
+      "headingOffsets": [
+        1191123
+      ],
+      "declarations": [
+        "DEFAULT_WINDOW",
+        "DEFAULT_SLOW_CALL_MS",
+        "AdaptiveConcurrencyController"
+      ],
+      "reconstructedBindings": [
+        "DEFAULT_WINDOW",
+        "DEFAULT_SLOW_CALL_MS",
+        "AdaptiveConcurrencyController"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/apply-patch.ts",
+      "headingOffsets": [
+        932616,
+        940319
+      ],
+      "declarations": [
+        "import_node_crypto3",
+        "import_promises2",
+        "import_node_path",
+        "DEFAULT_APPLY_PATCH_CONFIG",
+        "PatchToolError",
+        "Mutex",
+        "fileLocks",
+        "lockFor",
+        "withFileLocks",
+        "hashBytes",
+        "pathIdentity",
+        "isInsideRoot",
+        "canonicalRoots",
+        "resolveExistingPath",
+        "resolveExistingPathSpelling",
+        "resolveNewPath",
+        "pathExists",
+        "decodeSnapshot",
+        "encodeText",
+        "normalizePatchPath",
+        "parsePatch",
+        "findSequence",
+        "applyHunks",
+        "normalizedExpectedVersions",
+        "expectedVersionForSource",
+        "loadSnapshot",
+        "preflight",
+        "assertSourceUnchanged",
+        "tempPathFor",
+        "stageBytes",
+        "stagePlans",
+        "stagedFor",
+        "installNewFromStage",
+        "replaceExistingFromStage",
+        "restoreExistingFile",
+        "restoreMissingFile",
+        "rollbackPlans",
+        "commitPlans",
+        "truncateUtf8",
+        "normalizeError",
+        "applyPatch",
+        "formatApplyPatchForModel"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DOMException",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "TextDecoder",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "canonicalizeWorkspaceRoots",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "createCanonicalUnifiedDiff",
+          "owner": "src/canonical-diff.ts"
+        },
+        {
+          "name": "literalFirstPathSpellings",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/bridge-activity-tracker.ts",
+      "headingOffsets": [
+        1180208
+      ],
+      "declarations": [
+        "BridgeActivityTracker"
+      ],
+      "reconstructedBindings": [
+        "BridgeActivityTracker"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/bridge-coordination-validation.ts",
+      "headingOffsets": [
+        1183538
+      ],
+      "declarations": [
+        "asRecord2",
+        "assertTodoStatus",
+        "assertSingleInProgress",
+        "parseBridgeTodos",
+        "parseBridgePlan",
+        "parseBridgeProgress"
+      ],
+      "reconstructedBindings": [
+        "asRecord2",
+        "assertTodoStatus",
+        "assertSingleInProgress",
+        "parseBridgeTodos",
+        "parseBridgePlan",
+        "parseBridgeProgress"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/bridge-event-store.ts",
+      "headingOffsets": [
+        1124285
+      ],
+      "declarations": [
+        "import_node_crypto5",
+        "BoundedInMemoryEventStore"
+      ],
+      "reconstructedBindings": [
+        "import_node_crypto5",
+        "BoundedInMemoryEventStore"
+      ],
+      "externalReferences": [
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/bridge-http-router.ts",
+      "headingOffsets": [
+        1125478,
+        1127502
+      ],
+      "declarations": [
+        "createBridgeHttpRoutes",
+        "writeBridgeJsonError",
+        "writeBridgeJsonRpcError",
+        "readJsonBody",
+        "handleBridgeHttpRequest"
+      ],
+      "reconstructedBindings": [
+        "createBridgeHttpRoutes",
+        "writeBridgeJsonError",
+        "writeBridgeJsonRpcError",
+        "readJsonBody",
+        "handleBridgeHttpRequest"
+      ],
+      "externalReferences": [
+        {
+          "name": "describeProtocolSupport",
+          "owner": "src/mcp-protocol.ts"
+        },
+        {
+          "name": "getBuildInfo",
+          "owner": "src/build-info.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/bridge-session-registry.ts",
+      "headingOffsets": [
+        1133366
+      ],
+      "declarations": [
+        "BridgeSessionRegistry"
+      ],
+      "reconstructedBindings": [
+        "BridgeSessionRegistry"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/bridge-tool-name.ts",
+      "headingOffsets": [
+        1187310
+      ],
+      "declarations": [
+        "resolveBridgeToolName"
+      ],
+      "reconstructedBindings": [
+        "resolveBridgeToolName"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/bridge-usage-counter.ts",
+      "headingOffsets": [
+        1188016
+      ],
+      "declarations": [
+        "BridgeUsageCounter"
+      ],
+      "reconstructedBindings": [
+        "BridgeUsageCounter"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/build-info.ts",
+      "headingOffsets": [
+        1125543,
+        1125695
+      ],
+      "declarations": [
+        "injectedBuildInfo",
+        "asNonEmptyString",
+        "getBuildInfo"
+      ],
+      "reconstructedBindings": [
+        "injectedBuildInfo",
+        "asNonEmptyString",
+        "getBuildInfo"
+      ],
+      "externalReferences": [
+        {
+          "name": "SHUNCODE_BEHAVIOR_VERSION",
+          "owner": "src/version.ts"
+        },
+        {
+          "name": "define_SHUNCODE_BUILD_INFO_default",
+          "owner": "snapshot-build-metadata"
+        }
+      ]
+    },
+    {
+      "label": "src/canonical-diff.ts",
+      "headingOffsets": [
+        932833
+      ],
+      "declarations": [
+        "DEFAULT_CONTEXT_LINES",
+        "MAX_MYERS_EDIT_DISTANCE",
+        "decodeLines",
+        "fallbackReplace",
+        "backtrackMyers",
+        "myersDiff",
+        "diffLines",
+        "annotateEdits",
+        "formatRange",
+        "renderHunks",
+        "renderFileDiff",
+        "createCanonicalUnifiedDiff"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": []
+    },
+    {
+      "label": "src/concurrency.ts",
+      "headingOffsets": [
+        1188476
+      ],
+      "declarations": [
+        "Semaphore",
+        "toAbortError",
+        "DEFAULT_MCP_CONCURRENCY",
+        "mcpConcurrencyLimiter"
+      ],
+      "reconstructedBindings": [
+        "Semaphore",
+        "toAbortError",
+        "DEFAULT_MCP_CONCURRENCY",
+        "mcpConcurrencyLimiter"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/custom-tool-admin.ts",
+      "headingOffsets": [
+        1221471
+      ],
+      "declarations": [
+        "import_node_fs7",
+        "import_node_path11",
+        "toggleCustomTool",
+        "deleteCustomTool"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "CUSTOM_TOOLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "SKILLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "SKILL_SIDECAR_FILE",
+          "owner": "src/custom-tool-skill.ts"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "isRecord",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "loadCustomTools",
+          "owner": "src/custom-tools.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tool-contract.ts",
+      "headingOffsets": [
+        932484,
+        1100525
+      ],
+      "declarations": [
+        "CUSTOM_TOOLS_DIR_NAME",
+        "SKILLS_DIR_NAME",
+        "LEGACY_SKILLS_DIR_NAME",
+        "CUSTOM_TOOL_OUTPUT_SCHEMA",
+        "TOOL_NAME_PATTERN",
+        "MIN_DESCRIPTION_LENGTH",
+        "MAX_DESCRIPTION_LENGTH",
+        "MIN_TIMEOUT_MS",
+        "MAX_TIMEOUT_MS",
+        "DEFAULT_TIMEOUT_MS",
+        "RESERVED_TOOL_NAMES",
+        "isRecord"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "FILE_TOOL_NAMES",
+          "owner": "src/file-tool-registry.ts"
+        },
+        {
+          "name": "IDE_TOOL_NAMES",
+          "owner": "src/ide-tool-definitions.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tool-manifest.ts",
+      "headingOffsets": [
+        1101459
+      ],
+      "declarations": [
+        "import_node_fs2",
+        "import_node_path6",
+        "MAX_MANIFEST_BYTES",
+        "MAX_COMMAND_PARTS",
+        "MAX_COMMAND_PART_LENGTH",
+        "parseManifest",
+        "readManifest"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DEFAULT_TIMEOUT_MS",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MAX_DESCRIPTION_LENGTH",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MAX_TIMEOUT_MS",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MIN_DESCRIPTION_LENGTH",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MIN_TIMEOUT_MS",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "RESERVED_TOOL_NAMES",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "TOOL_NAME_PATTERN",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "isRecord",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tool-migration.ts",
+      "headingOffsets": [
+        1103890
+      ],
+      "declarations": [
+        "import_node_fs3",
+        "import_node_path7",
+        "migratedLegacyRoots",
+        "migrateLegacySkillDirs"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "CUSTOM_TOOLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "LEGACY_SKILLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tool-sandbox.ts",
+      "headingOffsets": [
+        1118682
+      ],
+      "declarations": [
+        "import_node_child_process4",
+        "import_node_fs5",
+        "import_node_path9",
+        "CUSTOM_TOOL_ARGS_ENV",
+        "CUSTOM_TOOL_NAME_ENV",
+        "MAX_OUTPUT_BYTES",
+        "FORCE_KILL_GRACE_MS",
+        "SKILL_INTERPRETERS",
+        "runChild",
+        "executeCustomTool"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        },
+        {
+          "name": "validateToolInput",
+          "owner": "src/tool-input-validation.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tool-skill-import.ts",
+      "headingOffsets": [
+        1223920
+      ],
+      "declarations": [
+        "import_node_child_process5",
+        "import_node_fs8",
+        "import_node_os",
+        "import_node_path12",
+        "SKILL_FILE",
+        "MAX_ARCHIVE_BYTES",
+        "MAX_ENTRIES",
+        "NAME_PATTERN",
+        "GENERATED_RUNNER_REL",
+        "GENERATED_RUNNER_SOURCE",
+        "declaredFrontmatterEntry",
+        "skillNameFromMarkdown",
+        "availableSkillName",
+        "safeArchiveEntry",
+        "extractArchive",
+        "locateSkillRoot",
+        "countEntries",
+        "importSkill",
+        "writeSkillRunner",
+        "generateSkillRunner"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "SKILLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "findSkillEntryScript",
+          "owner": "src/custom-tool-skill.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        },
+        {
+          "name": "resolveSkillDir",
+          "owner": "src/custom-tool-skill.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tool-skill.ts",
+      "headingOffsets": [
+        1105587
+      ],
+      "declarations": [
+        "import_node_fs4",
+        "import_node_path8",
+        "MAX_SKILLS_PER_ROOT",
+        "MAX_SKILL_BYTES",
+        "SKILL_ENTRY_CANDIDATES",
+        "SKILL_SIDECAR_FILE",
+        "SKILL_LOAD_REASONS",
+        "SKILL_LOAD_FIXES",
+        "failSkill",
+        "unquote",
+        "parseFrontmatter",
+        "parseSkillDocument",
+        "buildDescription",
+        "readSidecar",
+        "findSkillEntryScript",
+        "entryCommand",
+        "readSkillManifest",
+        "loadSkillTools",
+        "resolveSkillDir",
+        "diagnoseSkillTools"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DEFAULT_TIMEOUT_MS",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MAX_DESCRIPTION_LENGTH",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MAX_TIMEOUT_MS",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MIN_DESCRIPTION_LENGTH",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "MIN_TIMEOUT_MS",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "RESERVED_TOOL_NAMES",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "SKILLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "TOOL_NAME_PATTERN",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "isRecord",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/custom-tools.ts",
+      "headingOffsets": [
+        932324,
+        1122387
+      ],
+      "declarations": [
+        "import_node_fs6",
+        "import_node_path10",
+        "MAX_MANIFESTS_PER_ROOT",
+        "loadCustomTools",
+        "listEnabledCustomTools",
+        "findCustomTool",
+        "toStatusEntries",
+        "customToolsFingerprint"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "CUSTOM_TOOLS_DIR_NAME",
+          "owner": "src/custom-tool-contract.ts"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "loadSkillTools",
+          "owner": "src/custom-tool-skill.ts"
+        },
+        {
+          "name": "migrateLegacySkillDirs",
+          "owner": "src/custom-tool-migration.ts"
+        },
+        {
+          "name": "readManifest",
+          "owner": "src/custom-tool-manifest.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/file-tool-input-compat.ts",
+      "headingOffsets": [
+        970235
+      ],
+      "declarations": [
+        "READ_START_KEYS",
+        "READ_END_KEYS",
+        "isObject2",
+        "hasOwn",
+        "sameJsonValue",
+        "invalid",
+        "singleSearchScope",
+        "normalizeSearchInput",
+        "foldLineAliases",
+        "normalizeReadRequest",
+        "normalizeReadCollection",
+        "normalizeReadInput",
+        "normalizeFileToolName",
+        "isFileToolCompatibilityAlias",
+        "normalizeFileToolInput"
+      ],
+      "reconstructedBindings": [
+        "READ_START_KEYS",
+        "READ_END_KEYS",
+        "isObject2",
+        "hasOwn",
+        "sameJsonValue",
+        "invalid",
+        "singleSearchScope",
+        "normalizeSearchInput",
+        "foldLineAliases",
+        "normalizeReadRequest",
+        "normalizeReadCollection",
+        "normalizeReadInput",
+        "normalizeFileToolName",
+        "isFileToolCompatibilityAlias",
+        "normalizeFileToolInput"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/file-tool-registry.ts",
+      "headingOffsets": [
+        932551,
+        1059020
+      ],
+      "declarations": [
+        "APPLY_PATCH_TOOL",
+        "READ_FILES_TOOL",
+        "READ_IMAGE_TOOL",
+        "FIND_FILES_TOOL",
+        "SEARCH_FILES_TOOL",
+        "FILE_TOOL_DEFINITIONS",
+        "FILE_TOOL_NAMES",
+        "asObjectRow",
+        "assertOptionalNonEmptyString",
+        "assertOptionalBooleans",
+        "assertOptionalIntegers",
+        "assertOptionalStringArrays",
+        "parseApplyPatchInput",
+        "parseReadFilesInput",
+        "parseReadImageInput",
+        "parseFindFilesInput",
+        "parseSearchFilesInput",
+        "isFileToolName",
+        "FILE_TOOL_ERROR_TAGS",
+        "resolveFileToolErrorCode",
+        "buildFileToolErrorResult",
+        "invokeFileTool",
+        "dispatchFileTool"
+      ],
+      "reconstructedBindings": [
+        "APPLY_PATCH_TOOL",
+        "READ_FILES_TOOL",
+        "READ_IMAGE_TOOL",
+        "FIND_FILES_TOOL",
+        "SEARCH_FILES_TOOL",
+        "FILE_TOOL_DEFINITIONS",
+        "FILE_TOOL_NAMES",
+        "asObjectRow",
+        "assertOptionalNonEmptyString",
+        "assertOptionalBooleans",
+        "assertOptionalIntegers",
+        "assertOptionalStringArrays",
+        "parseApplyPatchInput",
+        "parseReadFilesInput",
+        "parseReadImageInput",
+        "parseFindFilesInput",
+        "parseSearchFilesInput",
+        "isFileToolName"
+      ],
+      "externalReferences": [
+        {
+          "name": "applyPatch",
+          "owner": "src/apply-patch.ts"
+        },
+        {
+          "name": "findFiles",
+          "owner": "src/find-files.ts"
+        },
+        {
+          "name": "formatApplyPatchForModel",
+          "owner": "src/apply-patch.ts"
+        },
+        {
+          "name": "formatFindFilesForModel",
+          "owner": "src/find-files.ts"
+        },
+        {
+          "name": "formatReadFilesForModel",
+          "owner": "src/read-files.ts"
+        },
+        {
+          "name": "formatReadImageForModel",
+          "owner": "src/read-image.ts"
+        },
+        {
+          "name": "formatSearchFilesForModel",
+          "owner": "src/search-files.ts"
+        },
+        {
+          "name": "normalizeFileToolInput",
+          "owner": "src/file-tool-input-compat.ts"
+        },
+        {
+          "name": "normalizeFileToolName",
+          "owner": "src/file-tool-input-compat.ts"
+        },
+        {
+          "name": "readFiles",
+          "owner": "src/read-files.ts"
+        },
+        {
+          "name": "readImage",
+          "owner": "src/read-image.ts"
+        },
+        {
+          "name": "searchFiles",
+          "owner": "src/search-files.ts"
+        },
+        {
+          "name": "validateToolInput",
+          "owner": "src/tool-input-validation.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/find-files.ts",
+      "headingOffsets": [
+        975672,
+        977929
+      ],
+      "declarations": [
+        "import_node_child_process2",
+        "import_promises3",
+        "import_node_path2",
+        "rgPath",
+        "MACOS_PROTECTED_VOLUME_GLOBS",
+        "DEFAULT_FIND_FILES_CONFIG",
+        "FindFilesError",
+        "isInsideRoot2",
+        "canonicalRoots2",
+        "resolveSafeScope",
+        "validateGlob",
+        "normalizeInput",
+        "displayPath",
+        "matchesGlob",
+        "matchesAny",
+        "matchesScopedAny",
+        "isHiddenPath",
+        "loadRootGitignore",
+        "gitignoreMatches",
+        "ripgrepCandidates",
+        "buildRipgrepArgs",
+        "toRipgrepFailure",
+        "planInvalidGlobRetry",
+        "tryFindWithRipgrep",
+        "findWithNode",
+        "findWithPreferredEngine",
+        "mapWithConcurrency",
+        "enrichFiles",
+        "normalizeError2",
+        "findFiles",
+        "formatFindFilesForModel"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DOMException",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "__dirname",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "attributeGlobFailure",
+          "owner": "src/ripgrep-diagnostics.ts"
+        },
+        {
+          "name": "canonicalizeWorkspaceRoots",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "classifyRipgrepStderr",
+          "owner": "src/ripgrep-diagnostics.ts"
+        },
+        {
+          "name": "formatGlobFailureLocation",
+          "owner": "src/ripgrep-diagnostics.ts"
+        },
+        {
+          "name": "literalFirstPathSpellings",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/ide-tool-definitions.ts",
+      "headingOffsets": [
+        1089367
+      ],
+      "declarations": [
+        "MANAGED_SHELL_DESCRIPTION",
+        "GENERIC_OUTPUT_SCHEMA",
+        "RUN_COMMAND_OUTPUT_SCHEMA",
+        "IDE_TOOL_DEFINITIONS",
+        "IDE_TOOL_NAMES",
+        "BRIDGE_EXCLUDED_TOOL_NAMES",
+        "getIdeToolDefinition"
+      ],
+      "reconstructedBindings": [
+        "MANAGED_SHELL_DESCRIPTION",
+        "GENERIC_OUTPUT_SCHEMA",
+        "RUN_COMMAND_OUTPUT_SCHEMA",
+        "IDE_TOOL_DEFINITIONS",
+        "IDE_TOOL_NAMES",
+        "BRIDGE_EXCLUDED_TOOL_NAMES",
+        "getIdeToolDefinition"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/jsonrpc-request-id-registry.ts",
+      "headingOffsets": [
+        1132243
+      ],
+      "declarations": [
+        "keyOf",
+        "requestIdOf",
+        "requestIdsOfRequest",
+        "JsonRpcRequestIdRegistry"
+      ],
+      "reconstructedBindings": [
+        "keyOf",
+        "requestIdOf",
+        "requestIdsOfRequest",
+        "JsonRpcRequestIdRegistry"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/managed-command-cancellation.ts",
+      "headingOffsets": [
+        1135558,
+        1143334
+      ],
+      "declarations": [
+        "NATIVE_MANAGED_COMMAND_OWNER_ID",
+        "DEFAULT_CANCELLATION_LIMIT",
+        "DEFAULT_CANCELLATION_WINDOW_MS",
+        "DEFAULT_FORCE_PROMPT_LIMIT",
+        "DEFAULT_FORCE_PROMPT_WINDOW_MS",
+        "DEFAULT_FORCE_PROMPT_COOLDOWN_MS",
+        "DEFAULT_FORCE_RESERVATION_TTL_MS",
+        "forceCancellationRequiresConfirmation",
+        "bridgeManagedCommandOwnerId",
+        "managedCommandNotAccessibleError",
+        "waitForCommandOrGrace",
+        "PerOwnerCancellationRateLimiter",
+        "ManagedCommandCanceller"
+      ],
+      "reconstructedBindings": [
+        "NATIVE_MANAGED_COMMAND_OWNER_ID",
+        "DEFAULT_CANCELLATION_LIMIT",
+        "DEFAULT_CANCELLATION_WINDOW_MS",
+        "DEFAULT_FORCE_PROMPT_LIMIT",
+        "DEFAULT_FORCE_PROMPT_WINDOW_MS",
+        "DEFAULT_FORCE_PROMPT_COOLDOWN_MS",
+        "DEFAULT_FORCE_RESERVATION_TTL_MS",
+        "forceCancellationRequiresConfirmation",
+        "bridgeManagedCommandOwnerId",
+        "managedCommandNotAccessibleError",
+        "waitForCommandOrGrace",
+        "PerOwnerCancellationRateLimiter",
+        "ManagedCommandCanceller"
+      ],
+      "externalReferences": [
+        {
+          "name": "classifyManagedCommandRisk",
+          "owner": "src/managed-command-risk.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/managed-command-id.ts",
+      "headingOffsets": [
+        1345139
+      ],
+      "declarations": [
+        "import_node_crypto10",
+        "MANAGED_COMMAND_ENTROPY_BYTES",
+        "MANAGED_COMMAND_ID",
+        "MANAGED_COMMAND_ID_LABEL",
+        "createManagedCommandId",
+        "normalizeManagedCommandId"
+      ],
+      "reconstructedBindings": [
+        "import_node_crypto10",
+        "MANAGED_COMMAND_ENTROPY_BYTES",
+        "MANAGED_COMMAND_ID",
+        "MANAGED_COMMAND_ID_LABEL",
+        "createManagedCommandId",
+        "normalizeManagedCommandId"
+      ],
+      "externalReferences": [
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/managed-command-retention.ts",
+      "headingOffsets": [
+        1346127
+      ],
+      "declarations": [
+        "MANAGED_COMMAND_COMPLETED_STATE_TTL_MS",
+        "MAX_COMPLETED_COMMAND_STATES_PER_OWNER",
+        "managedCommandStateIdsToPrune"
+      ],
+      "reconstructedBindings": [
+        "MANAGED_COMMAND_COMPLETED_STATE_TTL_MS",
+        "MAX_COMPLETED_COMMAND_STATES_PER_OWNER",
+        "managedCommandStateIdsToPrune"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/managed-command-risk.ts",
+      "headingOffsets": [
+        1135633
+      ],
+      "declarations": [
+        "NORMAL_RISK",
+        "highRisk",
+        "parseInvocations",
+        "executableName",
+        "stripLeadingOptions",
+        "unwrapInvocation",
+        "RELEASE_SCRIPT",
+        "ARCHIVE_SCRIPT",
+        "PACKAGE_MUTATIONS",
+        "PACKAGE_INSPECTION",
+        "classifyPackageManager",
+        "tarMutates",
+        "classifyWords",
+        "classifyManagedCommandRisk"
+      ],
+      "reconstructedBindings": [
+        "NORMAL_RISK",
+        "highRisk",
+        "parseInvocations",
+        "executableName",
+        "stripLeadingOptions",
+        "unwrapInvocation",
+        "RELEASE_SCRIPT",
+        "ARCHIVE_SCRIPT",
+        "PACKAGE_MUTATIONS",
+        "PACKAGE_INSPECTION",
+        "classifyPackageManager",
+        "tarMutates",
+        "classifyWords",
+        "classifyManagedCommandRisk"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/managed-terminal-lifecycle.ts",
+      "headingOffsets": [
+        1347137
+      ],
+      "declarations": [
+        "MANAGED_TERMINAL_IDLE_TIMEOUT_MS",
+        "managedTerminalIdleDelay",
+        "isManagedTerminalIdleExpired"
+      ],
+      "reconstructedBindings": [
+        "MANAGED_TERMINAL_IDLE_TIMEOUT_MS",
+        "managedTerminalIdleDelay",
+        "isManagedTerminalIdleExpired"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/mcp-protocol.ts",
+      "headingOffsets": [
+        1126310
+      ],
+      "declarations": [
+        "MODERN_ERA_MIN_VERSION",
+        "MODERN_PROTOCOL_VERSION",
+        "LEGACY_PROTOCOL_VERSIONS",
+        "NEGOTIABLE_LATEST_PROTOCOL_VERSION",
+        "NEGOTIABLE_PROTOCOL_VERSIONS",
+        "classifyProtocolEra",
+        "SUPPORTS_STATELESS_TRANSPORT",
+        "PROTOCOL_TRANSPORT_MODE",
+        "describeProtocolSupport"
+      ],
+      "reconstructedBindings": [
+        "MODERN_ERA_MIN_VERSION",
+        "MODERN_PROTOCOL_VERSION",
+        "LEGACY_PROTOCOL_VERSIONS",
+        "NEGOTIABLE_LATEST_PROTOCOL_VERSION",
+        "NEGOTIABLE_PROTOCOL_VERSIONS",
+        "classifyProtocolEra",
+        "SUPPORTS_STATELESS_TRANSPORT",
+        "PROTOCOL_TRANSPORT_MODE",
+        "describeProtocolSupport"
+      ],
+      "externalReferences": [
+        {
+          "name": "SUPPORTED_PROTOCOL_VERSIONS",
+          "owner": "snapshot-sdk-versions"
+        }
+      ]
+    },
+    {
+      "label": "src/read-files.ts",
+      "headingOffsets": [
+        998322
+      ],
+      "declarations": [
+        "import_node_crypto4",
+        "import_node_fs",
+        "import_promises4",
+        "import_node_path3",
+        "DEFAULT_READ_FILES_CONFIG",
+        "ReadToolError",
+        "estimateTokens",
+        "validateRange",
+        "isInsideRoot3",
+        "resolveSafePath",
+        "appearsBinary",
+        "readTextRange",
+        "normalizeError3",
+        "readSingleFile",
+        "mapWithConcurrency2",
+        "applyBatchBudget",
+        "readFiles",
+        "formatReadFilesForModel"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DOMException",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "TextDecoder",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "canonicalizeWorkspaceRoots",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "literalFirstPathSpellings",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/read-image.ts",
+      "headingOffsets": [
+        1013331
+      ],
+      "declarations": [
+        "import_promises5",
+        "import_node_path4",
+        "DEFAULT_READ_IMAGE_CONFIG",
+        "ReadImageToolError",
+        "gcd",
+        "formatAspectRatio",
+        "formatBytes",
+        "isInsideRoot4",
+        "resolveSafePath2",
+        "parsePngDimensions",
+        "parseGifDimensions",
+        "parseBmpDimensions",
+        "parseJpegDimensions",
+        "parseWebPDimensions",
+        "parseSvgDimensions",
+        "parseIcoDimensions",
+        "detectImageFormat",
+        "normalizeError4",
+        "readImage",
+        "formatReadImageForModel"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DOMException",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    },
+    {
+      "label": "src/ripgrep-diagnostics.ts",
+      "headingOffsets": [
+        976109
+      ],
+      "declarations": [
+        "INVALID_REGEX_SIGNATURE",
+        "INVALID_GLOB_SIGNATURE",
+        "classifyRipgrepStderr",
+        "globErrorEchoBodies",
+        "attributeGlobFailure",
+        "echoedNeedleHit",
+        "formatGlobFailureLocation"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": []
+    },
+    {
+      "label": "src/search-files.ts",
+      "headingOffsets": [
+        1026020
+      ],
+      "declarations": [
+        "import_node_child_process3",
+        "import_promises6",
+        "import_node_path5",
+        "MACOS_PROTECTED_VOLUME_GLOBS2",
+        "DEFAULT_SEARCH_FILES_CONFIG",
+        "SearchToolError",
+        "estimateTokens2",
+        "isInsideRoot5",
+        "canonicalRoots3",
+        "resolveSafeScope2",
+        "boundedInteger",
+        "smartCaseSensitive",
+        "normalizeInput2",
+        "displayPath2",
+        "matchesAnyGlob",
+        "shouldIncludePath",
+        "appearsBinary2",
+        "loadRootGitignore2",
+        "gitignorePatternMatches",
+        "ignoredByRootGitignore",
+        "compileFallbackMatcher",
+        "collectCandidateFiles",
+        "searchWithNode",
+        "ripgrepCandidates2",
+        "buildRipgrepArgs2",
+        "toSearchRipgrepFailure",
+        "trySearchWithRipgrep",
+        "searchWithPreferredEngine",
+        "truncateLine",
+        "addContext",
+        "serializedMatchSize",
+        "applyOutputBudget",
+        "normalizeError5",
+        "searchFiles",
+        "formatSearchFilesForModel"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "DOMException",
+          "owner": "UNRESOLVED"
+        },
+        {
+          "name": "__toESM",
+          "owner": "<prelude>"
+        },
+        {
+          "name": "attributeGlobFailure",
+          "owner": "src/ripgrep-diagnostics.ts"
+        },
+        {
+          "name": "canonicalizeWorkspaceRoots",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "classifyRipgrepStderr",
+          "owner": "src/ripgrep-diagnostics.ts"
+        },
+        {
+          "name": "formatGlobFailureLocation",
+          "owner": "src/ripgrep-diagnostics.ts"
+        },
+        {
+          "name": "literalFirstPathSpellings",
+          "owner": "src/workspace-paths.ts"
+        },
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        },
+        {
+          "name": "rgPath",
+          "owner": "src/find-files.ts"
+        }
+      ]
+    },
+    {
+      "label": "src/tool-input-validation.ts",
+      "headingOffsets": [
+        1054317
+      ],
+      "declarations": [
+        "schemaObject",
+        "valueType",
+        "sameJsonValue2",
+        "fail",
+        "validateType",
+        "validateSchema",
+        "validateToolInput"
+      ],
+      "reconstructedBindings": [
+        "schemaObject",
+        "valueType",
+        "sameJsonValue2",
+        "fail",
+        "validateType",
+        "validateSchema",
+        "validateToolInput"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/version.ts",
+      "headingOffsets": [
+        1125600
+      ],
+      "declarations": [
+        "SHUNCODE_BEHAVIOR_VERSION"
+      ],
+      "reconstructedBindings": [
+        "SHUNCODE_BEHAVIOR_VERSION"
+      ],
+      "externalReferences": []
+    },
+    {
+      "label": "src/workspace-paths.ts",
+      "headingOffsets": [
+        939192
+      ],
+      "declarations": [
+        "import_promises",
+        "STALE_ROOT_CODES",
+        "canonicalizeWorkspaceRoots",
+        "literalFirstPathSpellings"
+      ],
+      "reconstructedBindings": [],
+      "externalReferences": [
+        {
+          "name": "require",
+          "owner": "Node/CJS loader"
+        }
+      ]
+    }
+  ],
+  "moduleCount": 24,
+  "declarationCount": 130,
+  "totalBytes": 96503,
+  "transformations": [
+    "Dependency closure rooted at explicit reviewed exports",
+    "Removed per-module build-info initializer calls; extracted original metadata into an explicit dependency",
+    "Replaced static Node require/interop imports with Node ESM namespaces",
+    "Added ESM imports/exports; no original TS types reconstructed",
+    "Refused unresolved bindings, third-party executable module dependencies and cyclic initialization"
+  ]
+}

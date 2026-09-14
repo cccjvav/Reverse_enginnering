@@ -179,3 +179,40 @@ python3 tools/audit_recovered_extension.py
 - 自动更新工具做版本/哈希检查、备份、失败回滚，生成约 467 KB 的实验包，不重复传递 241 MB 安装器。
 
 原商业后台尚未关闭，历史付款/退款未处理；这部分不可能仅通过修改客户端完成。Windows 实机端到端测试仍待完成。
+
+
+## 08 — 从 bundle 声明恢复独立模块，而不是把切片当源码工程
+
+### 观察与方法修正
+
+同一 `src/*.ts` 标签经常分为两段：前段只有 `init_define_SHUNCODE_BUILD_INFO()`，真正的函数/类在依赖后面。早期 `.work/shared-review/` 正则切片只用于阅读，没有作为交付或原始 TS。随后使用 Acorn 的真实注释和顶层 AST 声明定位来源，固定 `eslint-scope@9.1.2` 做词法自由变量分析。
+
+```bash
+npm install --save-dev --save-exact eslint-scope@9.1.2 --ignore-scripts --no-audit --no-fund
+npm run build:bridge-core
+npm run check:bridge-core
+npm test
+python3 -m unittest discover -s tests -q
+python3 tools/audit_recovered_extension.py
+```
+
+`tools/reconstruct_bridge_core.mjs` 先核对原 bundle 哈希，从明确选择的工具/路由/状态导出出发，递归找每个自由变量所属的声明。无法定位、进入第三方可执行代码、声明跨来源标签或形成 ESM 初始化环时直接报错，而不是填空函数骗过编译。它不会运行原扩展 bundle。
+
+### 重建结果与诚实边界
+
+- 生成 `reconstructed/bridge-core/src/`：**24 模块、130 声明、96,503 字节**；21 个自有标签的已发布顶层声明齐全，1 个工具注册表为子集，另外 2 个文件是原构建/SDK 常量快照。
+- 新增 ESM 连线，把 Node 内建模块的静态 require 改接为 namespace import；函数/类体原样保留。原构建初始化调用被显式元数据依赖取代。来源证据逐声明记录位置/哈希，额外记录生成文件哈希和依赖。
+- 只在本 bundle 内索引 38 个共享标签；历史 43 是三份 bundle 合并，二者口径不同。
+- 原 `getBuildInfo()` 仍返回原发行构建身份；不把 `release=true` 冒充新重建工程的发行状态。
+- 恢复了 5 个文件工具和 8 个 IDE 工具的目录，`wait` 仍排除在 Bridge 外。文件注册表没有执行器，路径/符号链接安全还需下一组依赖，参数解析成功不等于允许访问该路径。
+- 后续维护修改单独放 `community/`；生成器拒绝覆盖已经手工修改的重建文件。为 Windows checkout 增加原件/重建/社区文件的字节保留规则，避免自动换行破坏来源哈希。
+
+### 行为测试与发现的问题
+
+本地 **40 项 Node 测试通过**（原社区 14 + 新核心 26），包括临时回环 HTTP 的令牌/方法/会话头/SSE/请求体检查、请求 ID 冲突、事件流隔离、活动会话保留、命令归属与强制取消的主机确认、工具输入，以及全部模块加载。另将**审查过的声明闭包**在隔离 VM 中执行，与重建 ESM 的确定性解析结果逐例对照；VM 不被宣称为安全沙箱，未执行整个扩展或安装器。
+
+原并发器动态降上限的疑点已复现：2 个运行任务、1 个排队任务，把上限改为 1 后首次归还仍会放入排队任务。原貌层保留它，用明确标注的行为刻画测试记录；独立 `community/bridge-core/concurrency.mjs` 只增加 `current < max` 放行条件，并测试不撤销在途任务、排队取消和重复归还。该修复候选**没有纳入已有 overlay ZIP**。
+
+23 项 Python 回归测试也通过；原件审计仍为 34 个源码文件、原始哈希一致、32 处相对导入未解决。另起一个包不等于这些原 TS 导入已接通。
+
+Windows/Linux CI 使用 `bridge-core-tests.yml`，只拉文本证据，不下载 LFS 安装器、不运行 GUI。远端结果记录在 [bridge-core-tests.json](evidence/bridge-core-tests.json)；不把 Windows Node 测试称为 Windows 应用验收。

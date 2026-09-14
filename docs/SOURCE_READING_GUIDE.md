@@ -57,3 +57,14 @@
 - 未做：完整 TS 编译、恢复代码单元测试、扩展激活、Windows 实机启动、整套应用打包。
 
 不要把“文件存在”“语法通过”“能编译”“功能正常”当成同一个验收标准。
+
+
+## 新增阅读路径：独立 Bridge 核心重建层
+
+先读 [`reconstructed/bridge-core/README.md`](../reconstructed/bridge-core/README.md)。建议按 `bridge-http-router → bridge-session-registry → jsonrpc-request-id-registry → bridge-event-store` 理解传输与状态，再看 `file-tool-input-compat → tool-input-validation → file-tool-registry`。最后阅读 `managed-command-cancellation` 中的会话归属和本地主机确认，不要把这些保护当成收费功能删掉。
+
+对应 [`provenance.json`](../reconstructed/bridge-core/provenance.json) 的 `start/end` 可定位到原 bundle 的 UTF-16 字符位置；不是文件字节偏移。`sourceLabelIndex` 同时列出尚未重建的模块声明和外部引用。当前 bundle 有 38 个共享标签，三份 bundle 合并原统计为 43。
+
+同一个 `// src/xxx.ts` 可能出现两次，第一次只有构建信息初始化。不能用正则截第一段就声称模块完整；新工具从真实注释定位来源，再使用 AST 顶层声明和词法自由变量分析建立依赖闭包。
+
+`file-tool-registry` 特别标注为部分重建，没有文件执行器。校验器也不是完整 JSON Schema 实现，更不能代替工作区安全检查。原貌层保留原行为；修复候选见 [`community/bridge-core`](../community/bridge-core/README.md)。

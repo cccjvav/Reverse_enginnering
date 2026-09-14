@@ -105,3 +105,12 @@ GitHub Actions 运行 `34849979254` 成功完成，报告由机器人提交 `69c
 - 真实包 8 个目标文件校验通过，三个合成 JS 语法检查通过（运行 34855446553）。
 - 仍未完成完整源码重编译或 Windows 实机功能验收；旧商户后台与历史订单另需运营下线处理。
 - 详见 `COMMUNITY_MIGRATION.md` 与 `community/README.md`。
+
+
+## 2026-09-14：共享核心第一组可执行重建
+
+完成从扩展主 bundle 到 24 个 ESM JavaScript 文件的可重复重建：22 个自有标签（21 个标签的已发布顶层声明齐全、1 个工具注册表为子集），加 2 个快照元数据模块。不是原始 TypeScript 工程。来源、缺口、依赖和复现命令见 [模块说明](../reconstructed/bridge-core/README.md)。
+
+本地 40 项 Node 与 23 项 Python 测试通过。新增 Windows/Linux Node CI，不运行安装器或完整扩展；远端状态另见 [测试证据](evidence/bridge-core-tests.json)。原始文件哈希仍一致，原来源树的 32 处未解析相对导入不会因另建 ESM 包而自动消失。
+
+后续顺序：补齐 `workspace-paths` 与实际文件读写/搜索/补丁执行依赖；针对越界路径、符号链接、并发写入和版本冲突补测试；然后接回扩展 TS 入口、宿主声明和构建配置。完整 Windows 安装器与 GUI 验收仍是后续阶段。
