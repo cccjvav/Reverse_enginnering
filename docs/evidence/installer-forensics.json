@@ -1,0 +1,118 @@
+{
+  "file": "ShunCode-0.7.4-win32-x64-Setup.exe",
+  "size": 240559253,
+  "sha256": "fdc2328b2520a128fd3449ed2015a7383e2b7dafaae05c3892d5a4c11a671272",
+  "markers": [
+    {
+      "kind": "inno",
+      "matches": [
+        {
+          "offset": 698348,
+          "signature": "Inno Setup Setup Data (6.4.0.1)"
+        },
+        {
+          "offset": 238601591,
+          "signature": "Inno Setup Setup Data (6.4.0.1)"
+        }
+      ]
+    }
+  ],
+  "scope": "Static parsing only. Installer code is never executed.",
+  "pe": {
+    "machine_hex": "0x14c",
+    "timestamp_raw": 1739339596,
+    "sections": [
+      {
+        "name": ".text",
+        "raw_size": 677888,
+        "raw_offset": 1024
+      },
+      {
+        "name": ".itext",
+        "raw_size": 6144,
+        "raw_offset": 678912
+      },
+      {
+        "name": ".data",
+        "raw_size": 14848,
+        "raw_offset": 685056
+      },
+      {
+        "name": ".bss",
+        "raw_size": 0,
+        "raw_offset": 0
+      },
+      {
+        "name": ".idata",
+        "raw_size": 4096,
+        "raw_offset": 699904
+      },
+      {
+        "name": ".didata",
+        "raw_size": 512,
+        "raw_offset": 704000
+      },
+      {
+        "name": ".edata",
+        "raw_size": 512,
+        "raw_offset": 704512
+      },
+      {
+        "name": ".tls",
+        "raw_size": 0,
+        "raw_offset": 0
+      },
+      {
+        "name": ".rdata",
+        "raw_size": 512,
+        "raw_offset": 705024
+      },
+      {
+        "name": ".reloc",
+        "raw_size": 69120,
+        "raw_offset": 705536
+      },
+      {
+        "name": ".rsrc",
+        "raw_size": 157696,
+        "raw_offset": 774656
+      }
+    ],
+    "section_data_end": 932352,
+    "bytes_after_sections": 239626901,
+    "note": "Installer stub architecture is not necessarily the application architecture; trailing bytes may include certificates."
+  },
+  "seven_zip": {
+    "command": [
+      "7z",
+      "l",
+      "-slt",
+      "ShunCode-0.7.4-win32-x64-Setup.exe"
+    ],
+    "exit_code": 2,
+    "log_bytes": 478,
+    "log_head": "\n7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20\n 64-bit locale=C.UTF-8 Threads:4 OPEN_MAX:65536\n\nScanning the drive for archives:\n1 file, 240559253 bytes (230 MiB)\n\nListing archive: ShunCode-0.7.4-win32-x64-Setup.exe\n\n\nERROR: ShunCode-0.7.4-win32-x64-Setup.exe : Cannot open the file as archive\n\n\n\nErrors: 1\n",
+    "log_truncated": false
+  },
+  "innoextract_version": {
+    "command": [
+      "innoextract",
+      "--version"
+    ],
+    "exit_code": 0,
+    "log_bytes": 74,
+    "log_head": "innoextract 1.9\nExtracts installers created by Inno Setup 1.2.10 to 6.0.5\n",
+    "log_truncated": false
+  },
+  "innoextract_list": {
+    "command": [
+      "innoextract",
+      "--list",
+      "ShunCode-0.7.4-win32-x64-Setup.exe"
+    ],
+    "exit_code": 2,
+    "log_bytes": 469,
+    "log_head": "Warning: Unexpected setup data version: 6.4.0.1\nWarning: Unexpected Style value: 77\nWarning: Unexpected Uninstall Log Mode value: 18\nWarning: Unexpected Auto Boolean value: 3\nStream error while parsing setup headers!\n ├─ detected setup version: 6.4.0.1\n └─ error reason: basic_ios::clear: iostream error\nIf you are sure the setup file is not corrupted, consider \nfiling a bug report at https://innoextract.constexpr.org/issues\nDone with 1 error and 4 warnings.\n",
+    "log_truncated": false
+  }
+}
