@@ -1,6 +1,58 @@
 {
   "scope": "Validation against statically extracted Windows 0.7.4 files. JS parsed only; no Windows GUI, extension activation or live MCP tests.",
-  "success": false,
-  "files": [],
-  "error": "Expected exactly one custom UI class in sessions.desktop.main.js"
+  "success": true,
+  "files": [
+    {
+      "path": "resources/app/extensions/shuncode/dist/extension.js",
+      "originalSha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+      "sha256": "9435f0db52696c892fbd67ec54f183a90b97cb23940bcba85ba9e83c222c8f29",
+      "size": 1633343,
+      "syntax_exit_code": 0
+    },
+    {
+      "path": "resources/app/extensions/shuncode/package.json",
+      "originalSha256": "ad0a5b107caa5fa9f332202d3e4b5732b16d8ec8395a6078545658123beffb9a",
+      "sha256": "eb030b5eb56b54953c53b2c352a0d992a93dd983aafe6fbf19773768e406a2e2",
+      "size": 35691
+    },
+    {
+      "path": "resources/app/extensions/shuncode/src/bridge-license-service.ts",
+      "originalSha256": "b59d05a515dea760bb6d6ecb1de169e65f312c85b91830817664dab38c45b23c",
+      "sha256": "30ed09b966c8addd6e55746ccf40fe988befaebc427b30f7084af448f6be0ed8",
+      "size": 3637
+    },
+    {
+      "path": "resources/app/extensions/shuncode/src/bridge-access-controller.ts",
+      "originalSha256": "eedc3cc7569c5e1661290a36731c8452a641b7ba13ef3a2a15a3237da08e4789",
+      "sha256": "3f5360261ac48e4df93be078ed15aa2836433ac4ae4b9e4b8a8cfac7e1a790e8",
+      "size": 1911
+    },
+    {
+      "path": "resources/app/extensions/shuncode/src/bridge-license-config.ts",
+      "originalSha256": "d410fab21d2e7675dc5f340605d04eaddd03e9f5d562dbfd7c9bd7077e67758f",
+      "sha256": "a7a0f04e4d35d99179c75f6e494aff6ca550218ee27a7c801abd99554f5cadda",
+      "size": 93
+    },
+    {
+      "path": "resources/app/extensions/shuncode/src/extension.ts",
+      "originalSha256": "536a0437541d893b2dc275fbca450521770eace96e864bf061ecc00d89b94eca",
+      "sha256": "233be1b542fd626173bb09e6de04490f3055d29054944256645851da644ba9a5",
+      "size": 26677
+    },
+    {
+      "path": "resources/app/out/vs/workbench/workbench.desktop.main.js",
+      "originalSha256": "c10a82c4aabcbd84ae4038a251d5f2c8d903c5fdb1c929c77a136ca4f56135a5",
+      "sha256": "828d7588a35c31cd8da65d5eee5042a96ba3d14bc4e89f061d48642663f07c92",
+      "size": 36758728,
+      "syntax_exit_code": 0
+    },
+    {
+      "path": "resources/app/out/vs/sessions/sessions.desktop.main.js",
+      "originalSha256": "d8bda871b371f188b49ca2068daa4e29a4033914e22a3e2c7dd31a993bb9f6bb",
+      "sha256": "b7f0d608a80e57a9f3b2a495c03616361f2161a3fc4b0d56216d6f30b9cde069",
+      "size": 36769174,
+      "syntax_exit_code": 0
+    }
+  ],
+  "overlayManifestSha256": "a543ed8a63f6a2fdcb3a23d8dfbc19573eb1e4041022a795e109d04633096c52"
 }

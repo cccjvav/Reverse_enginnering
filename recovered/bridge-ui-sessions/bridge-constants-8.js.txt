@@ -1,0 +1,1 @@
+BRIDGE_LICENSE_SIGN_IN_GITEE = "shuncode.bridge.license.signInWithGitee"

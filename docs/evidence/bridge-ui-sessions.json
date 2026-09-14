@@ -1,0 +1,228 @@
+{
+  "origin": "out/vs/sessions/sessions.desktop.main.js",
+  "sha256": "d8bda871b371f188b49ca2068daa4e29a4033914e22a3e2c7dd31a993bb9f6bb",
+  "scope": "Compiled custom UI class excerpts, not original TypeScript; offsets are UTF-16 JavaScript string positions.",
+  "constant_bindings": [
+    "BRIDGE_PAYMENT_GET_ORDER",
+    "BRIDGE_PAYMENT_CREATE_ORDER",
+    "BRIDGE_PAYMENT_GET_PLANS",
+    "BRIDGE_LICENSE_REDEEM",
+    "BRIDGE_LICENSE_SIGN_OUT",
+    "BRIDGE_LICENSE_REFRESH",
+    "BRIDGE_LICENSE_REFRESH_SESSION",
+    "BRIDGE_LICENSE_SIGN_IN_GITEE",
+    "BRIDGE_LICENSE_SIGN_IN",
+    "BRIDGE_ACCESS_GET_STATUS"
+  ],
+  "constants": [
+    {
+      "file": "bridge-constants-1.js.txt",
+      "name": "BRIDGE_PAYMENT_GET_ORDER",
+      "start": 24108486,
+      "end": 24108547,
+      "sha256": "a2d0b6c32266c5a2d3b32b0d93940227b6296542363fb725e049540f3613be0d"
+    },
+    {
+      "file": "bridge-constants-2.js.txt",
+      "name": "BRIDGE_PAYMENT_CREATE_ORDER",
+      "start": 24108413,
+      "end": 24108480,
+      "sha256": "3828b40e6e8db3f2b764f7dec27fb862c40f43d09c49f3cdd39086e10871f79d"
+    },
+    {
+      "file": "bridge-constants-3.js.txt",
+      "name": "BRIDGE_PAYMENT_GET_PLANS",
+      "start": 24108346,
+      "end": 24108407,
+      "sha256": "6b1335df76ed0579d7422fb403abb1d013e95711a9815171b7ba191e4c6ced7b"
+    },
+    {
+      "file": "bridge-constants-4.js.txt",
+      "name": "BRIDGE_LICENSE_REDEEM",
+      "start": 24108284,
+      "end": 24108340,
+      "sha256": "bc4d2bbe4eadd8bdf2462dc1117ec87bc7ba524b05f55670cd899f3ea51a073f"
+    },
+    {
+      "file": "bridge-constants-5.js.txt",
+      "name": "BRIDGE_LICENSE_SIGN_OUT",
+      "start": 24108219,
+      "end": 24108278,
+      "sha256": "bf7b1074a04606dff43171fb75b8744b1944472909f2a5fa14210863b1833714"
+    },
+    {
+      "file": "bridge-constants-6.js.txt",
+      "name": "BRIDGE_LICENSE_REFRESH",
+      "start": 24108155,
+      "end": 24108213,
+      "sha256": "93627f05f4a651203fbbfc3730905d2a4f02ceccbf47aa3b6067da075bd8deed"
+    },
+    {
+      "file": "bridge-constants-7.js.txt",
+      "name": "BRIDGE_LICENSE_REFRESH_SESSION",
+      "start": 24108076,
+      "end": 24108149,
+      "sha256": "5f29468c6f5c5a4cca3ba4a9123557dbee40ec30c6713685e667351010ab8cf9"
+    },
+    {
+      "file": "bridge-constants-8.js.txt",
+      "name": "BRIDGE_LICENSE_SIGN_IN_GITEE",
+      "start": 24107998,
+      "end": 24108070,
+      "sha256": "18ebb7244f38a2737928da9fad354b4f72421d817cbf19c32882cca422348419"
+    },
+    {
+      "file": "bridge-constants-9.js.txt",
+      "name": "BRIDGE_LICENSE_SIGN_IN",
+      "start": 24107935,
+      "end": 24107992,
+      "sha256": "418af438ac569160e0f54912edb3da1ca58c5c4b76b5ac1963aaa5e3c475cd24"
+    },
+    {
+      "file": "bridge-constants-10.js.txt",
+      "name": "BRIDGE_ACCESS_GET_STATUS",
+      "start": 24107868,
+      "end": 24107929,
+      "sha256": "c9ac6e55b53c404aaf59ff46ae599d2b1ac32f308575c790c572a797eb6a8b35"
+    }
+  ],
+  "classes": [
+    {
+      "file": "bridge-ui-1.js.txt",
+      "start": 24109641,
+      "end": 24232607,
+      "size": 122966,
+      "sha256": "c47df110f769739b285ed48e94109374b56d25679473c58e07026e710819b888",
+      "methods": [
+        "constructor",
+        "createField",
+        "createTunnelProviderChoice",
+        "createProviderShortcutActions",
+        "installAndCheckCloudflared",
+        "revealNgrokSetup",
+        "selectTunnelProvider",
+        "createCloudflareSetupSection",
+        "createCloudflareNamedSetupSection",
+        "createNgrokSetupSection",
+        "createSetupStep",
+        "persistDomain",
+        "updateNamedTunnelOriginPreview",
+        "saveNamedTunnel",
+        "clearNamedTunnelToken",
+        "toggleBridge",
+        "installCloudflared",
+        "signOut",
+        "createPayment",
+        "redeemActivationCode",
+        "resolveArenaPrompt",
+        "copyArenaPrompt",
+        "copyText",
+        "showCopyToast",
+        "resetMcpAddress",
+        "runCommand",
+        "refreshAccessAndPlans",
+        "fetchPaymentPlans",
+        "runAccessCommand",
+        "refresh",
+        "renderAccess",
+        "errorDetailText",
+        "render",
+        "renderPersistentModeToggle",
+        "readWorkspaceScope",
+        "renderWorkspaceScopeButton",
+        "toggleWorkspaceScope",
+        "readWindowRestore",
+        "renderWindowRestoreButton",
+        "toggleWindowRestore",
+        "renderLocalError",
+        "renderAccessError",
+        "accessAccountLabel",
+        "updateControls",
+        "focus",
+        "renderCustomTools",
+        "renderSkillsCard",
+        "renderCustomToolRow",
+        "appendRowButton",
+        "findSkillDiagnosis",
+        "openSkillFolder",
+        "diagnoseSkillRow",
+        "regenerateSkillEntry",
+        "revealSkillsCard",
+        "locateSkillRow",
+        "skillsEnabled",
+        "renderSkillsToggle",
+        "refreshCustomTools",
+        "toggleSkillsEnabled",
+        "importSkill",
+        "fetchSkillDiagnoses",
+        "showImportDiagnosis",
+        "diagnoseSkills",
+        "toggleCustomTool",
+        "deleteCustomTool",
+        "showSkillDiagnosisDialog",
+        "skillDiagnosisGuidance",
+        "showMultiSkillDiagnosisDialog",
+        "generateAllRunners",
+        "generateRunnerAndRecheck",
+        "recheckSkillLoaded",
+        "openCustomToolPath",
+        "runningSuffix",
+        "readQuickLinks",
+        "isValidQuickLinkUrl",
+        "renderQuickLinkButtons",
+        "renderQuickLinksList",
+        "addQuickLink",
+        "removeQuickLink",
+        "restoreQuickLinksDefaults",
+        "saveCopyPromptText",
+        "resetCopyPromptText",
+        "renderCopyPromptMessage",
+        "renderQuickLinkMessage",
+        "dispose"
+      ],
+      "commands": []
+    }
+  ],
+  "unmatched": [
+    {
+      "command": "shuncode.bridge.access.getStatus",
+      "offset": 24107896
+    },
+    {
+      "command": "shuncode.bridge.license.signIn",
+      "offset": 24107961
+    },
+    {
+      "command": "shuncode.bridge.license.signInWithGitee",
+      "offset": 24108030
+    },
+    {
+      "command": "shuncode.bridge.license.refreshSession",
+      "offset": 24108110
+    },
+    {
+      "command": "shuncode.bridge.license.refresh",
+      "offset": 24108181
+    },
+    {
+      "command": "shuncode.bridge.license.signOut",
+      "offset": 24108246
+    },
+    {
+      "command": "shuncode.bridge.license.redeem",
+      "offset": 24108309
+    },
+    {
+      "command": "shuncode.bridge.payment.getPlans",
+      "offset": 24108374
+    },
+    {
+      "command": "shuncode.bridge.payment.createOrder",
+      "offset": 24108444
+    },
+    {
+      "command": "shuncode.bridge.payment.getOrder",
+      "offset": 24108514
+    }
+  ]
+}

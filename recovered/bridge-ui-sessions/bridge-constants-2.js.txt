@@ -1,0 +1,1 @@
+BRIDGE_PAYMENT_CREATE_ORDER = "shuncode.bridge.payment.createOrder"
