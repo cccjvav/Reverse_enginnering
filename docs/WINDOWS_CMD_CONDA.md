@@ -179,3 +179,12 @@ call apply-community.cmd --app-dir "C:\Test\ShunCode"
 | 直接双击仍用了其他Python | Explorer没有继承已激活CMD环境 | 从同一个CMD运行新版启动器，不要求改用Anaconda Prompt |
 
 `conda deactivate` 只退出当前环境，不删除它。此流程不需要 `venv`、`virtualenv` 或 PowerShell执行策略更改。
+
+
+## 9. 本轮实际验证记录
+
+[CI运行34875639178](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178) 已通过，测试提交 `ab17a9398f1f29027450341ae324a47b0e38c746`。Windows2022的独立作业使用 `cmd /C CALL {0}`，创建本页声明的conda环境，在CMD显式激活，再跑环境检查、完整学习入口和更新器 `--help`；另有Windows/Linux Node回归作业通过。
+
+本地Linux有90项Node通过、34项Python中31通过且3项真实CMD测试跳过；这3项在Windows作业中启用，作业通过。远端证据取得的是GitHub作业/步骤API状态，完整日志下载遇到EOF，未伪造逐项日志。setup阶段有弃用及一次环境尚不存在的提示，最终环境创建和显式激活检查成功；这些提示记录在证据中，不把它们隐瞒为“零警告”。
+
+详见 [验证证据](evidence/cmd-conda-validation.json)。此结果证明这套CMD工具链流程能在该Windows runner工作，**不是已在你的电脑、ShunCode图形界面、真实MCP客户端或完整安装器上验收**。

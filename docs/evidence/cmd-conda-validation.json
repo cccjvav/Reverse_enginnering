@@ -20,8 +20,221 @@
     "originalExtensionFilesVerified": 51
   },
   "windowsCmdCondaCI": {
-    "status": "pending",
-    "note": "Do not claim real Windows CMD/conda acceptance before this job succeeds."
+    "status": "success",
+    "runId": 34875639178,
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178",
+    "testedCommit": "ab17a9398f1f29027450341ae324a47b0e38c746",
+    "jobs": [
+      {
+        "completedAt": "2026-09-14T17:37:27Z",
+        "conclusion": "success",
+        "databaseId": 104082013079,
+        "name": "core (ubuntu-24.04)",
+        "startedAt": "2026-09-14T17:35:09Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178/job/104082013079"
+      },
+      {
+        "completedAt": "2026-09-14T17:37:27Z",
+        "conclusion": "success",
+        "databaseId": 104082013316,
+        "name": "core (windows-2022)",
+        "startedAt": "2026-09-14T17:35:09Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "skipped",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178/job/104082013316"
+      },
+      {
+        "completedAt": "2026-09-14T17:37:27Z",
+        "conclusion": "success",
+        "databaseId": 104082013565,
+        "name": "windows-cmd-conda",
+        "startedAt": "2026-09-14T17:35:09Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence only",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Create the declared conda environment using Miniforge",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run real CMD and conda checks, not an application GUI",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Create the declared conda environment using Miniforge",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence only",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 9,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178/job/104082013565"
+      }
+    ],
+    "evidenceSource": "GitHub run/job/step API conclusions; full Windows job log download failed with EOF. No claim of having retrieved per-test remote logs.",
+    "executedScope": "Windows-2022 CMD shell, declared conda environment creation, explicit activation, environment doctor, learning runner (Node and Python suites), and updater --help. Three Windows-only launcher/runner fixtures are enabled on this platform.",
+    "notTested": [
+      "Windows GUI interaction",
+      "Real MCP client and full extension activation",
+      "Full source/installer build",
+      "User machine configuration"
+    ],
+    "warningsObserved": [
+      "Pinned Node20 action runtimes forced to Node24 by GitHub",
+      "auto-activate-base and nodefaults action configuration deprecation warnings",
+      "Conda package script execution trust warning",
+      "Setup reported EnvironmentNameNotFound once; final creation and explicit CMD activation/check step succeeded. Full setup log unavailable, so exact intermediate cause is not asserted."
+    ]
   },
   "packageComparison": {
     "old": {

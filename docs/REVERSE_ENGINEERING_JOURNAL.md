@@ -380,3 +380,14 @@ python3 -m unittest discover -s tests -q
 新版467406字节，SHA256为6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa。manifest仍为a543ed8a63f6a2fdcb3a23d8dfbc19573eb1e4041022a795e109d04633096c52；沿用34855446553对相同应用内容的真实原包验证，不谎称本轮又下载/运行安装器。旧历史证据保留旧ZIP哈希，当前用户下载页更新新哈希。
 
 详见 `docs/evidence/cmd-conda-validation.json`。推送前Windows CMD+conda CI状态仍pending，必须等真实作业后另记结果。此次没有部署读/写竞态候选，没有完成完整源码整合、安装器、GUI或远端支付服务下线；已应用旧社区补丁的人无需因为启动器变化重打补丁。
+
+
+### 13 跨平台实际结果与日志边界
+
+代码提交ab17a9398f1f29027450341ae324a47b0e38c746已推送。运行 [34875639178](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178) 成功，三个作业全部通过：Ubuntu24.04核心、Windows2022核心、独立Windows CMD+conda。后者作业104082013565创建环境、执行普通CMD显式激活、检查器、完整学习入口和更新器--help均成功；3个Windows专属夹具在该平台启用，不再采用Linux跳过结果冒充验证。
+
+gh run watch --exit-status返回0；gh run view的JSON作业/步骤状态已纳入cmd-conda-validation.json。尝试下载该Windows作业完整日志仍发生EOF，因此只主张已获取API级步骤证据，不伪造逐项远端测试输出或实际解析后的精确包版本列表。
+
+CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/nodefaults配置弃用、conda包脚本信任提示；setup中还报告一次EnvironmentNameNotFound，随后环境创建与显式CMD激活/总检查步骤均成功。完整setup日志未取得，不更具体断言中间提示原因。这不是需要用户改用Anaconda Prompt的理由，也不需要关闭SSL或安全软件。
+
+当前能交付的是经过该Windows runner验证的CMD/conda工具链、改进分发启动器、271行实质教学及保留应用内容的ZIP；完整项目、全项目逐行教程和Windows GUI/安装器仍未完成。
