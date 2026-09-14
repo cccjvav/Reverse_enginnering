@@ -1,0 +1,1744 @@
+{
+  "scope": "Paths, package placement and real AST comments support feature separation, not exclusive authorship or complete Code OSS modification discovery.",
+  "files": [
+    {
+      "path": "agents/shuncode-ask.agent.md",
+      "bytes": 795,
+      "sha256": "71e3aa01b829972e970dd71390041d25b45be9bf1e94ab3d3d80e6d94e82528a",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "agents/shuncode-code.agent.md",
+      "bytes": 575,
+      "sha256": "2d0eda547f82297dfeb1a6902bb48a484543b64aa34687a3fc7c472a5582569e",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "agents/shuncode-plan.agent.md",
+      "bytes": 683,
+      "sha256": "226adcc38621410667e3aff75dd173a857c4819ae3c357c2129770bd885222b0",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "dist/extension.js",
+      "bytes": 1670771,
+      "sha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "dist/src/bridge-tunnel-lease.js",
+      "bytes": 18294,
+      "sha256": "4186abb8fdea1c79e21be25988037c17a3df3fb29042c9bdbcfb690aaeb8b3c6",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "dist/src/workspace-hub-store.js",
+      "bytes": 23049,
+      "sha256": "bfcad7d04babb7ae148b5c241fbe7cf60724f5ce6265341005da6555429a7f5d",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "dist/src/workspace-hub-types.js",
+      "bytes": 1346,
+      "sha256": "cc798b6b29af59a7a9d0197c6e8a91c5e404ad6ad650309211eb4240b21ecbd6",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "dist/test/workspace-hub-store.test.cjs",
+      "bytes": 45973,
+      "sha256": "951b580e22f295c0982db3ec415b9a4bfedbec2252852d73326d529d289f74ec",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "dist/tests/workspace-hub-store.test.cjs",
+      "bytes": 46465,
+      "sha256": "15997837928437599462b3dc309a84fe2608ab34d3d21a3b512ffc5487e75c56",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "media/shuncode.svg",
+      "bytes": 3910,
+      "sha256": "b8b52ea62d53f994e9c7543eef20b39ee3eb444fff895b5b53428f1c7908a83a",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "media/workspace-hub.css",
+      "bytes": 8756,
+      "sha256": "f9b453c93536421d465d4329bc259b01f31aaa036cbd0b2badaa8c37b00a6a82",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "media/workspace-hub.html",
+      "bytes": 3024,
+      "sha256": "98aadb5c313314ca4b2e6accdeb02cbecf61aba514cecde9e526240e4800e4db",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "media/workspace-hub.js",
+      "bytes": 14646,
+      "sha256": "14e48fac257596f00e4e74a32c9f3087ab293480a81c561042d758e8c8d52ea8",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "package.json",
+      "bytes": 24361,
+      "sha256": "ad0a5b107caa5fa9f332202d3e4b5732b16d8ec8395a6078545658123beffb9a",
+      "role": "extension-resource-or-metadata"
+    },
+    {
+      "path": "runtime/agent-host.js",
+      "bytes": 943158,
+      "sha256": "9c265084d78a98b24e1bae01bca73825bddb4d6562579d62a1ea923f0ea48f22",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "runtime/mcp-server.js",
+      "bytes": 1286417,
+      "sha256": "4388415a4d78fb7ee254b8cf0766da67045228260e356e7e797020bf6b6d18e1",
+      "role": "compiled-may-contain-third-party"
+    },
+    {
+      "path": "src/agent-checkpoint-store.ts",
+      "bytes": 6951,
+      "sha256": "5d236820b67279a34e470019b607e0a4a4f4be45645f0630f5fb04be73ae1100",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/branch-state.ts",
+      "bytes": 4797,
+      "sha256": "6ca137af058f413dae0bce2fc4674428255af25c1b35d410d0ea29a6453ddca2",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-access-controller.ts",
+      "bytes": 4538,
+      "sha256": "eedc3cc7569c5e1661290a36731c8452a641b7ba13ef3a2a15a3237da08e4789",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-constants.ts",
+      "bytes": 15240,
+      "sha256": "1de73541dfb22f180a04bda374e8bd9bc78f5f77f6cad830212b6fa9d8a61902",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-license-config.ts",
+      "bytes": 1012,
+      "sha256": "d410fab21d2e7675dc5f340605d04eaddd03e9f5d562dbfd7c9bd7077e67758f",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-license-service.ts",
+      "bytes": 42603,
+      "sha256": "b59d05a515dea760bb6d6ecb1de169e65f312c85b91830817664dab38c45b23c",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-mcp-modern.ts",
+      "bytes": 6133,
+      "sha256": "f624d66e8d131676345ff9396c58644fd49a40dc74f36312b48be6402e023c56",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-mcp-transport.ts",
+      "bytes": 28810,
+      "sha256": "6776d4d4c6cce1cdba80d205a796f4301fb4630b588837ddf7da0fb29429260b",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-server.ts",
+      "bytes": 82642,
+      "sha256": "e1e23bf52877be3c8399ae81dfb7c1f698ea276b57ce0d4eb5fbd3df564c8202",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-tool-dispatcher.ts",
+      "bytes": 19795,
+      "sha256": "0016656e7a800e6c98a14346546c04ad31b24e4030993ad33529051d5755eb01",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-tunnel-lease.ts",
+      "bytes": 23806,
+      "sha256": "49b592e499820ec436ce443e99ffd0223e6bccb17b1a0db82cc0987c82b3f3ae",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/bridge-utils.ts",
+      "bytes": 16669,
+      "sha256": "ab11c87b637023fc126a6204cb3a36cbbbe0f93955dd73c1e85588b202b622b5",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/chat-history.mts",
+      "bytes": 9256,
+      "sha256": "ec47043d4fdd139bc3c38828f3577e2828ff91b0b3102be12cd1d506c6e151a8",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/codex-account-view.ts",
+      "bytes": 12740,
+      "sha256": "437c54da599fa933b04fe1621802983c11c703c222caca433bc29c656aea0d0c",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/codex-auth.ts",
+      "bytes": 20565,
+      "sha256": "b2769706de99514a28210df9d60a134084100deb9c5f5870a9e483c1871eff0e",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/config.ts",
+      "bytes": 2695,
+      "sha256": "9c6cbc96b2ba6c923ef0d15e6079fc6fe25802cb9aa11ad412cf14e5df4ca260",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/custom-agents.ts",
+      "bytes": 610,
+      "sha256": "d74afadef6a9682c7eff49b0721ff712979e5fa9bc4c08fb752bbdbdb3c754f9",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/deepseek-compat.mts",
+      "bytes": 1350,
+      "sha256": "1282a9ec9b91c26955023889b9b2d6462427a56b9fb8401c45d2afd71bcbb939",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/extension-host-proxy.mts",
+      "bytes": 11234,
+      "sha256": "026ba584590a70ade13b4f4808d9ab63a2718cf97765bf4a3c6b15747828b494",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/extension.ts",
+      "bytes": 27629,
+      "sha256": "536a0437541d893b2dc275fbca450521770eace96e864bf061ecc00d89b94eca",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/ide-tool-broker.ts",
+      "bytes": 92279,
+      "sha256": "3ff0cd85881a8e0e1a3c72a2e5e0eaada01f99d256026fabda074021589d0531",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/instance-launcher.ts",
+      "bytes": 9621,
+      "sha256": "bef1840f4c7424a0b3bba2c34b5bebd58654fb0b5c4946d6116402859d20d02a",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/lsp-tool.ts",
+      "bytes": 21546,
+      "sha256": "ee8349346a8ac498f822b4efca97c3d864fd90a9a760f631fe393dfd2265f195",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/merge-contract.ts",
+      "bytes": 2737,
+      "sha256": "ec28ec1ad910a717ff3a658e47cabf15efdc1113e8d53eb8f30df5ddcf5e1a53",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/model-defaults.mts",
+      "bytes": 859,
+      "sha256": "438d55d602eba21d84f09986931672a4a8ef737fe5c69ca217845c8864c73285",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/model-provider-identifiers.mts",
+      "bytes": 1063,
+      "sha256": "1dc13b5a14e0d732efde77a081e045924a2e3e0ab30f3d9f21bcb76f7a209af5",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/model-provider.ts",
+      "bytes": 79339,
+      "sha256": "92434bd94126ba36c5665c38260d99175851d4ca491bf43094f249848710f2c5",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/model-reasoning.mts",
+      "bytes": 2640,
+      "sha256": "855250d262f364896760812898f3a8ec9be5fe565bbf5ff790c2aa6e5cf5e47e",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/native-chat.ts",
+      "bytes": 44808,
+      "sha256": "6f04145dfdf78a6a469323c720182790fe92d5fcd1fdcc35cb60515baad29d5d",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/runtime-client.ts",
+      "bytes": 18270,
+      "sha256": "90724da0d72552307b3bab9f153dec937963252c26c292a26638b63f13ce1cd9",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/tool-presentation.ts",
+      "bytes": 23280,
+      "sha256": "0b70c8a2b0d77bb4ada282a08c5e6a0bd882f6b3b46c181eac9f51af7e6b0fe9",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/workspace-hub-store.ts",
+      "bytes": 21919,
+      "sha256": "a86533c65920c9ebe1e0646f468c22686be38fcbe7c548e235c6b8df88993f39",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/workspace-hub-types.ts",
+      "bytes": 2173,
+      "sha256": "60e0e7f584e8bb3bde8f70e360d7a9be7579c27d671aed8fd58258682934ad30",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "src/workspace-hub.ts",
+      "bytes": 23253,
+      "sha256": "439b8127baaccd3bb43761bf7b976140f37fac857bfa4299e46fa476883672a4",
+      "role": "shipped-typescript-source"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 1447,
+      "sha256": "afc8019c1ba87b60627ff3a63f43c7b66a2dfa8abfff934074cb8b5aaa3d8ad6",
+      "role": "extension-resource-or-metadata"
+    }
+  ],
+  "bundles": [
+    {
+      "file": "dist/extension.js",
+      "sha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+      "labels": [
+        {
+          "label": "extensions/shuncode/src/agent-checkpoint-store.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/branch-state.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-access-controller.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-constants.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-license-config.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-license-service.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-mcp-modern.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-mcp-transport.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-server.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-tool-dispatcher.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-tunnel-lease.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/bridge-utils.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/chat-history.mts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/codex-auth.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/config.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/custom-agents.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/deepseek-compat.mts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/extension-host-proxy.mts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/extension.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/ide-tool-broker.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/instance-launcher.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/lsp-tool.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/merge-contract.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/model-defaults.mts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/model-provider-identifiers.mts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/model-provider.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/model-reasoning.mts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/native-chat.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/runtime-client.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/tool-presentation.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub-store.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub-types.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/core/dist/auth-CUe6YdwF.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/core/dist/internal.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/node/dist/index.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/node/node_modules/@hono/node-server/dist/index.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/ajvProvider-CEoC__sr.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/chunk-Br0eD_fh.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/dialects-DoSzNhcb.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/index.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/mcp-DXXb3Vv3.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/shimsNode.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/src-CX2iR2pK.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/agent-base/dist/helpers.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/agent-base/dist/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/debug/src/browser.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/debug/src/common.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/debug/src/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/debug/src/node.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/https-proxy-agent/dist/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/https-proxy-agent/dist/parse-proxy-response.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/ms/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/checks.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/coerce.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/compat.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/errors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/external.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/iso.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/schemas.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/api.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/checks.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/core.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/doc.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/errors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/json-schema-processors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/regexes.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/registries.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/schemas.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/to-json-schema.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/util.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/versions.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/en.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "src/adaptive-concurrency.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/apply-patch.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-activity-tracker.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-coordination-validation.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-event-store.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-http-router.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-session-registry.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-tool-name.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/bridge-usage-counter.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/build-info.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/canonical-diff.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/concurrency.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-admin.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-contract.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-manifest.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-migration.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-sandbox.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-skill-import.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tool-skill.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/custom-tools.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/file-tool-input-compat.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/file-tool-registry.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/find-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/ide-tool-definitions.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/jsonrpc-request-id-registry.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/managed-command-cancellation.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/managed-command-id.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/managed-command-retention.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/managed-command-risk.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/managed-terminal-lifecycle.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/mcp-protocol.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/read-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/read-image.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/ripgrep-diagnostics.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/search-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/tool-input-validation.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/version.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/workspace-paths.ts",
+          "classification": "shared-custom-candidate"
+        }
+      ]
+    },
+    {
+      "file": "dist/test/workspace-hub-store.test.cjs",
+      "sha256": "951b580e22f295c0982db3ec415b9a4bfedbec2252852d73326d529d289f74ec",
+      "labels": [
+        {
+          "label": "extensions/shuncode/src/bridge-tunnel-lease.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub-store.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub-types.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/test/workspace-hub-store.test.ts",
+          "classification": "custom-extension-path"
+        }
+      ]
+    },
+    {
+      "file": "dist/tests/workspace-hub-store.test.cjs",
+      "sha256": "15997837928437599462b3dc309a84fe2608ab34d3d21a3b512ffc5487e75c56",
+      "labels": [
+        {
+          "label": "extensions/shuncode/src/bridge-tunnel-lease.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub-store.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/src/workspace-hub-types.ts",
+          "classification": "custom-extension-path"
+        },
+        {
+          "label": "extensions/shuncode/test/workspace-hub-store.test.ts",
+          "classification": "custom-extension-path"
+        }
+      ]
+    },
+    {
+      "file": "runtime/agent-host.js",
+      "sha256": "9c265084d78a98b24e1bae01bca73825bddb4d6562579d62a1ea923f0ea48f22",
+      "labels": [
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/ajvProvider-97rDpkRx.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/chunk-Br0eD_fh.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/dialects-BOhdv1Fc.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/index.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/shimsNode.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/src-D_zzAWoS.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/client/dist/stdio.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/core/dist/auth-CUe6YdwF.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/core/dist/internal.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/cross-spawn/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/cross-spawn/lib/enoent.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/cross-spawn/lib/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/cross-spawn/lib/util/escape.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/cross-spawn/lib/util/readShebang.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/cross-spawn/lib/util/resolveCommand.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/isexe/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/isexe/mode.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/isexe/windows.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/path-key/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/pkce-challenge/dist/index.node.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/shebang-command/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/shebang-regex/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/which/which.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/checks.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/coerce.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/compat.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/errors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/external.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/iso.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/schemas.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/api.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/checks.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/core.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/doc.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/errors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/json-schema-processors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/regexes.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/registries.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/schemas.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/to-json-schema.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/util.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/versions.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/en.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "src/agent-host.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/agent-tool-content.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/apply-patch.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/canonical-diff.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/deepseek-compat.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/file-tool-input-compat.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/file-tool-registry.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/find-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/ide-tool-definitions.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/openai-agent.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/read-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/read-image.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/ripgrep-diagnostics.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/search-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/tool-input-validation.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/version.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/workspace-paths.ts",
+          "classification": "shared-custom-candidate"
+        }
+      ]
+    },
+    {
+      "file": "runtime/mcp-server.js",
+      "sha256": "4388415a4d78fb7ee254b8cf0766da67045228260e356e7e797020bf6b6d18e1",
+      "labels": [
+        {
+          "label": "node_modules/@modelcontextprotocol/core/dist/auth-CUe6YdwF.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/ajvProvider-CEoC__sr.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/chunk-Br0eD_fh.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/dialects-DoSzNhcb.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/index.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/mcp-DXXb3Vv3.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/shimsNode.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/src-CX2iR2pK.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/@modelcontextprotocol/server/dist/stdio.mjs",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/checks.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/coerce.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/compat.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/errors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/external.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/from-json-schema.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/iso.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/classic/schemas.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/api.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/checks.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/core.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/doc.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/errors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/json-schema-generator.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/json-schema-processors.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/json-schema.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/parse.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/regexes.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/registries.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/schemas.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/to-json-schema.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/util.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/core/versions.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ar.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/az.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/be.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/bg.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ca.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/cs.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/da.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/de.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/el.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/en.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/eo.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/es.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/fa.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/fi.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/fr-CA.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/fr.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/he.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/hr.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/hu.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/hy.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/id.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/index.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/is.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/it.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ja.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ka.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/kh.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/km.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ko.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/lt.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/mk.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ms.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/nl.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/no.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ota.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/pl.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ps.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/pt.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ro.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ru.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/sl.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/sv.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ta.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/th.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/tr.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ua.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/uk.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/ur.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/uz.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/vi.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/yo.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/zh-CN.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "node_modules/zod/v4/locales/zh-TW.js",
+          "classification": "bundled-third-party"
+        },
+        {
+          "label": "src/apply-patch.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/canonical-diff.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/concurrency.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/file-tool-input-compat.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/file-tool-registry.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/find-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/mcp-protocol.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/mcp-server.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/read-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/read-image.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/ripgrep-diagnostics.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/search-files.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/tool-input-validation.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/version.ts",
+          "classification": "shared-custom-candidate"
+        },
+        {
+          "label": "src/workspace-paths.ts",
+          "classification": "shared-custom-candidate"
+        }
+      ]
+    }
+  ],
+  "ui": [
+    {
+      "folder": "recovered/bridge-ui",
+      "host": "out/vs/workbench/workbench.desktop.main.js",
+      "hostSha256": "c10a82c4aabcbd84ae4038a251d5f2c8d903c5fdb1c929c77a136ca4f56135a5",
+      "classification": "located-custom-feature-in-mixed-host",
+      "classFiles": [
+        "bridge-ui-1.js.txt"
+      ],
+      "standaloneSourceModule": false,
+      "wholeHostComparedToUpstream": false
+    },
+    {
+      "folder": "recovered/bridge-ui-sessions",
+      "host": "out/vs/sessions/sessions.desktop.main.js",
+      "hostSha256": "d8bda871b371f188b49ca2068daa4e29a4033914e22a3e2c7dd31a993bb9f6bb",
+      "classification": "located-custom-feature-in-mixed-host",
+      "classFiles": [
+        "bridge-ui-1.js.txt"
+      ],
+      "standaloneSourceModule": false,
+      "wholeHostComparedToUpstream": false
+    }
+  ],
+  "missingOriginalTargets": [
+    {
+      "target": "../../src/adaptive-concurrency.js",
+      "matchingLabel": "src/adaptive-concurrency.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/adaptive-concurrency.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-activity-tracker.js",
+      "matchingLabel": "src/bridge-activity-tracker.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-activity-tracker.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-coordination-validation.js",
+      "matchingLabel": "src/bridge-coordination-validation.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-coordination-validation.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-event-store.js",
+      "matchingLabel": "src/bridge-event-store.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-event-store.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-http-router.js",
+      "matchingLabel": "src/bridge-http-router.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-http-router.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-session-registry.js",
+      "matchingLabel": "src/bridge-session-registry.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-session-registry.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-tool-name.js",
+      "matchingLabel": "src/bridge-tool-name.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-tool-name.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/bridge-usage-counter.js",
+      "matchingLabel": "src/bridge-usage-counter.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/bridge-usage-counter.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/concurrency.js",
+      "matchingLabel": "src/concurrency.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/concurrency.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/custom-tool-admin.js",
+      "matchingLabel": "src/custom-tool-admin.ts",
+      "reconstruction": null,
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/custom-tool-migration.js",
+      "matchingLabel": "src/custom-tool-migration.ts",
+      "reconstruction": null,
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/custom-tool-skill-import.js",
+      "matchingLabel": "src/custom-tool-skill-import.ts",
+      "reconstruction": null,
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/custom-tool-skill.js",
+      "matchingLabel": "src/custom-tool-skill.ts",
+      "reconstruction": null,
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/custom-tools.js",
+      "matchingLabel": "src/custom-tools.ts",
+      "reconstruction": null,
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/file-tool-input-compat.js",
+      "matchingLabel": "src/file-tool-input-compat.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/file-tool-input-compat.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/file-tool-registry.js",
+      "matchingLabel": "src/file-tool-registry.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/file-tool-registry.js",
+        "coverage": "selected declaration subset; other functionality not reconstructed"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/ide-tool-definitions.js",
+      "matchingLabel": "src/ide-tool-definitions.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/ide-tool-definitions.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/jsonrpc-request-id-registry.js",
+      "matchingLabel": "src/jsonrpc-request-id-registry.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/jsonrpc-request-id-registry.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/managed-command-cancellation.js",
+      "matchingLabel": "src/managed-command-cancellation.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/managed-command-cancellation.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/managed-command-id.js",
+      "matchingLabel": "src/managed-command-id.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/managed-command-id.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/managed-command-retention.js",
+      "matchingLabel": "src/managed-command-retention.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/managed-command-retention.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/managed-terminal-lifecycle.js",
+      "matchingLabel": "src/managed-terminal-lifecycle.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/managed-terminal-lifecycle.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/tool-input-validation.js",
+      "matchingLabel": "src/tool-input-validation.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/tool-input-validation.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    },
+    {
+      "target": "../../src/version.js",
+      "matchingLabel": "src/version.ts",
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/version.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
+      "originalTypescriptImportResolved": false
+    }
+  ],
+  "summary": {
+    "originalFiles": 51,
+    "shippedTypescriptFiles": 34,
+    "sharedLabelsAcrossBundles": 43,
+    "originalMissingTargets": 24,
+    "targetsWithSomeReconstructedJs": 19,
+    "reconstructedModules": 28
+  },
+  "separation": {
+    "originalExtension": "recovered/shuncode-extension",
+    "compiledCustomUi": [
+      "recovered/bridge-ui",
+      "recovered/bridge-ui-sessions"
+    ],
+    "reconstructedShared": "reconstructed/bridge-core",
+    "communityMaintenance": "community",
+    "codeOssFullSourceRecovered": false,
+    "exactUpstreamBaselineConfirmed": false,
+    "completeCustomPatchset": false
+  },
+  "warnings": [
+    "Compiled extension bundles include third-party dependencies: do not claim the whole bundle as exclusively self-authored.",
+    "src/ labels are candidates corroborated by feature/import evidence, not copyright determinations.",
+    "Two located UI classes do not prove all carrier modifications have been found.",
+    "Separate JS modules do not resolve the original TypeScript imports or recover erased types."
+  ]
+}

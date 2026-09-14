@@ -1,0 +1,104 @@
+{
+  "scope": "Public 1.132.0 tag is a candidate, NOT a confirmed match to the shipped custom carrier",
+  "tag": "1.132.0",
+  "commit": "df53daabb18cd157bdb08c7f01c34df936cf12f4",
+  "files": {
+    "package.json": {
+      "git_blob_sha": "c80e65a6ed6ae4ad7b60011e105a67da107ef2a2",
+      "sha256": "f17155a3024c10e9838b7d19e8670b803f7c94180cc3f1a122adaef35af6c48e",
+      "url": "https://github.com/microsoft/vscode/blob/df53daabb18cd157bdb08c7f01c34df936cf12f4/package.json",
+      "version": "1.132.0",
+      "electron_dev_dependency": "42.7.1",
+      "scripts": {
+        "compile": "npm-run-all2 -lp compile-client compile-copilot",
+        "watch": "npm-run-all2 -lp watch-client-transpile watch-client watch-extensions watch-copilot",
+        "gulp": "node --experimental-strip-types --max-old-space-size=8192 ./node_modules/gulp/bin/gulp.js"
+      }
+    },
+    ".nvmrc": {
+      "git_blob_sha": "ca5c350055ccb6dacb495a786f60c8232abed8f2",
+      "sha256": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce",
+      "url": "https://github.com/microsoft/vscode/blob/df53daabb18cd157bdb08c7f01c34df936cf12f4/.nvmrc",
+      "content": "24.18.0\n"
+    },
+    ".npmrc": {
+      "git_blob_sha": "02f65e85e66051819036a01933298426a04958ae",
+      "sha256": "26c701f0672a675deaee3f3404556ccd9b0608aa6c7ece2a1ec8270a62f08392",
+      "url": "https://github.com/microsoft/vscode/blob/df53daabb18cd157bdb08c7f01c34df936cf12f4/.npmrc",
+      "content": "disturl=\"https://electronjs.org/headers\"\ntarget=\"42.7.1\"\nms_build_id=\"14760073\"\nruntime=\"electron\"\nignore-scripts=false\nbuild_from_source=\"true\"\nlegacy-peer-deps=\"true\"\ntimeout=180000\n"
+    },
+    "build/gulpfile.vscode.win32.ts": {
+      "git_blob_sha": "1f0f2d9ea0a14034fe1242eedd5af314a98e529c",
+      "sha256": "eaa4fdd16cc787b04f12af628c83bb21a3d0f9c5fdcf82c860a71a8b41d9cf07",
+      "url": "https://github.com/microsoft/vscode/blob/df53daabb18cd157bdb08c7f01c34df936cf12f4/build/gulpfile.vscode.win32.ts",
+      "relevant_task_lines": [
+        "const buildPath = (arch: string) => path.join(path.dirname(repoPath), `VSCode-win32-${arch}`);",
+        "const setupDir = (arch: string, target: string) => path.join(repoPath, '.build', `win32-${arch}`, `${target}-setup`);",
+        "function buildWin32Setup(arch: string, target: string): task.CallbackTask {",
+        "\t\tthrow new Error('Invalid setup target');",
+        "\t\tconst outputPath = setupDir(arch, target);",
+        "function defineWin32SetupTasks(arch: string, target: string) {",
+        "\tconst cleanTask = util.rimraf(setupDir(arch, target));",
+        "\ttask.task(task.define(`vscode-win32-${arch}-${target}-setup`, task.series(cleanTask, buildWin32Setup(arch, target))));",
+        "task.task(task.define('vscode-win32-x64-inno-updater', task.series(copyInnoUpdater('x64'), updateIcon(path.join(buildPath('x64'), 'tools', 'inno_updater.exe')))));",
+        "task.task(task.define('vscode-win32-arm64-inno-updater', task.series(copyInnoUpdater('arm64'), updateIcon(path.join(buildPath('arm64'), 'tools', 'inno_updater.exe')))));"
+      ]
+    },
+    "build/gulpfile.vscode.ts": {
+      "git_blob_sha": "66514015e651e8c50e1dcbcd1e0e3e21563fea86",
+      "sha256": "53271063699f1bbb33c8e36a4142165f08a67a4a6b22f09655e74289de821983",
+      "url": "https://github.com/microsoft/vscode/blob/df53daabb18cd157bdb08c7f01c34df936cf12f4/build/gulpfile.vscode.ts",
+      "relevant_task_lines": []
+    },
+    "LICENSE.txt": {
+      "git_blob_sha": "0ac28ee234d232ac0691f39cebf95bf6b2a763a5",
+      "sha256": "9480271317925265e806a9a196aaa33410a962fa9d4d1e248a4a5187bc8c9df9",
+      "url": "https://github.com/microsoft/vscode/blob/df53daabb18cd157bdb08c7f01c34df936cf12f4/LICENSE.txt",
+      "licence_name": "MIT",
+      "first_line": "MIT License"
+    }
+  },
+  "earlier_probe": {
+    "main_commit": "bdadf2eb338657fd540c1b38713393b4a5856de1",
+    "main_package_version": "1.139.0",
+    "obsolete_build_js_path": "404; current build tasks use .ts"
+  },
+  "proposedApiDeclarationCheck": [
+    {
+      "proposal": "defaultChatParticipant",
+      "candidate_file_exists": true
+    },
+    {
+      "proposal": "chatParticipantAdditions",
+      "candidate_file_exists": true
+    },
+    {
+      "proposal": "chatParticipantPrivate",
+      "candidate_file_exists": true
+    },
+    {
+      "proposal": "chatReferenceBinaryData",
+      "candidate_file_exists": true
+    },
+    {
+      "proposal": "chatPromptFiles",
+      "candidate_file_exists": true
+    },
+    {
+      "proposal": "chatProvider",
+      "candidate_file_exists": true
+    },
+    {
+      "proposal": "languageModelThinkingPart",
+      "candidate_file_exists": true
+    }
+  ],
+  "shippedCarrierComparison": {
+    "declared_version": "1.132.0",
+    "declared_electron": "44.2.0",
+    "product_commit": "09533f921029d9d073c06e70f566ebe31e43cebc",
+    "candidate_electron": "42.7.1",
+    "electron_matches": false,
+    "basis": "docs/evidence/windows-extraction.json and prior extraction journal; metadata only, not binary ABI validation"
+  }
+}

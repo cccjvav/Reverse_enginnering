@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-14",
+  "scope": "Custom/third-party/carrier boundary inventory and migration/build documentation, not a full source rebuild",
+  "local": {
+    "passed": true,
+    "platform": "Linux",
+    "node": "v22.22.3",
+    "node_tests": 86,
+    "new_boundary_tests": 2,
+    "python_tests": 23,
+    "node_log_sha256": "d079442a69bcf71b2ab369f2c98adace09f19d41a8bf495cfc96ebe0e6565782",
+    "python_log_sha256": "c6aca692034288d5da38b825ab031891d8213fa0c0e2b3d4c0ab2778c347b91f"
+  },
+  "boundary_report_sha256": "99419b19fc8719da3a353753e2de68795ede10ed3353cc9b8310c596d6bccee7",
+  "upstream_reference_sha256": "9cf04d0915138eed186a8dc700ca0f8d7cffae215d416e09e14325c8c5dc5f38",
+  "overlay_rebuilt_byte_identically": true,
+  "overlay_sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268",
+  "remote_ci": {
+    "status": "pending",
+    "workflow": ".github/workflows/bridge-core-tests.yml"
+  },
+  "exact_codeoss_baseline_confirmed": false,
+  "full_source_build_tested": false,
+  "new_windows_installer_built": false,
+  "windows_gui_tested": false
+}

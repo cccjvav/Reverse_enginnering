@@ -126,3 +126,8 @@ GitHub Actions 运行 `34849979254` 成功完成，报告由机器人提交 `69c
 ## 第三组：补丁写入与差异模块
 
 恢复 `apply-patch` 和 `canonical-diff`，总计 28 模块 / 206 声明。新增 16 个临时文件测试，本地 84 Node + 23 Python 通过；版本冲突和受控提交失败回滚可复现。双重预检查仍存在目录替换竞态，未部署写入器，也未宣称多文件原子或崩溃恢复。参见 [写入说明](../reconstructed/bridge-core/PATCH_WRITER.md) 与 [验证证据](evidence/bridge-patch-tests.json)。
+
+
+## 完整工程方向与上游候选
+
+作者要求继续，并优先复用开源 Code OSS。目标为“可维护、功能等价的社区工程”，不是逐字恢复历史。公开 1.132.0 标签已定位，7 个 proposed API 声明存在，但 Electron 元数据不匹配，尚未选定底座。新增 [边界图](CUSTOM_CODE_MAP.md)、[安装包指南](WINDOWS_BUILD_GUIDE.md) 和 [可分发用户教程](../community/MIGRATION_FOR_USERS.md)。原 24 个缺失共享目标中 19 个有 JS 对应，仍缺 5 个 Custom Tools/Skills 目标；类型/目录、注册表与传递执行依赖、宿主接入和 Windows 验收均未完成。

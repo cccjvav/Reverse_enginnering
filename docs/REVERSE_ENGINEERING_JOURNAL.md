@@ -287,3 +287,30 @@ python3 tools/audit_recovered_extension.py
 运行 [34864622967](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34864622967) 成功，测试代码提交 `80472568854d51e25d652d92b1a7826b6189d7c0`。Windows 2022 与 Ubuntu 24.04 的确定性重建和 Node 测试步骤均通过，Python 回归仅在 Linux 运行。`gh run watch --exit-status` 返回 0，另从作业 API 保存有限步骤证据。固定 action 仍有旧 Node 目标的兼容警告，但未影响运行。没有声称下载了远端完整逐项日志。
 
 本轮保留原证据和旧 overlay 不变，新增源码、测试和日志全部推送到会话分支；完整扩展、搜索/图片执行器、真实 MCP 集成与 Windows GUI 验收仍未完成。
+
+
+## 11 — 作者要求区分自有定制与 Code OSS，并准备分发教程
+
+目标扩展为恢复可维护的完整社区工程；不是逐字找回已删除的历史。已有代码按原扩展、编译 UI 片段、共享 JS 重建、社区维护层分离。本轮增加 `tools/audit_custom_boundary.mjs`：逐文件核对 51 个原件及两个 UI 捕获的哈希，用 Acorn 真实注释区分扩展路径、共享候选、捆绑第三方和未知部分；不执行 bundle，不把整个 Workbench 判为纯上游或纯定制。
+
+```bash
+npm run audit:boundary
+npm run audit:boundary -- --check
+npm test
+python3 -m unittest discover -s tests -q
+```
+
+结果：34 个原 TS/MTS，跨 bundle 43 个共享标签；原 TS 的 24 个不同缺失目标中有 19 个已存在某种 JS 对应（含部分注册表），5 个仍缺，集中于 Custom Tools/Skills。仍未接回原 TS 类型/路径；19/24 不是工程完成百分比。两项新增边界测试核对清单可重复生成与保守分类。
+
+### 上游参考查询，不盲目选择最新版
+
+通过 `gh api` 获取固定来源。最初 main 指向 `bdadf2eb338657fd540c1b38713393b4a5856de1`，package 版本 1.139.0；旧教程的 `build/gulpfile.vscode.win32.js` 路径返回 404，列目录后确认任务已经是 `.ts`。记录这个失败，避免把过时命令当成已验证步骤。
+
+随后找到公开标签 1.132.0 → `df53daabb18cd157bdb08c7f01c34df936cf12f4`，核对 LICENSE（MIT）、package、.nvmrc/.npmrc、Windows 打包任务与 proposed API 文件名。7 个所需声明均存在，但候选 Electron 42.7.1 与原包声明 44.2.0 不符，Node .nvmrc 为 24.18.0。这里只抓取少量参考内容，未克隆整个底座、未运行 npm 安装或构建脚本，也没有把它选成正式构建依赖。结果保存为 `upstream-build-reference.json`。
+
+新增三份面向不同读者的文档：`CUSTOM_CODE_MAP.md`（边界与未确认部分）、`WINDOWS_BUILD_GUIDE.md`（已验证 overlay 构建 + 尚未执行的完整源码路线）、`community/MIGRATION_FOR_USERS.md`（普通用户/开发者双路线）。原 `COMMUNITY_MIGRATION.md` 的技术去商业化教程继续保留。用户教程明确作者授权、保留安全和第三方模型认证、不伪造订单/签名、备份回退、不能跳过哈希，以及旧更新包未修复的读写竞态。未为自有代码擅自选定新开源许可证。
+
+本轮不更换旧 ZIP，不把未来 Code OSS 构建模板称为已生成 ShunCode 安装器。接下来优先补 5 个直接缺失目标及传递执行依赖，同时推进候选底座兼容性比较和原生宿主接入。
+
+
+本轮实际重跑 `npm run build:community` 与 `python3 tools/package_community.py`，归档仍为 466,543 字节、SHA-256 `83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268`，与已发布文件完全一致。说明用户“自行生成补丁”路线在当前代码上可复现，而不是仅写未执行命令。完整 Code OSS/安装器模板则明确未执行。

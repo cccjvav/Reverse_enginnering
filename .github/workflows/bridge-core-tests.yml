@@ -8,6 +8,7 @@ on:
       - .gitattributes
       - package.json
       - package-lock.json
+      - tools/audit_custom_boundary.mjs
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs
       - reconstructed/bridge-core/**

@@ -7,7 +7,8 @@
     "test": "node --test tests/community-*.test.mjs tests/bridge-core-*.test.mjs",
     "build:community": "node tools/build_community.mjs",
     "build:bridge-core": "node tools/reconstruct_bridge_core.mjs",
-    "check:bridge-core": "node tools/reconstruct_bridge_core.mjs --check"
+    "check:bridge-core": "node tools/reconstruct_bridge_core.mjs --check",
+    "audit:boundary": "node tools/audit_custom_boundary.mjs"
   },
   "devDependencies": {
     "acorn": "8.18.0",

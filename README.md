@@ -2,6 +2,14 @@
 
 优先恢复作者自己的 MCP Bridge、工具、定制 UI 等内容；VS Code 只作为运行载体，不追求完整逆向本体。后续目标是建立可维护的定制工程和 Windows 社区版。所有工作在 `arena/01a09d2c-reverse-enginnering-of-shun` 分支进行。
 
+## 定制代码、完整工程与用户分发
+
+- **[定制代码与 Code OSS 边界图](docs/CUSTOM_CODE_MAP.md)**：哪些已独立提取、哪些是第三方、哪些宿主改动仍未确定；附可重复审计清单。
+- **[给现有用户的社区版迁移教程](community/MIGRATION_FOR_USERS.md)**：直接用更新包或自行生成补丁，含校验、备份、回退与已知风险，可随发布分享。
+- **[Windows 构建与安装包路线](docs/WINDOWS_BUILD_GUIDE.md)**：现在可制作的 overlay，以及完整源码构建仍需补齐的环节。不是宣称已有完整安装器。
+
+本轮找到公开 1.132.0 上游候选，7 个 proposed API 声明均存在；但 Electron 42.7.1 与原包声明 44.2.0 不同，**尚未确认原底座**。继续以“匹配开源底座 + 独立自有定制层”恢复可维护社区工程，不逆向整个 Code OSS。
+
 ## 新进展：免费社区版测试补丁
 
 按作者的新要求，已将自有 Bridge 改为无需商业账号、付款或激活码的本地可用模式，移除收费 UI、支付轮询、商业授权复验与用量上报；保留 MCP 访问令牌、工具/路径校验、隧道凭证和第三方模型登录。
@@ -18,8 +26,8 @@
 从原扩展 bundle 拆出 **28 个 JavaScript 模块 / 206 个声明**，约 151.3 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录、输入解析与独立文件读取/补丁写入；不是找回了原始 TS 类型，也不是完整 MCP 服务。
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
-- 本地 **84 项 Node 测试 + 23 项 Python 回归测试通过**；本轮新增 16 项补丁写入测试，使用临时文件，不运行安装器。
-- **本轮 Windows / Linux CI 均通过**：[验证记录](docs/evidence/bridge-patch-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
+- 本地 **86 项 Node 测试 + 23 项 Python 回归测试通过**；包含 16 项补丁写入测试和 2 项新增边界审计测试，使用临时文件，不运行安装器。
+- [最新 Windows / Linux 验证状态](docs/evidence/custom-boundary-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 
 原件不变。文件读取已可独立运行，但发现并复现了确认期间目录替换的风险；[读取说明与防护局限](reconstructed/bridge-core/FILE_READER.md)明确记录。补丁写入也已独立恢复，且复现了同类路径替换风险；[写入验证与局限](reconstructed/bridge-core/PATCH_WRITER.md)。搜索、图片、MCP 执行调度与完整扩展构建仍待恢复。
