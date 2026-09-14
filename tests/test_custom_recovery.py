@@ -35,3 +35,22 @@ class CustomRecoveryTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class AuditTests(unittest.TestCase):
+    def test_resolve_source_import(self):
+        from audit_recovered_extension import resolve_reference
+        self.assertEqual(resolve_reference('src', './hello.js', {'src/hello.ts'}), 'src/hello.ts')
+        self.assertEqual(resolve_reference('src', './hello.mjs', {'src/hello.mts'}), 'src/hello.mts')
+        self.assertIsNone(resolve_reference('src', '../../../src/missing.js', {'src/hello.ts'}))
+
+    def test_git_runtime_excluded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            extension = root / 'input/resources/app/extensions/shuncode'
+            (extension / 'runtime/git').mkdir(parents=True)
+            (extension / 'package.json').write_text('{}')
+            (extension / 'runtime/git/README.md').write_text('third party')
+            report = mod.recover(root / 'input', root / 'output')
+            self.assertEqual(report['copied_count'], 1)
+            self.assertEqual(report['excluded_trees']['runtime/git/']['files'], 1)
+            self.assertFalse((root / 'output/runtime/git').exists())

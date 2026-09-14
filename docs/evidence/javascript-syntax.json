@@ -1,0 +1,60 @@
+{
+  "scope": "JavaScript parse-only checks; no activation, imports, unit tests or application execution. Not a TypeScript build or runtime compatibility test.",
+  "node_version": "v22.22.3",
+  "checks": [
+    {
+      "path": "dist/extension.js",
+      "sha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "dist/src/bridge-tunnel-lease.js",
+      "sha256": "4186abb8fdea1c79e21be25988037c17a3df3fb29042c9bdbcfb690aaeb8b3c6",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "dist/src/workspace-hub-store.js",
+      "sha256": "bfcad7d04babb7ae148b5c241fbe7cf60724f5ce6265341005da6555429a7f5d",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "dist/src/workspace-hub-types.js",
+      "sha256": "cc798b6b29af59a7a9d0197c6e8a91c5e404ad6ad650309211eb4240b21ecbd6",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "dist/test/workspace-hub-store.test.cjs",
+      "sha256": "951b580e22f295c0982db3ec415b9a4bfedbec2252852d73326d529d289f74ec",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "dist/tests/workspace-hub-store.test.cjs",
+      "sha256": "15997837928437599462b3dc309a84fe2608ab34d3d21a3b512ffc5487e75c56",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "media/workspace-hub.js",
+      "sha256": "14e48fac257596f00e4e74a32c9f3087ab293480a81c561042d758e8c8d52ea8",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "runtime/agent-host.js",
+      "sha256": "9c265084d78a98b24e1bae01bca73825bddb4d6562579d62a1ea923f0ea48f22",
+      "exit_code": 0,
+      "diagnostic": ""
+    },
+    {
+      "path": "runtime/mcp-server.js",
+      "sha256": "4388415a4d78fb7ee254b8cf0766da67045228260e356e7e797020bf6b6d18e1",
+      "exit_code": 0,
+      "diagnostic": ""
+    }
+  ]
+}

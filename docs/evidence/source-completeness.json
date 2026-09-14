@@ -1,0 +1,566 @@
+{
+  "scope": "Static inventory/regex audit; not a full TypeScript module resolver or a build test.",
+  "source_file_count": 34,
+  "source_files": [
+    "src/agent-checkpoint-store.ts",
+    "src/branch-state.ts",
+    "src/bridge-access-controller.ts",
+    "src/bridge-constants.ts",
+    "src/bridge-license-config.ts",
+    "src/bridge-license-service.ts",
+    "src/bridge-mcp-modern.ts",
+    "src/bridge-mcp-transport.ts",
+    "src/bridge-server.ts",
+    "src/bridge-tool-dispatcher.ts",
+    "src/bridge-tunnel-lease.ts",
+    "src/bridge-utils.ts",
+    "src/chat-history.mts",
+    "src/codex-account-view.ts",
+    "src/codex-auth.ts",
+    "src/config.ts",
+    "src/custom-agents.ts",
+    "src/deepseek-compat.mts",
+    "src/extension-host-proxy.mts",
+    "src/extension.ts",
+    "src/ide-tool-broker.ts",
+    "src/instance-launcher.ts",
+    "src/lsp-tool.ts",
+    "src/merge-contract.ts",
+    "src/model-defaults.mts",
+    "src/model-provider-identifiers.mts",
+    "src/model-provider.ts",
+    "src/model-reasoning.mts",
+    "src/native-chat.ts",
+    "src/runtime-client.ts",
+    "src/tool-presentation.ts",
+    "src/workspace-hub-store.ts",
+    "src/workspace-hub-types.ts",
+    "src/workspace-hub.ts"
+  ],
+  "source_bytes": 682862,
+  "provenance": [
+    {
+      "path": "agents/shuncode-ask.agent.md",
+      "matches_original": true
+    },
+    {
+      "path": "agents/shuncode-code.agent.md",
+      "matches_original": true
+    },
+    {
+      "path": "agents/shuncode-plan.agent.md",
+      "matches_original": true
+    },
+    {
+      "path": "dist/extension.js",
+      "matches_original": true
+    },
+    {
+      "path": "dist/src/bridge-tunnel-lease.js",
+      "matches_original": true
+    },
+    {
+      "path": "dist/src/workspace-hub-store.js",
+      "matches_original": true
+    },
+    {
+      "path": "dist/src/workspace-hub-types.js",
+      "matches_original": true
+    },
+    {
+      "path": "dist/test/workspace-hub-store.test.cjs",
+      "matches_original": true
+    },
+    {
+      "path": "dist/tests/workspace-hub-store.test.cjs",
+      "matches_original": true
+    },
+    {
+      "path": "media/shuncode.svg",
+      "matches_original": true
+    },
+    {
+      "path": "media/workspace-hub.css",
+      "matches_original": true
+    },
+    {
+      "path": "media/workspace-hub.html",
+      "matches_original": true
+    },
+    {
+      "path": "media/workspace-hub.js",
+      "matches_original": true
+    },
+    {
+      "path": "package.json",
+      "matches_original": true
+    },
+    {
+      "path": "runtime/agent-host.js",
+      "matches_original": true
+    },
+    {
+      "path": "runtime/mcp-server.js",
+      "matches_original": true
+    },
+    {
+      "path": "src/agent-checkpoint-store.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/branch-state.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-access-controller.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-constants.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-license-config.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-license-service.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-mcp-modern.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-mcp-transport.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-server.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-tool-dispatcher.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-tunnel-lease.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/bridge-utils.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/chat-history.mts",
+      "matches_original": true
+    },
+    {
+      "path": "src/codex-account-view.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/codex-auth.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/config.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/custom-agents.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/deepseek-compat.mts",
+      "matches_original": true
+    },
+    {
+      "path": "src/extension-host-proxy.mts",
+      "matches_original": true
+    },
+    {
+      "path": "src/extension.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/ide-tool-broker.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/instance-launcher.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/lsp-tool.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/merge-contract.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/model-defaults.mts",
+      "matches_original": true
+    },
+    {
+      "path": "src/model-provider-identifiers.mts",
+      "matches_original": true
+    },
+    {
+      "path": "src/model-provider.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/model-reasoning.mts",
+      "matches_original": true
+    },
+    {
+      "path": "src/native-chat.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/runtime-client.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/tool-presentation.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/workspace-hub-store.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/workspace-hub-types.ts",
+      "matches_original": true
+    },
+    {
+      "path": "src/workspace-hub.ts",
+      "matches_original": true
+    },
+    {
+      "path": "tsconfig.json",
+      "matches_original": true
+    }
+  ],
+  "all_hashes_match": true,
+  "unresolved_relative_imports": [
+    {
+      "from": "src/bridge-constants.ts",
+      "specifier": "../../../src/custom-tools.js",
+      "normalized_target": "../../src/custom-tools.js"
+    },
+    {
+      "from": "src/bridge-constants.ts",
+      "specifier": "../../../src/file-tool-registry.js",
+      "normalized_target": "../../src/file-tool-registry.js"
+    },
+    {
+      "from": "src/bridge-constants.ts",
+      "specifier": "../../../src/ide-tool-definitions.js",
+      "normalized_target": "../../src/ide-tool-definitions.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/bridge-event-store.js",
+      "normalized_target": "../../src/bridge-event-store.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/bridge-http-router.js",
+      "normalized_target": "../../src/bridge-http-router.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/bridge-session-registry.js",
+      "normalized_target": "../../src/bridge-session-registry.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/custom-tools.js",
+      "normalized_target": "../../src/custom-tools.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/jsonrpc-request-id-registry.js",
+      "normalized_target": "../../src/jsonrpc-request-id-registry.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/managed-command-cancellation.js",
+      "normalized_target": "../../src/managed-command-cancellation.js"
+    },
+    {
+      "from": "src/bridge-mcp-transport.ts",
+      "specifier": "../../../src/version.js",
+      "normalized_target": "../../src/version.js"
+    },
+    {
+      "from": "src/bridge-server.ts",
+      "specifier": "../../../src/custom-tool-admin.js",
+      "normalized_target": "../../src/custom-tool-admin.js"
+    },
+    {
+      "from": "src/bridge-server.ts",
+      "specifier": "../../../src/custom-tool-migration.js",
+      "normalized_target": "../../src/custom-tool-migration.js"
+    },
+    {
+      "from": "src/bridge-server.ts",
+      "specifier": "../../../src/custom-tool-skill-import.js",
+      "normalized_target": "../../src/custom-tool-skill-import.js"
+    },
+    {
+      "from": "src/bridge-server.ts",
+      "specifier": "../../../src/custom-tool-skill.js",
+      "normalized_target": "../../src/custom-tool-skill.js"
+    },
+    {
+      "from": "src/bridge-server.ts",
+      "specifier": "../../../src/custom-tools.js",
+      "normalized_target": "../../src/custom-tools.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/adaptive-concurrency.js",
+      "normalized_target": "../../src/adaptive-concurrency.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/bridge-activity-tracker.js",
+      "normalized_target": "../../src/bridge-activity-tracker.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/bridge-coordination-validation.js",
+      "normalized_target": "../../src/bridge-coordination-validation.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/bridge-tool-name.js",
+      "normalized_target": "../../src/bridge-tool-name.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/bridge-usage-counter.js",
+      "normalized_target": "../../src/bridge-usage-counter.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/concurrency.js",
+      "normalized_target": "../../src/concurrency.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/custom-tools.js",
+      "normalized_target": "../../src/custom-tools.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/file-tool-input-compat.js",
+      "normalized_target": "../../src/file-tool-input-compat.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/file-tool-registry.js",
+      "normalized_target": "../../src/file-tool-registry.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/ide-tool-definitions.js",
+      "normalized_target": "../../src/ide-tool-definitions.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/managed-command-cancellation.js",
+      "normalized_target": "../../src/managed-command-cancellation.js"
+    },
+    {
+      "from": "src/bridge-tool-dispatcher.ts",
+      "specifier": "../../../src/tool-input-validation.js",
+      "normalized_target": "../../src/tool-input-validation.js"
+    },
+    {
+      "from": "src/ide-tool-broker.ts",
+      "specifier": "../../../src/ide-tool-definitions.js",
+      "normalized_target": "../../src/ide-tool-definitions.js"
+    },
+    {
+      "from": "src/ide-tool-broker.ts",
+      "specifier": "../../../src/managed-command-cancellation.js",
+      "normalized_target": "../../src/managed-command-cancellation.js"
+    },
+    {
+      "from": "src/ide-tool-broker.ts",
+      "specifier": "../../../src/managed-command-id.js",
+      "normalized_target": "../../src/managed-command-id.js"
+    },
+    {
+      "from": "src/ide-tool-broker.ts",
+      "specifier": "../../../src/managed-command-retention.js",
+      "normalized_target": "../../src/managed-command-retention.js"
+    },
+    {
+      "from": "src/ide-tool-broker.ts",
+      "specifier": "../../../src/managed-terminal-lifecycle.js",
+      "normalized_target": "../../src/managed-terminal-lifecycle.js"
+    }
+  ],
+  "external_import_specifiers": {
+    "@modelcontextprotocol/node": 2,
+    "@modelcontextprotocol/server": 2,
+    "https-proxy-agent": 1,
+    "node:child_process": 6,
+    "node:crypto": 11,
+    "node:fs": 5,
+    "node:fs/promises": 3,
+    "node:http": 5,
+    "node:https": 1,
+    "node:net": 1,
+    "node:os": 4,
+    "node:path": 9,
+    "node:readline": 1,
+    "node:stream": 1,
+    "node:string_decoder": 1,
+    "node:url": 1,
+    "node:util": 2,
+    "vscode": 17
+  },
+  "missing_tsconfig_files": [
+    "../../vscode-main/src/vscode-dts/vscode.d.ts",
+    "../../vscode-main/src/vscode-dts/vscode.proposed.defaultChatParticipant.d.ts",
+    "../../vscode-main/src/vscode-dts/vscode.proposed.chatParticipantAdditions.d.ts",
+    "../../vscode-main/src/vscode-dts/vscode.proposed.chatParticipantPrivate.d.ts",
+    "../../vscode-main/src/vscode-dts/vscode.proposed.chatPromptFiles.d.ts",
+    "../../vscode-main/src/vscode-dts/vscode.proposed.chatProvider.d.ts",
+    "../../vscode-main/src/vscode-dts/vscode.proposed.languageModelThinkingPart.d.ts",
+    "../../src/file-tool-registry.ts",
+    "../../src/ide-tool-definitions.ts",
+    "test/workspace-hub-store.test.ts"
+  ],
+  "compiled_source_labels": {
+    "dist/extension.js": [
+      "extensions/shuncode/src/agent-checkpoint-store.ts",
+      "extensions/shuncode/src/branch-state.ts",
+      "extensions/shuncode/src/bridge-access-controller.ts",
+      "extensions/shuncode/src/bridge-constants.ts",
+      "extensions/shuncode/src/bridge-license-config.ts",
+      "extensions/shuncode/src/bridge-license-service.ts",
+      "extensions/shuncode/src/bridge-mcp-modern.ts",
+      "extensions/shuncode/src/bridge-mcp-transport.ts",
+      "extensions/shuncode/src/bridge-server.ts",
+      "extensions/shuncode/src/bridge-tool-dispatcher.ts",
+      "extensions/shuncode/src/bridge-tunnel-lease.ts",
+      "extensions/shuncode/src/bridge-utils.ts",
+      "extensions/shuncode/src/chat-history.mts",
+      "extensions/shuncode/src/codex-auth.ts",
+      "extensions/shuncode/src/config.ts",
+      "extensions/shuncode/src/custom-agents.ts",
+      "extensions/shuncode/src/deepseek-compat.mts",
+      "extensions/shuncode/src/extension-host-proxy.mts",
+      "extensions/shuncode/src/extension.ts",
+      "extensions/shuncode/src/ide-tool-broker.ts",
+      "extensions/shuncode/src/instance-launcher.ts",
+      "extensions/shuncode/src/lsp-tool.ts",
+      "extensions/shuncode/src/merge-contract.ts",
+      "extensions/shuncode/src/model-defaults.mts",
+      "extensions/shuncode/src/model-provider-identifiers.mts",
+      "extensions/shuncode/src/model-provider.ts",
+      "extensions/shuncode/src/model-reasoning.mts",
+      "extensions/shuncode/src/native-chat.ts",
+      "extensions/shuncode/src/runtime-client.ts",
+      "extensions/shuncode/src/tool-presentation.ts",
+      "extensions/shuncode/src/workspace-hub-store.ts",
+      "extensions/shuncode/src/workspace-hub-types.ts",
+      "extensions/shuncode/src/workspace-hub.ts",
+      "src/adaptive-concurrency.ts",
+      "src/apply-patch.ts",
+      "src/bridge-activity-tracker.ts",
+      "src/bridge-coordination-validation.ts",
+      "src/bridge-event-store.ts",
+      "src/bridge-http-router.ts",
+      "src/bridge-session-registry.ts",
+      "src/bridge-tool-name.ts",
+      "src/bridge-usage-counter.ts",
+      "src/build-info.ts",
+      "src/canonical-diff.ts",
+      "src/concurrency.ts",
+      "src/custom-tool-admin.ts",
+      "src/custom-tool-contract.ts",
+      "src/custom-tool-manifest.ts",
+      "src/custom-tool-migration.ts",
+      "src/custom-tool-sandbox.ts",
+      "src/custom-tool-skill-import.ts",
+      "src/custom-tool-skill.ts",
+      "src/custom-tools.ts",
+      "src/file-tool-input-compat.ts",
+      "src/file-tool-registry.ts",
+      "src/find-files.ts",
+      "src/ide-tool-definitions.ts",
+      "src/jsonrpc-request-id-registry.ts",
+      "src/managed-command-cancellation.ts",
+      "src/managed-command-id.ts",
+      "src/managed-command-retention.ts",
+      "src/managed-command-risk.ts",
+      "src/managed-terminal-lifecycle.ts",
+      "src/mcp-protocol.ts",
+      "src/read-files.ts",
+      "src/read-image.ts",
+      "src/ripgrep-diagnostics.ts",
+      "src/search-files.ts",
+      "src/tool-input-validation.ts",
+      "src/version.ts",
+      "src/workspace-paths.ts"
+    ],
+    "runtime/agent-host.js": [
+      "src/agent-host.ts",
+      "src/agent-tool-content.ts",
+      "src/apply-patch.ts",
+      "src/canonical-diff.ts",
+      "src/deepseek-compat.ts",
+      "src/file-tool-input-compat.ts",
+      "src/file-tool-registry.ts",
+      "src/find-files.ts",
+      "src/ide-tool-definitions.ts",
+      "src/openai-agent.ts",
+      "src/read-files.ts",
+      "src/read-image.ts",
+      "src/ripgrep-diagnostics.ts",
+      "src/search-files.ts",
+      "src/tool-input-validation.ts",
+      "src/version.ts",
+      "src/workspace-paths.ts"
+    ],
+    "runtime/mcp-server.js": [
+      "src/apply-patch.ts",
+      "src/canonical-diff.ts",
+      "src/concurrency.ts",
+      "src/file-tool-input-compat.ts",
+      "src/file-tool-registry.ts",
+      "src/find-files.ts",
+      "src/mcp-protocol.ts",
+      "src/mcp-server.ts",
+      "src/read-files.ts",
+      "src/read-image.ts",
+      "src/ripgrep-diagnostics.ts",
+      "src/search-files.ts",
+      "src/tool-input-validation.ts",
+      "src/version.ts",
+      "src/workspace-paths.ts"
+    ]
+  },
+  "manifest_has_scripts": false,
+  "manifest_has_dependencies": false,
+  "manifest_has_dev_dependencies": false,
+  "proposed_apis": [
+    "defaultChatParticipant",
+    "chatParticipantAdditions",
+    "chatParticipantPrivate",
+    "chatReferenceBinaryData",
+    "chatPromptFiles",
+    "chatProvider",
+    "languageModelThinkingPart"
+  ],
+  "note": "Source labels in bundles are clues to original module boundaries, not embedded original TypeScript."
+}

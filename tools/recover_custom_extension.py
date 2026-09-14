@@ -68,7 +68,7 @@ def recover(tree, output):
     report = {'origin': extension.relative_to(tree).as_posix(), 'copied': [], 'skipped': [],
               'scope': 'Exact shipped text files, not original source reconstruction. Do not execute before review.',
               'secret_scan': 'Heuristic gate for common private keys/tokens only; NOT a security audit.',
-              'core_code_index': [], 'asar_indexes': []}
+              'core_code_index': [], 'asar_indexes': [], 'excluded_trees': {}}
     selected = []
     total = 0
     for path in sorted(extension.rglob('*')):
@@ -76,6 +76,12 @@ def recover(tree, output):
             continue
         rel = path.relative_to(extension).as_posix()
         size = path.stat().st_size
+        excluded = next((prefix for prefix in ('runtime/git/', 'vendor/') if rel.startswith(prefix)), None)
+        if excluded:
+            summary = report['excluded_trees'].setdefault(excluded, {'files': 0, 'bytes': 0, 'reason': 'bundled third-party runtime/vendor tree'})
+            summary['files'] += 1
+            summary['bytes'] += size
+            continue
         reason = None
         if 'node_modules' in path.relative_to(extension).parts:
             reason = 'third-party dependencies excluded'

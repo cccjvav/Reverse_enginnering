@@ -135,3 +135,28 @@ cmake --build .work/innoextract-build --parallel 2
 为什么先恢复扩展？它的产品名与版本和目标软件匹配，又有独立入口，是定制功能的重要候选位置。但这不意味着所有定制功能都在扩展里：工具还为核心 `out/` 文件生成路径、哈希和 `shuncode` 字样数量，供后续定位 Code OSS 本体修改。同时只读取 ASAR 目录头，检查其内部 source map 数量，无需把 85 MB 的第三方库复制到 Git。
 
 当前是“已发布代码提取”，不是“已恢复完整原始 TypeScript 工程”。后续依据实际文件再决定格式化、source map 恢复或手工重建。
+
+### 05 实测：发行包直接带有源码
+
+运行 [34851848414](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34851848414) 提取成功。发现 `src/` 中有 **34 个 TS/MTS 文件**，带类型与注释，共 **682,862 字节**。这些不是本次反编译生成的文本，而是安装包本来就附带的源码。
+
+第一轮后缀筛选还复制了捆绑 Git 目录中的文档、帮助文本，以及 vendor 文本，共 356 文件 / 16,998,342 字节。**这是提取范围过宽，不是额外恢复了自有代码。** 后续显式排除 `runtime/git/` 和 `vendor/`，将这些树压缩为数量/体积摘要，并删除误纳入的第三方材料（提交历史保留过程，不重写历史）。精简后为 **51 文件 / 4,776,532 字节**，源码原字节不变。增加了专项测试防止再次带入捆绑 Git 文档。
+
+ASAR 头实测包含 **5,716 个文件、1,208 个 `.map` 路径**，报告中的样本位于第三方依赖。我们没有将这些 map 计入自有源码恢复成果，也没有将目录头统计说成已恢复 map 内的源码。
+
+## 06 — 从“文件拿到了”到“工程完整吗”
+
+```bash
+python3 tools/audit_recovered_extension.py
+```
+
+新增静态审计，结果在 [`evidence/source-completeness.json`](evidence/source-completeness.json)。
+
+- 51 个保留文件逐一计算 SHA-256，全部与提取记录一致。
+- 扫描 TS/MTS 的 import/from/require，对 `.js → .ts`、`.mjs → .mts` 做简单路径解析。发现 **32 处未解析相对导入 / 24 个不同共享模块路径**。这是轻量静态审计，不等同完整编译器解析。
+- 原 `tsconfig.json` 中 **10 个文件引用**目前缺失，包括 VS Code proposed API 声明、原工程共享模块和原始测试 TS。
+- 扩展发行版 `package.json` 不包含构建 scripts、dependencies、devDependencies；不能直接假定 `npm install && npm run build` 可用。
+- 三个 bundle 的模块边界注释中找到 **43 个上层共享源码路径标签**，其中有部分缺失模块对应的运行代码。后续可以据此恢复编译后的模块逻辑，但这些注释不携带被擦除的类型。
+- 对 9 个恢复的 JS/CJS 文件运行 `node --check <file>`，均返回 0，记录在 [`evidence/javascript-syntax.json`](evidence/javascript-syntax.json)。这是只解析不执行，不是扩展激活或功能测试。
+
+**下一阶段：** 先整理缺失共享模块与 bundle 标签的对应关系，建立“原样源码 / 编译产物重建”分离的工作区，再补构建依赖和宿主 API 类型。核心 Code OSS 定制仍需另外定位。详细阅读顺序见 [源码阅读指南](SOURCE_READING_GUIDE.md)。
