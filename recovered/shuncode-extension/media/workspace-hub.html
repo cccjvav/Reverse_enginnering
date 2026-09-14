@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspSource}}; script-src 'nonce-{{nonce}}'; img-src {{cspSource}} data:;">
+<link rel="stylesheet" href="{{styleUri}}"><title>工作区与共享聊天</title></head>
+<body>
+<header class="topbar"><div><div class="eyebrow">SHUNCODE · WORKSPACE HUB</div><h1>工作区与共享聊天</h1><p>看清每个项目的连接与任务，在任意实例查看同一份聊天记录。每个实例是独立进程，账号与聊天记录共享。</p></div><div class="topbar-actions"><button id="new-instance">新开空白实例</button><button id="choose" class="primary">＋ 在新实例打开项目</button></div></header>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+<nav class="tabs" aria-label="管理页面"><button id="tab-workspaces" class="selected" aria-selected="true">工作区 <span id="window-count">0</span></button><button id="tab-chats" aria-selected="false">共享聊天 <span id="chat-count">0</span></button><span class="live"><i></i><span id="sync-state">实时同步</span></span></nav>
+<main>
+<section id="workspaces-page"><div class="section-heading"><h2>打开的工作区</h2><span>连接地址默认隐藏 · 点击眼睛查看（Token 永不显示）· 其他窗口的地址由所属窗口复制</span></div><div id="windows" class="window-grid"></div></section>
+<section id="chats-page" hidden><div class="chat-layout"><aside class="chat-sidebar"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索聊天或项目" aria-label="搜索聊天或项目"></label><div id="chats" class="chat-list"></div></aside><article class="conversation"><div class="conversation-header"><div><div id="chat-project" class="eyebrow">全部工作区 · 共享记录</div><h2 id="chat-title">选择一段聊天</h2><div id="chat-status" class="muted">生成中的会话只能由原窗口执行，其他窗口同步查看。</div></div><div class="header-actions"><button id="delete-chat" class="danger" title="删除这条共享记录（原工作区本地历史不受影响）" disabled>删除记录</button><button id="continue" class="primary" disabled>在所属工作区继续</button></div></div><div id="messages" class="messages"><div class="empty">左侧是所有窗口的聊天记录。<br>继续聊天时会回到原项目，不会把任务执行到当前项目。</div></div><div class="reader-note">只读同步视图 · 不执行消息中的命令或工具 · 点击“继续”后由你在原项目发送下一条消息</div></article></div></section>
+</main>
+<footer><button id="data-folder" class="link">打开共享记录文件夹 ↗</button><span id="folder-path"></span><span>原工作区历史保留作兼容备份 · 共享目录对所有实例可见</span></footer>
+<script nonce="{{nonce}}" src="{{scriptUri}}"></script></body></html>
