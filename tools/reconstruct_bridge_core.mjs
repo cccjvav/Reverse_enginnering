@@ -37,6 +37,11 @@ export function scopeInfo(code) {
   const moduleScope = scope.scopes.find(s=>s.type==='module');
   return {ast,names:moduleScope.variables.map(v=>v.name),free:[...new Set(scope.globalScope.through.map(r=>r.identifier.name))].sort()};
 }
+export function assertOmittableInitializer(node, owner) {
+  const call=node.type==='ExpressionStatement'?node.expression:null;
+  if(call?.type==='CallExpression' && call.callee.type==='Identifier' && call.callee.name==='init_define_SHUNCODE_BUILD_INFO' && call.arguments.length===0)return;
+  throw new Error(`Unmodeled top-level statement in ${owner}`);
+}
 function bindingNames(node) {
   if (node.type==='FunctionDeclaration'||node.type==='ClassDeclaration') return node.id ? [node.id.name] : [];
   if(node.type==='VariableDeclaration') return node.declarations.map(d=>d.id.type==='Identifier'?d.id.name:null).filter(Boolean);
@@ -105,6 +110,9 @@ export async function reconstruct({write=true}={}) {
   }
   const groups=new Map();
   for(const e of selected){if(!groups.has(e.owner))groups.set(e.owner,[]);groups.get(e.owner).push(e);}
+  // The reviewed labels omit exactly the injected build-info calls, not arbitrary
+  // assignments or other side effects that might initialize their declarations.
+  for(const node of ast.body){const owner=ownerAt(node.start);if(groups.has(owner)&&!bindingNames(node).length)assertOmittableInitializer(node,owner);}
   const filename=owner=>owner.startsWith('src/')?owner.slice(4).replace(/\.ts$/,'.js'):owner+'.js';
   const outputRoot=path.join(ROOT,'reconstructed/bridge-core/src');
   const report={scope:'Dependency-closed runnable JavaScript reconstructed from a reviewed subset of shipped declarations. NOT original TypeScript, complete source recovery, or an application rebuild.',origin:ORIGINAL,originSha256:expected,offsetUnits:'UTF-16 string offsets',modules:[],sourceLabelIndex:[]};

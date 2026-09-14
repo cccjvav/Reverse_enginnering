@@ -5,7 +5,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createRequire } from 'node:module';
 import vm from 'node:vm';
-import { reconstruct, scopeInfo } from '../tools/reconstruct_bridge_core.mjs';
+import { reconstruct, scopeInfo, assertOmittableInitializer } from '../tools/reconstruct_bridge_core.mjs';
 import { ROOT, hash } from '../tools/patch_utils.mjs';
 import * as compat from '../reconstructed/bridge-core/src/file-tool-input-compat.js';
 import * as fileTools from '../reconstructed/bridge-core/src/file-tool-registry.js';
@@ -41,6 +41,8 @@ test('scope analysis sees lexical dependencies, not property names or shadowed p
   assert.deepEqual(scopeInfo('function f(local) { return external.call(local); }').free,['external']);
   assert.deepEqual(scopeInfo('const external = 1; function f() { return external; }').free,[]);
   assert.deepEqual(scopeInfo('const f = () => hidden;').free,['hidden']);
+  assert.doesNotThrow(()=>assertOmittableInitializer(scopeInfo('init_define_SHUNCODE_BUILD_INFO();').ast.body[0],'fixture'));
+  for(const code of ['state.ready = true;','startServer();','init_define_SHUNCODE_BUILD_INFO(extra);'])assert.throws(()=>assertOmittableInitializer(scopeInfo(code).ast.body[0],'fixture'),/Unmodeled top-level statement/);
 });
 
 test('tool catalogue contains 5 file tools and 8 IDE tools; wait stays excluded from Bridge',()=>{
