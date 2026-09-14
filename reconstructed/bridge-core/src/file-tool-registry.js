@@ -1,6 +1,6 @@
 // RECONSTRUCTED from src/file-tool-registry.ts; see ../provenance.json.
 // Original function/class bodies retained; ESM wiring was reconstructed.
-// PARTIAL: catalogue + input parsing ONLY. File IO and dispatcher are NOT reconstructed.
+// PARTIAL: catalogue + input parsing ONLY. This module has no file IO or dispatcher.
 
 
 var APPLY_PATCH_TOOL = {

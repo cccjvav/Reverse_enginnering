@@ -227,3 +227,34 @@ Windows/Linux CI 使用 `bridge-core-tests.yml`，只拉文本证据，不下载
 第一轮 `gh run view --log` 下载完整日志时，日志存储域名返回 EOF。没有把这个下载失败说成测试失败，也没有伪造逐项远端日志：使用 `gh run view --json ...jobs` 和 `gh run watch --exit-status` 核实作业/步骤成功，将有限结果保存为 `docs/evidence/bridge-core-tests.json`。Actions 有固定工具 action 使用旧 Node 目标、平台强制 Node 24 的警告，但任务本身成功；测试运行时由 setup-node 选择 Node 22。
 
 截至本轮：本地 40 Node + 23 Python 通过，Windows/Linux 核心 CI 通过；原 0.7.4 overlay ZIP 未改动。仍未做完整扩展激活、真实文件工具执行、Electron GUI 或新安装器构建。下一阶段从文件执行链与工作区路径保护继续。
+
+
+## 09 — 从输入解析走到真实文件读取
+
+本轮先查看依赖索引中 `read-files`、`workspace-paths`、读图、搜索和补丁模块。确认文本读取只依赖 Node 内建模块与共享路径模块，因此先完整审阅这条链，不同时引入尚未定位部署位置的 ripgrep 或写入执行器。临时 `.work/shared-review/` 切片仍只作阅读，真正产物仍按 AST 声明生成。
+
+在生成器的明确种子中加入 `readFiles/formatReadFilesForModel` 与两个路径函数，将 `DOMException/TextDecoder` 标为已确认的 Node 22 全局量。新增 **2 模块 / 22 声明**，总计 **26 模块 / 152 声明 / 113,420 字节 JS**。新包版本 `0.0.0-reconstructed.2`，仍是禁止 npm 发布的私有重建包，不冒充原 0.7.4 发行身份。
+
+```bash
+npm run build:bridge-core
+npm run check:bridge-core
+npm test
+python3 -m unittest discover -s tests -q
+python3 tools/audit_recovered_extension.py
+```
+
+原声明对照现在还需要原 bundler 的 `__toESM`。测试辅助工具从同一哈希固定的原 bundle 中只取 8 个已审阅的互操作辅助声明，并将 require 限定为 crypto/fs/fs-promises/path；不执行完整扩展。VM 注入 Node 的 TextDecoder 和相同的错误构造器，避免跨 realm 的 TypeError 身份差异导致错误分类假差异。这个 VM 仍只是对照工具，不是安全沙箱。
+
+### 真实夹具测试与发现
+
+新增 28 项测试，全部只在临时目录中创建小文件。覆盖根目录规范化、多根、相对/绝对路径、静态越界、内部/外部目录链接、Windows 分隔符与 POSIX 反斜杠字面量、编码/行范围/预算/版本、权限回调和取消。对同一夹具比较原声明与重建 ESM 的读取结果和文本格式。本地总计 **68 Node + 23 Python 通过**，原来源审计仍全部哈希一致、34 个 TS/MTS、32 处原 TS 相对导入缺口。
+
+发现并稳定复现了原版本风险：规范化路径通过后，在异步权限回调中将原目录换成指向外部夹具的链接/junction，原声明和重建读取器都会返回外部夹具文本。风险测试明确标注 KNOWN SNAPSHOT RISK；它通过表示复现成功，不能计作“已安全”。没有读取用户文件或修改证据文件。
+
+### 防护候选的边界
+
+`community/bridge-core/read-files.mjs` 只调整共享模块 import，并在确认后加 realpath 检查点。与原核准根比较，阻止根被重新绑定后扩大范围；若变成另一个内部路径也要求重新确认。测试覆盖外部目录替换、内部目标替换、根本身替换、正常行为及精确差异范围。
+
+**这不是完整竞态修复**：检查之后仍可能被替换，stat、探测与流读取还不是同一个固定句柄。后续需结合句柄复用、操作系统隔离和威胁模型继续设计。也记录了输出预算仅限制返回内容，完整版本计算仍扫描全文件，长行缓冲不由显示截断提供硬限额。
+
+因此本轮交付是可读、可复现、可测试的读取基线及有限防护候选，不部署到真实 MCP 服务，不改 overlay，不宣称整个文件工具链安全。跨平台运行状态另存 [bridge-read-tests.json](evidence/bridge-read-tests.json)。

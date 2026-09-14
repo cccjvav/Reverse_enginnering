@@ -114,3 +114,10 @@ GitHub Actions 运行 `34849979254` 成功完成，报告由机器人提交 `69c
 本地 40 项 Node 与 23 项 Python 测试通过。新增 Windows/Linux Node CI，不运行安装器或完整扩展；远端状态另见 [测试证据](evidence/bridge-core-tests.json)。原始文件哈希仍一致，原来源树的 32 处未解析相对导入不会因另建 ESM 包而自动消失。
 
 后续顺序：补齐 `workspace-paths` 与实际文件读写/搜索/补丁执行依赖；针对越界路径、符号链接、并发写入和版本冲突补测试；然后接回扩展 TS 入口、宿主声明和构建配置。完整 Windows 安装器与 GUI 验收仍是后续阶段。
+
+
+## 2026-09-14：独立读文件执行与风险复现
+
+新增 `read-files`、`workspace-paths` 两个自有模块、22 个声明，当前重建共 26 模块 / 152 声明 / 113,420 字节。读文件可在临时工作区实际执行，搜索/写补丁/完整 MCP 调度仍未恢复。本地 68 Node + 23 Python 通过。
+
+已复现原读取器在确认期间目录替换的 TOCTOU 风险，并提供单独检查点防护候选；不将再次 realpath 说成完整防竞态方案。见 [说明](../reconstructed/bridge-core/FILE_READER.md) 和 [本轮跨平台证据](evidence/bridge-read-tests.json)。后续需明确文件系统威胁模型与句柄/隔离策略，再推进写入执行，不能仅凭静态越界测试就认定安全。

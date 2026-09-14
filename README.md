@@ -15,14 +15,14 @@
 
 ## 新进展：可测试的 Bridge 核心模块
 
-从原扩展 bundle 拆出 **24 个 JavaScript 模块 / 130 个声明**，约 96.5 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录与输入解析；不是找回了原始 TS 类型，也不是完整 MCP 服务。
+从原扩展 bundle 拆出 **26 个 JavaScript 模块 / 152 个声明**，约 113.4 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录、输入解析与独立文件读取；不是找回了原始 TS 类型，也不是完整 MCP 服务。
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
-- 本地 **40 项 Node 测试 + 23 项 Python 回归测试通过**；Node 测试含 26 项新增核心测试，使用临时回环 HTTP 和桩执行器，不运行安装器。
-- **Windows Server 2022 / Ubuntu 24.04 的 CI 均通过**：[验证记录](docs/evidence/bridge-core-tests.json)。这是 Node 模块测试，不是 Windows 图形界面验收。
+- 本地 **68 项 Node 测试 + 23 项 Python 回归测试通过**；本轮新增 28 项文件读取/防护测试，使用临时文件，不运行安装器。
+- [本轮 Windows / Linux 验证状态](docs/evidence/bridge-read-tests.json)。这是 Node 模块及临时文件测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 
-原件不变。文件工具当前只有定义与输入解析，实际文件操作及完整扩展构建仍在恢复中。
+原件不变。文件读取已可独立运行，但发现并复现了确认期间目录替换的风险；[读取说明与防护局限](reconstructed/bridge-core/FILE_READER.md)明确记录。搜索、补丁写入、MCP 执行调度与完整扩展构建仍待恢复。
 
 ## 当前恢复成果
 

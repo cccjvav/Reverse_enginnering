@@ -3,8 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { createRequire } from 'node:module';
-import vm from 'node:vm';
+import { originalBaseline } from './helpers/bridge-core-baseline.mjs';
 import { reconstruct, scopeInfo, assertOmittableInitializer } from '../tools/reconstruct_bridge_core.mjs';
 import { ROOT, hash } from '../tools/patch_utils.mjs';
 import * as compat from '../reconstructed/bridge-core/src/file-tool-input-compat.js';
@@ -25,7 +24,7 @@ test('reconstruction is deterministic; every original declaration hash and gener
     const bytes=await readFile(path.join(ROOT,'reconstructed/bridge-core',m.file));assert.equal(hash(bytes),m.sha256);
     for(const d of m.declarations)assert.equal(hash(original.slice(d.start,d.end)),d.originalSha256);
   }
-  assert.equal(generated.report.moduleCount,24);
+  assert.equal(generated.report.moduleCount,26);
   assert.ok(generated.report.sourceLabelIndex.some(m=>m.headingOffsets.length>1));
 });
 
@@ -68,19 +67,12 @@ test('schema validation and tool parsers are separate checks, not a filesystem s
   assert.throws(()=>fileTools.parseReadFilesInput({files:[{path:'a',start_line:0}]}),/integer >= 1/);
   assert.equal(fileTools.parseSearchFilesInput({pattern:'needle'}).pattern,'needle');
   // A syntactically valid path is not proof it is within a workspace. That
-  // enforcement lives in the not-yet-reconstructed file-operation layer.
+  // enforcement belongs to the file-operation layer, not this parser.
   assert.equal(fileTools.parseReadFilesInput({files:[{path:'../outside'}]}).files[0].path,'../outside');
 });
 
-test('isolated original declarations and ESM reconstruction agree on deterministic parser cases',()=>{
-  // Execute ONLY the hash-checked, reviewed declaration closure, never the full
-  // extension bundle. VM is a comparison harness, not a security sandbox.
-  const declarations=generated.report.modules.flatMap(m=>m.declarations).sort((a,b)=>a.start-b.start);
-  const baselineSource=declarations.map(d=>d.snapshotMetadataAssignment?`const ${d.names[0]} = ${original.slice(d.start,d.end)};`:original.slice(d.start,d.end)).join('\n');
-  const require=createRequire(import.meta.url);
-  const baseline=vm.runInNewContext(baselineSource+'\n({normalizeFileToolInput,parseReadFilesInput,parseSearchFilesInput,validateToolInput,FILE_TOOL_DEFINITIONS})',{
-    require:specifier=>{assert.equal(specifier,'node:crypto');return require(specifier);},Buffer,setTimeout,clearTimeout,
-  },{timeout:1000});
+test('isolated original declarations and ESM reconstruction agree on deterministic parser cases',async()=>{
+  const baseline=await originalBaseline();
   const canonical=fn=>{try{return JSON.stringify({result:fn()});}catch(e){return JSON.stringify({error:e.message});}};
   const cases=[{},null,{path:'a',start:2},{files:['a']},{files:[]},{files:[{path:'a',start_line:0}]},{query:'a',pattern:'b'}];
   for(const input of cases){

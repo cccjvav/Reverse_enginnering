@@ -12,6 +12,7 @@ on:
       - tools/patch_utils.mjs
       - reconstructed/bridge-core/**
       - community/bridge-core/**
+      - tests/helpers/**
       - tests/bridge-core-*.test.mjs
       - tests/community-*.test.mjs
   workflow_dispatch:

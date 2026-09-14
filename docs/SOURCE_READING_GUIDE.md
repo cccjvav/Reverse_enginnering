@@ -68,3 +68,10 @@
 同一个 `// src/xxx.ts` 可能出现两次，第一次只有构建信息初始化。不能用正则截第一段就声称模块完整；新工具从真实注释定位来源，再使用 AST 顶层声明和词法自由变量分析建立依赖闭包。
 
 `file-tool-registry` 特别标注为部分重建，没有文件执行器。校验器也不是完整 JSON Schema 实现，更不能代替工作区安全检查。原貌层保留原行为；修复候选见 [`community/bridge-core`](../community/bridge-core/README.md)。
+
+
+## 第二组：实际文件读取与路径边界
+
+新增 [`FILE_READER.md`](../reconstructed/bridge-core/FILE_READER.md)。按 `workspace-paths → resolveSafePath → readSingleFile → readTextRange → readFiles` 阅读，并对照 `tests/bridge-core-files.test.mjs`。原注册表仍只有目录/解析，独立读文件函数已经有真实临时文件测试，二者不要混淆。
+
+特别注意权限确认是异步的：保存一个已经检查过的路径字符串，不等于固定了它稍后指向的文件。测试分别复现原貌风险和验证维护层再次核对路径的检查点；后者仍不是原子打开，也不是完整防竞态方案。输出预算同样不等于总 I/O 或内存限额。

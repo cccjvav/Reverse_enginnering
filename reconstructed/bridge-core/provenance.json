@@ -664,8 +664,8 @@
     {
       "originLabel": "src/file-tool-registry.ts",
       "file": "src/file-tool-registry.js",
-      "sha256": "dd66edceb3a4fbd17aa8ec9069768c786f8d4a108c33d58713e7bb78828b966f",
-      "bytes": 26768,
+      "sha256": "7405a7721b860405a74e07b5c9199ab208a9c562f0c5bf2fab73354f923688e9",
+      "bytes": 26764,
       "exports": [
         "APPLY_PATCH_TOOL",
         "FILE_TOOL_DEFINITIONS",
@@ -1621,6 +1621,218 @@
       ]
     },
     {
+      "originLabel": "src/read-files.ts",
+      "file": "src/read-files.js",
+      "sha256": "748632eb72c187174296ce569402a29460a06906b70184b5c6dcf0eb88ec9820",
+      "bytes": 15603,
+      "exports": [
+        "DEFAULT_READ_FILES_CONFIG",
+        "ReadToolError",
+        "appearsBinary",
+        "applyBatchBudget",
+        "estimateTokens",
+        "formatReadFilesForModel",
+        "import_node_crypto4",
+        "import_node_fs",
+        "import_node_path3",
+        "import_promises4",
+        "isInsideRoot3",
+        "mapWithConcurrency2",
+        "normalizeError3",
+        "readFiles",
+        "readSingleFile",
+        "readTextRange",
+        "resolveSafePath",
+        "validateRange"
+      ],
+      "dependencies": [
+        "workspace-paths.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_crypto4"
+          ],
+          "start": 998378,
+          "end": 998427,
+          "originalSha256": "d186d387bbdecb4d4ad29d20341c65e98ce2abe8c69b46bfbff31802968ba3cf",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_fs"
+          ],
+          "start": 998428,
+          "end": 998468,
+          "originalSha256": "c1cf40e0553e1d21bbfd071d56b322758816fc60a3f36e410c0a139ffeff68fe",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_promises4"
+          ],
+          "start": 998469,
+          "end": 998520,
+          "originalSha256": "b4c0f1c34c3331f8a8864ff42eba51387361821193556dc4bad08fea89415fda",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path3"
+          ],
+          "start": 998521,
+          "end": 998578,
+          "originalSha256": "e309d42b7f393f793ea09b79df59cdd47c96192c5007110b3f8f47e85c2bf09f",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_READ_FILES_CONFIG"
+          ],
+          "start": 998579,
+          "end": 998904,
+          "originalSha256": "3fe96c07a663a932160c34ca6a688b2ff0e97ae44286db692c0a49e9051e0829",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "ReadToolError"
+          ],
+          "start": 998905,
+          "end": 999034,
+          "originalSha256": "52a03632e6ef18ad927ab2922ebfca5c8d66a05c738e76f566845e36342026b0",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "estimateTokens"
+          ],
+          "start": 999035,
+          "end": 999105,
+          "originalSha256": "f50568c60d6c2470af154c942373e9fcb5a70c2119f6bb314f0f5c408f408861",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "validateRange"
+          ],
+          "start": 999106,
+          "end": 999730,
+          "originalSha256": "91cfa71258bdf3cc283e78674d1bc39188e587690fac67f0fac7c700405828af",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isInsideRoot3"
+          ],
+          "start": 999731,
+          "end": 1000000,
+          "originalSha256": "347d39d4e3b99a5a3baa6d8639ca611d327467da14b7a2ea794a5e4a015a17d1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "resolveSafePath"
+          ],
+          "start": 1000001,
+          "end": 1001463,
+          "originalSha256": "05c2c9b61278e433d58c4b1b44d192c4ad859d5a65dc1154ab6aa3b29f57da8b",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "appearsBinary"
+          ],
+          "start": 1001464,
+          "end": 1002126,
+          "originalSha256": "06f64b228fc73147f55f977dd2d99a3f94d49110e56365a27311903891b7257d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readTextRange"
+          ],
+          "start": 1002127,
+          "end": 1005408,
+          "originalSha256": "121bad94a997e25eb5d7c87bc2e1fc7d82266acc1a917af2a17d744bf875a181",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeError3"
+          ],
+          "start": 1005409,
+          "end": 1006287,
+          "originalSha256": "a568815b4b3ec17aba50e46ae5fd02148850de5e92139e609b0bb37c8f402145",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readSingleFile"
+          ],
+          "start": 1006288,
+          "end": 1008627,
+          "originalSha256": "f537c3d634a1167572540d990c0ae3cf4dfff38d9b23584dd57b5ac254227335",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "mapWithConcurrency2"
+          ],
+          "start": 1008628,
+          "end": 1009071,
+          "originalSha256": "6ffc69dfa4962d0feb61da419cdf3ffe602b1efe7a67cc11dfbf96c85194fa45",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "applyBatchBudget"
+          ],
+          "start": 1009072,
+          "end": 1009766,
+          "originalSha256": "93b3a2b03f843d987bbe64e3e7c652e72d42120a21b355c55deea7fc96944270",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readFiles"
+          ],
+          "start": 1009767,
+          "end": 1011157,
+          "originalSha256": "ed04d88b2c4826c41c2bb257433a941fc093798d5d323cf7e7219ff40ba0fda1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "formatReadFilesForModel"
+          ],
+          "start": 1011158,
+          "end": 1013329,
+          "originalSha256": "359706d0dc0a39517ad13b8cb597976b6eb5975d39fc114a2d2c1d2340525aac",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
       "originLabel": "src/tool-input-validation.ts",
       "file": "src/tool-input-validation.js",
       "sha256": "3757e12f94795620a6e27ec7900e3d21ff4b76f7a718cf71cd3c14cf6db954b2",
@@ -1731,6 +1943,62 @@
           "snapshotMetadataAssignment": false
         }
       ]
+    },
+    {
+      "originLabel": "src/workspace-paths.ts",
+      "file": "src/workspace-paths.js",
+      "sha256": "2c896a3bb746d613d16cfed75c773392f0ec68e7a8cc9efcd43c38bff5c54a80",
+      "bytes": 1318,
+      "exports": [
+        "STALE_ROOT_CODES",
+        "canonicalizeWorkspaceRoots",
+        "import_promises",
+        "literalFirstPathSpellings"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_promises"
+          ],
+          "start": 939253,
+          "end": 939303,
+          "originalSha256": "67a44edf336ff0a812b5dcb3332a08988f467970fcc7fa91338c305d6a5af933",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "STALE_ROOT_CODES"
+          ],
+          "start": 939304,
+          "end": 939374,
+          "originalSha256": "9c66c788bdc69115bda2786db82366258c34640c227a77655ca6a4a8622b31b1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "canonicalizeWorkspaceRoots"
+          ],
+          "start": 939375,
+          "end": 940040,
+          "originalSha256": "970340554da0fe4fc17b44c97cebc95904d01400c62e652fa7e04ccec2690528",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "literalFirstPathSpellings"
+          ],
+          "start": 940041,
+          "end": 940317,
+          "originalSha256": "95b325a240677c23071c2c681b4d2ef53173737e662848fb8f5a2e56f99f4881",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
     }
   ],
   "sourceLabelIndex": [
@@ -1803,14 +2071,6 @@
       ],
       "reconstructedBindings": [],
       "externalReferences": [
-        {
-          "name": "DOMException",
-          "owner": "UNRESOLVED"
-        },
-        {
-          "name": "TextDecoder",
-          "owner": "UNRESOLVED"
-        },
         {
           "name": "__toESM",
           "owner": "<prelude>"
@@ -2583,10 +2843,6 @@
       "reconstructedBindings": [],
       "externalReferences": [
         {
-          "name": "DOMException",
-          "owner": "UNRESOLVED"
-        },
-        {
           "name": "__dirname",
           "owner": "UNRESOLVED"
         },
@@ -2867,16 +3123,27 @@
         "readFiles",
         "formatReadFilesForModel"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_crypto4",
+        "import_node_fs",
+        "import_promises4",
+        "import_node_path3",
+        "DEFAULT_READ_FILES_CONFIG",
+        "ReadToolError",
+        "estimateTokens",
+        "validateRange",
+        "isInsideRoot3",
+        "resolveSafePath",
+        "appearsBinary",
+        "readTextRange",
+        "normalizeError3",
+        "readSingleFile",
+        "mapWithConcurrency2",
+        "applyBatchBudget",
+        "readFiles",
+        "formatReadFilesForModel"
+      ],
       "externalReferences": [
-        {
-          "name": "DOMException",
-          "owner": "UNRESOLVED"
-        },
-        {
-          "name": "TextDecoder",
-          "owner": "UNRESOLVED"
-        },
         {
           "name": "__toESM",
           "owner": "<prelude>"
@@ -2924,10 +3191,6 @@
       ],
       "reconstructedBindings": [],
       "externalReferences": [
-        {
-          "name": "DOMException",
-          "owner": "UNRESOLVED"
-        },
         {
           "name": "__toESM",
           "owner": "<prelude>"
@@ -2999,10 +3262,6 @@
       ],
       "reconstructedBindings": [],
       "externalReferences": [
-        {
-          "name": "DOMException",
-          "owner": "UNRESOLVED"
-        },
         {
           "name": "__toESM",
           "owner": "<prelude>"
@@ -3086,7 +3345,12 @@
         "canonicalizeWorkspaceRoots",
         "literalFirstPathSpellings"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_promises",
+        "STALE_ROOT_CODES",
+        "canonicalizeWorkspaceRoots",
+        "literalFirstPathSpellings"
+      ],
       "externalReferences": [
         {
           "name": "require",
@@ -3095,9 +3359,9 @@
       ]
     }
   ],
-  "moduleCount": 24,
-  "declarationCount": 130,
-  "totalBytes": 96503,
+  "moduleCount": 26,
+  "declarationCount": 152,
+  "totalBytes": 113420,
   "transformations": [
     "Dependency closure rooted at explicit reviewed exports",
     "Removed per-module build-info initializer calls; extracted original metadata into an explicit dependency",

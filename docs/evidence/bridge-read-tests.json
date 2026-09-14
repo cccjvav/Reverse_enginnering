@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-14",
+  "phase": "Text-file execution recovery after the first 24-module core milestone",
+  "local": {
+    "platform": "Linux",
+    "node": "v22.22.3",
+    "passed": true,
+    "node_tests": 68,
+    "new_file_tests": 28,
+    "python_tests": 23,
+    "node_log_sha256": "1975335d02b0d2a73b998eb0916e3cfcb5aaec12ee48f3a18e113df63505805e",
+    "python_log_sha256": "c6aca692034288d5da38b825ab031891d8213fa0c0e2b3d4c0ab2778c347b91f"
+  },
+  "reconstruction": {
+    "modules": 26,
+    "declarations": 152,
+    "javascript_bytes": 113420,
+    "new_modules": [
+      "src/read-files.js",
+      "src/workspace-paths.js"
+    ],
+    "origin_sha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+    "provenance_sha256": "baa0adea73471889eea9c615ef450c0c615aba58b808c1c0e4a0df15b41704fc"
+  },
+  "known_risks": [
+    {
+      "id": "read-path-approval-race",
+      "snapshot_reproduced": true,
+      "baseline_and_reconstruction_agree": true,
+      "test_data": "Temporary fixture sentinel only",
+      "mitigation": "Post-approval realpath compared against original root and approved target",
+      "mitigation_deployed": false,
+      "fully_race_free": false
+    },
+    {
+      "id": "read-output-budget-not-io-or-memory-limit",
+      "status": "Documented; full stream is hashed and a long line can accumulate before display truncation"
+    }
+  ],
+  "community_candidate": {
+    "path": "community/bridge-core/read-files.mjs",
+    "sha256": "8fe237dcc92eccf14edbabf5c8f8578e18abb5434b9b82ece28c722fed823143",
+    "scope": "Checkpoint mitigation, not atomic file access"
+  },
+  "remote_ci": {
+    "status": "pending",
+    "workflow": ".github/workflows/bridge-core-tests.yml"
+  },
+  "scope": {
+    "actual_file_reads": "Self-created temporary fixtures only",
+    "file_writes": "Test fixture setup only; apply_patch executor not recovered",
+    "http": "Existing loopback stub handlers only",
+    "windows_gui_tested": false,
+    "full_extension_activation_tested": false,
+    "search_and_image_executors_tested": false,
+    "complete_source_build": false,
+    "existing_overlay_changed": false
+  },
+  "original_overlay_sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268"
+}
