@@ -1,0 +1,8 @@
+    this.accessCard = append(this.root, $("section.shuncode-bridge-card.shuncode-bridge-access-card"));
+    const communityHeader = append(this.accessCard, $(".shuncode-bridge-card-header"));
+    append(communityHeader, $("h3", void 0, localizeBridge("shuncodeBridge.communityEdition", "ShunCode Community")));
+    this.accessBadge = append(communityHeader, $(".shuncode-bridge-state state-stopped"));
+    this.accessDetails = append(this.accessCard, $("p.shuncode-bridge-access-details"));
+    this.accessMessage = append(this.accessCard, $("p.shuncode-bridge-help"));
+    this.accessDetails.textContent = localizeBridge("shuncodeBridge.communityChecking", "正在检查本地 Bridge 组件…");
+    this.accessMessage.textContent = localizeBridge("shuncodeBridge.communityNotice", "Bridge 与本地工具免费使用，无需登录、购买或激活码。模型 API 与隧道提供商的账号和费用另行管理。请勿公开 MCP 地址。");
