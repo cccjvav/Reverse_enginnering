@@ -1,6 +1,6 @@
 {
   "name": "@shuncode/reconstructed-bridge-core",
-  "version": "0.0.0-reconstructed.2",
+  "version": "0.0.0-reconstructed.3",
   "private": true,
   "type": "module",
   "description": "Reviewed subset reconstructed from ShunCode 0.7.4 compiled JavaScript; not original TypeScript or a complete MCP server",

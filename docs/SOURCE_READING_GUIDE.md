@@ -75,3 +75,8 @@
 新增 [`FILE_READER.md`](../reconstructed/bridge-core/FILE_READER.md)。按 `workspace-paths → resolveSafePath → readSingleFile → readTextRange → readFiles` 阅读，并对照 `tests/bridge-core-files.test.mjs`。原注册表仍只有目录/解析，独立读文件函数已经有真实临时文件测试，二者不要混淆。
 
 特别注意权限确认是异步的：保存一个已经检查过的路径字符串，不等于固定了它稍后指向的文件。测试分别复现原貌风险和验证维护层再次核对路径的检查点；后者仍不是原子打开，也不是完整防竞态方案。输出预算同样不等于总 I/O 或内存限额。
+
+
+## 第三组：写入前检查、提交与回滚
+
+按 `parsePatch → preflight → withFileLocks → preflight → commitPlans → rollbackPlans` 阅读新恢复的 `apply-patch.js`，并对照 `tests/bridge-core-patch.test.mjs`。显示 diff 在 `canonical-diff.js`。先读 [PATCH_WRITER.md](../reconstructed/bridge-core/PATCH_WRITER.md) 的风险与非原子边界，不要因为函数叫 rollback 或结果写着 staged 就假定所有操作可安全恢复。

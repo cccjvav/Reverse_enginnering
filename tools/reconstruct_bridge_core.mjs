@@ -8,6 +8,7 @@ import { ROOT, hash } from './patch_utils.mjs';
 
 const ORIGINAL = 'recovered/shuncode-extension/dist/extension.js';
 export const SEEDS = {
+  'apply-patch': ['applyPatch','formatApplyPatchForModel'],
   'read-files': ['readFiles','formatReadFilesForModel'],
   'workspace-paths': ['canonicalizeWorkspaceRoots','literalFirstPathSpellings'],
   'tool-input-validation': ['validateToolInput'],
@@ -138,7 +139,7 @@ export async function reconstruct({write=true}={}) {
     // Export reconstructed declarations explicitly. This superset is not a claim
     // about the original author's public API; private helpers remain identifiable.
     const exports=[...ownNames].sort();
-    const header=`// RECONSTRUCTED from ${owner}; see ../provenance.json.\n// Original function/class bodies retained; ESM wiring was reconstructed.\n`+(owner==='src/file-tool-registry.ts'?'// PARTIAL: catalogue + input parsing ONLY. This module has no file IO or dispatcher.\n':'')+(owner==='src/read-files.ts'?'// SECURITY LIMIT: path checks/open are not atomic; see ../FILE_READER.md.\n':'');
+    const header=`// RECONSTRUCTED from ${owner}; see ../provenance.json.\n// Original function/class bodies retained; ESM wiring was reconstructed.\n`+(owner==='src/file-tool-registry.ts'?'// PARTIAL: catalogue + input parsing ONLY. This module has no file IO or dispatcher.\n':'')+(owner==='src/read-files.ts'?'// SECURITY LIMIT: path checks/open are not atomic; see ../FILE_READER.md.\n':'')+(owner==='src/apply-patch.ts'?'// SECURITY LIMIT: path-based writes/rollback are not race-free; see ../PATCH_WRITER.md.\n':'');
     const importText=[...imports].sort(([a],[b])=>a.localeCompare(b)).map(([file,names])=>`import { ${[...names].sort().join(', ')} } from './${file}';`).join('\n');
     const code=header+importText+'\n\n'+group.map(e=>info.get(e).code).join('\n\n')+'\n\nexport { '+exports.join(', ')+' };\n';
     const unresolved=scopeInfo(code).free.filter(n=>!GLOBALS.has(n));

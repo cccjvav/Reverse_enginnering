@@ -15,14 +15,14 @@
 
 ## 新进展：可测试的 Bridge 核心模块
 
-从原扩展 bundle 拆出 **26 个 JavaScript 模块 / 152 个声明**，约 113.4 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录、输入解析与独立文件读取；不是找回了原始 TS 类型，也不是完整 MCP 服务。
+从原扩展 bundle 拆出 **28 个 JavaScript 模块 / 206 个声明**，约 151.3 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录、输入解析与独立文件读取/补丁写入；不是找回了原始 TS 类型，也不是完整 MCP 服务。
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
-- 本地 **68 项 Node 测试 + 23 项 Python 回归测试通过**；本轮新增 28 项文件读取/防护测试，使用临时文件，不运行安装器。
-- **本轮 Windows / Linux CI 均通过**：[验证记录](docs/evidence/bridge-read-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
+- 本地 **84 项 Node 测试 + 23 项 Python 回归测试通过**；本轮新增 16 项补丁写入测试，使用临时文件，不运行安装器。
+- [本轮 Windows / Linux 验证状态](docs/evidence/bridge-patch-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 
-原件不变。文件读取已可独立运行，但发现并复现了确认期间目录替换的风险；[读取说明与防护局限](reconstructed/bridge-core/FILE_READER.md)明确记录。搜索、补丁写入、MCP 执行调度与完整扩展构建仍待恢复。
+原件不变。文件读取已可独立运行，但发现并复现了确认期间目录替换的风险；[读取说明与防护局限](reconstructed/bridge-core/FILE_READER.md)明确记录。补丁写入也已独立恢复，且复现了同类路径替换风险；[写入验证与局限](reconstructed/bridge-core/PATCH_WRITER.md)。搜索、图片、MCP 执行调度与完整扩展构建仍待恢复。
 
 ## 当前恢复成果
 

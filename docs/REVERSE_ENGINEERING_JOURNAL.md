@@ -265,3 +265,18 @@ python3 tools/audit_recovered_extension.py
 运行 [34861023069](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34861023069) 成功，测试代码提交 `568c2a3c14e9183930300e03fac6552a500603cf`。Windows 2022 与 Ubuntu 24.04 两个任务的确定性重建、Node 测试步骤均成功；Windows 测试实际创建 junction 夹具，没有因权限不足跳过关键路径用例。Python 回归仅在 Linux 上执行。
 
 通过 `gh run view --json ...jobs` 保存作业/步骤证据，没有再次尝试此前已知下载失败的完整日志域名，也没有编造远端逐项日志。原免费 overlay SHA-256 仍为 `83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268`；新增的安全发现另补充到社区迁移文档，明确已有 ZIP 不含检查点候选。
+
+
+## 10 — 恢复补丁写入链（中断后续做）
+
+上一轮停在两个模块已经生成、测试未补齐的状态。重新检查 `git status`，确认变更仍在；没有重新提取安装器，也没有覆盖原件。继续完整阅读 `apply-patch` 的解析、双重 preflight、进程内锁、staging、提交与 rollback，以及 `canonical-diff` 的文本规范化和显示生成。
+
+生成器以 `applyPatch/formatApplyPatchForModel` 为新种子，自动闭合到差异模块，新增 54 个声明；现在为 **28 模块 / 206 声明 / 151,272 字节**。原 CJS 对照环境补入 Node process（临时文件命名需要 pid），没有加入子进程或第三方执行器。
+
+执行 `npm run check:bridge-core`、`npm test`、`python3 -m unittest discover -s tests -q` 和原来源审计。新增 16 项临时文件测试，本地 84 Node + 23 Python 通过。所有写入均为自建临时夹具；没有修改真实工作区数据或证据。
+
+验证了增删改移、编码/换行约定、版本冲突、上下文拒绝、权限/取消、静态越界、并发版本竞争，以及在 preflight 后制造目标冲突时对四类已完成操作的回滚。不是磁盘满、断电或所有回滚失败情形的穷尽测试。
+
+发现两项原貌限制并保留复现：第二次权限回调期间把父目录换成外部 junction/link，原声明与重建写入器均在外部夹具创建文件；只改变末尾换行时原显示 diff 可以没有 hunk。风险刻画测试通过不代表安全目标通过。
+
+因此没有给写入器套一个再次 realpath 就宣布修好，也不把它接入真实 MCP。进程内路径锁不阻止外部进程改目录，多文件也明确不是原子事务。说明与后续句柄/目录身份、系统隔离、回滚并发风险方向见 [PATCH_WRITER.md](../reconstructed/bridge-core/PATCH_WRITER.md)。本轮跨平台证据另存 [bridge-patch-tests.json](evidence/bridge-patch-tests.json)。

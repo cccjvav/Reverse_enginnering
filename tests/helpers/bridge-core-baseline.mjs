@@ -25,6 +25,6 @@ export async function originalBaseline() {
   const allowed=new Set(['node:crypto','node:fs','node:fs/promises','node:path']);
   return vm.runInNewContext('"use strict";\n'+helpers.map(n=>original.slice(n.start,n.end)).join('\n')+'\n'+source+'\n({'+declarations.flatMap(d=>d.names).join(',')+'})',{
     require:specifier=>{assert.ok(allowed.has(specifier),`Unexpected baseline import: ${specifier}`);return require(specifier);},
-    Buffer,TextDecoder,DOMException,Error,TypeError,RangeError,setTimeout,clearTimeout,
+    process,Buffer,TextDecoder,DOMException,Error,TypeError,RangeError,setTimeout,clearTimeout,
   },{timeout:1000});
 }

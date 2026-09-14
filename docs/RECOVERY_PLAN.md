@@ -121,3 +121,8 @@ GitHub Actions 运行 `34849979254` 成功完成，报告由机器人提交 `69c
 新增 `read-files`、`workspace-paths` 两个自有模块、22 个声明，当前重建共 26 模块 / 152 声明 / 113,420 字节。读文件可在临时工作区实际执行，搜索/写补丁/完整 MCP 调度仍未恢复。本地 68 Node + 23 Python 通过。
 
 已复现原读取器在确认期间目录替换的 TOCTOU 风险，并提供单独检查点防护候选；不将再次 realpath 说成完整防竞态方案。见 [说明](../reconstructed/bridge-core/FILE_READER.md) 和 [本轮跨平台证据](evidence/bridge-read-tests.json)。后续需明确文件系统威胁模型与句柄/隔离策略，再推进写入执行，不能仅凭静态越界测试就认定安全。
+
+
+## 第三组：补丁写入与差异模块
+
+恢复 `apply-patch` 和 `canonical-diff`，总计 28 模块 / 206 声明。新增 16 个临时文件测试，本地 84 Node + 23 Python 通过；版本冲突和受控提交失败回滚可复现。双重预检查仍存在目录替换竞态，未部署写入器，也未宣称多文件原子或崩溃恢复。参见 [写入说明](../reconstructed/bridge-core/PATCH_WRITER.md) 与 [验证证据](evidence/bridge-patch-tests.json)。

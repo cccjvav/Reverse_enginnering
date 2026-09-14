@@ -24,7 +24,7 @@ test('reconstruction is deterministic; every original declaration hash and gener
     const bytes=await readFile(path.join(ROOT,'reconstructed/bridge-core',m.file));assert.equal(hash(bytes),m.sha256);
     for(const d of m.declarations)assert.equal(hash(original.slice(d.start,d.end)),d.originalSha256);
   }
-  assert.equal(generated.report.moduleCount,26);
+  assert.equal(generated.report.moduleCount,28);
   assert.ok(generated.report.sourceLabelIndex.some(m=>m.headingOffsets.length>1));
 });
 

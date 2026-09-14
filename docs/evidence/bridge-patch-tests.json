@@ -1,0 +1,40 @@
+{
+  "date": "2026-09-14",
+  "phase": "Patch execution and canonical diff recovery; isolated temporary fixtures only",
+  "local": {
+    "platform": "Linux",
+    "node": "v22.22.3",
+    "passed": true,
+    "node_tests": 84,
+    "new_patch_tests": 16,
+    "python_tests": 23,
+    "node_log_sha256": "fe2bc9ec9d385b15e3100e21d83f54976fa4299ad52f0098c1128de0d9ab09a7",
+    "python_log_sha256": "b5916a96c66437eeb99d72c617d17992bdbff89aba83ed1de469ef8c8dfc9e02"
+  },
+  "reconstruction": {
+    "modules": 28,
+    "declarations": 206,
+    "javascript_bytes": 151272,
+    "origin_sha256": "b6f3663fad5e0d67bfa823eb25070f4b60041401b152e00faaad074ec60464bb",
+    "provenance_sha256": "dc8ffef079ea1c627b030916cb7f630a391aad684926490e9735dd3fadfa5c11"
+  },
+  "known_risks": [
+    "Directory substitution during locked preflight redirects add outside; reproduced with original and reconstructed code on disposable fixtures",
+    "Final-newline-only change may have no displayed diff hunk",
+    "In-process locks and staged per-file operations are not a multi-file transaction or race-free filesystem isolation"
+  ],
+  "scope": {
+    "actual_writes": "Temporary fixture files only",
+    "rollback_tested": "Late destination collision after preflight, with completed add/update/delete/move plans",
+    "crash_or_all_rollback_failure_modes_tested": false,
+    "full_extension_activation_tested": false,
+    "windows_gui_tested": false,
+    "writer_deployed": false,
+    "existing_overlay_changed": false
+  },
+  "remote_ci": {
+    "status": "pending",
+    "workflow": ".github/workflows/bridge-core-tests.yml"
+  },
+  "original_overlay_sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268"
+}
