@@ -784,12 +784,10 @@
       ]
     }
   ],
-  "copied_count": 51,
-  "copied_bytes": 4776532,
   "excluded_trees": {
     "runtime/git/": {
       "files": 8319,
-      "bytes": 386132384,
+      "bytes": 386139446,
       "reason": "bundled third-party runtime/vendor tree"
     },
     "vendor/": {
@@ -797,5 +795,7 @@
       "bytes": 631254,
       "reason": "bundled third-party runtime/vendor tree"
     }
-  }
+  },
+  "copied_count": 51,
+  "copied_bytes": 4776532
 }
