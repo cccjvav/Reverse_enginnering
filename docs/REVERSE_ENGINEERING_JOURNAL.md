@@ -280,3 +280,10 @@ python3 tools/audit_recovered_extension.py
 发现两项原貌限制并保留复现：第二次权限回调期间把父目录换成外部 junction/link，原声明与重建写入器均在外部夹具创建文件；只改变末尾换行时原显示 diff 可以没有 hunk。风险刻画测试通过不代表安全目标通过。
 
 因此没有给写入器套一个再次 realpath 就宣布修好，也不把它接入真实 MCP。进程内路径锁不阻止外部进程改目录，多文件也明确不是原子事务。说明与后续句柄/目录身份、系统隔离、回滚并发风险方向见 [PATCH_WRITER.md](../reconstructed/bridge-core/PATCH_WRITER.md)。本轮跨平台证据另存 [bridge-patch-tests.json](evidence/bridge-patch-tests.json)。
+
+
+### 10 Windows / Linux 复验完成
+
+运行 [34864622967](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34864622967) 成功，测试代码提交 `80472568854d51e25d652d92b1a7826b6189d7c0`。Windows 2022 与 Ubuntu 24.04 的确定性重建和 Node 测试步骤均通过，Python 回归仅在 Linux 运行。`gh run watch --exit-status` 返回 0，另从作业 API 保存有限步骤证据。固定 action 仍有旧 Node 目标的兼容警告，但未影响运行。没有声称下载了远端完整逐项日志。
+
+本轮保留原证据和旧 overlay 不变，新增源码、测试和日志全部推送到会话分支；完整扩展、搜索/图片执行器、真实 MCP 集成与 Windows GUI 验收仍未完成。
