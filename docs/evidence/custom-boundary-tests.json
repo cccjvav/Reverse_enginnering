@@ -16,8 +16,110 @@
   "overlay_rebuilt_byte_identically": true,
   "overlay_sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268",
   "remote_ci": {
-    "status": "pending",
-    "workflow": ".github/workflows/bridge-core-tests.yml"
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 34868508275,
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34868508275",
+    "tested_source_commit": "d318c49e5ab9e0a0c942b41d7f680cab25fa2c24",
+    "workflow": ".github/workflows/bridge-core-tests.yml",
+    "jobs": [
+      {
+        "name": "core (ubuntu-24.04)",
+        "conclusion": "success",
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34868508275/job/104058284567",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install only the analysis/test tool dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify deterministic reconstruction and provenance",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run Node tests, not the full extension or Electron application",
+            "conclusion": "success"
+          },
+          {
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "core (windows-2022)",
+        "conclusion": "success",
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34868508275/job/104058284769",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install only the analysis/test tool dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify deterministic reconstruction and provenance",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run Node tests, not the full extension or Electron application",
+            "conclusion": "success"
+          },
+          {
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Use Node 22",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "scope": "Node inventory/module/fixture tests only, not a full Code OSS build; Python on Linux only",
+    "evidence_basis": "Actions job/step API and watch exit status; no downloaded full remote logs claimed"
   },
   "exact_codeoss_baseline_confirmed": false,
   "full_source_build_tested": false,

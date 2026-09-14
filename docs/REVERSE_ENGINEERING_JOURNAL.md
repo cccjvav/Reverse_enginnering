@@ -314,3 +314,8 @@ python3 -m unittest discover -s tests -q
 
 
 本轮实际重跑 `npm run build:community` 与 `python3 tools/package_community.py`，归档仍为 466,543 字节、SHA-256 `83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268`，与已发布文件完全一致。说明用户“自行生成补丁”路线在当前代码上可复现，而不是仅写未执行命令。完整 Code OSS/安装器模板则明确未执行。
+
+
+### 11 复验与发布记录
+
+本地 86 项 Node 与 23 项 Python 通过。运行 [34868508275](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34868508275) 在 Windows 2022 / Ubuntu 24.04 均成功，测试代码提交 `d318c49e5ab9e0a0c942b41d7f680cab25fa2c24`。使用作业/步骤 API 与 watch 返回码保存证据，仍未做完整 Code OSS 构建、安装器构建或 GUI 验收。用户迁移教程与更新 ZIP 已可分别从本分支分享；本轮没有改变已发布 ZIP。
