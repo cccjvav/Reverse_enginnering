@@ -1,0 +1,6 @@
+{
+  "scope": "Validation against statically extracted Windows 0.7.4 files. JS parsed only; no Windows GUI, extension activation or live MCP tests.",
+  "success": false,
+  "files": [],
+  "error": "Expected exactly one custom UI class in sessions.desktop.main.js"
+}
