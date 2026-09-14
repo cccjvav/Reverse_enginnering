@@ -59,3 +59,17 @@
 - 已验证：7 项模拟单元测试通过，覆盖 Linux 清单、Debian/ASAR 分析、Windows 文件指纹、路径检查及截断档案拒绝。
 - 未验证：Windows 实机运行与真实 Windows 安装器提取。
 - 未验证：真实包的校验、解包和端到端分析；任何源码恢复或 Windows 构建结果。
+
+## Windows 包已上传到分支（2026-09-14）
+
+已同步作者提交 `13bd182`，发现 `ShunCode-0.7.4-win32-x64-Setup.exe`。注意其文件名版本为 0.7.4，现有 Linux Release 文件名版本为 0.7.3；不能仅按“旧 Windows 版”的描述认定其代码更早。
+
+- 文件通过 Git LFS 保存，Git 中是 134 字节指针，不是实际 EXE。
+- LFS 声明大小：240,559,253 字节。
+- LFS 声明 SHA-256：`fdc2328b2520a128fd3449ed2015a7383e2b7dafaae05c3892d5a4c11a671272`。
+- Git fetch 成功；GitHub LFS batch API 也成功返回下载地址。
+- 实际下载域名 `github-cloud.githubusercontent.com` 的 TLS 连接失败；另试 `media.githubusercontent.com` 同样失败。因此本地仍未取得或校验安装包实体。
+
+新增 `.github/workflows/windows-static-probe.yml`，尝试在 GitHub Windows runner 上下载 LFS 文件，核对完整哈希并使用预装 7-Zip 仅列出安装包结构。不运行安装器，不安装软件，不自动恢复源码。报告限制大小并写回当前会话分支 `docs/evidence/windows-package.json`，避免再次通过大文件下载域名传递结果。
+
+工作流只在本分支的指定工具/包文件更新时触发，不会因报告提交循环运行。GitHub Actions 必须可用且允许工作流写入仓库；若权限、额度或 LFS 下载失败，需要查看实际日志，不代表取证成功。此方案尚待远端运行确认。
