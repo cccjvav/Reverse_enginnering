@@ -1,0 +1,14 @@
+{
+  "name": "shuncode-recovery-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static recovery and community-edition tooling; not the recovered application manifest",
+  "scripts": {
+    "test": "node --test tests/community-*.test.mjs",
+    "build:community": "node tools/build_community.mjs"
+  },
+  "devDependencies": {
+    "acorn": "8.18.0",
+    "esbuild": "0.28.2"
+  }
+}
