@@ -7,6 +7,7 @@ on:
       - .github/workflows/installer-forensics.yml
       - tools/installer_forensics.py
       - tools/build_extractor.py
+      - tools/recover_custom_extension.py
   workflow_dispatch:
 
 permissions:
@@ -51,12 +52,20 @@ jobs:
             --package ShunCode-0.7.4-win32-x64-Setup.exe \
             --extract-dir .work/windows-extracted \
             --output docs/evidence/windows-extraction.json
+          python3 tools/recover_custom_extension.py \
+            --tree .work/windows-extracted \
+            --output recovered/shuncode-extension \
+            --report docs/evidence/custom-extension.json
       - name: Save bounded report on this branch, not extracted binaries
         run: |
           test $(stat -c%s docs/evidence/extractor-build.json) -lt 100000
           if test -f docs/evidence/windows-extraction.json; then
             test $(stat -c%s docs/evidence/windows-extraction.json) -lt 4000000
             git add -- docs/evidence/windows-extraction.json
+          fi
+          if test -f docs/evidence/custom-extension.json; then
+            git add -- docs/evidence/custom-extension.json
+            git add -f -- recovered/shuncode-extension
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

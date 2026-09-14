@@ -112,3 +112,26 @@ cmake --build .work/innoextract-build --parallel 2
 复查固定上游 `CMakeLists.txt` 的 `find_package(Boost ...)`，发现依赖还列出 `date_time`，前一版安装依赖列表未显式包含它。补齐该开发库以及 zlib/bzip2 开发库；是否为唯一故障原因不能从已有日志证实。
 
 同时修正可观测性：新增 `tools/build_extractor.py`，将 CMake 配置和编译的退出码、日志首尾、CMake 版本写入 `docs/evidence/extractor-build.json`。即使构建失败，也先把有限大小的诊断报告写回分支，再将任务标记为失败。禁用 LTO 以缩短工具编译时间，不修改格式解析源码。
+
+### 04 实测：成功解包
+
+运行 [34851419303](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34851419303) 成功。`innoextract 1.10-dev + 6e9e34e` 对该包的 `--list` 和 `--extract` 均返回 **0**。虽然该开发版本的帮助文字仍写支持到 6.3.3，**真实包成功解析的证据比未更新的帮助文字更有决定性**。
+
+详见 [`evidence/extractor-build.json`](evidence/extractor-build.json) 和 [`evidence/windows-extraction.json`](evidence/windows-extraction.json)。
+
+- 解出 **9,875 个文件 / 1,032,221,550 字节**。
+- 主应用目录：`code$GetDestDir/resources/app/`。
+- 应用 `package.json`：名字 `ShunCode`、版本字段 `1.132.0`、入口 `./out/main.js`、开发依赖 Electron `44.2.0`。这是包内声明，不等于已经验证运行时二进制版本或找到上游基线。
+- 产品 `product.json`：`applicationName=shuncode`、`commit=09533f921029d9d073c06e70f566ebe31e43cebc`。用 GitHub API 在 `microsoft/vscode` 查询该提交返回 422（未找到）；**不能直接将产品 commit 当作公开上游 commit**。
+- 发现自定义扩展 `extensions/shuncode/package.json`，版本 **0.7.4**，主入口 `./dist/extension.js`。
+- 普通文件没有独立 `.map`；存在 **85,578,099 字节的 `node_modules.asar`** 尚待检查内部目录。所以暂不能断言所有 source map 都不存在。
+
+**知识点：** 静态提取后的 `code$GetDestDir`、`code$GetExeBasename` 是 Inno 动态常量的占位名。我们没有运行安装器，自然也没有执行其中的 Pascal Script 来计算最终安装路径；这种命名不表示解包错误。
+
+## 05 — 优先恢复作者定制扩展，保留原件与来源
+
+新增 `tools/recover_custom_extension.py`：只定位唯一的 `extensions/shuncode`，筛选文本文件，先检测常见凭证形式，再把通过检查的文件原字节保存在 `recovered/shuncode-extension/`。每个文件记录原始哈希；不格式化原件、不执行 JS、不运行包内 npm scripts。检测命中的文件只报告路径和匹配类型，不输出凭证值。
+
+为什么先恢复扩展？它的产品名与版本和目标软件匹配，又有独立入口，是定制功能的重要候选位置。但这不意味着所有定制功能都在扩展里：工具还为核心 `out/` 文件生成路径、哈希和 `shuncode` 字样数量，供后续定位 Code OSS 本体修改。同时只读取 ASAR 目录头，检查其内部 source map 数量，无需把 85 MB 的第三方库复制到 Git。
+
+当前是“已发布代码提取”，不是“已恢复完整原始 TypeScript 工程”。后续依据实际文件再决定格式化、source map 恢复或手工重建。
