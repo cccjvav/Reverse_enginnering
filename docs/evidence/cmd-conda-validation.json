@@ -1,0 +1,55 @@
+{
+  "scope": "Ordinary Windows CMD plus activated conda tooling; not a recovered complete project, GUI acceptance or installer build.",
+  "date": "2026-09-14",
+  "environmentFile": "environment-cmd.yml",
+  "setupMinicondaCommit": "fc2d68f6413eb2d87b895e92f8584b5b94a10167",
+  "local": {
+    "platform": "Linux; no conda installed locally",
+    "node": {
+      "tests": 90,
+      "passed": 90
+    },
+    "python": {
+      "discovered": 34,
+      "passed": 31,
+      "skipped": 3,
+      "skipReason": "Three real CMD integration tests require Windows"
+    },
+    "learningCheckPassed": true,
+    "coreProvenanceCheckPassed": true,
+    "originalExtensionFilesVerified": 51
+  },
+  "windowsCmdCondaCI": {
+    "status": "pending",
+    "note": "Do not claim real Windows CMD/conda acceptance before this job succeeds."
+  },
+  "packageComparison": {
+    "old": {
+      "size": 466543,
+      "sha256": "83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268"
+    },
+    "new": {
+      "size": 467406,
+      "sha256": "6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa"
+    },
+    "entryCount": 15,
+    "changedEntries": [
+      "README.md",
+      "apply-community.cmd"
+    ],
+    "byteIdenticalPayloadEntriesIncludingManifest": 11,
+    "applicationTargets": 8,
+    "overlayManifestSha256": "a543ed8a63f6a2fdcb3a23d8dfbc19573eb1e4041022a795e109d04633096c52",
+    "priorRealPackageValidationRun": 34855446553,
+    "realPackageValidationRerunThisRound": false,
+    "applicationPayloadChanged": false,
+    "windowsGuiTested": false
+  },
+  "teaching": {
+    "files": 132,
+    "lines": 26867,
+    "fullyExplainedFiles": 4,
+    "explainedLines": 271,
+    "projectWideExplanationComplete": false
+  }
+}

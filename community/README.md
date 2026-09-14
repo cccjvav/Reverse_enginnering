@@ -23,13 +23,13 @@
 - `../tools/patch_bridge_ui.mjs`：对取回的自定义 Bridge Widget 做 AST 定位修改；JSON 工具、Skills、隧道设置等无关方法逐字节检查不变。
 - `../tools/apply_community.py`：离线校验/应用/回退工具。
 
-在仓库根目录：
+开发者在仓库根目录、普通CMD激活 `environment-cmd.yml` 对应conda环境后（完整步骤见 `docs/WINDOWS_CMD_CONDA.md`）：
 
-```bash
-npm ci --ignore-scripts --no-audit --no-fund
-npm test
-python3 -m unittest discover -s tests -v
-npm run build:community
+```cmd
+npm.cmd ci --ignore-scripts --no-audit --no-fund
+npm.cmd test
+python -m unittest discover -s tests -v
+npm.cmd run build:community
 ```
 
 输出在 `.work/community-overlay/`：6 个扩展替换文件，以及两个宿主 bundle 中的**自定义 UI 类替换片段**。不会把几十 MB 的整个 VS Code bundle 纳入更新包。按哈希核验两个宿主（Workbench 和 Sessions），避免只改其中一个导致界面行为不一致。
@@ -39,16 +39,16 @@ npm run build:community
 如果本目录已有 `shuncode-community-0.7.4-overlay.zip`，它是经过真实包文件比对的**实验性更新包**，不是完整 Windows 安装器，也尚未通过 Windows 实机端到端功能验收。
 
 1. 保留原始安装包和工作资料。优先在原安装目录的**测试副本**上验证，不覆盖唯一工作环境。
-2. 从 GitHub 下载并完整解压 ZIP；需要 Python 3.10+，无需 Node.js。
+2. 从 GitHub 下载并完整解压 ZIP；需要 Python 3.10+ 和Tk，仅应用更新无需Node.js。普通CMD中可创建/激活conda环境：`conda create -n shuncode-update -c conda-forge python=3.12 tk`，然后 `conda activate shuncode-update`。已有合适环境可直接激活。
 3. 关闭所有 ShunCode 窗口和后台进程，避免并发更新/文件占用。
-4. 双击 `apply-community.cmd`，选择包含 `resources/app` 的 ShunCode 应用目录。
+4. conda用户在同一个已激活CMD中执行 `cd /d "更新包解压目录"`，再执行 `call apply-community.cmd`，选择包含 `resources/app` 的 ShunCode 应用目录。
 5. 工具先验证 8 个目标文件都与作者上传的 **0.7.4 精确构建**匹配。通过后再次确认才写入。不同版本、已经打过补丁、缺文件或校验失败时会停止，不能强行跳过。
 6. 工具自动在应用目录的 `.shuncode-community-backups/<时间-随机值>/` 保存原件，采用同目录临时文件替换；失败时尝试回滚并报告结果。**务必保留备份**。
 7. 工具不会自动启动 ShunCode。之后手动测试 Bridge 页面、启动/停止、工具与工作区功能。
 
 只检查不写入（默认 CLI 操作）：
 
-```powershell
+```cmd
 python apply_community.py --app-dir "C:\path\to\ShunCode"
 ```
 
@@ -56,7 +56,7 @@ python apply_community.py --app-dir "C:\path\to\ShunCode"
 
 回退（关闭应用后）：
 
-```powershell
+```cmd
 python apply_community.py --app-dir "C:\path\to\ShunCode" --restore "C:\path\to\ShunCode\.shuncode-community-backups\具体备份目录"
 ```
 
@@ -80,3 +80,12 @@ python apply_community.py --app-dir "C:\path\to\ShunCode" --restore "C:\path\to\
 4. 完成旧客户端迁移后，再评估停用授权 Worker 与专用于商业登录的 OAuth 应用。不要误撤销模型服务或开发账号凭证。
 
 这些后台操作目前**没有执行**，也不需要你把密码、令牌或支付密钥发到对话里。
+
+
+## Windows CMD / conda启动器说明
+
+新版启动器优先调用当前 `%CONDA_PREFIX%\python.exe`，活动环境路径无效时停止，不静默退回其他Python。没有激活conda的用户仍可使用系统Python兼容路径，但conda用户应从已激活的普通CMD运行，不从资源管理器双击期待继承另一个窗口的环境。
+
+`call apply-community.cmd --help` 可只看帮助，不打开GUI。带参数时启动器转发参数并保留Python退出码；无参数时启动GUI并在结束后暂停，方便查看错误。若只用conda解释器，也可直接执行本页的 `python apply_community.py ...` 命令；不要用 `py -3` 替代，因为它可能选到全局Python。
+
+本次只更新启动器及说明，8个应用目标（6个文件替换、2个宿主UI补丁）不变；已成功应用旧社区补丁的用户不需要重复应用。新启动器没有修复原读写路径竞态，也不是新安装器。

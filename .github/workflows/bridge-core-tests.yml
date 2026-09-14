@@ -8,6 +8,13 @@ on:
       - .gitattributes
       - package.json
       - package-lock.json
+      - environment-cmd.yml
+      - tools/check_cmd_environment.py
+      - tools/run-learning.cmd
+      - tools/apply-community.cmd
+      - tools/package_community.py
+      - tests/test_cmd_environment.py
+      - community/README.md
       - tools/build_learning.mjs
       - tools/learning_lab.mjs
       - docs/learning/**
@@ -52,3 +59,36 @@ jobs:
       - name: Regression-test Python recovery and overlay tools on Linux
         if: runner.os == 'Linux'
         run: python3 -m unittest discover -s tests -q
+
+  windows-cmd-conda:
+    if: github.ref == 'refs/heads/arena/01a09d2c-reverse-enginnering-of-shun'
+    runs-on: windows-2022
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: cmd /C CALL {0}
+    steps:
+      - name: Checkout text evidence only
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          lfs: false
+          persist-credentials: false
+      - name: Create the declared conda environment using Miniforge
+        uses: conda-incubator/setup-miniconda@fc2d68f6413eb2d87b895e92f8584b5b94a10167
+        with:
+          miniforge-version: latest
+          activate-environment: shuncode-recovery
+          environment-file: environment-cmd.yml
+          auto-activate-base: false
+      - name: Run real CMD and conda checks, not an application GUI
+        run: |
+          call "%CONDA%\condabin\conda.bat" activate shuncode-recovery
+          if errorlevel 1 exit /b 1
+          python tools\check_cmd_environment.py
+          if errorlevel 1 exit /b 1
+          call npm.cmd ci --ignore-scripts --no-audit --no-fund
+          if errorlevel 1 exit /b 1
+          call tools\run-learning.cmd
+          if errorlevel 1 exit /b 1
+          call tools\apply-community.cmd --help
+          if errorlevel 1 exit /b 1

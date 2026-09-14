@@ -15,17 +15,17 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 127,
-    "lines": 26558,
-    "fullyExplainedFiles": 3,
-    "explainedLines": 134,
+    "files": 132,
+    "lines": 26867,
+    "fullyExplainedFiles": 4,
+    "explainedLines": 271,
     "projectWideExplanationComplete": false
   },
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "7622932cb139a26dfc0f1971fdef0c29e6dd76d445017967de60bf6cfd52253b",
-      "lines": 54,
+      "sha256": "7be6c72de0c0c97dc6e28b98f699e019583e98b76b57c62f042628c20cee804a",
+      "lines": 94,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -696,7 +696,7 @@
     },
     {
       "source": "tests/bridge-core-learning.test.mjs",
-      "sha256": "aaa58c48176632888af43979d667764797fb1bc9256e59f2a34d5e59651d04f6",
+      "sha256": "73e76cd0eeb04cf4def8fabe01b277159c47fda81107b3b8a4ebb8202d4149b6",
       "lines": 40,
       "explainedLines": 0,
       "status": "pending"
@@ -758,6 +758,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/test_cmd_environment.py",
+      "sha256": "aae18118ec99181490104d71937fa715cda73d3192fb396d7d63efcefba9aa24",
+      "lines": 125,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/test_custom_recovery.py",
       "sha256": "f5aa78d0478613abf1e7d065b34a01fd0015ec65d4836f5d6e1fbe2d500a480a",
       "lines": 56,
@@ -786,6 +793,13 @@
       "status": "pending"
     },
     {
+      "source": "tools/apply-community.cmd",
+      "sha256": "3cf7c4f8c9e023b317dcbca8dd0301352b16eb78064ae07fe5f90b1cd054e87d",
+      "lines": 31,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/apply_community.py",
       "sha256": "2ccea15173ea9d7e2f84e2a7339c73e8f7af9cdd773665ad1609bdda1bd668e3",
       "lines": 196,
@@ -810,8 +824,8 @@
       "source": "tools/build_community.mjs",
       "sha256": "302cf892a3aa41a16eac6d6a10aa9103f5cfbd9755432371cf4abfbd9e6966c3",
       "lines": 137,
-      "explainedLines": 0,
-      "status": "pending"
+      "explainedLines": 137,
+      "status": "line-by-line-authored"
     },
     {
       "source": "tools/build_extractor.py",
@@ -822,7 +836,7 @@
     },
     {
       "source": "tools/build_learning.mjs",
-      "sha256": "9dbee9d9ca997e415ab0cb02f1ca9b0f23f70faaec14448a787ab76512c43e0d",
+      "sha256": "517eddf6309c8f422cb5b0d9abfbe8c4d7790d313c5eaf4a051e74c6affafb88",
       "lines": 62,
       "explainedLines": 0,
       "status": "pending"
@@ -835,9 +849,23 @@
       "status": "pending"
     },
     {
+      "source": "tools/check_cmd_environment.py",
+      "sha256": "7c239bda443472df17f75e6cc52e937bab9de36760887c2dbdfeffaeaa3b814b",
+      "lines": 87,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/ci_windows_probe.py",
       "sha256": "bba1a91ca71a1a5e437a249532b6df950484164276f7824228585e08e74c993c",
       "lines": 82,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/inspect-windows.cmd",
+      "sha256": "6fe2e790667c140577d9d9af870a61ebe10b68661322271058491e1f2e82748b",
+      "lines": 18,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -857,8 +885,8 @@
     },
     {
       "source": "tools/package_community.py",
-      "sha256": "2ca8af35b72788ed56ed3e97f9df3a68132eae30082ba4559bffca7b8fbe1d43",
-      "lines": 70,
+      "sha256": "45c744b150175940b0919b5ae6935071c5f96f346d4adea1254e88d6268e2c96",
+      "lines": 53,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -894,6 +922,13 @@
       "source": "tools/recover_custom_extension.py",
       "sha256": "57910875931ec6a12ce4ff62a9b8857c64b2f4b5b909ad1d897100b2415f567c",
       "lines": 154,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/run-learning.cmd",
+      "sha256": "3cb4dc6741e2546946b3db2f29c956601ec5fa80ccf306f725db365e1ab9c83f",
+      "lines": 25,
       "explainedLines": 0,
       "status": "pending"
     },

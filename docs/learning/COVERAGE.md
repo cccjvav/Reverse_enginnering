@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：3/127 个纳入范围的文件完整逐行解释；134/26558 行已解释。
+当前：4/132 个纳入范围的文件完整逐行解释；271/26867 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -15,7 +15,7 @@
 
 | 文件 | 总行数 | 已解释 | 状态 |
 |---|---:|---:|---|
-| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 54 | 0 | 待逐行讲解 |
+| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 94 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 107 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 47 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
@@ -120,25 +120,30 @@
 | [tests/helpers/bridge-core-baseline.mjs](../../tests/helpers/bridge-core-baseline.mjs) | 30 | 0 | 待逐行讲解 |
 | [tests/test_apply_community.py](../../tests/test_apply_community.py) | 86 | 0 | 待逐行讲解 |
 | [tests/test_ci_windows_probe.py](../../tests/test_ci_windows_probe.py) | 33 | 0 | 待逐行讲解 |
+| [tests/test_cmd_environment.py](../../tests/test_cmd_environment.py) | 125 | 0 | 待逐行讲解 |
 | [tests/test_custom_recovery.py](../../tests/test_custom_recovery.py) | 56 | 0 | 待逐行讲解 |
 | [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 53 | 0 | 待逐行讲解 |
 | [tests/test_recover.py](../../tests/test_recover.py) | 47 | 0 | 待逐行讲解 |
 | [tests/test_windows_inspect.py](../../tests/test_windows_inspect.py) | 71 | 0 | 待逐行讲解 |
+| [tools/apply-community.cmd](../../tools/apply-community.cmd) | 31 | 0 | 待逐行讲解 |
 | [tools/apply_community.py](../../tools/apply_community.py) | 196 | 0 | 待逐行讲解 |
 | [tools/audit_custom_boundary.mjs](../../tools/audit_custom_boundary.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/audit_recovered_extension.py](../../tools/audit_recovered_extension.py) | 79 | 0 | 待逐行讲解 |
-| [tools/build_community.mjs](../../tools/build_community.mjs) | 137 | 0 | 待逐行讲解 |
+| [tools/build_community.mjs](../../tools/build_community.mjs) | 137 | 137 | 本组已逐行解释 |
 | [tools/build_extractor.py](../../tools/build_extractor.py) | 25 | 0 | 待逐行讲解 |
 | [tools/build_learning.mjs](../../tools/build_learning.mjs) | 62 | 0 | 待逐行讲解 |
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |
+| [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
 | [tools/ci_windows_probe.py](../../tools/ci_windows_probe.py) | 82 | 0 | 待逐行讲解 |
+| [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |
 | [tools/installer_forensics.py](../../tools/installer_forensics.py) | 172 | 0 | 待逐行讲解 |
 | [tools/learning_lab.mjs](../../tools/learning_lab.mjs) | 40 | 0 | 待逐行讲解 |
-| [tools/package_community.py](../../tools/package_community.py) | 70 | 0 | 待逐行讲解 |
+| [tools/package_community.py](../../tools/package_community.py) | 53 | 0 | 待逐行讲解 |
 | [tools/patch_bridge_ui.mjs](../../tools/patch_bridge_ui.mjs) | 68 | 0 | 待逐行讲解 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
 | [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 189 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
 | [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |
+| [tools/run-learning.cmd](../../tools/run-learning.cmd) | 25 | 0 | 待逐行讲解 |
 | [tools/validate_community.py](../../tools/validate_community.py) | 40 | 0 | 待逐行讲解 |
 | [tools/windows_inspect.py](../../tools/windows_inspect.py) | 263 | 0 | 待逐行讲解 |

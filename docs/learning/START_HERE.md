@@ -46,108 +46,89 @@ Windows 11 的资源管理器一般在“查看 → 显示 → 文件扩展名�
 
 ---
 
-## 第1课：准备终端与工具
+## 第1课：Windows普通CMD中激活conda
 
-### 1.1 打开 PowerShell
+你的默认环境已经固定：**Windows，普通cmd.exe，conda环境**。不使用Anaconda Prompt、PowerShell、venv或virtualenv。完整菜单、命令和错误解释见 [CMD+conda专用指南](../WINDOWS_CMD_CONDA.md)。
 
-从开始菜单搜索 **PowerShell**，普通打开即可；或者在资源管理器中打开学习源码目录后使用“在终端中打开”，确认终端标签是 PowerShell，而不是命令提示符/WSL。不同终端的语法有差别。
+### 1.1 打开正确终端
 
-你可能看到：
+Win+R，输入 `cmd`，Enter，普通权限打开。看到的 `C:\Users\用户名>` 是提示符，不要复制。每次输入一条命令，等完成后再下一条。
 
-```text
-PS C:\Users\你的用户名>
+```cmd
+where conda
+conda --version
+conda env list
 ```
 
-这是**提示符**，表示当前目录，不是要复制执行的命令。下面所有代码块中的命令都不带这个提示符。每次粘贴一条命令，检查后按 Enter，等它结束再执行下一条。
+已能激活环境就不用重新初始化。找不到conda时，按专用指南使用实际安装目录中的 `condabin\conda.bat`；不要求你换到Anaconda Prompt。
 
-### 1.2 确认 Node.js
+### 1.2 进入源码根目录
 
-输入：
+复制资源管理器地址栏里，含 `package.json`、`tools` 和 `community` 的目录路径：
 
-```powershell
-node --version
+```cmd
+cd /d "你复制的源码根目录完整路径"
+cd
+dir /b
+if exist package.json (echo ROOT_OK) else (echo WRONG_FOLDER)
+if exist tools\learning_lab.mjs (echo LAB_FOUND) else (echo LAB_MISSING)
 ```
 
-若已安装，通常输出 `v22.x.x` 或其他具体版本。此恢复工具链使用 Node 22.13+；Node 24也满足当前分析依赖的要求。这里的版本不是 ShunCode 版本，也不是 Electron 版本。
+第一句的中文是占位符，需要换成真实路径；引号用英文直双引号。`/d` 允许同时跨盘符，单独 `cd` 显示位置，`dir /b` 列名称。最后要看到ROOT_OK与LAB_FOUND，否则先修正目录，不能新建空文件骗过检查。
 
-没有安装或版本太旧：到 [nodejs.org](https://nodejs.org/) 取得适合你Windows架构、满足上述要求的安装包。安装后关闭并重新打开终端，重新检查。不要从“破解工具合集”下载 Node。
+### 1.3 创建一次，以后每次打开CMD激活
 
-再输入：
-
-```powershell
-npm.cmd --version
+```cmd
+conda env create -f environment-cmd.yml
+conda activate shuncode-recovery
 ```
 
-npm 是 Node 的包管理工具。这里在 Windows 明确使用 `npm.cmd`，避免 PowerShell 有时优先选中 `npm.ps1` 而触发脚本策略错误。**不需要因此关闭执行策略或安全软件。** Linux/macOS一般直接使用 `npm`。
+文件指定Python 3.12、Node 22.13至23之前的兼容版本和Tk，使用conda-forge。创建会联网并写入conda环境，不修改ShunCode。若已有同名环境，先确认用途；需要更新专用环境时用 `conda env update -n shuncode-recovery -f environment-cmd.yml`，不盲目删除。
 
-### 1.3 Python什么时候需要
+每次新开CMD都需要重新激活。使用的是同一个CMD窗口，不是先在别处激活再回这里。
 
-本节教学模拟只需要 Node。后面的恢复工具回归测试和实际更新器才需要 Python 3.10+。
+### 1.4 验证当前解释器
 
-先检查：
-
-```powershell
-py -3 --version
-```
-
-如果找不到 `py`，试：
-
-```powershell
+```cmd
+echo %CONDA_PREFIX%
+where python
+python -c "import sys; print(sys.executable)"
 python --version
+where node
+node --version
+where npm.cmd
+npm.cmd --version
+python -c "import tkinter; print(tkinter.TkVersion)"
+python tools\check_cmd_environment.py
 ```
 
-两者都不可用，再从 [python.org/downloads/windows](https://www.python.org/downloads/windows/) 安装Python，实际GUI更新器还需要 Tcl/Tk。安装方式随版本变化，以官方安装说明为准。若输入 `python` 只打开商店，并不表示解释器已经可用；安装后重开终端再确认。
+最后检查应输出 `"ok": true`。Python、Node、npm应来自当前conda前缀；Tk只是导入检查，不会打开窗口。使用 `python` 而不是 `py -3`，后者可能跳到全局Python。不要手工伪造CONDA_PREFIX。
 
-### 1.4 切换到源码根目录
+### 1.5 安装npm依赖
 
-在资源管理器地址栏复制源码根目录的完整路径。在下面命令的双引号里放入你自己的路径：
-
-```powershell
-Set-Location -LiteralPath "你复制的源码根目录完整路径"
-```
-
-**这句有占位符，不能原样照抄。** `Set-Location` 切换当前目录；`-LiteralPath` 按原样解释路径；双引号让带空格/中文的路径作为一个参数。不要用中文弯引号 `“ ”` 代替程序需要的英文直引号 `"`。
-
-验证：
-
-```powershell
-Get-Location
-Get-ChildItem -Name
-Test-Path .\package.json
-Test-Path .\tools\learning_lab.mjs
-```
-
-最后两项应为 `True`。`Get-Location` 只显示位置，`Get-ChildItem` 只列文件；`Test-Path` 检查路径是否存在。`.\` 表示当前目录。
-
-若为 `False`：停下，回到解压目录找正确那一层。不要为了让命令成功就新建空 `package.json`，也不要在系统目录随意运行安装命令。
-
-### 1.5 安装分析工具依赖
-
-```powershell
+```cmd
 npm.cmd ci --ignore-scripts --no-audit --no-fund
+echo %ERRORLEVEL%
 ```
 
-逐项解释：
+- npm.cmd是Windows的npm入口，Node包管理器，不是Python。
+- ci按package-lock安装，写入学习目录的node_modules；不是安装ShunCode。
+- ignore-scripts不运行依赖安装脚本，适用于当前恢复工具；不能直接照搬到未来完整Code OSS构建。
+- no-audit省去本次额外审计请求，不等于已经完成安全审计。
+- no-fund省去资助提示，与Bridge收费无关。
 
-- `npm.cmd`：调用npm的Windows命令包装器。
-- `ci`：按 `package-lock.json` 的锁定版本安装；会重建依赖目录，不是安装ShunCode。
-- `--ignore-scripts`：不运行依赖包的安装脚本，适用于这里已经采用的恢复工具安装方式。
-- `--no-audit`：本条命令不额外发送npm漏洞审计请求；不表示依赖已通过安全审计。
-- `--no-fund`：不显示资助提示；不是付费解锁参数。
+这一步会从npm仓库下载依赖。成功后单独一行检查 `echo %ERRORLEVEL%` 应为0；不要放到前一条命令同一行或括号块中，以免CMD提前展开旧值。失败先看故障表，不删除锁文件、不关闭SSL验证。
 
-**会发生什么：** 从包仓库下载依赖，写入本学习副本的 `node_modules` 和npm缓存。联网来自安装工具依赖，不是 Bridge 商业登录。不会修改已安装的 ShunCode。
+### 1.6 一次跑完本轮检查，或按下一课分步学习
 
-正常情况：命令最后返回提示符，没有失败退出。下载条目、用时和提示可因环境不同，不要求与你看到的截图/示例逐字一样。
-
-在该命令结束后立即查看退出码：
-
-```powershell
-$LASTEXITCODE
+```cmd
+call tools\run-learning.cmd
+echo %ERRORLEVEL%
 ```
 
-外部命令通常以 `0` 表示成功，非0表示失败。它可能保留前一个外部命令的结果，所以要紧接在你要检查的命令之后看，不能隔几条命令再猜属于谁。
+脚本先检查环境和依赖，再执行教材检查、模拟实验、Node与Python回归；任何一步失败都停止。它不会自动激活环境、安装依赖或应用补丁。最后应有ALL_LEARNING_CHECKS_PASSED且退出码为0。
 
-若失败，先看本页“故障排查”，不要删掉锁文件再试 `npm install` 来掩盖版本问题。完整 Code OSS 构建需要另一套已确认工具链，**不能把这里的 `--ignore-scripts` 原样照搬过去**。
+CMD批处理内部调用另一个cmd/bat后还要继续时需要call。本仓库的总入口已经处理；单独在交互窗口运行npm.cmd也可正常返回提示符。
 
 ---
 
@@ -155,19 +136,19 @@ $LASTEXITCODE
 
 ### 2.1 检查逐行解释与源码一致
 
-```powershell
+```cmd
 npm.cmd run learn:check
 ```
 
 - `run`：运行 `package.json` 中同名脚本，不是让你打开一个叫 run 的文件。
-- `learn:check`：检查三个文件的SHA、每行原文、行号、解释和覆盖清单。
+- `learn:check`：检查四个文件的SHA、每行原文、行号、解释和覆盖清单。
 - 它读取源码/教材，不运行原扩展，不应用补丁。
 
 成功输出包含这些要点（总文件/总行数会随项目增长）：
 
 ```text
-"fullyExplainedFiles": 3
-"explainedLines": 134
+"fullyExplainedFiles": 4
+"explainedLines": 271
 "projectWideExplanationComplete": false
 ```
 
@@ -177,7 +158,7 @@ npm.cmd run learn:check
 
 ### 2.2 运行不会启动真实服务器的实验
 
-```powershell
+```cmd
 npm.cmd run learn:lab
 ```
 
@@ -219,7 +200,7 @@ npm.cmd run learn:lab
 
 ### 2.3 再看完整回归，而不是把模拟当验收
 
-```powershell
+```cmd
 npm.cmd test
 ```
 
@@ -229,19 +210,13 @@ npm.cmd test
 
 特别注意 `KNOWN SNAPSHOT RISK`：这类测试专门确认原版本缺陷可以重现。它通过意味着“证实风险存在”，不是“安全问题已经解决”。
 
-可选Python回归（使用你已经确认可用的解释器）：
+当前conda环境的Python回归：
 
-```powershell
-py -3 -m unittest discover -s tests -q
-```
-
-没有 `py` 但有Python时用：
-
-```powershell
+```cmd
 python -m unittest discover -s tests -q
 ```
 
-`-m unittest` 运行Python内建测试模块，`discover` 寻找测试，`-s tests` 指定目录，`-q` 减少输出。本轮基线为23项、结尾 `OK`；不是23个应用功能全部验收通过。
+`-m unittest` 运行Python内建测试模块，`discover` 寻找测试，`-s tests` 指定目录，`-q` 减少输出。测试项数会随新增环境测试变化；结尾应为 `OK`；不是应用功能全部验收通过。
 
 ---
 
@@ -317,9 +292,39 @@ AST把程序分成“变量声明、函数、调用”等结构。`allNodes`只�
 
 ### 3.4 正式逐行阅读
 
-打开 [LINE_BY_LINE.md](LINE_BY_LINE.md)。每一项包含：原文件、来源SHA、行号、真实代码和解释。先看服务，再看控制器，最后看补丁工具。
+打开 [LINE_BY_LINE.md](LINE_BY_LINE.md)。每一项包含：原文件、来源SHA、行号、真实代码和解释。先看服务73行，再看控制器30行、公共工具31行，最后看主构建器137行。
 
 不要只看 true/false 那几行：状态形状、旧方法兼容、错误传播、空dispose的范围、构造器参数属性、类型擦除等都是避免改坏程序的关键。
+
+---
+
+### 3.5 主构建器137行：把前三个文件串起来
+
+逐行手册的 `tools/build_community.mjs` 章节解释完整主构建器。先画数据流，再对照每行：
+
+```text
+原件清单 + 原bundle + 新服务/控制器TS
+  → 核对原件SHA
+  → 转译新TS、AST定位并替换旧收费区段
+  → 保护模块前后哈希一致、旧商业地址不残留
+  → 修改manifest和源码入口副本
+  → 写6个替换文件
+  → 分别生成Workbench/Sessions两个UI补丁
+  → 写overlay-manifest.json
+```
+
+用以下问题检查理解，而不只记true/false：
+
+- 第13行转译成功，为什么不是完整TS类型检查成功？
+- 第21行扫描来源注释，为什么不是任意bundle的安全解析器？
+- 第38、59、61、92行各因什么停止？为什么不能为了通过删掉检查？
+- 第70行只退役自有license/payment命令，为什么不删Codex登录？
+- 第86行默认输出在哪？为什么不把output设为真实安装目录？
+- 第110—113行写什么？原件目录会被覆盖吗？
+- 第118行为什么处理两个宿主？
+- 第129行为什么明确说不是完整源码重建或验证后的安装器？
+
+答案就在对应行的解释中。实际重建应另按社区开发说明执行：它会写 `.work` 和更新ZIP，不属于只读教材检查；不要直接在主力安装上试。
 
 ---
 
@@ -336,7 +341,7 @@ AST把程序分成“变量声明、函数、调用”等结构。`allNodes`只�
 7. **start 报 Unsafe workspace 时能 catch 后改回 running 吗？** 不能。这会伪造运行状态并掩盖安全错误。
 8. **模拟实验通过证明安装包可用吗？** 不证明。真实宿主、MCP、Windows GUI和安装升级仍需各自验收。
 9. **哈希相同证明代码安全吗？** 不证明。它证明对比的内容一致；坏代码也有稳定哈希。
-10. **覆盖134行是不是全工程逐行教程完成？** 不是。其余文件和行数明确标为待讲，见覆盖清单。
+10. **覆盖271行是不是全工程逐行教程完成？** 不是。其余文件和行数明确标为待讲，见覆盖清单。
 
 ### 可安全做的练习
 
@@ -352,12 +357,12 @@ AST把程序分成“变量声明、函数、调用”等结构。`allNodes`只�
 | 现象 | 先判断什么 | 安全处理 |
 |---|---|---|
 | 找不到 node/npm | 是否安装、是否重开终端、PATH是否生效 | 重开终端，再用官方安装器检查安装；别下载陌生“补丁” |
-| 提示 npm.ps1 被阻止 | 是否调用了PowerShell脚本包装器 | 使用本页 `npm.cmd`，不关闭系统执行策略 |
-| 找不到 package.json/ENOENT | 当前目录是不是源码根 | Get-Location、Test-Path检查，回到正确解压层 |
+| 终端不识别CMD命令 | 是否开错终端 | Win+R输入cmd；不修改PowerShell策略 |
+| 找不到 package.json/ENOENT | 当前目录是不是源码根 | cd、dir /b和if exist检查，回到正确解压层 |
 | npm ci说锁文件不一致 | 是否混用了不同提交的文件或改过package | 重取同一提交完整副本，不删锁文件冒充解决 |
 | 下载超时/证书错误 | 是网络/证书问题，不是商业门槛 | 保存错误、稍后重试或检查正常网络；不设 strict-ssl=false |
 | EACCES/EPERM | 目录权限或文件被占用 | 换到用户可写的学习副本，关闭占用者，不首先提权 |
-| Python命令打开商店 | 实际解释器可能没装好 | 核查官方Python安装和可用命令，不把商店窗口当版本输出 |
+| Python命令打开商店或指向全局 | 当前CMD未正确激活conda | 重新激活，检查where python与sys.executable，不改用py -3 |
 | Lesson source changed | 教材与源码版本不配套 | 恢复同版本副本；维护者先重新审阅，不手改指纹 |
 | lab出现未捕获错误 | 是真实失败，不是输出里 Rejected:true | 保存完整第一条错误和退出码，不继续到安装 |
 | npm test有 not ok/fail非0 | 某项断言没满足 | 记录用例名与错误；不能把测试删掉当修复 |

@@ -20,7 +20,7 @@ async function walk(folder){
     if(['__pycache__','node_modules'].includes(e.name))continue;
     const p=folder+'/'+e.name;
     if(e.isDirectory())out.push(...await walk(p));
-    else if(/\.(?:ts|mts|mjs|cjs|py|yml|js|js\.txt)$/.test(p))out.push(p);
+    else if(/\.(?:ts|mts|mjs|cjs|py|yml|cmd|js|js\.txt)$/.test(p))out.push(p);
   }
   return out;
 }
@@ -43,7 +43,7 @@ export async function learningArtifacts(){
     excluded:['Third-party node_modules and mixed original dist bundles (reference evidence, not counted as self-authored curriculum)','Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum'],
     summary:{files:files.length,lines:files.reduce((n,f)=>n+f.lines,0),fullyExplainedFiles:explained.size,explainedLines:files.reduce((n,f)=>n+f.explainedLines,0),projectWideExplanationComplete:false},files,
     limits:'Tests verify coverage, exact source mapping and freshness, NOT that every explanation is semantically correct. Human review and exercises are still required.'};
-  const book=['# 第一组代码逐行精读：社区策略、控制器与补丁基础','','先读 [零基础实验课](START_HERE.md)，再读本页。这里完整讲解三个文件的134行（含注释、空行和结构行），不是全工程已经讲完。','','本页由手写注解和真实源码生成；不要复制本页去覆盖原源文件。修改源码后需重新审阅注解并生成。类型声明不等于运行时保证，测试也不等于完整安全认证。','','## 阅读顺序','','1. `BridgeLicenseService`：回答“商业账号/付款是否必要”。','2. `BridgeAccessController`：把请求转给真实 Bridge，不伪造运行状态。','3. `patch_utils.mjs`：内容指纹、逆序替换、AST 遍历、唯一定位。','','章节目录：'];
+  const book=['# 第一组代码逐行精读：社区策略、控制器与补丁基础','',`先读 [零基础实验课](START_HERE.md)，再读本页。这里完整讲解${report.summary.fullyExplainedFiles}个文件的${report.summary.explainedLines}行（含注释、空行和结构行），不是全工程已经讲完。`,'','本页由手写注解和真实源码生成；不要复制本页去覆盖原源文件。修改源码后需重新审阅注解并生成。类型声明不等于运行时保证，测试也不等于完整安全认证。','','## 阅读顺序','','1. `BridgeLicenseService`：回答“商业账号/付款是否必要”。','2. `BridgeAccessController`：把请求转给真实 Bridge，不伪造运行状态。','3. `patch_utils.mjs`：内容指纹、逆序替换、AST 遍历、唯一定位。','4. `build_community.mjs`：原件校验、策略/入口替换、manifest与双宿主UI组装。','','章节目录：'];
   annotations.files.forEach((entry,i)=>book.push(`- [第${i+1}部分：${entry.title}](#file-${i+1})`));
   for(const [index,entry] of annotations.files.entries()){
     book.push('',`<a id="file-${index+1}"></a>`,`## 第${index+1}部分：${entry.title}`,'',`原文件：[${entry.source}](../../${entry.source})`,'',`对应源码 SHA-256：\`${entry.sha256}\``,'');

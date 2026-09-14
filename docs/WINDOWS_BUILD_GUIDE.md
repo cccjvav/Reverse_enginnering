@@ -12,15 +12,15 @@
 
 ## A. 现在可以复现：制作已验证版本的更新 ZIP
 
-在本仓库根目录，使用 Node 22.13+、Python 3.10+：
+在本仓库根目录，按 [CMD+conda指南](WINDOWS_CMD_CONDA.md) 激活恢复环境；使用普通CMD中的Node 22.13+、Python 3.10+：
 
-```powershell
-npm ci --ignore-scripts --no-audit --no-fund
-npm run check:bridge-core
-npm run audit:boundary -- --check
-npm test
+```cmd
+npm.cmd ci --ignore-scripts --no-audit --no-fund
+npm.cmd run check:bridge-core
+npm.cmd run audit:boundary -- --check
+npm.cmd test
 python -m unittest discover -s tests -q
-npm run build:community
+npm.cmd run build:community
 python tools/package_community.py
 ```
 
@@ -63,25 +63,25 @@ community-project/
 
 本轮已核实候选 `df53daab...` 的 `.nvmrc` 为 Node **24.18.0**、`.npmrc` 指定 Electron **42.7.1**。本恢复仓库测试使用 Node 22，**两者不能混为同一工具链**。在 Windows 独立工作目录取得固定源码，按该版本官方构建要求安装 C++ 构建工具、Windows SDK、Python 等；不要在本恢复仓库里运行下面的底座命令。
 
-```powershell
-# 在未来独立的 carrier 源码目录；仅是候选底座调试入口
-npm ci
-npm run compile
+```cmd
+REM 在未来独立的carrier源码目录；仅是候选底座调试入口
+npm.cmd ci
+npm.cmd run compile
 .\scripts\code.bat
 
-# 核对该固定版本实际提供的打包任务
-npm run gulp -- --tasks-simple
+REM 核对该固定版本实际提供的打包任务
+npm.cmd run gulp -- --tasks-simple
 ```
 
 完整源码构建可能需要受信任的安装脚本编译原生依赖；不能照搬恢复工具安装时的 `--ignore-scripts` 并假定完整应用可用。以上命令尚未在本项目执行或验证，不保证未补齐配置的候选能直接生成应用。
 
 先完成自有代码集成、品牌配置与未签名便携目录测试，再执行应用打包任务。应用目录需形成 `VSCode-win32-x64`（候选上游的默认约定；定制构建可另行调整）。其后才是安装器任务：
 
-```powershell
-# 前提：对应应用目录已构建并通过验证，product/安装配置已齐全
-npm run gulp -- vscode-win32-x64-user-setup
-# 或系统级安装，按分发策略二选一
-npm run gulp -- vscode-win32-x64-system-setup
+```cmd
+REM 前提：应用目录已构建且验证，product和安装配置齐全
+npm.cmd run gulp -- vscode-win32-x64-user-setup
+REM 或系统级安装，按分发策略二选一
+npm.cmd run gulp -- vscode-win32-x64-system-setup
 ```
 
 这两个任务名来自候选的固定 `build/gulpfile.vscode.win32.ts`，内部调用依赖提供的 Inno Setup 与 `build/win32/code.iss`；默认安装器输出目录为 `.build/win32-x64/user-setup` 或 `system-setup`。不是让用户随便安装一个旧 Inno 版本再手写万能打包命令。**尚未实际生成 ShunCode EXE。** 应用目录的具体构建任务需在最终底座中核对，不能拿未经检查的旧教程任务名替代。
@@ -99,3 +99,6 @@ npm run gulp -- vscode-win32-x64-system-setup
 - 没有代码签名证书时明确标注未签名，不伪造签名，不要求用户关闭系统安全机制。正式签名需另行配置受保护的证书，不能放进仓库。
 
 最终目标是可维护、可重新构建的社区工程；不需要逆向全部上游，但也不能把“找到了开源底座”误当成“定制已经迁移完成”。
+
+
+未来完整Code OSS构建也应在普通CMD使用**独立conda环境**，不得直接覆盖学习环境。最终Node/Electron版本尚未确定；若conda渠道没有所需精确版本，先停止核对方案，不把版本要求随意放宽。当前environment-cmd.yml只保证恢复/教学工具的环境用途，不承诺满足完整宿主构建。

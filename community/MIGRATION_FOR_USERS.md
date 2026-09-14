@@ -15,43 +15,43 @@
 
 下载本分支的 [`shuncode-community-0.7.4-overlay.zip`](shuncode-community-0.7.4-overlay.zip)。GitHub 文件页可使用 Download raw file。
 
-当前文件：466,543 字节；SHA-256：
+当前文件：467,406 字节；SHA-256：
 
 ```text
-83bdda87792194cf5ee2c7a5c9beded9c38dd49fac86562c5eb8ad68493c4268
+6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa
 ```
 
-PowerShell 可核对下载文件：
+Windows普通CMD可核对下载文件：
 
-```powershell
-Get-FileHash .\shuncode-community-0.7.4-overlay.zip -Algorithm SHA256
+```cmd
+certutil -hashfile "shuncode-community-0.7.4-overlay.zip" SHA256
 ```
 
 哈希应与作者可信发布页一致；哈希本身不是数字签名。不要从陌生镜像取得一个包和同一镜像提供的哈希就当作可信。
 
 1. 保存原安装器、工作资料，复制安装目录作为测试副本。
-2. 安装 Python 3.10 或更高版本，包含 Tcl/Tk；更新包不需要 Node.js。完整解压 ZIP。
+2. 按 [CMD+conda指南](../docs/WINDOWS_CMD_CONDA.md) 准备并激活环境。需要 Python 3.10 或更高版本，包含 Tcl/Tk；本教程使用普通CMD中激活的conda环境。仅更新包不需要Node.js。完整解压ZIP。
 3. 关闭所有 ShunCode 窗口和后台进程。
-4. 双击 `apply-community.cmd`，选择**包含 `resources/app` 的应用目录**，不是项目文件夹，也不是 `resources/app` 本身。
+4. 在已激活conda的同一个CMD中，用 `cd /d "更新包解压目录"` 进入目录，执行 `call apply-community.cmd`，选择**包含 `resources/app` 的应用目录**，不是项目文件夹，也不是 `resources/app` 本身。
 5. 工具先核验全部 8 个目标；全部匹配后，再确认是否写入。失败则停止，不手改 manifest，不跳过哈希。
 6. 保存应用目录里的 `.shuncode-community-backups` 备份。遇到权限错误先确认路径和文件占用，不要给陌生脚本提升权限或关闭安全软件。
 7. 手动启动测试副本，检查 Bridge 页面、启动/停止与自有功能。工具不会替你启动应用。
 
 命令行只检查，不写入：
 
-```powershell
+```cmd
 python .\apply_community.py --app-dir "C:\Test\ShunCode"
 ```
 
 确认目标正确后应用：
 
-```powershell
+```cmd
 python .\apply_community.py --app-dir "C:\Test\ShunCode" --apply
 ```
 
 回退：关闭应用，将实际备份目录传给 `--restore`：
 
-```powershell
+```cmd
 python .\apply_community.py --app-dir "C:\Test\ShunCode" --restore "C:\Test\ShunCode\.shuncode-community-backups\实际备份目录"
 ```
 
@@ -59,26 +59,26 @@ python .\apply_community.py --app-dir "C:\Test\ShunCode" --restore "C:\Test\Shun
 
 ## 路线二：从公开维护代码自行生成相同补丁（开发者）
 
-在 GitHub 选择 `arena/01a09d2c-reverse-enginnering-of-shun` 分支下载源码，或克隆该分支。不需要从聊天下载附件。源码 ZIP 中的 EXE 可能只是 Git LFS 指针，不能当安装器使用；复现当前补丁不需要下载那个 EXE。
+先按 [CMD+conda指南](../docs/WINDOWS_CMD_CONDA.md) 创建并激活恢复环境，再在 GitHub 选择 `arena/01a09d2c-reverse-enginnering-of-shun` 分支下载源码，或克隆该分支。不需要从聊天下载附件。源码 ZIP 中的 EXE 可能只是 Git LFS 指针，不能当安装器使用；复现当前补丁不需要下载那个 EXE。
 
-仓库根目录，Node 22.13+ 和 Python 3.10+：
+仓库根目录，普通CMD中激活 `shuncode-recovery` 后（不要用py -3切到全局Python）：
 
-```powershell
-npm ci --ignore-scripts --no-audit --no-fund
-npm test
+```cmd
+npm.cmd ci --ignore-scripts --no-audit --no-fund
+npm.cmd test
 python -m unittest discover -s tests -q
-npm run build:community
+npm.cmd run build:community
 ```
 
 对安装目录副本只检查：
 
-```powershell
+```cmd
 python tools/apply_community.py --payload .work/community-overlay --app-dir "C:\Test\ShunCode"
 ```
 
 确认后加 `--apply`。要制作可分享 ZIP，执行：
 
-```powershell
+```cmd
 python tools/package_community.py
 ```
 
@@ -109,3 +109,6 @@ python tools/package_community.py
 - 旧客户端、网站和后台仍可能下单。作者应另行停售、处理历史订单/退款、停用旧支付接口；客户端补丁做不到服务器下线。
 
 作者分发时建议同时提供：本教程链接、固定版本 ZIP 与哈希、去商业化技术教程、已知风险/回退说明。不把实验补丁宣传为完整安装器、已签名发行版或已经解决全部安全问题。
+
+
+新版启动器优先使用已激活的conda Python；从资源管理器直接双击不会继承另一个CMD窗口的激活状态。两版ZIP的8个应用目标（6个文件替换、2个宿主UI补丁）相同，已经应用旧社区补丁的用户无需重打。

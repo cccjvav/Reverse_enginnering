@@ -1,6 +1,6 @@
 # 第一组代码逐行精读：社区策略、控制器与补丁基础
 
-先读 [零基础实验课](START_HERE.md)，再读本页。这里完整讲解三个文件的134行（含注释、空行和结构行），不是全工程已经讲完。
+先读 [零基础实验课](START_HERE.md)，再读本页。这里完整讲解4个文件的271行（含注释、空行和结构行），不是全工程已经讲完。
 
 本页由手写注解和真实源码生成；不要复制本页去覆盖原源文件。修改源码后需重新审阅注解并生成。类型声明不等于运行时保证，测试也不等于完整安全认证。
 
@@ -9,11 +9,13 @@
 1. `BridgeLicenseService`：回答“商业账号/付款是否必要”。
 2. `BridgeAccessController`：把请求转给真实 Bridge，不伪造运行状态。
 3. `patch_utils.mjs`：内容指纹、逆序替换、AST 遍历、唯一定位。
+4. `build_community.mjs`：原件校验、策略/入口替换、manifest与双宿主UI组装。
 
 章节目录：
 - [第1部分：社区可用性策略：73行](#file-1)
 - [第2部分：生命周期适配器：30行](#file-2)
 - [第3部分：补丁定位基础工具：31行](#file-3)
+- [第4部分：社区overlay主构建器：137行](#file-4)
 
 <a id="file-1"></a>
 ## 第1部分：社区可用性策略：73行
@@ -1103,6 +1105,1106 @@ filter 对每项调用 predicate，收集返回真值的项。筛选函数由调
 ```
 
 结束 only。它只保证数量条件，是否选中了正确业务位置仍取决于 predicate 和原始文件哈希。
+
+
+<a id="file-4"></a>
+## 第4部分：社区overlay主构建器：137行
+
+原文件：[tools/build_community.mjs](../../tools/build_community.mjs)
+
+对应源码 SHA-256：`302cf892a3aa41a16eac6d6a10aa9103f5cfbd9755432371cf4abfbd9e6966c3`
+
+### L1
+
+```js
+// Version-locked, reproducible overlay. Never evaluates the recovered extension.
+```
+
+注释声明产物是锁定原版本的overlay，不是完整源码重编译。脚本解析原扩展文本，不执行原扩展；新维护代码与构建工具仍会被执行。
+
+### L2
+
+```js
+import { parse } from 'acorn';
+```
+
+导入Acorn的parse，把JS文本变成AST以定位声明/调用；解析不等于运行代码。
+
+### L3
+
+```js
+import { transformSync } from 'esbuild';
+```
+
+导入esbuild同步转译函数，将新写TS转成JS；它不是完整TypeScript类型检查器。
+
+### L4
+
+```js
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+```
+
+导入异步文件读取、写入和建目录；真正写盘发生在build中的输出阶段，默认不指向已安装软件。
+
+### L5
+
+```js
+import { createHash } from 'node:crypto';
+```
+
+导入createHash，但当前文件未直接使用它；实际hash来自第9行的公共工具。这是可识别的冗余导入，不是另一个签名流程。
+
+### L6
+
+```js
+import path from 'node:path';
+```
+
+导入路径工具，拼接本机路径而非硬编码Windows分隔符。
+
+### L7
+
+```js
+import { fileURLToPath } from 'node:url';
+```
+
+导入fileURLToPath，最后用来识别“直接运行脚本”还是“被其他模块导入”。
+
+### L8
+
+（空行）
+
+空行分开第三方/内建导入与本项目公共工具导入。
+
+### L9
+
+```js
+import { ROOT, hash, applyEdits, allNodes, only } from './patch_utils.mjs';
+```
+
+导入仓库根、SHA函数、逆序编辑、AST遍历与唯一匹配工具；前一章节已逐行解释这些函数。
+
+### L10
+
+```js
+export { ROOT, hash, applyEdits, allNodes, only } from './patch_utils.mjs';
+```
+
+同时把这五个工具重新导出，兼容从构建器导入它们的调用者；不是再执行一遍工具，也不复制定义。
+
+### L11
+
+（空行）
+
+空行分开导入与首个转换函数。
+
+### L12
+
+```js
+export function scriptModule(ts) {
+```
+
+scriptModule接收TS文本并返回适合放回旧脚本bundle的JS片段；不接受文件路径，也不自行读取文件。
+
+### L13
+
+```js
+  const js = transformSync(ts, { loader: 'ts', target: 'es2022', format: 'esm', legalComments: 'inline' }).code;
+```
+
+loader指定TS，target指定ES2022，format先生成ESM，legalComments保留相关注释；取结果的code字符串。类型声明会被擦除，转译成功不保证类型依赖齐全。
+
+### L14
+
+```js
+  const ast = parse(js, { ecmaVersion: 'latest', sourceType: 'module' });
+```
+
+把刚生成的ESM按module语法解析，取得顶层导出语句的位置；这里不是解析原始TS。
+
+### L15
+
+```js
+  return applyEdits(js, ast.body.filter(n => n.type === 'ExportNamedDeclaration').map(n => {
+```
+
+从顶层body筛出具名导出节点，逐个映射成编辑，再交applyEdits执行；目标是去除导出列表，让片段嵌入原脚本作用域。
+
+### L16
+
+```js
+    if (n.declaration) throw new Error('Unexpected export shape');
+```
+
+如果导出节点直接携带声明就拒绝，因为直接删除可能连类/函数本体一起删掉；这里只接受当前固定转译器产生的导出形状。
+
+### L17
+
+```js
+    return { start:n.start, end:n.end, text:'' };
+```
+
+为导出列表建立[start,end)空字符串替换；保留已在其他位置声明的类/函数。
+
+### L18
+
+```js
+  }));
+```
+
+结束map和applyEdits调用，返回移除导出列表后的JS；不是调用其中的Bridge类。
+
+### L19
+
+```js
+}
+```
+
+结束scriptModule，下面的sections负责文本区段定位。
+
+### L20
+
+```js
+function sections(text, marker) {
+```
+
+sections接收完整文本和来源标签，返回该标签出现的所有区段位置，不假设标签只出现一次。
+
+### L21
+
+```js
+  const tags = [...text.matchAll(/^\/\/ (?:extensions\/|src\/|node_modules\/|<define:)[^\n]+\n/gm)];
+```
+
+正则匹配以//开头的来源行：extensions、src、node_modules或构建注入标记；g找全部、m让^匹配每行开头。这里是文本扫描而非Acorn注释识别，只用于固定哈希产物，不能当通用安全解析器。
+
+### L22
+
+```js
+  return tags.filter(t => t[0] === `// ${marker}\n`).map(t => {
+```
+
+筛出完整标签行精确相等的项，再逐项计算区段；末尾换行也是当前格式约定的一部分。
+
+### L23
+
+```js
+    const next = tags.find(n => n.index > t.index);
+```
+
+寻找它之后的下一个来源标签；不是找同名标签。matchAll提供的index是JS字符串偏移。
+
+### L24
+
+```js
+    return {start:t.index, end:next?.index ?? text.length};
+```
+
+区段从本标签起点到下个标签起点；没有下个标签就到全文末尾。?.防止next缺失，??只在null/undefined时使用后备值。
+
+### L25
+
+```js
+  });
+```
+
+结束这批区段的映射；返回的是位置数组，还没有做任何替换。
+
+### L26
+
+```js
+}
+```
+
+结束sections；完整来源/边界仍依赖当前原件和格式，不是完整上游差异分析。
+
+### L27
+
+```js
+const protectedModules = [
+```
+
+开始必须逐字节保留的模块标签列表；它定义本次去商业化不应触碰的关键范围。
+
+### L28
+
+```js
+  'extensions/shuncode/src/bridge-server.ts',
+```
+
+保护Bridge服务器逻辑，不为了免费绕开真实启动和工作区机制。
+
+### L29
+
+```js
+  'extensions/shuncode/src/bridge-mcp-transport.ts',
+```
+
+保护MCP传输逻辑，不删路由令牌或传输会话检查。
+
+### L30
+
+```js
+  'extensions/shuncode/src/bridge-tool-dispatcher.ts',
+```
+
+保护工具调度器；收费与工具授权不是同一层。
+
+### L31
+
+```js
+  'extensions/shuncode/src/ide-tool-broker.ts',
+```
+
+保护IDE工具代理，避免改坏宿主工具调用与相关控制。
+
+### L32
+
+```js
+  'extensions/shuncode/src/codex-auth.ts',
+```
+
+保护Codex自身认证；作者取消自有收费不代表第三方模型无需登录。
+
+### L33
+
+```js
+  'src/bridge-http-router.ts', 'src/workspace-paths.ts', 'src/tool-input-validation.ts',
+```
+
+同一行保护HTTP路由、工作区路径、工具输入校验三个共享模块；保留原实现不等于证明原实现没有已知竞态。
+
+### L34
+
+```js
+];
+```
+
+结束8个标签的数组。它不是全应用安全审计清单，未列出的修改仍需另行评审。
+
+### L35
+
+```js
+export function protectedHashes(text) {
+```
+
+protectedHashes给这些标签对应的全部文本片段计算哈希。
+
+### L36
+
+```js
+  return Object.fromEntries(protectedModules.map(marker => {
+```
+
+map把每个标签变成键值对，Object.fromEntries再组装成对象，便于生成报告和比较。
+
+### L37
+
+```js
+    const found = sections(text, marker);
+```
+
+查找当前标签的所有区段，处理构建初始化与实际声明分开的情形。
+
+### L38
+
+```js
+    if (!found.length) throw new Error(`Missing security/provider module: ${marker}`);
+```
+
+完全找不到就抛错停止，不能把缺失模块当作“无需保护”。错误带标签供定位。
+
+### L39
+
+```js
+    return [marker, found.map(s => hash(text.slice(s.start, s.end)))];
+```
+
+返回标签及其各区段SHA数组；slice按字符串区段取文本，hash对文本UTF-8编码求摘要。
+
+### L40
+
+```js
+  }));
+```
+
+结束映射与对象构造。此处的哈希证明一致性，不证明功能正确或安全。
+
+### L41
+
+```js
+}
+```
+
+结束protectedHashes。
+
+### L42
+
+```js
+export function patchExtension(original, service, controller) {
+```
+
+patchExtension接收原bundle文本、社区服务TS文本、控制器TS文本；返回修改文本和保护证据，不直接写安装目录。
+
+### L43
+
+```js
+  const nodes = allNodes(parse(original, { ecmaVersion:'latest', sourceType:'script' }));
+```
+
+按script语法解析原bundle，再遍历AST节点；这一步不会运行其中的扩展激活函数。
+
+### L44
+
+```js
+  const edits = [];
+```
+
+准备编辑数组，之后先收集位置，再一次性逆序替换，避免前面改动影响后面原坐标。
+
+### L45
+
+```js
+  const controllerSection = only(sections(original, 'extensions/shuncode/src/bridge-access-controller.ts'), () => true, 'controller section');
+```
+
+定位控制器来源区段，only要求恰好一个。谓词恒真表示这里按区段数量判断；多段或找不到都停止。
+
+### L46
+
+```js
+  edits.push({...controllerSection, text:`// Community lifecycle (reconstructed replacement)\n${scriptModule(controller)}\n`});
+```
+
+把原控制器区段替换成明确标为重建替换的注释及转译后的社区控制器；展开语法带入start/end坐标。
+
+### L47
+
+```js
+  const serviceSection = only(sections(original, 'extensions/shuncode/src/bridge-license-service.ts'), s => original.slice(s.start,s.end).includes('var BridgeLicenseService = class'), 'commercial service section');
+```
+
+服务标签可能出现多段，用含实际BridgeLicenseService类声明的文本筛出目标，再要求唯一。这依赖已核验的固定bundle形状，不是任意版本都适用。
+
+### L48
+
+```js
+  edits.push({...serviceSection, text:`// Community availability (not a signed commercial licence)\n${scriptModule(service)}\n`});
+```
+
+用新社区服务替换商业服务实现，并注明不是签名商业许可证；不是生成假许可证骗原验签器。
+
+### L49
+
+```js
+  const configSection = only(sections(original, 'extensions/shuncode/src/bridge-license-config.ts'), () => true, 'commercial config');
+```
+
+唯一定位商业授权配置区段；这里针对自有收费服务配置，不是全应用的所有配置。
+
+### L50
+
+```js
+  edits.push({...configSection,text:'// Commercial trust configuration retired in community edition.\n'});
+```
+
+将该商业配置区段替换为停用说明注释；不删除模型、隧道或MCP的真实凭证配置。
+
+### L51
+
+```js
+  const gate = only(nodes, n => n.type === 'VariableDeclarator' && n.id.name === 'authorizeBridgeStart', 'start callback');
+```
+
+在AST里找名称为authorizeBridgeStart的变量声明器，并要求唯一，避免全局替换碰到无关代码。
+
+### L52
+
+```js
+  edits.push({start:gate.init.start,end:gate.init.end,text:'async () => { await bridgeLicense.requireFeature("bridge"); }'});
+```
+
+只替换初始化表达式，留下变量声明结构。新回调等待requireFeature("bridge")完成，接受已知社区能力，而不是对所有未知功能放行。
+
+### L53
+
+```js
+  const signOut = only(nodes, n => n.type === 'CallExpression' && n.arguments[0]?.value === 'shuncode.bridge.license.signOut', 'legacy sign-out');
+```
+
+查找第一个实参为旧商业登出命令字符串的调用节点；可选链处理没有第一个实参的调用。仍须恰好一个匹配。
+
+### L54
+
+```js
+  const fn = signOut.arguments[1];
+```
+
+按已知注册调用形状取第二个参数作为回调函数；这不是对任意函数注册API都成立的通用规则。
+
+### L55
+
+```js
+  edits.push({start:fn.body.start,end:fn.body.end,text:'{ await bridgeLicenseReady; return bridgeAccess.signOut(); }'});
+```
+
+只替换该回调的函数体：先等策略初始化，再返回社区登出状态；不再借商店登出修改自动启动或隐式停止。
+
+### L56
+
+```js
+  const result = applyEdits(original,edits);
+```
+
+把所有编辑应用到原文本；共同使用原坐标，applyEdits负责逆序处理和重叠拒绝。
+
+### L57
+
+```js
+  parse(result,{ecmaVersion:'latest',sourceType:'script'});
+```
+
+再解析修改结果，确认JS语法成立；解析成功不等于扩展激活、UI或工具功能测试成功。
+
+### L58
+
+```js
+  const before = protectedHashes(original), after = protectedHashes(result);
+```
+
+分别计算修改前后8组保护片段的哈希。
+
+### L59
+
+```js
+  if (JSON.stringify(before) !== JSON.stringify(after)) throw new Error('Security or provider module changed');
+```
+
+将两个有固定构造顺序的对象序列化比较；不一致就停止并报告保护模块被改变。不是声称全文件只能有这些编辑。
+
+### L60
+
+```js
+  for (const forbidden of ['shuncode-bridge-license.', '/v1/payments', 'PAYMENT_POLL_INTERVAL_MS', 'LICENSE_REVALIDATION_INTERVAL_MS', 'SHUNCODE_BRIDGE_LICENSE_SMOKE_BYPASS']) {
+```
+
+遍历禁止残留的商业地址片段、支付路径、支付轮询/复验常量与旧烟雾测试绕过开关；这是固定文本检查，不是全面网络流量审计。
+
+### L61
+
+```js
+    if (result.includes(forbidden)) throw new Error(`Retired commercial path remains: ${forbidden}`);
+```
+
+结果包含任一禁止字符串就失败；不能把这一行删掉来让未完成的改造通过。
+
+### L62
+
+```js
+  }
+```
+
+结束禁止残留项循环，后续才会返回已经检查的修改结果。
+
+### L63
+
+```js
+  return { code:result, protectedModules:before };
+```
+
+返回code字符串和原保护片段哈希；它们稍后进入产物清单，不在这里自动安装。
+
+### L64
+
+```js
+}
+```
+
+结束patchExtension。
+
+### L65
+
+```js
+export function communityManifest(original) {
+```
+
+communityManifest生成修改版扩展package配置；入参是解析后的对象，不是原文件路径。
+
+### L66
+
+```js
+  const p = structuredClone(original);
+```
+
+structuredClone复制对象，避免在调用者持有的原manifest上原地修改；原证据文件当然也不会因此被写盘。
+
+### L67
+
+```js
+  p.displayName = 'ShunCode Community';
+```
+
+将显示名称改为社区版，不等于更改扩展唯一标识或所有安装/升级身份。
+
+### L68
+
+```js
+  p.description = 'Recovered ShunCode custom tools and UI. Bridge is free; model and tunnel provider accounts remain separate.';
+```
+
+更新描述，明确Bridge免费且模型/隧道账号独立；文字不是许可证条款或安全认证。
+
+### L69
+
+```js
+  p.shuncodeEdition = 'community';
+```
+
+添加shuncodeEdition标记，帮助识别本次修改版；不伪造原发行构建信息。
+
+### L70
+
+```js
+  const retired = command => typeof command === 'string' && /^shuncode\.bridge\.(license|payment)\./.test(command);
+```
+
+retired仅匹配字符串类型且以shuncode.bridge.license/payment开头的命令；正则里的点转义成字面量，避免误匹配其他字符。
+
+### L71
+
+```js
+  p.contributes.commands = p.contributes.commands.filter(c => !retired(c.command));
+```
+
+筛掉命令面板贡献中的商业命令；不是删除所有注册函数或第三方登录命令。
+
+### L72
+
+```js
+  for (const [key, items] of Object.entries(p.contributes.menus ?? {})) {
+```
+
+遍历菜单配置；没有menus时用空对象，避免对undefined调用Object.entries。
+
+### L73
+
+```js
+    if (Array.isArray(items)) p.contributes.menus[key] = items.filter(i => !retired(i.command));
+```
+
+只处理值为数组的菜单项集合，并过滤商业命令；保留非数组配置形状及其他菜单项。
+
+### L74
+
+```js
+  }
+```
+
+结束菜单过滤循环，保留命令不在这里重新注册或执行。
+
+### L75
+
+```js
+  return p;
+```
+
+返回复制后修改的manifest；其他字段如引擎/proposed API不在本函数里重写。
+
+### L76
+
+```js
+}
+```
+
+结束communityManifest；此操作本身不证明能在普通VSCode以VSIX安装。
+
+### L77
+
+```js
+function patchEntrySource(text) {
+```
+
+patchEntrySource同步修改随包提供的extension.ts副本，使源码说明与bundle改造尽量对应；它不是全工程编译器。
+
+### L78
+
+```js
+  const a = text.indexOf('  const authorizeBridgeStart = async () => {');
+```
+
+按固定缩进和文本找到启动授权回调起点；这是锁定原源码的定位方式，换版本不能盲用。
+
+### L79
+
+```js
+  const b = text.indexOf('\n  const bridge = new BridgeManager', a);
+```
+
+从起点往后找BridgeManager创建位置作为结束边界；保留后续真实经理创建逻辑。
+
+### L80
+
+```js
+  if (a < 0 || b < 0) throw new Error('Unexpected original source entry');
+```
+
+任一起点/终点找不到就拒绝，不猜测应该删除多少行。
+
+### L81
+
+```js
+  text = text.slice(0,a) + '  const authorizeBridgeStart = async () => {\n    await bridgeLicense.requireFeature("bridge");\n  };' + text.slice(b);
+```
+
+保留前后文本，只把中间启动回调换成等待社区能力检查；换行由转义序列明确写入。
+
+### L82
+
+```js
+  const legacy = '      await vscode.workspace.getConfiguration("shuncode.bridge").update("persistentMode", false, vscode.ConfigurationTarget.Global);\n';
+```
+
+保存旧登出逻辑中把persistentMode设为false的完整语句，含缩进和换行，准备精确删除。
+
+### L83
+
+```js
+  if (text.split(legacy).length !== 2) throw new Error('Unexpected sign-out source');
+```
+
+split结果长度必须为2，表示恰好出现一次；0次或多次都不是预期版本形状，不能静默继续。
+
+### L84
+
+```js
+  return text.replace(legacy,'');
+```
+
+只删除这一条旧配置更新语句并返回；不删除用户现有设置文件，也不强制开启自动启动。
+
+### L85
+
+```js
+}
+```
+
+结束patchEntrySource。
+
+### L86
+
+```js
+export async function build(output = path.join(ROOT,'.work/community-overlay')) {
+```
+
+build是异步构建入口，默认写到仓库的.work/community-overlay。output可由可信调用者传入，不能把真实安装目录当作学习输出位置。
+
+### L87
+
+```js
+  const originals = JSON.parse(await readFile(path.join(ROOT,'docs/evidence/custom-extension.json'),'utf8'));
+```
+
+读取并解析原扩展来源清单，后续按它核对原文件SHA；不是读取服务器许可证。
+
+### L88
+
+```js
+  const origin = path.join(ROOT,'recovered/shuncode-extension');
+```
+
+定位原件目录recovered/shuncode-extension，保持与维护代码目录分离。
+
+### L89
+
+```js
+  const readOriginal = async relative => {
+```
+
+声明一个内部异步读取器，relative是构建器自己提供的已知相对路径。
+
+### L90
+
+```js
+    const entry = only(originals.copied,e => e.path === relative,relative);
+```
+
+在来源清单里找唯一同路径记录；找不到或有多条就拒绝，不能用未知文件替代证据。
+
+### L91
+
+```js
+    const bytes = await readFile(path.join(origin,relative));
+```
+
+从原件目录读取Buffer；此时没有写入原件，也没有执行文件内容。
+
+### L92
+
+```js
+    if (hash(bytes) !== entry.sha256) throw new Error(`Original evidence changed: ${relative}`);
+```
+
+计算实际SHA与记录对比；不一致立即停止。更新记录里的哈希来掩盖原件改变会破坏证据链。
+
+### L93
+
+```js
+    return bytes;
+```
+
+校验通过后返回原始字节，调用者决定何时解码为文本或JSON。
+
+### L94
+
+```js
+  };
+```
+
+结束内部readOriginal函数定义。
+
+### L95
+
+```js
+  const service = await readFile(path.join(ROOT,'community/extension/src/bridge-license-service.ts'),'utf8');
+```
+
+读取新写的社区服务TS维护文件；它本来就是允许修改的维护层，不是原件目录。
+
+### L96
+
+```js
+  const controller = await readFile(path.join(ROOT,'community/extension/src/bridge-access-controller.ts'),'utf8');
+```
+
+读取新写的社区控制器TS维护文件，后续与服务一起转译嵌入。
+
+### L97
+
+```js
+  const bundle = await readOriginal('dist/extension.js');
+```
+
+通过带哈希检查的读取器取得原扩展bundle。
+
+### L98
+
+```js
+  const patched = patchExtension(bundle.toString('utf8'),service,controller);
+```
+
+把原bundle按UTF-8解码，交patchExtension静态修改与校验，返回code及保护哈希。
+
+### L99
+
+```js
+  const manifest = communityManifest(JSON.parse(await readOriginal('package.json')));
+```
+
+核验原package.json后解析成对象，再生成社区manifest；原package字节不被覆盖。
+
+### L100
+
+```js
+  const outputs = {
+```
+
+开始定义6个输出文件的路径到内容映射；它是输出计划，不是已经完成写盘。
+
+### L101
+
+```js
+    'dist/extension.js': patched.code,
+```
+
+第一项是修改后的可执行扩展JS，而不是原始TS重新完整编译产物。
+
+### L102
+
+```js
+    'package.json': JSON.stringify(manifest,null,2)+'\n',
+```
+
+第二项把新manifest按两空格缩进序列化并补末尾换行，方便阅读和稳定比对。
+
+### L103
+
+```js
+    'src/bridge-license-service.ts': service,
+```
+
+第三项保留社区服务TS，便于后续维护和教学。
+
+### L104
+
+```js
+    'src/bridge-access-controller.ts': controller,
+```
+
+第四项保留社区控制器TS；这些TS文件随包输出并不证明原TS工程已经能完整编译。
+
+### L105
+
+```js
+    'src/bridge-license-config.ts': '// Commercial configuration retired. See the preserved original under recovered/.\nexport {};\n',
+```
+
+第五项给旧商业配置TS输出退役说明及空导出；export {}使其仍是模块，不包含商业信任配置。
+
+### L106
+
+```js
+    'src/extension.ts': patchEntrySource((await readOriginal('src/extension.ts')).toString('utf8').replaceAll('\r\n','\n')),
+```
+
+第六项先核验原extension.ts，解码并把CRLF转LF，再应用固定入口/登出修改；只规范化这个输出副本，不格式化原件。
+
+### L107
+
+```js
+  };
+```
+
+结束输出映射，当前固定版本应有6项。
+
+### L108
+
+```js
+  const files = [];
+```
+
+准备文件清单数组，记录每个原/新文件哈希及大小。
+
+### L109
+
+```js
+  for (const [relative, contents] of Object.entries(outputs)) {
+```
+
+遍历输出映射，分别拿到相对路径与内容；数组顺序来自当前固定对象构造。
+
+### L110
+
+```js
+    const destination = path.join(output,'resources/app/extensions/shuncode',relative);
+```
+
+把输出路径拼在输出目录的resources/app/extensions/shuncode下面，模拟应用布局但不是默认安装路径。
+
+### L111
+
+```js
+    await mkdir(path.dirname(destination),{recursive:true});
+```
+
+递归创建所需父目录；已经存在也可继续。不需要先手工建每层目录。
+
+### L112
+
+```js
+    await writeFile(destination,contents);
+```
+
+写入当前输出文件内容。这是明确的写盘点，默认发生在.work生成目录，不在recovered里。
+
+### L113
+
+```js
+    files.push({path:`resources/app/extensions/shuncode/${relative}`, originalSha256:hash(await readOriginal(relative)), sha256:hash(contents), size:Buffer.byteLength(contents)});
+```
+
+记录安装相对路径、再次核验取得的原SHA、新内容SHA和UTF-8字节大小；字符串length与字节数不同，所以使用Buffer.byteLength。
+
+### L114
+
+```js
+  }
+```
+
+结束6文件输出循环。若中间失败应报告失败，不能仅凭生成目录存在判断构建完成。
+
+### L115
+
+```js
+  const { buildUiPatch } = await import('./patch_bridge_ui.mjs');
+```
+
+动态导入UI补丁构建函数；它和本构建器共用独立helper，避免此前顶层await循环依赖的问题。导入工具不是执行原Workbench应用。
+
+### L116
+
+```js
+  await mkdir(path.join(output,'ui'),{recursive:true});
+```
+
+建立输出ui目录，存原/新类片段，不复制整个几十MB宿主bundle。
+
+### L117
+
+```js
+  const uiPatches = [], preservedUiMethods = {};
+```
+
+分别准备UI补丁清单数组和保留方法记录对象。
+
+### L118
+
+```js
+  for (const variant of ['workbench','sessions']) {
+```
+
+明确处理workbench与sessions两个宿主；不能只改一个就认为所有入口已更新。
+
+### L119
+
+```js
+    const ui = await buildUiPatch(variant);
+```
+
+为当前宿主生成自己的UI替换片段，内部仍需验证对应原类与未改方法。
+
+### L120
+
+```js
+    const relative = variant === 'workbench' ? 'out/vs/workbench/workbench.desktop.main.js' : 'out/vs/sessions/sessions.desktop.main.js';
+```
+
+三元表达式按宿主选择真实bundle相对路径；两个文件不同，不假设其字节一样。
+
+### L121
+
+```js
+    const entry = only(originals.core_code_index,e => e.path === relative,relative);
+```
+
+在原宿主索引里找唯一记录，取得完整宿主文件SHA用于安装时核对；本地只保存类片段不等于不需要核对完整宿主。
+
+### L122
+
+```js
+    const find = `ui/bridge.${variant}.original.txt`, replacement = `ui/bridge.${variant}.community.txt`;
+```
+
+建立该宿主的原片段和社区片段输出文件名，避免两个宿主互相覆盖。
+
+### L123
+
+```js
+    await writeFile(path.join(output,find),ui.original);
+```
+
+保存原UI片段，作为将来安装时寻找与校验的目标文本。
+
+### L124
+
+```js
+    await writeFile(path.join(output,replacement),ui.code);
+```
+
+保存新UI片段；安装器不能对其他相似版本任意替换这段内容。
+
+### L125
+
+```js
+    preservedUiMethods[variant] = ui.preservedMethods;
+```
+
+记录当前宿主哪些方法被保留，供审计与回归测试核对；保留原方法不是安全缺陷已修复的证明。
+
+### L126
+
+```js
+    uiPatches.push({path:'resources/app/'+relative,originalSha256:entry.sha256,
+```
+
+开始记录UI更新项：完整安装相对路径和整个原宿主SHA。
+
+### L127
+
+```js
+      find,findSha256:hash(ui.original),replace:replacement,replaceSha256:hash(ui.code)});
+```
+
+继续记录原/新片段文件路径及各自SHA；安装器需要同时验证宿主与替换文本，不只是搜到一个类名。
+
+### L128
+
+```js
+  }
+```
+
+结束两个宿主的构建循环。
+
+### L129
+
+```js
+  const report = { edition:'community', baseVersion:'0.7.4', scope:'Version-locked extension overlay, not a complete source rebuild or tested Windows installer.',
+```
+
+开始总manifest：社区标识、精确基底0.7.4及“不代表完整源码/Windows安装器”的范围说明。
+
+### L130
+
+```js
+    protectedModules:patched.protectedModules,preservedUiMethods,files,uiPatches };
+```
+
+把保护模块、UI保留方法、6文件与2宿主片段清单纳入报告；8个目标不代表8个全部功能模块。
+
+### L131
+
+```js
+  await writeFile(path.join(output,'overlay-manifest.json'),JSON.stringify(report,null,2)+'\n');
+```
+
+把报告写到overlay-manifest.json，供验证器、打包器、应用器后续检查；生成清单不是已经通过真实安装包验证。
+
+### L132
+
+```js
+  return report;
+```
+
+返回报告，调用者可检查它或继续验证/打包。
+
+### L133
+
+```js
+}
+```
+
+结束异步build函数定义；导入模块本身不会调用这个函数。
+
+### L134
+
+```js
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+```
+
+只有命令行入口路径与当前模块文件路径一致时才执行下面代码；被测试或其他脚本导入时不自动构建。fileURLToPath处理file URL与Windows路径差异。
+
+### L135
+
+```js
+  const report = await build();
+```
+
+直接运行时等待默认build完成；失败会让脚本报错，不应继续把半成品打包。
+
+### L136
+
+```js
+  console.log(`Built ${report.files.length} community overlay files; security/provider modules byte-identical.`);
+```
+
+打印6个overlay文件与保护模块字节一致的摘要。文字中的一致性来自前面的哈希检查，不是完整功能或GUI验收。
+
+### L137
+
+```js
+}
+```
+
+结束直接运行入口条件。完整流程后面还需要真实包校验、打包、备份应用和单独的Windows验收。
 
 ## 学完后如何确认不是只看懂了文字
 

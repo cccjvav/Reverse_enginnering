@@ -345,3 +345,38 @@ python3 -m unittest discover -s tests -q
 ### 12 跨平台复验
 
 运行 [34870756579](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34870756579) 成功，测试代码提交 `0cda23e6a215ca1928686642da408de71030a456`。Windows 2022和Ubuntu 24.04的Node测试（含教材同步与模拟实验）均成功；Python回归仅在Linux运行。保存作业/步骤API证据，不宣称已取得逐项远端完整日志。课程、人工注解、生成器和实验已推送；全工程逐行讲解仍明确未完成。
+
+## 13. 普通Windows CMD + conda适配与主构建器逐行教学（2026-09-14）
+
+### 用户环境与范围
+
+用户明确：普通CMD，在其中激活conda，不是Anaconda Prompt。将它写入README、专用环境指南与实验课，当前命令块改用CMD的cd /d、dir、certutil、npm.cmd、python和call，不引入venv/virtualenv或PowerShell执行策略修改。历史章节记录当时的操作，不伪改为当时已使用conda。
+
+新增environment-cmd.yml：恢复/教学使用Python3.12、Node22.13至23之前、Tk，conda-forge/nodefaults。不是未来完整Code OSS工具链的承诺；候选底座版本与原包仍未对齐，必须另建环境。
+
+### 实际实现与检查点
+
+1. 新增只读 `tools/check_cmd_environment.py`：检查CONDA_PREFIX、conda-meta、Python/Node/npm路径归属、版本及Tk导入。避免执行错误选中的全局Node；不激活、不安装、不改设置、不打开窗口。
+2. 新增 `tools/run-learning.cmd`：只接受已激活conda；检查教材、模拟实验、Node与Python回归，顺序失败即停。内部调用npm.cmd使用call，保留后续控制流程。
+3. 新增独立 `tools/apply-community.cmd` 资产，由打包器读取。已激活conda时优先用其python.exe，缺失则停止、不悄悄退回全局py；转发参数、保留退出码。有参数不暂停，无参数GUI结束后暂停。启动器切到自身目录，所以CLI目标/外部payload应使用绝对路径。
+4. 专用指南解释了普通CMD激活、完整conda.bat路径入口、审阅后可选init cmd.exe、同窗口继承、where与sys.executable、为何不用py -3、批处理CALL、错误码与安全停止。init会修改当前用户CMD初始化，文档不隐藏副作用。
+5. 新增环境与分发包测试。真实CMD夹具仅运行临时Python替身，验证带空格/符号参数、conda解释器、退出码7；另测失效环境不回退和学习入口拒绝未激活环境。Linux明确跳过这3项，不能用跳过当Windows成功。
+6. Windows CI新增独立conda作业，setup-miniconda固定到fc2d68f6413eb2d87b895e92f8584b5b94a10167，Miniforge创建声明环境，shell为cmd /C CALL {0}；显式在该CMD调用conda.bat activate，再跑总入口和更新器--help。不是在Anaconda Prompt或PowerShell里模拟CMD。
+
+### 教学新增，不虚报完整工程
+
+人工新增 `tools/build_community.mjs` 全部137行讲解：TS转译不等于类型检查、固定注释/AST定位、保护片段SHA、商业命令过滤、原件核验、6文件输出、双宿主片段、manifest及直接运行条件。源码本身未改。每行映射真实代码与SHA，新增数据流及自测问题。
+
+生成器现在纳入.cmd，教材标题数量从报告生成，避免旧硬编码134行。最终4/132文件、271/26867行完整解释，全项目完成标记仍false。压缩行与重复维护/原件分别计数，不能换算工程完成率。
+
+中间一次生成因新增第62行解释长度不满足检查而失败；审阅补充了3条过短结构行说明后重新生成。一次文档编辑因不存在的章节标题中止，检查实际标题后修正；未把中止的编辑或失败测试记作成功。
+
+### 本地执行与更新包重打包
+
+执行并通过：npm run learn:build、learn:check、learn:lab、check:bridge-core、npm test；python3 -m unittest discover -s tests -q。最终Node90项通过；Python发现34项，本地Linux31通过、3个真实CMD夹具跳过。本机无conda，不宣称本机已实测Windows环境。
+
+先保留旧ZIP于.work，再执行npm run build:community与python3 tools/package_community.py。逐项比对15个ZIP条目：仅README.md、apply-community.cmd改变，全部11个payload条目（含manifest）字节相同，作用于8个应用目标。原51个扩展文件SHA再次匹配。
+
+新版467406字节，SHA256为6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa。manifest仍为a543ed8a63f6a2fdcb3a23d8dfbc19573eb1e4041022a795e109d04633096c52；沿用34855446553对相同应用内容的真实原包验证，不谎称本轮又下载/运行安装器。旧历史证据保留旧ZIP哈希，当前用户下载页更新新哈希。
+
+详见 `docs/evidence/cmd-conda-validation.json`。推送前Windows CMD+conda CI状态仍pending，必须等真实作业后另记结果。此次没有部署读/写竞态候选，没有完成完整源码整合、安装器、GUI或远端支付服务下线；已应用旧社区补丁的人无需因为启动器变化重打补丁。

@@ -1,5 +1,5 @@
 {
-  "scope": "Manual explanations for these three entire files only; not a claim of project-wide completion.",
+  "scope": "Manual explanations for four entire files only; not project-wide completion.",
   "files": [
     {
       "source": "community/extension/src/bridge-license-service.ts",
@@ -689,6 +689,698 @@
           "number": 31,
           "code": "}",
           "explanation": "结束 only。它只保证数量条件，是否选中了正确业务位置仍取决于 predicate 和原始文件哈希。"
+        }
+      ]
+    },
+    {
+      "source": "tools/build_community.mjs",
+      "title": "社区overlay主构建器：137行",
+      "sha256": "302cf892a3aa41a16eac6d6a10aa9103f5cfbd9755432371cf4abfbd9e6966c3",
+      "lines": [
+        {
+          "number": 1,
+          "code": "// Version-locked, reproducible overlay. Never evaluates the recovered extension.",
+          "explanation": "注释声明产物是锁定原版本的overlay，不是完整源码重编译。脚本解析原扩展文本，不执行原扩展；新维护代码与构建工具仍会被执行。"
+        },
+        {
+          "number": 2,
+          "code": "import { parse } from 'acorn';",
+          "explanation": "导入Acorn的parse，把JS文本变成AST以定位声明/调用；解析不等于运行代码。"
+        },
+        {
+          "number": 3,
+          "code": "import { transformSync } from 'esbuild';",
+          "explanation": "导入esbuild同步转译函数，将新写TS转成JS；它不是完整TypeScript类型检查器。"
+        },
+        {
+          "number": 4,
+          "code": "import { readFile, writeFile, mkdir } from 'node:fs/promises';",
+          "explanation": "导入异步文件读取、写入和建目录；真正写盘发生在build中的输出阶段，默认不指向已安装软件。"
+        },
+        {
+          "number": 5,
+          "code": "import { createHash } from 'node:crypto';",
+          "explanation": "导入createHash，但当前文件未直接使用它；实际hash来自第9行的公共工具。这是可识别的冗余导入，不是另一个签名流程。"
+        },
+        {
+          "number": 6,
+          "code": "import path from 'node:path';",
+          "explanation": "导入路径工具，拼接本机路径而非硬编码Windows分隔符。"
+        },
+        {
+          "number": 7,
+          "code": "import { fileURLToPath } from 'node:url';",
+          "explanation": "导入fileURLToPath，最后用来识别“直接运行脚本”还是“被其他模块导入”。"
+        },
+        {
+          "number": 8,
+          "code": "",
+          "explanation": "空行分开第三方/内建导入与本项目公共工具导入。"
+        },
+        {
+          "number": 9,
+          "code": "import { ROOT, hash, applyEdits, allNodes, only } from './patch_utils.mjs';",
+          "explanation": "导入仓库根、SHA函数、逆序编辑、AST遍历与唯一匹配工具；前一章节已逐行解释这些函数。"
+        },
+        {
+          "number": 10,
+          "code": "export { ROOT, hash, applyEdits, allNodes, only } from './patch_utils.mjs';",
+          "explanation": "同时把这五个工具重新导出，兼容从构建器导入它们的调用者；不是再执行一遍工具，也不复制定义。"
+        },
+        {
+          "number": 11,
+          "code": "",
+          "explanation": "空行分开导入与首个转换函数。"
+        },
+        {
+          "number": 12,
+          "code": "export function scriptModule(ts) {",
+          "explanation": "scriptModule接收TS文本并返回适合放回旧脚本bundle的JS片段；不接受文件路径，也不自行读取文件。"
+        },
+        {
+          "number": 13,
+          "code": "  const js = transformSync(ts, { loader: 'ts', target: 'es2022', format: 'esm', legalComments: 'inline' }).code;",
+          "explanation": "loader指定TS，target指定ES2022，format先生成ESM，legalComments保留相关注释；取结果的code字符串。类型声明会被擦除，转译成功不保证类型依赖齐全。"
+        },
+        {
+          "number": 14,
+          "code": "  const ast = parse(js, { ecmaVersion: 'latest', sourceType: 'module' });",
+          "explanation": "把刚生成的ESM按module语法解析，取得顶层导出语句的位置；这里不是解析原始TS。"
+        },
+        {
+          "number": 15,
+          "code": "  return applyEdits(js, ast.body.filter(n => n.type === 'ExportNamedDeclaration').map(n => {",
+          "explanation": "从顶层body筛出具名导出节点，逐个映射成编辑，再交applyEdits执行；目标是去除导出列表，让片段嵌入原脚本作用域。"
+        },
+        {
+          "number": 16,
+          "code": "    if (n.declaration) throw new Error('Unexpected export shape');",
+          "explanation": "如果导出节点直接携带声明就拒绝，因为直接删除可能连类/函数本体一起删掉；这里只接受当前固定转译器产生的导出形状。"
+        },
+        {
+          "number": 17,
+          "code": "    return { start:n.start, end:n.end, text:'' };",
+          "explanation": "为导出列表建立[start,end)空字符串替换；保留已在其他位置声明的类/函数。"
+        },
+        {
+          "number": 18,
+          "code": "  }));",
+          "explanation": "结束map和applyEdits调用，返回移除导出列表后的JS；不是调用其中的Bridge类。"
+        },
+        {
+          "number": 19,
+          "code": "}",
+          "explanation": "结束scriptModule，下面的sections负责文本区段定位。"
+        },
+        {
+          "number": 20,
+          "code": "function sections(text, marker) {",
+          "explanation": "sections接收完整文本和来源标签，返回该标签出现的所有区段位置，不假设标签只出现一次。"
+        },
+        {
+          "number": 21,
+          "code": "  const tags = [...text.matchAll(/^\\/\\/ (?:extensions\\/|src\\/|node_modules\\/|<define:)[^\\n]+\\n/gm)];",
+          "explanation": "正则匹配以//开头的来源行：extensions、src、node_modules或构建注入标记；g找全部、m让^匹配每行开头。这里是文本扫描而非Acorn注释识别，只用于固定哈希产物，不能当通用安全解析器。"
+        },
+        {
+          "number": 22,
+          "code": "  return tags.filter(t => t[0] === `// ${marker}\\n`).map(t => {",
+          "explanation": "筛出完整标签行精确相等的项，再逐项计算区段；末尾换行也是当前格式约定的一部分。"
+        },
+        {
+          "number": 23,
+          "code": "    const next = tags.find(n => n.index > t.index);",
+          "explanation": "寻找它之后的下一个来源标签；不是找同名标签。matchAll提供的index是JS字符串偏移。"
+        },
+        {
+          "number": 24,
+          "code": "    return {start:t.index, end:next?.index ?? text.length};",
+          "explanation": "区段从本标签起点到下个标签起点；没有下个标签就到全文末尾。?.防止next缺失，??只在null/undefined时使用后备值。"
+        },
+        {
+          "number": 25,
+          "code": "  });",
+          "explanation": "结束这批区段的映射；返回的是位置数组，还没有做任何替换。"
+        },
+        {
+          "number": 26,
+          "code": "}",
+          "explanation": "结束sections；完整来源/边界仍依赖当前原件和格式，不是完整上游差异分析。"
+        },
+        {
+          "number": 27,
+          "code": "const protectedModules = [",
+          "explanation": "开始必须逐字节保留的模块标签列表；它定义本次去商业化不应触碰的关键范围。"
+        },
+        {
+          "number": 28,
+          "code": "  'extensions/shuncode/src/bridge-server.ts',",
+          "explanation": "保护Bridge服务器逻辑，不为了免费绕开真实启动和工作区机制。"
+        },
+        {
+          "number": 29,
+          "code": "  'extensions/shuncode/src/bridge-mcp-transport.ts',",
+          "explanation": "保护MCP传输逻辑，不删路由令牌或传输会话检查。"
+        },
+        {
+          "number": 30,
+          "code": "  'extensions/shuncode/src/bridge-tool-dispatcher.ts',",
+          "explanation": "保护工具调度器；收费与工具授权不是同一层。"
+        },
+        {
+          "number": 31,
+          "code": "  'extensions/shuncode/src/ide-tool-broker.ts',",
+          "explanation": "保护IDE工具代理，避免改坏宿主工具调用与相关控制。"
+        },
+        {
+          "number": 32,
+          "code": "  'extensions/shuncode/src/codex-auth.ts',",
+          "explanation": "保护Codex自身认证；作者取消自有收费不代表第三方模型无需登录。"
+        },
+        {
+          "number": 33,
+          "code": "  'src/bridge-http-router.ts', 'src/workspace-paths.ts', 'src/tool-input-validation.ts',",
+          "explanation": "同一行保护HTTP路由、工作区路径、工具输入校验三个共享模块；保留原实现不等于证明原实现没有已知竞态。"
+        },
+        {
+          "number": 34,
+          "code": "];",
+          "explanation": "结束8个标签的数组。它不是全应用安全审计清单，未列出的修改仍需另行评审。"
+        },
+        {
+          "number": 35,
+          "code": "export function protectedHashes(text) {",
+          "explanation": "protectedHashes给这些标签对应的全部文本片段计算哈希。"
+        },
+        {
+          "number": 36,
+          "code": "  return Object.fromEntries(protectedModules.map(marker => {",
+          "explanation": "map把每个标签变成键值对，Object.fromEntries再组装成对象，便于生成报告和比较。"
+        },
+        {
+          "number": 37,
+          "code": "    const found = sections(text, marker);",
+          "explanation": "查找当前标签的所有区段，处理构建初始化与实际声明分开的情形。"
+        },
+        {
+          "number": 38,
+          "code": "    if (!found.length) throw new Error(`Missing security/provider module: ${marker}`);",
+          "explanation": "完全找不到就抛错停止，不能把缺失模块当作“无需保护”。错误带标签供定位。"
+        },
+        {
+          "number": 39,
+          "code": "    return [marker, found.map(s => hash(text.slice(s.start, s.end)))];",
+          "explanation": "返回标签及其各区段SHA数组；slice按字符串区段取文本，hash对文本UTF-8编码求摘要。"
+        },
+        {
+          "number": 40,
+          "code": "  }));",
+          "explanation": "结束映射与对象构造。此处的哈希证明一致性，不证明功能正确或安全。"
+        },
+        {
+          "number": 41,
+          "code": "}",
+          "explanation": "结束protectedHashes。"
+        },
+        {
+          "number": 42,
+          "code": "export function patchExtension(original, service, controller) {",
+          "explanation": "patchExtension接收原bundle文本、社区服务TS文本、控制器TS文本；返回修改文本和保护证据，不直接写安装目录。"
+        },
+        {
+          "number": 43,
+          "code": "  const nodes = allNodes(parse(original, { ecmaVersion:'latest', sourceType:'script' }));",
+          "explanation": "按script语法解析原bundle，再遍历AST节点；这一步不会运行其中的扩展激活函数。"
+        },
+        {
+          "number": 44,
+          "code": "  const edits = [];",
+          "explanation": "准备编辑数组，之后先收集位置，再一次性逆序替换，避免前面改动影响后面原坐标。"
+        },
+        {
+          "number": 45,
+          "code": "  const controllerSection = only(sections(original, 'extensions/shuncode/src/bridge-access-controller.ts'), () => true, 'controller section');",
+          "explanation": "定位控制器来源区段，only要求恰好一个。谓词恒真表示这里按区段数量判断；多段或找不到都停止。"
+        },
+        {
+          "number": 46,
+          "code": "  edits.push({...controllerSection, text:`// Community lifecycle (reconstructed replacement)\\n${scriptModule(controller)}\\n`});",
+          "explanation": "把原控制器区段替换成明确标为重建替换的注释及转译后的社区控制器；展开语法带入start/end坐标。"
+        },
+        {
+          "number": 47,
+          "code": "  const serviceSection = only(sections(original, 'extensions/shuncode/src/bridge-license-service.ts'), s => original.slice(s.start,s.end).includes('var BridgeLicenseService = class'), 'commercial service section');",
+          "explanation": "服务标签可能出现多段，用含实际BridgeLicenseService类声明的文本筛出目标，再要求唯一。这依赖已核验的固定bundle形状，不是任意版本都适用。"
+        },
+        {
+          "number": 48,
+          "code": "  edits.push({...serviceSection, text:`// Community availability (not a signed commercial licence)\\n${scriptModule(service)}\\n`});",
+          "explanation": "用新社区服务替换商业服务实现，并注明不是签名商业许可证；不是生成假许可证骗原验签器。"
+        },
+        {
+          "number": 49,
+          "code": "  const configSection = only(sections(original, 'extensions/shuncode/src/bridge-license-config.ts'), () => true, 'commercial config');",
+          "explanation": "唯一定位商业授权配置区段；这里针对自有收费服务配置，不是全应用的所有配置。"
+        },
+        {
+          "number": 50,
+          "code": "  edits.push({...configSection,text:'// Commercial trust configuration retired in community edition.\\n'});",
+          "explanation": "将该商业配置区段替换为停用说明注释；不删除模型、隧道或MCP的真实凭证配置。"
+        },
+        {
+          "number": 51,
+          "code": "  const gate = only(nodes, n => n.type === 'VariableDeclarator' && n.id.name === 'authorizeBridgeStart', 'start callback');",
+          "explanation": "在AST里找名称为authorizeBridgeStart的变量声明器，并要求唯一，避免全局替换碰到无关代码。"
+        },
+        {
+          "number": 52,
+          "code": "  edits.push({start:gate.init.start,end:gate.init.end,text:'async () => { await bridgeLicense.requireFeature(\"bridge\"); }'});",
+          "explanation": "只替换初始化表达式，留下变量声明结构。新回调等待requireFeature(\"bridge\")完成，接受已知社区能力，而不是对所有未知功能放行。"
+        },
+        {
+          "number": 53,
+          "code": "  const signOut = only(nodes, n => n.type === 'CallExpression' && n.arguments[0]?.value === 'shuncode.bridge.license.signOut', 'legacy sign-out');",
+          "explanation": "查找第一个实参为旧商业登出命令字符串的调用节点；可选链处理没有第一个实参的调用。仍须恰好一个匹配。"
+        },
+        {
+          "number": 54,
+          "code": "  const fn = signOut.arguments[1];",
+          "explanation": "按已知注册调用形状取第二个参数作为回调函数；这不是对任意函数注册API都成立的通用规则。"
+        },
+        {
+          "number": 55,
+          "code": "  edits.push({start:fn.body.start,end:fn.body.end,text:'{ await bridgeLicenseReady; return bridgeAccess.signOut(); }'});",
+          "explanation": "只替换该回调的函数体：先等策略初始化，再返回社区登出状态；不再借商店登出修改自动启动或隐式停止。"
+        },
+        {
+          "number": 56,
+          "code": "  const result = applyEdits(original,edits);",
+          "explanation": "把所有编辑应用到原文本；共同使用原坐标，applyEdits负责逆序处理和重叠拒绝。"
+        },
+        {
+          "number": 57,
+          "code": "  parse(result,{ecmaVersion:'latest',sourceType:'script'});",
+          "explanation": "再解析修改结果，确认JS语法成立；解析成功不等于扩展激活、UI或工具功能测试成功。"
+        },
+        {
+          "number": 58,
+          "code": "  const before = protectedHashes(original), after = protectedHashes(result);",
+          "explanation": "分别计算修改前后8组保护片段的哈希。"
+        },
+        {
+          "number": 59,
+          "code": "  if (JSON.stringify(before) !== JSON.stringify(after)) throw new Error('Security or provider module changed');",
+          "explanation": "将两个有固定构造顺序的对象序列化比较；不一致就停止并报告保护模块被改变。不是声称全文件只能有这些编辑。"
+        },
+        {
+          "number": 60,
+          "code": "  for (const forbidden of ['shuncode-bridge-license.', '/v1/payments', 'PAYMENT_POLL_INTERVAL_MS', 'LICENSE_REVALIDATION_INTERVAL_MS', 'SHUNCODE_BRIDGE_LICENSE_SMOKE_BYPASS']) {",
+          "explanation": "遍历禁止残留的商业地址片段、支付路径、支付轮询/复验常量与旧烟雾测试绕过开关；这是固定文本检查，不是全面网络流量审计。"
+        },
+        {
+          "number": 61,
+          "code": "    if (result.includes(forbidden)) throw new Error(`Retired commercial path remains: ${forbidden}`);",
+          "explanation": "结果包含任一禁止字符串就失败；不能把这一行删掉来让未完成的改造通过。"
+        },
+        {
+          "number": 62,
+          "code": "  }",
+          "explanation": "结束禁止残留项循环，后续才会返回已经检查的修改结果。"
+        },
+        {
+          "number": 63,
+          "code": "  return { code:result, protectedModules:before };",
+          "explanation": "返回code字符串和原保护片段哈希；它们稍后进入产物清单，不在这里自动安装。"
+        },
+        {
+          "number": 64,
+          "code": "}",
+          "explanation": "结束patchExtension。"
+        },
+        {
+          "number": 65,
+          "code": "export function communityManifest(original) {",
+          "explanation": "communityManifest生成修改版扩展package配置；入参是解析后的对象，不是原文件路径。"
+        },
+        {
+          "number": 66,
+          "code": "  const p = structuredClone(original);",
+          "explanation": "structuredClone复制对象，避免在调用者持有的原manifest上原地修改；原证据文件当然也不会因此被写盘。"
+        },
+        {
+          "number": 67,
+          "code": "  p.displayName = 'ShunCode Community';",
+          "explanation": "将显示名称改为社区版，不等于更改扩展唯一标识或所有安装/升级身份。"
+        },
+        {
+          "number": 68,
+          "code": "  p.description = 'Recovered ShunCode custom tools and UI. Bridge is free; model and tunnel provider accounts remain separate.';",
+          "explanation": "更新描述，明确Bridge免费且模型/隧道账号独立；文字不是许可证条款或安全认证。"
+        },
+        {
+          "number": 69,
+          "code": "  p.shuncodeEdition = 'community';",
+          "explanation": "添加shuncodeEdition标记，帮助识别本次修改版；不伪造原发行构建信息。"
+        },
+        {
+          "number": 70,
+          "code": "  const retired = command => typeof command === 'string' && /^shuncode\\.bridge\\.(license|payment)\\./.test(command);",
+          "explanation": "retired仅匹配字符串类型且以shuncode.bridge.license/payment开头的命令；正则里的点转义成字面量，避免误匹配其他字符。"
+        },
+        {
+          "number": 71,
+          "code": "  p.contributes.commands = p.contributes.commands.filter(c => !retired(c.command));",
+          "explanation": "筛掉命令面板贡献中的商业命令；不是删除所有注册函数或第三方登录命令。"
+        },
+        {
+          "number": 72,
+          "code": "  for (const [key, items] of Object.entries(p.contributes.menus ?? {})) {",
+          "explanation": "遍历菜单配置；没有menus时用空对象，避免对undefined调用Object.entries。"
+        },
+        {
+          "number": 73,
+          "code": "    if (Array.isArray(items)) p.contributes.menus[key] = items.filter(i => !retired(i.command));",
+          "explanation": "只处理值为数组的菜单项集合，并过滤商业命令；保留非数组配置形状及其他菜单项。"
+        },
+        {
+          "number": 74,
+          "code": "  }",
+          "explanation": "结束菜单过滤循环，保留命令不在这里重新注册或执行。"
+        },
+        {
+          "number": 75,
+          "code": "  return p;",
+          "explanation": "返回复制后修改的manifest；其他字段如引擎/proposed API不在本函数里重写。"
+        },
+        {
+          "number": 76,
+          "code": "}",
+          "explanation": "结束communityManifest；此操作本身不证明能在普通VSCode以VSIX安装。"
+        },
+        {
+          "number": 77,
+          "code": "function patchEntrySource(text) {",
+          "explanation": "patchEntrySource同步修改随包提供的extension.ts副本，使源码说明与bundle改造尽量对应；它不是全工程编译器。"
+        },
+        {
+          "number": 78,
+          "code": "  const a = text.indexOf('  const authorizeBridgeStart = async () => {');",
+          "explanation": "按固定缩进和文本找到启动授权回调起点；这是锁定原源码的定位方式，换版本不能盲用。"
+        },
+        {
+          "number": 79,
+          "code": "  const b = text.indexOf('\\n  const bridge = new BridgeManager', a);",
+          "explanation": "从起点往后找BridgeManager创建位置作为结束边界；保留后续真实经理创建逻辑。"
+        },
+        {
+          "number": 80,
+          "code": "  if (a < 0 || b < 0) throw new Error('Unexpected original source entry');",
+          "explanation": "任一起点/终点找不到就拒绝，不猜测应该删除多少行。"
+        },
+        {
+          "number": 81,
+          "code": "  text = text.slice(0,a) + '  const authorizeBridgeStart = async () => {\\n    await bridgeLicense.requireFeature(\"bridge\");\\n  };' + text.slice(b);",
+          "explanation": "保留前后文本，只把中间启动回调换成等待社区能力检查；换行由转义序列明确写入。"
+        },
+        {
+          "number": 82,
+          "code": "  const legacy = '      await vscode.workspace.getConfiguration(\"shuncode.bridge\").update(\"persistentMode\", false, vscode.ConfigurationTarget.Global);\\n';",
+          "explanation": "保存旧登出逻辑中把persistentMode设为false的完整语句，含缩进和换行，准备精确删除。"
+        },
+        {
+          "number": 83,
+          "code": "  if (text.split(legacy).length !== 2) throw new Error('Unexpected sign-out source');",
+          "explanation": "split结果长度必须为2，表示恰好出现一次；0次或多次都不是预期版本形状，不能静默继续。"
+        },
+        {
+          "number": 84,
+          "code": "  return text.replace(legacy,'');",
+          "explanation": "只删除这一条旧配置更新语句并返回；不删除用户现有设置文件，也不强制开启自动启动。"
+        },
+        {
+          "number": 85,
+          "code": "}",
+          "explanation": "结束patchEntrySource。"
+        },
+        {
+          "number": 86,
+          "code": "export async function build(output = path.join(ROOT,'.work/community-overlay')) {",
+          "explanation": "build是异步构建入口，默认写到仓库的.work/community-overlay。output可由可信调用者传入，不能把真实安装目录当作学习输出位置。"
+        },
+        {
+          "number": 87,
+          "code": "  const originals = JSON.parse(await readFile(path.join(ROOT,'docs/evidence/custom-extension.json'),'utf8'));",
+          "explanation": "读取并解析原扩展来源清单，后续按它核对原文件SHA；不是读取服务器许可证。"
+        },
+        {
+          "number": 88,
+          "code": "  const origin = path.join(ROOT,'recovered/shuncode-extension');",
+          "explanation": "定位原件目录recovered/shuncode-extension，保持与维护代码目录分离。"
+        },
+        {
+          "number": 89,
+          "code": "  const readOriginal = async relative => {",
+          "explanation": "声明一个内部异步读取器，relative是构建器自己提供的已知相对路径。"
+        },
+        {
+          "number": 90,
+          "code": "    const entry = only(originals.copied,e => e.path === relative,relative);",
+          "explanation": "在来源清单里找唯一同路径记录；找不到或有多条就拒绝，不能用未知文件替代证据。"
+        },
+        {
+          "number": 91,
+          "code": "    const bytes = await readFile(path.join(origin,relative));",
+          "explanation": "从原件目录读取Buffer；此时没有写入原件，也没有执行文件内容。"
+        },
+        {
+          "number": 92,
+          "code": "    if (hash(bytes) !== entry.sha256) throw new Error(`Original evidence changed: ${relative}`);",
+          "explanation": "计算实际SHA与记录对比；不一致立即停止。更新记录里的哈希来掩盖原件改变会破坏证据链。"
+        },
+        {
+          "number": 93,
+          "code": "    return bytes;",
+          "explanation": "校验通过后返回原始字节，调用者决定何时解码为文本或JSON。"
+        },
+        {
+          "number": 94,
+          "code": "  };",
+          "explanation": "结束内部readOriginal函数定义。"
+        },
+        {
+          "number": 95,
+          "code": "  const service = await readFile(path.join(ROOT,'community/extension/src/bridge-license-service.ts'),'utf8');",
+          "explanation": "读取新写的社区服务TS维护文件；它本来就是允许修改的维护层，不是原件目录。"
+        },
+        {
+          "number": 96,
+          "code": "  const controller = await readFile(path.join(ROOT,'community/extension/src/bridge-access-controller.ts'),'utf8');",
+          "explanation": "读取新写的社区控制器TS维护文件，后续与服务一起转译嵌入。"
+        },
+        {
+          "number": 97,
+          "code": "  const bundle = await readOriginal('dist/extension.js');",
+          "explanation": "通过带哈希检查的读取器取得原扩展bundle。"
+        },
+        {
+          "number": 98,
+          "code": "  const patched = patchExtension(bundle.toString('utf8'),service,controller);",
+          "explanation": "把原bundle按UTF-8解码，交patchExtension静态修改与校验，返回code及保护哈希。"
+        },
+        {
+          "number": 99,
+          "code": "  const manifest = communityManifest(JSON.parse(await readOriginal('package.json')));",
+          "explanation": "核验原package.json后解析成对象，再生成社区manifest；原package字节不被覆盖。"
+        },
+        {
+          "number": 100,
+          "code": "  const outputs = {",
+          "explanation": "开始定义6个输出文件的路径到内容映射；它是输出计划，不是已经完成写盘。"
+        },
+        {
+          "number": 101,
+          "code": "    'dist/extension.js': patched.code,",
+          "explanation": "第一项是修改后的可执行扩展JS，而不是原始TS重新完整编译产物。"
+        },
+        {
+          "number": 102,
+          "code": "    'package.json': JSON.stringify(manifest,null,2)+'\\n',",
+          "explanation": "第二项把新manifest按两空格缩进序列化并补末尾换行，方便阅读和稳定比对。"
+        },
+        {
+          "number": 103,
+          "code": "    'src/bridge-license-service.ts': service,",
+          "explanation": "第三项保留社区服务TS，便于后续维护和教学。"
+        },
+        {
+          "number": 104,
+          "code": "    'src/bridge-access-controller.ts': controller,",
+          "explanation": "第四项保留社区控制器TS；这些TS文件随包输出并不证明原TS工程已经能完整编译。"
+        },
+        {
+          "number": 105,
+          "code": "    'src/bridge-license-config.ts': '// Commercial configuration retired. See the preserved original under recovered/.\\nexport {};\\n',",
+          "explanation": "第五项给旧商业配置TS输出退役说明及空导出；export {}使其仍是模块，不包含商业信任配置。"
+        },
+        {
+          "number": 106,
+          "code": "    'src/extension.ts': patchEntrySource((await readOriginal('src/extension.ts')).toString('utf8').replaceAll('\\r\\n','\\n')),",
+          "explanation": "第六项先核验原extension.ts，解码并把CRLF转LF，再应用固定入口/登出修改；只规范化这个输出副本，不格式化原件。"
+        },
+        {
+          "number": 107,
+          "code": "  };",
+          "explanation": "结束输出映射，当前固定版本应有6项。"
+        },
+        {
+          "number": 108,
+          "code": "  const files = [];",
+          "explanation": "准备文件清单数组，记录每个原/新文件哈希及大小。"
+        },
+        {
+          "number": 109,
+          "code": "  for (const [relative, contents] of Object.entries(outputs)) {",
+          "explanation": "遍历输出映射，分别拿到相对路径与内容；数组顺序来自当前固定对象构造。"
+        },
+        {
+          "number": 110,
+          "code": "    const destination = path.join(output,'resources/app/extensions/shuncode',relative);",
+          "explanation": "把输出路径拼在输出目录的resources/app/extensions/shuncode下面，模拟应用布局但不是默认安装路径。"
+        },
+        {
+          "number": 111,
+          "code": "    await mkdir(path.dirname(destination),{recursive:true});",
+          "explanation": "递归创建所需父目录；已经存在也可继续。不需要先手工建每层目录。"
+        },
+        {
+          "number": 112,
+          "code": "    await writeFile(destination,contents);",
+          "explanation": "写入当前输出文件内容。这是明确的写盘点，默认发生在.work生成目录，不在recovered里。"
+        },
+        {
+          "number": 113,
+          "code": "    files.push({path:`resources/app/extensions/shuncode/${relative}`, originalSha256:hash(await readOriginal(relative)), sha256:hash(contents), size:Buffer.byteLength(contents)});",
+          "explanation": "记录安装相对路径、再次核验取得的原SHA、新内容SHA和UTF-8字节大小；字符串length与字节数不同，所以使用Buffer.byteLength。"
+        },
+        {
+          "number": 114,
+          "code": "  }",
+          "explanation": "结束6文件输出循环。若中间失败应报告失败，不能仅凭生成目录存在判断构建完成。"
+        },
+        {
+          "number": 115,
+          "code": "  const { buildUiPatch } = await import('./patch_bridge_ui.mjs');",
+          "explanation": "动态导入UI补丁构建函数；它和本构建器共用独立helper，避免此前顶层await循环依赖的问题。导入工具不是执行原Workbench应用。"
+        },
+        {
+          "number": 116,
+          "code": "  await mkdir(path.join(output,'ui'),{recursive:true});",
+          "explanation": "建立输出ui目录，存原/新类片段，不复制整个几十MB宿主bundle。"
+        },
+        {
+          "number": 117,
+          "code": "  const uiPatches = [], preservedUiMethods = {};",
+          "explanation": "分别准备UI补丁清单数组和保留方法记录对象。"
+        },
+        {
+          "number": 118,
+          "code": "  for (const variant of ['workbench','sessions']) {",
+          "explanation": "明确处理workbench与sessions两个宿主；不能只改一个就认为所有入口已更新。"
+        },
+        {
+          "number": 119,
+          "code": "    const ui = await buildUiPatch(variant);",
+          "explanation": "为当前宿主生成自己的UI替换片段，内部仍需验证对应原类与未改方法。"
+        },
+        {
+          "number": 120,
+          "code": "    const relative = variant === 'workbench' ? 'out/vs/workbench/workbench.desktop.main.js' : 'out/vs/sessions/sessions.desktop.main.js';",
+          "explanation": "三元表达式按宿主选择真实bundle相对路径；两个文件不同，不假设其字节一样。"
+        },
+        {
+          "number": 121,
+          "code": "    const entry = only(originals.core_code_index,e => e.path === relative,relative);",
+          "explanation": "在原宿主索引里找唯一记录，取得完整宿主文件SHA用于安装时核对；本地只保存类片段不等于不需要核对完整宿主。"
+        },
+        {
+          "number": 122,
+          "code": "    const find = `ui/bridge.${variant}.original.txt`, replacement = `ui/bridge.${variant}.community.txt`;",
+          "explanation": "建立该宿主的原片段和社区片段输出文件名，避免两个宿主互相覆盖。"
+        },
+        {
+          "number": 123,
+          "code": "    await writeFile(path.join(output,find),ui.original);",
+          "explanation": "保存原UI片段，作为将来安装时寻找与校验的目标文本。"
+        },
+        {
+          "number": 124,
+          "code": "    await writeFile(path.join(output,replacement),ui.code);",
+          "explanation": "保存新UI片段；安装器不能对其他相似版本任意替换这段内容。"
+        },
+        {
+          "number": 125,
+          "code": "    preservedUiMethods[variant] = ui.preservedMethods;",
+          "explanation": "记录当前宿主哪些方法被保留，供审计与回归测试核对；保留原方法不是安全缺陷已修复的证明。"
+        },
+        {
+          "number": 126,
+          "code": "    uiPatches.push({path:'resources/app/'+relative,originalSha256:entry.sha256,",
+          "explanation": "开始记录UI更新项：完整安装相对路径和整个原宿主SHA。"
+        },
+        {
+          "number": 127,
+          "code": "      find,findSha256:hash(ui.original),replace:replacement,replaceSha256:hash(ui.code)});",
+          "explanation": "继续记录原/新片段文件路径及各自SHA；安装器需要同时验证宿主与替换文本，不只是搜到一个类名。"
+        },
+        {
+          "number": 128,
+          "code": "  }",
+          "explanation": "结束两个宿主的构建循环。"
+        },
+        {
+          "number": 129,
+          "code": "  const report = { edition:'community', baseVersion:'0.7.4', scope:'Version-locked extension overlay, not a complete source rebuild or tested Windows installer.',",
+          "explanation": "开始总manifest：社区标识、精确基底0.7.4及“不代表完整源码/Windows安装器”的范围说明。"
+        },
+        {
+          "number": 130,
+          "code": "    protectedModules:patched.protectedModules,preservedUiMethods,files,uiPatches };",
+          "explanation": "把保护模块、UI保留方法、6文件与2宿主片段清单纳入报告；8个目标不代表8个全部功能模块。"
+        },
+        {
+          "number": 131,
+          "code": "  await writeFile(path.join(output,'overlay-manifest.json'),JSON.stringify(report,null,2)+'\\n');",
+          "explanation": "把报告写到overlay-manifest.json，供验证器、打包器、应用器后续检查；生成清单不是已经通过真实安装包验证。"
+        },
+        {
+          "number": 132,
+          "code": "  return report;",
+          "explanation": "返回报告，调用者可检查它或继续验证/打包。"
+        },
+        {
+          "number": 133,
+          "code": "}",
+          "explanation": "结束异步build函数定义；导入模块本身不会调用这个函数。"
+        },
+        {
+          "number": 134,
+          "code": "if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {",
+          "explanation": "只有命令行入口路径与当前模块文件路径一致时才执行下面代码；被测试或其他脚本导入时不自动构建。fileURLToPath处理file URL与Windows路径差异。"
+        },
+        {
+          "number": 135,
+          "code": "  const report = await build();",
+          "explanation": "直接运行时等待默认build完成；失败会让脚本报错，不应继续把半成品打包。"
+        },
+        {
+          "number": 136,
+          "code": "  console.log(`Built ${report.files.length} community overlay files; security/provider modules byte-identical.`);",
+          "explanation": "打印6个overlay文件与保护模块字节一致的摘要。文字中的一致性来自前面的哈希检查，不是完整功能或GUI验收。"
+        },
+        {
+          "number": 137,
+          "code": "}",
+          "explanation": "结束直接运行入口条件。完整流程后面还需要真实包校验、打包、备份应用和单独的Windows验收。"
         }
       ]
     }

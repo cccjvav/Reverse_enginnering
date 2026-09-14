@@ -2,11 +2,19 @@
 
 优先恢复作者自己的 MCP Bridge、工具、定制 UI 等内容；VS Code 只作为运行载体，不追求完整逆向本体。后续目标是建立可维护的定制工程和 Windows 社区版。所有工作在 `arena/01a09d2c-reverse-enginnering-of-shun` 分支进行。
 
+## 你的操作环境：普通 Windows CMD + conda
+
+以 **cmd.exe中激活conda** 为默认，不要求Anaconda Prompt，不用PowerShell/venv激活。
+
+- **[从零配置CMD+conda](docs/WINDOWS_CMD_CONDA.md)**：环境文件、每条命令解释、路径/版本检查与故障处理。
+- 环境激活且安装npm依赖后，仓库根目录执行 `call tools\run-learning.cmd`，一次运行环境、教材、模拟实验、Node/Python回归。不会修改已安装软件。
+- 社区ZIP启动器也已优先使用当前conda Python；已应用旧补丁者无需因启动器更新重打应用补丁。
+
 ## 零基础实操与逐行课程
 
 - **[从这里开始：分步实验](docs/learning/START_HERE.md)**：打开正确目录、识别命令/输出、安装工具、模拟实验、预期结果、故障处理和自测答案。
-- **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具三个文件的 **134行**；不是全工程已逐行讲完。
-- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：127个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
+- **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具和主构建器四个文件的 **271行**；不是全工程已逐行讲完。
+- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：132个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
 - 学习实验：`npm run learn:check`、`npm run learn:lab`；Windows零基础步骤使用 `npm.cmd`，见实验课。实验不启动真实 Bridge、不应用补丁。
 
 ## 定制代码、完整工程与用户分发

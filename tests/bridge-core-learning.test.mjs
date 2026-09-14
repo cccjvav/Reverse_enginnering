@@ -7,9 +7,9 @@ import { learningArtifacts, verifyAnnotation } from '../tools/build_learning.mjs
 import { runLearningLab } from '../tools/learning_lab.mjs';
 import { parse } from 'acorn';
 
-test('every line of the three explained files is mapped; coverage and lessons are fresh',async()=>{
+test('every line of the four explained files is mapped; coverage and lessons are fresh',async()=>{
   const {report,files}=await learningArtifacts();
-  assert.equal(report.summary.fullyExplainedFiles,3);assert.equal(report.summary.explainedLines,134);
+  assert.equal(report.summary.fullyExplainedFiles,4);assert.equal(report.summary.explainedLines,271);
   assert.equal(report.summary.projectWideExplanationComplete,false);
   assert.ok(report.files.some(f=>f.status==='pending'));
   for(const [file,text] of files)assert.equal(await readFile(path.join(ROOT,'docs/learning',file),'utf8'),text);

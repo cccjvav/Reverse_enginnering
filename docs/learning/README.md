@@ -2,12 +2,13 @@
 
 你要的不是“已经做过什么”的报告，而是能照着做、能解释为什么、能复现失败与修正的教程。本目录按这个标准持续补齐。
 
-**先说明完成度：目前只有三个文件、134行的完整逐行注解，以及第一组零基础实验。不是全工程的每行代码已经讲完。** 其余真实文件逐一列在覆盖清单中，不能用一段概述冒充逐行解释。完整工程本身也仍有缺失，不能为不存在的原源码编造注解。
+**先说明完成度：目前只有四个文件、271行的完整逐行注解，以及第一组零基础实验。不是全工程的每行代码已经讲完。** 其余真实文件逐一列在覆盖清单中，不能用一段概述冒充逐行解释。完整工程本身也仍有缺失，不能为不存在的原源码编造注解。
 
 ## 从这里开始
 
+0. [Windows CMD + conda环境](../WINDOWS_CMD_CONDA.md)：只用普通CMD激活环境，不用Anaconda Prompt；含环境文件和一次运行的检查入口。
 1. [零基础实验课 START_HERE](START_HERE.md)：从打开正确文件夹、辨认命令与输出开始，不修改已安装软件。
-2. [逐行精读 LINE_BY_LINE](LINE_BY_LINE.md)：社区策略73行、控制器30行、补丁基础工具31行；每行给出真实代码和解释。
+2. [逐行精读 LINE_BY_LINE](LINE_BY_LINE.md)：社区策略73行、控制器30行、补丁基础工具31行、主构建器137行；每行给出真实代码和解释。
 3. [逐文件覆盖清单 COVERAGE](COVERAGE.md)：讲到哪里、哪些文件还待讲。可机器核验，不用“基本都写了”代替事实。
 4. [面向现有用户的迁移操作](../../community/MIGRATION_FOR_USERS.md)：这是实际应用补丁路线，与只读/模拟实验分开。
 
@@ -18,7 +19,7 @@
 | 00 环境与安全 | 文件夹是什么？在哪里输命令？哪些动作会写盘？怎样停下和求助？ | 本目录 START_HERE | 第一组实操已写 |
 | 01 证据与来源 | EXE、LFS指针、解包、哈希是什么？为什么不能改原件？ | `tools/installer_forensics.py`、`recover_custom_extension.py` | 基础概念已写；工具逐行待补 |
 | 02 免费策略 | 账号、收费、权限、令牌有什么区别？为何 licensed 仍是 true？ | `community/extension/src/` | 两个文件全部103行已讲 |
-| 03 构建补丁 | AST是什么？如何保证只改一个目标？逆序替换为什么不乱位置？ | `tools/patch_utils.mjs`、`build_community.mjs` | 基础工具31行已讲；主构建器逐行待补 |
+| 03 构建补丁 | AST是什么？如何保证只改一个目标？逆序替换为什么不乱位置？ | `tools/patch_utils.mjs`、`build_community.mjs` | 基础工具31行、主构建器137行全部已讲 |
 | 04 定制 UI | 两个宿主为何分开？如何移除付款 UI 又保留停止/隧道控制？ | `community/ui/`、`capture_bridge_ui.mjs`、`patch_bridge_ui.mjs` | 技术记录已有；逐行待补 |
 | 05 安装与回退 | 8文件校验、备份、锁、原子替换、回滚如何工作？失败怎么办？ | `tools/apply_community.py`、`validate_community.py`、`package_community.py` | 用户步骤已有；Python逐行待补 |
 | 06 共享逻辑恢复 | bundle中重复标签、AST、自由变量和依赖闭包是什么？ | `tools/reconstruct_bridge_core.mjs`、`reconstructed/bridge-core/` | 技术说明与测试已有；逐行待补 |
@@ -44,7 +45,7 @@ JSON配置、锁文件、产品字段、许可与第三方NOTICE单独安排字�
 
 `annotations.json` 保存人工撰写的解释、精确代码行和源文件SHA-256；`tools/build_learning.mjs` 检查它们后生成逐行页与覆盖清单。源代码改了、缺行了或解释为空，检查会失败，避免拿旧教程讲新代码。
 
-```powershell
+```cmd
 npm.cmd run learn:check
 npm.cmd run learn:lab
 ```

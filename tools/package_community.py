@@ -39,24 +39,7 @@ def package():
         add('apply_community.py',(ROOT/'tools/apply_community.py').read_bytes())
         add('README.md',(ROOT/'community/README.md').read_bytes())
         add('VALIDATION.json',(ROOT/'docs/evidence/community-validation.json').read_bytes())
-        command = '''@echo off
-setlocal
-cd /d "%~dp0"
-where py >nul 2>nul
-if not errorlevel 1 (
-    py -3 apply_community.py
-    goto finished
-)
-python --version >nul 2>nul
-if not errorlevel 1 (
-    python apply_community.py
-    goto finished
-)
-echo Python 3.10 or later is required. Install it from python.org with Tcl/Tk.
-:finished
-pause
-'''
-        add('apply-community.cmd',command.replace('\n','\r\n').encode('ascii'))
+        add('apply-community.cmd',(ROOT/'tools/apply-community.cmd').read_bytes())
     with zipfile.ZipFile(archive) as check:
         if check.testzip() is not None:
             raise ValueError('ZIP integrity check failed')

@@ -1,0 +1,9 @@
+# Learning/recovery tools only, NOT the future full Code OSS build environment.
+name: shuncode-recovery
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - nodejs>=22.13,<23
+  - tk
