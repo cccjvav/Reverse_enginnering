@@ -28,7 +28,7 @@ npm run audit:boundary -- --check
 - 三份 bundle 合并有 **43 个共享路径标签**；不是把全部依赖算成自有模块。
 - 原 TS 有 **24 个不同的缺失相对目标 / 32 处引用**。
 - 其中 **24 个目标已有某种 JS 重建对应**，但尚未接回原 TS 导入；不能把 24/24 当作工程完成百分比。
-- `file-tool-registry` 仍只是部分声明：没有完整 dispatcher。
+- `file-tool-registry` 的已发布声明与dispatcher现已恢复；原调度器不转发逐文件权限回调，尚未安全整合到宿主。
 - 此前5个目标现已恢复已发布JS声明：`custom-tool-admin`、`custom-tool-migration`、`custom-tool-skill-import`、`custom-tool-skill`、`custom-tools`。
 - 图片、搜索及文件调度现已独立恢复并在临时目录测试，但没有接入真实宿主或部署到overlay。
 
