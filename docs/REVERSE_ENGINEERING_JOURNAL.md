@@ -432,3 +432,10 @@ CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/n
 执行npm ci、build:bridge-core、audit:boundary、learn:build/check、check:bridge-core、运行时审计、npm test与Python回归。Node106通过；Python34发现/31本地通过/3个Windows专属跳过。第一次重定向测试日志因.work目录不存在失败，创建目录后重跑成功。教学仍363行，不将新恢复源码自动算为已讲解；覆盖分母145文件28332行。ZIP未变，SHA仍6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa。
 
 本轮Windows/CMD+conda待推送复验，证据见custom-tools-recovery-tests.json。未完成完整宿主API适配、类型恢复、文件调度、完整编译/安装器或GUI/MCP验收。
+
+
+### 15 跨平台执行链复验结果
+
+代码提交aebec3c76ba2e734ab5e3d9e42d8a2d3e410f2d3，运行 [34959381656](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34959381656) 的Windows2022核心、Ubuntu24.04核心、独立Windows CMD+conda作业全部成功。新测试中的临时工具和提示型Skill执行在Windows也通过，未改用Anaconda Prompt。gh run watch --exit-status返回0，API作业/步骤证据存入custom-tools-recovery-tests.json；不宣称已取得逐项远端完整日志。再次核验51个原扩展文件SHA相同。
+
+本轮不再把5个目标列为“无JS实现”，而是明确更新为“已有发布逻辑重建，但原TS未接线”。仍有55个共享运行时说明符中的3个再导出关系和1个完整文件执行入口未接通；这不是完整依赖审计的全部范围。目标未一次性全部完成：原类型、宿主兼容、搜索/调度、原生资产、完整工程编译/安装器及实际GUI/MCP验收仍待完成。

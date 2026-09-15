@@ -9,7 +9,7 @@
 - **[从零配置CMD+conda](docs/WINDOWS_CMD_CONDA.md)**：环境文件、每条命令解释、路径/版本检查与故障处理。
 - 环境激活且安装npm依赖后，仓库根目录执行 `call tools\run-learning.cmd`，一次运行环境、教材、模拟实验、Node/Python回归。不会修改已安装软件。
 - 社区ZIP启动器也已优先使用当前conda Python；已应用旧补丁者无需因启动器更新重打应用补丁。
-- **[Windows CMD+conda CI已通过](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34912486285)**：创建/激活环境、总入口和CLI夹具通过；[本轮UI与CMD验证证据](docs/evidence/ui-learning-validation.json)。不是GUI或完整安装器验收。
+- **[Windows CMD+conda CI已通过](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34959381656)**：创建/激活环境、总入口和CLI夹具通过；[本轮源码恢复与CMD验证证据](docs/evidence/custom-tools-recovery-tests.json)。不是GUI或完整安装器验收。
 
 ## 零基础实操与逐行课程
 
