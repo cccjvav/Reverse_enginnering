@@ -84,3 +84,7 @@ echo %ERRORLEVEL%
 - 原生资产/ABI、真实扩展激活、GUI/MCP和安装器仍需完整候选及实机证据。
 
 发布检查现在审核HTTP维护变体，记录httpSourceIntegrated:true，但HTTP的整机验收门槛仍BLOCKED；源码接入与产品验收是两件事。
+
+## 本轮最终回归
+
+本地Node138项通过、Python31项通过（另3项Windows专属本地跳过）。提交7680b458db21eb5efd84eacd97d141e5b50d5a11的[运行35036955654](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35036955654)中，Ubuntu、Windows2022、普通CMD+conda三个作业全部成功。作业/步骤API证据在docs/evidence/http-integration-tests.json，未归档完整远端逐项日志。CI绿色不改变11条类型失败和NOT_READY的产品结论。

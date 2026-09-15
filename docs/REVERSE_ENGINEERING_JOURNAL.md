@@ -623,3 +623,9 @@ HTTP变体实际输出.work/http-linked-extension/dist/extension.cjs，1675648�
 学习范围163文件31043行，完整讲解仍6文件363行。原51文件和社区ZIP字节不变，旧实验bundle证据不变。新HTTP证据使用-text保持Windows哈希一致，CI路径包含新helper及http证据。HTTP_EXTENSION_INTEGRATION.md详细区别三种类型模式、两份实验产物和本机惰性协议测试，更新入口与工程状态避免继续误称HTTP适配器完全孤立。
 
 本轮尚未验证新Windows CI；推送后单独检查。剩余Chat宿主契约、真实文件授权接入、原生资产/ABI、完整扩展激活/GUI/MCP及新安装器仍未完成，整体NOT_READY。
+
+### 27 本轮Windows/Linux/CMD复验完成
+
+实现7680b458db21eb5efd84eacd97d141e5b50d5a11已推送并自动触发35036955654。gh run watch --exit-status后台进程退出0：Ubuntu35秒、Windows43秒、普通CMD+conda3分15秒均成功。作业/步骤API与本地138/31/3计数保存http-integration-tests.json；没有归档完整远端逐项日志。动作运行时Node20弃用/强制Node24警告仍存在，项目测试Node版本未改写。
+
+确认这是新增HTTP源码接入和隔离SDK会话测试，不是原件替换、完整扩展激活或真实文件/模型/GUI/隧道验收。HTTP实验类型仍11条失败，产品NOT_READY；默认原连接基线14条及旧构建都保留。
