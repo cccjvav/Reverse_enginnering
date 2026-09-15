@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/145 个纳入范围的文件完整逐行解释；363/28332 行已解释。
+当前：6/150 个纳入范围的文件完整逐行解释；363/29877 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -43,9 +43,10 @@
 | [reconstructed/bridge-core/src/custom-tool-sandbox.js](../../reconstructed/bridge-core/src/custom-tool-sandbox.js) | 88 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/custom-tool-skill-import.js](../../reconstructed/bridge-core/src/custom-tool-skill-import.js) | 163 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/custom-tool-skill.js](../../reconstructed/bridge-core/src/custom-tool-skill.js) | 354 | 0 | 待逐行讲解 |
-| [reconstructed/bridge-core/src/custom-tools.js](../../reconstructed/bridge-core/src/custom-tools.js) | 62 | 0 | 待逐行讲解 |
+| [reconstructed/bridge-core/src/custom-tools.js](../../reconstructed/bridge-core/src/custom-tools.js) | 64 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/file-tool-input-compat.js](../../reconstructed/bridge-core/src/file-tool-input-compat.js) | 160 | 0 | 待逐行讲解 |
-| [reconstructed/bridge-core/src/file-tool-registry.js](../../reconstructed/bridge-core/src/file-tool-registry.js) | 644 | 0 | 待逐行讲解 |
+| [reconstructed/bridge-core/src/file-tool-registry.js](../../reconstructed/bridge-core/src/file-tool-registry.js) | 759 | 0 | 待逐行讲解 |
+| [reconstructed/bridge-core/src/find-files.js](../../reconstructed/bridge-core/src/find-files.js) | 506 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/ide-tool-definitions.js](../../reconstructed/bridge-core/src/ide-tool-definitions.js) | 185 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/jsonrpc-request-id-registry.js](../../reconstructed/bridge-core/src/jsonrpc-request-id-registry.js) | 43 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/managed-command-cancellation.js](../../reconstructed/bridge-core/src/managed-command-cancellation.js) | 223 | 0 | 待逐行讲解 |
@@ -56,7 +57,10 @@
 | [reconstructed/bridge-core/src/mcp-protocol.js](../../reconstructed/bridge-core/src/mcp-protocol.js) | 41 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/read-files.js](../../reconstructed/bridge-core/src/read-files.js) | 403 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/read-image.js](../../reconstructed/bridge-core/src/read-image.js) | 311 | 0 | 待逐行讲解 |
+| [reconstructed/bridge-core/src/ripgrep-diagnostics.js](../../reconstructed/bridge-core/src/ripgrep-diagnostics.js) | 59 | 0 | 待逐行讲解 |
+| [reconstructed/bridge-core/src/search-files.js](../../reconstructed/bridge-core/src/search-files.js) | 739 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/snapshot-build-metadata.js](../../reconstructed/bridge-core/src/snapshot-build-metadata.js) | 7 | 0 | 待逐行讲解 |
+| [reconstructed/bridge-core/src/snapshot-packaged-ripgrep.js](../../reconstructed/bridge-core/src/snapshot-packaged-ripgrep.js) | 8 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/snapshot-sdk-versions.js](../../reconstructed/bridge-core/src/snapshot-sdk-versions.js) | 15 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/tool-input-validation.js](../../reconstructed/bridge-core/src/tool-input-validation.js) | 112 | 0 | 待逐行讲解 |
 | [reconstructed/bridge-core/src/version.js](../../reconstructed/bridge-core/src/version.js) | 7 | 0 | 待逐行讲解 |
@@ -119,6 +123,7 @@
 | [recovered/shuncode-extension/src/workspace-hub.ts](../../recovered/shuncode-extension/src/workspace-hub.ts) | 333 | 0 | 待逐行讲解 |
 | [tests/bridge-core-boundary.test.mjs](../../tests/bridge-core-boundary.test.mjs) | 25 | 0 | 待逐行讲解 |
 | [tests/bridge-core-custom-tools.test.mjs](../../tests/bridge-core-custom-tools.test.mjs) | 145 | 0 | 待逐行讲解 |
+| [tests/bridge-core-file-execution.test.mjs](../../tests/bridge-core-file-execution.test.mjs) | 104 | 0 | 待逐行讲解 |
 | [tests/bridge-core-files.test.mjs](../../tests/bridge-core-files.test.mjs) | 245 | 0 | 待逐行讲解 |
 | [tests/bridge-core-http.test.mjs](../../tests/bridge-core-http.test.mjs) | 63 | 0 | 待逐行讲解 |
 | [tests/bridge-core-learning.test.mjs](../../tests/bridge-core-learning.test.mjs) | 40 | 0 | 待逐行讲解 |
@@ -154,7 +159,7 @@
 | [tools/package_community.py](../../tools/package_community.py) | 53 | 0 | 待逐行讲解 |
 | [tools/patch_bridge_ui.mjs](../../tools/patch_bridge_ui.mjs) | 72 | 72 | 本组已逐行解释 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
-| [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 198 | 0 | 待逐行讲解 |
+| [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 210 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
 | [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |
 | [tools/run-learning.cmd](../../tools/run-learning.cmd) | 27 | 0 | 待逐行讲解 |

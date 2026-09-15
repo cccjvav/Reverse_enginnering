@@ -1653,7 +1653,7 @@
       "matchingLabel": "src/file-tool-registry.ts",
       "reconstruction": {
         "file": "reconstructed/bridge-core/src/file-tool-registry.js",
-        "coverage": "selected declaration subset; other functionality not reconstructed"
+        "coverage": "all emitted top-level declarations for this label"
       },
       "originalTypescriptImportResolved": false
     },
@@ -1736,7 +1736,7 @@
     "sharedLabelsAcrossBundles": 43,
     "originalMissingTargets": 24,
     "targetsWithSomeReconstructedJs": 24,
-    "reconstructedModules": 37
+    "reconstructedModules": 41
   },
   "separation": {
     "originalExtension": "recovered/shuncode-extension",

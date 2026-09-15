@@ -60,3 +60,5 @@ function customToolsFingerprint(tools) {
 }
 
 export { MAX_MANIFESTS_PER_ROOT, customToolsFingerprint, findCustomTool, import_node_fs6, import_node_path10, listEnabledCustomTools, loadCustomTools, toStatusEntries };
+export { CUSTOM_TOOL_OUTPUT_SCHEMA, CUSTOM_TOOLS_DIR_NAME } from './custom-tool-contract.js';
+export { executeCustomTool } from './custom-tool-sandbox.js';

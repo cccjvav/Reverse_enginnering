@@ -25,6 +25,6 @@ export async function originalBaseline() {
   const allowed=new Set(['node:os','node:crypto','node:fs','node:fs/promises','node:path']);
   return vm.runInNewContext('"use strict";\n'+helpers.map(n=>original.slice(n.start,n.end)).join('\n')+'\n'+source+'\n({'+declarations.flatMap(d=>d.names).join(',')+'})',{
     require:specifier=>{if(specifier==='node:child_process')return {execFile(){throw new Error('Baseline child execution forbidden');},spawnSync(){throw new Error('Baseline child execution forbidden');}};assert.ok(allowed.has(specifier),`Unexpected baseline import: ${specifier}`);return require(specifier);},
-    process,Buffer,TextDecoder,DOMException,Error,TypeError,RangeError,setTimeout,clearTimeout,
+    __dirname:path.join(ROOT,"recovered/shuncode-extension/dist"),process,Buffer,TextDecoder,DOMException,Error,TypeError,RangeError,setTimeout,clearTimeout,
   },{timeout:1000});
 }

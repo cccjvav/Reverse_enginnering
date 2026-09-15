@@ -439,3 +439,17 @@ CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/n
 代码提交aebec3c76ba2e734ab5e3d9e42d8a2d3e410f2d3，运行 [34959381656](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34959381656) 的Windows2022核心、Ubuntu24.04核心、独立Windows CMD+conda作业全部成功。新测试中的临时工具和提示型Skill执行在Windows也通过，未改用Anaconda Prompt。gh run watch --exit-status返回0，API作业/步骤证据存入custom-tools-recovery-tests.json；不宣称已取得逐项远端完整日志。再次核验51个原扩展文件SHA相同。
 
 本轮不再把5个目标列为“无JS实现”，而是明确更新为“已有发布逻辑重建，但原TS未接线”。仍有55个共享运行时说明符中的3个再导出关系和1个完整文件执行入口未接通；这不是完整依赖审计的全部范围。目标未一次性全部完成：原类型、宿主兼容、搜索/调度、原生资产、完整工程编译/安装器及实际GUI/MCP验收仍待完成。
+
+## 16. 文件调度、查找搜索与barrel恢复（2026-09-15）
+
+继续工程接线缺口：补回invokeFileTool/dispatchFileTool及find-files/search-files/ripgrep-diagnostics。识别原打包插件独立注释，纠正rgPath被归给前一src标签的旧索引；严格匹配原initializer，显式重定位到保留扩展的runtime/bin/rg.exe，记录runtimeAssetRewrite。没有提供或执行该二进制。VM原声明对照提供原布局__dirname并拒绝子进程执行。
+
+根据现存TS导入需求和原声明位置，新增custom-tools的三个barrel再导出，provenance记录compatibilityReexports，保持函数对象身份且校验来源/依赖，不编造本地声明。当前41模块389声明262904字节；索引内38个共享src标签的已发布顶层声明均纳入，另外3个快照/资产模块。原TS并未改写接线，类型、其他bundle和宿主构建不计作完成。
+
+新增7测试：路径/再导出、原实现对照查找搜索、直接权限/取消/越界拒绝、读/图/补丁调度、错误封装、spawn替身模拟所有rg不可用后两工具Node回退，以及权限回调未转发的原行为。只使用临时目录，不执行真实rg。Node113通过，Python31通过/3项Windows专属本地跳过。
+
+安全发现：dispatchFileTool原函数只转发workspaceRoots/signal，不传checkPermission/config。临时夹具确认拒绝回调未被调用且原文件仍可读。这不能证明宿主上层没有授权，但足以阻止将该模块直接当成自带授权的远程服务。原样重建并记录，没有冒充安全修复。
+
+执行build:bridge-core、audit:boundary、运行时审计、learn:build/check、npm test、Python回归；55个共享运行时导入现在全部有导出，未解析和待再导出计数为0。核心版本reconstructed.5；ZIP未改，原哈希保留。教学仍363行，覆盖分母变为150文件29877行，未把恢复代码自动算作已讲解。
+
+本轮Windows CMD+conda推送后待验，证据见file-execution-tests.json。完整源码工程、TS类型、宿主接口、原生资产、授权整合和完整安装器/GUI仍未完成。

@@ -24,7 +24,7 @@ test('reconstruction is deterministic; every original declaration hash and gener
     const bytes=await readFile(path.join(ROOT,'reconstructed/bridge-core',m.file));assert.equal(hash(bytes),m.sha256);
     for(const d of m.declarations)assert.equal(hash(original.slice(d.start,d.end)),d.originalSha256);
   }
-  assert.equal(generated.report.moduleCount,37);
+  assert.equal(generated.report.moduleCount,41);
   assert.ok(generated.report.sourceLabelIndex.some(m=>m.headingOffsets.length>1));
 });
 
@@ -33,7 +33,7 @@ test('every reconstructed module loads in Node without npm runtime packages',asy
     const loaded=await import(pathToFileURL(path.join(ROOT,'reconstructed/bridge-core',m.file)));
     assert.deepEqual(Object.keys(loaded).sort(),m.exports);
   }
-  assert.equal('dispatchFileTool' in fileTools,false);
+  assert.equal(typeof fileTools.dispatchFileTool,'function');
 });
 
 test('scope analysis sees lexical dependencies, not property names or shadowed parameters',()=>{

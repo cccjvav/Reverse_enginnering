@@ -139,7 +139,7 @@ test('runtime import audit distinguishes existing labels from missing exports an
   assert.deepEqual(actual, stored);
   assert.equal(actual.originalTypescriptImportsRewired, false);
   assert.equal(actual.originalTypecheckPassed, false);
-  assert.equal(actual.summary.unresolved, 1);
-  assert.equal(actual.summary.reexportAdaptersNeeded, 3);
-  assert.equal(actual.imports.find(i => i.status === 'unresolved-runtime-export').name, 'invokeFileTool');
+  assert.equal(actual.summary.unresolved, 0);
+  assert.equal(actual.summary.reexportAdaptersNeeded, 0);
+  assert.equal(actual.summary.direct, 55);
 });

@@ -6,8 +6,8 @@
 
 ## 已经做到什么
 
-- **37 个可独立加载的模块 / 311 个声明 / 204,568 字节 JS**。
-- 其中 **35 个自有源码标签**：34 个标签的已发布顶层声明全部纳入，`file-tool-registry` 仅纳入工具目录和输入解析；另外 2 个文件是原构建元数据、SDK 版本常量。
+- **41 个可独立加载的模块 / 389 个声明 / 262,904 字节 JS**。
+- 其中38个共享src标签的已发布顶层声明全部纳入；另有3个快照/资产定位模块。不能推广为全部宿主或原TS恢复完成。
 - 依赖闭合：每个非内建自由变量都有显式模块来源；运行这些模块不需要安装 npm 运行时依赖，仅使用 Node 内建模块。
 - 原函数/类声明不重写；主要新增 `import/export`，把静态 Node `require` 改接为 ESM，并把构建元数据显式化。
 - [`provenance.json`](provenance.json) 记录原 bundle SHA-256、每个声明的 UTF-16 位置与哈希、输出哈希、模块依赖、完整/部分范围，以及该 bundle **38 个共享源码标签**的索引。此前的 43 是三个 bundle 合并统计，不是这里漏掉了 5 个。
@@ -23,7 +23,7 @@
 | 运行状态 | 活动历史、纯本地计数、并发/自适应并发、命令 ID、保留期和终端空闲管理 |
 | 命令取消 | 原会话归属、限流、强制取消预留与本地主机确认要求，以及命令风险分类 |
 
-**重要限制：** `file-tool-registry.js` 没有 `dispatchFileTool` / `invokeFileTool`，本注册表不能执行读写、搜索或补丁操作。`readFiles` 已可从独立模块调用，但尚未接入调度器；`applyPatch` 也已独立恢复，但图片执行器已恢复但未接入，搜索执行链仍缺失。路径解析不等于安全隔离，原读取器还有已复现的检查/使用竞态，详见 [FILE_READER.md](FILE_READER.md)。IDE 工具仍需 VS Code API 和原宿主执行器。输入校验器实现的是 JSON Schema 的一个子集，不是完整标准验证器。
+**文件调度入口已恢复**，详见 [执行链与权限阻断项](FILE_EXECUTION.md)。原调度器不转发逐文件权限回调，已知读写竞态未修复；不能直接暴露为远程服务。IDE工具仍需要宿主API，输入校验不是完整JSON Schema认证。
 
 ## 如何复现（仓库根目录，Node 22.13+）
 
@@ -45,7 +45,7 @@ npm.cmd run build:bridge-core
 
 ## 不能混淆的身份与缺陷
 
-- `snapshot-build-metadata.js` 保留的是**原 0.7.4 发行构建**的 `version/gitSha/builtAt/release`；`getBuildInfo()` 返回该快照身份，不代表本重建包是官方发行版。本包自身版本是 `0.0.0-reconstructed.4`，且禁止 npm 发布。
+- `snapshot-build-metadata.js` 保留的是**原 0.7.4 发行构建**的 `version/gitSha/builtAt/release`；`getBuildInfo()` 返回该快照身份，不代表本重建包是官方发行版。本包自身版本是 `0.0.0-reconstructed.5`，且禁止 npm 发布。
 - `snapshot-sdk-versions.js` 是原 SDK 中的版本常量证据；原代码宣称的协议支持不等于经过标准兼容性认证。
 - 原 `Semaphore` 动态降低上限时会过早放行排队任务。测试已复现，基线保持原貌。单独的[社区维护候选](../../community/bridge-core/README.md)增加放行条件，已有回归测试，**尚未接入安装包或 overlay**。
 - 本地用量计数只是进程内数字，不重新接入收费服务；现有社区版取消商业授权的改造不受影响。

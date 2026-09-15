@@ -1,7 +1,13 @@
 // RECONSTRUCTED from src/file-tool-registry.ts; see ../provenance.json.
 // Original function/class bodies retained; ESM wiring was reconstructed.
-// PARTIAL: catalogue + input parsing ONLY. This module has no file IO or dispatcher.
-
+// Original full dispatcher: does not forward per-file permission callbacks. See ../FILE_EXECUTION.md.
+import { applyPatch, formatApplyPatchForModel } from './apply-patch.js';
+import { normalizeFileToolInput, normalizeFileToolName } from './file-tool-input-compat.js';
+import { findFiles, formatFindFilesForModel } from './find-files.js';
+import { formatReadFilesForModel, readFiles } from './read-files.js';
+import { formatReadImageForModel, readImage } from './read-image.js';
+import { formatSearchFilesForModel, searchFiles } from './search-files.js';
+import { validateToolInput } from './tool-input-validation.js';
 
 var APPLY_PATCH_TOOL = {
   name: "apply_patch",
@@ -641,4 +647,113 @@ function isFileToolName(name) {
   return FILE_TOOL_NAMES.includes(name);
 }
 
-export { APPLY_PATCH_TOOL, FILE_TOOL_DEFINITIONS, FILE_TOOL_NAMES, FIND_FILES_TOOL, READ_FILES_TOOL, READ_IMAGE_TOOL, SEARCH_FILES_TOOL, asObjectRow, assertOptionalBooleans, assertOptionalIntegers, assertOptionalNonEmptyString, assertOptionalStringArrays, isFileToolName, parseApplyPatchInput, parseFindFilesInput, parseReadFilesInput, parseReadImageInput, parseSearchFilesInput };
+var FILE_TOOL_ERROR_TAGS = {
+  apply_patch: "APPLY_PATCH",
+  find_files: "FIND_FILES",
+  read_files: "READ_FILES",
+  read_image: "READ_IMAGE",
+  search_files: "SEARCH_FILES"
+};
+
+function resolveFileToolErrorCode(error2, message) {
+  const className = error2?.constructor?.name ?? "";
+  if (/(?:FindFiles|SearchTool|ReadTool|ReadImageTool|PatchTool)Error$/.test(className)) {
+    const code = error2.code;
+    if (typeof code === "string" && code.length > 0) return code;
+  }
+  if (message.startsWith("INVALID_ARGUMENT:")) return "INVALID_ARGUMENT";
+  return "UNEXPECTED";
+}
+
+function buildFileToolErrorResult(name, error2) {
+  const message = error2 instanceof Error ? error2.message : String(error2 ?? "");
+  const code = resolveFileToolErrorCode(error2, message);
+  const at = error2?.at;
+  const tag = FILE_TOOL_ERROR_TAGS[normalizeFileToolName(name)] ?? "FILE_TOOL";
+  const structuredContent = {
+    status: "error",
+    error_code: code,
+    message,
+    ...at ? { invalid_glob_source: at } : {}
+  };
+  const lines = [
+    `=== ${tag} BEGIN ===`,
+    "status: error",
+    `error_code: ${code}`,
+    `message: ${message.replace(/[\r\n]+/g, " ")}`,
+    ...at ? [`invalid_glob_source: ${JSON.stringify(at)}`] : [],
+    "NOTE: nothing was read or written; correct the reported field before retrying.",
+    `=== ${tag} END ===`
+  ];
+  return { text: lines.join("\n"), structuredContent, isError: true };
+}
+
+async function invokeFileTool(name, args, context) {
+  try {
+    const { workspaceRoots } = context;
+    return await dispatchFileTool(name, args, {
+      ...context,
+      workspaceRoots: typeof workspaceRoots === "function" ? workspaceRoots() : workspaceRoots
+    });
+  } catch (error2) {
+    return buildFileToolErrorResult(name, error2);
+  }
+}
+
+async function dispatchFileTool(name, args, context) {
+  const canonicalName = normalizeFileToolName(name);
+  const normalizedArgs = normalizeFileToolInput(canonicalName, args);
+  const definition = FILE_TOOL_DEFINITIONS.find((tool) => tool.name === canonicalName);
+  if (!definition) throw new Error(`Unknown file tool: ${name}`);
+  validateToolInput(definition.name, definition.inputSchema, normalizedArgs);
+  if (canonicalName === APPLY_PATCH_TOOL.name) {
+    const result = await applyPatch(parseApplyPatchInput(normalizedArgs), {
+      workspaceRoots: context.workspaceRoots,
+      signal: context.signal
+    });
+    return { text: formatApplyPatchForModel(result), structuredContent: result };
+  }
+  if (canonicalName === FIND_FILES_TOOL.name) {
+    const result = await findFiles(parseFindFilesInput(normalizedArgs), {
+      workspaceRoots: context.workspaceRoots,
+      signal: context.signal
+    });
+    return { text: formatFindFilesForModel(result), structuredContent: result };
+  }
+  if (canonicalName === READ_FILES_TOOL.name) {
+    const result = await readFiles(parseReadFilesInput(normalizedArgs), {
+      workspaceRoots: context.workspaceRoots,
+      signal: context.signal
+    });
+    return {
+      text: formatReadFilesForModel(result),
+      structuredContent: result,
+      isError: result.summary.succeeded === 0 && result.summary.failed > 0 || void 0
+    };
+  }
+  if (canonicalName === READ_IMAGE_TOOL.name) {
+    const result = await readImage(parseReadImageInput(normalizedArgs), {
+      workspaceRoots: context.workspaceRoots,
+      signal: context.signal
+    });
+    const text = formatReadImageForModel(result);
+    const content = [{ type: "text", text }];
+    if (result.status === "error") {
+      return { text, structuredContent: result, content, isError: true };
+    }
+    const { base64: base642, ...metadata } = result;
+    if (!base642) throw new Error("read_image returned success without image data.");
+    content.push({ type: "image", data: base642, mimeType: result.mime_type });
+    return { text, structuredContent: metadata, content };
+  }
+  if (canonicalName === SEARCH_FILES_TOOL.name) {
+    const result = await searchFiles(parseSearchFilesInput(normalizedArgs), {
+      workspaceRoots: context.workspaceRoots,
+      signal: context.signal
+    });
+    return { text: formatSearchFilesForModel(result), structuredContent: result };
+  }
+  throw new Error(`Unknown file tool: ${name}`);
+}
+
+export { APPLY_PATCH_TOOL, FILE_TOOL_DEFINITIONS, FILE_TOOL_ERROR_TAGS, FILE_TOOL_NAMES, FIND_FILES_TOOL, READ_FILES_TOOL, READ_IMAGE_TOOL, SEARCH_FILES_TOOL, asObjectRow, assertOptionalBooleans, assertOptionalIntegers, assertOptionalNonEmptyString, assertOptionalStringArrays, buildFileToolErrorResult, dispatchFileTool, invokeFileTool, isFileToolName, parseApplyPatchInput, parseFindFilesInput, parseReadFilesInput, parseReadImageInput, parseSearchFilesInput, resolveFileToolErrorCode };

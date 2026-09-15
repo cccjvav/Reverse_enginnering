@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-15",
+  "scope": "Full emitted shared file dispatcher and search recovery; not full original project or safe remote service",
+  "modules": 41,
+  "declarations": 389,
+  "bytes": 262904,
+  "sharedLabelsWithAllEmittedDeclarations": 38,
+  "runtimeImportSpecifiersWithExports": 55,
+  "originalTsRewired": false,
+  "fullTypecheckPassed": false,
+  "ripgrepBinaryTested": false,
+  "local": {
+    "nodePassed": 113,
+    "pythonPassed": 31,
+    "pythonWindowsOnlySkipped": 3
+  },
+  "overlayChanged": false,
+  "overlaySha256": "6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa",
+  "ci": {
+    "status": "pending"
+  },
+  "securityFinding": "Original dispatcher does not forward checkPermission; characterized using temporary files, not repaired or deployed."
+}

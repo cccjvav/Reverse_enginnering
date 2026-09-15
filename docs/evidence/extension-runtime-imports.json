@@ -35,9 +35,10 @@
       "source": "src/bridge-mcp-transport.ts",
       "target": "src/custom-tools.js",
       "name": "CUSTOM_TOOL_OUTPUT_SCHEMA",
-      "status": "reexport-adapter-needed",
+      "status": "direct-export-present",
       "providers": [
-        "src/custom-tool-contract.js"
+        "src/custom-tool-contract.js",
+        "src/custom-tools.js"
       ]
     },
     {
@@ -188,9 +189,10 @@
       "source": "src/bridge-server.ts",
       "target": "src/custom-tools.js",
       "name": "CUSTOM_TOOLS_DIR_NAME",
-      "status": "reexport-adapter-needed",
+      "status": "direct-export-present",
       "providers": [
-        "src/custom-tool-contract.js"
+        "src/custom-tool-contract.js",
+        "src/custom-tools.js"
       ]
     },
     {
@@ -269,9 +271,10 @@
       "source": "src/bridge-tool-dispatcher.ts",
       "target": "src/custom-tools.js",
       "name": "executeCustomTool",
-      "status": "reexport-adapter-needed",
+      "status": "direct-export-present",
       "providers": [
-        "src/custom-tool-sandbox.js"
+        "src/custom-tool-sandbox.js",
+        "src/custom-tools.js"
       ]
     },
     {
@@ -332,8 +335,10 @@
       "source": "src/bridge-tool-dispatcher.ts",
       "target": "src/file-tool-registry.js",
       "name": "invokeFileTool",
-      "status": "unresolved-runtime-export",
-      "providers": []
+      "status": "direct-export-present",
+      "providers": [
+        "src/file-tool-registry.js"
+      ]
     },
     {
       "source": "src/bridge-tool-dispatcher.ts",
@@ -500,8 +505,8 @@
   ],
   "summary": {
     "importSpecifiers": 55,
-    "direct": 51,
-    "reexportAdaptersNeeded": 3,
-    "unresolved": 1
+    "direct": 55,
+    "reexportAdaptersNeeded": 0,
+    "unresolved": 0
   }
 }

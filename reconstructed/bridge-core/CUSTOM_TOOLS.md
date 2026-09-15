@@ -52,11 +52,7 @@
 
 执行 `node tools\audit_extension_runtime.mjs --check`。工具校验原TS哈希，用esbuild擦除类型后检查共享模块ImportDeclaration；不执行源码、不修改导入，不进行类型检查。
 
-当前55个实际保留的共享导入说明符：
-
-- 51个在对应重建模块直接存在。
-- 3个需重建原barrel再导出关系：custom-tools的CUSTOM_TOOL_OUTPUT_SCHEMA、CUSTOM_TOOLS_DIR_NAME来自contract，executeCustomTool来自sandbox。
-- 1个仍没有执行实现：file-tool-registry的invokeFileTool。完整调度需要find-files、search-files等链条与原打包ripgrep资产定位；不靠空函数或吞错凑齐。
+后续文件执行轮次已补齐以下缺口：55个共享导入现在都有对应导出，3个barrel关系与invokeFileTool已恢复。详情见 [FILE_EXECUTION.md](FILE_EXECUTION.md)。原TS仍未接线或类型检查通过。
 
 这份统计只检查该目录的静态共享运行时导入，不检查完整宿主依赖、动态导入、类型、VS Code proposed API或所有打包资产。详见 `docs/evidence/extension-runtime-imports.json`。
 
@@ -75,4 +71,4 @@ npm.cmd test
 
 测试会在系统临时目录写文件并运行受控Node夹具，不操作真实工作区或安装目录。不要直接对自己的项目调用loadCustomTools/importSkill/deleteCustomTool来试验。没有要求改用Anaconda Prompt，也没有创建venv。
 
-当前全部37个模块是可测试重建基础，不是已完整恢复的ShunCode工程或可分发Windows安装器。
+当前全部41个模块是可测试重建基础，不是已完整恢复的ShunCode工程或可分发Windows安装器。

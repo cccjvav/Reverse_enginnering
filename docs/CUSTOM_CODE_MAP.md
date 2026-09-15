@@ -7,7 +7,7 @@
 | 材料 | 位置 | 可证实的范围 | 不能据此声称 |
 |---|---|---|---|
 | 自有扩展边界 | `recovered/shuncode-extension/` | 原安装包的 `extensions/shuncode`，51 个文本文件，其中 34 个 TS/MTS；manifest 声明 first-party 集成 | 整个 bundle 都是作者独占原创；它也打包第三方库 |
-| 共享业务逻辑 | `reconstructed/bridge-core/` | 37 个 ESM 模块，35 个自有路径标签加 2 个快照常量模块；按声明记录来源 | 原始 TS 类型或完整共享工程已找回 |
+| 共享业务逻辑 | `reconstructed/bridge-core/` | 41 个 ESM 模块，38 个共享路径标签加 3 个快照/资产定位模块；按声明记录来源 | 原始 TS 类型或完整共享工程已找回 |
 | 定制 Bridge UI | `recovered/bridge-ui/`、`recovered/bridge-ui-sessions/` | 两个宿主各自的自定义 UI 类与常量，哈希定位 | Workbench/Sessions 整个文件都是定制；或只有这两处宿主修改 |
 | 社区版维护 | `community/extension/src/`、`community/ui/` | 本次新写的收费门槛移除与 UI 改造 | 它属于原安装包原件 |
 | 独立维护候选 | `community/bridge-core/` | 并发器修复、读取器有限检查点防护 | 已部署；或已彻底解决文件系统竞态 |
@@ -59,4 +59,4 @@ npm run audit:boundary -- --check
 完整构建路径见 [WINDOWS_BUILD_GUIDE.md](WINDOWS_BUILD_GUIDE.md)。
 
 
-最新运行时接线审计见 [extension-runtime-imports.json](evidence/extension-runtime-imports.json)：51个导出直接存在、3个barrel再导出待接、1个invokeFileTool缺失。全部24个路径有JS标签对应不等于所有类型/导出/执行链齐全。
+最新运行时接线审计见 [extension-runtime-imports.json](evidence/extension-runtime-imports.json)：55个导出均存在，barrel再导出与invokeFileTool已恢复，但原TS未接线。全部24个路径有JS标签对应不等于所有类型/导出/执行链齐全。

@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 145,
-    "lines": 28332,
+    "files": 150,
+    "lines": 29877,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -220,8 +220,8 @@
     },
     {
       "source": "reconstructed/bridge-core/src/custom-tools.js",
-      "sha256": "d3f07bf880872c6e4e6f3657939605ebc0f113484b93b4757c85daff9bc0ba2e",
-      "lines": 62,
+      "sha256": "f3194837be4a4ae4f4b2e79409bc15a57aacd3908c7808d0a452b2e763d16048",
+      "lines": 64,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -234,8 +234,15 @@
     },
     {
       "source": "reconstructed/bridge-core/src/file-tool-registry.js",
-      "sha256": "7405a7721b860405a74e07b5c9199ab208a9c562f0c5bf2fab73354f923688e9",
-      "lines": 644,
+      "sha256": "c7f9373b292a11f2c2b6072a57566460c36bf86a3ca7043dd75c193fd550ff35",
+      "lines": 759,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/find-files.js",
+      "sha256": "94ecd0454a155393f09845ff6c1c162776058354129b2e9c5fd9a4ee40e5c7c2",
+      "lines": 506,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -310,9 +317,30 @@
       "status": "pending"
     },
     {
+      "source": "reconstructed/bridge-core/src/ripgrep-diagnostics.js",
+      "sha256": "60512c37b5dd79d4f028f1423566407e89d186621689207e2b0e40ca66b05963",
+      "lines": 59,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/search-files.js",
+      "sha256": "13e1966d574df9547f66a502a99448d096d473bfea81832329d985445497d111",
+      "lines": 739,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "reconstructed/bridge-core/src/snapshot-build-metadata.js",
       "sha256": "2faee786a81af521a61174517a500c6fc72d477080f1d3165089de58138b698d",
       "lines": 7,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/snapshot-packaged-ripgrep.js",
+      "sha256": "b514d6bf88fa9501f78c19f74428e414418da50a228b8644310dd3d3634a8c0b",
+      "lines": 8,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -745,8 +773,15 @@
     },
     {
       "source": "tests/bridge-core-custom-tools.test.mjs",
-      "sha256": "4f39b4c5823ed4a0ad796258e41554ab89049849abca9603d6fa032204509b81",
+      "sha256": "55ccfe2da930251e8ec67466f008f6042b5603fb1f7f4d29c5167b37a410bcfc",
       "lines": 145,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-file-execution.test.mjs",
+      "sha256": "a144aa6ac3fb956deaf8df350bd35916ce9400d48fc22eb863bec918c060d6b1",
+      "lines": 104,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -780,7 +815,7 @@
     },
     {
       "source": "tests/bridge-core-reconstruction.test.mjs",
-      "sha256": "d0db4d529f891f013c1c899ec2455d902b2052997d1ef6bff34cc5db0c79989f",
+      "sha256": "52239ea256d4ef93266f331a096eff7dc2f10dc8199a8ee60fec037ead172222",
       "lines": 103,
       "explainedLines": 0,
       "status": "pending"
@@ -815,7 +850,7 @@
     },
     {
       "source": "tests/helpers/bridge-core-baseline.mjs",
-      "sha256": "98af30823b5391f0fc4857a23d2dc56b71b5b4f174431385c15b5e1466677460",
+      "sha256": "6951fcebd15a9e8c35788d7f334c45e414e6092c0abebf8986a0a47c3a9b9d84",
       "lines": 30,
       "explainedLines": 0,
       "status": "pending"
@@ -997,8 +1032,8 @@
     },
     {
       "source": "tools/reconstruct_bridge_core.mjs",
-      "sha256": "300ba03ef37f64f87cb2780dfc87b316f82d9f822b3b178de31aa6ae6a18ded4",
-      "lines": 198,
+      "sha256": "76f11b7c8c202157076f5a31ac236387d3b4424f340d36cf2461e68abb9d4a8a",
+      "lines": 210,
       "explainedLines": 0,
       "status": "pending"
     },

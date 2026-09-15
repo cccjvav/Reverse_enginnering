@@ -39,8 +39,8 @@ export const SEEDS = {
   'managed-terminal-lifecycle': ['managedTerminalIdleDelay','isManagedTerminalIdleExpired'],
   'file-tool-input-compat': ['normalizeFileToolInput','normalizeFileToolName','isFileToolCompatibilityAlias'],
   'ide-tool-definitions': ['IDE_TOOL_DEFINITIONS','IDE_TOOL_NAMES','BRIDGE_EXCLUDED_TOOL_NAMES','getIdeToolDefinition'],
-  // Catalogue and input parsing only, NOT file-operation implementations or dispatcher.
-  'file-tool-registry': ['FILE_TOOL_DEFINITIONS','FILE_TOOL_NAMES','isFileToolName','parseApplyPatchInput','parseReadFilesInput','parseReadImageInput','parseFindFilesInput','parseSearchFilesInput'],
+  // Full emitted file-tool dispatcher; original security limitations remain.
+  'file-tool-registry': ['invokeFileTool','dispatchFileTool','FILE_TOOL_DEFINITIONS','FILE_TOOL_NAMES','isFileToolName','parseApplyPatchInput','parseReadFilesInput','parseReadImageInput','parseFindFilesInput','parseSearchFilesInput'],
 };
 const GLOBALS = new Set(['Object','Array','String','Number','Boolean','Math','Date','RegExp','JSON','Error','TypeError','RangeError','Set','Map','WeakMap','WeakSet','Promise','Symbol','Reflect','Infinity','NaN','undefined','BigInt','Uint8Array','Buffer','URL','URLSearchParams','AbortController','AbortSignal','DOMException','TextDecoder','setTimeout','clearTimeout','setInterval','clearInterval','queueMicrotask','console','process']);
 export function scopeInfo(code) {
@@ -71,7 +71,7 @@ export async function reconstruct({write=true}={}) {
   if(hash(original)!==expected)throw new Error('Original extension bundle hash mismatch');
   const comments=[];
   const ast=parse(original,{ecmaVersion:'latest',sourceType:'script',ranges:true,onComment:comments});
-  const markers=comments.filter(c=>!c.block && /^(src\/|extensions\/|node_modules\/|<define:)/.test(c.value.trim()) && original.slice(original.lastIndexOf('\n',c.start-1)+1,c.start).trim()==='').map(c=>({start:c.start,end:c.end,label:c.value.trim()}));
+  const markers=comments.filter(c=>!c.block && /^(src\/|extensions\/|node_modules\/|shuncode-packaged-ripgrep-|<define:)/.test(c.value.trim()) && original.slice(original.lastIndexOf('\n',c.start-1)+1,c.start).trim()==='').map(c=>({start:c.start,end:c.end,label:c.value.trim()}));
   const ownerAt=offset=>{let label='<prelude>';for(const m of markers){if(m.start>offset)break;label=m.label;}return label;};
   const entries=[], bindings=new Map();
   for(const node of ast.body){
@@ -89,6 +89,11 @@ export async function reconstruct({write=true}={}) {
   if(injected.length!==1)throw new Error('Expected one original build metadata assignment');
   const dataNode=injected[0].right;
   bindings.set('define_SHUNCODE_BUILD_INFO_default',{node:dataNode,names:['define_SHUNCODE_BUILD_INFO_default'],owner:'snapshot-build-metadata',code:`const define_SHUNCODE_BUILD_INFO_default = ${original.slice(dataNode.start,dataNode.end)};`,synthetic:true});
+  const packagedRg = bindings.get('rgPath');
+  if (packagedRg?.owner !== 'shuncode-packaged-ripgrep-..-runtime-bin:shuncode-packaged-ripgrep-..-runtime-bin' || packagedRg.code !== 'var rgPath = require("node:path").join(__dirname, "..", "runtime", "bin", "rg.exe");') throw new Error('Unexpected packaged ripgrep binding');
+  // Explicit repository-relative asset relocation, not a claim the binary exists.
+  packagedRg.owner = 'snapshot-packaged-ripgrep';
+  packagedRg.runtimeAssetRewrite = true;
   const selected=new Set(), info=new Map();
   function include(entry){
     if(selected.has(entry))return;
@@ -107,6 +112,7 @@ export async function reconstruct({write=true}={}) {
         code=`import * as ${d.id.name} from ${JSON.stringify(spec)};`;
       }
     }
+    if (entry.runtimeAssetRewrite) code = 'import { fileURLToPath as packagedAssetPath } from "node:url";\nconst rgPath = packagedAssetPath(new URL("../../../recovered/shuncode-extension/runtime/bin/rg.exe", import.meta.url));';
     const parsed=scopeInfo(code);
     if(parsed.free.includes('require')||parsed.free.includes('eval'))throw new Error(`Dynamic loader or eval in ${entry.owner}`);
     info.set(entry,{code,...parsed});
@@ -147,10 +153,15 @@ export async function reconstruct({write=true}={}) {
     }
     // Export reconstructed declarations explicitly. This superset is not a claim
     // about the original author's public API; private helpers remain identifiable.
-    const exports=[...ownNames].sort();
-    const header=`// RECONSTRUCTED from ${owner}; see ../provenance.json.\n// Original function/class bodies retained; ESM wiring was reconstructed.\n`+(owner==='src/file-tool-registry.ts'?'// PARTIAL: catalogue + input parsing ONLY. This module has no file IO or dispatcher.\n':'')+(owner==='src/read-files.ts'?'// SECURITY LIMIT: path checks/open are not atomic; see ../FILE_READER.md.\n':'')+(owner==='src/apply-patch.ts'?'// SECURITY LIMIT: path-based writes/rollback are not race-free; see ../PATCH_WRITER.md.\n':'');
+    const reexports = owner === 'src/custom-tools.ts' ? [
+      {file:'custom-tool-contract.js',names:['CUSTOM_TOOL_OUTPUT_SCHEMA','CUSTOM_TOOLS_DIR_NAME']},
+      {file:'custom-tool-sandbox.js',names:['executeCustomTool']}
+    ] : [];
+    const exports=[...ownNames,...reexports.flatMap(r=>r.names)].sort();
+    for (const r of reexports) for (const name of r.names) if (bindings.get(name)?.owner !== 'src/'+r.file.replace(/\.js$/,'.ts') || !selected.has(bindings.get(name))) throw new Error('Unverified shared barrel export');
+    const header=`// RECONSTRUCTED from ${owner}; see ../provenance.json.\n// Original function/class bodies retained; ESM wiring was reconstructed.\n`+(owner==='src/file-tool-registry.ts'?'// Original full dispatcher: does not forward per-file permission callbacks. See ../FILE_EXECUTION.md.\n':'')+(owner==='src/read-files.ts'?'// SECURITY LIMIT: path checks/open are not atomic; see ../FILE_READER.md.\n':'')+(owner==='src/apply-patch.ts'?'// SECURITY LIMIT: path-based writes/rollback are not race-free; see ../PATCH_WRITER.md.\n':'');
     const importText=[...imports].sort(([a],[b])=>a.localeCompare(b)).map(([file,names])=>`import { ${[...names].sort().join(', ')} } from './${file}';`).join('\n');
-    const code=header+importText+'\n\n'+group.map(e=>info.get(e).code).join('\n\n')+'\n\nexport { '+exports.join(', ')+' };\n';
+    const code=header+importText+'\n\n'+group.map(e=>info.get(e).code).join('\n\n')+'\n\nexport { '+[...ownNames].sort().join(', ')+' };\n'+reexports.map(r=>`export { ${r.names.join(', ')} } from './${r.file}';`).join('\n')+(reexports.length?'\n':'');
     const unresolved=scopeInfo(code).free.filter(n=>!GLOBALS.has(n));
     if(unresolved.length)throw new Error(`Unresolved final module ${owner}: ${unresolved}`);
     const file=filename(owner);
@@ -158,16 +169,17 @@ export async function reconstruct({write=true}={}) {
     files.set(file,code);
     const total=entries.filter(e=>e.owner===owner).length;
     report.modules.push({originLabel:owner,file:'src/'+file,sha256:hash(code),bytes:Buffer.byteLength(code),exports,
-      dependencies:[...imports.keys()].sort(),
+      dependencies:[...new Set([...imports.keys(),...reexports.map(r=>r.file)])].sort(),
+      compatibilityReexports:reexports,
       coverage:owner.startsWith('snapshot-')?'snapshot metadata/third-party version literals':group.length===total?'all emitted top-level declarations for this label':'selected declaration subset; other functionality not reconstructed',
-      declarations:group.map(e=>({names:e.names,start:e.node.start,end:e.node.end,originalSha256:hash(original.slice(e.node.start,e.node.end)),rewiredNodeImport:info.get(e).code!==e.code,snapshotMetadataAssignment:!!e.synthetic}))});
+      declarations:group.map(e=>({names:e.names,start:e.node.start,end:e.node.end,originalSha256:hash(original.slice(e.node.start,e.node.end)),rewiredNodeImport:info.get(e).code!==e.code,snapshotMetadataAssignment:!!e.synthetic,runtimeAssetRewrite:!!e.runtimeAssetRewrite}))});
   }
   // Reject cycles rather than silently inheriting CJS/ESM initialization differences.
   const state=new Map();
   function visit(file){if(state.get(file)===1)throw new Error(`ESM initialization cycle: ${file}`);if(state.get(file)===2)return;state.set(file,1);for(const dep of report.modules.find(m=>m.file==='src/'+file).dependencies)visit(dep);state.set(file,2);}
   for(const file of files.keys())visit(file);
   report.moduleCount=files.size;report.declarationCount=selected.size;report.totalBytes=[...files.values()].reduce((n,s)=>n+Buffer.byteLength(s),0);
-  report.transformations=['Dependency closure rooted at explicit reviewed exports','Removed per-module build-info initializer calls; extracted original metadata into an explicit dependency','Replaced static Node require/interop imports with Node ESM namespaces','Added ESM imports/exports; no original TS types reconstructed','Refused unresolved bindings, third-party executable module dependencies and cyclic initialization'];
+  report.transformations=['Dependency closure rooted at explicit reviewed exports','Removed per-module build-info initializer calls; extracted original metadata into an explicit dependency','Replaced static Node require/interop imports with Node ESM namespaces','Relocated the exact packaged rgPath initializer to the preserved extension runtime/bin/rg.exe location; binary availability not asserted','Added ESM imports/exports; no original TS types reconstructed','Refused unresolved bindings, third-party executable module dependencies and cyclic initialization'];
   if(write){
     // Do not silently overwrite manual maintenance changes or leave stale modules.
     let prior;
