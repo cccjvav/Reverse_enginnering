@@ -561,3 +561,9 @@ facade字段与执行返回来自多个原模块，故provenance增加四个evid
 全套npm test126/126通过；Python34项发现、31通过、3Windows专属本地跳过。check:bridge-core、check:linked-extension、learn:check及CRLF感知diff检查通过。原51文件与HEAD逐字节一致，社区ZIP原SHA6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa不变，实验bundle仍1673367字节原哈希。学习清单154文件30465行，完整解释仍6文件363行；新说明不算全工程逐行覆盖。THIRD_BATCH.md记录普通CMD命令、预期和真实失败修正；SECOND_BATCH明确标为历史39条，当前入口改为18条。
 
 剩余18条集中于取消命令/ToolContentBlock接口、文件结果content、3处HTTP头边界、定制Chat字段。权限调度、真实宿主/原生运行资产/激活/GUI/MCP/新安装器未完成，没有部署实验产物，整体仍NOT_READY。本轮新Windows CI待推送后单独确认，不沿用第二批34980025558作为本轮证明。
+
+### 21 Windows/Linux/CMD复验完成
+
+实现提交10bc1f72113ec6b38539c0b491d73ef16bb397b6已推送固定分支，自动触发35033132376。后台gh run watch --exit-status退出0；Ubuntu23秒、Windows50秒、普通CMD+conda2分23秒三个作业全部成功。gh run view获取作业/步骤API证据保存docs/evidence/type-contract-batch3-tests.json，保留第二批历史证据不覆盖。动作运行时Node20弃用/被强制Node24提示仍记录为警告；未改变项目conda环境。未归档远端逐项完整日志，不冒称更高证据等级。
+
+本轮源代码回归和CMD适配通过；候选18条类型错误、定制宿主与安全/运行时/安装器门槛仍失败或阻塞，不能因为CI绿色发布完整产品。

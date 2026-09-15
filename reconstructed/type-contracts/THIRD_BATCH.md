@@ -76,3 +76,7 @@ echo %ERRORLEVEL%
 39→18共减少21条：8条缺失类型导出、3条Skill名称访问、10条隐式any回调。剩余分类为TS2305=1、TS2339=11、TS2345=3、TS2353=1、TS2724=2。新增声明没有新增any，但原TS的显式any、checkJs:false下的未检查实现仍存在。
 
 下一步还需取消命令、ToolContentBlock/文件工具结果、HTTP边界处理和定制Chat宿主；权限调度、原生资产、真实激活/GUI/MCP和新Windows安装器都未放行。
+
+## 本轮CI结果
+
+提交10bc1f72113ec6b38539c0b491d73ef16bb397b6的[运行35033132376](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35033132376)已完成：Ubuntu、Windows2022、普通CMD+conda三个作业全部成功。作业/步骤API证据在docs/evidence/type-contract-batch3-tests.json，本地126项Node/31项Python通过（另3项Windows专属本地跳过）。未归档远端逐项完整日志；CI成功不表示18条类型错误已消失，更不是实机产品验收。

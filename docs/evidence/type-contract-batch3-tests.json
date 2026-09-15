@@ -1,0 +1,214 @@
+{
+  "scope": "Third-batch contract recovery: local counts and GitHub job/step API evidence. No full per-test remote logs archived; not actual extension, GUI, MCP or installer acceptance.",
+  "localNodeTestsPassed": 126,
+  "localPythonTestsPassed": 31,
+  "localPythonWindowsOnlySkipped": 3,
+  "candidateContractModules": 12,
+  "candidateContractErrors": 18,
+  "candidateTypecheckPassed": false,
+  "extensionLoaded": false,
+  "installerBuilt": false,
+  "github": {
+    "conclusion": "success",
+    "headSha": "10bc1f72113ec6b38539c0b491d73ef16bb397b6",
+    "jobs": [
+      {
+        "completedAt": "2026-09-15T22:53:42Z",
+        "conclusion": "success",
+        "databaseId": 104596019633,
+        "name": "core (windows-2022)",
+        "startedAt": "2026-09-15T22:53:19Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "skipped",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35033132376/job/104596019633"
+      },
+      {
+        "completedAt": "2026-09-15T22:53:42Z",
+        "conclusion": "success",
+        "databaseId": 104596019822,
+        "name": "windows-cmd-conda",
+        "startedAt": "2026-09-15T22:53:19Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence only",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Create the declared conda environment using Miniforge",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run real CMD and conda checks, not an application GUI",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Create the declared conda environment using Miniforge",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence only",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 9,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35033132376/job/104596019822"
+      },
+      {
+        "completedAt": "2026-09-15T22:53:42Z",
+        "conclusion": "success",
+        "databaseId": 104596019910,
+        "name": "core (ubuntu-24.04)",
+        "startedAt": "2026-09-15T22:53:19Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35033132376/job/104596019910"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35033132376"
+  }
+}
