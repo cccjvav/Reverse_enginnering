@@ -23,6 +23,209 @@
   "overlayChanged": false,
   "overlaySha256": "6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa",
   "ci": {
-    "status": "pending"
+    "conclusion": "success",
+    "databaseId": 34970685889,
+    "headSha": "fa6570ae6bb3ed5153e74cd6f56dcd87cd1d4e9f",
+    "jobs": [
+      {
+        "completedAt": "2026-09-15T12:45:32Z",
+        "conclusion": "success",
+        "databaseId": 104385950249,
+        "name": "windows-cmd-conda",
+        "startedAt": "2026-09-15T12:44:58Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence only",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Create the declared conda environment using Miniforge",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run real CMD and conda checks, not an application GUI",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Create the declared conda environment using Miniforge",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence only",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 9,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34970685889/job/104385950249"
+      },
+      {
+        "completedAt": "2026-09-15T12:45:32Z",
+        "conclusion": "success",
+        "databaseId": 104385950396,
+        "name": "core (ubuntu-24.04)",
+        "startedAt": "2026-09-15T12:44:58Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34970685889/job/104385950396"
+      },
+      {
+        "completedAt": "2026-09-15T12:45:32Z",
+        "conclusion": "success",
+        "databaseId": 104385950419,
+        "name": "core (windows-2022)",
+        "startedAt": "2026-09-15T12:44:57Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "skipped",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34970685889/job/104385950419"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34970685889",
+    "evidenceLevel": "GitHub run/job/step API conclusions; full per-test remote logs not retrieved. Test source compares bundle/diagnostic evidence on each platform.",
+    "passingTestsDoNotMeanTypecheckPassed": true
   }
 }

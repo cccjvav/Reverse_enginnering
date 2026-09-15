@@ -104,3 +104,10 @@ node --test tests\bridge-core-linked-extension.test.mjs
 6. 继续源码逐行教学；本轮没有把新工具自动算成已讲解。
 
 旧社区ZIP保持原样；不要用这个实验bundle覆盖现有安装。原自有商业限制继续被替换，第三方模型认证、MCP令牌和其他安全机制没有作为“免费化”目标删除。
+
+
+## 本轮跨平台证据
+
+[运行34970685889](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34970685889) 的Windows2022、Ubuntu24.04和独立CMD+conda作业全部成功。测试代码提交fa6570ae6bb3ed5153e74cd6f56dcd87cd1d4e9f。回归在各平台比较同一bundle哈希与诊断记录；通过不等于59个类型错误已解决。
+
+证据来自GitHub作业/步骤API，未获取逐项完整远端日志。详见 [extension-build-tests.json](evidence/extension-build-tests.json)。

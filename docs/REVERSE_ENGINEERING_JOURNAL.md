@@ -478,3 +478,12 @@ CJS输出的rg路径改用输出dist的../runtime/bin/rg.exe，避免把ESM仓�
 新增4项回归验证确定性构建、来源拒绝、依赖实际打包与诚实记录类型错误。Node117通过；Python31通过、3项Windows专属本地跳过。回归测试通过不等于类型检查通过——它明确断言59错误/false。根锁文件与候选声明添加-text，保证Windows哈希与诊断复现；CI触发范围包括新工具和reference。
 
 执行npm install精确依赖（ignore-scripts）、npm pack、build/check:linked-extension、diagnose:linked-types（预期失败）、check:bridge-core、learn:build、npm test和Python回归。原51文件哈希一致，ZIP仍原SHA。教程仍363行，分母153文件30141行。完整宿主、类型修复、权限整合、原生资产、真实激活/GUI/MCP和安装器未完成；本轮已可重复生成新扩展实验bundle，不再仅有旧bundle替换。
+
+
+### 17 Windows/Linux/CMD复验结果
+
+测试代码fa6570ae6bb3ed5153e74cd6f56dcd87cd1d4e9f，运行 [34970685889](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34970685889) 的Windows2022核心、Ubuntu24.04核心、独立Windows CMD+conda三个作业全部成功。各平台测试会重新连接bundle并比较完整证据，包括输出SHA、依赖输入SHA和59条类型诊断；这不是类型检查成功，更不是实际扩展激活。
+
+gh run watch --exit-status返回0，GitHub作业/步骤API结果保存到extension-build-tests.json；未下载逐项完整远端日志，不虚构更高证据等级。旧action运行时弃用提示仍存在。用户环境继续普通CMD激活conda，不引入Anaconda Prompt或venv。
+
+本轮确实越过“只有导出存在”阶段，得到可重建的新扩展bundle；仍不能声称一次性完成剩余项目。最直接的后续阻断项是59条候选类型错误及定制宿主契约，再往后还有原生资产、运行时、权限与安装验收。
