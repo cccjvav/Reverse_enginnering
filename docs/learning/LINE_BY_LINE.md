@@ -1,6 +1,6 @@
 # 第一组代码逐行精读：社区策略、控制器与补丁基础
 
-先读 [零基础实验课](START_HERE.md)，再读本页。这里完整讲解4个文件的271行（含注释、空行和结构行），不是全工程已经讲完。
+先读 [零基础实验课](START_HERE.md)，再读本页。这里完整讲解6个文件的363行（含注释、空行和结构行），不是全工程已经讲完。
 
 本页由手写注解和真实源码生成；不要复制本页去覆盖原源文件。修改源码后需重新审阅注解并生成。类型声明不等于运行时保证，测试也不等于完整安全认证。
 
@@ -10,12 +10,16 @@
 2. `BridgeAccessController`：把请求转给真实 Bridge，不伪造运行状态。
 3. `patch_utils.mjs`：内容指纹、逆序替换、AST 遍历、唯一定位。
 4. `build_community.mjs`：原件校验、策略/入口替换、manifest与双宿主UI组装。
+5. `patch_bridge_ui.mjs`：双宿主来源、位置补偿、拒绝异常与保留方法核对。
+6. `access-methods.mjs`：状态渲染、错误反馈与取消套餐查询。
 
 章节目录：
 - [第1部分：社区可用性策略：73行](#file-1)
 - [第2部分：生命周期适配器：30行](#file-2)
 - [第3部分：补丁定位基础工具：31行](#file-3)
 - [第4部分：社区overlay主构建器：137行](#file-4)
+- [第5部分：双宿主UI补丁器：72行](#file-5)
+- [第6部分：社区UI状态方法体：20行](#file-6)
 
 <a id="file-1"></a>
 ## 第1部分：社区可用性策略：73行
@@ -2205,6 +2209,756 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 ```
 
 结束直接运行入口条件。完整流程后面还需要真实包校验、打包、备份应用和单独的Windows验收。
+
+
+<a id="file-5"></a>
+## 第5部分：双宿主UI补丁器：72行
+
+原文件：[tools/patch_bridge_ui.mjs](../../tools/patch_bridge_ui.mjs)
+
+对应源码 SHA-256：`5d18c2741664c51483d04767df8b9d5a1de53cf63bcc4b90c38542f8a162828d`
+
+### L1
+
+```js
+// Patch only the custom Bridge widget. Keep the host and tool/tunnel UI intact.
+```
+
+注释限定改造范围：只处理自定义Bridge组件，不整体替换宿主，也不删除工具或隧道控制。
+
+### L2
+
+```js
+import { parse } from 'acorn';
+```
+
+导入Acorn解析器，把JS字符串转成AST；解析不等于执行原组件。
+
+### L3
+
+```js
+import { readFile } from 'node:fs/promises';
+```
+
+导入异步读取函数。这个模块没有导入写文件函数，产物以字符串返回给主构建器。
+
+### L4
+
+```js
+import path from 'node:path';
+```
+
+导入路径工具，让Windows与其他平台使用各自路径规则。
+
+### L5
+
+```js
+import { accessMethods } from '../community/ui/access-methods.mjs';
+```
+
+导入手写方法体映射。值是代码字符串，导入映射不会调用这些UI方法。
+
+### L6
+
+```js
+import { ROOT, applyEdits, allNodes, only, hash } from './patch_utils.mjs';
+```
+
+复用根目录、位置编辑、AST遍历、唯一匹配和SHA工具，避免各补丁器自行实现不同规则。
+
+### L7
+
+（空行）
+
+空行分隔导入和解析函数；没有额外运行效果。
+
+### L8
+
+```js
+export function parseClass(code) {
+```
+
+导出parseClass，供补丁器、静态实验及测试共同解析类片段。
+
+### L9
+
+```js
+  if (typeof code !== 'string') throw new TypeError('UI class source must be a string');
+```
+
+显式拒绝非字符串，防止JS隐式转字符串把错误输入变成难懂的解析结果。
+
+### L10
+
+```js
+  const ast = parse('('+code+')',{ecmaVersion:'latest',sourceType:'module'});
+```
+
+给原片段外包一对括号，把类放在表达式位置。前面增加一个UTF-16代码单元，所以所有原文切片位置要减一。
+
+### L11
+
+```js
+  const expression = ast.body.length === 1 ? ast.body[0].expression : undefined;
+```
+
+只有顶层恰好一个语句才取它的expression；否则用undefined交给下一行拒绝。
+
+### L12
+
+```js
+  if (expression?.type !== 'ClassExpression') throw new Error('Expected one UI class expression');
+```
+
+可选链防止expression缺失时报属性错误；仅接受ClassExpression，不接受对象、序列表达式或额外语句。
+
+### L13
+
+```js
+  return expression;
+```
+
+返回类AST节点，没有new这个类，也没有执行类中的静态块。
+
+### L14
+
+```js
+}
+```
+
+结束parseClass。语法结构正确不等于该代码可以安全执行。
+
+### L15
+
+```js
+const retiredMethods = new Set(['signOut','createPayment','redeemActivationCode','fetchPaymentPlans','runAccessCommand','accessAccountLabel']);
+```
+
+Set列出要删除的自有商业方法：登出、创建订单、兑换、套餐查询、商业命令转发和账号标签。
+
+### L16
+
+```js
+const retiredControls = ['signInButton','giteeSignInButton','refreshSessionButton','refreshLicenseButton','signOutButton','planSelect','paymentTypeSelect','purchaseButton','reloadPaymentPlansButton','checkPaymentButton','activationInput','redeemButton'];
+```
+
+数组列出旧商业控件名称，用于清理updateControls对这些控件的引用；不包含隧道凭证清除按钮。
+
+### L17
+
+```js
+export function patchUiClass(original,card) {
+```
+
+patchUiClass接收原类与新说明卡片的文本，返回修改结果；调用者须提供可信维护卡片与正确版本原件。
+
+### L18
+
+```js
+  const cls = parseClass(original);
+```
+
+先解析原类取得节点位置；这不是加载Workbench或启动扩展。
+
+### L19
+
+```js
+  const methods = cls.body.body.filter(n => n.type === 'MethodDefinition');
+```
+
+只选MethodDefinition方法节点，不把类字段、静态块一律当作方法。
+
+### L20
+
+```js
+  const method = name => only(methods,n => n.key.name === name,`UI method ${name}`);
+```
+
+内部method函数按普通属性名定位并要求唯一；当前固定产物采用这种命名，不是通用的计算属性名解析。
+
+### L21
+
+```js
+  const text = n => original.slice(n.start-1,n.end-1);
+```
+
+把包装后AST坐标减一再切原文，修正开头括号的偏移；JS位置不是UTF-8字节偏移。
+
+### L22
+
+```js
+  const edit = (n,value) => ({start:n.start-1,end:n.end-1,text:value});
+```
+
+创建编辑对象，同样减一；value是替换文本，尚未修改任何文件。
+
+### L23
+
+```js
+  const edits = [];
+```
+
+收集全部编辑，最后统一执行，避免边改边计算导致坐标漂移。
+
+### L24
+
+```js
+  const constructor = method('constructor');
+```
+
+定位唯一构造器方法，不调用构造器，因此不会创建DOM或注册真实事件。
+
+### L25
+
+```js
+  const body = constructor.value.body.body;
+```
+
+逐层取构造器函数体中的顶层语句数组；body字段在不同AST节点上含义不同。
+
+### L26
+
+```js
+  const accessStart = only(body,n => text(n).startsWith('this.accessCard ='), 'account card start');
+```
+
+从顶层语句找账户卡片赋值起点；startsWith依赖已核验编译格式，换版本不能盲用。
+
+### L27
+
+```js
+  const connectionStart = only(body,n => text(n).startsWith('this.connectionCard ='), 'connection card start');
+```
+
+找连接卡片起点，作为账户区域的结束边界；连接卡片本身要保留。
+
+### L28
+
+```js
+  if (accessStart.start >= connectionStart.start) throw new Error('Unexpected UI card order');
+```
+
+明确拒绝起点不在终点之前的输入，避免倒置范围误删连接区域；不自动交换两个边界猜测作者意图。
+
+### L29
+
+```js
+  edits.push({start:accessStart.start-1,end:connectionStart.start-1,text:card+'\n    '});
+```
+
+把账户区域替换为社区说明卡片，加换行和缩进；终点为连接卡片起点，不包含该卡片赋值。
+
+### L30
+
+```js
+  for (const n of body) if (/^this\.paymentPlans(?:FetchAttempted|Loading) =/.test(text(n))) edits.push(edit(n,''));
+```
+
+删除两个支付套餐加载状态初始化语句。正则中的可选分支只匹配这些已知状态，不删除所有payment相关字符。
+
+### L31
+
+```js
+  for (const n of methods) {
+```
+
+遍历所有原方法，分别判断删除或替换；尚未执行原方法内容。
+
+### L32
+
+```js
+    if (retiredMethods.has(n.key.name)) edits.push(edit(n,''));
+```
+
+商业方法整段替换为空字符串，连方法定义一起移除。
+
+### L33
+
+```js
+    else if (Object.hasOwn(accessMethods,n.key.name)) edits.push(edit(n.value.body,accessMethods[n.key.name]));
+```
+
+仅对映射自有属性替换函数体。Object.hasOwn避免把继承来的constructor误当替换项；保留原参数和方法名。
+
+### L34
+
+```js
+  }
+```
+
+结束方法编辑收集；其他方法默认不动，但后面仍会核对原文。
+
+### L35
+
+```js
+  const guards = allNodes(cls).filter(n => n.type === 'IfStatement' && text(n.test).includes('this.lastAccessStatus?.licensed'));
+```
+
+遍历类内IfStatement，按条件中的旧licensed表达式定位收费门槛；这是固定版本文本特征，不是任意授权逻辑识别器。
+
+### L36
+
+```js
+  if (guards.length !== 2) throw new Error(`Expected start and auto-start commercial guards, got ${guards.length}`);
+```
+
+必须恰好两个门槛：手动启动和自动启动。缺少或多出都停止，不能当作不必修改。
+
+### L37
+
+```js
+  for (const n of guards) {
+```
+
+遍历两个已识别条件，为每一个建立完整if语句替换。
+
+### L38
+
+```js
+    const persistent = text(n.test).includes('enabled');
+```
+
+按条件文本是否含enabled区分自动启动；这种约定只适用于当前已知构建，并非通用变量绑定分析。
+
+### L39
+
+```js
+    edits.push(edit(n,`if (${persistent?'enabled && ':''}(this.lastAccessStatus?.edition !== "community" || this.lastAccessStatus?.available !== true)) {
+```
+
+生成新的if：自动启动保留enabled前置条件；未匹配社区edition或available不严格为true时进入错误分支。
+
+### L40
+
+```js
+      this.renderAccessError("社区版组件尚未就绪，请先完成社区版更新。");
+```
+
+这行是将被写入UI的错误提示文本，不是构建时立刻显示提示；防止只安装新版UI就冒充后端已免费可用。
+
+### L41
+
+```js
+      return;
+```
+
+生成的return中止当前启动回调，不是退出整个补丁构建函数。
+
+### L42
+
+```js
+    }`));
+```
+
+结束生成的if字符串及编辑入队；仍没有调用真实Bridge命令。
+
+### L43
+
+```js
+  }
+```
+
+结束两个启动门槛的编辑循环；停止操作的其他逻辑不在此处删除。
+
+### L44
+
+```js
+  for (const n of method('updateControls').value.body.body) {
+```
+
+遍历updateControls方法的顶层语句；这个方法会随其他状态刷新控件。
+
+### L45
+
+```js
+    const s = text(n);
+```
+
+取当前语句原文，仍使用减一后的原始坐标。
+
+### L46
+
+```js
+    if (/^const (signedIn|hasPaymentPlans)\b/.test(s) || retiredControls.some(name => s.startsWith(`this.${name}.`))) edits.push(edit(n,''));
+```
+
+删除旧登录/套餐局部状态声明，以及旧商业控件的属性更新；some表示任一控件名前缀匹配即删除。
+
+### L47
+
+```js
+  }
+```
+
+结束控件清理循环。没有依据名称里含token就删除凭证相关控件。
+
+### L48
+
+```js
+  const updated = applyEdits(original,edits);
+```
+
+把收集的编辑逆序应用到字符串；公共工具拒绝重叠等错误，不写安装目录。
+
+### L49
+
+```js
+  const newMethods = parseClass(updated).body.body.filter(n => n.type === 'MethodDefinition');
+```
+
+重新解析修改后的类并收集方法，确保生成结果仍有正确类语法。
+
+### L50
+
+```js
+  for (const forbidden of ['BRIDGE_LICENSE_', 'BRIDGE_PAYMENT_', '.signedIn', '.licensed', 'paymentPlans', 'purchaseSection', 'activationInput']) {
+```
+
+遍历禁止残留的旧商业命令、状态和界面标识。名单检查不等于完整网络行为审计。
+
+### L51
+
+```js
+    if (updated.includes(forbidden)) throw new Error(`Commercial UI reference remains: ${forbidden}`);
+```
+
+若任一禁止字符串残留就抛错，连注释中的同名片段也会触发，属于保守文本检查。
+
+### L52
+
+```js
+  }
+```
+
+结束禁止残留检查；通过并不等于真实UI运行已经验收。
+
+### L53
+
+```js
+  const changed = new Set(['constructor','renderAccess','renderAccessError','refreshAccessAndPlans','toggleBridge','updateControls',...retiredMethods]);
+```
+
+定义允许修改的方法集合，包含构造器、访问状态渲染、刷新、启动、控件更新及已删除商业方法。
+
+### L54
+
+```js
+  const preserved = {};
+```
+
+建立保留方法的证据对象，记录原文哈希，供主manifest与测试使用。
+
+### L55
+
+```js
+  for (const n of methods) if (!changed.has(n.key.name)) {
+```
+
+只对不在允许改动集合中的原方法做逐字节内容核对。
+
+### L56
+
+```js
+    const after = only(newMethods,m => m.key.name === n.key.name,`preserved UI method ${n.key.name}`);
+```
+
+在新类里要求同名方法仍唯一存在；删除了工具方法或出现重复都会失败。
+
+### L57
+
+```js
+    const beforeText = text(n), afterText = updated.slice(after.start-1,after.end-1);
+```
+
+分别切取原方法和新方法文本；新AST的坐标对应updated，不能拿它去切original。
+
+### L58
+
+```js
+    if (beforeText !== afterText) throw new Error(`Unexpected change to UI method ${n.key.name}`);
+```
+
+要求两段文本严格相等，不仅仅比较方法名或参数；任何意外变更都拒绝。
+
+### L59
+
+```js
+    preserved[n.key.name] = hash(beforeText);
+```
+
+对相同原文求SHA并记录；保留原实现不意味着原实现没有安全缺陷。
+
+### L60
+
+```js
+  }
+```
+
+结束保留方法验证循环；当前两个真实宿主各有73个保留方法。
+
+### L61
+
+```js
+  return { code:updated, preservedMethods:preserved };
+```
+
+返回新类代码和保留方法记录；没有把它保存或安装到用户应用。
+
+### L62
+
+```js
+}
+```
+
+结束patchUiClass函数，后面的入口负责选择和核验宿主原件。
+
+### L63
+
+```js
+export async function buildUiPatch(variant = 'workbench') {
+```
+
+异步buildUiPatch默认选workbench；显式sessions走另一个来源记录。
+
+### L64
+
+```js
+  if (!['workbench','sessions'].includes(variant)) throw new Error('Unknown UI variant');
+```
+
+只接受两个已知宿主名字，防止拼错后回落到错误文件或任意拼接路径。
+
+### L65
+
+```js
+  const suffix = variant === 'sessions' ? '-sessions' : '';
+```
+
+为Sessions构造-sessions后缀，Workbench用空后缀，保持来源目录和证据配对。
+
+### L66
+
+```js
+  const evidence = JSON.parse(await readFile(path.join(ROOT,'docs/evidence/bridge-ui'+suffix+'.json'),'utf8'));
+```
+
+读取对应宿主的JSON来源证据，不是用一个宿主的记录校验两个不同文件。
+
+### L67
+
+```js
+  const target = only(evidence.classes,c => c.methods.includes('toggleBridge') && c.methods.includes('renderCustomTools'),'Bridge UI class');
+```
+
+按同时拥有toggleBridge和renderCustomTools的方法特征选择唯一类；特征命中不代表恢复了完整原TS源码。
+
+### L68
+
+```js
+  const original = await readFile(path.join(ROOT,'recovered/bridge-ui'+suffix,target.file),'utf8');
+```
+
+从相应recovered目录读取编译类片段，保留原始来源文件不覆盖。
+
+### L69
+
+```js
+  if (hash(original) !== target.sha256) throw new Error('Original Bridge UI evidence changed');
+```
+
+核对片段SHA与来源证据，发现变化就停止；不能直接修改证据SHA让未知版本混过去。
+
+### L70
+
+```js
+  const card = await readFile(path.join(ROOT,'community/ui/access-card.js.txt'),'utf8');
+```
+
+读取社区说明卡片维护文件；它属于新写代码而非原件证据。
+
+### L71
+
+```js
+  return { original, ...patchUiClass(original,card) };
+```
+
+返回原文与补丁结果，展开对象带入code及preservedMethods；主构建器稍后保存这些数据。
+
+### L72
+
+```js
+}
+```
+
+结束宿主构建入口；真实GUI、MCP连接与完整安装器仍需单独验证。
+
+
+<a id="file-6"></a>
+## 第6部分：社区UI状态方法体：20行
+
+原文件：[community/ui/access-methods.mjs](../../community/ui/access-methods.mjs)
+
+对应源码 SHA-256：`f16c9c3c41c52ac3c80c3f9bc78a35e48abcb26e397da427ecbcd25c99640660`
+
+### L1
+
+```js
+// Replacement method bodies for the recovered custom UI class, not a standalone UI.
+```
+
+注释说明这些是原UI类的方法体替换片段，不是可独立运行的界面。
+
+### L2
+
+```js
+export const accessMethods = {
+```
+
+导出方法名到方法体字符串的映射，供补丁器按自有属性名查找。
+
+### L3
+
+```js
+  renderAccess: `{
+```
+
+renderAccess的模板字符串从左花括号开始，只替换原方法体，不重写原参数列表。
+
+### L4
+
+```js
+    this.lastAccessStatus = status2;
+```
+
+保存传入status2到实例；status2是当前编译产物的参数名，不是随便改成status也能工作的全局变量。
+
+### L5
+
+```js
+    const ready = status2.edition === "community" && status2.available === true;
+```
+
+ready只在edition匹配且available严格等于true时成立；旧licensed:true不能伪装成社区组件。
+
+### L6
+
+```js
+    this.accessErrorOverride = "";
+```
+
+清空之前的访问错误覆盖文本，以便新状态重新渲染；不涉及删除磁盘日志。
+
+### L7
+
+```js
+    this.accessBadge.className = "shuncode-bridge-state state-" + (ready ? "running" : "error");
+```
+
+根据ready选择状态徽章CSS类。running在这里表示可用性样式，不证明真实Bridge正在监听。
+
+### L8
+
+```js
+    this.accessBadge.textContent = ready ? "Community · 免费" : "需要更新组件";
+```
+
+用textContent显示社区免费或需要更新组件，文本不会被当作HTML解释。
+
+### L9
+
+```js
+    this.accessDetails.textContent = ready ? "无需账号 · 无付费门槛 · 无授权到期" : "社区版界面与扩展未匹配，请安装同一份社区版更新。";
+```
+
+显示免费策略或组件不匹配说明；这不免除第三方模型/隧道服务自己的收费。
+
+### L10
+
+```js
+    this.updateControls();
+```
+
+请求更新控件状态，实际生命周期仍由原界面逻辑管理。
+
+### L11
+
+```js
+  }`,
+```
+
+结束renderAccess方法体字符串与该映射项，不在导入时执行它。
+
+### L12
+
+```js
+  renderAccessError: `{
+```
+
+开始renderAccessError的方法体字符串，沿用原方法的message参数。
+
+### L13
+
+```js
+    this.accessErrorOverride = message;
+```
+
+保存当前错误消息覆盖状态；它不是商业账号或支付状态。
+
+### L14
+
+```js
+    this.accessBadge.className = "shuncode-bridge-state state-error";
+```
+
+将徽章CSS类设为错误状态，只改变显示，不伪造Bridge服务器状态。
+
+### L15
+
+```js
+    this.accessBadge.textContent = "Bridge 状态异常";
+```
+
+徽章显示状态异常提示，避免错误仍显示免费可用造成误解。
+
+### L16
+
+```js
+    this.accessDetails.textContent = message;
+```
+
+错误详情用textContent显示message，不将服务返回内容当作HTML插入。
+
+### L17
+
+```js
+    this.renderLocalError(message);
+```
+
+调用原本地错误展示入口，保留界面一致的错误反馈机制。
+
+### L18
+
+```js
+  }`,
+```
+
+结束错误渲染方法体；传播给其他方法的异常并未在这里统一吞掉。
+
+### L19
+
+```js
+  refreshAccessAndPlans: `{ return this.refresh(); }`,
+```
+
+保留旧refreshAccessAndPlans方法名以兼容调用点，但只返回refresh，不再查询支付套餐；返回值保持原异步链可被等待。
+
+### L20
+
+```js
+};
+```
+
+结束映射对象。三个字符串仍依赖宿主方法参数和this字段，不是通用可插拔组件。
 
 ## 学完后如何确认不是只看懂了文字
 

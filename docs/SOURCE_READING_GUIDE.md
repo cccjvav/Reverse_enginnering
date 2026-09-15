@@ -84,4 +84,4 @@
 
 ## 面向零基础的新版入口
 
-如果本指南仍太抽象，请先读 [分步实验课](learning/START_HERE.md)，再读 [271行逐行注解](learning/LINE_BY_LINE.md)。[覆盖清单](learning/COVERAGE.md)记录所有已纳入代码文件哪些尚未逐行讲，避免将技术概览误当作完整教学。
+如果本指南仍太抽象，请先读 [分步实验课](learning/START_HERE.md)，再读 [363行逐行注解](learning/LINE_BY_LINE.md)。[覆盖清单](learning/COVERAGE.md)记录所有已纳入代码文件哪些尚未逐行讲，避免将技术概览误当作完整教学。

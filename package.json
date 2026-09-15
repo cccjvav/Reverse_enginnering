@@ -11,7 +11,8 @@
     "audit:boundary": "node tools/audit_custom_boundary.mjs",
     "learn:build": "node tools/build_learning.mjs",
     "learn:check": "node tools/build_learning.mjs --check",
-    "learn:lab": "node tools/learning_lab.mjs"
+    "learn:lab": "node tools/learning_lab.mjs",
+    "learn:ui": "node tools/learning_ui_lab.mjs"
   },
   "devDependencies": {
     "acorn": "8.18.0",

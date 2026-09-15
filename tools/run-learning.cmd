@@ -11,6 +11,8 @@ call npm.cmd run learn:check
 if errorlevel 1 exit /b 3
 call npm.cmd run learn:lab
 if errorlevel 1 exit /b 4
+call npm.cmd run learn:ui
+if errorlevel 1 exit /b 4
 call npm.cmd test
 if errorlevel 1 exit /b 5
 "%CONDA_PREFIX%\python.exe" -m unittest discover -s tests -q

@@ -15,17 +15,17 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 132,
-    "lines": 26867,
-    "fullyExplainedFiles": 4,
-    "explainedLines": 271,
+    "files": 134,
+    "lines": 26955,
+    "fullyExplainedFiles": 6,
+    "explainedLines": 363,
     "projectWideExplanationComplete": false
   },
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "7be6c72de0c0c97dc6e28b98f699e019583e98b76b57c62f042628c20cee804a",
-      "lines": 94,
+      "sha256": "006b73b1229336d2618a98dfcea15b4a3ba63c78ebc8a0022eab387a3b298ca5",
+      "lines": 97,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -82,8 +82,8 @@
       "source": "community/ui/access-methods.mjs",
       "sha256": "f16c9c3c41c52ac3c80c3f9bc78a35e48abcb26e397da427ecbcd25c99640660",
       "lines": 20,
-      "explainedLines": 0,
-      "status": "pending"
+      "explainedLines": 20,
+      "status": "line-by-line-authored"
     },
     {
       "source": "reconstructed/bridge-core/src/adaptive-concurrency.js",
@@ -696,7 +696,7 @@
     },
     {
       "source": "tests/bridge-core-learning.test.mjs",
-      "sha256": "73e76cd0eeb04cf4def8fabe01b277159c47fda81107b3b8a4ebb8202d4149b6",
+      "sha256": "af38b2e0e4fdf317ed774a9a641232347d1dbbc56d86bb783a37d6277577f138",
       "lines": 40,
       "explainedLines": 0,
       "status": "pending"
@@ -726,6 +726,13 @@
       "source": "tests/community-policy.test.mjs",
       "sha256": "1fb9bff7c4952ddddf67644b8d6f21f2bf94796d55524afd6d96899590bea015",
       "lines": 98,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/community-ui-hardening.test.mjs",
+      "sha256": "e566a79f11b35730527295afb51c2ef708f319a502f13737cf0f1ee14c047a3e",
+      "lines": 56,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -836,7 +843,7 @@
     },
     {
       "source": "tools/build_learning.mjs",
-      "sha256": "517eddf6309c8f422cb5b0d9abfbe8c4d7790d313c5eaf4a051e74c6affafb88",
+      "sha256": "619e68dd32db84d3b6ab6deefd9be81b572bf1b6a5774729dbf10a385fe1cbba",
       "lines": 62,
       "explainedLines": 0,
       "status": "pending"
@@ -884,6 +891,13 @@
       "status": "pending"
     },
     {
+      "source": "tools/learning_ui_lab.mjs",
+      "sha256": "0a5eecd1f8a0344026e2f4dd566fa07c106fec8d8ce027fd09f08f9e7cd18dd0",
+      "lines": 23,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/package_community.py",
       "sha256": "45c744b150175940b0919b5ae6935071c5f96f346d4adea1254e88d6268e2c96",
       "lines": 53,
@@ -892,10 +906,10 @@
     },
     {
       "source": "tools/patch_bridge_ui.mjs",
-      "sha256": "4a562756281402090f92d30ff992da5c84536baf3ef6ed6a44e9dbaf9fd5a93a",
-      "lines": 68,
-      "explainedLines": 0,
-      "status": "pending"
+      "sha256": "5d18c2741664c51483d04767df8b9d5a1de53cf63bcc4b90c38542f8a162828d",
+      "lines": 72,
+      "explainedLines": 72,
+      "status": "line-by-line-authored"
     },
     {
       "source": "tools/patch_utils.mjs",
@@ -927,8 +941,8 @@
     },
     {
       "source": "tools/run-learning.cmd",
-      "sha256": "3cb4dc6741e2546946b3db2f29c956601ec5fa80ccf306f725db365e1ab9c83f",
-      "lines": 25,
+      "sha256": "fa007b901547465adbfb3159c9c4ff67ded029779b1ac2ed62b65cd4267a45b1",
+      "lines": 27,
       "explainedLines": 0,
       "status": "pending"
     },

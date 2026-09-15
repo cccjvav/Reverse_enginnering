@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-15",
+  "scope": "UI patcher input hardening and static teaching; not full UI recovery or GUI validation",
+  "local": {
+    "nodePassed": 95,
+    "pythonDiscovered": 34,
+    "pythonPassed": 31,
+    "pythonWindowsOnlySkipped": 3,
+    "learningCheckPassed": true,
+    "coreProvenanceCheckPassed": true
+  },
+  "coverage": {
+    "files": 134,
+    "lines": 26955,
+    "fullyExplainedFiles": 6,
+    "explainedLines": 363,
+    "projectWideExplanationComplete": false
+  },
+  "package": {
+    "sha256": "6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa",
+    "size": 467406,
+    "archiveChanged": false,
+    "rebuiltPayloadEntriesByteIdentical": 11
+  },
+  "ci": {
+    "status": "pending"
+  },
+  "limits": [
+    "No original UI class instantiated by the new static lesson",
+    "No installer or GUI acceptance",
+    "No deployment of read/write race mitigations",
+    "Other UI and engineering recovery work remains incomplete"
+  ]
+}

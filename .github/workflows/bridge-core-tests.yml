@@ -17,6 +17,9 @@ on:
       - community/README.md
       - tools/build_learning.mjs
       - tools/learning_lab.mjs
+      - tools/learning_ui_lab.mjs
+      - tools/patch_bridge_ui.mjs
+      - community/ui/**
       - docs/learning/**
       - tools/audit_custom_boundary.mjs
       - tools/reconstruct_bridge_core.mjs

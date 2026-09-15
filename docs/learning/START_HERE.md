@@ -141,14 +141,14 @@ npm.cmd run learn:check
 ```
 
 - `run`：运行 `package.json` 中同名脚本，不是让你打开一个叫 run 的文件。
-- `learn:check`：检查四个文件的SHA、每行原文、行号、解释和覆盖清单。
+- `learn:check`：检查六个文件的SHA、每行原文、行号、解释和覆盖清单。
 - 它读取源码/教材，不运行原扩展，不应用补丁。
 
 成功输出包含这些要点（总文件/总行数会随项目增长）：
 
 ```text
-"fullyExplainedFiles": 4
-"explainedLines": 271
+"fullyExplainedFiles": 6
+"explainedLines": 363
 "projectWideExplanationComplete": false
 ```
 
@@ -328,6 +328,8 @@ AST把程序分成“变量声明、函数、调用”等结构。`allNodes`只�
 
 ---
 
+下一组：[双宿主UI静态实验](UI_PATCH_LAB.md)，配套UI补丁器72行和状态方法20行的逐行讲解。
+
 ## 自测与答案
 
 先自行回答，再对照：
@@ -341,7 +343,7 @@ AST把程序分成“变量声明、函数、调用”等结构。`allNodes`只�
 7. **start 报 Unsafe workspace 时能 catch 后改回 running 吗？** 不能。这会伪造运行状态并掩盖安全错误。
 8. **模拟实验通过证明安装包可用吗？** 不证明。真实宿主、MCP、Windows GUI和安装升级仍需各自验收。
 9. **哈希相同证明代码安全吗？** 不证明。它证明对比的内容一致；坏代码也有稳定哈希。
-10. **覆盖271行是不是全工程逐行教程完成？** 不是。其余文件和行数明确标为待讲，见覆盖清单。
+10. **覆盖363行是不是全工程逐行教程完成？** 不是。其余文件和行数明确标为待讲，见覆盖清单。
 
 ### 可安全做的练习
 

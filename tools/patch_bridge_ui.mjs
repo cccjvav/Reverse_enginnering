@@ -6,8 +6,11 @@ import { accessMethods } from '../community/ui/access-methods.mjs';
 import { ROOT, applyEdits, allNodes, only, hash } from './patch_utils.mjs';
 
 export function parseClass(code) {
+  if (typeof code !== 'string') throw new TypeError('UI class source must be a string');
   const ast = parse('('+code+')',{ecmaVersion:'latest',sourceType:'module'});
-  return ast.body[0].expression;
+  const expression = ast.body.length === 1 ? ast.body[0].expression : undefined;
+  if (expression?.type !== 'ClassExpression') throw new Error('Expected one UI class expression');
+  return expression;
 }
 const retiredMethods = new Set(['signOut','createPayment','redeemActivationCode','fetchPaymentPlans','runAccessCommand','accessAccountLabel']);
 const retiredControls = ['signInButton','giteeSignInButton','refreshSessionButton','refreshLicenseButton','signOutButton','planSelect','paymentTypeSelect','purchaseButton','reloadPaymentPlansButton','checkPaymentButton','activationInput','redeemButton'];
@@ -22,6 +25,7 @@ export function patchUiClass(original,card) {
   const body = constructor.value.body.body;
   const accessStart = only(body,n => text(n).startsWith('this.accessCard ='), 'account card start');
   const connectionStart = only(body,n => text(n).startsWith('this.connectionCard ='), 'connection card start');
+  if (accessStart.start >= connectionStart.start) throw new Error('Unexpected UI card order');
   edits.push({start:accessStart.start-1,end:connectionStart.start-1,text:card+'\n    '});
   for (const n of body) if (/^this\.paymentPlans(?:FetchAttempted|Loading) =/.test(text(n))) edits.push(edit(n,''));
   for (const n of methods) {

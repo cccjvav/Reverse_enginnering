@@ -391,3 +391,17 @@ gh run watch --exit-status返回0；gh run view的JSON作业/步骤状态已纳�
 CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/nodefaults配置弃用、conda包脚本信任提示；setup中还报告一次EnvironmentNameNotFound，随后环境创建与显式CMD激活/总检查步骤均成功。完整setup日志未取得，不更具体断言中间提示原因。这不是需要用户改用Anaconda Prompt的理由，也不需要关闭SSL或安全软件。
 
 当前能交付的是经过该Windows runner验证的CMD/conda工具链、改进分发启动器、271行实质教学及保留应用内容的ZIP；完整项目、全项目逐行教程和Windows GUI/安装器仍未完成。
+
+## 14. 双宿主UI输入拒绝与静态逐行实验（2026-09-15）
+
+本轮继续定制UI，不改用户安装目录，步骤仍为普通CMD激活conda。新增patch_bridge_ui.mjs全72行及access-methods.mjs全20行人工注解，累计6/134文件、363/26955行；完整UI/工程/逐行教学仍未完成。
+
+工作区恢复时发现本地Git历史停在初始提交，但文件为上轮成果。先fetch当前固定分支，使用mixed reset对齐到远端c64f85c，只调整历史/索引、不覆盖工作文件；默认refspec没有创建remote-tracking引用，第一次按origin/分支名reset未成功，改为已取得的FETCH_HEAD。对齐后仅dist目录的6个已跟踪证据文件缺失，按HEAD恢复（该目录属于环境快照排除项）；其他文件无差异。没有新建/切换分支或删除仓库。
+
+补丁器新增明确检查：输入必须是字符串，解析结果必须只有一个类表达式，账户卡片必须在连接卡片之前；错误时停止，不自动猜测交换位置。原件、卡片和新方法体未改。新增5项测试，包含两宿主缺失门槛/边界/倒置、额外表达式、禁止商业残留、未知宿主、UTF-16偏移，以及类静态块仅解析不运行。
+
+新增learn:ui命令与UI_PATCH_LAB.md：解析两宿主，报告不同原哈希、各73个保留方法、工具渲染和清除隧道令牌保留、创建订单方法移除。代码只读文件并处理字符串，不new原类、不打开DOM、不写文件。CMD总入口加入该实验；教材解释与已有替身行为测试的区别，不把绿色徽章说成真实Bridge已运行。
+
+执行npm ci --ignore-scripts --no-audit --no-fund；learn:build、learn:check、learn:ui、check:bridge-core、npm test成功。Node95通过，Python34发现/31通过/3项Windows专属本地跳过。重建overlay后，全部11个payload条目与已发布ZIP逐字节相同；ZIP未重打包，仍467406字节/SHA6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa。检查器改动不改变支持版本的应用输出，也不包含读写竞态修复。
+
+本轮远端CI待推送后复验；证据在docs/evidence/ui-learning-validation.json。完整GUI、MCP客户端、安装器及其余工程缺口均不计作已完成。

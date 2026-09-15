@@ -13,9 +13,11 @@
 
 ## 零基础实操与逐行课程
 
+- **[双宿主UI静态实验](docs/learning/UI_PATCH_LAB.md)**：CMD中执行 `npm.cmd run learn:ui`，解析两个宿主、核对各73个保留方法，不启动原UI；新增92行完整讲解。
+
 - **[从这里开始：分步实验](docs/learning/START_HERE.md)**：打开正确目录、识别命令/输出、安装工具、模拟实验、预期结果、故障处理和自测答案。
-- **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具和主构建器四个文件的 **271行**；不是全工程已逐行讲完。
-- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：132个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
+- **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具、主构建器、UI补丁器和UI状态方法六个文件的 **363行**；不是全工程已逐行讲完。
+- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：134个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
 - 学习实验：`npm run learn:check`、`npm run learn:lab`；Windows零基础步骤使用 `npm.cmd`，见实验课。实验不启动真实 Bridge、不应用补丁。
 
 ## 定制代码、完整工程与用户分发
