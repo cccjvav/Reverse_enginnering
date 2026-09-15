@@ -487,3 +487,19 @@ CJS输出的rg路径改用输出dist的../runtime/bin/rg.exe，避免把ESM仓�
 gh run watch --exit-status返回0，GitHub作业/步骤API结果保存到extension-build-tests.json；未下载逐项完整远端日志，不虚构更高证据等级。旧action运行时弃用提示仍存在。用户环境继续普通CMD激活conda，不引入Anaconda Prompt或venv。
 
 本轮确实越过“只有导出存在”阶段，得到可重建的新扩展bundle；仍不能声称一次性完成剩余项目。最直接的后续阻断项是59条候选类型错误及定制宿主契约，再往后还有原生资产、运行时、权限与安装验收。
+
+## 18 普通CMD+conda的分阶段验收规程（2026-09-15）
+
+本轮交付docs/acceptance：总手册、MCP、安装器、34行空白结果表、只含example.invalid的私有配置模板、来源与验证边界。根README、CMD环境、Windows构建和源码连接构建指南均增加入口。每项按编号列前置条件、命令/点击、预期、失败/停止与证据规则；区分源码SOURCE、每轮RUN和候选APP。安装/升级/卸载只在无生产数据且可恢复快照的Windows虚拟机执行。
+
+先检查instance-launcher/runtime-client/ide-tool-broker及Bridge路由：确认ShunCode.exe约定、Agent入口解析、node-pty的宿主路径、缺PortableGit实际抛错（过时注释不能代替执行逻辑）、令牌化/mcp和/healthz路径。普通CMD是操作者终端，不是产品内部Git Bash的替代品。CLI用户数据参数不隔离全局账号/凭证，因此不能以空窗口代替虚拟机隔离。
+
+执行npm view查询Inspector2.6.0的engines/bin/gitHead/dist.integrity；通过gh api读取固定提交795b1bb30ac845b7baa7cb3df8ec0b693882ca1d的官方配置、CLI及Web说明。在忽略目录.work/acceptance-inspector使用npm install --save-exact --ignore-scripts --no-audit --no-fund安装194包，实际运行launcher --cli --help成功。出现server-legacy弃用警告，未忽略记录。未连接任何真实ShunCode/MCP目标。Inspector要求Node>=22.19，故规程提供独立conda环境，不修改恢复工程Node最低版本或根依赖锁。使用显式只读--config和--server，避免默认样例/旧配置；原始响应及令牌配置保存在RUN/private，外发必须脱敏。
+
+安装器规程从尚不存在的新候选交付清单起步，覆盖哈希/签名、新装、同版重装与跨版升级的区别、持久化、取消/占用、卸载保留/清除、快照回退、中文/空格路径、用户/系统范围和并存身份。未猜静默参数，不要求关闭SmartScreen或删除注册表。原0.7.4 EXE和overlay均不能冒充源码构建的安装器。
+
+实际文档验证：Python解析所有新增文档及入口链接，目标存在；JSON解析及example.invalid检查；CSV34个唯一编号、状态仅NOT_RUN/BLOCKED、实际结果空白。人工检查CMD命令环境和逐项证据边界。Windows命令、GUI及真实协议仍未执行，不能把文档检查当端到端验收。
+
+重新执行npm test：117/117通过；python -m unittest discover -s tests -p 'test_*.py'：34项发现、31通过、3项Windows专属跳过。check:bridge-core通过（41模块389声明262904字节）；learn:check通过，153文件30141行、6文件363行已完整解释，完整覆盖仍false。CRLF感知diff --check通过。原51文件逐字节对比HEAD一致，原ZIP未改。
+
+本轮只新增验收材料，未修复59条类型错误，未改实验bundle、运行时代码或部署补丁。现有回归验证诚实保留类型失败，并非类型已通过；未新增Windows实机验收。A可运行，A05类型门槛仍FAIL；完整宿主、原生资产、真实激活/GUI/MCP与新安装器B/C/D仍BLOCKED，整体NOT_READY。后续工程仍应先重建有证据的类型契约、确认定制宿主字段并修复权限调度，再提交真正候选走本文流程。

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "acceptance": {
+      "type": "streamable-http",
+      "url": "https://example.invalid/mcp/REPLACE_WITH_TEST_ENDPOINT",
+      "protocolEra": "legacy",
+      "connectionTimeout": 15000,
+      "requestTimeout": 15000
+    }
+  }
+}

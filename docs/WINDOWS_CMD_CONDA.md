@@ -1,5 +1,7 @@
 # 唯一默认操作环境：Windows 普通 CMD + conda
 
+> **[普通CMD+conda：逐步验收手册](acceptance/README.md)**：宿主、原生资产、实际激活、GUI/MCP和安装/升级/卸载的操作、预期、失败处理及空白结果表。当前A可复现，A05仍59个类型错误，B/C/D尚阻塞；不是已完成验收报告。
+
 本项目面向你的所有当前操作步骤，以 **Windows 的命令提示符 cmd.exe，在其中激活 conda 环境** 为准。不要求 Anaconda Prompt，不使用 PowerShell 的激活命令，不创建 venv/virtualenv。
 
 这份环境用于恢复工具、教学实验、测试与现有更新包，**不是尚未选定的完整 Code OSS 构建工具链**。虚拟环境不是 ShunCode 的运行环境：它隔离的是你的 Python/Node 工具，不会把 Electron 应用装进 conda。
