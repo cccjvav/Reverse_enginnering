@@ -543,3 +543,21 @@ CI路径覆盖新增类型目录与新报告。本轮本地测试不代替新Win
 实现提交7c5c20fa17b195b7fa6393efc24db7d72637c592推送后自动触发34980025558。使用后台gh run watch --exit-status等待，第一次180秒等待到期时Windows/Ubuntu核心已通过、CMDconda仍运行；继续阻塞等待后进程退出0。三个作业全部成功：Ubuntu30秒、Windows49秒、CMDconda4分4秒。gh run view作业/步骤API结果和本地计数存docs/evidence/type-contract-tests.json，没有冒称已下载逐条完整远端日志。动作运行时Node20弃用/强制Node24警告仍存在，未把它误报成项目Node环境失败。
 
 新CI确实覆盖本轮123项Node回归及CMD环境检查，仍不代表39条类型错误消失、扩展实际激活或GUI/MCP/安装器通过。当前GitHub自动触发可用，不要求用户为历史手动dispatch的403重复提供任何凭证。
+
+## 21 第三批类型契约：CustomTool/Skill（2026-09-16）
+
+本轮继续恢复类型，不改原始实现。工作区再次保留上轮文件但Git元数据回到初始提交、node_modules/dist未保留；先确认当前固定分支与远端FETCH_HEAD=0561f1d，再mixed reset FETCH_HEAD恢复同分支历史/索引（不覆盖工作文件），从该HEAD恢复快照排除的六个原dist文件，npm ci --ignore-scripts --no-audit --no-fund恢复23包。没有切换或创建分支。
+
+读取custom-tools facade、manifest/contract/sandbox、skill/import/admin函数体及原bridge-server/dispatcher/transport消费者。新增custom-tools、custom-tool-skill、custom-tool-skill-import、custom-tool-admin、bridge-tool-name五份候选.d.ts，累计12个模块。Skill成功必有name；失败带reason/fix且name可选以覆盖原服务器duplicate-name分支；保留unknown原因兜底。import.generatedRunner实际是true或undefined，runner.generated真假对应有/无runnerRel。Manifest.inputSchema只承诺根type:object和未知扩展键，不虚构深层JSON Schema已验证或脚本安全。
+
+facade字段与执行返回来自多个原模块，故provenance增加四个evidenceDependencies（manifest/contract/sandbox/skill）及SHA；诊断器逐一与原core清单和实际字节校验后解析声明。没有新增any或原文件修改。
+
+初版execute选项只写实现读到的signal，诊断真实20条，发现原消费者还传log并有回调隐式any。对照原调用补入兼容log:(message:string)=>void，但声明直接注明提取执行器NOT invoked；运行时测试验证预先aborted调用返回null/aborted/isError且log计数0、不启动子进程。不能把接受回调当作日志功能恢复，也不是修复执行器。
+
+独立strict/noEmit/skipLibCheck:false夹具首次真实失败，两条node:path的export=不能使用export *问题。改成明确typeof import的导出常量及namespace default形态，刷新声明哈希后专项9项全通过，不关闭声明检查。新增9个类型负例覆盖缺失查找、布尔选项、command元素、schema根、成功name、导入true/undefined、runner分支、nullable退出码、名称谓词；新增3个原JS测试覆盖发现/失败/未启用、导入生成/已有/重名结果、预取消与不调用日志。Skill夹具只在临时目录写入/生成文件，不执行其脚本，不验证归档安全或真实产品加载。
+
+最终候选诊断实际退出1：18条（TS2305=1、TS2339=11、TS2345=3、TS2353=1、TS2724=2）。39→18减少8个缺失导出、3个Skill名称访问、10个隐式any回调诊断；TS7006清零不代表原显式any或checkJs:false实现已全部严格检查。原JS推断模式仍59，独立报告不覆盖该基线。
+
+全套npm test126/126通过；Python34项发现、31通过、3Windows专属本地跳过。check:bridge-core、check:linked-extension、learn:check及CRLF感知diff检查通过。原51文件与HEAD逐字节一致，社区ZIP原SHA6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa不变，实验bundle仍1673367字节原哈希。学习清单154文件30465行，完整解释仍6文件363行；新说明不算全工程逐行覆盖。THIRD_BATCH.md记录普通CMD命令、预期和真实失败修正；SECOND_BATCH明确标为历史39条，当前入口改为18条。
+
+剩余18条集中于取消命令/ToolContentBlock接口、文件结果content、3处HTTP头边界、定制Chat字段。权限调度、真实宿主/原生运行资产/激活/GUI/MCP/新安装器未完成，没有部署实验产物，整体仍NOT_READY。本轮新Windows CI待推送后单独确认，不沿用第二批34980025558作为本轮证明。

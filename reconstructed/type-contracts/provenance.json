@@ -32,10 +32,58 @@
       "implementationSha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56"
     },
     {
+      "declaration": "bridge-tool-name.d.ts",
+      "sha256": "61ebf1b8ac6430f17c90cd0bc273979b890d6c3f84571a9797062fb7484bb23b",
+      "implementation": "reconstructed/bridge-core/src/bridge-tool-name.js",
+      "implementationSha256": "7069bc0b4cdf9f5c403b9ee81066b2c786fbb32b61c2aedbfaf412be920b7119"
+    },
+    {
       "declaration": "concurrency.d.ts",
       "sha256": "bc377d07d635ece7a767f1efe51286aa98e7c8ee2855fc07c729a22c6d91b960",
       "implementation": "reconstructed/bridge-core/src/concurrency.js",
       "implementationSha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15"
+    },
+    {
+      "declaration": "custom-tool-admin.d.ts",
+      "sha256": "ee069891aeb4a536cd7ba68f371491c57bb7e8a0f178afcc3c3d13fb15cd7589",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-admin.js",
+      "implementationSha256": "923c7207a9a8f97edff4f83bb6de01606ee145729d5b0f292b1008c2d9c90b84"
+    },
+    {
+      "declaration": "custom-tool-skill-import.d.ts",
+      "sha256": "6c9ec4b0dae188053171f1c7d006c4ce6d7d3f96cecc9edc82100755e9f08f6a",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-skill-import.js",
+      "implementationSha256": "890a061e1942412b5e2d34dfb80c70d5df04f209381aad8bb27a0ad1e5bbd400"
+    },
+    {
+      "declaration": "custom-tool-skill.d.ts",
+      "sha256": "300687afc380be6c7dbe2745b8d0da9c4b4437404c57da8a678add8caa70e5a1",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-skill.js",
+      "implementationSha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406"
+    },
+    {
+      "declaration": "custom-tools.d.ts",
+      "sha256": "80c7a0ed7a1db746285e4385d536e692ab1e7fa99fde72e2c004ef3100c5de0c",
+      "implementation": "reconstructed/bridge-core/src/custom-tools.js",
+      "implementationSha256": "f3194837be4a4ae4f4b2e79409bc15a57aacd3908c7808d0a452b2e763d16048",
+      "evidenceDependencies": [
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-manifest.js",
+          "sha256": "6c56616131d347699fd4e61009981a359ba9632b3b912612a730254972f55472"
+        },
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-contract.js",
+          "sha256": "643a04115889ed8097c614a4ed1ebc9e396f95ca66fa0451c5b41bd0e1fa74d4"
+        },
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-sandbox.js",
+          "sha256": "3944a504397bb2b2495373e22b95484ba669453245c1beb1bf0c0059dbd87f66"
+        },
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-skill.js",
+          "sha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406"
+        }
+      ]
     },
     {
       "declaration": "jsonrpc-request-id-registry.d.ts",

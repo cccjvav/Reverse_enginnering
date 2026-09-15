@@ -9,15 +9,14 @@
   "allowJs": true,
   "checkJs": false,
   "skipLibCheck": true,
-  "errorCount": 39,
-  "diagnosticCount": 39,
+  "errorCount": 18,
+  "diagnosticCount": 18,
   "counts": {
-    "TS2305": 9,
-    "TS2339": 14,
+    "TS2305": 1,
+    "TS2339": 11,
     "TS2345": 3,
     "TS2353": 1,
-    "TS2724": 2,
-    "TS7006": 10
+    "TS2724": 2
   },
   "candidateTypecheckPassed": false,
   "originalTypesRecovered": false,
@@ -55,10 +54,58 @@
       "implementationSha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56"
     },
     {
+      "declaration": "bridge-tool-name.d.ts",
+      "sha256": "61ebf1b8ac6430f17c90cd0bc273979b890d6c3f84571a9797062fb7484bb23b",
+      "implementation": "reconstructed/bridge-core/src/bridge-tool-name.js",
+      "implementationSha256": "7069bc0b4cdf9f5c403b9ee81066b2c786fbb32b61c2aedbfaf412be920b7119"
+    },
+    {
       "declaration": "concurrency.d.ts",
       "sha256": "bc377d07d635ece7a767f1efe51286aa98e7c8ee2855fc07c729a22c6d91b960",
       "implementation": "reconstructed/bridge-core/src/concurrency.js",
       "implementationSha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15"
+    },
+    {
+      "declaration": "custom-tool-admin.d.ts",
+      "sha256": "ee069891aeb4a536cd7ba68f371491c57bb7e8a0f178afcc3c3d13fb15cd7589",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-admin.js",
+      "implementationSha256": "923c7207a9a8f97edff4f83bb6de01606ee145729d5b0f292b1008c2d9c90b84"
+    },
+    {
+      "declaration": "custom-tool-skill-import.d.ts",
+      "sha256": "6c9ec4b0dae188053171f1c7d006c4ce6d7d3f96cecc9edc82100755e9f08f6a",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-skill-import.js",
+      "implementationSha256": "890a061e1942412b5e2d34dfb80c70d5df04f209381aad8bb27a0ad1e5bbd400"
+    },
+    {
+      "declaration": "custom-tool-skill.d.ts",
+      "sha256": "300687afc380be6c7dbe2745b8d0da9c4b4437404c57da8a678add8caa70e5a1",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-skill.js",
+      "implementationSha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406"
+    },
+    {
+      "declaration": "custom-tools.d.ts",
+      "sha256": "80c7a0ed7a1db746285e4385d536e692ab1e7fa99fde72e2c004ef3100c5de0c",
+      "implementation": "reconstructed/bridge-core/src/custom-tools.js",
+      "implementationSha256": "f3194837be4a4ae4f4b2e79409bc15a57aacd3908c7808d0a452b2e763d16048",
+      "evidenceDependencies": [
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-manifest.js",
+          "sha256": "6c56616131d347699fd4e61009981a359ba9632b3b912612a730254972f55472"
+        },
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-contract.js",
+          "sha256": "643a04115889ed8097c614a4ed1ebc9e396f95ca66fa0451c5b41bd0e1fa74d4"
+        },
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-sandbox.js",
+          "sha256": "3944a504397bb2b2495373e22b95484ba669453245c1beb1bf0c0059dbd87f66"
+        },
+        {
+          "source": "reconstructed/bridge-core/src/custom-tool-skill.js",
+          "sha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406"
+        }
+      ]
     },
     {
       "declaration": "jsonrpc-request-id-registry.d.ts",
@@ -72,98 +119,10 @@
     {
       "code": 2305,
       "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-constants.ts",
-      "line": 1,
-      "column": 15,
-      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolStatusEntry'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 15,
-      "column": 42,
-      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 14,
-      "column": 49,
-      "message": "Module '\"../../../src/custom-tool-skill-import.js\"' has no exported member 'SkillImportResult'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 14,
-      "column": 73,
-      "message": "Module '\"../../../src/custom-tool-skill-import.js\"' has no exported member 'SkillRunnerResult'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 15,
-      "column": 35,
-      "message": "Module '\"../../../src/custom-tool-skill.js\"' has no exported member 'SkillLoadDiagnosis'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 22,
-      "column": 8,
-      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolStatusEntry'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 23,
-      "column": 8,
-      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
       "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
       "line": 11,
       "column": 47,
       "message": "Module '\"../../../src/file-tool-registry.js\"' has no exported member 'ToolContentBlock'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
-      "line": 3,
-      "column": 50,
-      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 309,
-      "column": 45,
-      "message": "Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; } | { dirName: string; loaded: boolean; name: any; }'.\n  Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; }'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 309,
-      "column": 79,
-      "message": "Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; } | { dirName: string; loaded: boolean; name: any; }'.\n  Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; }'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 312,
-      "column": 27,
-      "message": "Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; } | { dirName: string; loaded: boolean; name: any; }'.\n  Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; }'."
     },
     {
       "code": 2339,
@@ -300,86 +259,6 @@
       "line": 14,
       "column": 8,
       "message": "'\"../../../src/managed-command-cancellation.js\"' has no exported member named 'ManagedCommandCancellationTarget'. Did you mean 'ManagedCommandCanceller'?"
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 216,
-      "column": 68,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 282,
-      "column": 55,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 296,
-      "column": 47,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 327,
-      "column": 55,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 334,
-      "column": 54,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 350,
-      "column": 54,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-server.ts",
-      "line": 358,
-      "column": 55,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
-      "line": 221,
-      "column": 68,
-      "message": "Parameter 'message' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
-      "line": 233,
-      "column": 66,
-      "message": "Parameter 'name' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
-      "line": 342,
-      "column": 17,
-      "message": "Parameter 'message' implicitly has an 'any' type."
     }
   ],
   "lockfileSha256": "30be986a68e8acf5ebcf91f13b16705b102d478ff3648a34c84d1020cb33dba6"

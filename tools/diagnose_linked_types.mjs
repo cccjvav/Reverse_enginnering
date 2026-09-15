@@ -21,6 +21,10 @@ export async function diagnoseTypes({ contracts = false } = {}) {
   for (const item of contractModules) {
     if (expected.get(item.implementation) !== item.implementationSha256) throw new Error('Contract implementation provenance mismatch: ' + item.implementation);
     verifySource(await readFile(path.join(ROOT, item.implementation)), item.implementationSha256, item.implementation);
+    for (const dependency of item.evidenceDependencies ?? []) {
+      if (expected.get(dependency.source) !== dependency.sha256) throw new Error('Contract dependency provenance mismatch: ' + dependency.source);
+      verifySource(await readFile(path.join(ROOT, dependency.source)), dependency.sha256, dependency.source);
+    }
     const declaration = 'reconstructed/type-contracts/' + item.declaration;
     verifySource(await readFile(path.join(ROOT, declaration)), item.sha256, declaration);
     expected.set(declaration, item.sha256);

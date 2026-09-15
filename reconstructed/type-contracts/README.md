@@ -1,4 +1,4 @@
-# 可追溯的候选类型契约（累计7模块）
+# 可追溯的候选类型契约（累计12模块）
 
 这些是**新重建的声明**，不是找回原始.d.ts，更不是已经恢复完整宿主。只改变候选类型解析，不改41个提取JS模块、原51文件或实验bundle。原JavaScript依然未受TypeScript实现级检查，声明不能替代实现验证。
 
@@ -13,9 +13,11 @@ call npm.cmd run diagnose:contract-types
 echo %ERRORLEVEL%
 ```
 
-第一条是旧的JS推断基线：59错误、退出1；第二条启用七份候选声明：39错误、退出1。两者都没有通过产品类型门槛。新报告是docs/evidence/contract-type-diagnostics.json，不覆盖旧报告。不要因为错误减少就执行安装或开放Bridge。
+第一条是旧的JS推断基线：59错误、退出1；第二条启用十二份候选声明：18错误、退出1。两者都没有通过产品类型门槛。新报告是docs/evidence/contract-type-diagnostics.json，不覆盖旧报告。不要因为错误减少就执行安装或开放Bridge。
 
 第二批新增活动记录、事件存储和HTTP路由，详细依据、测试及新发现见 [第二批恢复记录](SECOND_BATCH.md)。第一批从59降到49，第二批消除13条旧诊断并暴露3条新诊断，净降到39。
+
+第三批新增CustomTool facade、Skill诊断/导入、管理操作、名称解析，见 [第三批恢复记录](THIRD_BATCH.md)。候选目前18条错误，39是第二批历史结果。
 
 ## 为什么能这样重建
 
@@ -32,19 +34,22 @@ echo %ERRORLEVEL%
 
 ## 来源保护与测试
 
-provenance.json记录每份声明及对应实现的SHA256。诊断器先将实现哈希与原core来源清单交叉核对，再校验实际文件与声明哈希，然后仅对七个明确模块重定向解析；其他模块仍按旧方式解析。新增报告携带这份映射。
+provenance.json记录每份声明及对应实现的SHA256。诊断器先将实现哈希与原core来源清单交叉核对，再校验实际文件与声明哈希，然后仅对十二个明确模块重定向解析；其他模块仍按旧方式解析。新增报告携带这份映射。
 
-tests/bridge-core-type-contracts.test.mjs现有6项：
+tests/bridge-core-type-contracts.test.mjs现有9项：
 
-1. 复现39条剩余错误（含3条新暴露HTTP边界错误），并确认宿主字段错误仍存在。
+1. 复现18条剩余错误（含3条新暴露HTTP边界错误），并确认宿主字段错误仍存在。
 2. 用strict、noEmit、**skipLibCheck:false**检查独立类型夹具和声明本身；@ts-expect-error负例必须真的出错，否则测试失败。包括错误构造参数、返回值错配、缺采样字段、null ID、不完整会话及未处理get缺失。
 3. 直接调用提取JS，核对同步/异步泛型返回、释放幂等、决策、ID联合分支和会话删除回调的实际结果。
 4. 活动记录保留presentation、统计和重复finish的实际语义。
 5. 事件存储仅重放同stream，等待send，传播send失败，逐出旧游标。
 6. 合成请求对象的数组请求头被路由原样转发（不冒称远程漏洞）。
+7. CustomTool/Skill发现与诊断区分失败、未找到和未启用。
+8. Skill导入/runner生成区分重名、已存在和新生成；不执行生成脚本。
+9. 预先取消的自定义工具调用不会启动子进程，日志回调实际不被调用；名称解析不能代替授权。
 
 这些测试只提供有限合同证据，不证明所有JS分支均符合声明；完整候选诊断仍沿用原strict/noEmit/allowJs/checkJs:false/skipLibCheck:true设置，不能把独立声明测试冒充全工程严格实现检查。
 
 ## 尚未解决
 
-39条仍包含缺失CustomTool/Skill/取消命令等接口、工具结果content、日志回调、HTTP请求头边界，以及定制ChatSimpleToolResultData字段。逐文件权限回调丢失未修复；完整宿主、原生资产、真实激活/GUI/MCP和新安装器仍BLOCKED。
+18条仍包含缺失取消命令/ToolContentBlock接口、工具结果content、HTTP请求头边界，以及定制ChatSimpleToolResultData字段。当前候选中的TS7006隐式any回调诊断已清零，不代表原代码所有显式any或未检查JS都已消除。逐文件权限回调丢失未修复；完整宿主、原生资产、真实激活/GUI/MCP和新安装器仍BLOCKED。

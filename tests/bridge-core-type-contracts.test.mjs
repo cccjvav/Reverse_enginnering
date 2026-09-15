@@ -14,14 +14,14 @@ test('candidate contracts expose typed HTTP boundary mismatches without hiding r
   const actual = await diagnoseTypes({ contracts: true });
   const stored = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/contract-type-diagnostics.json'), 'utf8'));
   assert.deepEqual(actual, stored);
-  assert.equal(actual.errorCount, 39);
-  assert.equal(actual.contractModules.length, 7);
+  assert.equal(actual.errorCount, 18);
+  assert.equal(actual.contractModules.length, 12);
   assert.equal(actual.candidateTypecheckPassed, false);
   assert.equal(actual.runtimeImplementationCheckedByTypeScript, false);
   assert.equal(actual.originalTypesRecovered, false);
   assert.ok(actual.diagnostics.some(d => d.message.includes('ChatSimpleToolResultData')));
   assert.equal(actual.diagnostics.filter(d => d.code === 2345 && d.source.endsWith('bridge-mcp-transport.ts')).length, 3);
-  assert.equal(actual.counts.TS7006, 10);
+  assert.equal(actual.counts.TS7006, undefined);
   assert.ok(!actual.diagnostics.some(d => d.code === 2749 && /Semaphore|AdaptiveConcurrencyController|JsonRpcRequestIdRegistry|BridgeSessionRegistry/.test(d.message)));
 });
 
@@ -81,6 +81,46 @@ await store.storeEvent('s', {jsonrpc: '1.0', method: 'ping', id: 1});
 await store.replayEventsAfter('id', {send: async (id, message) => {
   const event: JSONRPCMessage = message;
 }});
+import { loadCustomTools, findCustomTool, executeCustomTool, type CustomToolManifest } from '../../reconstructed/type-contracts/custom-tools.js';
+import { diagnoseSkillTools, type SkillLoadDiagnosis } from '../../reconstructed/type-contracts/custom-tool-skill.js';
+import { importSkill, generateSkillRunner, type SkillImportResult } from '../../reconstructed/type-contracts/custom-tool-skill-import.js';
+import { toggleCustomTool, deleteCustomTool } from '../../reconstructed/type-contracts/custom-tool-admin.js';
+import { resolveBridgeToolName } from '../../reconstructed/type-contracts/bridge-tool-name.js';
+const tools = loadCustomTools(['fixture'], message => { const text: string = message; }, {skillsEnabled: false});
+// @ts-expect-error find can miss or filter out a disabled tool
+const definitelyFound: CustomToolManifest = findCustomTool(['fixture'], 'missing');
+// @ts-expect-error skill option is boolean
+loadCustomTools([], undefined, {skillsEnabled: 'yes'});
+// @ts-expect-error command entries must be strings
+const badManifest: CustomToolManifest = {...tools[0], command: [123]};
+// @ts-expect-error schema type must be object (not a deep schema validity guarantee)
+const badSchema: CustomToolManifest = {...tools[0], inputSchema: {type: 'array'}};
+for (const diagnosis of diagnoseSkillTools('fixture')) {
+  if (diagnosis.loaded) { const name: string = diagnosis.name; }
+  else { const reason: string = diagnosis.reason; const optionalName: string | undefined = diagnosis.name; }
+}
+// @ts-expect-error loaded success requires a name
+const badDiagnosis: SkillLoadDiagnosis = {dirName: 'a', loaded: true};
+const collision: SkillLoadDiagnosis = {dirName: 'a', name: 'tool_a', loaded: false, reasonCode: 'duplicate-name', reason: 'collision', fix: 'open-folder'};
+const imported = importSkill('fixture', 'source', message => { const text: string = message; });
+const renamed: string | undefined = imported.renamedFrom;
+// @ts-expect-error import emits true or undefined, not false
+const badImport: SkillImportResult = {...imported, generatedRunner: false};
+const runner = generateSkillRunner('fixture', 'tool');
+if (runner.generated) { const rel: string = runner.runnerRel; }
+else {
+  // @ts-expect-error already-present entry has no runnerRel
+  const rel: string = runner.runnerRel;
+}
+const enabled: boolean = toggleCustomTool(['fixture'], 'tool').enabled;
+const deleted: string = deleteCustomTool(['fixture'], 'tool').deleted;
+const execution = await executeCustomTool(['fixture'], tools[0], {}, {log: message => { const text: string = message; }});
+const exitCode: number | null = execution.structuredContent.exit_code;
+// @ts-expect-error nullable exit status cannot be assumed successful numeric exit
+const definiteExit: number = execution.structuredContent.exit_code;
+resolveBridgeToolName('mcp__server__tool', name => { const text: string = name; return name === 'tool'; });
+// @ts-expect-error known-name predicate must return boolean
+resolveBridgeToolName('tool', name => name);
 const handlers: BridgeHttpHandlers = {
   getSessionCount: () => 0,
   handlePost: async (req, res, body, sessionId) => {
@@ -179,4 +219,87 @@ test('raw HTTP router forwards array headers: declarations must not claim normal
     assert.deepEqual(calls[0].sessionId, ['A', 'B']);
     if (method === 'POST') { assert.deepEqual(calls[0].body, {fixture: true}); assert.deepEqual(calls[0].protocol, ['one', 'two']); }
   }
+});
+
+test('CustomTool discovery and Skill diagnosis preserve absence, failure and sidecar state', async t => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises');
+  const os = await import('node:os');
+  const { loadCustomTools, findCustomTool, toStatusEntries } = await import('../reconstructed/bridge-core/src/custom-tools.js');
+  const { diagnoseSkillTools } = await import('../reconstructed/bridge-core/src/custom-tool-skill.js');
+  const root = await mkdtemp(path.join(os.tmpdir(), 'shuncode-contract-skill-'));
+  t.after(() => rm(root, {recursive: true, force: true}));
+  const dir = path.join(root, '.shuncode/mcp-tools');
+  await mkdir(path.join(dir, 'good-skill'), {recursive: true});
+  await mkdir(path.join(dir, 'bad-skill'));
+  const description = 'A synthetic Skill description for validating loader contracts without executing any scripts or accessing external services.';
+  await writeFile(path.join(dir, 'good-skill/SKILL.md'), `---\nname: good-skill\ndescription: ${description}\n---\nFixture instructions.`);
+  await writeFile(path.join(dir, 'good-skill/run.mjs'), 'throw new Error("THIS FIXTURE MUST NOT EXECUTE");');
+  await writeFile(path.join(dir, 'good-skill/skill-tool.json'), '{"enabled":false}');
+  await writeFile(path.join(dir, 'invalid.json'), '{');
+  const logs = [];
+  const tools = loadCustomTools([root], text => logs.push(text));
+  assert.equal(tools.length, 1);
+  assert.equal(tools[0].name, 'good_skill');
+  assert.equal(tools[0].enabled, false);
+  assert.equal(findCustomTool([root], 'good_skill'), undefined);
+  assert.equal(toStatusEntries(tools)[0].source, 'skill');
+  assert.ok(logs.every(x => typeof x === 'string'));
+  assert.ok(logs.some(x => x.includes('invalid JSON')));
+  const diagnoses = diagnoseSkillTools(root);
+  assert.deepEqual(diagnoses.find(x => x.loaded), {dirName: 'good-skill', loaded: true, name: 'good_skill'});
+  const failed = diagnoses.find(x => !x.loaded);
+  assert.equal(failed.reasonCode, 'no-skill-md');
+  assert.equal(failed.fix, 'open-folder');
+  assert.equal(failed.name, undefined);
+  assert.ok(diagnoseSkillTools(root, undefined, {skillsEnabled: false}).every(x => !x.loaded && x.reasonCode === 'skills-disabled'));
+});
+
+test('Skill import and runner contract distinguish generated, existing and renamed outcomes', async t => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises');
+  const os = await import('node:os');
+  const { importSkill, generateSkillRunner } = await import('../reconstructed/bridge-core/src/custom-tool-skill-import.js');
+  const root = await mkdtemp(path.join(os.tmpdir(), 'shuncode-contract-import-'));
+  t.after(() => rm(root, {recursive: true, force: true}));
+  const source = path.join(root, 'source');
+  const target = path.join(root, 'target');
+  await mkdir(source); await mkdir(target);
+  await writeFile(path.join(source, 'SKILL.md'), '---\nname: import-fixture\n---\nSynthetic instructions only.');
+  const first = importSkill(target, source);
+  assert.equal(first.generatedRunner, true);
+  assert.equal(first.renamedFrom, undefined);
+  const existing = generateSkillRunner(target, first.name);
+  assert.equal(existing.generated, false);
+  assert.equal(Object.hasOwn(existing, 'runnerRel'), false);
+  await rm(path.join(first.directory, 'scripts/run.mjs'));
+  const generated = generateSkillRunner(target, first.name);
+  assert.equal(generated.generated, true);
+  assert.equal(generated.runnerRel, 'scripts/run.mjs');
+  await writeFile(path.join(source, 'run.mjs'), 'throw new Error("MUST NOT EXECUTE");');
+  const second = importSkill(target, source);
+  assert.equal(second.name, 'import-fixture-2');
+  assert.equal(second.renamedFrom, 'import-fixture');
+  assert.equal(second.generatedRunner, undefined);
+  assert.throws(() => importSkill(target, path.join(root, 'missing')));
+});
+
+test('executor accepts but ignores caller log option; pre-abort result remains nullable and no child runs', async t => {
+  const { mkdtemp, rm } = await import('node:fs/promises');
+  const os = await import('node:os');
+  const { executeCustomTool } = await import('../reconstructed/bridge-core/src/custom-tools.js');
+  const { resolveBridgeToolName } = await import('../reconstructed/bridge-core/src/bridge-tool-name.js');
+  const root = await mkdtemp(path.join(os.tmpdir(), 'shuncode-contract-abort-'));
+  t.after(() => rm(root, {recursive: true, force: true}));
+  let logs = 0;
+  const controller = new AbortController(); controller.abort();
+  const result = await executeCustomTool([root], {
+    name: 'aborted_fixture', title: 'Fixture', description: 'Only a synthetic contract fixture.',
+    command: ['node', '-e', 'throw new Error("MUST NOT RUN")'],
+    inputSchema: {type: 'object'}, timeoutMs: 1000, enabled: true, sourcePath: 'fixture.json'
+  }, {}, {signal: controller.signal, log: () => logs++});
+  assert.equal(result.structuredContent.exit_code, null);
+  assert.equal(result.structuredContent.aborted, true);
+  assert.equal(result.isError, true);
+  assert.equal(logs, 0);
+  assert.equal(resolveBridgeToolName(' mcp__fixture__tool ', name => name === 'tool'), 'tool');
+  assert.equal(resolveBridgeToolName(' unknown ', () => false), 'unknown');
 });

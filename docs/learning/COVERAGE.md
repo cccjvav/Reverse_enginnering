@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/154 个纳入范围的文件完整逐行解释；363/30338 行已解释。
+当前：6/154 个纳入范围的文件完整逐行解释；363/30465 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -131,7 +131,7 @@
 | [tests/bridge-core-patch.test.mjs](../../tests/bridge-core-patch.test.mjs) | 136 | 0 | 待逐行讲解 |
 | [tests/bridge-core-reconstruction.test.mjs](../../tests/bridge-core-reconstruction.test.mjs) | 103 | 0 | 待逐行讲解 |
 | [tests/bridge-core-state.test.mjs](../../tests/bridge-core-state.test.mjs) | 113 | 0 | 待逐行讲解 |
-| [tests/bridge-core-type-contracts.test.mjs](../../tests/bridge-core-type-contracts.test.mjs) | 182 | 0 | 待逐行讲解 |
+| [tests/bridge-core-type-contracts.test.mjs](../../tests/bridge-core-type-contracts.test.mjs) | 305 | 0 | 待逐行讲解 |
 | [tests/community-policy.test.mjs](../../tests/community-policy.test.mjs) | 98 | 0 | 待逐行讲解 |
 | [tests/community-ui-hardening.test.mjs](../../tests/community-ui-hardening.test.mjs) | 56 | 0 | 待逐行讲解 |
 | [tests/community-ui.test.mjs](../../tests/community-ui.test.mjs) | 64 | 0 | 待逐行讲解 |
@@ -155,7 +155,7 @@
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |
 | [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
 | [tools/ci_windows_probe.py](../../tools/ci_windows_probe.py) | 82 | 0 | 待逐行讲解 |
-| [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 79 | 0 | 待逐行讲解 |
+| [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 83 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |
 | [tools/installer_forensics.py](../../tools/installer_forensics.py) | 172 | 0 | 待逐行讲解 |
 | [tools/learning_lab.mjs](../../tools/learning_lab.mjs) | 40 | 0 | 待逐行讲解 |
