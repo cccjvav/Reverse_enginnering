@@ -599,3 +599,27 @@ docs/RECOVERY_STATUS.md按全部目标列已完成/未完成，包含普通CMD�
 实现dcbd8efe73a0da3b7426575de92f289ff1fd8941成功推送，自动运行35034730553。后台gh run watch --exit-status退出0：Ubuntu30秒、Windows50秒、普通CMD+conda2分15秒全部成功。作业/步骤API和本地计数保存maintenance-recovery-tests.json。尝试gh run view --log获取完整远端日志，归档下载返回EOF，未获得逐项完整日志；临时签名URL不入库。此前动作Node20弃用/强制Node24警告仍存在，项目测试Node环境未因此改写。
 
 最终文档统一标明：本地133项Node通过、候选14条仍失败、旧Agent Host仅内部stdio探测通过、新维护适配器未进入应用构建、总发布NOT_READY。不能声称用户要求的全部项目已经完成；本轮没有停止/删除安全检查或部署未验收产物来凑完成。
+
+## 25 HTTP维护适配器进入实验扩展构建（2026-09-16）
+
+本轮从5bc7b1a继续，不再只增加孤立模块。build_linked_extension新增显式HTTP维护模式：只将原bridge-mcp-transport.ts的共享HTTP导入改向community/bridge-core/http-router.mjs；默认旧构建不变。类型诊断使用同一个模式和来源清单，解析到维护路由的.d.mts；原模式59/14条继续独立保存，新HTTP模式11条（TS2339=10、TS2353=1，均为tool-presentation定制Chat宿主字段），仍退出1。
+
+新增http_maintenance_inputs.mjs及精确三文件白名单/哈希清单，包含维护JS、.d.mts及http-router-types.d.ts，并核验原路由SHA与core来源。构建和诊断共同加载这份清单，防止声明/实际代码错位。维护JS新增JSDoc，除了入口拒绝重复/数组头，还在真正回调前再次校验单值。使用strict/checkJs:true/skipLibCheck:false对维护JS函数体与声明做独立检查；原路由以既有候选声明为边界，并非整个原JS工程严格检查通过。合成两次取头值由string变array时，末端守卫实际拒绝且处理器0调用。
+
+HTTP变体实际输出.work/http-linked-extension/dist/extension.cjs，1675648字节，SHA1e4ca05f8d77b8c37ad1b02f00928923cdd833ab39c00d1a7bd68950fff7cc39；74一方输入、31共享连接、2商业策略替换。旧实验输出仍1673367字节/c9785357…不变。新报告http-linked-extension.json携带sourceIntegrated:true和runtimeActivationVerified:false；并没有加载完整扩展或部署应用。file-tool-dispatcher维护入口仍未接入，不改变宿主权限策略。
+
+## 26 原传输层与真实候选SDK的本机协议往返（2026-09-16）
+
+为避免只验证bundle包含字符串，同一构建器增加受限制的transportOnly测试入口（必须同时启用HTTP维护模式），从原BridgeMcpTransport TS生成独立CJS夹具；没有vscode外部依赖。使用真正的锁定server/node SDK2.0.0和原会话/工具注册逻辑，回环Node HTTP客户端完成2025-11-25 initialize、initialized通知、tools/list、惰性tools/call。仅dispatchToolCall及宿主回调为明确的内存替身，无文件/命令/模型执行；不启动BridgeManager或公网隧道。
+
+真实SDK返回shuncode-bridge及会话头。重复头400和错令牌404不进入工具替身；合法调用携带bridge:会话owner。建立两会话，owner不同；删除第一会话后旧ID404，第二会话仍可列工具；最后销毁全部会话并关闭监听，端口清空。未测试实际任务ID归属、宿主审批、现代无状态协议、第三方客户端或GUI。结果及夹具来源哈希在http-transport-smoke.json，不保存随机会话ID/完整端点。该记录是本地平台数据，不冒称已包含Windows逐项结果。
+
+新增HTTP专项5项全部通过，包括来源连接、11条真实诊断、适配器JS/声明严格检查、本机SDK生命周期及末端头类型防护。非法transportOnly模式的拒绝也测试通过。新增build:http-extension/check:http-extension/diagnose:http-types供普通CMD使用，不修改原三条基线命令。
+
+## 27 本轮回归与门槛更新（2026-09-16）
+
+全套本地npm test138/138；Python34项发现、31通过、3Windows专属本地跳过。check:bridge-core、旧check:linked-extension、新check:http-extension、学习构建及文档链接/diff检查通过。发布检查改为审核HTTP变体，真实11条错误、httpSourceIntegrated:true、NOT_READY退出2；HTTP整机门槛仍BLOCKED，不把源码接入当GUI通过。补充的门槛断言6项专项再次通过。
+
+学习范围163文件31043行，完整讲解仍6文件363行。原51文件和社区ZIP字节不变，旧实验bundle证据不变。新HTTP证据使用-text保持Windows哈希一致，CI路径包含新helper及http证据。HTTP_EXTENSION_INTEGRATION.md详细区别三种类型模式、两份实验产物和本机惰性协议测试，更新入口与工程状态避免继续误称HTTP适配器完全孤立。
+
+本轮尚未验证新Windows CI；推送后单独检查。剩余Chat宿主契约、真实文件授权接入、原生资产/ABI、完整扩展激活/GUI/MCP及新安装器仍未完成，整体NOT_READY。

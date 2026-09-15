@@ -15,3 +15,4 @@ package.json -text
 package-lock.json -text
 docs/evidence/linked-*.json -text
 docs/evidence/contract-type-diagnostics.json -text
+docs/evidence/http-*.json -text

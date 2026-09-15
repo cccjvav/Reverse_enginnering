@@ -1,5 +1,7 @@
 # Windows小白验收手册：从构建检查到安装/卸载
 
+> 最新 [HTTP接入实验](../HTTP_EXTENSION_INTEGRATION.md)已完成本机隔离协议往返，使用惰性工具替身；不是本文B/C/D完整候选验收，不自动填写PASS。
+
 > 类型恢复进度：累计14个[候选类型契约](../../reconstructed/type-contracts/README.md)使独立合同模式诊断降至14条（11条定制Chat字段、3条HTTP边界）；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
 
 **你的终端固定为：普通CMD（cmd.exe），在里面激活conda。不要求Anaconda Prompt、PowerShell、venv。** 软件内部的受管终端目前使用产品自带Git Bash，这是产品资产，与“你用CMD操作”不冲突。

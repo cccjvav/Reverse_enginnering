@@ -7,8 +7,8 @@ import {diagnoseTypes} from './diagnose_linked_types.mjs';
 import {buildLinkedExtension} from './build_linked_extension.mjs';
 
 export async function checkReleaseReadiness() {
-  const diagnostics = await diagnoseTypes({contracts:true});
-  const {report: bundle} = await buildLinkedExtension();
+  const diagnostics = await diagnoseTypes({httpMaintenance:true});
+  const {report: bundle} = await buildLinkedExtension({httpMaintenance:true});
   const observed = [];
   for (const name of [
     'recovered/shuncode-extension/runtime/agent-host.js',
@@ -34,12 +34,13 @@ export async function checkReleaseReadiness() {
     {id:'host-chat-api', status:'BLOCKED', detail:'Custom Chat presentation fields lack verified host implementation/registration.'},
     {id:'native-runtime', status:'BLOCKED', detail:'Recovered legacy JS exists, but complete candidate assets and Electron ABI execution are unverified.'},
     {id:'authorization-integration', status:'BLOCKED', detail:'Fail-closed maintenance dispatcher exists but is not connected to host-owned policy or the extension build. Original dispatcher still omits policy.'},
-    {id:'http-integration', status:'BLOCKED', detail:'Duplicate-header rejection adapter is isolated, not connected to extension build.'},
+    {id:'http-integration', status:'BLOCKED', detail:'HTTP adapter is source-linked in the experimental variant. Actual extension/desktop lifecycle acceptance is still missing.'},
     {id:'real-activation-gui-mcp', status:'BLOCKED', detail:'No complete candidate desktop activation, GUI, real client or tunnel acceptance has been performed.'},
     {id:'source-built-installer', status:'BLOCKED', detail:'No new full installer or install/upgrade/uninstall acceptance. Original EXE/overlay do not satisfy this gate.'}
   ];
   return {scope:'Current repository engineering release gates; no external account/network/desktop execution. Blocked gates require implementation and evidence, not editing this report.',
     overall:gates.every(g=>g.status==='PASS') ? 'READY' : 'NOT_READY',
+    experimentalVariant: 'http-maintenance', httpSourceIntegrated: bundle.sourceIntegrated,
     candidateContractModules:diagnostics.contractModules.length,
     originalTypesRecovered:false, originalHostIdentityConfirmed:false,
     originalInstaller:{source:'ShunCode-0.7.4-win32-x64-Setup.exe',bytes:info.size,isLfsPointer:installerIsLfsPointer,isNewSourceBuild:false},

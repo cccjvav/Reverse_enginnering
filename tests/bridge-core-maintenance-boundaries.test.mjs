@@ -115,8 +115,10 @@ test('release gate refuses to equate recovered contracts or a bundle with a comp
   const {checkReleaseReadiness}=await import('../tools/check_release_readiness.mjs');
   const report=await checkReleaseReadiness();
   assert.equal(report.overall,'NOT_READY');
+  assert.equal(report.experimentalVariant,'http-maintenance');
+  assert.equal(report.httpSourceIntegrated,true);
   assert.equal(report.candidateContractModules,14);
-  assert.equal(report.gates.find(g=>g.id==='candidate-types').errors,14);
+  assert.equal(report.gates.find(g=>g.id==='candidate-types').errors,11);
   assert.equal(report.gates.find(g=>g.id==='source-linkage').status,'PASS');
   for(const id of ['carrier-identity','host-chat-api','native-runtime','authorization-integration','http-integration','real-activation-gui-mcp','source-built-installer']) {
     assert.equal(report.gates.find(g=>g.id===id).status,'BLOCKED',id);

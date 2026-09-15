@@ -1,0 +1,18 @@
+{
+  "scope": "Reviewed maintenance HTTP adapter and its scalar callback declarations, not a deployed application.",
+  "originalSha256": "e62762f79c0119a9274474465e65a9cd361dfd30ad62d6241b493303596da1a1",
+  "files": [
+    {
+      "source": "community/bridge-core/http-router.mjs",
+      "sha256": "761f08c385197984ab626d8281490977f1b1364ef96a0becb7728c2919f23926"
+    },
+    {
+      "source": "community/bridge-core/http-router.d.mts",
+      "sha256": "196908f53ba89e9dbc4e4c8a73c68ebe99c0ed08b9bc43bcd89b7dfcd86ad8f5"
+    },
+    {
+      "source": "community/bridge-core/http-router-types.d.ts",
+      "sha256": "3a389eda147699af37ce46c03ef5e08a627cf57ea53e5c58a5648c961957c329"
+    }
+  ]
+}

@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 159,
-    "lines": 30823,
+    "files": 163,
+    "lines": 31043,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "f84655a74e991fef0ea310a85cb8a675119d6da59035cb7cbc1a6d9d5a836360",
-      "lines": 104,
+      "sha256": "7cd76bfc56227c90be612c26cfdc0762066ffc0a88967ea436c1b0cd05f27f79",
+      "lines": 106,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -58,9 +58,23 @@
       "status": "pending"
     },
     {
+      "source": "community/bridge-core/http-router-types.d.ts",
+      "sha256": "3a389eda147699af37ce46c03ef5e08a627cf57ea53e5c58a5648c961957c329",
+      "lines": 11,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/bridge-core/http-router.d.mts",
+      "sha256": "196908f53ba89e9dbc4e4c8a73c68ebe99c0ed08b9bc43bcd89b7dfcd86ad8f5",
+      "lines": 6,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "community/bridge-core/http-router.mjs",
-      "sha256": "87e67b40091ccca4d582deaa2ec0bb19eda1a086212729e115ad892f11f82466",
-      "lines": 31,
+      "sha256": "761f08c385197984ab626d8281490977f1b1364ef96a0becb7728c2919f23926",
+      "lines": 59,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -814,6 +828,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-http-linkage.test.mjs",
+      "sha256": "943fe787edfc4f785000afd52242703cd886b94893bfa0875143fa5bdbde9ae2",
+      "lines": 134,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/bridge-core-http.test.mjs",
       "sha256": "ba68f5681256515a17f969310e54e0f70688fdbd72827771efbdf45adfdda462",
       "lines": 63,
@@ -836,8 +857,8 @@
     },
     {
       "source": "tests/bridge-core-maintenance-boundaries.test.mjs",
-      "sha256": "fcbf9b43b937a1472df8c7882dbf5d88d4b789c99416fca23f020208946db8fa",
-      "lines": 126,
+      "sha256": "a8ef00a22d0356d184a49a885c8b1d14c212d5e92e404ec73a36ce75b8bd0bde",
+      "lines": 128,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1004,8 +1025,8 @@
     },
     {
       "source": "tools/build_linked_extension.mjs",
-      "sha256": "71e4e7c43365173c4bfaa29bd934469f292d84b6398d09f440028c512b496763",
-      "lines": 135,
+      "sha256": "3ba8f3245b33cdd78b455c79b8d2f0d27afc2ac8b56018bf472c89b790065b47",
+      "lines": 144,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1025,8 +1046,8 @@
     },
     {
       "source": "tools/check_release_readiness.mjs",
-      "sha256": "b6b48c731605144bc8f6d974c828e01bb54e42fc57b92c1f5fc787e8722df0d9",
-      "lines": 53,
+      "sha256": "4a89d2cb5d8742c7dd21da453e5bc8b934d1e96c481b597480489f0c28265305",
+      "lines": 54,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1039,8 +1060,15 @@
     },
     {
       "source": "tools/diagnose_linked_types.mjs",
-      "sha256": "b095399cddf104404c6250f2ee8f10e14f529ca3c1dd2cae4132e5f4947b717f",
-      "lines": 83,
+      "sha256": "efd8c8b76116aabce5835dcba2c43efd66e9b5d5edc61ac425267efb6fc08594",
+      "lines": 90,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/http_maintenance_inputs.mjs",
+      "sha256": "59f9478bd44c26d7dee569792a425d67778391732316d4fcf52ac4c9ac84f9dc",
+      "lines": 20,
       "explainedLines": 0,
       "status": "pending"
     },

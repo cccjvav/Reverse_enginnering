@@ -1,6 +1,8 @@
 {
   "scope": "Current repository engineering release gates; no external account/network/desktop execution. Blocked gates require implementation and evidence, not editing this report.",
   "overall": "NOT_READY",
+  "experimentalVariant": "http-maintenance",
+  "httpSourceIntegrated": true,
   "candidateContractModules": 14,
   "originalTypesRecovered": false,
   "originalHostIdentityConfirmed": false,
@@ -41,12 +43,12 @@
       "id": "source-linkage",
       "status": "PASS",
       "detail": "In-memory experimental CJS rebuilt and statically parsed; not a product package.",
-      "sha256": "c97853579b4b9fab7f27f3647f41b19bdfb32c4f424af6be22db3b5378703a00"
+      "sha256": "1e4ca05f8d77b8c37ad1b02f00928923cdd833ab39c00d1a7bd68950fff7cc39"
     },
     {
       "id": "candidate-types",
       "status": "FAIL",
-      "errors": 14,
+      "errors": 11,
       "detail": "Strict candidate consumer check; JS implementations not fully checked."
     },
     {
@@ -72,7 +74,7 @@
     {
       "id": "http-integration",
       "status": "BLOCKED",
-      "detail": "Duplicate-header rejection adapter is isolated, not connected to extension build."
+      "detail": "HTTP adapter is source-linked in the experimental variant. Actual extension/desktop lifecycle acceptance is still missing."
     },
     {
       "id": "real-activation-gui-mcp",

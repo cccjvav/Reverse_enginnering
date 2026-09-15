@@ -17,7 +17,10 @@
     "check:linked-extension": "node tools/build_linked_extension.mjs --check",
     "diagnose:linked-types": "node tools/diagnose_linked_types.mjs",
     "diagnose:contract-types": "node tools/diagnose_linked_types.mjs --contracts",
-    "check:release": "node tools/check_release_readiness.mjs"
+    "check:release": "node tools/check_release_readiness.mjs",
+    "build:http-extension": "node tools/build_linked_extension.mjs --http-maintenance",
+    "check:http-extension": "node tools/build_linked_extension.mjs --http-maintenance --check",
+    "diagnose:http-types": "node tools/diagnose_linked_types.mjs --http-maintenance"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

@@ -35,4 +35,4 @@ configByTool是可信宿主配置，不是模型输入。权限回调必须绑�
 
 `http-router.mjs`在正确端点拒绝数组型/重复协议请求头，并检查rawHeaders，覆盖Node已经把重复头合成字符串的情况。错误返回400，不回显令牌或具体头值；错误令牌仍走原404路由。测试使用本机回环HTTP和空处理器，不连接真实MCP、隧道或GUI。没有改变原CORS、OAuth或文件授权机制。
 
-两模块不在当前实验bundle的依赖图中，未进入已发布overlay。原扩展没有传入新入口需要的宿主权限策略，因此不能靠修改一条import就宣布整合完成。现有图像/搜索/写入竞态与非OS隔离限制仍存在，read_files检查点也不能关闭所有TOCTOU窗口。
+默认旧实验bundle和已发布overlay仍不含这两模块。新增HTTP专用实验变体已接入http-router.mjs，file-tool-dispatcher.mjs仍未接入；见[HTTP接入说明](../../docs/HTTP_EXTENSION_INTEGRATION.md)。原扩展没有传入新入口需要的宿主权限策略，因此不能靠修改一条import就宣布整合完成。现有图像/搜索/写入竞态与非OS隔离限制仍存在，read_files检查点也不能关闭所有TOCTOU窗口。

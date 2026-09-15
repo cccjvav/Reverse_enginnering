@@ -6,6 +6,7 @@ import { builtinModules } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROOT, hash } from './patch_utils.mjs';
+import { httpMaintenanceInputs } from './http_maintenance_inputs.mjs';
 
 const ORIGINAL_ROOT = 'recovered/shuncode-extension';
 const CORE_ROOT = 'reconstructed/bridge-core';
@@ -26,11 +27,17 @@ export function communityEntry(text) {
   if (text.split(retired).length !== 2) throw new Error('Unexpected legacy sign-out source');
   return text.replace(retired, '');
 }
-export async function buildLinkedExtension({ write = false } = {}) {
+export async function buildLinkedExtension({ write = false, httpMaintenance = false, transportOnly = false } = {}) {
+  if (transportOnly && !httpMaintenance) throw new Error('Transport fixture requires HTTP maintenance mode');
+  const output = transportOnly ? '.work/http-transport-fixture' : httpMaintenance ? '.work/http-linked-extension' : OUTPUT;
+  const outputName = transportOnly ? 'transport.cjs' : 'extension.cjs';
+  const entry = ORIGINAL_ROOT + (transportOnly ? '/src/bridge-mcp-transport.ts' : '/src/extension.ts');
+  const maintenance = httpMaintenance ? await httpMaintenanceInputs() : null;
   const original = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/custom-extension.json'), 'utf8'));
   const core = JSON.parse(await readFile(path.join(ROOT, CORE_ROOT, 'provenance.json'), 'utf8'));
   const expected = new Map(original.copied.map(e => [ORIGINAL_ROOT + '/' + e.path, e.sha256]));
   for (const module of core.modules) expected.set(CORE_ROOT + '/' + module.file, module.sha256);
+  for (const file of maintenance?.files ?? []) expected.set(file.source, file.sha256);
   const sourceRecords = new Map(), resolutions = [], externals = new Set();
   const plugin = {
     name: 'reviewed-source-linkage',
@@ -40,7 +47,7 @@ export async function buildLinkedExtension({ write = false } = {}) {
         if (!importer.startsWith(ORIGINAL_ROOT + '/src/')) throw new Error('Unexpected shared importer');
         const name = path.posix.basename(args.path);
         if (args.path !== '../../../src/' + name || !/^[a-z0-9-]+\.[cm]?js$/.test(name)) throw new Error('Unexpected shared target');
-        const target = CORE_ROOT + '/src/' + name;
+        const target = httpMaintenance && name === 'bridge-http-router.js' ? 'community/bridge-core/http-router.mjs' : CORE_ROOT + '/src/' + name;
         if (!expected.has(target)) throw new Error(`Unrecovered shared target: ${args.path}`);
         resolutions.push({ importer, requested: args.path, linkedTo: target });
         return { path: path.join(ROOT, target) };
@@ -78,8 +85,8 @@ export async function buildLinkedExtension({ write = false } = {}) {
       });
     }
   };
-  const result = await build({ absWorkingDir: ROOT, entryPoints: [ORIGINAL_ROOT + '/src/extension.ts'],
-    outfile: OUTPUT + '/dist/extension.cjs', bundle: true, write: false, platform: 'node', format: 'cjs',
+  const result = await build({ absWorkingDir: ROOT, entryPoints: [entry],
+    outfile: output + '/dist/' + outputName, bundle: true, write: false, platform: 'node', format: 'cjs',
     target: 'node22', metafile: true, sourcemap: false, logLevel: 'silent', plugins: [plugin] });
   if (result.warnings.length) throw new Error('Linkage warnings require review: ' + result.warnings.map(w => w.text).join('; '));
   if (result.outputFiles.length !== 1) throw new Error('Unexpected linkage output count');
@@ -106,8 +113,9 @@ export async function buildLinkedExtension({ write = false } = {}) {
   }
   const inputs = [...sourceRecords.values()].sort((a, b) => a.source.localeCompare(b.source, 'en'));
   if (inputs.some(i => i.source.includes('/dist/'))) throw new Error('Linked output must not embed the original compiled extension');
-  const report = { scope: 'Experimental CJS linkage from preserved TS/MTS and reconstructed JS, using community policy. NOT a typecheck, self-contained extension package, activation test or installer.',
-    output: OUTPUT + '/dist/extension.cjs', outputSha256: hash(bytes), outputBytes: bytes.length,
+  const report = { ...(transportOnly ? { isolatedTransportFixture: true, fixtureEntry: entry } : {}), scope: 'Experimental CJS linkage from preserved TS/MTS and reconstructed JS, using community policy. NOT a typecheck, self-contained extension package, activation test or installer.',
+    output: output + '/dist/' + outputName, outputSha256: hash(bytes), outputBytes: bytes.length,
+    ...(httpMaintenance ? { maintenanceHttpAdapter: maintenance, sourceIntegrated: true, runtimeActivationVerified: false } : {}),
     inputs, sharedResolutions: resolutions.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), 'en')),
     externalImports: [...externals].sort(),
     dependencyInputs, dependencyVersions, lockfileSha256: hash(await readFile(path.join(ROOT, 'package-lock.json'))),
@@ -118,15 +126,16 @@ export async function buildLinkedExtension({ write = false } = {}) {
       'PortableGit Bash, tunnel executables and ripgrep in the installed layout', 'Host authorization and file-access race mitigations'],
     summary: { inputs: inputs.length, sharedResolutions: resolutions.length, communityPolicyReplacements: inputs.filter(i => i.replacementSource).length } };
   if (write) {
-    await mkdir(path.join(ROOT, OUTPUT, 'dist'), { recursive: true });
+    await mkdir(path.join(ROOT, output, 'dist'), { recursive: true });
     await writeFile(path.join(ROOT, report.output), bytes);
-    await writeFile(path.join(ROOT, OUTPUT, 'linkage.json'), JSON.stringify(report, null, 2) + '\n');
+    await writeFile(path.join(ROOT, output, 'linkage.json'), JSON.stringify(report, null, 2) + '\n');
   }
   return { code, report };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { report } = await buildLinkedExtension({ write: !process.argv.includes('--check') });
-  const evidence = path.join(ROOT, 'docs/evidence/linked-extension.json');
+  const httpMaintenance = process.argv.includes('--http-maintenance');
+  const { report } = await buildLinkedExtension({ write: !process.argv.includes('--check'), httpMaintenance });
+  const evidence = path.join(ROOT, httpMaintenance ? 'docs/evidence/http-linked-extension.json' : 'docs/evidence/linked-extension.json');
   const text = JSON.stringify(report, null, 2) + '\n';
   if (process.argv.includes('--check')) {
     if (await readFile(evidence, 'utf8') !== text) throw new Error('Linkage evidence drift');

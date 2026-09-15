@@ -2,7 +2,7 @@
 
 > **[当前工程恢复汇总](docs/RECOVERY_STATUS.md)**：本轮类型/维护运行时/发布门槛成果，以及完整宿主、真实激活与安装器仍未完成的具体项目。总状态NOT_READY。
 
-> 类型恢复进度：累计14个[候选类型契约](reconstructed/type-contracts/README.md)使独立合同模式诊断降至14条（11条定制Chat字段、3条HTTP边界）；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
+> 类型恢复进度：累计14个[候选类型契约](reconstructed/type-contracts/README.md)；原连接合同模式14条，新增[HTTP接入实验](docs/HTTP_EXTENSION_INTEGRATION.md)为11条（定制Chat字段）；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
 
 > **[普通CMD+conda：逐步验收手册](docs/acceptance/README.md)**：宿主、原生资产、实际激活、GUI/MCP和安装/升级/卸载的操作、预期、失败处理及空白结果表。当前A可复现，A05仍59个类型错误，B/C/D尚阻塞；不是已完成验收报告。
 
@@ -23,7 +23,7 @@
 
 - **[从这里开始：分步实验](docs/learning/START_HERE.md)**：打开正确目录、识别命令/输出、安装工具、模拟实验、预期结果、故障处理和自测答案。
 - **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具、主构建器、UI补丁器和UI状态方法六个文件的 **363行**；不是全工程已逐行讲完。
-- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：159个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
+- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：163个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
 - 学习实验：`npm run learn:check`、`npm run learn:lab`；Windows零基础步骤使用 `npm.cmd`，见实验课。实验不启动真实 Bridge、不应用补丁。
 
 ## 定制代码、完整工程与用户分发

@@ -6,9 +6,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROOT, hash } from './patch_utils.mjs';
 import { communityEntry, verifySource } from './build_linked_extension.mjs';
+import { httpMaintenanceInputs } from './http_maintenance_inputs.mjs';
 
 const portable = p => p.split(path.sep).join('/');
-export async function diagnoseTypes({ contracts = false } = {}) {
+export async function diagnoseTypes({ contracts = false, httpMaintenance = false } = {}) {
+  if (httpMaintenance) contracts = true;
+  const maintenance = httpMaintenance ? await httpMaintenanceInputs() : null;
   const original = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/custom-extension.json'), 'utf8'));
   const core = JSON.parse(await readFile(path.join(ROOT, 'reconstructed/bridge-core/provenance.json'), 'utf8'));
   const upstream = JSON.parse(await readFile(path.join(ROOT, 'reference/vscode-types/provenance.json'), 'utf8'));
@@ -30,6 +33,8 @@ export async function diagnoseTypes({ contracts = false } = {}) {
     expected.set(declaration, item.sha256);
     contractMap.set(item.implementation, declaration);
   }
+  for (const file of maintenance?.files ?? []) expected.set(file.source, file.sha256);
+  if (httpMaintenance) contractMap.set('reconstructed/bridge-core/src/bridge-http-router.js', 'community/bridge-core/http-router.d.mts');
   const sourceFiles = original.copied.filter(f => f.path.startsWith('src/') && /\.[cm]?ts$/.test(f.path)).map(f => 'recovered/shuncode-extension/' + f.path);
   const hostFiles = upstream.files.filter(f => f.file.endsWith('.d.ts')).map(f => 'reference/vscode-types/' + f.file);
   const options = { noEmit: true, strict: true, skipLibCheck: true, allowJs: true, checkJs: false,
@@ -52,7 +57,7 @@ export async function diagnoseTypes({ contracts = false } = {}) {
       const source = 'reconstructed/bridge-core/src/' + path.posix.basename(name);
       if (name !== '../../../src/' + path.posix.basename(name) || !expected.has(source)) return undefined;
       const declaration = contractMap.get(source);
-      return { resolvedFileName: path.join(ROOT, declaration ?? source), extension: declaration ? ts.Extension.Dts : ts.Extension.Js, isExternalLibraryImport: false };
+      return { resolvedFileName: path.join(ROOT, declaration ?? source), extension: declaration ? (declaration.endsWith('.d.mts') ? ts.Extension.Dmts : ts.Extension.Dts) : ts.Extension.Js, isExternalLibraryImport: false };
     }
     return ts.resolveModuleName(name, containingFile, options, host).resolvedModule;
   });
@@ -72,12 +77,14 @@ export async function diagnoseTypes({ contracts = false } = {}) {
     errorCount: errors, diagnosticCount: diagnostics.length, counts,
     candidateTypecheckPassed: errors === 0, originalTypesRecovered: false, originalHostIdentityConfirmed: false,
     ...(contracts ? { contractMode: 'candidate-declarations', contractModules, runtimeImplementationCheckedByTypeScript: false } : {}),
+    ...(httpMaintenance ? { maintenanceHttpAdapter: maintenance } : {}),
     diagnostics, lockfileSha256: hash(await readFile(path.join(ROOT, 'package-lock.json'))) };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const contracts = process.argv.includes('--contracts');
-  const report = await diagnoseTypes({ contracts });
-  await writeFile(path.join(ROOT, contracts ? 'docs/evidence/contract-type-diagnostics.json' : 'docs/evidence/linked-type-diagnostics.json'), JSON.stringify(report, null, 2) + '\n');
+  const httpMaintenance = process.argv.includes('--http-maintenance');
+  const contracts = httpMaintenance || process.argv.includes('--contracts');
+  const report = await diagnoseTypes({ contracts, httpMaintenance });
+  await writeFile(path.join(ROOT, httpMaintenance ? 'docs/evidence/http-type-diagnostics.json' : contracts ? 'docs/evidence/contract-type-diagnostics.json' : 'docs/evidence/linked-type-diagnostics.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ errorCount: report.errorCount, counts: report.counts, candidateTypecheckPassed: report.candidateTypecheckPassed }, null, 2));
   process.exitCode = report.candidateTypecheckPassed ? 0 : 1;
 }

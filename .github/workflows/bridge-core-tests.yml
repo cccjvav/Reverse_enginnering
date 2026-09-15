@@ -24,6 +24,8 @@ on:
       - tools/audit_custom_boundary.mjs
       - tools/audit_extension_runtime.mjs
       - tools/build_linked_extension.mjs
+      - tools/http_maintenance_inputs.mjs
+      - docs/evidence/http-*.json
       - tools/diagnose_linked_types.mjs
       - tools/check_release_readiness.mjs
       - reference/vscode-types/**
