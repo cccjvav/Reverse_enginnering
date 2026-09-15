@@ -405,3 +405,12 @@ CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/n
 执行npm ci --ignore-scripts --no-audit --no-fund；learn:build、learn:check、learn:ui、check:bridge-core、npm test成功。Node95通过，Python34发现/31通过/3项Windows专属本地跳过。重建overlay后，全部11个payload条目与已发布ZIP逐字节相同；ZIP未重打包，仍467406字节/SHA6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa。检查器改动不改变支持版本的应用输出，也不包含读写竞态修复。
 
 本轮远端CI待推送后复验；证据在docs/evidence/ui-learning-validation.json。完整GUI、MCP客户端、安装器及其余工程缺口均不计作已完成。
+
+
+### 14 Windows/CMD跨平台复验完成
+
+代码提交1a334aec24e401829f884d8e81348fb3f5899a7a，运行 [34912486285](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34912486285) 三个作业全部成功：Windows2022核心、Ubuntu24.04核心、独立Windows CMD+conda。后者包括新增learn:ui的总入口及原更新器--help，Windows专属夹具在该平台启用。gh run watch --exit-status返回0，作业/步骤API证据已保存，不声称下载了逐项完整远端日志。
+
+另核验51个原扩展文件SHA均符合来源清单。CRLF批处理新增行被默认git diff --check当作尾空白，按cr-at-eol规则复核通过，保留Windows批处理原CRLF而未强行换行。现有action Node20弃用/平台改用Node24提示仍存在，不是应用兼容性验收。
+
+本轮已验证的实质变化是构建期输入拒绝更明确、双宿主静态实验及92行新增解释。应用输出与ZIP不变，仍未完成整个UI工程、读写隔离修复、完整源码重编译或Windows图形安装验收。

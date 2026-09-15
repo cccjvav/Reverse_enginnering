@@ -9,7 +9,7 @@
 - **[从零配置CMD+conda](docs/WINDOWS_CMD_CONDA.md)**：环境文件、每条命令解释、路径/版本检查与故障处理。
 - 环境激活且安装npm依赖后，仓库根目录执行 `call tools\run-learning.cmd`，一次运行环境、教材、模拟实验、Node/Python回归。不会修改已安装软件。
 - 社区ZIP启动器也已优先使用当前conda Python；已应用旧补丁者无需因启动器更新重打应用补丁。
-- **[Windows CMD+conda CI已通过](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34875639178)**：创建/激活环境、总入口和CLI夹具通过；[证据及未验收范围](docs/evidence/cmd-conda-validation.json)。不是GUI或完整安装器验收。
+- **[Windows CMD+conda CI已通过](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34912486285)**：创建/激活环境、总入口和CLI夹具通过；[本轮UI与CMD验证证据](docs/evidence/ui-learning-validation.json)。不是GUI或完整安装器验收。
 
 ## 零基础实操与逐行课程
 
@@ -44,7 +44,7 @@
 从原扩展 bundle 拆出 **28 个 JavaScript 模块 / 206 个声明**，约 151.3 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录、输入解析与独立文件读取/补丁写入；不是找回了原始 TS 类型，也不是完整 MCP 服务。
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
-- 本地 **90 项 Node 测试 + 23 项 Python 回归测试通过**；包含新增的 4 项教程同步与实验测试，使用临时文件，不运行安装器。
+- 本地 **95项Node通过，34项Python中31项本地通过、3项Windows专属本地跳过**；Windows CMD+conda CI中启用这些Windows夹具且作业通过，不运行ShunCode安装器。
 - **本轮 Windows / Linux CI 均通过**：[验证记录](docs/evidence/learning-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 
