@@ -2,10 +2,12 @@
 
 这是从 Windows 0.7.4 已发布扩展 bundle 中恢复的 **JavaScript 逻辑 + 重新建立的 ESM 依赖关系**。它不是原始 TypeScript，不是完整扩展，也不是新的 Windows 安装包。没有部署到此前的社区版 overlay。
 
+新增：[Custom Tools/Skills恢复与风险说明](CUSTOM_TOOLS.md)。目录导入、生成入口与受控执行链已在临时工作区测试；原sandbox不是OS沙箱，未部署到应用。普通CMD中激活conda后再按下列命令复现。
+
 ## 已经做到什么
 
-- **28 个可独立加载的模块 / 206 个声明 / 151,272 字节 JS**。
-- 其中 **26 个自有源码标签**：25 个标签的已发布顶层声明全部纳入，`file-tool-registry` 仅纳入工具目录和输入解析；另外 2 个文件是原构建元数据、SDK 版本常量。
+- **37 个可独立加载的模块 / 311 个声明 / 204,568 字节 JS**。
+- 其中 **35 个自有源码标签**：34 个标签的已发布顶层声明全部纳入，`file-tool-registry` 仅纳入工具目录和输入解析；另外 2 个文件是原构建元数据、SDK 版本常量。
 - 依赖闭合：每个非内建自由变量都有显式模块来源；运行这些模块不需要安装 npm 运行时依赖，仅使用 Node 内建模块。
 - 原函数/类声明不重写；主要新增 `import/export`，把静态 Node `require` 改接为 ESM，并把构建元数据显式化。
 - [`provenance.json`](provenance.json) 记录原 bundle SHA-256、每个声明的 UTF-16 位置与哈希、输出哈希、模块依赖、完整/部分范围，以及该 bundle **38 个共享源码标签**的索引。此前的 43 是三个 bundle 合并统计，不是这里漏掉了 5 个。
@@ -21,20 +23,20 @@
 | 运行状态 | 活动历史、纯本地计数、并发/自适应并发、命令 ID、保留期和终端空闲管理 |
 | 命令取消 | 原会话归属、限流、强制取消预留与本地主机确认要求，以及命令风险分类 |
 
-**重要限制：** `file-tool-registry.js` 没有 `dispatchFileTool` / `invokeFileTool`，本注册表不能执行读写、搜索或补丁操作。`readFiles` 已可从独立模块调用，但尚未接入调度器；`applyPatch` 也已独立恢复，但搜索与图片执行器仍缺失。路径解析不等于安全隔离，原读取器还有已复现的检查/使用竞态，详见 [FILE_READER.md](FILE_READER.md)。IDE 工具仍需 VS Code API 和原宿主执行器。输入校验器实现的是 JSON Schema 的一个子集，不是完整标准验证器。
+**重要限制：** `file-tool-registry.js` 没有 `dispatchFileTool` / `invokeFileTool`，本注册表不能执行读写、搜索或补丁操作。`readFiles` 已可从独立模块调用，但尚未接入调度器；`applyPatch` 也已独立恢复，但图片执行器已恢复但未接入，搜索执行链仍缺失。路径解析不等于安全隔离，原读取器还有已复现的检查/使用竞态，详见 [FILE_READER.md](FILE_READER.md)。IDE 工具仍需 VS Code API 和原宿主执行器。输入校验器实现的是 JSON Schema 的一个子集，不是完整标准验证器。
 
 ## 如何复现（仓库根目录，Node 22.13+）
 
-```bash
-npm ci --ignore-scripts --no-audit --no-fund
-npm run check:bridge-core
-npm test
+```cmd
+npm.cmd ci --ignore-scripts --no-audit --no-fund
+npm.cmd run check:bridge-core
+npm.cmd test
 ```
 
 如需重新生成：
 
-```bash
-npm run build:bridge-core
+```cmd
+npm.cmd run build:bridge-core
 ```
 
 生成器只解析原 bundle，不运行整个扩展。它拒绝源哈希改变、未解析变量、跨来源 AST 声明、第三方可执行依赖和初始化循环；若重建文件被手工修改，会拒绝覆盖。请把后续维护修改放到独立的 `community/` 层，而不是改动原证据或静默覆盖重建基线。
@@ -43,7 +45,7 @@ npm run build:bridge-core
 
 ## 不能混淆的身份与缺陷
 
-- `snapshot-build-metadata.js` 保留的是**原 0.7.4 发行构建**的 `version/gitSha/builtAt/release`；`getBuildInfo()` 返回该快照身份，不代表本重建包是官方发行版。本包自身版本是 `0.0.0-reconstructed.3`，且禁止 npm 发布。
+- `snapshot-build-metadata.js` 保留的是**原 0.7.4 发行构建**的 `version/gitSha/builtAt/release`；`getBuildInfo()` 返回该快照身份，不代表本重建包是官方发行版。本包自身版本是 `0.0.0-reconstructed.4`，且禁止 npm 发布。
 - `snapshot-sdk-versions.js` 是原 SDK 中的版本常量证据；原代码宣称的协议支持不等于经过标准兼容性认证。
 - 原 `Semaphore` 动态降低上限时会过早放行排队任务。测试已复现，基线保持原貌。单独的[社区维护候选](../../community/bridge-core/README.md)增加放行条件，已有回归测试，**尚未接入安装包或 overlay**。
 - 本地用量计数只是进程内数字，不重新接入收费服务；现有社区版取消商业授权的改造不受影响。

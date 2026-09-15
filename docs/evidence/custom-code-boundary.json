@@ -1597,31 +1597,46 @@
     {
       "target": "../../src/custom-tool-admin.js",
       "matchingLabel": "src/custom-tool-admin.ts",
-      "reconstruction": null,
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/custom-tool-admin.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
       "originalTypescriptImportResolved": false
     },
     {
       "target": "../../src/custom-tool-migration.js",
       "matchingLabel": "src/custom-tool-migration.ts",
-      "reconstruction": null,
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/custom-tool-migration.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
       "originalTypescriptImportResolved": false
     },
     {
       "target": "../../src/custom-tool-skill-import.js",
       "matchingLabel": "src/custom-tool-skill-import.ts",
-      "reconstruction": null,
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/custom-tool-skill-import.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
       "originalTypescriptImportResolved": false
     },
     {
       "target": "../../src/custom-tool-skill.js",
       "matchingLabel": "src/custom-tool-skill.ts",
-      "reconstruction": null,
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/custom-tool-skill.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
       "originalTypescriptImportResolved": false
     },
     {
       "target": "../../src/custom-tools.js",
       "matchingLabel": "src/custom-tools.ts",
-      "reconstruction": null,
+      "reconstruction": {
+        "file": "reconstructed/bridge-core/src/custom-tools.js",
+        "coverage": "all emitted top-level declarations for this label"
+      },
       "originalTypescriptImportResolved": false
     },
     {
@@ -1720,8 +1735,8 @@
     "shippedTypescriptFiles": 34,
     "sharedLabelsAcrossBundles": 43,
     "originalMissingTargets": 24,
-    "targetsWithSomeReconstructedJs": 19,
-    "reconstructedModules": 28
+    "targetsWithSomeReconstructedJs": 24,
+    "reconstructedModules": 37
   },
   "separation": {
     "originalExtension": "recovered/shuncode-extension",

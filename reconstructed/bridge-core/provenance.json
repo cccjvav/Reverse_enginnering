@@ -1106,6 +1106,1060 @@
       ]
     },
     {
+      "originLabel": "src/custom-tool-admin.ts",
+      "file": "src/custom-tool-admin.js",
+      "sha256": "923c7207a9a8f97edff4f83bb6de01606ee145729d5b0f292b1008c2d9c90b84",
+      "bytes": 2820,
+      "exports": [
+        "deleteCustomTool",
+        "import_node_fs7",
+        "import_node_path11",
+        "toggleCustomTool"
+      ],
+      "dependencies": [
+        "custom-tool-contract.js",
+        "custom-tool-skill.js",
+        "custom-tools.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_fs7"
+          ],
+          "start": 1221534,
+          "end": 1221575,
+          "originalSha256": "09b91b96915d4a823133cbfb898aa7067945dc99fadc9e878d742a70665b7977",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path11"
+          ],
+          "start": 1221576,
+          "end": 1221634,
+          "originalSha256": "511b4f42911c46b5225ad7508bdcc1d3cf63a85f862f7ddd6e651eeb64662380",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "toggleCustomTool"
+          ],
+          "start": 1221635,
+          "end": 1222859,
+          "originalSha256": "dcac54bd3f78873a17b71b3462d1f7baa989cf0275eeffcb07097bc8e2c88b50",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "deleteCustomTool"
+          ],
+          "start": 1222860,
+          "end": 1223918,
+          "originalSha256": "bad63ea4f243bb474ab4f296d5b31eee9938cdad517e3a911ed0da69ce1cf2a4",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tool-contract.ts",
+      "file": "src/custom-tool-contract.js",
+      "sha256": "643a04115889ed8097c614a4ed1ebc9e396f95ca66fa0451c5b41bd0e1fa74d4",
+      "bytes": 1435,
+      "exports": [
+        "CUSTOM_TOOLS_DIR_NAME",
+        "CUSTOM_TOOL_OUTPUT_SCHEMA",
+        "DEFAULT_TIMEOUT_MS",
+        "LEGACY_SKILLS_DIR_NAME",
+        "MAX_DESCRIPTION_LENGTH",
+        "MAX_TIMEOUT_MS",
+        "MIN_DESCRIPTION_LENGTH",
+        "MIN_TIMEOUT_MS",
+        "RESERVED_TOOL_NAMES",
+        "SKILLS_DIR_NAME",
+        "TOOL_NAME_PATTERN",
+        "isRecord"
+      ],
+      "dependencies": [
+        "file-tool-registry.js",
+        "ide-tool-definitions.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "CUSTOM_TOOLS_DIR_NAME"
+          ],
+          "start": 1100556,
+          "end": 1100606,
+          "originalSha256": "57aa23d718b1a47abcc9bb118b150559e946b1d60d08c0a17607a12617fe1091",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILLS_DIR_NAME"
+          ],
+          "start": 1100607,
+          "end": 1100651,
+          "originalSha256": "9765d91240db8507aac4e22684d121bbf21e54db61e0676c46d3adab64f5dad4",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "LEGACY_SKILLS_DIR_NAME"
+          ],
+          "start": 1100652,
+          "end": 1100700,
+          "originalSha256": "1a5d73e5fa510435b3a56122500c162cd999798091e57b2c42435d71fcc63310",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "CUSTOM_TOOL_OUTPUT_SCHEMA"
+          ],
+          "start": 1100701,
+          "end": 1101024,
+          "originalSha256": "59464d146e26e18a3573b758430e93c7dfceecbb22fab0e4a52b309face22e79",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "TOOL_NAME_PATTERN"
+          ],
+          "start": 1101025,
+          "end": 1101074,
+          "originalSha256": "6f4e92f5398c6b1800ef7c463516c9591d4e50afb090ea7b346ee6609497aeda",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MIN_DESCRIPTION_LENGTH"
+          ],
+          "start": 1101075,
+          "end": 1101107,
+          "originalSha256": "f8f84422952521a4d981e9a3e861b1ee5d3b9cc54c09ff592da87f992b1bc704",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_DESCRIPTION_LENGTH"
+          ],
+          "start": 1101108,
+          "end": 1101141,
+          "originalSha256": "2369ff124696d0457c7d49442332dbb2457d1a4239fc221721eacc4795397a24",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MIN_TIMEOUT_MS"
+          ],
+          "start": 1101142,
+          "end": 1101167,
+          "originalSha256": "110b506f931cbe5794c6bd3f745c2945f68839dd29a27a36e76d3c45941b4cec",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_TIMEOUT_MS"
+          ],
+          "start": 1101168,
+          "end": 1101193,
+          "originalSha256": "b20a1eba91ac93a805d9637b6ff375e47faf46e9ebc04f9e8953360db99cd842",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_TIMEOUT_MS"
+          ],
+          "start": 1101194,
+          "end": 1101224,
+          "originalSha256": "58bc418b1269ebb9f45f3ae21a7515a9981b3335bde750a7d666894990c1a936",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "RESERVED_TOOL_NAMES"
+          ],
+          "start": 1101225,
+          "end": 1101349,
+          "originalSha256": "eabead87b44872bc95f29b1eaa9393cddc972a6326e4ef57abf5a9ecabaf2afb",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isRecord"
+          ],
+          "start": 1101350,
+          "end": 1101457,
+          "originalSha256": "883444e10acc012712ca66d5eb8fa0e7b37a88e91146e18db6456760ff5d9908",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tool-manifest.ts",
+      "file": "src/custom-tool-manifest.js",
+      "sha256": "6c56616131d347699fd4e61009981a359ba9632b3b912612a730254972f55472",
+      "bytes": 2847,
+      "exports": [
+        "MAX_COMMAND_PARTS",
+        "MAX_COMMAND_PART_LENGTH",
+        "MAX_MANIFEST_BYTES",
+        "import_node_fs2",
+        "import_node_path6",
+        "parseManifest",
+        "readManifest"
+      ],
+      "dependencies": [
+        "custom-tool-contract.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_fs2"
+          ],
+          "start": 1101525,
+          "end": 1101566,
+          "originalSha256": "c123e30ab58d27d14c412ff904a545349f9703e244aeb8a813354e0009e9b478",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path6"
+          ],
+          "start": 1101567,
+          "end": 1101624,
+          "originalSha256": "1d08868c35e526c45d2ba120cd9c57c7218c08bc446c397f765a4195b76c7024",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_MANIFEST_BYTES"
+          ],
+          "start": 1101625,
+          "end": 1101656,
+          "originalSha256": "cd92f866ce1b2464d90c38204e6935d7558275f4e472cd0dd7eb457c6e332133",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_COMMAND_PARTS"
+          ],
+          "start": 1101657,
+          "end": 1101684,
+          "originalSha256": "b15c59fce6c81ce8e28e109b10a7f04b5317972950f60998359d418d07bbc681",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_COMMAND_PART_LENGTH"
+          ],
+          "start": 1101685,
+          "end": 1101720,
+          "originalSha256": "bdbf6eb50f596caa81636b48927e1811efb95723583734486211cc4c250cb456",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseManifest"
+          ],
+          "start": 1101721,
+          "end": 1103212,
+          "originalSha256": "4446b72b3abc343d5c1e882a548a1dbfe92c398d435034b3876343b4c87a678a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readManifest"
+          ],
+          "start": 1103213,
+          "end": 1103888,
+          "originalSha256": "d302ca756fb1306213dac701f948e1c7f3962b71743f0d5289ba2f0c66540fc2",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tool-migration.ts",
+      "file": "src/custom-tool-migration.js",
+      "sha256": "e4aff9d3aa896b45c32976b74fa202f5283cd6d5e6371ecc7c438932c7b8f63f",
+      "bytes": 1959,
+      "exports": [
+        "import_node_fs3",
+        "import_node_path7",
+        "migrateLegacySkillDirs",
+        "migratedLegacyRoots"
+      ],
+      "dependencies": [
+        "custom-tool-contract.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_fs3"
+          ],
+          "start": 1103957,
+          "end": 1103998,
+          "originalSha256": "821a6b2972fd7058a87d7677f494437591c540557a811240c7cb2d731e989752",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path7"
+          ],
+          "start": 1103999,
+          "end": 1104056,
+          "originalSha256": "2986df0428e36902ba72614e468a31e2019a6d002eac3c34483727ac5632338d",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "migratedLegacyRoots"
+          ],
+          "start": 1104057,
+          "end": 1104109,
+          "originalSha256": "37cf9522c42e82783daecbe9be6f27df0029637947c68bc1645822a54b5966fd",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "migrateLegacySkillDirs"
+          ],
+          "start": 1104110,
+          "end": 1105585,
+          "originalSha256": "b5a02177b8e280fc7aa17a605c5f62de5a9bb521956f2af8c9ebdc1580e25953",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tool-sandbox.ts",
+      "file": "src/custom-tool-sandbox.js",
+      "sha256": "3944a504397bb2b2495373e22b95484ba669453245c1beb1bf0c0059dbd87f66",
+      "bytes": 4063,
+      "exports": [
+        "CUSTOM_TOOL_ARGS_ENV",
+        "CUSTOM_TOOL_NAME_ENV",
+        "FORCE_KILL_GRACE_MS",
+        "MAX_OUTPUT_BYTES",
+        "SKILL_INTERPRETERS",
+        "executeCustomTool",
+        "import_node_child_process4",
+        "import_node_fs5",
+        "import_node_path9",
+        "runChild"
+      ],
+      "dependencies": [
+        "tool-input-validation.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_child_process4"
+          ],
+          "start": 1118747,
+          "end": 1118810,
+          "originalSha256": "b571148f34c80fa038f200e6c558a7cd8e30af08ecf9a91221848336eb6fd731",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_fs5"
+          ],
+          "start": 1118811,
+          "end": 1118852,
+          "originalSha256": "db95cf71f543228b674bc7451e31ab7ef6e2d7540c75f512f3227fbcb402bfb5",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path9"
+          ],
+          "start": 1118853,
+          "end": 1118910,
+          "originalSha256": "71e34cee0d768b1f1b074447706c15fc69d021d4df4a0900c2ca76bce5a58d12",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "CUSTOM_TOOL_ARGS_ENV"
+          ],
+          "start": 1118911,
+          "end": 1118959,
+          "originalSha256": "2877abc7d09df614b1c0211f1f9c07cce955d00a063fdb4e024af77977ed9ebd",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "CUSTOM_TOOL_NAME_ENV"
+          ],
+          "start": 1118960,
+          "end": 1119008,
+          "originalSha256": "86cb4975deb43192981654cbb68b68866a41654c9d3c6cd4ea7224da1464d815",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_OUTPUT_BYTES"
+          ],
+          "start": 1119009,
+          "end": 1119048,
+          "originalSha256": "48dc20b368e43b7d10a7f7a1b4105dc1092cda0cd4a7d773598d6356dceb3340",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "FORCE_KILL_GRACE_MS"
+          ],
+          "start": 1119049,
+          "end": 1119079,
+          "originalSha256": "00d26b9cc69df0e80668dc51c89dedacf6ba65b9dac1165206a3034cd6b1ce96",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILL_INTERPRETERS"
+          ],
+          "start": 1119080,
+          "end": 1119223,
+          "originalSha256": "2c413d9bcf92b165bf501e2d32f34d31cd48b896822cc70cf5b58a3fc27c4c36",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "runChild"
+          ],
+          "start": 1119224,
+          "end": 1120706,
+          "originalSha256": "8a082f62f97fcab79118ec364256c009791e4066e1cac84dc6c70bfe95616c46",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "executeCustomTool"
+          ],
+          "start": 1120707,
+          "end": 1122385,
+          "originalSha256": "fe8da4019cfb9c75d913d13ead9af20f0ddb0e4c8cfc79fd0cd5b7dec12b3e5f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tool-skill-import.ts",
+      "file": "src/custom-tool-skill-import.js",
+      "sha256": "890a061e1942412b5e2d34dfb80c70d5df04f209381aad8bb27a0ad1e5bbd400",
+      "bytes": 10705,
+      "exports": [
+        "GENERATED_RUNNER_REL",
+        "GENERATED_RUNNER_SOURCE",
+        "MAX_ARCHIVE_BYTES",
+        "MAX_ENTRIES",
+        "NAME_PATTERN",
+        "SKILL_FILE",
+        "availableSkillName",
+        "countEntries",
+        "declaredFrontmatterEntry",
+        "extractArchive",
+        "generateSkillRunner",
+        "importSkill",
+        "import_node_child_process5",
+        "import_node_fs8",
+        "import_node_os",
+        "import_node_path12",
+        "locateSkillRoot",
+        "safeArchiveEntry",
+        "skillNameFromMarkdown",
+        "writeSkillRunner"
+      ],
+      "dependencies": [
+        "custom-tool-contract.js",
+        "custom-tool-skill.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_child_process5"
+          ],
+          "start": 1223990,
+          "end": 1224053,
+          "originalSha256": "8efbbd5b57e265e371353f9fd40d3732355db10fa8199fe4ca2f95eb1d199113",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_fs8"
+          ],
+          "start": 1224054,
+          "end": 1224095,
+          "originalSha256": "8799685ae21a893a802b2b3a571ad8f66b4bd9b5f53bf5a727cd9e9137012c24",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_os"
+          ],
+          "start": 1224096,
+          "end": 1224148,
+          "originalSha256": "c44e69d0d2c302e091fabdf4c9c6508830f6b35d90a18a27d0dfee0025baf937",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path12"
+          ],
+          "start": 1224149,
+          "end": 1224207,
+          "originalSha256": "926c1413d1b937f1c7151835748178f16e432e562885e690a1119efd6b82450a",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILL_FILE"
+          ],
+          "start": 1224208,
+          "end": 1224236,
+          "originalSha256": "988199ed0566da7a632e1ff311c6a66eb8eb642ef73b5b233ad4f1753e606c43",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_ARCHIVE_BYTES"
+          ],
+          "start": 1224237,
+          "end": 1224278,
+          "originalSha256": "7f7c650abe38739c9db86fa13e415c65ae47a5dd435e5cca15692b26d6e2f786",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_ENTRIES"
+          ],
+          "start": 1224279,
+          "end": 1224301,
+          "originalSha256": "258753edbbfdae88ee32d00cb358d2a204af1b2b4fe486f75a5f1ba101c9feb3",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "NAME_PATTERN"
+          ],
+          "start": 1224302,
+          "end": 1224347,
+          "originalSha256": "bf3f6c02a294602158551c75d25b5b65b67222889ef0f46fc3d660de276569eb",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "GENERATED_RUNNER_REL"
+          ],
+          "start": 1224348,
+          "end": 1224393,
+          "originalSha256": "230a39d310b861c6cde4cc07070ed18e4fbcc4e4a5761981637f1910853b3479",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "GENERATED_RUNNER_SOURCE"
+          ],
+          "start": 1224394,
+          "end": 1225870,
+          "originalSha256": "fe5054a85e0e37a297c3ef2541800cdb5f047d79044f4547148be2d63fe68b97",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "declaredFrontmatterEntry"
+          ],
+          "start": 1225871,
+          "end": 1226404,
+          "originalSha256": "51d103ed8e8f66032a902d5cb5a77616b7a10ccb20e4bb4250cdb04a0e4be252",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "skillNameFromMarkdown"
+          ],
+          "start": 1226405,
+          "end": 1226890,
+          "originalSha256": "741ab6184ec54f90513394971a71448282ffdd7af2a346d1e67f4f130bc5295a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "availableSkillName"
+          ],
+          "start": 1226891,
+          "end": 1227339,
+          "originalSha256": "86d181abf4525b54ec658b8c72328a28bd3ea9f9140d1899f66a21dcb3cd46b7",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "safeArchiveEntry"
+          ],
+          "start": 1227340,
+          "end": 1227583,
+          "originalSha256": "1b635508b1869205deacad634d12a734177aded5ae9a6e9fc6460227f1042c15",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "extractArchive"
+          ],
+          "start": 1227584,
+          "end": 1228732,
+          "originalSha256": "d3ec0106fa255ea597dc0b853094cbb18aad6385cea0093ff543afc24182c758",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "locateSkillRoot"
+          ],
+          "start": 1228733,
+          "end": 1229280,
+          "originalSha256": "dda6502fd7f8fbb749694dfb9caf1d3d8512af64381108cc4bda231870ea34fb",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "countEntries"
+          ],
+          "start": 1229281,
+          "end": 1229743,
+          "originalSha256": "d141685f89308855818b73489dc333b2c9d2e7b10021322895d0478a1e326ef0",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "importSkill"
+          ],
+          "start": 1229744,
+          "end": 1232506,
+          "originalSha256": "b40b580509e643fd0dea008ad5f4956a18da393195d499ffc38395492d1bafef",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "writeSkillRunner"
+          ],
+          "start": 1232507,
+          "end": 1232849,
+          "originalSha256": "439a2b75e7e7399f6595559a2e86adc091d7325e70954cb53d20088fccee4cbf",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "generateSkillRunner"
+          ],
+          "start": 1232850,
+          "end": 1234012,
+          "originalSha256": "533d9abbc3eb95e40a7cf7310b7b70d0a65ce0f9a18cae8ce5f3722c07714a2a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tool-skill.ts",
+      "file": "src/custom-tool-skill.js",
+      "sha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406",
+      "bytes": 13765,
+      "exports": [
+        "MAX_SKILLS_PER_ROOT",
+        "MAX_SKILL_BYTES",
+        "SKILL_ENTRY_CANDIDATES",
+        "SKILL_LOAD_FIXES",
+        "SKILL_LOAD_REASONS",
+        "SKILL_SIDECAR_FILE",
+        "buildDescription",
+        "diagnoseSkillTools",
+        "entryCommand",
+        "failSkill",
+        "findSkillEntryScript",
+        "import_node_fs4",
+        "import_node_path8",
+        "loadSkillTools",
+        "parseFrontmatter",
+        "parseSkillDocument",
+        "readSidecar",
+        "readSkillManifest",
+        "resolveSkillDir",
+        "unquote"
+      ],
+      "dependencies": [
+        "custom-tool-contract.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_fs4"
+          ],
+          "start": 1105650,
+          "end": 1105691,
+          "originalSha256": "3c5c3cc79244ef415975441901b1134305e02b4b08dbee9a47f1f49432f75feb",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path8"
+          ],
+          "start": 1105692,
+          "end": 1105749,
+          "originalSha256": "3db5312a706fd5b27e61801051a7ed7ff1cf2ee62252e688eb274f67eb359d60",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_SKILLS_PER_ROOT"
+          ],
+          "start": 1105750,
+          "end": 1105779,
+          "originalSha256": "995a7017bbe347d7b5cef9441e8d91da79475a629dec28552fc34fb306c50c16",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_SKILL_BYTES"
+          ],
+          "start": 1105780,
+          "end": 1105808,
+          "originalSha256": "3ec57050fe493d60ec1e0bd3db23bd0627dc31456c9734f6f06fed4c5560cb8e",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILL_ENTRY_CANDIDATES"
+          ],
+          "start": 1105809,
+          "end": 1106107,
+          "originalSha256": "1c9fc31793af0b0f1d76a5aa0242d3c10a6f599fceffec599280431f5f316297",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILL_SIDECAR_FILE"
+          ],
+          "start": 1106108,
+          "end": 1106151,
+          "originalSha256": "b9488c1a35217173f2c2acd40a515dbba7e1f32de806db3403bca72e37312fa0",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILL_LOAD_REASONS"
+          ],
+          "start": 1106152,
+          "end": 1107428,
+          "originalSha256": "d2307fc624f319e684a48f1e0e1581dea6cdb4c8403f782adcc8443fe8761a80",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "SKILL_LOAD_FIXES"
+          ],
+          "start": 1107429,
+          "end": 1107954,
+          "originalSha256": "c6096eb774e9423031b158e1d9bad9454ca5807c87089f3bf3e99048bd4114a8",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "failSkill"
+          ],
+          "start": 1107955,
+          "end": 1108227,
+          "originalSha256": "643487c046ac2f878e5ddc1efcdd671f93b3d7653677ac792443a7cc179326ba",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "unquote"
+          ],
+          "start": 1108228,
+          "end": 1108485,
+          "originalSha256": "70ae5ec9ba173d2757d63efa6cf86267b380416309062227d49f7c536cae744a",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseFrontmatter"
+          ],
+          "start": 1108486,
+          "end": 1109929,
+          "originalSha256": "d5b0cf1dc99dba8c8df8ef578185f57de554420216a1cd9fedf5342833c49b7d",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseSkillDocument"
+          ],
+          "start": 1109930,
+          "end": 1110205,
+          "originalSha256": "ffc513434d792aeea1e9531e0448e01ef4d588ab947becbba9d14bec95889837",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "buildDescription"
+          ],
+          "start": 1110206,
+          "end": 1110778,
+          "originalSha256": "92348ad010a0a2c1b5270f6c510299f74e6d06b4a46036e5eed8af501e22d586",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readSidecar"
+          ],
+          "start": 1110779,
+          "end": 1112123,
+          "originalSha256": "b9261901b70d58561b12533084cdf6205c1555fb8d6ced3f99a484314be5628f",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "findSkillEntryScript"
+          ],
+          "start": 1112124,
+          "end": 1112637,
+          "originalSha256": "681f41288a5d9d2e7e59f525ca481b39b5e2345914d8b55d168e27e51fd863d7",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "entryCommand"
+          ],
+          "start": 1112638,
+          "end": 1113941,
+          "originalSha256": "e3ae0522499f55c62a817d894648ebb32c927038815783ce0c7f1442dc75e4f9",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readSkillManifest"
+          ],
+          "start": 1113942,
+          "end": 1116004,
+          "originalSha256": "e567d5ce844300e1e4df49777e8b7a2850127e28bc64537c8bdff00c05561c49",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "loadSkillTools"
+          ],
+          "start": 1116005,
+          "end": 1116781,
+          "originalSha256": "5a48ca52dab5bb19ca77ff45c914e61813e0b0f99584650cdf38756ded80bad3",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "resolveSkillDir"
+          ],
+          "start": 1116782,
+          "end": 1117664,
+          "originalSha256": "0ace57f5a67a2cf8ba6a82f6dc1d3176b7639833f0d48df1f9ca4308c17c7e38",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "diagnoseSkillTools"
+          ],
+          "start": 1117665,
+          "end": 1118680,
+          "originalSha256": "5a191a60e455b34f9e76608bee9d9f8a2daad1d9ee9eb6287024cafb70058e5c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
+      "originLabel": "src/custom-tools.ts",
+      "file": "src/custom-tools.js",
+      "sha256": "d3f07bf880872c6e4e6f3657939605ebc0f113484b93b4757c85daff9bc0ba2e",
+      "bytes": 2538,
+      "exports": [
+        "MAX_MANIFESTS_PER_ROOT",
+        "customToolsFingerprint",
+        "findCustomTool",
+        "import_node_fs6",
+        "import_node_path10",
+        "listEnabledCustomTools",
+        "loadCustomTools",
+        "toStatusEntries"
+      ],
+      "dependencies": [
+        "custom-tool-contract.js",
+        "custom-tool-manifest.js",
+        "custom-tool-migration.js",
+        "custom-tool-skill.js"
+      ],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_node_fs6"
+          ],
+          "start": 932382,
+          "end": 932423,
+          "originalSha256": "7a04390ba6f79e5ba80d4605eb3c7066bfb611d2f7da94e10a13c150287f83c7",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path10"
+          ],
+          "start": 932424,
+          "end": 932482,
+          "originalSha256": "ee1282ecd8be3e768be68b6a703181bce5cd832868453ee688c646db141c6a3c",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "MAX_MANIFESTS_PER_ROOT"
+          ],
+          "start": 1122410,
+          "end": 1122442,
+          "originalSha256": "53c79a0cdacb21ba4436a4dec36003271feaa916c3c356d5a434d24d345a8966",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "loadCustomTools"
+          ],
+          "start": 1122443,
+          "end": 1123616,
+          "originalSha256": "6fa3b62d672a1fbe9cdf29246ac9637529c4e391f9fe9e20de76b7db80726594",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "listEnabledCustomTools"
+          ],
+          "start": 1123617,
+          "end": 1123774,
+          "originalSha256": "272313fba5bd89934ba5e8297f8ad8f28d91edca17872bd00edb883fb380f164",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "findCustomTool"
+          ],
+          "start": 1123775,
+          "end": 1123941,
+          "originalSha256": "4dbffc09e203abe3ed5deed04474aacea0ca1e1208a14de115a3013af41d7f78",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "toStatusEntries"
+          ],
+          "start": 1123942,
+          "end": 1124149,
+          "originalSha256": "034d8a965a5afab1c17cb637d9e00a3cc05ace053b8cd2ee485585c9a849d371",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "customToolsFingerprint"
+          ],
+          "start": 1124150,
+          "end": 1124283,
+          "originalSha256": "72540f5bff5f711ea7a953411caed7f195397e20f9583453f2c07a21190dcb27",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
       "originLabel": "src/file-tool-input-compat.ts",
       "file": "src/file-tool-input-compat.js",
       "sha256": "c07a9f151149dff602dbcbbf82a6aa58e72196056c63e7480818ed926713448c",
@@ -2454,6 +3508,238 @@
       ]
     },
     {
+      "originLabel": "src/read-image.ts",
+      "file": "src/read-image.js",
+      "sha256": "1a5bc1cb1c0fb904a5e2e8a153fccb6d90adbc1df791940f294ef4ec4db4b21b",
+      "bytes": 13164,
+      "exports": [
+        "DEFAULT_READ_IMAGE_CONFIG",
+        "ReadImageToolError",
+        "detectImageFormat",
+        "formatAspectRatio",
+        "formatBytes",
+        "formatReadImageForModel",
+        "gcd",
+        "import_node_path4",
+        "import_promises5",
+        "isInsideRoot4",
+        "normalizeError4",
+        "parseBmpDimensions",
+        "parseGifDimensions",
+        "parseIcoDimensions",
+        "parseJpegDimensions",
+        "parsePngDimensions",
+        "parseSvgDimensions",
+        "parseWebPDimensions",
+        "readImage",
+        "resolveSafePath2"
+      ],
+      "dependencies": [],
+      "coverage": "all emitted top-level declarations for this label",
+      "declarations": [
+        {
+          "names": [
+            "import_promises5"
+          ],
+          "start": 1013387,
+          "end": 1013438,
+          "originalSha256": "6ae85f4c8a4d97401275e6821c6cc42c066c2cac04bef76a1b3f4d8a68b467d3",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "import_node_path4"
+          ],
+          "start": 1013439,
+          "end": 1013496,
+          "originalSha256": "d3538e16d69ab1368c2c632ac79870a41f9d5377506d8c7f9e73a71bfd5e0b32",
+          "rewiredNodeImport": true,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "DEFAULT_READ_IMAGE_CONFIG"
+          ],
+          "start": 1013497,
+          "end": 1013562,
+          "originalSha256": "73c58b3a371371a03d259601183579ccb9ecd8eaa26eb81c90929418a47e7de9",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "ReadImageToolError"
+          ],
+          "start": 1013563,
+          "end": 1013697,
+          "originalSha256": "c26c4fe0ff341aefd8feebacfb117aa201f253880c6a549023a34e85b2db7679",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "gcd"
+          ],
+          "start": 1013698,
+          "end": 1013839,
+          "originalSha256": "87838a765aeb28a8191aca488caec556642d4c11aff418d87acdbba52f18e807",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "formatAspectRatio"
+          ],
+          "start": 1013840,
+          "end": 1014233,
+          "originalSha256": "9b80e026f8eb6c29dd7dca4bb1bbdb56c6017ba8bb552f5d079b26d9c6a9198c",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "formatBytes"
+          ],
+          "start": 1014234,
+          "end": 1014428,
+          "originalSha256": "bf819c98690edd1eb542df50e04657f4aeec51a884092cd675df6819f43f7301",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "isInsideRoot4"
+          ],
+          "start": 1014429,
+          "end": 1014698,
+          "originalSha256": "46e4657f49b187f39428c2a7437aceef0e6fa415dc09d7d5128b7eb7f5b8a6e4",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "resolveSafePath2"
+          ],
+          "start": 1014699,
+          "end": 1015983,
+          "originalSha256": "ae33ea03aa18e53b48ae42764689b1990b7a6c24dd98966fd4561907801d819b",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parsePngDimensions"
+          ],
+          "start": 1015984,
+          "end": 1016276,
+          "originalSha256": "cf426fb9e51acb3c7b2a29e829b664d097fccae503507c3543ca8d387f6d2d17",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseGifDimensions"
+          ],
+          "start": 1016277,
+          "end": 1016572,
+          "originalSha256": "1363c753eee0fef455c5cf27c875b7aafa80ec8811b7696d147c421452548f74",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseBmpDimensions"
+          ],
+          "start": 1016573,
+          "end": 1016999,
+          "originalSha256": "63401065f154e9db212b4a8c8d695e206ab29c93d367d85dee19ede2d32f9e02",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseJpegDimensions"
+          ],
+          "start": 1017000,
+          "end": 1018021,
+          "originalSha256": "14016dd842a325d88b8a43f9d626aed222aa1383c4e62e9c9b0835511e3961f4",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseWebPDimensions"
+          ],
+          "start": 1018022,
+          "end": 1019304,
+          "originalSha256": "7ddaf5472c90c8226fe5ceb29950b3904f0c5602376f88494ef72b2fefb91346",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseSvgDimensions"
+          ],
+          "start": 1019305,
+          "end": 1020176,
+          "originalSha256": "b609d26ab8448546857a02c2088b71910870cd568abd5e72b0dacde527494e14",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "parseIcoDimensions"
+          ],
+          "start": 1020177,
+          "end": 1020662,
+          "originalSha256": "e6e3bb8ad242bdf9028fc08e3a5b8247e33c51a726a7bc0d5a82bdd2de4c0a79",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "detectImageFormat"
+          ],
+          "start": 1020663,
+          "end": 1022158,
+          "originalSha256": "34a026b19f9089fc793486226f1b68e84e98fe445c8b4922443d5d739e1b8375",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "normalizeError4"
+          ],
+          "start": 1022159,
+          "end": 1023034,
+          "originalSha256": "f5cf61972e0ecf98c1dbfab3576315b72c5bf7cfd7df4be4a4263fbe5803b804",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "readImage"
+          ],
+          "start": 1023035,
+          "end": 1025213,
+          "originalSha256": "2b2990de72d102a56daf29a70fda69df79e55d75502127f33165c958aa5e0153",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        },
+        {
+          "names": [
+            "formatReadImageForModel"
+          ],
+          "start": 1025214,
+          "end": 1026018,
+          "originalSha256": "b5d57f34e627ec40f100b1a6e0318a94bf66e4ded27ded972a35b4173ef158a1",
+          "rewiredNodeImport": false,
+          "snapshotMetadataAssignment": false
+        }
+      ]
+    },
+    {
       "originLabel": "src/tool-input-validation.ts",
       "file": "src/tool-input-validation.js",
       "sha256": "3757e12f94795620a6e27ec7900e3d21ff4b76f7a718cf71cd3c14cf6db954b2",
@@ -2975,7 +4261,12 @@
         "toggleCustomTool",
         "deleteCustomTool"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_fs7",
+        "import_node_path11",
+        "toggleCustomTool",
+        "deleteCustomTool"
+      ],
       "externalReferences": [
         {
           "name": "CUSTOM_TOOLS_DIR_NAME",
@@ -3027,7 +4318,20 @@
         "RESERVED_TOOL_NAMES",
         "isRecord"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "CUSTOM_TOOLS_DIR_NAME",
+        "SKILLS_DIR_NAME",
+        "LEGACY_SKILLS_DIR_NAME",
+        "CUSTOM_TOOL_OUTPUT_SCHEMA",
+        "TOOL_NAME_PATTERN",
+        "MIN_DESCRIPTION_LENGTH",
+        "MAX_DESCRIPTION_LENGTH",
+        "MIN_TIMEOUT_MS",
+        "MAX_TIMEOUT_MS",
+        "DEFAULT_TIMEOUT_MS",
+        "RESERVED_TOOL_NAMES",
+        "isRecord"
+      ],
       "externalReferences": [
         {
           "name": "FILE_TOOL_NAMES",
@@ -3053,7 +4357,15 @@
         "parseManifest",
         "readManifest"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_fs2",
+        "import_node_path6",
+        "MAX_MANIFEST_BYTES",
+        "MAX_COMMAND_PARTS",
+        "MAX_COMMAND_PART_LENGTH",
+        "parseManifest",
+        "readManifest"
+      ],
       "externalReferences": [
         {
           "name": "DEFAULT_TIMEOUT_MS",
@@ -3108,7 +4420,12 @@
         "migratedLegacyRoots",
         "migrateLegacySkillDirs"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_fs3",
+        "import_node_path7",
+        "migratedLegacyRoots",
+        "migrateLegacySkillDirs"
+      ],
       "externalReferences": [
         {
           "name": "CUSTOM_TOOLS_DIR_NAME",
@@ -3145,7 +4462,18 @@
         "runChild",
         "executeCustomTool"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_child_process4",
+        "import_node_fs5",
+        "import_node_path9",
+        "CUSTOM_TOOL_ARGS_ENV",
+        "CUSTOM_TOOL_NAME_ENV",
+        "MAX_OUTPUT_BYTES",
+        "FORCE_KILL_GRACE_MS",
+        "SKILL_INTERPRETERS",
+        "runChild",
+        "executeCustomTool"
+      ],
       "externalReferences": [
         {
           "name": "__toESM",
@@ -3188,7 +4516,28 @@
         "writeSkillRunner",
         "generateSkillRunner"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_child_process5",
+        "import_node_fs8",
+        "import_node_os",
+        "import_node_path12",
+        "SKILL_FILE",
+        "MAX_ARCHIVE_BYTES",
+        "MAX_ENTRIES",
+        "NAME_PATTERN",
+        "GENERATED_RUNNER_REL",
+        "GENERATED_RUNNER_SOURCE",
+        "declaredFrontmatterEntry",
+        "skillNameFromMarkdown",
+        "availableSkillName",
+        "safeArchiveEntry",
+        "extractArchive",
+        "locateSkillRoot",
+        "countEntries",
+        "importSkill",
+        "writeSkillRunner",
+        "generateSkillRunner"
+      ],
       "externalReferences": [
         {
           "name": "SKILLS_DIR_NAME",
@@ -3239,7 +4588,28 @@
         "resolveSkillDir",
         "diagnoseSkillTools"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_fs4",
+        "import_node_path8",
+        "MAX_SKILLS_PER_ROOT",
+        "MAX_SKILL_BYTES",
+        "SKILL_ENTRY_CANDIDATES",
+        "SKILL_SIDECAR_FILE",
+        "SKILL_LOAD_REASONS",
+        "SKILL_LOAD_FIXES",
+        "failSkill",
+        "unquote",
+        "parseFrontmatter",
+        "parseSkillDocument",
+        "buildDescription",
+        "readSidecar",
+        "findSkillEntryScript",
+        "entryCommand",
+        "readSkillManifest",
+        "loadSkillTools",
+        "resolveSkillDir",
+        "diagnoseSkillTools"
+      ],
       "externalReferences": [
         {
           "name": "DEFAULT_TIMEOUT_MS",
@@ -3303,7 +4673,16 @@
         "toStatusEntries",
         "customToolsFingerprint"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_node_fs6",
+        "import_node_path10",
+        "MAX_MANIFESTS_PER_ROOT",
+        "loadCustomTools",
+        "listEnabledCustomTools",
+        "findCustomTool",
+        "toStatusEntries",
+        "customToolsFingerprint"
+      ],
       "externalReferences": [
         {
           "name": "CUSTOM_TOOLS_DIR_NAME",
@@ -3866,7 +5245,28 @@
         "readImage",
         "formatReadImageForModel"
       ],
-      "reconstructedBindings": [],
+      "reconstructedBindings": [
+        "import_promises5",
+        "import_node_path4",
+        "DEFAULT_READ_IMAGE_CONFIG",
+        "ReadImageToolError",
+        "gcd",
+        "formatAspectRatio",
+        "formatBytes",
+        "isInsideRoot4",
+        "resolveSafePath2",
+        "parsePngDimensions",
+        "parseGifDimensions",
+        "parseBmpDimensions",
+        "parseJpegDimensions",
+        "parseWebPDimensions",
+        "parseSvgDimensions",
+        "parseIcoDimensions",
+        "detectImageFormat",
+        "normalizeError4",
+        "readImage",
+        "formatReadImageForModel"
+      ],
       "externalReferences": [
         {
           "name": "__toESM",
@@ -4036,9 +5436,9 @@
       ]
     }
   ],
-  "moduleCount": 28,
-  "declarationCount": 206,
-  "totalBytes": 151272,
+  "moduleCount": 37,
+  "declarationCount": 311,
+  "totalBytes": 204568,
   "transformations": [
     "Dependency closure rooted at explicit reviewed exports",
     "Removed per-module build-info initializer calls; extracted original metadata into an explicit dependency",

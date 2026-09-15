@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 134,
-    "lines": 26955,
+    "files": 145,
+    "lines": 28332,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "006b73b1229336d2618a98dfcea15b4a3ba63c78ebc8a0022eab387a3b298ca5",
-      "lines": 97,
+      "sha256": "e072f3a704340c7756b4c9b22d3b66991800c59176831b53023bfb683f4997b2",
+      "lines": 98,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -170,6 +170,62 @@
       "status": "pending"
     },
     {
+      "source": "reconstructed/bridge-core/src/custom-tool-admin.js",
+      "sha256": "923c7207a9a8f97edff4f83bb6de01606ee145729d5b0f292b1008c2d9c90b84",
+      "lines": 47,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tool-contract.js",
+      "sha256": "643a04115889ed8097c614a4ed1ebc9e396f95ca66fa0451c5b41bd0e1fa74d4",
+      "lines": 42,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tool-manifest.js",
+      "sha256": "6c56616131d347699fd4e61009981a359ba9632b3b912612a730254972f55472",
+      "lines": 61,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tool-migration.js",
+      "sha256": "e4aff9d3aa896b45c32976b74fa202f5283cd6d5e6371ecc7c438932c7b8f63f",
+      "lines": 46,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tool-sandbox.js",
+      "sha256": "3944a504397bb2b2495373e22b95484ba669453245c1beb1bf0c0059dbd87f66",
+      "lines": 88,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tool-skill-import.js",
+      "sha256": "890a061e1942412b5e2d34dfb80c70d5df04f209381aad8bb27a0ad1e5bbd400",
+      "lines": 163,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tool-skill.js",
+      "sha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406",
+      "lines": 354,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/custom-tools.js",
+      "sha256": "d3f07bf880872c6e4e6f3657939605ebc0f113484b93b4757c85daff9bc0ba2e",
+      "lines": 62,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "reconstructed/bridge-core/src/file-tool-input-compat.js",
       "sha256": "c07a9f151149dff602dbcbbf82a6aa58e72196056c63e7480818ed926713448c",
       "lines": 160,
@@ -243,6 +299,13 @@
       "source": "reconstructed/bridge-core/src/read-files.js",
       "sha256": "748632eb72c187174296ce569402a29460a06906b70184b5c6dcf0eb88ec9820",
       "lines": 403,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/read-image.js",
+      "sha256": "1a5bc1cb1c0fb904a5e2e8a153fccb6d90adbc1df791940f294ef4ec4db4b21b",
+      "lines": 311,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -675,8 +738,15 @@
     },
     {
       "source": "tests/bridge-core-boundary.test.mjs",
-      "sha256": "c2f9858474bac0e5c4f1f8b94f9189279ee5d5402ac35c1363c6ca177a278a93",
+      "sha256": "4c6953242c0d0b410010a6feb4ea4b62c174828a18edc3889aee504c401702a0",
       "lines": 25,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-custom-tools.test.mjs",
+      "sha256": "4f39b4c5823ed4a0ad796258e41554ab89049849abca9603d6fa032204509b81",
+      "lines": 145,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -710,7 +780,7 @@
     },
     {
       "source": "tests/bridge-core-reconstruction.test.mjs",
-      "sha256": "a9b38a00e3637cb2e88229513868e0dce8f1c3b915b4a8fadafb6b3c2dbc74ec",
+      "sha256": "d0db4d529f891f013c1c899ec2455d902b2052997d1ef6bff34cc5db0c79989f",
       "lines": 103,
       "explainedLines": 0,
       "status": "pending"
@@ -745,7 +815,7 @@
     },
     {
       "source": "tests/helpers/bridge-core-baseline.mjs",
-      "sha256": "87a0c541ecb80157aae1fcb245ba4515a08884bfad765bee3e0a343e7d77fe5d",
+      "sha256": "98af30823b5391f0fc4857a23d2dc56b71b5b4f174431385c15b5e1466677460",
       "lines": 30,
       "explainedLines": 0,
       "status": "pending"
@@ -817,6 +887,13 @@
       "source": "tools/audit_custom_boundary.mjs",
       "sha256": "3a65f11da94353b0841ac07e740a5e55e7648660cdd4dc626287c4288b225239",
       "lines": 54,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/audit_extension_runtime.mjs",
+      "sha256": "6a9a723bd940c942122f16e8a5aae8562547b760de665576a23f653ffb1c2f2e",
+      "lines": 48,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -920,8 +997,8 @@
     },
     {
       "source": "tools/reconstruct_bridge_core.mjs",
-      "sha256": "81a7a7d7dee75c83ff0838fbc4935641a5f2796530fbeefb10f2476ca5896a36",
-      "lines": 189,
+      "sha256": "300ba03ef37f64f87cb2780dfc87b316f82d9f822b3b178de31aa6ae6a18ded4",
+      "lines": 198,
       "explainedLines": 0,
       "status": "pending"
     },

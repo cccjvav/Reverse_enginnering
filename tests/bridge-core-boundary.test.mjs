@@ -12,7 +12,7 @@ test('custom boundary inventory is reproducible and all included evidence hashes
   assert.equal(actual.summary.shippedTypescriptFiles,34);
   assert.equal(actual.summary.sharedLabelsAcrossBundles,43);
   assert.equal(actual.summary.originalMissingTargets,24);
-  assert.equal(actual.summary.targetsWithSomeReconstructedJs,19);
+  assert.equal(actual.summary.targetsWithSomeReconstructedJs,24);
   assert.equal(actual.separation.completeCustomPatchset,false);
   assert.ok(actual.missingOriginalTargets.every(t=>t.originalTypescriptImportResolved===false));
 });

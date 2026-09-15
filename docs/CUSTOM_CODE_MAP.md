@@ -7,7 +7,7 @@
 | 材料 | 位置 | 可证实的范围 | 不能据此声称 |
 |---|---|---|---|
 | 自有扩展边界 | `recovered/shuncode-extension/` | 原安装包的 `extensions/shuncode`，51 个文本文件，其中 34 个 TS/MTS；manifest 声明 first-party 集成 | 整个 bundle 都是作者独占原创；它也打包第三方库 |
-| 共享业务逻辑 | `reconstructed/bridge-core/` | 28 个 ESM 模块，26 个自有路径标签加 2 个快照常量模块；按声明记录来源 | 原始 TS 类型或完整共享工程已找回 |
+| 共享业务逻辑 | `reconstructed/bridge-core/` | 37 个 ESM 模块，35 个自有路径标签加 2 个快照常量模块；按声明记录来源 | 原始 TS 类型或完整共享工程已找回 |
 | 定制 Bridge UI | `recovered/bridge-ui/`、`recovered/bridge-ui-sessions/` | 两个宿主各自的自定义 UI 类与常量，哈希定位 | Workbench/Sessions 整个文件都是定制；或只有这两处宿主修改 |
 | 社区版维护 | `community/extension/src/`、`community/ui/` | 本次新写的收费门槛移除与 UI 改造 | 它属于原安装包原件 |
 | 独立维护候选 | `community/bridge-core/` | 并发器修复、读取器有限检查点防护 | 已部署；或已彻底解决文件系统竞态 |
@@ -27,10 +27,10 @@ npm run audit:boundary -- --check
 
 - 三份 bundle 合并有 **43 个共享路径标签**；不是把全部依赖算成自有模块。
 - 原 TS 有 **24 个不同的缺失相对目标 / 32 处引用**。
-- 其中 **19 个目标已有某种 JS 重建对应**，但尚未接回原 TS 导入；不能把 19/24 当作工程完成百分比。
+- 其中 **24 个目标已有某种 JS 重建对应**，但尚未接回原 TS 导入；不能把 24/24 当作工程完成百分比。
 - `file-tool-registry` 仍只是部分声明：没有完整 dispatcher。
-- 另外 5 个目标尚无对应重建：`custom-tool-admin`、`custom-tool-migration`、`custom-tool-skill-import`、`custom-tool-skill`、`custom-tools`。
-- 搜索、图片等是注册表的传递依赖，不能因为不在上述 5 个直接缺失目标里就忽略它们。
+- 此前5个目标现已恢复已发布JS声明：`custom-tool-admin`、`custom-tool-migration`、`custom-tool-skill-import`、`custom-tool-skill`、`custom-tools`。
+- 图片已独立恢复但未接入，搜索等仍是注册表缺失的传递依赖，不能因为不在上述 5 个直接缺失目标里就忽略它们。
 
 ## 找到了上游版本候选，但尚未确认底座
 
@@ -57,3 +57,6 @@ npm run audit:boundary -- --check
 作者可以授权自己的商业限制移除与补丁分发，但当前仓库尚未为自有代码指定新的通用开源许可证。`Community` 是版本定位，不自动等于 MIT/GPL。正式源码发行还需确定自有部分许可、品牌、第三方 NOTICE/许可和服务使用规则。
 
 完整构建路径见 [WINDOWS_BUILD_GUIDE.md](WINDOWS_BUILD_GUIDE.md)。
+
+
+最新运行时接线审计见 [extension-runtime-imports.json](evidence/extension-runtime-imports.json)：51个导出直接存在、3个barrel再导出待接、1个invokeFileTool缺失。全部24个路径有JS标签对应不等于所有类型/导出/执行链齐全。

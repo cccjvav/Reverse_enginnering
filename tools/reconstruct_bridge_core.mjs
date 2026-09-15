@@ -8,6 +8,15 @@ import { ROOT, hash } from './patch_utils.mjs';
 
 const ORIGINAL = 'recovered/shuncode-extension/dist/extension.js';
 export const SEEDS = {
+  'custom-tool-admin': ['toggleCustomTool','deleteCustomTool'],
+  'custom-tool-contract': ['CUSTOM_TOOL_OUTPUT_SCHEMA'],
+  'custom-tool-manifest': ['parseManifest','readManifest'],
+  'custom-tool-migration': ['migrateLegacySkillDirs'],
+  'custom-tool-sandbox': ['executeCustomTool'],
+  'custom-tool-skill-import': ['importSkill','generateSkillRunner'],
+  'custom-tool-skill': ['loadSkillTools','resolveSkillDir','diagnoseSkillTools'],
+  'custom-tools': ['loadCustomTools','listEnabledCustomTools','findCustomTool','toStatusEntries','customToolsFingerprint'],
+  'read-image': ['readImage','formatReadImageForModel'],
   'apply-patch': ['applyPatch','formatApplyPatchForModel'],
   'read-files': ['readFiles','formatReadFilesForModel'],
   'workspace-paths': ['canonicalizeWorkspaceRoots','literalFirstPathSpellings'],

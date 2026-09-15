@@ -1,0 +1,507 @@
+{
+  "scope": "Static shared runtime import names after TypeScript erasure; no rewriting, execution, original type recovery or full extension build.",
+  "originalTypescriptImportsRewired": false,
+  "originalTypecheckPassed": false,
+  "typescriptFiles": 28,
+  "imports": [
+    {
+      "source": "src/bridge-constants.ts",
+      "target": "src/file-tool-registry.js",
+      "name": "FILE_TOOL_DEFINITIONS",
+      "status": "direct-export-present",
+      "providers": [
+        "src/file-tool-registry.js"
+      ]
+    },
+    {
+      "source": "src/bridge-constants.ts",
+      "target": "src/ide-tool-definitions.js",
+      "name": "BRIDGE_EXCLUDED_TOOL_NAMES",
+      "status": "direct-export-present",
+      "providers": [
+        "src/ide-tool-definitions.js"
+      ]
+    },
+    {
+      "source": "src/bridge-constants.ts",
+      "target": "src/ide-tool-definitions.js",
+      "name": "IDE_TOOL_DEFINITIONS",
+      "status": "direct-export-present",
+      "providers": [
+        "src/ide-tool-definitions.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/custom-tools.js",
+      "name": "CUSTOM_TOOL_OUTPUT_SCHEMA",
+      "status": "reexport-adapter-needed",
+      "providers": [
+        "src/custom-tool-contract.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/bridge-event-store.js",
+      "name": "BoundedInMemoryEventStore",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-event-store.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/bridge-http-router.js",
+      "name": "createBridgeHttpRoutes",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-http-router.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/bridge-http-router.js",
+      "name": "handleBridgeHttpRequest",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-http-router.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/bridge-http-router.js",
+      "name": "writeBridgeJsonError",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-http-router.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/bridge-http-router.js",
+      "name": "writeBridgeJsonRpcError",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-http-router.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/jsonrpc-request-id-registry.js",
+      "name": "JsonRpcRequestIdRegistry",
+      "status": "direct-export-present",
+      "providers": [
+        "src/jsonrpc-request-id-registry.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/jsonrpc-request-id-registry.js",
+      "name": "requestIdsOfRequest",
+      "status": "direct-export-present",
+      "providers": [
+        "src/jsonrpc-request-id-registry.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/bridge-session-registry.js",
+      "name": "BridgeSessionRegistry",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-session-registry.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/managed-command-cancellation.js",
+      "name": "bridgeManagedCommandOwnerId",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-cancellation.js"
+      ]
+    },
+    {
+      "source": "src/bridge-mcp-transport.ts",
+      "target": "src/version.js",
+      "name": "SHUNCODE_BEHAVIOR_VERSION",
+      "status": "direct-export-present",
+      "providers": [
+        "src/version.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tool-admin.js",
+      "name": "deleteCustomTool",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tool-admin.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tool-admin.js",
+      "name": "toggleCustomTool",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tool-admin.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tool-migration.js",
+      "name": "migrateLegacySkillDirs",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tool-migration.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tool-skill-import.js",
+      "name": "generateSkillRunner",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tool-skill-import.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tool-skill-import.js",
+      "name": "importSkill",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tool-skill-import.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tool-skill.js",
+      "name": "diagnoseSkillTools",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tool-skill.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tools.js",
+      "name": "CUSTOM_TOOLS_DIR_NAME",
+      "status": "reexport-adapter-needed",
+      "providers": [
+        "src/custom-tool-contract.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tools.js",
+      "name": "customToolsFingerprint",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tools.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tools.js",
+      "name": "listEnabledCustomTools",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tools.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tools.js",
+      "name": "loadCustomTools",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tools.js"
+      ]
+    },
+    {
+      "source": "src/bridge-server.ts",
+      "target": "src/custom-tools.js",
+      "name": "toStatusEntries",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tools.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/bridge-activity-tracker.js",
+      "name": "BridgeActivityTracker",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-activity-tracker.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/bridge-coordination-validation.js",
+      "name": "parseBridgePlan",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-coordination-validation.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/bridge-coordination-validation.js",
+      "name": "parseBridgeProgress",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-coordination-validation.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/bridge-coordination-validation.js",
+      "name": "parseBridgeTodos",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-coordination-validation.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/custom-tools.js",
+      "name": "executeCustomTool",
+      "status": "reexport-adapter-needed",
+      "providers": [
+        "src/custom-tool-sandbox.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/custom-tools.js",
+      "name": "findCustomTool",
+      "status": "direct-export-present",
+      "providers": [
+        "src/custom-tools.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/bridge-tool-name.js",
+      "name": "resolveBridgeToolName",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-tool-name.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/bridge-usage-counter.js",
+      "name": "BridgeUsageCounter",
+      "status": "direct-export-present",
+      "providers": [
+        "src/bridge-usage-counter.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/file-tool-input-compat.js",
+      "name": "isFileToolCompatibilityAlias",
+      "status": "direct-export-present",
+      "providers": [
+        "src/file-tool-input-compat.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/file-tool-input-compat.js",
+      "name": "normalizeFileToolInput",
+      "status": "direct-export-present",
+      "providers": [
+        "src/file-tool-input-compat.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/file-tool-input-compat.js",
+      "name": "normalizeFileToolName",
+      "status": "direct-export-present",
+      "providers": [
+        "src/file-tool-input-compat.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/file-tool-registry.js",
+      "name": "invokeFileTool",
+      "status": "unresolved-runtime-export",
+      "providers": []
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/file-tool-registry.js",
+      "name": "isFileToolName",
+      "status": "direct-export-present",
+      "providers": [
+        "src/file-tool-registry.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/ide-tool-definitions.js",
+      "name": "BRIDGE_EXCLUDED_TOOL_NAMES",
+      "status": "direct-export-present",
+      "providers": [
+        "src/ide-tool-definitions.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/ide-tool-definitions.js",
+      "name": "getIdeToolDefinition",
+      "status": "direct-export-present",
+      "providers": [
+        "src/ide-tool-definitions.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/managed-command-cancellation.js",
+      "name": "NATIVE_MANAGED_COMMAND_OWNER_ID",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-cancellation.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/tool-input-validation.js",
+      "name": "validateToolInput",
+      "status": "direct-export-present",
+      "providers": [
+        "src/tool-input-validation.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/concurrency.js",
+      "name": "Semaphore",
+      "status": "direct-export-present",
+      "providers": [
+        "src/concurrency.js"
+      ]
+    },
+    {
+      "source": "src/bridge-tool-dispatcher.ts",
+      "target": "src/adaptive-concurrency.js",
+      "name": "AdaptiveConcurrencyController",
+      "status": "direct-export-present",
+      "providers": [
+        "src/adaptive-concurrency.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/ide-tool-definitions.js",
+      "name": "IDE_TOOL_DEFINITIONS",
+      "status": "direct-export-present",
+      "providers": [
+        "src/ide-tool-definitions.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/ide-tool-definitions.js",
+      "name": "getIdeToolDefinition",
+      "status": "direct-export-present",
+      "providers": [
+        "src/ide-tool-definitions.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-cancellation.js",
+      "name": "ManagedCommandCanceller",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-cancellation.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-cancellation.js",
+      "name": "NATIVE_MANAGED_COMMAND_OWNER_ID",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-cancellation.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-cancellation.js",
+      "name": "forceCancellationRequiresConfirmation",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-cancellation.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-cancellation.js",
+      "name": "managedCommandNotAccessibleError",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-cancellation.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-id.js",
+      "name": "createManagedCommandId",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-id.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-id.js",
+      "name": "normalizeManagedCommandId",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-id.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-command-retention.js",
+      "name": "managedCommandStateIdsToPrune",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-command-retention.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-terminal-lifecycle.js",
+      "name": "isManagedTerminalIdleExpired",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-terminal-lifecycle.js"
+      ]
+    },
+    {
+      "source": "src/ide-tool-broker.ts",
+      "target": "src/managed-terminal-lifecycle.js",
+      "name": "managedTerminalIdleDelay",
+      "status": "direct-export-present",
+      "providers": [
+        "src/managed-terminal-lifecycle.js"
+      ]
+    }
+  ],
+  "summary": {
+    "importSpecifiers": 55,
+    "direct": 51,
+    "reexportAdaptersNeeded": 3,
+    "unresolved": 1
+  }
+}

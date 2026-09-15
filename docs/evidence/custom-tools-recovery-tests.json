@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-15",
+  "scope": "Custom Tools/Skills and image executable JS recovery; NOT complete application recovery",
+  "modules": 37,
+  "declarations": 311,
+  "bytes": 204568,
+  "addedModules": 9,
+  "addedDeclarations": 105,
+  "local": {
+    "nodePassed": 106,
+    "pythonDiscovered": 34,
+    "pythonPassed": 31,
+    "pythonWindowsOnlySkipped": 3,
+    "provenanceCheckPassed": true,
+    "runtimeImportAuditPassed": true
+  },
+  "runtimeImports": {
+    "importSpecifiers": 55,
+    "direct": 51,
+    "reexportAdaptersNeeded": 3,
+    "unresolved": 1
+  },
+  "originalTsRewired": false,
+  "fullTypecheckPassed": false,
+  "installerBuilt": false,
+  "overlayChanged": false,
+  "overlaySha256": "6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa",
+  "ci": {
+    "status": "pending"
+  }
+}

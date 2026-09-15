@@ -414,3 +414,21 @@ CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/n
 另核验51个原扩展文件SHA均符合来源清单。CRLF批处理新增行被默认git diff --check当作尾空白，按cr-at-eol规则复核通过，保留Windows批处理原CRLF而未强行换行。现有action Node20弃用/平台改用Node24提示仍存在，不是应用兼容性验收。
 
 本轮已验证的实质变化是构建期输入拒绝更明确、双宿主静态实验及92行新增解释。应用输出与ZIP不变，仍未完成整个UI工程、读写隔离修复、完整源码重编译或Windows图形安装验收。
+
+## 15. 恢复Custom Tools/Skills与图片执行实现（2026-09-15）
+
+本轮按用户要求优先恢复工程，不再以扩充讲解代替源码进度。不询问中间选择，不用空函数/any冒充完成。工作区索引再次仅有初始历史，先fetch固定分支，用mixed reset对齐远端并仅恢复快照未保留的已跟踪dist证据；不切分支、不改其他用户文件。
+
+静态检查原bundle和已有来源索引，确认5个此前无JS对应目标的声明实际仍在原产物中，其传递依赖均可落在自有标签及Node内建模块。扩展生成器SEEDS，依赖闭包仍拒绝未解析变量、第三方可执行依赖、跨来源声明和初始化循环。
+
+新增custom-tool-admin/contract/manifest/migration/sandbox/skill-import/skill/custom-tools及read-image共9模块105声明；当前37模块311声明204568字节。九个来源标签的已发布顶层声明全部纳入，原函数体不重写，类型/原导出表不冒称找回。基线版本为0.0.0-reconstructed.4。
+
+新增11项测试：原manifest解析器对照、加载/重复/过滤、启停/删除、迁移、目录Skill导入与生成入口实际执行、重名、归档路径字符串拒绝、受控进程、预取消、图片读取/拒绝及运行时导入审计。只用自建临时目录和受控Node脚本；不运行tar.exe、不处理陌生ZIP、不启动原扩展。对照VM的child_process使用拒绝执行替身，允许的os仅为Node内建模块。
+
+新确认的边界：原sandbox仅execFile进程管理，继承宿主环境，不能隔离文件/网络；loadCustomTools默认会触发迁移；迁移集合可能阻止失败重试；重复Skill导入只改文件夹名，frontmatter名仍冲突；ZIP字符串检查不等于链接/解压隔离；图片也有检查/打开间隔。均原样保留并明确禁止直接部署，不把测试通过说成安全缺陷修复。
+
+新增静态运行时导入审计：原TS哈希校验后经esbuild擦除类型，收集共享ImportDeclaration；55个说明符中51个对应模块导出存在，3个barrel导出待接（CUSTOM_TOOL_OUTPUT_SCHEMA、CUSTOM_TOOLS_DIR_NAME、executeCustomTool），1个invokeFileTool仍缺失。继续追踪发现完整文件调度依赖find/search及打包注入的rgPath（__dirname/runtime/bin/rg.exe），不能随意给undefined或空实现蒙混。原TS24个缺失路径现均有JS标签对应，仍未真正接线或完成类型检查。
+
+执行npm ci、build:bridge-core、audit:boundary、learn:build/check、check:bridge-core、运行时审计、npm test与Python回归。Node106通过；Python34发现/31本地通过/3个Windows专属跳过。第一次重定向测试日志因.work目录不存在失败，创建目录后重跑成功。教学仍363行，不将新恢复源码自动算为已讲解；覆盖分母145文件28332行。ZIP未变，SHA仍6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa。
+
+本轮Windows/CMD+conda待推送复验，证据见custom-tools-recovery-tests.json。未完成完整宿主API适配、类型恢复、文件调度、完整编译/安装器或GUI/MCP验收。

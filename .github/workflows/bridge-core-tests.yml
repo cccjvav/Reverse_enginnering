@@ -22,6 +22,7 @@ on:
       - community/ui/**
       - docs/learning/**
       - tools/audit_custom_boundary.mjs
+      - tools/audit_extension_runtime.mjs
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs
       - reconstructed/bridge-core/**
