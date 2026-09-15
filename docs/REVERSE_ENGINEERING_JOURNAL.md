@@ -453,3 +453,10 @@ CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/n
 执行build:bridge-core、audit:boundary、运行时审计、learn:build/check、npm test、Python回归；55个共享运行时导入现在全部有导出，未解析和待再导出计数为0。核心版本reconstructed.5；ZIP未改，原哈希保留。教学仍363行，覆盖分母变为150文件29877行，未把恢复代码自动算作已讲解。
 
 本轮Windows CMD+conda推送后待验，证据见file-execution-tests.json。完整源码工程、TS类型、宿主接口、原生资产、授权整合和完整安装器/GUI仍未完成。
+
+
+### 16 跨平台复验成功
+
+测试代码b6a96b568de4fc1060a6321e285992904cb54152，运行 [34968350673](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34968350673) Windows2022、Ubuntu24.04、独立Windows CMD+conda三个作业全部成功，gh run watch退出0。原查找搜索对照、临时文件调度和模拟rg不可用的回退测试均在该测试集中；没有以真实rg或完整应用验收替代说明。远端证据仅API作业/步骤结论，不伪造逐项完整日志。再次核验51个原扩展文件SHA相同。
+
+action Node20运行时被平台改用Node24的弃用提示仍存在；不影响本轮作业通过，也不是完整应用兼容性结论。本轮完成的是最后一个已知共享运行时导出缺口及再导出关系，仍需TS接线、宿主接口/授权、原生资产和完整构建验收。

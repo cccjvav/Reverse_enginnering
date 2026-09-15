@@ -30,7 +30,7 @@ npm run audit:boundary -- --check
 - 其中 **24 个目标已有某种 JS 重建对应**，但尚未接回原 TS 导入；不能把 24/24 当作工程完成百分比。
 - `file-tool-registry` 仍只是部分声明：没有完整 dispatcher。
 - 此前5个目标现已恢复已发布JS声明：`custom-tool-admin`、`custom-tool-migration`、`custom-tool-skill-import`、`custom-tool-skill`、`custom-tools`。
-- 图片已独立恢复但未接入，搜索等仍是注册表缺失的传递依赖，不能因为不在上述 5 个直接缺失目标里就忽略它们。
+- 图片、搜索及文件调度现已独立恢复并在临时目录测试，但没有接入真实宿主或部署到overlay。
 
 ## 找到了上游版本候选，但尚未确认底座
 
