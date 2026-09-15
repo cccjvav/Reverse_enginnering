@@ -102,3 +102,8 @@ npm.cmd run gulp -- vscode-win32-x64-system-setup
 
 
 未来完整Code OSS构建也应在普通CMD使用**独立conda环境**，不得直接覆盖学习环境。最终Node/Electron版本尚未确定；若conda渠道没有所需精确版本，先停止核对方案，不把版本要求随意放宽。当前environment-cmd.yml只保证恢复/教学工具的环境用途，不承诺满足完整宿主构建。
+
+
+## 最新：已实际尝试TS入口连接构建
+
+见 [LINKED_EXTENSION_BUILD.md](LINKED_EXTENSION_BUILD.md)。原TS到重建模块的运行时连接已实现，候选npm依赖已锁定并打包；但原类型和定制宿主字段造成59个严格诊断错误。此实验产物不是完整宿主构建，不输出可用安装器，不替代上述放行标准。

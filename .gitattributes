@@ -8,3 +8,9 @@ tools/** -text
 tests/** -text
 .github/workflows/** -text
 docs/learning/** -text
+
+# Pinned upstream candidate declarations retain their evidence bytes.
+reference/** -text
+package.json -text
+package-lock.json -text
+docs/evidence/linked-*.json -text

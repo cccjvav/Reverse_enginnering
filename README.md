@@ -17,7 +17,7 @@
 
 - **[从这里开始：分步实验](docs/learning/START_HERE.md)**：打开正确目录、识别命令/输出、安装工具、模拟实验、预期结果、故障处理和自测答案。
 - **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具、主构建器、UI补丁器和UI状态方法六个文件的 **363行**；不是全工程已逐行讲完。
-- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：150个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
+- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：153个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
 - 学习实验：`npm run learn:check`、`npm run learn:lab`；Windows零基础步骤使用 `npm.cmd`，见实验课。实验不启动真实 Bridge、不应用补丁。
 
 ## 定制代码、完整工程与用户分发
@@ -39,6 +39,12 @@
 
 更新工具先验哈希，自动备份，失败尝试回滚；建议先在测试副本上使用。**尚未做 Windows 实机端到端验收。** 旧商业服务的停售、历史订单和退款仍需另行处理；客户端修改不会自动关闭远端收款。
 
+## 新进展：从TS入口连接构建
+
+**[源码连接构建与59个类型错误](docs/LINKED_EXTENSION_BUILD.md)**：73个恢复/维护输入、31条共享导入已在构建时实际连接，并将锁定的MCP等npm依赖打包，生成新的实验CJS bundle；不是复用旧dist补丁。候选严格类型诊断仍有59错误，未激活扩展或构建完整安装器。
+
+CMD中执行 `npm.cmd run build:linked-extension`；`npm.cmd run diagnose:linked-types` 当前会以退出码1报告未解决问题，不应忽略。
+
 ## 新进展：可测试的 Bridge 核心模块
 
 **[文件调度、查找与搜索恢复](reconstructed/bridge-core/FILE_EXECUTION.md)**：invokeFileTool已补齐，Node回退和读/图/写调度经临时文件测试；原调度器不转发逐文件权限回调，尚未安全整合或部署。
@@ -50,7 +56,7 @@
 从原扩展 bundle 拆出 **41 个 JavaScript 模块 / 389 个声明**，约 262.9 KB，重新接齐模块依赖。覆盖路由、会话、事件、命令取消保护、工具目录、输入解析与独立文件读取/补丁写入；不是找回了原始 TS 类型，也不是完整 MCP 服务。
 
 - **[重建模块与复现方法](reconstructed/bridge-core/README.md)**、[逐声明来源及依赖图](reconstructed/bridge-core/provenance.json)
-- 本地 **113项Node通过，34项Python中31项本地通过、3项Windows专属本地跳过**；Windows CMD+conda CI中启用这些Windows夹具且作业通过，不运行ShunCode安装器。
+- 本地 **117项Node通过，34项Python中31项本地通过、3项Windows专属本地跳过**；Windows CMD+conda CI中启用这些Windows夹具且作业通过，不运行ShunCode安装器。
 - **本轮 Windows / Linux CI 均通过**：[验证记录](docs/evidence/learning-tests.json)。包含真实临时文件和目录链接测试，不是 Windows 图形界面验收。
 - 发现并复现原并发器的动态降上限问题；提供[独立修复候选](community/bridge-core/README.md)，尚未纳入已发布 overlay。
 

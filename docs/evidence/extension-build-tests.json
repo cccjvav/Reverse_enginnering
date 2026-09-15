@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-15",
+  "scope": "Source linkage and honest candidate type diagnostics, not complete project recovery",
+  "local": {
+    "nodePassed": 117,
+    "pythonPassed": 31,
+    "pythonWindowsOnlySkipped": 3,
+    "originalFilesHashVerified": 51
+  },
+  "linkedBundle": {
+    "bytes": 1673367,
+    "sha256": "c97853579b4b9fab7f27f3647f41b19bdfb32c4f424af6be22db3b5378703a00",
+    "sourceInputs": 73,
+    "sharedConnections": 31,
+    "bundledDependencyInputs": 118,
+    "extensionExecuted": false
+  },
+  "candidateTypeDiagnostics": {
+    "errors": 59,
+    "typecheckPassed": false,
+    "commandExitCode": 1
+  },
+  "overlayChanged": false,
+  "overlaySha256": "6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa",
+  "ci": {
+    "status": "pending"
+  }
+}

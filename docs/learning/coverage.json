@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 150,
-    "lines": 29877,
+    "files": 153,
+    "lines": 30141,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "e072f3a704340c7756b4c9b22d3b66991800c59176831b53023bfb683f4997b2",
-      "lines": 98,
+      "sha256": "26281ea424d5f4715af59bf409a897416638d319053ff891aaad9c1c54fb3955",
+      "lines": 101,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -807,6 +807,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-linked-extension.test.mjs",
+      "sha256": "cf9da8223aa7d86744ea7af97e742959a969750676266542e7cbe793436d02cc",
+      "lines": 60,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/bridge-core-patch.test.mjs",
       "sha256": "8a85b12a55f5233c5746957e4ebfbb896f9f3646d7466d79da343b3bbdb8a165",
       "lines": 136,
@@ -961,6 +968,13 @@
       "status": "pending"
     },
     {
+      "source": "tools/build_linked_extension.mjs",
+      "sha256": "71e4e7c43365173c4bfaa29bd934469f292d84b6398d09f440028c512b496763",
+      "lines": 135,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/capture_bridge_ui.mjs",
       "sha256": "c64c635730cffce5d73bd4e005f0c014be842feb00018e56f0c3a762da802bce",
       "lines": 82,
@@ -978,6 +992,13 @@
       "source": "tools/ci_windows_probe.py",
       "sha256": "bba1a91ca71a1a5e437a249532b6df950484164276f7824228585e08e74c993c",
       "lines": 82,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/diagnose_linked_types.mjs",
+      "sha256": "bde813d9e59316ab2526e4188eb5c5b0286a9ad2c344268c9aed39e890e17356",
+      "lines": 66,
       "explainedLines": 0,
       "status": "pending"
     },

@@ -23,6 +23,9 @@ on:
       - docs/learning/**
       - tools/audit_custom_boundary.mjs
       - tools/audit_extension_runtime.mjs
+      - tools/build_linked_extension.mjs
+      - tools/diagnose_linked_types.mjs
+      - reference/vscode-types/**
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs
       - reconstructed/bridge-core/**

@@ -60,3 +60,6 @@ npm run audit:boundary -- --check
 
 
 最新运行时接线审计见 [extension-runtime-imports.json](evidence/extension-runtime-imports.json)：55个导出均存在，barrel再导出与invokeFileTool已恢复，但原TS未接线。全部24个路径有JS标签对应不等于所有类型/导出/执行链齐全。
+
+
+后续已建立 [实验连接构建](LINKED_EXTENSION_BUILD.md)：73个源码/重建输入、31条共享导入实际连成新CJS bundle；原件仍不改动，连接由构建器完成。不能继续把运行时仅描述为“导出存在”，也不能反过来宣称类型齐全：候选严格类型诊断仍有59个错误。

@@ -1,0 +1,24 @@
+{
+  "scope": "Candidate version evidence, not proof of the original complete dependency lockfile",
+  "serverVersion": "2.0.0",
+  "tarballSha256": "b4f0dfda3b73b322f1091b86fabe568994eb2fedef873b12db2c54adc3cfe198",
+  "matchingPublishedChunkNames": [
+    "mcp-DXXb3Vv3.mjs",
+    "src-CX2iR2pK.mjs",
+    "chunk-Br0eD_fh.mjs",
+    "dialects-DoSzNhcb.mjs",
+    "ajvProvider-CEoC__sr.mjs"
+  ],
+  "fullOriginalDependencyIdentityProven": false,
+  "candidateChoices": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "@modelcontextprotocol/node": "2.0.0",
+    "https-proxy-agent": "7.0.6",
+    "supports-color": "8.1.1"
+  },
+  "notes": [
+    "Server chunk names match the original source headings",
+    "Proxy and optional color versions are explicit maintenance candidates, not recovered original lock entries",
+    "All transitive installed versions are recorded in the root package-lock.json"
+  ]
+}

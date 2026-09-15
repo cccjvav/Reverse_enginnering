@@ -12,11 +12,20 @@
     "learn:build": "node tools/build_learning.mjs",
     "learn:check": "node tools/build_learning.mjs --check",
     "learn:lab": "node tools/learning_lab.mjs",
-    "learn:ui": "node tools/learning_ui_lab.mjs"
+    "learn:ui": "node tools/learning_ui_lab.mjs",
+    "build:linked-extension": "node tools/build_linked_extension.mjs",
+    "check:linked-extension": "node tools/build_linked_extension.mjs --check",
+    "diagnose:linked-types": "node tools/diagnose_linked_types.mjs"
   },
   "devDependencies": {
+    "@modelcontextprotocol/node": "2.0.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "@types/node": "22.20.2",
     "acorn": "8.18.0",
     "esbuild": "0.28.2",
-    "eslint-scope": "9.1.2"
+    "eslint-scope": "9.1.2",
+    "https-proxy-agent": "7.0.6",
+    "supports-color": "8.1.1",
+    "typescript": "5.9.3"
   }
 }

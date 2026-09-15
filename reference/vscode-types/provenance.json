@@ -1,0 +1,69 @@
+{
+  "scope": "Public Code OSS 1.132.0 candidate types, NOT proven original carrier declarations",
+  "commit": "df53daabb18cd157bdb08c7f01c34df936cf12f4",
+  "files": [
+    {
+      "file": "vscode.d.ts",
+      "source": "src/vscode-dts/vscode.d.ts",
+      "gitBlobSha": "434d6a8a98b30cbf9c92ffc0fb2908efcec38d77",
+      "sha256": "ee11e767c8ab76f6c0de8dc88222796147a6f0bc82f3a1ec644e41b39b52f2cd",
+      "bytes": 742072
+    },
+    {
+      "file": "vscode.proposed.defaultChatParticipant.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.defaultChatParticipant.d.ts",
+      "gitBlobSha": "bc7bcf72af72fcf39b646571bac39ba7333f734d",
+      "sha256": "245ed2e892edd3895b0b06064ebf3425094f21bd32352259155f76306718f984",
+      "bytes": 1371
+    },
+    {
+      "file": "vscode.proposed.chatParticipantAdditions.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.chatParticipantAdditions.d.ts",
+      "gitBlobSha": "7fe34db11d029ae1329327c4340e9c1abc4d575c",
+      "sha256": "b4b241aefa7d17b44838ef63da6db39f0c660f37897c6a6c542970fb82f2aec8",
+      "bytes": 32412
+    },
+    {
+      "file": "vscode.proposed.chatParticipantPrivate.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.chatParticipantPrivate.d.ts",
+      "gitBlobSha": "85f68a556995bb99317d96a6fb2274a8ab456de4",
+      "sha256": "ad03f0210e2e0a30e9428936a1fdc223e9ea3cc85496471730d3daa4e8b907f2",
+      "bytes": 16621
+    },
+    {
+      "file": "vscode.proposed.chatReferenceBinaryData.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.chatReferenceBinaryData.d.ts",
+      "gitBlobSha": "df5095314e29b83562a56ab9f8b4e7c7c33f6fce",
+      "sha256": "03d42c6cbe874cd1a499bc667237ca119908330dc097a2688409c5b2db375b9a",
+      "bytes": 1606
+    },
+    {
+      "file": "vscode.proposed.chatPromptFiles.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.chatPromptFiles.d.ts",
+      "gitBlobSha": "eb77adbd1a1084837ab2d7b8f669f8ecfc20f1b8",
+      "sha256": "69773bd033c8ebdfd9f1bdd85d86c2cd3f7155e43efaeac90936bfd7edaf062c",
+      "bytes": 13619
+    },
+    {
+      "file": "vscode.proposed.chatProvider.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.chatProvider.d.ts",
+      "gitBlobSha": "653dec5cb33544c46a2de838ed6a1af6adbf3058",
+      "sha256": "fa2091b328a7843c9ed80cc71e40f6b8f2554e9110fb43d63c6355b1ceff5f05",
+      "bytes": 7681
+    },
+    {
+      "file": "vscode.proposed.languageModelThinkingPart.d.ts",
+      "source": "src/vscode-dts/vscode.proposed.languageModelThinkingPart.d.ts",
+      "gitBlobSha": "e60cd9fe43258c96f7aba3c7c30e2560f7afc138",
+      "sha256": "b344e385996f1647ba5a5e1103b342f706492ffd9254abec94f4cb699e6c6740",
+      "bytes": 4246
+    },
+    {
+      "file": "LICENSE.txt",
+      "source": "LICENSE.txt",
+      "gitBlobSha": "0ac28ee234d232ac0691f39cebf95bf6b2a763a5",
+      "sha256": "9480271317925265e806a9a196aaa33410a962fa9d4d1e248a4a5187bc8c9df9",
+      "bytes": 1088
+    }
+  ]
+}

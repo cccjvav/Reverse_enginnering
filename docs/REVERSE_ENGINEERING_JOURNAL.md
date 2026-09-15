@@ -460,3 +460,21 @@ CI显示：旧action Node20运行时被平台改用Node24、auto-activate-base/n
 测试代码b6a96b568de4fc1060a6321e285992904cb54152，运行 [34968350673](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34968350673) Windows2022、Ubuntu24.04、独立Windows CMD+conda三个作业全部成功，gh run watch退出0。原查找搜索对照、临时文件调度和模拟rg不可用的回退测试均在该测试集中；没有以真实rg或完整应用验收替代说明。远端证据仅API作业/步骤结论，不伪造逐项完整日志。再次核验51个原扩展文件SHA相同。
 
 action Node20运行时被平台改用Node24的弃用提示仍存在；不影响本轮作业通过，也不是完整应用兼容性结论。本轮完成的是最后一个已知共享运行时导出缺口及再导出关系，仍需TS接线、宿主接口/授权、原生资产和完整构建验收。
+
+## 17. 原TS入口实际连接构建与类型诊断（2026-09-15）
+
+用户希望尽量一次完成，已明确不预先保证整机/宿主/安装器未验证结果。本轮不止统计导出，而是新增build_linked_extension.mjs，从原extension.ts出发，用构建插件连接../../../src到重建JS；两个商业模块替换为社区维护TS，入口精确删除旧烟雾绕过和登出关闭persistentMode。只在内存改写并验证原件/重建输入SHA，不覆盖原文件，不读取旧dist/extension.js作为新bundle代码输入。
+
+73个输入（32个保留扩展源码、41重建模块），31条共享导入真正连接。旧商业配置与未被入口引用的codex-account-view未进入bundle，不把它们算作全部34TS运行输入。初次先用明确external列表验证内部连接，随后安装并打入锁定npm候选：MCP server/node2.0.0、https-proxy-agent7.0.6。npm pack server2.0.0的5个chunk文件名与原bundle来源标题一致；属于候选证据，不证明整个原锁文件身份。
+
+加强metafile外部导入审查后，发现依赖内部未打包的可选supports-color；构建实际拒绝，补锁8.1.1后重新成功。最终118个依赖输入记录SHA，静态external只允许Node内建和vscode。输出1673367字节CJS在.work/linked-extension/dist/extension.cjs，文件不入Git，也未加载或安装。动态Electron/node-pty、Agent host入口、PortableGit/隧道/rg原生资产仍不由静态external清单保证。
+
+CJS输出的rg路径改用输出dist的../runtime/bin/rg.exe，避免把ESM仓库路径或无效import.meta写进最终CJS。资产没有因此出现，不宣称实际rg已运行。社区ZIP不变。
+
+新增diagnose_linked_types.mjs，TypeScript5.9.3、固定@types/node22系列，采用strict/noEmit/NodeNext，明确allowJs:true/checkJs:false/skipLibCheck:true。下载公开Code OSS候选df53daabb18cd157bdb08c7f01c34df936cf12f4的8个声明文件与MIT许可，存reference/vscode-types并记录来源/哈希，不冒称原定制宿主类型。未采用any空壳或扩大接口索引签名。
+
+实际类型诊断退出1：59错误，TS2305=10、TS2339=14、TS2353=1、TS2558=2、TS2724=2、TS2749=5、TS7006=25。包括丢失CustomToolManifest等类型、泛型/类类型和回调；ChatSimpleToolResultData缺items/metrics/diffPreview/presentationKind/presentationStyle，进一步证实公共候选与定制宿主契约不完全一致。检查覆盖34个TS/MTS及8个宿主声明，不等于原始tsconfig或整个Code OSS检查。
+
+新增4项回归验证确定性构建、来源拒绝、依赖实际打包与诚实记录类型错误。Node117通过；Python31通过、3项Windows专属本地跳过。回归测试通过不等于类型检查通过——它明确断言59错误/false。根锁文件与候选声明添加-text，保证Windows哈希与诊断复现；CI触发范围包括新工具和reference。
+
+执行npm install精确依赖（ignore-scripts）、npm pack、build/check:linked-extension、diagnose:linked-types（预期失败）、check:bridge-core、learn:build、npm test和Python回归。原51文件哈希一致，ZIP仍原SHA。教程仍363行，分母153文件30141行。完整宿主、类型修复、权限整合、原生资产、真实激活/GUI/MCP和安装器未完成；本轮已可重复生成新扩展实验bundle，不再仅有旧bundle替换。
