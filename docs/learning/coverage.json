@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 154,
-    "lines": 30247,
+    "lines": 30338,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -836,8 +836,8 @@
     },
     {
       "source": "tests/bridge-core-type-contracts.test.mjs",
-      "sha256": "08d674fb620a52739f310ec7b2adde8f77f3e67ac6bf9aeb678170c9b50c3c4d",
-      "lines": 91,
+      "sha256": "084c050bbb5096b78677723821a9103975d582cb59b8ba36c701536c44727cf2",
+      "lines": 182,
       "explainedLines": 0,
       "status": "pending"
     },

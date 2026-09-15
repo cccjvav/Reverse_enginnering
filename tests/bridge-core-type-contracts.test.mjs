@@ -10,16 +10,18 @@ import { AdaptiveConcurrencyController } from '../reconstructed/bridge-core/src/
 import { JsonRpcRequestIdRegistry, requestIdsOfRequest } from '../reconstructed/bridge-core/src/jsonrpc-request-id-registry.js';
 import { BridgeSessionRegistry } from '../reconstructed/bridge-core/src/bridge-session-registry.js';
 
-test('candidate contracts remove ten diagnostics without hiding remaining host/type failures', async () => {
+test('candidate contracts expose typed HTTP boundary mismatches without hiding remaining host/type failures', async () => {
   const actual = await diagnoseTypes({ contracts: true });
   const stored = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/contract-type-diagnostics.json'), 'utf8'));
   assert.deepEqual(actual, stored);
-  assert.equal(actual.errorCount, 49);
-  assert.equal(actual.contractModules.length, 4);
+  assert.equal(actual.errorCount, 39);
+  assert.equal(actual.contractModules.length, 7);
   assert.equal(actual.candidateTypecheckPassed, false);
   assert.equal(actual.runtimeImplementationCheckedByTypeScript, false);
   assert.equal(actual.originalTypesRecovered, false);
   assert.ok(actual.diagnostics.some(d => d.message.includes('ChatSimpleToolResultData')));
+  assert.equal(actual.diagnostics.filter(d => d.code === 2345 && d.source.endsWith('bridge-mcp-transport.ts')).length, 3);
+  assert.equal(actual.counts.TS7006, 10);
   assert.ok(!actual.diagnostics.some(d => d.code === 2749 && /Semaphore|AdaptiveConcurrencyController|JsonRpcRequestIdRegistry|BridgeSessionRegistry/.test(d.message)));
 });
 
@@ -59,6 +61,40 @@ const missing: Session = sessions.get('missing');
 // @ts-expect-error arbitrary object cannot be the session generic
 new BridgeSessionRegistry<{label: string}>();
 await sessions.destroyAfter('a', async s => s.label);
+import { BridgeActivityTracker } from '../../reconstructed/type-contracts/bridge-activity-tracker.js';
+import { BoundedInMemoryEventStore } from '../../reconstructed/type-contracts/bridge-event-store.js';
+import type { EventStore, JSONRPCMessage } from '@modelcontextprotocol/server';
+import type { BridgeHttpHandlers } from '../../reconstructed/type-contracts/bridge-http-router.js';
+const tracker = new BridgeActivityTracker<{title: string}>(3, () => 'time');
+const activityId: number = tracker.push({tool: 'read_files', status: 'running', presentation: {title: 'Read'}});
+tracker.finish(activityId, 'completed', 10);
+const title: string | undefined = tracker.snapshot().activities[0].presentation?.title;
+// @ts-expect-error presentation must retain the chosen generic
+tracker.push({tool: 'read_files', status: 'running', presentation: {title: 42}});
+// @ts-expect-error finish is a terminal transition in the preserved consumer
+tracker.finish(activityId, 'progress', 10);
+const store = new BoundedInMemoryEventStore(3);
+const sdkStore: EventStore = store;
+await sdkStore.storeEvent('s', {jsonrpc: '2.0', method: 'ping', id: 1});
+// @ts-expect-error invalid JSON-RPC version
+await store.storeEvent('s', {jsonrpc: '1.0', method: 'ping', id: 1});
+await store.replayEventsAfter('id', {send: async (id, message) => {
+  const event: JSONRPCMessage = message;
+}});
+const handlers: BridgeHttpHandlers = {
+  getSessionCount: () => 0,
+  handlePost: async (req, res, body, sessionId) => {
+    // @ts-expect-error raw header can be string[]
+    const id: string | undefined = sessionId;
+    // @ts-expect-error JSON body requires narrowing before property access
+    const method: string = body.method;
+  },
+  handleGet: async (req, res, sessionId) => {
+    // @ts-expect-error non-empty header still is not guaranteed string
+    const id: string = sessionId;
+  },
+  handleDelete: async (req, res, sessionId) => { if (typeof sessionId === 'string') sessionId.trim(); }
+};
 `);
   const options = { strict: true, noEmit: true, skipLibCheck: false, target: ts.ScriptTarget.ES2022,
     module: ts.ModuleKind.NodeNext, moduleResolution: ts.ModuleResolutionKind.NodeNext,
@@ -88,4 +124,59 @@ test('observed runtime bodies agree with generic result, claim union and session
   assert.equal(await sessions.destroyAfter('a', async s => { assert.equal(s, session); }), true);
   assert.deepEqual(events, ['A', ['a', 'A', 'delete']]);
   assert.equal(await sessions.destroyAfter('missing', () => assert.fail('must not call action')), false);
+});
+
+test('activity contract preserves typed presentation and running-only completion accounting', async () => {
+  const { BridgeActivityTracker } = await import('../reconstructed/bridge-core/src/bridge-activity-tracker.js');
+  const tracker = new BridgeActivityTracker(3, () => 'fixture-time');
+  assert.equal(tracker.snapshot().stats.lastTool, undefined);
+  const id = tracker.push({ tool: 'read_files', status: 'running', presentation: { title: 'Read' } });
+  tracker.push({ tool: 'progress', status: 'progress', percent: 50 });
+  assert.equal(tracker.snapshot().stats.toolCalls, 1);
+  assert.equal(tracker.clear(), 1);
+  assert.equal(tracker.finish(id, 'completed', 12), true);
+  assert.equal(tracker.snapshot().activities[0].presentation.title, 'Read');
+  assert.equal(tracker.finish(id, 'error', 99), true);
+  assert.equal(tracker.snapshot().stats.completedToolCalls, 1);
+  assert.equal(tracker.snapshot().stats.failedToolCalls, 0);
+  assert.equal(tracker.finish(999, 'completed', 1), false);
+  assert.equal(tracker.reset(), true);
+  assert.equal(tracker.reset(), false);
+});
+
+test('event contract replays only the cursor stream, awaits send and propagates rejection', async () => {
+  const { BoundedInMemoryEventStore } = await import('../reconstructed/bridge-core/src/bridge-event-store.js');
+  const store = new BoundedInMemoryEventStore(3);
+  const first = await store.storeEvent('A', { jsonrpc: '2.0', method: 'ping', id: 1 });
+  await store.storeEvent('B', { jsonrpc: '2.0', method: 'ping', id: 2 });
+  const message = { jsonrpc: '2.0', method: 'ping', id: 3 };
+  const third = await store.storeEvent('A', message);
+  const sent = [];
+  assert.equal(await store.replayEventsAfter(first, { send: async (id, msg) => { await Promise.resolve(); sent.push([id, msg]); } }), 'A');
+  assert.deepEqual(sent, [[third, message]]);
+  await assert.rejects(store.replayEventsAfter(first, { send: async () => { throw new Error('fixture-send-failed'); } }), /fixture-send-failed/);
+  await store.storeEvent('A', { jsonrpc: '2.0', method: 'ping', id: 4 });
+  assert.equal(await store.replayEventsAfter(first, { send: async () => assert.fail('evicted cursor must not replay') }), '');
+});
+
+test('raw HTTP router forwards array headers: declarations must not claim normalization', async () => {
+  const { EventEmitter } = await import('node:events');
+  const { createBridgeHttpRoutes, handleBridgeHttpRequest } = await import('../reconstructed/bridge-core/src/bridge-http-router.js');
+  const options = { routes: createBridgeHttpRoutes('fixture-token'), maxRequestBytes: 128, standaloneGetEnabled: true };
+  for (const method of ['POST', 'GET', 'DELETE']) {
+    const request = new EventEmitter();
+    Object.assign(request, { method, url: '/mcp/fixture-token', headers: { 'mcp-session-id': ['A', 'B'], 'mcp-protocol-version': ['one', 'two'] } });
+    const response = { setHeader() {}, writeHead() { return this; }, end() {} };
+    const calls = [];
+    const handlers = { getSessionCount: () => 0,
+      handlePost: async (_req, _res, body, sessionId, protocol) => calls.push({ body, sessionId, protocol }),
+      handleGet: async (_req, _res, sessionId) => calls.push({ sessionId }),
+      handleDelete: async (_req, _res, sessionId) => calls.push({ sessionId }) };
+    const pending = handleBridgeHttpRequest(options, handlers, request, response);
+    if (method === 'POST') { request.emit('data', Buffer.from('{"fixture":true}')); request.emit('end'); }
+    await pending;
+    assert.equal(calls.length, 1);
+    assert.deepEqual(calls[0].sessionId, ['A', 'B']);
+    if (method === 'POST') { assert.deepEqual(calls[0].body, {fixture: true}); assert.deepEqual(calls[0].protocol, ['one', 'two']); }
+  }
 });

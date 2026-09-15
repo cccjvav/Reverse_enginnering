@@ -521,3 +521,19 @@ CI路径覆盖新增类型目录与新报告。本轮本地测试不代替新Win
 ### 19 远端提交与CI权限边界
 
 实现提交3586853已成功推送同一Arena分支。推送后gh run list两次查询只返回旧运行，尚未查到本提交的新CI。尝试gh workflow run bridge-core-tests.yml --ref arena/01a09d2c-reverse-enginnering-of-shun，API真实返回403 Resource not accessible by integration。未换身份、未索取令牌、未绕过权限；本轮不能声称Windows CI通过。GitHub连接的Actions调度权限需在Arena端检查/重新连接，或由仓库所有者在Actions页面手工执行该分支工作流。代码推送已成功，不受该调度权限错误影响。
+
+## 20 第二批类型契约：活动/事件/HTTP（2026-09-15）
+
+继续比对bridge-activity-tracker、bridge-event-store、bridge-http-router的提取JS与原bridge-constants/bridge-tool-dispatcher/bridge-mcp-transport调用点；在锁定SDK2.0.0声明中确认EventStore结构。新增三份独立.d.ts及哈希来源，累计7模块，不改原JS/TS或实验bundle。
+
+活动输入/输出保留泛型presentation、可选状态字段与原消费者的终态限制；事件存储使用候选SDK JSONRPCMessage，并通过严格夹具检验可赋给EventStore。没有虚构可选getStreamIdForEventId，也没有声称JS本身会校验JSON-RPC数据。HTTP参数使用Node类型和unknown正文，原headers值直接转发，所以保留string[]而非虚假收窄。
+
+本轮合同诊断实际退出1：39错误，TS2305=9、TS2339=14、TS2345=3、TS2353=1、TS2724=2、TS7006=10。旧13条消失（ActivitySnapshot导出1、ActivityTracker泛型1、EventStore实例类型1、HTTP隐式any10），同时原传输层381—383行暴露3个string[]与string参数不匹配。没有删除原调用、修改strict或用any抹掉新错误；旧JS推断基线仍59。
+
+专项测试扩充至6项且全部通过：独立strict/noEmit/skipLibCheck:false夹具增加6个负例；原JS验证活动presentation/重复finish统计、事件同stream重放/等待send/传播失败/游标逐出、合成HTTP请求对象数组头原样转发。后者不是实际Node网络解析或远程漏洞验证，真实重复请求头可能合并，后续必须明确候选边界策略，不能随意取数组首项。既有纯本地HTTP夹具仍不接真实Bridge/隧道或执行工具。
+
+全套npm test实际123/123；Python34项发现、31通过、3Windows专属跳过。check:bridge-core（41模块389声明262904字节）、check:linked-extension（73输入/31连接/1673367字节）、learn:check、CRLF感知diff检查通过。原51文件与HEAD逐字节一致，ZIP原SHA不变。学习清单154文件30338行，完整讲解仍6文件363行，新增声明说明不冒称全工程逐行覆盖。第二批讲解在reconstructed/type-contracts/SECOND_BATCH.md，CMD规程区分类型退出1与专项测试退出0。
+
+本轮查询发现上一轮代码358685378717895767e85a7079166cfd5fcaa5f6的自动CI已完成，运行34977478994成功；不再把“当时未查到”当永久事实。之前手动dispatch的403仍是真实历史事件。本轮新代码尚未据此验收，不沿用旧120项成功冒充新123项Windows通过。
+
+未修运行时权限调度、未实现新HTTP拒绝策略、未改定制Chat宿主，剩余CustomTool/Skill/取消命令/日志/工具结果/宿主字段继续待恢复。没有部署实验扩展、执行真实激活/GUI/MCP或构建完整Windows安装器，整体仍NOT_READY。

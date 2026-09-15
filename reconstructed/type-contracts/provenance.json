@@ -8,6 +8,24 @@
       "implementationSha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7"
     },
     {
+      "declaration": "bridge-activity-tracker.d.ts",
+      "sha256": "d9c6d64eec83d0cfff21194143649ee23679f1d4639eadd9a0abc4fddebfa6d9",
+      "implementation": "reconstructed/bridge-core/src/bridge-activity-tracker.js",
+      "implementationSha256": "fc698f0ecb5df49b879713ab92df287d85414443d1f2604a69ecb34a5c90a662"
+    },
+    {
+      "declaration": "bridge-event-store.d.ts",
+      "sha256": "898896a6795341c57d42d1f8f94c08f550c6993259cdd169bfc9959ce69d7c04",
+      "implementation": "reconstructed/bridge-core/src/bridge-event-store.js",
+      "implementationSha256": "04f49f8c0300eae09795367f46f8ce611a1da0eb420c8615efb6eadd8be87995"
+    },
+    {
+      "declaration": "bridge-http-router.d.ts",
+      "sha256": "d9875ce2f78303b6cc2b0de31a5f157751669eb55925c98cc62ef3ee24458927",
+      "implementation": "reconstructed/bridge-core/src/bridge-http-router.js",
+      "implementationSha256": "e62762f79c0119a9274474465e65a9cd361dfd30ad62d6241b493303596da1a1"
+    },
+    {
       "declaration": "bridge-session-registry.d.ts",
       "sha256": "556d39cdc5642cb2a57d4fbd2ea5990e85bc8172b165c03c7fef0155d9531524",
       "implementation": "reconstructed/bridge-core/src/bridge-session-registry.js",

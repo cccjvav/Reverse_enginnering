@@ -9,16 +9,15 @@
   "allowJs": true,
   "checkJs": false,
   "skipLibCheck": true,
-  "errorCount": 49,
-  "diagnosticCount": 49,
+  "errorCount": 39,
+  "diagnosticCount": 39,
   "counts": {
-    "TS2305": 10,
+    "TS2305": 9,
     "TS2339": 14,
+    "TS2345": 3,
     "TS2353": 1,
-    "TS2558": 1,
     "TS2724": 2,
-    "TS2749": 1,
-    "TS7006": 20
+    "TS7006": 10
   },
   "candidateTypecheckPassed": false,
   "originalTypesRecovered": false,
@@ -30,6 +29,24 @@
       "sha256": "9d489d0d877607eb3a7bbd4c61fdc7b813e5703025e81ff01d96c91143465ac2",
       "implementation": "reconstructed/bridge-core/src/adaptive-concurrency.js",
       "implementationSha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7"
+    },
+    {
+      "declaration": "bridge-activity-tracker.d.ts",
+      "sha256": "d9c6d64eec83d0cfff21194143649ee23679f1d4639eadd9a0abc4fddebfa6d9",
+      "implementation": "reconstructed/bridge-core/src/bridge-activity-tracker.js",
+      "implementationSha256": "fc698f0ecb5df49b879713ab92df287d85414443d1f2604a69ecb34a5c90a662"
+    },
+    {
+      "declaration": "bridge-event-store.d.ts",
+      "sha256": "898896a6795341c57d42d1f8f94c08f550c6993259cdd169bfc9959ce69d7c04",
+      "implementation": "reconstructed/bridge-core/src/bridge-event-store.js",
+      "implementationSha256": "04f49f8c0300eae09795367f46f8ce611a1da0eb420c8615efb6eadd8be87995"
+    },
+    {
+      "declaration": "bridge-http-router.d.ts",
+      "sha256": "d9875ce2f78303b6cc2b0de31a5f157751669eb55925c98cc62ef3ee24458927",
+      "implementation": "reconstructed/bridge-core/src/bridge-http-router.js",
+      "implementationSha256": "e62762f79c0119a9274474465e65a9cd361dfd30ad62d6241b493303596da1a1"
     },
     {
       "declaration": "bridge-session-registry.d.ts",
@@ -107,14 +124,6 @@
       "line": 23,
       "column": 8,
       "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
-    },
-    {
-      "code": 2305,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
-      "line": 1,
-      "column": 38,
-      "message": "Module '\"../../../src/bridge-activity-tracker.js\"' has no exported member 'BridgeActivitySnapshot'."
     },
     {
       "code": 2305,
@@ -245,20 +254,36 @@
       "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
     },
     {
+      "code": 2345,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 381,
+      "column": 106,
+      "message": "Argument of type 'BridgeHeaderValue' is not assignable to parameter of type 'string | undefined'.\n  Type 'string[]' is not assignable to type 'string'."
+    },
+    {
+      "code": 2345,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 382,
+      "column": 92,
+      "message": "Argument of type 'string | string[]' is not assignable to parameter of type 'string'.\n  Type 'string[]' is not assignable to type 'string'."
+    },
+    {
+      "code": 2345,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 383,
+      "column": 98,
+      "message": "Argument of type 'string | string[]' is not assignable to parameter of type 'string'.\n  Type 'string[]' is not assignable to type 'string'."
+    },
+    {
       "code": 2353,
       "category": "Error",
       "source": "recovered/shuncode-extension/src/tool-presentation.ts",
       "line": 443,
       "column": 7,
       "message": "Object literal may only specify known properties, and 'presentationStyle' does not exist in type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2558,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
-      "line": 85,
-      "column": 64,
-      "message": "Expected 0 type arguments, but got 1."
     },
     {
       "code": 2724,
@@ -275,94 +300,6 @@
       "line": 14,
       "column": 8,
       "message": "'\"../../../src/managed-command-cancellation.js\"' has no exported member named 'ManagedCommandCancellationTarget'. Did you mean 'ManagedCommandCanceller'?"
-    },
-    {
-      "code": 2749,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 87,
-      "column": 15,
-      "message": "'BoundedInMemoryEventStore' refers to a value, but is being used as a type here. Did you mean 'typeof BoundedInMemoryEventStore'?"
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 381,
-      "column": 24,
-      "message": "Parameter 'incoming' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 381,
-      "column": 34,
-      "message": "Parameter 'outgoing' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 381,
-      "column": 44,
-      "message": "Parameter 'body' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 381,
-      "column": 50,
-      "message": "Parameter 'sessionId' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 382,
-      "column": 23,
-      "message": "Parameter 'incoming' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 382,
-      "column": 33,
-      "message": "Parameter 'outgoing' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 382,
-      "column": 43,
-      "message": "Parameter 'sessionId' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 383,
-      "column": 26,
-      "message": "Parameter 'incoming' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 383,
-      "column": 36,
-      "message": "Parameter 'outgoing' implicitly has an 'any' type."
-    },
-    {
-      "code": 7006,
-      "category": "Error",
-      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
-      "line": 383,
-      "column": 46,
-      "message": "Parameter 'sessionId' implicitly has an 'any' type."
     },
     {
       "code": 7006,
