@@ -63,3 +63,7 @@ echo %ERRORLEVEL%
 第一条诊断应为39、false、退出1；第二条专项回归应6项通过、退出0。二者不矛盾：回归检查“如实记录尚有39条错误”，并不把类型门槛改成通过。
 
 完整候选仍checkJs:false/skipLibCheck:true；独立声明夹具的skipLibCheck:false不覆盖整个应用实现。剩余CustomTool/Skill、取消命令、工具结果、日志回调、宿主Chat与HTTP边界继续待恢复；逐文件权限调度未修复。不能安装实验bundle或公开Bridge。
+
+## 本轮自动CI结果
+
+提交7c5c20fa17b195b7fa6393efc24db7d72637c592的[运行34980025558](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/34980025558)已完成：Ubuntu、Windows2022、普通CMD+conda三个作业全部成功。作业/步骤API证据保存于docs/evidence/type-contract-tests.json；没有归档远端逐条完整日志。39条类型诊断仍失败，不代表实际扩展或安装器已通过。

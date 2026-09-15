@@ -537,3 +537,9 @@ CI路径覆盖新增类型目录与新报告。本轮本地测试不代替新Win
 本轮查询发现上一轮代码358685378717895767e85a7079166cfd5fcaa5f6的自动CI已完成，运行34977478994成功；不再把“当时未查到”当永久事实。之前手动dispatch的403仍是真实历史事件。本轮新代码尚未据此验收，不沿用旧120项成功冒充新123项Windows通过。
 
 未修运行时权限调度、未实现新HTTP拒绝策略、未改定制Chat宿主，剩余CustomTool/Skill/取消命令/日志/工具结果/宿主字段继续待恢复。没有部署实验扩展、执行真实激活/GUI/MCP或构建完整Windows安装器，整体仍NOT_READY。
+
+### 20 本轮Windows/Linux/CMD复验
+
+实现提交7c5c20fa17b195b7fa6393efc24db7d72637c592推送后自动触发34980025558。使用后台gh run watch --exit-status等待，第一次180秒等待到期时Windows/Ubuntu核心已通过、CMDconda仍运行；继续阻塞等待后进程退出0。三个作业全部成功：Ubuntu30秒、Windows49秒、CMDconda4分4秒。gh run view作业/步骤API结果和本地计数存docs/evidence/type-contract-tests.json，没有冒称已下载逐条完整远端日志。动作运行时Node20弃用/强制Node24警告仍存在，未把它误报成项目Node环境失败。
+
+新CI确实覆盖本轮123项Node回归及CMD环境检查，仍不代表39条类型错误消失、扩展实际激活或GUI/MCP/安装器通过。当前GitHub自动触发可用，不要求用户为历史手动dispatch的403重复提供任何凭证。
