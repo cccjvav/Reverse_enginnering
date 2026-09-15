@@ -1,0 +1,29 @@
+{
+  "scope": "Candidate public contracts inferred from preserved bodies and extension callers; not original declarations or runtime acceptance.",
+  "modules": [
+    {
+      "declaration": "adaptive-concurrency.d.ts",
+      "sha256": "9d489d0d877607eb3a7bbd4c61fdc7b813e5703025e81ff01d96c91143465ac2",
+      "implementation": "reconstructed/bridge-core/src/adaptive-concurrency.js",
+      "implementationSha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7"
+    },
+    {
+      "declaration": "bridge-session-registry.d.ts",
+      "sha256": "556d39cdc5642cb2a57d4fbd2ea5990e85bc8172b165c03c7fef0155d9531524",
+      "implementation": "reconstructed/bridge-core/src/bridge-session-registry.js",
+      "implementationSha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56"
+    },
+    {
+      "declaration": "concurrency.d.ts",
+      "sha256": "bc377d07d635ece7a767f1efe51286aa98e7c8ee2855fc07c729a22c6d91b960",
+      "implementation": "reconstructed/bridge-core/src/concurrency.js",
+      "implementationSha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15"
+    },
+    {
+      "declaration": "jsonrpc-request-id-registry.d.ts",
+      "sha256": "15299aa2f22f64ca48c8578270a4a9f44101b1589c3fdbec9e144eac7ef66f28",
+      "implementation": "reconstructed/bridge-core/src/jsonrpc-request-id-registry.js",
+      "implementationSha256": "d69e55e73f6d771b0710889360a79541c7c85475445e07cc73f0506ab149f977"
+    }
+  ]
+}

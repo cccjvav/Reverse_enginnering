@@ -1,5 +1,7 @@
 # Windows小白验收手册：从构建检查到安装/卸载
 
+> 类型恢复进度：首批4个[候选类型契约](../../reconstructed/type-contracts/README.md)使独立合同模式诊断降至49条；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
+
 **你的终端固定为：普通CMD（cmd.exe），在里面激活conda。不要求Anaconda Prompt、PowerShell、venv。** 软件内部的受管终端目前使用产品自带Git Bash，这是产品资产，与“你用CMD操作”不冲突。
 
 本手册是可执行的验收规程，不是“全部已验收”的报告。每项都有编号，配套 [结果记录表](RESULTS.csv)。

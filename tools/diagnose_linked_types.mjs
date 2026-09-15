@@ -8,7 +8,7 @@ import { ROOT, hash } from './patch_utils.mjs';
 import { communityEntry, verifySource } from './build_linked_extension.mjs';
 
 const portable = p => p.split(path.sep).join('/');
-export async function diagnoseTypes() {
+export async function diagnoseTypes({ contracts = false } = {}) {
   const original = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/custom-extension.json'), 'utf8'));
   const core = JSON.parse(await readFile(path.join(ROOT, 'reconstructed/bridge-core/provenance.json'), 'utf8'));
   const upstream = JSON.parse(await readFile(path.join(ROOT, 'reference/vscode-types/provenance.json'), 'utf8'));
@@ -16,6 +16,16 @@ export async function diagnoseTypes() {
   for (const file of original.copied) expected.set('recovered/shuncode-extension/' + file.path, file.sha256);
   for (const file of core.modules) expected.set('reconstructed/bridge-core/' + file.file, file.sha256);
   for (const file of upstream.files) expected.set('reference/vscode-types/' + file.file, file.sha256);
+  const contractModules = contracts ? JSON.parse(await readFile(path.join(ROOT, 'reconstructed/type-contracts/provenance.json'), 'utf8')).modules : [];
+  const contractMap = new Map();
+  for (const item of contractModules) {
+    if (expected.get(item.implementation) !== item.implementationSha256) throw new Error('Contract implementation provenance mismatch: ' + item.implementation);
+    verifySource(await readFile(path.join(ROOT, item.implementation)), item.implementationSha256, item.implementation);
+    const declaration = 'reconstructed/type-contracts/' + item.declaration;
+    verifySource(await readFile(path.join(ROOT, declaration)), item.sha256, declaration);
+    expected.set(declaration, item.sha256);
+    contractMap.set(item.implementation, declaration);
+  }
   const sourceFiles = original.copied.filter(f => f.path.startsWith('src/') && /\.[cm]?ts$/.test(f.path)).map(f => 'recovered/shuncode-extension/' + f.path);
   const hostFiles = upstream.files.filter(f => f.file.endsWith('.d.ts')).map(f => 'reference/vscode-types/' + f.file);
   const options = { noEmit: true, strict: true, skipLibCheck: true, allowJs: true, checkJs: false,
@@ -37,7 +47,8 @@ export async function diagnoseTypes() {
     if (name.startsWith('../../../src/') && portable(path.relative(ROOT, containingFile)).startsWith('recovered/shuncode-extension/src/')) {
       const source = 'reconstructed/bridge-core/src/' + path.posix.basename(name);
       if (name !== '../../../src/' + path.posix.basename(name) || !expected.has(source)) return undefined;
-      return { resolvedFileName: path.join(ROOT, source), extension: ts.Extension.Js, isExternalLibraryImport: false };
+      const declaration = contractMap.get(source);
+      return { resolvedFileName: path.join(ROOT, declaration ?? source), extension: declaration ? ts.Extension.Dts : ts.Extension.Js, isExternalLibraryImport: false };
     }
     return ts.resolveModuleName(name, containingFile, options, host).resolvedModule;
   });
@@ -56,11 +67,13 @@ export async function diagnoseTypes() {
     strict: true, noEmit: true, allowJs: true, checkJs: false, skipLibCheck: true,
     errorCount: errors, diagnosticCount: diagnostics.length, counts,
     candidateTypecheckPassed: errors === 0, originalTypesRecovered: false, originalHostIdentityConfirmed: false,
+    ...(contracts ? { contractMode: 'candidate-declarations', contractModules, runtimeImplementationCheckedByTypeScript: false } : {}),
     diagnostics, lockfileSha256: hash(await readFile(path.join(ROOT, 'package-lock.json'))) };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const report = await diagnoseTypes();
-  await writeFile(path.join(ROOT, 'docs/evidence/linked-type-diagnostics.json'), JSON.stringify(report, null, 2) + '\n');
+  const contracts = process.argv.includes('--contracts');
+  const report = await diagnoseTypes({ contracts });
+  await writeFile(path.join(ROOT, contracts ? 'docs/evidence/contract-type-diagnostics.json' : 'docs/evidence/linked-type-diagnostics.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ errorCount: report.errorCount, counts: report.counts, candidateTypecheckPassed: report.candidateTypecheckPassed }, null, 2));
   process.exitCode = report.candidateTypecheckPassed ? 0 : 1;
 }

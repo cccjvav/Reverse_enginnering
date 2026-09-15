@@ -1,5 +1,7 @@
 # ShunCode Windows 源码恢复
 
+> 类型恢复进度：首批4个[候选类型契约](reconstructed/type-contracts/README.md)使独立合同模式诊断降至49条；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
+
 > **[普通CMD+conda：逐步验收手册](docs/acceptance/README.md)**：宿主、原生资产、实际激活、GUI/MCP和安装/升级/卸载的操作、预期、失败处理及空白结果表。当前A可复现，A05仍59个类型错误，B/C/D尚阻塞；不是已完成验收报告。
 
 优先恢复作者自己的 MCP Bridge、工具、定制 UI 等内容；VS Code 只作为运行载体，不追求完整逆向本体。后续目标是建立可维护的定制工程和 Windows 社区版。所有工作在 `arena/01a09d2c-reverse-enginnering-of-shun` 分支进行。
@@ -19,7 +21,7 @@
 
 - **[从这里开始：分步实验](docs/learning/START_HERE.md)**：打开正确目录、识别命令/输出、安装工具、模拟实验、预期结果、故障处理和自测答案。
 - **[逐行精读](docs/learning/LINE_BY_LINE.md)**：目前完整解释社区策略、控制器、补丁基础工具、主构建器、UI补丁器和UI状态方法六个文件的 **363行**；不是全工程已逐行讲完。
-- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：153个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
+- **[完整课程路线](docs/learning/README.md)** 与 [逐文件覆盖清单](docs/learning/COVERAGE.md)：154个纳入范围文件中，其余明确待讲。源码与注解的行号/哈希会自动检查，不能拿过期教材讲新代码。
 - 学习实验：`npm run learn:check`、`npm run learn:lab`；Windows零基础步骤使用 `npm.cmd`，见实验课。实验不启动真实 Bridge、不应用补丁。
 
 ## 定制代码、完整工程与用户分发

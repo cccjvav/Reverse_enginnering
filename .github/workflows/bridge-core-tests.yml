@@ -29,6 +29,8 @@ on:
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs
       - reconstructed/bridge-core/**
+      - reconstructed/type-contracts/**
+      - docs/evidence/contract-type-diagnostics.json
       - community/bridge-core/**
       - tests/helpers/**
       - tests/bridge-core-*.test.mjs

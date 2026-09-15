@@ -15,7 +15,8 @@
     "learn:ui": "node tools/learning_ui_lab.mjs",
     "build:linked-extension": "node tools/build_linked_extension.mjs",
     "check:linked-extension": "node tools/build_linked_extension.mjs --check",
-    "diagnose:linked-types": "node tools/diagnose_linked_types.mjs"
+    "diagnose:linked-types": "node tools/diagnose_linked_types.mjs",
+    "diagnose:contract-types": "node tools/diagnose_linked_types.mjs --contracts"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

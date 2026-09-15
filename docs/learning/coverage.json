@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 153,
-    "lines": 30141,
+    "files": 154,
+    "lines": 30247,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "26281ea424d5f4715af59bf409a897416638d319053ff891aaad9c1c54fb3955",
-      "lines": 101,
+      "sha256": "9e4c738ccda18571a5cba4a04d21cb912ea8982e9abeca11bc30949b1e6ede20",
+      "lines": 103,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -835,6 +835,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-type-contracts.test.mjs",
+      "sha256": "08d674fb620a52739f310ec7b2adde8f77f3e67ac6bf9aeb678170c9b50c3c4d",
+      "lines": 91,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/community-policy.test.mjs",
       "sha256": "1fb9bff7c4952ddddf67644b8d6f21f2bf94796d55524afd6d96899590bea015",
       "lines": 98,
@@ -997,8 +1004,8 @@
     },
     {
       "source": "tools/diagnose_linked_types.mjs",
-      "sha256": "bde813d9e59316ab2526e4188eb5c5b0286a9ad2c344268c9aed39e890e17356",
-      "lines": 66,
+      "sha256": "c59214094b71ce8dfaae5418a6a8fd42b755d8b9ce0dd27576c836ae397d7475",
+      "lines": 79,
       "explainedLines": 0,
       "status": "pending"
     },

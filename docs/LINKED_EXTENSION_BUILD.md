@@ -1,5 +1,7 @@
 # 从原TS入口实际连接构建：结果与未通过项
 
+> 类型恢复进度：首批4个[候选类型契约](../reconstructed/type-contracts/README.md)使独立合同模式诊断降至49条；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
+
 > **[普通CMD+conda：逐步验收手册](acceptance/README.md)**：宿主、原生资产、实际激活、GUI/MCP和安装/升级/卸载的操作、预期、失败处理及空白结果表。当前A可复现，A05仍59个类型错误，B/C/D尚阻塞；不是已完成验收报告。
 
 本轮不再只检查“文件/导出存在”，而是让构建器从 `recovered/shuncode-extension/src/extension.ts` 出发，解析依赖、连接重建模块并生成新的CJS扩展bundle。

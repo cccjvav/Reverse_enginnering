@@ -503,3 +503,17 @@ gh run watch --exit-status返回0，GitHub作业/步骤API结果保存到extensi
 重新执行npm test：117/117通过；python -m unittest discover -s tests -p 'test_*.py'：34项发现、31通过、3项Windows专属跳过。check:bridge-core通过（41模块389声明262904字节）；learn:check通过，153文件30141行、6文件363行已完整解释，完整覆盖仍false。CRLF感知diff --check通过。原51文件逐字节对比HEAD一致，原ZIP未改。
 
 本轮只新增验收材料，未修复59条类型错误，未改实验bundle、运行时代码或部署补丁。现有回归验证诚实保留类型失败，并非类型已通过；未新增Windows实机验收。A可运行，A05类型门槛仍FAIL；完整宿主、原生资产、真实激活/GUI/MCP与新安装器B/C/D仍BLOCKED，整体NOT_READY。后续工程仍应先重建有证据的类型契约、确认定制宿主字段并修复权限调度，再提交真正候选走本文流程。
+
+## 19 第一批候选类型契约恢复（2026-09-15）
+
+先核对59条诊断和原JS/TS调用点，选择concurrency、adaptive-concurrency、jsonrpc-request-id-registry、bridge-session-registry四个实现闭合且不依赖未知宿主字段的模块。不修改提取原件，用reconstructed/type-contracts中的候选声明建立实例类型、泛型、判别联合、可选get和回调约束。它们不是原始声明，也不改变运行时授权行为。每份声明及对应原JS哈希写入provenance，诊断前与原core清单及文件交叉验证。
+
+环境恢复时发现本地Git元数据只在初始提交，工作文件保留了上轮成果，node_modules和dist未持久化。第一次诊断真实失败于缺typescript；npm ci --ignore-scripts --no-audit --no-fund恢复23包。gh API确认本分支远端fd346bc，git fetch本分支成功；引用origin/分支不存在，故首次mixed reset失败且未改变文件，随后确认FETCH_HEAD就是fd346bc并mixed reset FETCH_HEAD，仅恢复同分支索引/历史，不覆盖工作树。从该HEAD恢复快照排除的六个原dist文件；没有切分支或重建原bundle。
+
+保留diagnose:linked-types的59条JS推断基线，新增diagnose:contract-types/--contracts与独立contract-type-diagnostics.json。启用四个候选合同后实际退出1、49错误：TS2305=10、TS2339=14、TS2353=1、TS2558=1、TS2724=2、TS2749=1、TS7006=20。减少10条（4个值/类型错误、1个泛型参数错误、5个会话回调隐式any），不是降低strict或补any所得。候选诊断仍checkJs:false/skipLibCheck:true，报告明确runtimeImplementationCheckedByTypeScript:false。
+
+新增三项回归：准确诊断与宿主错误保留；strict/noEmit/skipLibCheck:false的独立声明夹具（含七个@ts-expect-error负例，拒绝不合约调用）；对原JS的有限运行时合同核验。声明不声称穷尽实现行为，reason保持string是因为实现接受调用者自定义销毁理由。类型夹具只写.work，不生成应用代码。
+
+执行新专项测试3通过，全套npm test现在120/120通过；Python34项发现、31通过、3Windows专属跳过；check:bridge-core、check:linked-extension、learn:check及CRLF感知diff检查通过。learn:build更新清单为154文件30247行，仍仅6文件363行完整讲解；新增声明说明不计作全工程逐行覆盖。原51文件逐字节比对HEAD一致，社区ZIP SHA仍6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa；实验bundle保持1673367字节与原SHA。
+
+CI路径覆盖新增类型目录与新报告。本轮本地测试不代替新Windows CI结果；此前34970685889只对应历史117项。下一批仍需恢复Activity/CustomTool/Skill/EventStore与HTTP回调，定制Chat宿主字段必须继续结合真实宿主证据，不能单纯module augmentation伪装已实现。权限调度、宿主原生运行资产、激活/GUI/MCP/安装器均未完成，整体仍NOT_READY。

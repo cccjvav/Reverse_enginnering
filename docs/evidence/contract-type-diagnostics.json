@@ -1,0 +1,449 @@
+{
+  "scope": "Diagnostic candidate linking preserved TS to inferred JS and public Code OSS types. Not original type recovery or application acceptance.",
+  "typescriptVersion": "5.9.3",
+  "candidateHostCommit": "df53daabb18cd157bdb08c7f01c34df936cf12f4",
+  "sourceFiles": 34,
+  "hostDeclarationFiles": 8,
+  "strict": true,
+  "noEmit": true,
+  "allowJs": true,
+  "checkJs": false,
+  "skipLibCheck": true,
+  "errorCount": 49,
+  "diagnosticCount": 49,
+  "counts": {
+    "TS2305": 10,
+    "TS2339": 14,
+    "TS2353": 1,
+    "TS2558": 1,
+    "TS2724": 2,
+    "TS2749": 1,
+    "TS7006": 20
+  },
+  "candidateTypecheckPassed": false,
+  "originalTypesRecovered": false,
+  "originalHostIdentityConfirmed": false,
+  "contractMode": "candidate-declarations",
+  "contractModules": [
+    {
+      "declaration": "adaptive-concurrency.d.ts",
+      "sha256": "9d489d0d877607eb3a7bbd4c61fdc7b813e5703025e81ff01d96c91143465ac2",
+      "implementation": "reconstructed/bridge-core/src/adaptive-concurrency.js",
+      "implementationSha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7"
+    },
+    {
+      "declaration": "bridge-session-registry.d.ts",
+      "sha256": "556d39cdc5642cb2a57d4fbd2ea5990e85bc8172b165c03c7fef0155d9531524",
+      "implementation": "reconstructed/bridge-core/src/bridge-session-registry.js",
+      "implementationSha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56"
+    },
+    {
+      "declaration": "concurrency.d.ts",
+      "sha256": "bc377d07d635ece7a767f1efe51286aa98e7c8ee2855fc07c729a22c6d91b960",
+      "implementation": "reconstructed/bridge-core/src/concurrency.js",
+      "implementationSha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15"
+    },
+    {
+      "declaration": "jsonrpc-request-id-registry.d.ts",
+      "sha256": "15299aa2f22f64ca48c8578270a4a9f44101b1589c3fdbec9e144eac7ef66f28",
+      "implementation": "reconstructed/bridge-core/src/jsonrpc-request-id-registry.js",
+      "implementationSha256": "d69e55e73f6d771b0710889360a79541c7c85475445e07cc73f0506ab149f977"
+    }
+  ],
+  "runtimeImplementationCheckedByTypeScript": false,
+  "diagnostics": [
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-constants.ts",
+      "line": 1,
+      "column": 15,
+      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolStatusEntry'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 15,
+      "column": 42,
+      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 14,
+      "column": 49,
+      "message": "Module '\"../../../src/custom-tool-skill-import.js\"' has no exported member 'SkillImportResult'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 14,
+      "column": 73,
+      "message": "Module '\"../../../src/custom-tool-skill-import.js\"' has no exported member 'SkillRunnerResult'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 15,
+      "column": 35,
+      "message": "Module '\"../../../src/custom-tool-skill.js\"' has no exported member 'SkillLoadDiagnosis'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 22,
+      "column": 8,
+      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolStatusEntry'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 23,
+      "column": 8,
+      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 1,
+      "column": 38,
+      "message": "Module '\"../../../src/bridge-activity-tracker.js\"' has no exported member 'BridgeActivitySnapshot'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 11,
+      "column": 47,
+      "message": "Module '\"../../../src/file-tool-registry.js\"' has no exported member 'ToolContentBlock'."
+    },
+    {
+      "code": 2305,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 3,
+      "column": 50,
+      "message": "Module '\"../../../src/custom-tools.js\"' has no exported member 'CustomToolManifest'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 309,
+      "column": 45,
+      "message": "Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; } | { dirName: string; loaded: boolean; name: any; }'.\n  Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; }'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 309,
+      "column": 79,
+      "message": "Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; } | { dirName: string; loaded: boolean; name: any; }'.\n  Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; }'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 312,
+      "column": 27,
+      "message": "Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; } | { dirName: string; loaded: boolean; name: any; }'.\n  Property 'name' does not exist on type '{ dirName: any; loaded: boolean; reasonCode: any; reason: any; fix: any; }'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 329,
+      "column": 27,
+      "message": "Property 'content' does not exist on type '{ text: string; structuredContent: any; isError?: undefined; content?: undefined; } | { text: string; structuredContent: { files: any; summary: { requested: any; succeeded: any; failed: any; skipped: any; truncated: any; }; }; isError: true | undefined; content?: undefined; } | { ...; } | { ...; } | { ...; }'.\n  Property 'content' does not exist on type '{ text: string; structuredContent: { invalid_glob_source?: any; status: string; error_code: string; message: string; }; isError: boolean; }'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 17,
+      "column": 55,
+      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 18,
+      "column": 57,
+      "message": "Property 'metrics' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 22,
+      "column": 61,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 220,
+      "column": 105,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 223,
+      "column": 60,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 224,
+      "column": 64,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 225,
+      "column": 64,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 27,
+      "column": 90,
+      "message": "Property 'presentationKind' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 295,
+      "column": 60,
+      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 319,
+      "column": 60,
+      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2353,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/tool-presentation.ts",
+      "line": 443,
+      "column": 7,
+      "message": "Object literal may only specify known properties, and 'presentationStyle' does not exist in type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2558,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 85,
+      "column": 64,
+      "message": "Expected 0 type arguments, but got 1."
+    },
+    {
+      "code": 2724,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/ide-tool-broker.ts",
+      "line": 13,
+      "column": 8,
+      "message": "'\"../../../src/managed-command-cancellation.js\"' has no exported member named 'ManagedCommandCancellationPreview'. Did you mean 'ManagedCommandCanceller'?"
+    },
+    {
+      "code": 2724,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/ide-tool-broker.ts",
+      "line": 14,
+      "column": 8,
+      "message": "'\"../../../src/managed-command-cancellation.js\"' has no exported member named 'ManagedCommandCancellationTarget'. Did you mean 'ManagedCommandCanceller'?"
+    },
+    {
+      "code": 2749,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 87,
+      "column": 15,
+      "message": "'BoundedInMemoryEventStore' refers to a value, but is being used as a type here. Did you mean 'typeof BoundedInMemoryEventStore'?"
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 381,
+      "column": 24,
+      "message": "Parameter 'incoming' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 381,
+      "column": 34,
+      "message": "Parameter 'outgoing' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 381,
+      "column": 44,
+      "message": "Parameter 'body' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 381,
+      "column": 50,
+      "message": "Parameter 'sessionId' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 382,
+      "column": 23,
+      "message": "Parameter 'incoming' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 382,
+      "column": 33,
+      "message": "Parameter 'outgoing' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 382,
+      "column": 43,
+      "message": "Parameter 'sessionId' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 383,
+      "column": 26,
+      "message": "Parameter 'incoming' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 383,
+      "column": 36,
+      "message": "Parameter 'outgoing' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-mcp-transport.ts",
+      "line": 383,
+      "column": 46,
+      "message": "Parameter 'sessionId' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 216,
+      "column": 68,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 282,
+      "column": 55,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 296,
+      "column": 47,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 327,
+      "column": 55,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 334,
+      "column": 54,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 350,
+      "column": 54,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 358,
+      "column": 55,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 221,
+      "column": 68,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 233,
+      "column": 66,
+      "message": "Parameter 'name' implicitly has an 'any' type."
+    },
+    {
+      "code": 7006,
+      "category": "Error",
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 342,
+      "column": 17,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    }
+  ],
+  "lockfileSha256": "30be986a68e8acf5ebcf91f13b16705b102d478ff3648a34c84d1020cb33dba6"
+}
