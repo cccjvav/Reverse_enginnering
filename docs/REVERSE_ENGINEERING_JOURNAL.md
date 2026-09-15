@@ -517,3 +517,7 @@ gh run watch --exit-status返回0，GitHub作业/步骤API结果保存到extensi
 执行新专项测试3通过，全套npm test现在120/120通过；Python34项发现、31通过、3Windows专属跳过；check:bridge-core、check:linked-extension、learn:check及CRLF感知diff检查通过。learn:build更新清单为154文件30247行，仍仅6文件363行完整讲解；新增声明说明不计作全工程逐行覆盖。原51文件逐字节比对HEAD一致，社区ZIP SHA仍6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa；实验bundle保持1673367字节与原SHA。
 
 CI路径覆盖新增类型目录与新报告。本轮本地测试不代替新Windows CI结果；此前34970685889只对应历史117项。下一批仍需恢复Activity/CustomTool/Skill/EventStore与HTTP回调，定制Chat宿主字段必须继续结合真实宿主证据，不能单纯module augmentation伪装已实现。权限调度、宿主原生运行资产、激活/GUI/MCP/安装器均未完成，整体仍NOT_READY。
+
+### 19 远端提交与CI权限边界
+
+实现提交3586853已成功推送同一Arena分支。推送后gh run list两次查询只返回旧运行，尚未查到本提交的新CI。尝试gh workflow run bridge-core-tests.yml --ref arena/01a09d2c-reverse-enginnering-of-shun，API真实返回403 Resource not accessible by integration。未换身份、未索取令牌、未绕过权限；本轮不能声称Windows CI通过。GitHub连接的Actions调度权限需在Arena端检查/重新连接，或由仓库所有者在Actions页面手工执行该分支工作流。代码推送已成功，不受该调度权限错误影响。
