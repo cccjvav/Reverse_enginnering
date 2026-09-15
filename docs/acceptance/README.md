@@ -1,6 +1,6 @@
 # Windows小白验收手册：从构建检查到安装/卸载
 
-> 类型恢复进度：累计12个[候选类型契约](../../reconstructed/type-contracts/README.md)使独立合同模式诊断降至18条（仍含3条HTTP边界错误）；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
+> 类型恢复进度：累计14个[候选类型契约](../../reconstructed/type-contracts/README.md)使独立合同模式诊断降至14条（11条定制Chat字段、3条HTTP边界）；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。
 
 **你的终端固定为：普通CMD（cmd.exe），在里面激活conda。不要求Anaconda Prompt、PowerShell、venv。** 软件内部的受管终端目前使用产品自带Git Bash，这是产品资产，与“你用CMD操作”不冲突。
 
@@ -107,7 +107,7 @@ echo %ERRORLEVEL% > "%RUN%\logs\A03-exit.txt"
 type "%RUN%\logs\A03-exit.txt"
 ```
 
-**PASS预期：** 0，日志出现ALL_LEARNING_CHECKS_PASSED。当前参考为117项Node；Python在Windows应运行34项（本地Linux记录中有3项Windows专属跳过，不能把该跳过结果复制为Windows验收）。测试数以后可能变化，要同时记录提交及实际日志。**这仍不是GUI/MCP验收。** 出错打开日志找第一个失败，别只看最后一句。
+**PASS预期：** 0，日志出现ALL_LEARNING_CHECKS_PASSED。早期源码连接基线为117项Node，本轮扩充后为133项Node；Python在Windows应运行34项（本地Linux记录中有3项Windows专属跳过，不能把该跳过结果复制为Windows验收）。测试数以后可能变化，要同时记录提交及实际日志。**这仍不是GUI/MCP验收。** 出错打开日志找第一个失败，别只看最后一句。
 
 ### A04 构建实验扩展并核对来源
 

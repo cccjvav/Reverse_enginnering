@@ -86,10 +86,28 @@
       ]
     },
     {
+      "declaration": "file-tool-registry.d.ts",
+      "sha256": "09c3dea1b309b5122172b374eb898fb7a8637008fc7c456e32bb819ced26118f",
+      "implementation": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "implementationSha256": "c7f9373b292a11f2c2b6072a57566460c36bf86a3ca7043dd75c193fd550ff35"
+    },
+    {
       "declaration": "jsonrpc-request-id-registry.d.ts",
       "sha256": "15299aa2f22f64ca48c8578270a4a9f44101b1589c3fdbec9e144eac7ef66f28",
       "implementation": "reconstructed/bridge-core/src/jsonrpc-request-id-registry.js",
       "implementationSha256": "d69e55e73f6d771b0710889360a79541c7c85475445e07cc73f0506ab149f977"
+    },
+    {
+      "declaration": "managed-command-cancellation.d.ts",
+      "sha256": "ea16aa92c386905dd4deaa275999e869239f36fdd1614326374cff3dbd13359a",
+      "implementation": "reconstructed/bridge-core/src/managed-command-cancellation.js",
+      "implementationSha256": "1a2d8cc585b0d64ea26aedf44d5f1c0a86aa8f91fb69c3b05bce7607b330a6b0",
+      "evidenceDependencies": [
+        {
+          "source": "reconstructed/bridge-core/src/managed-command-risk.js",
+          "sha256": "aea0023597c8fd6f7fa4663ab4f80fedf2378cfd1bac83ea206f1c0ce9fa035e"
+        }
+      ]
     }
   ]
 }

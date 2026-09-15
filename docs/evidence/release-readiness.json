@@ -1,0 +1,88 @@
+{
+  "scope": "Current repository engineering release gates; no external account/network/desktop execution. Blocked gates require implementation and evidence, not editing this report.",
+  "overall": "NOT_READY",
+  "candidateContractModules": 14,
+  "originalTypesRecovered": false,
+  "originalHostIdentityConfirmed": false,
+  "originalInstaller": {
+    "source": "ShunCode-0.7.4-win32-x64-Setup.exe",
+    "bytes": 134,
+    "isLfsPointer": true,
+    "isNewSourceBuild": false
+  },
+  "observedRuntimeAssets": [
+    {
+      "source": "recovered/shuncode-extension/runtime/agent-host.js",
+      "exists": true,
+      "bytes": 943158,
+      "sha256": "9c265084d78a98b24e1bae01bca73825bddb4d6562579d62a1ea923f0ea48f22",
+      "candidateRuntimeVerified": false
+    },
+    {
+      "source": "recovered/shuncode-extension/runtime/mcp-server.js",
+      "exists": true,
+      "bytes": 1286417,
+      "sha256": "4388415a4d78fb7ee254b8cf0766da67045228260e356e7e797020bf6b6d18e1",
+      "candidateRuntimeVerified": false
+    },
+    {
+      "source": "recovered/shuncode-extension/runtime/git/bin/bash.exe",
+      "exists": false,
+      "candidateRuntimeVerified": false
+    },
+    {
+      "source": "recovered/shuncode-extension/runtime/bin/rg.exe",
+      "exists": false,
+      "candidateRuntimeVerified": false
+    }
+  ],
+  "gates": [
+    {
+      "id": "source-linkage",
+      "status": "PASS",
+      "detail": "In-memory experimental CJS rebuilt and statically parsed; not a product package.",
+      "sha256": "c97853579b4b9fab7f27f3647f41b19bdfb32c4f424af6be22db3b5378703a00"
+    },
+    {
+      "id": "candidate-types",
+      "status": "FAIL",
+      "errors": 14,
+      "detail": "Strict candidate consumer check; JS implementations not fully checked."
+    },
+    {
+      "id": "carrier-identity",
+      "status": "BLOCKED",
+      "detail": "Original custom host identity not confirmed. Public candidate types are not original host proof."
+    },
+    {
+      "id": "host-chat-api",
+      "status": "BLOCKED",
+      "detail": "Custom Chat presentation fields lack verified host implementation/registration."
+    },
+    {
+      "id": "native-runtime",
+      "status": "BLOCKED",
+      "detail": "Recovered legacy JS exists, but complete candidate assets and Electron ABI execution are unverified."
+    },
+    {
+      "id": "authorization-integration",
+      "status": "BLOCKED",
+      "detail": "Fail-closed maintenance dispatcher exists but is not connected to host-owned policy or the extension build. Original dispatcher still omits policy."
+    },
+    {
+      "id": "http-integration",
+      "status": "BLOCKED",
+      "detail": "Duplicate-header rejection adapter is isolated, not connected to extension build."
+    },
+    {
+      "id": "real-activation-gui-mcp",
+      "status": "BLOCKED",
+      "detail": "No complete candidate desktop activation, GUI, real client or tunnel acceptance has been performed."
+    },
+    {
+      "id": "source-built-installer",
+      "status": "BLOCKED",
+      "detail": "No new full installer or install/upgrade/uninstall acceptance. Original EXE/overlay do not satisfy this gate."
+    }
+  ]
+}

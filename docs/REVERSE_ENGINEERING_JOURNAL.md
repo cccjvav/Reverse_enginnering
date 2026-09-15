@@ -567,3 +567,29 @@ facade字段与执行返回来自多个原模块，故provenance增加四个evid
 实现提交10bc1f72113ec6b38539c0b491d73ef16bb397b6已推送固定分支，自动触发35033132376。后台gh run watch --exit-status退出0；Ubuntu23秒、Windows50秒、普通CMD+conda2分23秒三个作业全部成功。gh run view获取作业/步骤API证据保存docs/evidence/type-contract-batch3-tests.json，保留第二批历史证据不覆盖。动作运行时Node20弃用/被强制Node24提示仍记录为警告；未改变项目conda环境。未归档远端逐项完整日志，不冒称更高证据等级。
 
 本轮源代码回归和CMD适配通过；候选18条类型错误、定制宿主与安全/运行时/安装器门槛仍失败或阻塞，不能因为CI绿色发布完整产品。
+
+## 22 剩余契约与维护运行时边界（2026-09-16）
+
+用户要求一次完成后统一报告；本轮没有继续分批请求确认，执行剩余可验证工作，但不能将未完成的宿主/桌面/安装器标成完成。原件保护保持，工作分支从cb2e1ce开始。
+
+先读取managed-command-cancellation、managed-command-risk、原CommandState/cancellationTarget与file-tool-registry/消费者。新增取消命令和文件结果两份候选声明，累计14模块。取消状态/owner/高风险预约/nullable退出码完整保留；文件内容为text/image联合、content可选。初版native owner声明为字面量导致原默认参数被误窄化，真实诊断15条；改为与原var及跨会话调用一致的string后14条。当前TS2339=10、TS2345=3、TS2353=1，即11条定制Chat字段和3条原HTTP头边界。没有补未验证的宿主augmentation或删除原调用来刷绿；原JS推断仍59。
+
+新增community/bridge-core/file-tool-dispatcher.mjs：独立维护入口要求可信宿主checkPermission，否则PERMISSION_POLICY_REQUIRED；审批结果只有true允许。向五种文件工具转发权限与configByTool，read_files复用之前的检查点候选。未知工具/参数拒绝，失败信息不再泛称没有任何读写。它没有接入原扩展，原消费者缺少宿主策略；不会把这个未整合模块塞进overlay。配置必须来自宿主，不来自模型；会话绑定、审批UI、OS隔离和剩余竞态均未解决。
+
+新增community/bridge-core/http-router.mjs：在正确端点拒绝数组/重复协议头，rawHeaders检查覆盖Node已拼接重复头的情形，不回显令牌/头值。原错误路径和令牌路由保留。用真正的回环Node HTTP服务器和无工具处理器测试4类重复头400/零调用、错令牌404、单值合法请求200、缺session头400。不是实际MCP或隧道测试，未接入原扩展构建。
+
+首次维护专项两条断言失败：读结果实际有行号“1: alpha”，不是“alpha”；rm字符串在取消风险分类器返回normal，该分类器强调中途强停损坏风险而非通用危险命令分类。按实际语义改测试，用它明确识别的npm install字符串内存夹具（从不执行命令），没有改实现伪造高风险。另测5工具拒绝、字节不变、显式批准图片/补丁、单行配置预算、truthy非布尔拒绝、权限异常拒绝、owner及确认预约。修正后维护5项通过；新增声明严格夹具也通过。
+
+## 23 旧Agent Host实际stdio探测与发布门槛（2026-09-16）
+
+观察当前安装器仅134字节LFS指针，git lfs命令不存在；这不是新安装器或真实旧EXE。当前恢复区agent-host.js943158字节、mcp-server.js1286417字节确实存在，runtime/git/bin/bash.exe和runtime/bin/rg.exe不存在。未把缺少当前LFS对象说成永远无法获取，但也不运行指针或冒称已检查原生ABI。
+
+进一步审读旧agent-host.js的启动/dispatch逻辑，只选择runtime/hello、runtime/ping、tools/list、不存在任务agent/cancel和未知方法五个固定请求。新增bridge-core-agent-runtime测试：校验原文件SHA后在空临时HOME、最小环境下启动Node；通过预加载JS守卫阻断HTTP/TCP/TLS/UDP/fetch和后续child_process入口，不继承账号/代理环境，不发送agent/run。守卫不是OS沙箱。实际protocol=8、ping=true、工具列表一致、not_running、-32601，收到全部响应再关闭stdin，退出0。保存本地证据agent-metadata-smoke.json；不是新源码Agent Host、模型执行、Electron、PTY、GUI或扩展激活验收。
+
+新增check_release_readiness.mjs/npm run check:release：每次真实重跑候选诊断和内存bundle构建，观察运行文件/原安装器状态，保守列出载体/Chat/原生资产/权限整合/HTTP整合/实机/新安装器门槛。--write保存release-readiness.json；NOT_READY退出2。检查不会启动应用或公网服务，编辑报告不构成放行。新增门槛回归验证静态构建PASS不能使总状态READY。
+
+## 24 本轮总验证与真实完成边界（2026-09-16）
+
+完整本地npm test133/133；Python34项发现、31通过、3Windows专属跳过。check:bridge-core、check:linked-extension、learn:check、CRLF感知diff与新汇总文档链接检查通过。学习清单159文件30823行，仍仅6文件363行完整讲解。原51文件与HEAD逐字节一致，社区ZIP SHA6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa及实验bundle1673367字节原SHA不变。
+
+docs/RECOVERY_STATUS.md按全部目标列已完成/未完成，包含普通CMD复现和实际失败修正。仍有14条候选错误；维护模块没有纳入原扩展，源构建Agent Host与完整载体、真实激活/GUI/MCP、原生资产和安装器未完成。总状态NOT_READY，没有“所有剩余项目已完成”的结论。本轮Windows CI在推送后另行记录，不沿用第三批的成功。

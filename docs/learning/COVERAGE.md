@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/154 个纳入范围的文件完整逐行解释；363/30465 行已解释。
+当前：6/159 个纳入范围的文件完整逐行解释；363/30823 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -15,10 +15,12 @@
 
 | 文件 | 总行数 | 已解释 | 状态 |
 |---|---:|---:|---|
-| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 103 | 0 | 待逐行讲解 |
+| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 104 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 107 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 47 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
+| [community/bridge-core/file-tool-dispatcher.mjs](../../community/bridge-core/file-tool-dispatcher.mjs) | 63 | 0 | 待逐行讲解 |
+| [community/bridge-core/http-router.mjs](../../community/bridge-core/http-router.mjs) | 31 | 0 | 待逐行讲解 |
 | [community/bridge-core/read-files.mjs](../../community/bridge-core/read-files.mjs) | 412 | 0 | 待逐行讲解 |
 | [community/extension/src/bridge-access-controller.ts](../../community/extension/src/bridge-access-controller.ts) | 30 | 30 | 本组已逐行解释 |
 | [community/extension/src/bridge-license-service.ts](../../community/extension/src/bridge-license-service.ts) | 73 | 73 | 本组已逐行解释 |
@@ -121,6 +123,7 @@
 | [recovered/shuncode-extension/src/workspace-hub-store.ts](../../recovered/shuncode-extension/src/workspace-hub-store.ts) | 301 | 0 | 待逐行讲解 |
 | [recovered/shuncode-extension/src/workspace-hub-types.ts](../../recovered/shuncode-extension/src/workspace-hub-types.ts) | 74 | 0 | 待逐行讲解 |
 | [recovered/shuncode-extension/src/workspace-hub.ts](../../recovered/shuncode-extension/src/workspace-hub.ts) | 333 | 0 | 待逐行讲解 |
+| [tests/bridge-core-agent-runtime.test.mjs](../../tests/bridge-core-agent-runtime.test.mjs) | 69 | 0 | 待逐行讲解 |
 | [tests/bridge-core-boundary.test.mjs](../../tests/bridge-core-boundary.test.mjs) | 25 | 0 | 待逐行讲解 |
 | [tests/bridge-core-custom-tools.test.mjs](../../tests/bridge-core-custom-tools.test.mjs) | 145 | 0 | 待逐行讲解 |
 | [tests/bridge-core-file-execution.test.mjs](../../tests/bridge-core-file-execution.test.mjs) | 104 | 0 | 待逐行讲解 |
@@ -128,10 +131,11 @@
 | [tests/bridge-core-http.test.mjs](../../tests/bridge-core-http.test.mjs) | 63 | 0 | 待逐行讲解 |
 | [tests/bridge-core-learning.test.mjs](../../tests/bridge-core-learning.test.mjs) | 40 | 0 | 待逐行讲解 |
 | [tests/bridge-core-linked-extension.test.mjs](../../tests/bridge-core-linked-extension.test.mjs) | 60 | 0 | 待逐行讲解 |
+| [tests/bridge-core-maintenance-boundaries.test.mjs](../../tests/bridge-core-maintenance-boundaries.test.mjs) | 126 | 0 | 待逐行讲解 |
 | [tests/bridge-core-patch.test.mjs](../../tests/bridge-core-patch.test.mjs) | 136 | 0 | 待逐行讲解 |
 | [tests/bridge-core-reconstruction.test.mjs](../../tests/bridge-core-reconstruction.test.mjs) | 103 | 0 | 待逐行讲解 |
 | [tests/bridge-core-state.test.mjs](../../tests/bridge-core-state.test.mjs) | 113 | 0 | 待逐行讲解 |
-| [tests/bridge-core-type-contracts.test.mjs](../../tests/bridge-core-type-contracts.test.mjs) | 305 | 0 | 待逐行讲解 |
+| [tests/bridge-core-type-contracts.test.mjs](../../tests/bridge-core-type-contracts.test.mjs) | 320 | 0 | 待逐行讲解 |
 | [tests/community-policy.test.mjs](../../tests/community-policy.test.mjs) | 98 | 0 | 待逐行讲解 |
 | [tests/community-ui-hardening.test.mjs](../../tests/community-ui-hardening.test.mjs) | 56 | 0 | 待逐行讲解 |
 | [tests/community-ui.test.mjs](../../tests/community-ui.test.mjs) | 64 | 0 | 待逐行讲解 |
@@ -154,6 +158,7 @@
 | [tools/build_linked_extension.mjs](../../tools/build_linked_extension.mjs) | 135 | 0 | 待逐行讲解 |
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |
 | [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
+| [tools/check_release_readiness.mjs](../../tools/check_release_readiness.mjs) | 53 | 0 | 待逐行讲解 |
 | [tools/ci_windows_probe.py](../../tools/ci_windows_probe.py) | 82 | 0 | 待逐行讲解 |
 | [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 83 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |

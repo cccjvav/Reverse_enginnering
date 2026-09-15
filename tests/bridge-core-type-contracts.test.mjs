@@ -14,8 +14,8 @@ test('candidate contracts expose typed HTTP boundary mismatches without hiding r
   const actual = await diagnoseTypes({ contracts: true });
   const stored = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/contract-type-diagnostics.json'), 'utf8'));
   assert.deepEqual(actual, stored);
-  assert.equal(actual.errorCount, 18);
-  assert.equal(actual.contractModules.length, 12);
+  assert.equal(actual.errorCount, 14);
+  assert.equal(actual.contractModules.length, 14);
   assert.equal(actual.candidateTypecheckPassed, false);
   assert.equal(actual.runtimeImplementationCheckedByTypeScript, false);
   assert.equal(actual.originalTypesRecovered, false);
@@ -121,6 +121,21 @@ const definiteExit: number = execution.structuredContent.exit_code;
 resolveBridgeToolName('mcp__server__tool', name => { const text: string = name; return name === 'tool'; });
 // @ts-expect-error known-name predicate must return boolean
 resolveBridgeToolName('tool', name => name);
+import { ManagedCommandCanceller, NATIVE_MANAGED_COMMAND_OWNER_ID, type ManagedCommandCancellationTarget } from '../../reconstructed/type-contracts/managed-command-cancellation.js';
+import { invokeFileTool, type ToolContentBlock } from '../../reconstructed/type-contracts/file-tool-registry.js';
+const cancel = new ManagedCommandCanceller({waitForGrace: async (target, ms) => { const command: string = target.command; }});
+declare const target: ManagedCommandCancellationTarget;
+const owner: string = NATIVE_MANAGED_COMMAND_OWNER_ID;
+const preview = cancel.preview(target, 'bridge:fixture');
+const risk: 'normal' | 'high' = preview.riskLevel;
+// @ts-expect-error ownership is required even for cancellation
+cancel.cancel(target, {graceMs: 10});
+// @ts-expect-error unknown is not a lifecycle status
+const invalidTarget: ManagedCommandCancellationTarget = {...target, status: 'unknown'};
+const fileResult = await invokeFileTool('read_files', {}, {workspaceRoots: () => ['fixture']});
+const blocks: ToolContentBlock[] | undefined = fileResult.content;
+// @ts-expect-error an image block requires actual data and MIME type
+const invalidImage: ToolContentBlock = {type: 'image', text: 'not image data'};
 const handlers: BridgeHttpHandlers = {
   getSessionCount: () => 0,
   handlePost: async (req, res, body, sessionId) => {

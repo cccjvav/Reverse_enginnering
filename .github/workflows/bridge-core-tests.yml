@@ -25,6 +25,7 @@ on:
       - tools/audit_extension_runtime.mjs
       - tools/build_linked_extension.mjs
       - tools/diagnose_linked_types.mjs
+      - tools/check_release_readiness.mjs
       - reference/vscode-types/**
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs

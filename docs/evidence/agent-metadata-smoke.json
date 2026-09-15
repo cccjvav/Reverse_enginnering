@@ -1,0 +1,16 @@
+{
+  "scope": "Legacy original JS metadata only; empty HOME and JS guard. Not an OS sandbox, model run, new source build, extension/Electron or native asset test.",
+  "source": "recovered/shuncode-extension/runtime/agent-host.js",
+  "sha256": "9c265084d78a98b24e1bae01bca73825bddb4d6562579d62a1ea923f0ea48f22",
+  "node": "v22.22.3",
+  "platform": "linux",
+  "protocolVersion": 8,
+  "requests": [
+    "runtime/hello",
+    "runtime/ping",
+    "tools/list",
+    "agent/cancel (not running)",
+    "unknown method"
+  ],
+  "passed": true
+}

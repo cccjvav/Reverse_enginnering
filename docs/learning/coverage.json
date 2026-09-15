@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 154,
-    "lines": 30465,
+    "files": 159,
+    "lines": 30823,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "9e4c738ccda18571a5cba4a04d21cb912ea8982e9abeca11bc30949b1e6ede20",
-      "lines": 103,
+      "sha256": "f84655a74e991fef0ea310a85cb8a675119d6da59035cb7cbc1a6d9d5a836360",
+      "lines": 104,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -47,6 +47,20 @@
       "source": "community/bridge-core/concurrency.mjs",
       "sha256": "3c508831701a3a24b08c3c42fa9e7d2a20049745fc6b6572fa54777fef91fdf0",
       "lines": 101,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/bridge-core/file-tool-dispatcher.mjs",
+      "sha256": "d48b10b708d48b3c5d4a48298299e9eac60b0fa9e5c60a02d2dbc679e3953578",
+      "lines": 63,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/bridge-core/http-router.mjs",
+      "sha256": "87e67b40091ccca4d582deaa2ec0bb19eda1a086212729e115ad892f11f82466",
+      "lines": 31,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -765,6 +779,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-agent-runtime.test.mjs",
+      "sha256": "f31469dae4977835a7fee385441b0f74dca8b9220e046bd0a79ba8df35c04199",
+      "lines": 69,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/bridge-core-boundary.test.mjs",
       "sha256": "4c6953242c0d0b410010a6feb4ea4b62c174828a18edc3889aee504c401702a0",
       "lines": 25,
@@ -814,6 +835,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-maintenance-boundaries.test.mjs",
+      "sha256": "fcbf9b43b937a1472df8c7882dbf5d88d4b789c99416fca23f020208946db8fa",
+      "lines": 126,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/bridge-core-patch.test.mjs",
       "sha256": "8a85b12a55f5233c5746957e4ebfbb896f9f3646d7466d79da343b3bbdb8a165",
       "lines": 136,
@@ -836,8 +864,8 @@
     },
     {
       "source": "tests/bridge-core-type-contracts.test.mjs",
-      "sha256": "09d29d61bf2de11a7a1d2fad202fde6ed295c5ae6f56464971f62909c23ca78d",
-      "lines": 305,
+      "sha256": "e01863a00b9bba1f1f12f4d30f44cfa346f45da4e5274eebfda0eb61348029e8",
+      "lines": 320,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -992,6 +1020,13 @@
       "source": "tools/check_cmd_environment.py",
       "sha256": "7c239bda443472df17f75e6cc52e937bab9de36760887c2dbdfeffaeaa3b814b",
       "lines": 87,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/check_release_readiness.mjs",
+      "sha256": "b6b48c731605144bc8f6d974c828e01bb54e42fc57b92c1f5fc787e8722df0d9",
+      "lines": 53,
       "explainedLines": 0,
       "status": "pending"
     },
