@@ -593,3 +593,9 @@ facade字段与执行返回来自多个原模块，故provenance增加四个evid
 完整本地npm test133/133；Python34项发现、31通过、3Windows专属跳过。check:bridge-core、check:linked-extension、learn:check、CRLF感知diff与新汇总文档链接检查通过。学习清单159文件30823行，仍仅6文件363行完整讲解。原51文件与HEAD逐字节一致，社区ZIP SHA6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa及实验bundle1673367字节原SHA不变。
 
 docs/RECOVERY_STATUS.md按全部目标列已完成/未完成，包含普通CMD复现和实际失败修正。仍有14条候选错误；维护模块没有纳入原扩展，源构建Agent Host与完整载体、真实激活/GUI/MCP、原生资产和安装器未完成。总状态NOT_READY，没有“所有剩余项目已完成”的结论。本轮Windows CI在推送后另行记录，不沿用第三批的成功。
+
+### 24 Windows/Linux/CMD最终复验
+
+实现dcbd8efe73a0da3b7426575de92f289ff1fd8941成功推送，自动运行35034730553。后台gh run watch --exit-status退出0：Ubuntu30秒、Windows50秒、普通CMD+conda2分15秒全部成功。作业/步骤API和本地计数保存maintenance-recovery-tests.json。尝试gh run view --log获取完整远端日志，归档下载返回EOF，未获得逐项完整日志；临时签名URL不入库。此前动作Node20弃用/强制Node24警告仍存在，项目测试Node环境未因此改写。
+
+最终文档统一标明：本地133项Node通过、候选14条仍失败、旧Agent Host仅内部stdio探测通过、新维护适配器未进入应用构建、总发布NOT_READY。不能声称用户要求的全部项目已经完成；本轮没有停止/删除安全检查或部署未验收产物来凑完成。

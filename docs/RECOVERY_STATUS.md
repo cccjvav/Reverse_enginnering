@@ -73,3 +73,14 @@ echo %ERRORLEVEL%
 实际得到protocolVersion=8、runtime/ping正常、tools/list与hello一致、不存在任务取消返回not_running、未知方法返回-32601，关闭stdin后正常退出。原文件SHA和本地平台证据保存为docs/evidence/agent-metadata-smoke.json。
 
 这证明原有bundle在测试Node下能启动并响应这些请求，不是恢复出新的Agent Host源工程，也不证明新载体注入、Electron ABI、Git Bash、模型请求或GUI已通过。发布门槛仍为NOT_READY。
+
+
+## 本轮最终回归结果
+
+- 本地Node：133项通过；Python：31项通过、3项Windows专属本地跳过。
+- 提交dcbd8efe73a0da3b7426575de92f289ff1fd8941的[CI运行35034730553](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35034730553)：Ubuntu、Windows2022、普通CMD+conda三作业全部成功。
+- 作业/步骤API证据在docs/evidence/maintenance-recovery-tests.json。另尝试下载完整远端日志，归档端点返回EOF，未获得逐项完整日志；没有把此失败改记成功或保存临时签名URL。
+- Agent Host的tools/list是内部stdio方法，不是Bridge MCP端点握手；不能据此放行MCP。
+- 原51个文件、既有overlay、实验bundle均保持字节一致。维护适配器仍未进入应用构建。
+
+**以上成果已完成并验证，但“所有剩余项目完成”仍不成立。** 已知14条类型/边界错误与上述宿主、授权整合、原生资产、GUI/MCP、安装器门槛必须继续以实际实现和实机证据关闭，不能靠这份报告代替。
