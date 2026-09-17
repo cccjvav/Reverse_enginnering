@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/163 个纳入范围的文件完整逐行解释；363/31043 行已解释。
+当前：6/166 个纳入范围的文件完整逐行解释；363/31232 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -15,7 +15,7 @@
 
 | 文件 | 总行数 | 已解释 | 状态 |
 |---|---:|---:|---|
-| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 106 | 0 | 待逐行讲解 |
+| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 110 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 107 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 47 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
@@ -26,6 +26,7 @@
 | [community/bridge-core/read-files.mjs](../../community/bridge-core/read-files.mjs) | 412 | 0 | 待逐行讲解 |
 | [community/extension/src/bridge-access-controller.ts](../../community/extension/src/bridge-access-controller.ts) | 30 | 30 | 本组已逐行解释 |
 | [community/extension/src/bridge-license-service.ts](../../community/extension/src/bridge-license-service.ts) | 73 | 73 | 本组已逐行解释 |
+| [community/extension/src/portable-tool-presentation.ts](../../community/extension/src/portable-tool-presentation.ts) | 54 | 0 | 待逐行讲解 |
 | [community/ui/access-card.js.txt](../../community/ui/access-card.js.txt) | 8 | 0 | 待逐行讲解 |
 | [community/ui/access-methods.mjs](../../community/ui/access-methods.mjs) | 20 | 20 | 本组已逐行解释 |
 | [reconstructed/bridge-core/src/adaptive-concurrency.js](../../reconstructed/bridge-core/src/adaptive-concurrency.js) | 68 | 0 | 待逐行讲解 |
@@ -134,8 +135,9 @@
 | [tests/bridge-core-http.test.mjs](../../tests/bridge-core-http.test.mjs) | 63 | 0 | 待逐行讲解 |
 | [tests/bridge-core-learning.test.mjs](../../tests/bridge-core-learning.test.mjs) | 40 | 0 | 待逐行讲解 |
 | [tests/bridge-core-linked-extension.test.mjs](../../tests/bridge-core-linked-extension.test.mjs) | 60 | 0 | 待逐行讲解 |
-| [tests/bridge-core-maintenance-boundaries.test.mjs](../../tests/bridge-core-maintenance-boundaries.test.mjs) | 128 | 0 | 待逐行讲解 |
+| [tests/bridge-core-maintenance-boundaries.test.mjs](../../tests/bridge-core-maintenance-boundaries.test.mjs) | 129 | 0 | 待逐行讲解 |
 | [tests/bridge-core-patch.test.mjs](../../tests/bridge-core-patch.test.mjs) | 136 | 0 | 待逐行讲解 |
+| [tests/bridge-core-portable-chat.test.mjs](../../tests/bridge-core-portable-chat.test.mjs) | 84 | 0 | 待逐行讲解 |
 | [tests/bridge-core-reconstruction.test.mjs](../../tests/bridge-core-reconstruction.test.mjs) | 103 | 0 | 待逐行讲解 |
 | [tests/bridge-core-state.test.mjs](../../tests/bridge-core-state.test.mjs) | 113 | 0 | 待逐行讲解 |
 | [tests/bridge-core-type-contracts.test.mjs](../../tests/bridge-core-type-contracts.test.mjs) | 320 | 0 | 待逐行讲解 |
@@ -158,12 +160,12 @@
 | [tools/build_community.mjs](../../tools/build_community.mjs) | 137 | 137 | 本组已逐行解释 |
 | [tools/build_extractor.py](../../tools/build_extractor.py) | 25 | 0 | 待逐行讲解 |
 | [tools/build_learning.mjs](../../tools/build_learning.mjs) | 62 | 0 | 待逐行讲解 |
-| [tools/build_linked_extension.mjs](../../tools/build_linked_extension.mjs) | 144 | 0 | 待逐行讲解 |
+| [tools/build_linked_extension.mjs](../../tools/build_linked_extension.mjs) | 156 | 0 | 待逐行讲解 |
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |
 | [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
 | [tools/check_release_readiness.mjs](../../tools/check_release_readiness.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/ci_windows_probe.py](../../tools/ci_windows_probe.py) | 82 | 0 | 待逐行讲解 |
-| [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 90 | 0 | 待逐行讲解 |
+| [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 98 | 0 | 待逐行讲解 |
 | [tools/http_maintenance_inputs.mjs](../../tools/http_maintenance_inputs.mjs) | 20 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |
 | [tools/installer_forensics.py](../../tools/installer_forensics.py) | 172 | 0 | 待逐行讲解 |
@@ -172,6 +174,7 @@
 | [tools/package_community.py](../../tools/package_community.py) | 53 | 0 | 待逐行讲解 |
 | [tools/patch_bridge_ui.mjs](../../tools/patch_bridge_ui.mjs) | 72 | 72 | 本组已逐行解释 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
+| [tools/portable_presentation_inputs.mjs](../../tools/portable_presentation_inputs.mjs) | 26 | 0 | 待逐行讲解 |
 | [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 210 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
 | [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |

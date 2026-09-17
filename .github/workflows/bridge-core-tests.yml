@@ -25,6 +25,10 @@ on:
       - tools/audit_extension_runtime.mjs
       - tools/build_linked_extension.mjs
       - tools/http_maintenance_inputs.mjs
+      - tools/portable_presentation_inputs.mjs
+      - community/extension/src/portable-tool-presentation.ts
+      - community/extension/portable-presentation.provenance.json
+      - docs/evidence/portable-*.json
       - docs/evidence/http-*.json
       - tools/diagnose_linked_types.mjs
       - tools/check_release_readiness.mjs

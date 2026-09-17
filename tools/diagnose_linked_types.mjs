@@ -7,9 +7,12 @@ import { fileURLToPath } from 'node:url';
 import { ROOT, hash } from './patch_utils.mjs';
 import { communityEntry, verifySource } from './build_linked_extension.mjs';
 import { httpMaintenanceInputs } from './http_maintenance_inputs.mjs';
+import { portablePresentationInputs, portablePresentationSource, PORTABLE_PRESENTATION_SOURCE } from './portable_presentation_inputs.mjs';
 
 const portable = p => p.split(path.sep).join('/');
-export async function diagnoseTypes({ contracts = false, httpMaintenance = false } = {}) {
+export async function diagnoseTypes({ contracts = false, httpMaintenance = false, portableChat = false } = {}) {
+  if (portableChat) httpMaintenance = true;
+  const portablePresentation = portableChat ? await portablePresentationInputs() : null;
   if (httpMaintenance) contracts = true;
   const maintenance = httpMaintenance ? await httpMaintenanceInputs() : null;
   const original = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/custom-extension.json'), 'utf8'));
@@ -35,6 +38,7 @@ export async function diagnoseTypes({ contracts = false, httpMaintenance = false
   }
   for (const file of maintenance?.files ?? []) expected.set(file.source, file.sha256);
   if (httpMaintenance) contractMap.set('reconstructed/bridge-core/src/bridge-http-router.js', 'community/bridge-core/http-router.d.mts');
+  if (portablePresentation) expected.set(portablePresentation.source, portablePresentation.sha256);
   const sourceFiles = original.copied.filter(f => f.path.startsWith('src/') && /\.[cm]?ts$/.test(f.path)).map(f => 'recovered/shuncode-extension/' + f.path);
   const hostFiles = upstream.files.filter(f => f.file.endsWith('.d.ts')).map(f => 'reference/vscode-types/' + f.file);
   const options = { noEmit: true, strict: true, skipLibCheck: true, allowJs: true, checkJs: false,
@@ -46,6 +50,7 @@ export async function diagnoseTypes({ contracts = false, httpMaintenance = false
     if (!expected.has(source)) return originalRead(file);
     const bytes = fs.readFileSync(file); verifySource(bytes, expected.get(source), source);
     let text = bytes.toString('utf8');
+    if (portableChat && source === 'recovered/shuncode-extension/src/tool-presentation.ts') return portablePresentationSource(text);
     if (source === 'recovered/shuncode-extension/src/extension.ts') return communityEntry(text);
     for (const name of ['bridge-license-service', 'bridge-access-controller']) {
       if (source === 'recovered/shuncode-extension/src/' + name + '.ts') return fs.readFileSync(path.join(ROOT, 'community/extension/src/' + name + '.ts'), 'utf8');
@@ -53,6 +58,7 @@ export async function diagnoseTypes({ contracts = false, httpMaintenance = false
     return text;
   };
   host.resolveModuleNames = (names, containingFile) => names.map(name => {
+    if (portableChat && name === '@shuncode/portable-presentation' && portable(path.relative(ROOT,containingFile)) === 'recovered/shuncode-extension/src/tool-presentation.ts') return {resolvedFileName:path.join(ROOT,PORTABLE_PRESENTATION_SOURCE),extension:ts.Extension.Ts,isExternalLibraryImport:false};
     if (name.startsWith('../../../src/') && portable(path.relative(ROOT, containingFile)).startsWith('recovered/shuncode-extension/src/')) {
       const source = 'reconstructed/bridge-core/src/' + path.posix.basename(name);
       if (name !== '../../../src/' + path.posix.basename(name) || !expected.has(source)) return undefined;
@@ -78,13 +84,15 @@ export async function diagnoseTypes({ contracts = false, httpMaintenance = false
     candidateTypecheckPassed: errors === 0, originalTypesRecovered: false, originalHostIdentityConfirmed: false,
     ...(contracts ? { contractMode: 'candidate-declarations', contractModules, runtimeImplementationCheckedByTypeScript: false } : {}),
     ...(httpMaintenance ? { maintenanceHttpAdapter: maintenance } : {}),
+    ...(portableChat ? { portablePresentation, customHostCardsRestored: false } : {}),
     diagnostics, lockfileSha256: hash(await readFile(path.join(ROOT, 'package-lock.json'))) };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const httpMaintenance = process.argv.includes('--http-maintenance');
+  const portableChat = process.argv.includes('--portable-chat');
+  const httpMaintenance = portableChat || process.argv.includes('--http-maintenance');
   const contracts = httpMaintenance || process.argv.includes('--contracts');
-  const report = await diagnoseTypes({ contracts, httpMaintenance });
-  await writeFile(path.join(ROOT, httpMaintenance ? 'docs/evidence/http-type-diagnostics.json' : contracts ? 'docs/evidence/contract-type-diagnostics.json' : 'docs/evidence/linked-type-diagnostics.json'), JSON.stringify(report, null, 2) + '\n');
+  const report = await diagnoseTypes({ contracts, httpMaintenance, portableChat });
+  await writeFile(path.join(ROOT, portableChat ? 'docs/evidence/portable-type-diagnostics.json' : httpMaintenance ? 'docs/evidence/http-type-diagnostics.json' : contracts ? 'docs/evidence/contract-type-diagnostics.json' : 'docs/evidence/linked-type-diagnostics.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ errorCount: report.errorCount, counts: report.counts, candidateTypecheckPassed: report.candidateTypecheckPassed }, null, 2));
   process.exitCode = report.candidateTypecheckPassed ? 0 : 1;
 }

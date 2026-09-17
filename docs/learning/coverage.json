@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 163,
-    "lines": 31043,
+    "files": 166,
+    "lines": 31232,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "7cd76bfc56227c90be612c26cfdc0762066ffc0a88967ea436c1b0cd05f27f79",
-      "lines": 106,
+      "sha256": "77ae0121db54a54fd367fecf8b73a3526a7c9233db9e66d996680cdaface9cd8",
+      "lines": 110,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -98,6 +98,13 @@
       "lines": 73,
       "explainedLines": 73,
       "status": "line-by-line-authored"
+    },
+    {
+      "source": "community/extension/src/portable-tool-presentation.ts",
+      "sha256": "e1773f1162347bf77843066bbc2601f51f12742cf33b6f82cd40a1afd5c0c1c5",
+      "lines": 54,
+      "explainedLines": 0,
+      "status": "pending"
     },
     {
       "source": "community/ui/access-card.js.txt",
@@ -857,8 +864,8 @@
     },
     {
       "source": "tests/bridge-core-maintenance-boundaries.test.mjs",
-      "sha256": "a8ef00a22d0356d184a49a885c8b1d14c212d5e92e404ec73a36ce75b8bd0bde",
-      "lines": 128,
+      "sha256": "de7591313fe9ab62e597dfe319fc271e2e1dd85099ad1f956dfcd86c711da914",
+      "lines": 129,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -866,6 +873,13 @@
       "source": "tests/bridge-core-patch.test.mjs",
       "sha256": "8a85b12a55f5233c5746957e4ebfbb896f9f3646d7466d79da343b3bbdb8a165",
       "lines": 136,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-portable-chat.test.mjs",
+      "sha256": "8c8eb952b3847d92f8e853c715b112328411c090a58ac89d79c385e8f0a2cb48",
+      "lines": 84,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1025,8 +1039,8 @@
     },
     {
       "source": "tools/build_linked_extension.mjs",
-      "sha256": "3ba8f3245b33cdd78b455c79b8d2f0d27afc2ac8b56018bf472c89b790065b47",
-      "lines": 144,
+      "sha256": "4cfea5175bce508839ad073fec5f6b793440ac09372be026ce7b429c37184cfa",
+      "lines": 156,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1046,7 +1060,7 @@
     },
     {
       "source": "tools/check_release_readiness.mjs",
-      "sha256": "4a89d2cb5d8742c7dd21da453e5bc8b934d1e96c481b597480489f0c28265305",
+      "sha256": "d5f6e8b526c74d750111f57b173e7b079b2f25da8b643ea92197c790a47ac83f",
       "lines": 54,
       "explainedLines": 0,
       "status": "pending"
@@ -1060,8 +1074,8 @@
     },
     {
       "source": "tools/diagnose_linked_types.mjs",
-      "sha256": "efd8c8b76116aabce5835dcba2c43efd66e9b5d5edc61ac425267efb6fc08594",
-      "lines": 90,
+      "sha256": "f79af13984dc7f3f9308a24bedba55c8d598efdf042c4b4f285bbb31e951463f",
+      "lines": 98,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1120,6 +1134,13 @@
       "lines": 31,
       "explainedLines": 31,
       "status": "line-by-line-authored"
+    },
+    {
+      "source": "tools/portable_presentation_inputs.mjs",
+      "sha256": "ef8e6487b298b3859a74f7a9e7ab94a22e305d609c658fab835975750df86175",
+      "lines": 26,
+      "explainedLines": 0,
+      "status": "pending"
     },
     {
       "source": "tools/reconstruct_bridge_core.mjs",

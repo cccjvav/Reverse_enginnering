@@ -7,8 +7,8 @@ import {diagnoseTypes} from './diagnose_linked_types.mjs';
 import {buildLinkedExtension} from './build_linked_extension.mjs';
 
 export async function checkReleaseReadiness() {
-  const diagnostics = await diagnoseTypes({httpMaintenance:true});
-  const {report: bundle} = await buildLinkedExtension({httpMaintenance:true});
+  const diagnostics = await diagnoseTypes({portableChat:true});
+  const {report: bundle} = await buildLinkedExtension({portableChat:true});
   const observed = [];
   for (const name of [
     'recovered/shuncode-extension/runtime/agent-host.js',
@@ -31,7 +31,7 @@ export async function checkReleaseReadiness() {
     {id:'source-linkage', status:'PASS', detail:'In-memory experimental CJS rebuilt and statically parsed; not a product package.', sha256:bundle.outputSha256},
     {id:'candidate-types', status:diagnostics.candidateTypecheckPassed ? 'PASS' : 'FAIL', errors:diagnostics.errorCount, detail:'Strict candidate consumer check; JS implementations not fully checked.'},
     {id:'carrier-identity', status:'BLOCKED', detail:'Original custom host identity not confirmed. Public candidate types are not original host proof.'},
-    {id:'host-chat-api', status:'BLOCKED', detail:'Custom Chat presentation fields lack verified host implementation/registration.'},
+    {id:'host-chat-api', status:'BLOCKED', detail:'Public input/output fallback is source-linked and typechecked; original custom Chat cards and actual host rendering are not restored/verified.'},
     {id:'native-runtime', status:'BLOCKED', detail:'Recovered legacy JS exists, but complete candidate assets and Electron ABI execution are unverified.'},
     {id:'authorization-integration', status:'BLOCKED', detail:'Fail-closed maintenance dispatcher exists but is not connected to host-owned policy or the extension build. Original dispatcher still omits policy.'},
     {id:'http-integration', status:'BLOCKED', detail:'HTTP adapter is source-linked in the experimental variant. Actual extension/desktop lifecycle acceptance is still missing.'},
@@ -40,7 +40,7 @@ export async function checkReleaseReadiness() {
   ];
   return {scope:'Current repository engineering release gates; no external account/network/desktop execution. Blocked gates require implementation and evidence, not editing this report.',
     overall:gates.every(g=>g.status==='PASS') ? 'READY' : 'NOT_READY',
-    experimentalVariant: 'http-maintenance', httpSourceIntegrated: bundle.sourceIntegrated,
+    experimentalVariant: 'portable-chat-fallback', httpSourceIntegrated: bundle.sourceIntegrated,
     candidateContractModules:diagnostics.contractModules.length,
     originalTypesRecovered:false, originalHostIdentityConfirmed:false,
     originalInstaller:{source:'ShunCode-0.7.4-win32-x64-Setup.exe',bytes:info.size,isLfsPointer:installerIsLfsPointer,isNewSourceBuild:false},

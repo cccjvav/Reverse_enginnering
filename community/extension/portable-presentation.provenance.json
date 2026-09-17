@@ -1,0 +1,15 @@
+{
+  "scope": "Local rich data model and public input/output fallback; not original custom host API restoration.",
+  "source": "community/extension/src/portable-tool-presentation.ts",
+  "sha256": "e1773f1162347bf77843066bbc2601f51f12742cf33b6f82cd40a1afd5c0c1c5",
+  "dependencies": [
+    {
+      "path": "src/tool-presentation.ts",
+      "sha256": "0b70c8a2b0d77bb4ada282a08c5e6a0bd882f6b3b46c181eac9f51af7e6b0fe9"
+    },
+    {
+      "path": "src/chat-history.mts",
+      "sha256": "ec47043d4fdd139bc3c38828f3577e2828ff91b0b3102be12cd1d506c6e151a8"
+    }
+  ]
+}

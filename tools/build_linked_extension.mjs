@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROOT, hash } from './patch_utils.mjs';
 import { httpMaintenanceInputs } from './http_maintenance_inputs.mjs';
+import { portablePresentationInputs, portablePresentationSource, PORTABLE_PRESENTATION_SOURCE } from './portable_presentation_inputs.mjs';
 
 const ORIGINAL_ROOT = 'recovered/shuncode-extension';
 const CORE_ROOT = 'reconstructed/bridge-core';
@@ -27,21 +28,30 @@ export function communityEntry(text) {
   if (text.split(retired).length !== 2) throw new Error('Unexpected legacy sign-out source');
   return text.replace(retired, '');
 }
-export async function buildLinkedExtension({ write = false, httpMaintenance = false, transportOnly = false } = {}) {
+export async function buildLinkedExtension({ write = false, httpMaintenance = false, transportOnly = false, portableChat = false, presentationOnly = false } = {}) {
+  if (portableChat) httpMaintenance = true;
+  if (presentationOnly && !portableChat || presentationOnly && transportOnly) throw new Error('Invalid presentation fixture mode');
+  const portablePresentation = portableChat ? await portablePresentationInputs() : null;
+  if (transportOnly && portableChat) throw new Error('Transport fixture does not exercise portable Chat');
   if (transportOnly && !httpMaintenance) throw new Error('Transport fixture requires HTTP maintenance mode');
-  const output = transportOnly ? '.work/http-transport-fixture' : httpMaintenance ? '.work/http-linked-extension' : OUTPUT;
-  const outputName = transportOnly ? 'transport.cjs' : 'extension.cjs';
-  const entry = ORIGINAL_ROOT + (transportOnly ? '/src/bridge-mcp-transport.ts' : '/src/extension.ts');
+  const output = presentationOnly ? '.work/portable-presentation-fixture' : portableChat ? '.work/portable-linked-extension' : transportOnly ? '.work/http-transport-fixture' : httpMaintenance ? '.work/http-linked-extension' : OUTPUT;
+  const outputName = presentationOnly ? 'presentation.cjs' : transportOnly ? 'transport.cjs' : 'extension.cjs';
+  const entry = ORIGINAL_ROOT + (presentationOnly ? '/src/tool-presentation.ts' : transportOnly ? '/src/bridge-mcp-transport.ts' : '/src/extension.ts');
   const maintenance = httpMaintenance ? await httpMaintenanceInputs() : null;
   const original = JSON.parse(await readFile(path.join(ROOT, 'docs/evidence/custom-extension.json'), 'utf8'));
   const core = JSON.parse(await readFile(path.join(ROOT, CORE_ROOT, 'provenance.json'), 'utf8'));
   const expected = new Map(original.copied.map(e => [ORIGINAL_ROOT + '/' + e.path, e.sha256]));
   for (const module of core.modules) expected.set(CORE_ROOT + '/' + module.file, module.sha256);
   for (const file of maintenance?.files ?? []) expected.set(file.source, file.sha256);
+  if (portablePresentation) expected.set(portablePresentation.source, portablePresentation.sha256);
   const sourceRecords = new Map(), resolutions = [], externals = new Set();
   const plugin = {
     name: 'reviewed-source-linkage',
     setup(builder) {
+      builder.onResolve({filter: /^@shuncode\/portable-presentation$/}, args => {
+        if (!portableChat || portable(path.relative(ROOT,args.importer)) !== ORIGINAL_ROOT + '/src/tool-presentation.ts') throw new Error('Unexpected portable presentation importer');
+        return {path:path.join(ROOT,PORTABLE_PRESENTATION_SOURCE)};
+      });
       builder.onResolve({ filter: /^\.\.\/\.\.\/\.\.\/src\// }, args => {
         const importer = portable(path.relative(ROOT, args.importer));
         if (!importer.startsWith(ORIGINAL_ROOT + '/src/')) throw new Error('Unexpected shared importer');
@@ -67,6 +77,7 @@ export async function buildLinkedExtension({ write = false, httpMaintenance = fa
         const originalBytes = await readFile(args.path);
         verifySource(originalBytes, expected.get(source), source);
         let text = originalBytes.toString('utf8'), replacementSource = null;
+        if (portableChat && source === ORIGINAL_ROOT + '/src/tool-presentation.ts') text = portablePresentationSource(text);
         if (source === ORIGINAL_ROOT + '/src/extension.ts') text = communityEntry(text);
         for (const name of ['bridge-license-service', 'bridge-access-controller']) {
           if (source === ORIGINAL_ROOT + '/src/' + name + '.ts') {
@@ -80,7 +91,7 @@ export async function buildLinkedExtension({ write = false, httpMaintenance = fa
           text = 'const rgPath = require("node:path").join(__dirname, "..", "runtime", "bin", "rg.exe");\nexport { rgPath };\n';
         }
         sourceRecords.set(source, { source, originalSha256: hash(originalBytes), loadedSha256: hash(text), replacementSource,
-          transformation: replacementSource ? 'community-policy-replacement' : source.endsWith('/src/extension.ts') ? 'community-entry-rewrite' : source.endsWith('/snapshot-packaged-ripgrep.js') ? 'explicit-CJS-installed-asset-layout' : 'none' });
+          transformation: portableChat && source === ORIGINAL_ROOT + '/src/tool-presentation.ts' ? 'portable-public-chat-fallback' : replacementSource ? 'community-policy-replacement' : source.endsWith('/src/extension.ts') ? 'community-entry-rewrite' : source.endsWith('/snapshot-packaged-ripgrep.js') ? 'explicit-CJS-installed-asset-layout' : 'none' });
         return { contents: text, loader: /\.[cm]?ts$/.test(source) ? 'ts' : 'js', resolveDir: path.dirname(args.path) };
       });
     }
@@ -113,7 +124,7 @@ export async function buildLinkedExtension({ write = false, httpMaintenance = fa
   }
   const inputs = [...sourceRecords.values()].sort((a, b) => a.source.localeCompare(b.source, 'en'));
   if (inputs.some(i => i.source.includes('/dist/'))) throw new Error('Linked output must not embed the original compiled extension');
-  const report = { ...(transportOnly ? { isolatedTransportFixture: true, fixtureEntry: entry } : {}), scope: 'Experimental CJS linkage from preserved TS/MTS and reconstructed JS, using community policy. NOT a typecheck, self-contained extension package, activation test or installer.',
+  const report = { ...(portableChat ? { portablePresentation, presentationOnly, customHostCardsRestored: false } : {}), ...(transportOnly ? { isolatedTransportFixture: true, fixtureEntry: entry } : {}), scope: 'Experimental CJS linkage from preserved TS/MTS and reconstructed JS, using community policy. NOT a typecheck, self-contained extension package, activation test or installer.',
     output: output + '/dist/' + outputName, outputSha256: hash(bytes), outputBytes: bytes.length,
     ...(httpMaintenance ? { maintenanceHttpAdapter: maintenance, sourceIntegrated: true, runtimeActivationVerified: false } : {}),
     inputs, sharedResolutions: resolutions.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), 'en')),
@@ -133,9 +144,10 @@ export async function buildLinkedExtension({ write = false, httpMaintenance = fa
   return { code, report };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const httpMaintenance = process.argv.includes('--http-maintenance');
-  const { report } = await buildLinkedExtension({ write: !process.argv.includes('--check'), httpMaintenance });
-  const evidence = path.join(ROOT, httpMaintenance ? 'docs/evidence/http-linked-extension.json' : 'docs/evidence/linked-extension.json');
+  const portableChat = process.argv.includes('--portable-chat');
+  const httpMaintenance = portableChat || process.argv.includes('--http-maintenance');
+  const { report } = await buildLinkedExtension({ write: !process.argv.includes('--check'), httpMaintenance, portableChat });
+  const evidence = path.join(ROOT, portableChat ? 'docs/evidence/portable-linked-extension.json' : httpMaintenance ? 'docs/evidence/http-linked-extension.json' : 'docs/evidence/linked-extension.json');
   const text = JSON.stringify(report, null, 2) + '\n';
   if (process.argv.includes('--check')) {
     if (await readFile(evidence, 'utf8') !== text) throw new Error('Linkage evidence drift');

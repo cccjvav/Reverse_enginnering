@@ -629,3 +629,13 @@ HTTP变体实际输出.work/http-linked-extension/dist/extension.cjs，1675648�
 实现7680b458db21eb5efd84eacd97d141e5b50d5a11已推送并自动触发35036955654。gh run watch --exit-status后台进程退出0：Ubuntu35秒、Windows43秒、普通CMD+conda3分15秒均成功。作业/步骤API与本地138/31/3计数保存http-integration-tests.json；没有归档完整远端逐项日志。动作运行时Node20弃用/强制Node24警告仍存在，项目测试Node版本未改写。
 
 确认这是新增HTTP源码接入和隔离SDK会话测试，不是原件替换、完整扩展激活或真实文件/模型/GUI/隧道验收。HTTP实验类型仍11条失败，产品NOT_READY；默认原连接基线14条及旧构建都保留。
+
+## 28 公共Chat文本边界与严格检查（2026-09-17）
+
+环境恢复时工作树内容保留但Git元数据退回初始提交。fetch固定Arena分支确认97099c5后mixed reset恢复索引，并从HEAD恢复6个缺失的已跟踪dist文件；未改原件或切换分支。npm ci恢复工具依赖。
+
+没有向公共vscode命名空间添加虚构字段。新增本地富结果模型及input/output转换，受SHA和转换边界约束，只在portableChat显式模式接入；自动包含HTTP维护。摘要、文件增删数、指标、耗时、终端ID和diff转文字，最终整体脱敏/限制12000字符。useShunCodeStyle:true仍降级，这是兼容候选而非原卡片恢复。原始格式化器文件不改。
+
+新bundle75输入31共享别名2策略替换1677498字节。消费者候选诊断0条；原推断59、合同14、HTTP11保持独立。5项专项包含实际转换格式化器VM执行、秘密/边界/diff及真实锁定公共声明strict/noEmit/skipLibCheck:false正反类型测试。VM宿主为空替身，未执行URI或GUI，完整JS和原宿主身份不获此证明。
+
+全套Node143通过。发布审计改选portable-chat-fallback：源码连接、候选类型PASS，7个实际发布门槛仍BLOCKED，NOT_READY退出2。增加普通CMD命令、模式说明、来源与CI触发路径。学习清单166文件31232行；完整人工讲解仍6文件363行。远端CI须推送后单独记录，不借用上一轮成功。

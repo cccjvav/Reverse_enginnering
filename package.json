@@ -20,7 +20,10 @@
     "check:release": "node tools/check_release_readiness.mjs",
     "build:http-extension": "node tools/build_linked_extension.mjs --http-maintenance",
     "check:http-extension": "node tools/build_linked_extension.mjs --http-maintenance --check",
-    "diagnose:http-types": "node tools/diagnose_linked_types.mjs --http-maintenance"
+    "diagnose:http-types": "node tools/diagnose_linked_types.mjs --http-maintenance",
+    "build:portable-extension": "node tools/build_linked_extension.mjs --portable-chat",
+    "check:portable-extension": "node tools/build_linked_extension.mjs --portable-chat --check",
+    "diagnose:portable-types": "node tools/diagnose_linked_types.mjs --portable-chat"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

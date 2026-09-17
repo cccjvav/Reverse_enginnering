@@ -1,7 +1,7 @@
 {
   "scope": "Current repository engineering release gates; no external account/network/desktop execution. Blocked gates require implementation and evidence, not editing this report.",
   "overall": "NOT_READY",
-  "experimentalVariant": "http-maintenance",
+  "experimentalVariant": "portable-chat-fallback",
   "httpSourceIntegrated": true,
   "candidateContractModules": 14,
   "originalTypesRecovered": false,
@@ -43,12 +43,12 @@
       "id": "source-linkage",
       "status": "PASS",
       "detail": "In-memory experimental CJS rebuilt and statically parsed; not a product package.",
-      "sha256": "1e4ca05f8d77b8c37ad1b02f00928923cdd833ab39c00d1a7bd68950fff7cc39"
+      "sha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa"
     },
     {
       "id": "candidate-types",
-      "status": "FAIL",
-      "errors": 11,
+      "status": "PASS",
+      "errors": 0,
       "detail": "Strict candidate consumer check; JS implementations not fully checked."
     },
     {
@@ -59,7 +59,7 @@
     {
       "id": "host-chat-api",
       "status": "BLOCKED",
-      "detail": "Custom Chat presentation fields lack verified host implementation/registration."
+      "detail": "Public input/output fallback is source-linked and typechecked; original custom Chat cards and actual host rendering are not restored/verified."
     },
     {
       "id": "native-runtime",
