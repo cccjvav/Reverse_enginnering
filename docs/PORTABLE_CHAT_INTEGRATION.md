@@ -50,7 +50,7 @@ echo %ERRORLEVEL%
 
 ## 验证范围与后续门槛
 
-本地Node全套143项通过；Python31项通过、3项Windows专属本地跳过。学习清单166文件31232行，人工完整讲解仍仅6文件363行，不等于每行均已讲完。CI结果另存`docs/evidence/portable-integration-tests.json`（生成后才代表远端证据）。
+本地Node全套143项通过；Python31项通过、3项Windows专属本地跳过。学习清单166文件31232行，人工完整讲解仍仅6文件363行，不等于每行均已讲完。实现提交`ee8ebed225e64fd0987f611a8f16a048d993a3f0`的[CI 35219484258](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35219484258)中，Ubuntu、Windows2022和普通CMD+conda三个作业均成功。作业/步骤API证据另存`docs/evidence/portable-integration-tests.json`，未归档远端逐项完整日志。setup-miniconda曾输出初始环境不存在/激活退出1注释，但后续创建环境和真正CMD测试步骤成功；另有动作运行时与conda配置弃用警告，均保留说明。
 
 格式化测试的`vscode`是空冻结替身，未传workspaceRoot，没有运行URI、GUI或真实扩展激活。公共声明的严格检查不是公共宿主运行时证明。HTTP协议夹具仍是本机真实候选SDK+惰性工具替身，不是实际文件/命令/模型授权验收。
 

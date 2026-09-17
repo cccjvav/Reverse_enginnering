@@ -639,3 +639,13 @@ HTTP变体实际输出.work/http-linked-extension/dist/extension.cjs，1675648�
 新bundle75输入31共享别名2策略替换1677498字节。消费者候选诊断0条；原推断59、合同14、HTTP11保持独立。5项专项包含实际转换格式化器VM执行、秘密/边界/diff及真实锁定公共声明strict/noEmit/skipLibCheck:false正反类型测试。VM宿主为空替身，未执行URI或GUI，完整JS和原宿主身份不获此证明。
 
 全套Node143通过。发布审计改选portable-chat-fallback：源码连接、候选类型PASS，7个实际发布门槛仍BLOCKED，NOT_READY退出2。增加普通CMD命令、模式说明、来源与CI触发路径。学习清单166文件31232行；完整人工讲解仍6文件363行。远端CI须推送后单独记录，不借用上一轮成功。
+
+### 28 回归与远端验证完成
+
+Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/portable确定性检查、学习核验、文档链接及diff检查通过。原recovered文件和已有overlay未改，默认73输入1673367字节与HTTP74输入1675648字节基线保留。
+
+实现ee8ebed225e64fd0987f611a8f16a048d993a3f0推送固定分支后，CI35219484258的Ubuntu、Windows2022、普通CMD+conda三作业全部成功，gh run watch退出0。真实API作业/步骤记录保存portable-integration-tests.json；未归档完整远端逐项日志。setup-miniconda初始激活曾注释EnvironmentNameNotFound/退出1，但其后创建和真正CMD检查步骤成功；Node动作运行时、auto-activate-base/nodefaults弃用及包脚本警告仍存在，不隐去。
+
+最终仍NOT_READY，当前完成范围为可选文本回退源码接入与自动化验证，不是原卡片/完整Windows应用交付。
+
+推送CI文档时远端安装器取证工作流先写入085bfd1，仅更新两份提取证据元数据；首次推送因此被正常拒绝。fetch并核对差异后将本地文档提交rebase到该同分支提交上，不强推、不覆盖远端取证更新。该自动取证不代表生成新的Windows安装器。

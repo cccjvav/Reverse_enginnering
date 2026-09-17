@@ -1,0 +1,224 @@
+{
+  "scope": "Portable public Chat text fallback source linkage, candidate consumer types, formatter VM fixtures and GitHub job/step evidence. Not desktop rendering, full extension activation, real file authorization or installer acceptance.",
+  "localNodeTestsPassed": 143,
+  "localPythonTestsPassed": 31,
+  "localPythonWindowsOnlySkipped": 3,
+  "portableCandidateTypeErrors": 0,
+  "httpVariantTypeErrors": 11,
+  "baselineContractTypeErrors": 14,
+  "candidateTypecheckPassed": true,
+  "fullTypecheckPassed": false,
+  "customHostCardsRestored": false,
+  "extensionLoaded": false,
+  "installerBuilt": false,
+  "releaseStatus": "NOT_READY",
+  "fullRemotePerTestLogsArchived": false,
+  "ciAnnotations": [
+    "Action Node20 deprecation/forced Node24",
+    "setup-miniconda auto-activate-base/nodefaults deprecations and package-script warning",
+    "setup-miniconda emitted an initial EnvironmentNameNotFound / conda activate exit1 annotation; environment creation and subsequent real CMD test step nevertheless completed successfully. Do not treat the annotation alone as successful activation."
+  ],
+  "github": {
+    "conclusion": "success",
+    "headSha": "ee8ebed225e64fd0987f611a8f16a048d993a3f0",
+    "jobs": [
+      {
+        "completedAt": "2026-09-17T12:12:14Z",
+        "conclusion": "success",
+        "databaseId": 105195821831,
+        "name": "core (windows-2022)",
+        "startedAt": "2026-09-17T12:08:58Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "skipped",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35219484258/job/105195821831"
+      },
+      {
+        "completedAt": "2026-09-17T12:12:14Z",
+        "conclusion": "success",
+        "databaseId": 105195821851,
+        "name": "core (ubuntu-24.04)",
+        "startedAt": "2026-09-17T12:08:58Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence, without fetching or running the installer",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Use Node 22",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Install only the analysis/test tool dependencies",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify deterministic reconstruction and provenance",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run Node tests, not the full extension or Electron application",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Regression-test Python recovery and overlay tools on Linux",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Use Node 22",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence, without fetching or running the installer",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35219484258/job/105195821851"
+      },
+      {
+        "completedAt": "2026-09-17T12:12:14Z",
+        "conclusion": "success",
+        "databaseId": 105195821910,
+        "name": "windows-cmd-conda",
+        "startedAt": "2026-09-17T12:08:59Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Checkout text evidence only",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Create the declared conda environment using Miniforge",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run real CMD and conda checks, not an application GUI",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Create the declared conda environment using Miniforge",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Checkout text evidence only",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 9,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35219484258/job/105195821910"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35219484258"
+  }
+}
