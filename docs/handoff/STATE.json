@@ -75,7 +75,26 @@
     "evidence": "docs/evidence/portable-integration-tests.json"
   },
   "handoffCI": {
-    "status": "pending-push"
+    "status": "success",
+    "runId": 35232127826,
+    "headSha": "2d26aca5e9578ca1fbb950235ccb9351294b3ea6",
+    "url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35232127826",
+    "jobs": [
+      {
+        "name": "core (ubuntu-24.04)",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-cmd-conda",
+        "conclusion": "success"
+      },
+      {
+        "name": "core (windows-2022)",
+        "conclusion": "success"
+      }
+    ],
+    "evidence": "docs/evidence/handoff-integration-tests.json",
+    "scope": "Audit implementation commit tested; later evidence/documentation-only commit is not claimed as this run head."
   },
   "authorization": {
     "evidence": "docs/evidence/authorization-wiring.json",

@@ -677,3 +677,11 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 - learn:build/check更新为168文件/31303行，6文件363行已人工解释，full:false；新增审计与测试尚没有逐行人工教程，不能把生成覆盖清单算已教完。
 - `check:release`仍退出2/NOT_READY，2PASS/7BLOCKED；没有运行完整宿主/GUI/Windows安装器，也没有把维护授权接入产品。
 - 完成前检查并修正路线图验收链接：B指向已有acceptance/README.md，C为MCP.md，D为INSTALLER.md；逐一核验handoff内相对Markdown目标存在，STATE.json可解析。给旧验收/恢复计划顶部补充最新入口，保留历史诊断模式定义。
+
+### 29.4 推送后Windows/Linux/CMD验证
+
+- 交接/审计提交`2d26aca5e9578ca1fbb950235ccb9351294b3ea6`已推送固定分支。推送前fetch确认远端仍b77a9e5；原overlay SHA仍6c5aef6c1d8338367bbf76595524fb8d9f8c991b8652c87838670ee20f85d2fa；原件/重建原貌/维护应用源码/lockfile无差异。
+- 当前gh版本不支持`gh run list --commit`，改用`gh api .../actions/runs`并核对head_sha，不升级工具或误把上次绿色run当本次。
+- `gh run watch 35232127826 --exit-status`作为后台进程等待，退出0：Ubuntu job105238656156（1分17秒）、Windows 2022 job105238656709（1分38秒）、普通CMD+conda job105238656649（3分39秒）均success。
+- 从GitHub API保存run和3个jobs的步骤/起止时间到`docs/evidence/handoff-integration-tests.json`。保留Action Node20弃用/被迫Node24告警；这是Action运行时，不是项目Node22错误。未归档完整逐条远端日志，不扩张证据范围。
+- STATE.json和交接入口补上本轮真实CI，不再pending-push。后续仅证据/文档提交，明确CI被测代码SHA为2d26aca；P1仍READY（审计完成、宿主服务实现未开始），下一步按P1.1确认可信owner/取消生命周期后设计策略。

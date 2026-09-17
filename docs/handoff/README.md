@@ -92,6 +92,14 @@ Linux助手环境可以复现npm和Python测试，但不能把3项Windows专属�
 - 之前CI全部绿色不代表当前代码通过；始终记录被测headSha与run ID。API作业/步骤证据不等于归档了逐条完整日志。
 - 工作区scope不是设备沙箱；双数据目录不是全局账号隔离。B/C/D需可恢复Windows VM、虚构资料、无生产账号及磁盘共享。
 
+### 本交接版本实际验证结果
+
+- 授权审计/回归代码提交：`2d26aca5e9578ca1fbb950235ccb9351294b3ea6`。随后仅补证据文档，不把文档提交冒称被该次CI测试。
+- 本轮Linux：144项Node通过；Python运行34项，31通过、3项Windows专属跳过；portable类型0；发布仍退出2。
+- [CI 35232127826](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35232127826)：Ubuntu、Windows 2022、**普通CMD+conda**三个作业全部成功。保存[作业/步骤证据](../evidence/handoff-integration-tests.json)，没有冒称已归档完整逐条远端日志。
+- 原件/旧overlay未改，portable bundle SHA仍`635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa`。学习覆盖更新为168文件/31303行，仍仅6文件363行已人工解释。
+- 授权审计是本轮新增工程成果；宿主策略实现尚未开始。CI通过不改变7项发布BLOCKED。
+
 ## 7. 已知风险与不要重试的捷径
 
 - 原文件调度器不转发checkPermission/config；维护入口只有字面值true允许，不能接一个固定true回调来“恢复功能”。
