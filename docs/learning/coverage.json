@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 166,
-    "lines": 31232,
+    "files": 168,
+    "lines": 31303,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "77ae0121db54a54fd367fecf8b73a3526a7c9233db9e66d996680cdaface9cd8",
-      "lines": 110,
+      "sha256": "828a6899c35408a0fe39f7adf1987df5513426a666fd7bbad5223b8f232862fd",
+      "lines": 112,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -807,6 +807,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-authorization-wiring.test.mjs",
+      "sha256": "6a59f6f1e544b283ee1a4dcc2f54243706704ddc83dd21b52185fd290dd468b8",
+      "lines": 19,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/bridge-core-boundary.test.mjs",
       "sha256": "4c6953242c0d0b410010a6feb4ea4b62c174828a18edc3889aee504c401702a0",
       "lines": 25,
@@ -992,6 +999,13 @@
       "source": "tools/apply_community.py",
       "sha256": "2ccea15173ea9d7e2f84e2a7339c73e8f7af9cdd773665ad1609bdda1bd668e3",
       "lines": 196,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/audit_authorization_wiring.mjs",
+      "sha256": "f6b328c5e750196548b9983b3d8a9dcd1ccfc596560fb55f6ff5d8999339a18d",
+      "lines": 50,
       "explainedLines": 0,
       "status": "pending"
     },

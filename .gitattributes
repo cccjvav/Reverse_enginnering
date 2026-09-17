@@ -17,3 +17,4 @@ docs/evidence/linked-*.json -text
 docs/evidence/contract-type-diagnostics.json -text
 docs/evidence/http-*.json -text
 docs/evidence/portable-*.json -text
+docs/evidence/authorization-wiring.json -text

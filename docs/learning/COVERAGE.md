@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/166 个纳入范围的文件完整逐行解释；363/31232 行已解释。
+当前：6/168 个纳入范围的文件完整逐行解释；363/31303 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -15,7 +15,7 @@
 
 | 文件 | 总行数 | 已解释 | 状态 |
 |---|---:|---:|---|
-| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 110 | 0 | 待逐行讲解 |
+| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 112 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 107 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 47 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
@@ -127,6 +127,7 @@
 | [recovered/shuncode-extension/src/workspace-hub-types.ts](../../recovered/shuncode-extension/src/workspace-hub-types.ts) | 74 | 0 | 待逐行讲解 |
 | [recovered/shuncode-extension/src/workspace-hub.ts](../../recovered/shuncode-extension/src/workspace-hub.ts) | 333 | 0 | 待逐行讲解 |
 | [tests/bridge-core-agent-runtime.test.mjs](../../tests/bridge-core-agent-runtime.test.mjs) | 69 | 0 | 待逐行讲解 |
+| [tests/bridge-core-authorization-wiring.test.mjs](../../tests/bridge-core-authorization-wiring.test.mjs) | 19 | 0 | 待逐行讲解 |
 | [tests/bridge-core-boundary.test.mjs](../../tests/bridge-core-boundary.test.mjs) | 25 | 0 | 待逐行讲解 |
 | [tests/bridge-core-custom-tools.test.mjs](../../tests/bridge-core-custom-tools.test.mjs) | 145 | 0 | 待逐行讲解 |
 | [tests/bridge-core-file-execution.test.mjs](../../tests/bridge-core-file-execution.test.mjs) | 104 | 0 | 待逐行讲解 |
@@ -154,6 +155,7 @@
 | [tests/test_windows_inspect.py](../../tests/test_windows_inspect.py) | 71 | 0 | 待逐行讲解 |
 | [tools/apply-community.cmd](../../tools/apply-community.cmd) | 31 | 0 | 待逐行讲解 |
 | [tools/apply_community.py](../../tools/apply_community.py) | 196 | 0 | 待逐行讲解 |
+| [tools/audit_authorization_wiring.mjs](../../tools/audit_authorization_wiring.mjs) | 50 | 0 | 待逐行讲解 |
 | [tools/audit_custom_boundary.mjs](../../tools/audit_custom_boundary.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/audit_extension_runtime.mjs](../../tools/audit_extension_runtime.mjs) | 48 | 0 | 待逐行讲解 |
 | [tools/audit_recovered_extension.py](../../tools/audit_recovered_extension.py) | 79 | 0 | 待逐行讲解 |

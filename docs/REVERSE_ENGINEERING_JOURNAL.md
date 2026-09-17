@@ -649,3 +649,31 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 最终仍NOT_READY，当前完成范围为可选文本回退源码接入与自动化验证，不是原卡片/完整Windows应用交付。
 
 推送CI文档时远端安装器取证工作流先写入085bfd1，仅更新两份提取证据元数据；首次推送因此被正常拒绝。fetch并核对差异后将本地文档提交rebase到该同分支提交上，不强推、不覆盖远端取证更新。该自动取证不代表生成新的Windows安装器。
+
+## 29. 先交接，再推进授权：基线同步与调用图审计（2026-09-17）
+
+用户希望接力文档同时是路线图，先做交接再继续工程。新增`docs/handoff/README.md`、`ROADMAP.md`、`NEXT_AUTHORIZATION.md`与`STATE.json`：独立项目背景、固定分支/不可变原件/保留认证的约束、第一小时CMD操作、P0–P7依赖/通过/停止条件、七发布门槛映射及下一授权任务具体正反向测试。不把完整Windows验收指南再复制一遍，链接现有分阶段步骤。
+
+### 29.1 先检查远端，不重复聊天中的旧工作
+
+- 起始会话快照文件已到97099c5，但Git索引/HEAD落在9159d82；先`git fetch origin arena/01a09d2c-reverse-enginnering-of-shun`，远端已是b77a9e512cd491de1efa2101ee578a5e647a2de5。
+- 用`git archive 97099c5`逐个比较工作区字节：所有已存在文件相同，仅六个recovered旧dist因会话目录排除未保存。核验后才`git reset --mixed 97099c5`恢复索引、从97099c5补这六个原件，再`git merge --ff-only FETCH_HEAD`。没有覆盖现有修改、硬重置、切分支或强推；这些是本次特殊恢复操作，不是下次可直接复制的步骤。
+- 实际远端已包含ee8ebed公共Chat文本回退、085bfd1自动安装器静态证据、b77a9e5 CI文档。最新可选portable类型0，不能再把HTTP-only的11当当前候选失败。
+- `npm ci --ignore-scripts --no-audit --no-fund`成功，23包；原143 Node/31 Python/3跳过与35219484258 CI是继承证据，在本次复验前没有伪称刚跑过。
+
+### 29.2 授权下一步不是盲目alias：新增可复验审计
+
+- 跟读原Facade构造、ToolDispatcherDeps、invokeFileTool及5个执行器context。入口和下游都只有workspaceRoots/signal；实际deps也不含文件审批服务。维护强制授权调度器尚不在portable图。
+- 新增`tools/audit_authorization_wiring.mjs`，先用现有来源报告核验3个原件SHA，再TypeScript AST定位1接口/1构造/1入口/5执行器字段与行号；重建同源portable图，输出原alias仍指向reconstructed文件注册器且authorizedDispatcherBundled:false。对象spread/原件漂移/数量异常中止，不静默猜测。
+- 新增固定报告`docs/evidence/authorization-wiring.json`与自动对照回归；`npm run audit:authorization-wiring`仅观察，`--write`显式更新报告。退出0只是报告完成，authorizationIntegrationVerified仍false，不是漏洞扫描或OS沙箱证明。没有接入固定true政策，也没有改变实验扩展构建字节。
+- 首次命令重定向到不存在的`.work/`导致shell未执行报告生成，随后测试ENOENT；创建`.work`后重跑报告与单测，1/1通过。记录该失败，不用旧报告填补。
+- 为CI增加审计工具/证据的paths触发，报告`-text`避免Windows自动CRLF造成hash证据差异。源码仍保留原件，旧overlay不重打包。
+
+### 29.3 本轮本地复验（与上一轮CI分开）
+
+- `npm run check:bridge-core`：41模块/389声明/262904字节闭包通过；注意这条命令不是npm test，随后单独执行完整测试。
+- `npm test`：144/144通过、0失败/跳过；`python -m unittest discover -s tests -v`：34运行、31通过、3项Windows专属在Linux跳过。
+- portable构建/check/诊断均退出0；75输入、31alias、2商业政策替换，1677498字节，SHA仍635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa。
+- learn:build/check更新为168文件/31303行，6文件363行已人工解释，full:false；新增审计与测试尚没有逐行人工教程，不能把生成覆盖清单算已教完。
+- `check:release`仍退出2/NOT_READY，2PASS/7BLOCKED；没有运行完整宿主/GUI/Windows安装器，也没有把维护授权接入产品。
+- 完成前检查并修正路线图验收链接：B指向已有acceptance/README.md，C为MCP.md，D为INSTALLER.md；逐一核验handoff内相对Markdown目标存在，STATE.json可解析。给旧验收/恢复计划顶部补充最新入口，保留历史诊断模式定义。

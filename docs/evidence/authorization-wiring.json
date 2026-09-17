@@ -1,0 +1,117 @@
+{
+  "scope": "Hash-verified original AST contexts plus freshly rebuilt portable input graph. Missing field observations are not a complete security audit or a policy implementation.",
+  "authorizationIntegrationVerified": false,
+  "variant": "portable-chat-fallback",
+  "bundleSha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa",
+  "sources": [
+    {
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "sha256": "0016656e7a800e6c98a14346546c04ad31b24e4030993ad33529051d5755eb01"
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "sha256": "e1e23bf52877be3c8399ae81dfb7c1f698ea276b57ce0d4eb5fbd3df564c8202"
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "sha256": "c7f9373b292a11f2c2b6072a57566460c36bf86a3ca7043dd75c193fd550ff35"
+    }
+  ],
+  "observations": [
+    {
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 62,
+      "kind": "dependency-interface",
+      "fields": [
+        "invokeIdeTool",
+        "log",
+        "skillsEnabled",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "line": 309,
+      "kind": "file-tool-call",
+      "fields": [
+        "signal",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "recovered/shuncode-extension/src/bridge-server.ts",
+      "line": 197,
+      "kind": "host-constructor",
+      "fields": [
+        "invokeIdeTool",
+        "log",
+        "skillsEnabled",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "line": 710,
+      "kind": "executor-context",
+      "executor": "applyPatch",
+      "fields": [
+        "signal",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "line": 717,
+      "kind": "executor-context",
+      "executor": "findFiles",
+      "fields": [
+        "signal",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "line": 724,
+      "kind": "executor-context",
+      "executor": "readFiles",
+      "fields": [
+        "signal",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "line": 735,
+      "kind": "executor-context",
+      "executor": "readImage",
+      "fields": [
+        "signal",
+        "workspaceRoots"
+      ]
+    },
+    {
+      "source": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "line": 750,
+      "kind": "executor-context",
+      "executor": "searchFiles",
+      "fields": [
+        "signal",
+        "workspaceRoots"
+      ]
+    }
+  ],
+  "fileRegistryResolutions": [
+    {
+      "importer": "recovered/shuncode-extension/src/bridge-constants.ts",
+      "requested": "../../../src/file-tool-registry.js",
+      "linkedTo": "reconstructed/bridge-core/src/file-tool-registry.js"
+    },
+    {
+      "importer": "recovered/shuncode-extension/src/bridge-tool-dispatcher.ts",
+      "requested": "../../../src/file-tool-registry.js",
+      "linkedTo": "reconstructed/bridge-core/src/file-tool-registry.js"
+    }
+  ],
+  "authorizedDispatcherBundled": false,
+  "nextTask": "P1: bind host-owned, session-scoped permission policy through facade and dispatcher; preserve cancellation/roots and test real fixture file denial before build integration."
+}

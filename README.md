@@ -1,5 +1,7 @@
 # ShunCode Windows 源码恢复
 
+> **助手接力 / 当前路线图（2026-09-17）：** 请先读[交接与路线图](docs/handoff/README.md)。最新portable文本回退候选类型0错误，产品仍NOT_READY；下一优先项为宿主文件授权接线，不要重复历史11错误工作。本文早期调查/数字属于历史记录。
+
 > **[当前工程恢复汇总](docs/RECOVERY_STATUS.md)**：本轮类型/维护运行时/发布门槛成果，以及完整宿主、真实激活与安装器仍未完成的具体项目。总状态NOT_READY。
 
 > 类型恢复进度：累计14个[候选类型契约](reconstructed/type-contracts/README.md)；原连接合同模式14条，新增[HTTP接入实验](docs/HTTP_EXTENSION_INTEGRATION.md)为11条（定制Chat字段）；原A05/JS推断基线仍59条，两种模式都失败，宿主与权限门槛未放行。

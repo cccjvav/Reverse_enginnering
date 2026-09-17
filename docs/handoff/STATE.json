@@ -1,0 +1,123 @@
+{
+  "updated": "2026-09-17",
+  "purpose": "Handoff snapshot, not a release attestation. Verify current git HEAD and re-run commands before trusting it.",
+  "branch": "arena/01a09d2c-reverse-enginnering-of-shun",
+  "baseCommitBeforeHandoff": "b77a9e512cd491de1efa2101ee578a5e647a2de5",
+  "portableImplementationCommit": "ee8ebed225e64fd0987f611a8f16a048d993a3f0",
+  "release": {
+    "status": "NOT_READY",
+    "exitCode": 2,
+    "passed": [
+      "source-linkage",
+      "candidate-types"
+    ],
+    "blocked": [
+      "carrier-identity",
+      "host-chat-api",
+      "native-runtime",
+      "authorization-integration",
+      "http-integration",
+      "real-activation-gui-mcp",
+      "source-built-installer"
+    ]
+  },
+  "candidate": {
+    "variant": "portable-chat-fallback",
+    "candidateErrorCount": 0,
+    "originalErrorCounts": {
+      "inference": 59,
+      "contracts": 14,
+      "httpOnly": 11
+    },
+    "inputs": 75,
+    "aliases": 31,
+    "commercialPolicyReplacements": 2,
+    "outputBytes": 1677498,
+    "sha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa",
+    "fullTypecheckPassed": false,
+    "originalTypesRecovered": false,
+    "originalHostIdentityConfirmed": false,
+    "richCardsRestored": false
+  },
+  "localVerification": {
+    "scope": "This handoff working tree: static audit/test/docs additions, no application source changes; Linux, not Windows/GUI. Raw transient logs in .work, summarized here rather than published.",
+    "nodeVersion": "v22.22.3",
+    "pythonVersion": "3.11.2",
+    "npmTest": {
+      "exitCode": 0,
+      "passed": 144,
+      "failed": 0
+    },
+    "pythonUnittest": {
+      "exitCode": 0,
+      "run": 34,
+      "passed": 31,
+      "skippedWindowsOnly": 3
+    },
+    "commandsPassed": [
+      "npm run check:bridge-core",
+      "npm run build:portable-extension",
+      "npm run check:portable-extension",
+      "npm run diagnose:portable-types",
+      "npm run learn:build",
+      "npm run learn:check",
+      "node tools/audit_authorization_wiring.mjs --write",
+      "node --test tests/bridge-core-authorization-wiring.test.mjs"
+    ],
+    "expectedNonzero": {
+      "npm run check:release": 2
+    }
+  },
+  "previousCI": {
+    "runId": 35219484258,
+    "headSha": "ee8ebed225e64fd0987f611a8f16a048d993a3f0",
+    "jobs": "Ubuntu, Windows 2022 and ordinary CMD/conda successful (inherited evidence; not the new audit commit)",
+    "evidence": "docs/evidence/portable-integration-tests.json"
+  },
+  "handoffCI": {
+    "status": "pending-push"
+  },
+  "authorization": {
+    "evidence": "docs/evidence/authorization-wiring.json",
+    "authorizedDispatcherBundled": false,
+    "authorizationIntegrationVerified": false,
+    "implementedThisTurn": "Hash-verified AST and portable input-graph audit only; no host permission service or runtime integration"
+  },
+  "learning": {
+    "files": 168,
+    "lines": 31303,
+    "fullyExplainedFiles": 6,
+    "explainedLines": 363,
+    "projectWideExplanationComplete": false
+  },
+  "tasks": {
+    "P0": "DONE",
+    "P1": "READY: audit complete; implementation not started",
+    "P2": "PARTIAL: inert HTTP fixtures only",
+    "P3": "BLOCKED: static inventory may proceed",
+    "P4": "BLOCKED",
+    "P5": "BLOCKED",
+    "P6": "BLOCKED",
+    "P7": "BLOCKED: learning can continue"
+  },
+  "nextAction": "Follow docs/handoff/NEXT_AUTHORIZATION.md P1.1: trace trusted session owner and cancellation lifecycle; design fail-closed host-owned file permission contract before wiring maintained dispatcher.",
+  "protected": [
+    "recovered originals",
+    "reconstructed original-shape sources",
+    "existing overlay bytes",
+    "provider authentication and transport tokens",
+    "filesystem boundaries"
+  ],
+  "notDone": [
+    "host file authorization wiring",
+    "real extension activation/GUI/MCP acceptance",
+    "native Electron ABI acceptance",
+    "source-built Windows installer",
+    "full line-by-line teaching"
+  ],
+  "freshnessRules": [
+    "Do not treat baseCommitBeforeHandoff as the newest HEAD. Fetch and inspect remote before merging or pushing.",
+    "Distinguish freshly rerun local tests from previous CI evidence.",
+    "Update task status, journal and evidence after implementation; never force release gates to PASS."
+  ]
+}

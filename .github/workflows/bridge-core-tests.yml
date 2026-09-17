@@ -32,6 +32,8 @@ on:
       - docs/evidence/http-*.json
       - tools/diagnose_linked_types.mjs
       - tools/check_release_readiness.mjs
+      - tools/audit_authorization_wiring.mjs
+      - docs/evidence/authorization-wiring.json
       - reference/vscode-types/**
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs
