@@ -45,7 +45,7 @@
     "pythonVersion": "3.11.2",
     "npmTest": {
       "exitCode": 0,
-      "passed": 162,
+      "passed": 164,
       "failed": 0
     },
     "pythonUnittest": {
@@ -69,6 +69,12 @@
     ],
     "expectedNonzero": {
       "npm run check:release": 2
+    },
+    "portableBundle": {
+      "inputs": 75,
+      "outputSha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa",
+      "outputBytes": 1677498,
+      "byteIdenticalToBaseline": true
     }
   },
   "previousCI": {
@@ -112,8 +118,30 @@
       "community/bridge-core/file-authorization-policy.mjs",
       "community/bridge-core/authorized-file-tools.mjs"
     ],
-    "p12Tests": "tests/bridge-core-file-authorization.test.mjs (18 tests, 8 mutations verified, includes the Windows realpath regression)",
-    "newDesignNotRecoveredOriginal": "The original extension TS contains zero checkPermission call sites and the original callback has no operation field; the operation-aware contract is new maintenance design and must not be presented as a recovered d.ts."
+    "p12Tests": "tests/bridge-core-file-authorization.test.mjs (20 tests; includes the Windows realpath regression, move dual-end authorization, and a hostile-caller forged-plan case)",
+    "newDesignNotRecoveredOriginal": "The original extension TS contains zero checkPermission call sites and the original callback has no operation field; the operation-aware contract is new maintenance design and must not be presented as a recovered d.ts.",
+    "p13Step1": {
+      "change": "apply_patch operation classification no longer comes from a caller-supplied patchPlan. derivePatchPlan() parses the patch inside the module using the original parsePatch/resolveExistingPath/resolveNewPath.",
+      "closes": [
+        "Windows realpath key-mismatch as a CLASS, not per-platform patching",
+        "A trust-boundary hole: a caller could declare a Delete File patch as \"update\" and get a modify-only grant to authorize the delete."
+      ],
+      "apiChange": "invokeFileToolWithPolicy dropped the patchPlan parameter; createPermissionCallback keeps it for direct unit-test injection.",
+      "hostileProbeResult": "forged plan ignored; policy saw [\"delete\"], isError true, file intact",
+      "mutations": {
+        "killed": [
+          "M9 trust caller plan (4 fails)",
+          "M10 move destination unrecorded (1)",
+          "M11 all ops as update (2)",
+          "M14 classification catch returns true (1)"
+        ],
+        "equivalentMutantsProvenByDifferentialProbe": [
+          "M12 empty Map vs undefined on derivation failure",
+          "M13 explicit non-Map guard removed"
+        ],
+        "note": "M12/M13 survive and are reported as equivalent mutants, proven by comparing all observable outputs against baseline, NOT silently claimed as covered."
+      }
+    }
   },
   "learning": {
     "files": 172,
@@ -124,7 +152,7 @@
   },
   "tasks": {
     "P0": "DONE",
-    "P1": "PARTIAL: P1.1 design record + P1.2 host-owned fail-closed policy and boundary tests done; P1.3 build integration and real host UI approval NOT started",
+    "P1": "PARTIAL: P1.1 design record, P1.2 host-owned fail-closed policy, and P1.3 step 1 (self-derived patch plan, caller can no longer mislabel an operation) done; P1.3 build integration and real host UI approval NOT started",
     "P2": "PARTIAL: inert HTTP fixtures only",
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
@@ -132,7 +160,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "P1.3: integrate the policy behind a SEPARATE experimental build flag (do not change the default 75-input portable bundle or its SHA), wiring facade -> dispatcher -> file entry so the extension actually constructs a host policy instead of only tests injecting one. Must supply patchPlan from the parsed patch, record provenance hashes/exact transform counts, and document that find/search drop to the Node engine. If a safe host UI is not yet possible, stop at deny-all and keep the gate BLOCKED rather than shipping a fixed true callback.",
+  "nextAction": "P1.3 step 2: integrate the policy behind a SEPARATE experimental build flag (must NOT change the default 75-input portable bundle or its SHA 635190e6...a2daa), wiring facade -> dispatcher -> file entry so the extension actually constructs a host policy instead of only tests injecting one. The patchPlan question is settled: the module derives the plan itself, so integration does not need to supply one. If no host UI can safely present the approval, stop at default-deny and keep authorization-integration BLOCKED rather than weakening the gate.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",

@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/172 个纳入范围的文件完整逐行解释；363/32335 行已解释。
+当前：6/172 个纳入范围的文件完整逐行解释；363/32442 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -18,7 +18,7 @@
 | [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 116 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 110 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 49 | 0 | 待逐行讲解 |
-| [community/bridge-core/authorized-file-tools.mjs](../../community/bridge-core/authorized-file-tools.mjs) | 146 | 0 | 待逐行讲解 |
+| [community/bridge-core/authorized-file-tools.mjs](../../community/bridge-core/authorized-file-tools.mjs) | 173 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
 | [community/bridge-core/file-authorization-policy.mjs](../../community/bridge-core/file-authorization-policy.mjs) | 278 | 0 | 待逐行讲解 |
 | [community/bridge-core/file-tool-dispatcher.mjs](../../community/bridge-core/file-tool-dispatcher.mjs) | 63 | 0 | 待逐行讲解 |
@@ -132,7 +132,7 @@
 | [tests/bridge-core-authorization-wiring.test.mjs](../../tests/bridge-core-authorization-wiring.test.mjs) | 19 | 0 | 待逐行讲解 |
 | [tests/bridge-core-boundary.test.mjs](../../tests/bridge-core-boundary.test.mjs) | 25 | 0 | 待逐行讲解 |
 | [tests/bridge-core-custom-tools.test.mjs](../../tests/bridge-core-custom-tools.test.mjs) | 145 | 0 | 待逐行讲解 |
-| [tests/bridge-core-file-authorization.test.mjs](../../tests/bridge-core-file-authorization.test.mjs) | 498 | 0 | 待逐行讲解 |
+| [tests/bridge-core-file-authorization.test.mjs](../../tests/bridge-core-file-authorization.test.mjs) | 578 | 0 | 待逐行讲解 |
 | [tests/bridge-core-file-execution.test.mjs](../../tests/bridge-core-file-execution.test.mjs) | 104 | 0 | 待逐行讲解 |
 | [tests/bridge-core-files.test.mjs](../../tests/bridge-core-files.test.mjs) | 245 | 0 | 待逐行讲解 |
 | [tests/bridge-core-http-linkage.test.mjs](../../tests/bridge-core-http-linkage.test.mjs) | 134 | 0 | 待逐行讲解 |

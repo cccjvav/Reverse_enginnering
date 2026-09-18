@@ -23,62 +23,70 @@ import {
   FileAuthorizationError, FileAuthorizationPolicy, operationForCheckpoint, resolveOwnerScope,
 } from './file-authorization-policy.mjs';
 import {invokeAuthorizedFileTool} from './file-tool-dispatcher.mjs';
-import {normalizeFileToolName} from '../../reconstructed/bridge-core/src/file-tool-input-compat.js';
+import {normalizeFileToolName, normalizeFileToolInput} from '../../reconstructed/bridge-core/src/file-tool-input-compat.js';
+import {
+  DEFAULT_APPLY_PATCH_CONFIG, parsePatch, resolveExistingPath, resolveNewPath,
+} from '../../reconstructed/bridge-core/src/apply-patch.js';
 
 /**
- * Canonicalize a plan key so host-supplied spellings match what the executors
- * actually report.
+ * Derive the authorized patch plan from the patch itself, using the ORIGINAL
+ * parser and the ORIGINAL path resolvers.
  *
- * The executors resolve workspace roots through realpath() before handing a
- * path to checkPermission, so the callback receives a fully resolved path. A
- * host building its plan from the raw root would never match on platforms
- * where the two differ. Windows is the common case: mkdtemp/TEMP frequently
- * yields an 8.3 short name (RUNNER~1) that realpath expands, and drive-letter
- * case can differ; POSIX hits the same thing through symlinked roots.
+ * Earlier this plan was supplied by the caller, which made a correct grant
+ * depend on the caller spelling paths exactly as the executors would. That is
+ * both fragile (it shipped a Windows-only defect: mkdtemp short names expand
+ * under realpath, so no key matched) and a weak trust boundary, since a wrong
+ * or hostile plan could mislabel a delete as a modify.
  *
- * Resolution is best-effort: a path that cannot be resolved (for example the
- * destination of an add, which does not exist yet) falls back to its parent's
- * real path plus the base name, mirroring resolveNewPath in apply-patch.js.
+ * Deriving it here means the operation attached to each path comes from the
+ * same parse the executor will perform, not from anything a caller asserts.
+ * Parse/resolution failures are surfaced as denials: the executor re-parses and
+ * reports the authoritative error, and a path we could not classify stays
+ * unauthorized.
  */
-async function canonicalPlanKey(candidate) {
-  try {
-    return await realpath(candidate);
-  } catch {
-    try {
-      return path.join(await realpath(path.dirname(candidate)), path.basename(candidate));
-    } catch {
-      return path.resolve(candidate);
+async function derivePatchPlan(args, workspaceRoots, config) {
+  const plan = new Map();
+  const normalized = normalizeFileToolInput('apply_patch', args);
+  if (!normalized || typeof normalized.patch !== 'string' || normalized.patch.length === 0) return plan;
+  const roots = workspaceRoots();
+  const record = (absolutePath, action) => {
+    plan.set(absolutePath, action);
+    if (process.platform === 'win32') plan.set(absolutePath.toLowerCase(), action);
+  };
+  for (const operation of parsePatch(normalized.patch, {...DEFAULT_APPLY_PATCH_CONFIG, ...config})) {
+    if (operation.action === 'add') {
+      record((await resolveNewPath(operation.path, roots)).absolutePath, 'add');
+      continue;
+    }
+    const source = await resolveExistingPath(operation.path, roots);
+    record(source.absolutePath, operation.action);
+    if (operation.action === 'update' && operation.moveTo) {
+      record((await resolveNewPath(operation.moveTo, roots)).absolutePath, 'move');
     }
   }
-}
-
-/**
- * Normalize a caller-supplied patch plan into canonical absolute paths.
- *
- * Windows filesystems are case-insensitive, so keys are additionally indexed
- * case-folded there to avoid a spelling mismatch denying a legitimate grant.
- */
-async function canonicalizePatchPlan(patchPlan) {
-  const canonical = new Map();
-  if (!patchPlan) return canonical;
-  for (const [candidate, action] of patchPlan) {
-    const key = await canonicalPlanKey(candidate);
-    canonical.set(key, action);
-    if (process.platform === 'win32') canonical.set(key.toLowerCase(), action);
-  }
-  return canonical;
+  return plan;
 }
 
 /**
  * Infer the apply_patch checkpoint for a path.
  *
- * The executor's callback passes only an absolute path, so the operation is
- * recovered from the parsed patch plan the host computed, never from model
- * arguments. An unmapped path fails closed rather than defaulting to `modify`.
+ * The executor's callback passes only an absolute path, so the operation comes
+ * from the derived plan above. An unmapped path fails closed rather than
+ * defaulting to `modify`.
+ *
+ * Windows filesystems are case-insensitive, so a case-folded lookup is tried
+ * before giving up.
  */
 function patchActionForPath(plan, absolutePath) {
-  const entry = plan?.get(absolutePath)
-    ?? (process.platform === 'win32' ? plan?.get(absolutePath.toLowerCase()) : undefined);
+  // An absent plan is a denial, not an exemption. Derivation failures hand us
+  // an empty Map, but guard the missing/!Map case explicitly so a future edit
+  // cannot turn "no plan" into "no checks".
+  if (!(plan instanceof Map)) {
+    throw new FileAuthorizationError('INVALID_AUTHORIZATION_REQUEST',
+      'apply_patch has no derived authorization plan; refusing to guess the operation.');
+  }
+  const entry = plan.get(absolutePath)
+    ?? (process.platform === 'win32' ? plan.get(absolutePath.toLowerCase()) : undefined);
   if (!entry) {
     throw new FileAuthorizationError('INVALID_AUTHORIZATION_REQUEST',
       'apply_patch touched a path that was not in the authorized plan.');
@@ -96,12 +104,22 @@ function patchActionForPath(plan, absolutePath) {
  * @param {() => string[]} options.workspaceRoots Host root resolver.
  * @param {AbortSignal} [options.signal]
  * @param {Map<string, string>} [options.patchPlan] absolutePath -> patch action.
+ *   Supplied by invokeFileToolWithPolicy from the parsed patch, not by callers.
  */
 export function createPermissionCallback({policy, owner, tool, workspaceRoots, signal, patchPlan}) {
   return async absolutePath => {
-    const operation = tool === 'apply_patch'
-      ? operationForCheckpoint(tool, patchActionForPath(patchPlan, absolutePath))
-      : operationForCheckpoint(tool);
+    // The executors treat any falsy return as "denied", so classification
+    // failures must resolve to false rather than propagate. Throwing here would
+    // abort the whole tool call and, depending on the caller, could be reported
+    // as a generic error instead of a permission denial.
+    let operation;
+    try {
+      operation = tool === 'apply_patch'
+        ? operationForCheckpoint(tool, patchActionForPath(patchPlan, absolutePath))
+        : operationForCheckpoint(tool);
+    } catch {
+      return false;
+    }
     return await policy.authorize({
       owner, tool, operation, absolutePath,
       workspaceRoots: workspaceRoots(), signal,
@@ -116,7 +134,7 @@ export function createPermissionCallback({policy, owner, tool, workspaceRoots, s
  * owner/approved/config through `args` cannot influence the decision: args are
  * forwarded to the original parsers only, and the policy reads none of them.
  */
-export async function invokeFileToolWithPolicy(name, args, {policy, owner, workspaceRoots, signal, patchPlan} = {}) {
+export async function invokeFileToolWithPolicy(name, args, {policy, owner, workspaceRoots, signal} = {}) {
   if (!(policy instanceof FileAuthorizationPolicy)) {
     return {
       text: 'PERMISSION_POLICY_REQUIRED: A host-owned FileAuthorizationPolicy is required.',
@@ -129,8 +147,17 @@ export async function invokeFileToolWithPolicy(name, args, {policy, owner, works
   }
   const canonical = normalizeFileToolName(name);
   const roots = typeof workspaceRoots === 'function' ? workspaceRoots : () => workspaceRoots;
-  // Resolve plan keys the same way the executors resolve the paths they report.
-  const resolvedPlan = canonical === 'apply_patch' ? await canonicalizePatchPlan(patchPlan) : undefined;
+  // Derive the plan from the patch itself so no caller can mislabel an operation.
+  // A parse/resolve failure yields an empty plan: every checkpoint then fails
+  // closed and the executor re-parses to report the authoritative error.
+  let resolvedPlan;
+  if (canonical === 'apply_patch') {
+    try {
+      resolvedPlan = await derivePatchPlan(args, roots, policy.configByTool?.apply_patch);
+    } catch {
+      resolvedPlan = new Map();
+    }
+  }
   return await invokeAuthorizedFileTool(name, args, {
     workspaceRoots: roots,
     signal,

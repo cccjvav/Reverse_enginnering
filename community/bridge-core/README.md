@@ -41,7 +41,7 @@ configByTool是可信宿主配置，不是模型输入。权限回调必须绑�
 
 三点必须照实说明：
 
-- **操作类型是新增字段。** `apply_patch`内部横跨新增/修改/移动/删除四个检查点，仅凭工具名无法区分"允许读"与"允许删"，故由宿主从已解析的补丁计划提供`patchPlan`；计划里没有的路径直接拒绝，不猜测默认操作。这是有意偏离原签名的新设计。
+- **操作类型是新增字段，且由本模块自行派生。** `apply_patch`内部横跨新增/修改/移动/删除四个检查点，仅凭工具名无法区分"允许读"与"允许删"。操作类型不接受调用方声明：`derivePatchPlan()`用原件导出的`parsePatch`/`resolveExistingPath`/`resolveNewPath`自己解析补丁得出每个路径的真实操作。理由是让调用方声明既脆弱（路径拼写须与执行器解析完全一致，曾导致Windows专属缺陷）又不安全（可把`Delete File`声明成`update`，骗过只授予修改权限的宿主）。无法分类的路径直接拒绝，不猜测默认操作。这是有意偏离原签名的新设计。
 - **授权会被缓存到owner+工具+操作+路径。** 因为`applyPatch`会跑两次preflight（先收集锁、再在锁内重跑），不缓存就会重复打扰宿主。代价是授权在TTL内可复用，因此必须有有限TTL，并在会话销毁时`revokeOwner`。现代MCP路径没有服务端销毁事件，只能靠TTL过期。
 - **传入权限回调会改变搜索执行路径。** `find-files.js:372`与`search-files.js:534`在有回调时从首选引擎（ripgrep）降级为逐条过滤的Node实现，行为与性能都会变，不是纯增强。
 
@@ -52,3 +52,14 @@ configByTool是可信宿主配置，不是模型输入。权限回调必须绑�
 `http-router.mjs`在正确端点拒绝数组型/重复协议请求头，并检查rawHeaders，覆盖Node已经把重复头合成字符串的情况。错误返回400，不回显令牌或具体头值；错误令牌仍走原404路由。测试使用本机回环HTTP和空处理器，不连接真实MCP、隧道或GUI。没有改变原CORS、OAuth或文件授权机制。
 
 默认旧实验bundle和已发布overlay仍不含这两模块。新增HTTP专用实验变体已接入http-router.mjs，file-tool-dispatcher.mjs仍未接入；见[HTTP接入说明](../../docs/HTTP_EXTENSION_INTEGRATION.md)。原扩展没有传入新入口需要的宿主权限策略，因此不能靠修改一条import就宣布整合完成。现有图像/搜索/写入竞态与非OS隔离限制仍存在，read_files检查点也不能关闭所有TOCTOU窗口。
+
+## P1.3 第一步：补丁计划改为自行派生（仍未接入扩展）
+
+`invokeFileToolWithPolicy`**不再接受`patchPlan`参数**。计划由`derivePatchPlan()`在模块内部用原件解析器派生，调用方无法影响操作分类。`createPermissionCallback`仍保留该参数，仅供单测直接注入。
+
+解析或路径解析失败时fail-closed：计划为空Map，所有路径无法分类而被拒绝，权威错误交由执行器重新解析后报出。
+
+`move`会同时授权源路径与目标路径，二者都必须获批，否则整次调用被拒且两端文件均不变。
+
+已实测：调用方递交Delete File补丁却声明为`update`时，策略看到的仍是`delete`，调用报错，文件完好。详见`docs/evidence/file-authorization-policy.json`的`planDerivation`与`mutationTesting.round3`（含两个**等价变异**的差分证明）。
+

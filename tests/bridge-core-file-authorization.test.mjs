@@ -360,11 +360,12 @@ test('apply_patch authorizes add, modify, move and delete as distinct operations
   const owner = bridgeOwner();
   const target = path.join(root, 'a.txt');
 
-  // "Allowed to read" must not permit deletion of the same file.
+  // "Allowed to read" must not permit deletion of the same file. The operation
+  // is derived from the patch itself, so the caller cannot mislabel it.
   const readOnly = new FileAuthorizationPolicy({approve: request => request.operation === 'read'});
   const refusedDelete = await invokeFileToolWithPolicy('apply_patch',
     {patch: '*** Begin Patch\n*** Delete File: a.txt\n*** End Patch'},
-    {policy: readOnly, owner, workspaceRoots: [root], patchPlan: new Map([[target, 'delete']])});
+    {policy: readOnly, owner, workspaceRoots: [root]});
   assert.equal(refusedDelete.isError, true);
   assert.equal(await readFile(target, 'utf8'), CONTENT, 'file survives a denied delete');
 
@@ -375,17 +376,94 @@ test('apply_patch authorizes add, modify, move and delete as distinct operations
   });
   const patched = await invokeFileToolWithPolicy('apply_patch',
     {patch: '*** Begin Patch\n*** Update File: a.txt\n@@\n-alpha\n+CHANGED\n*** End Patch'},
-    {policy: modifyPolicy, owner, workspaceRoots: [root], patchPlan: new Map([[target, 'update']])});
+    {policy: modifyPolicy, owner, workspaceRoots: [root]});
   assert.equal(patched.isError, undefined);
   assert.equal(await readFile(target, 'utf8'), 'CHANGED\nbeta\n');
   assert.ok(seen.every(operation => operation === 'modify'));
 
-  // A path missing from the host plan fails closed rather than guessing.
-  const unplanned = await invokeFileToolWithPolicy('apply_patch',
-    {patch: '*** Begin Patch\n*** Add File: new.txt\n+hello\n*** End Patch'},
-    {policy: new FileAuthorizationPolicy({approve: allow}), owner, workspaceRoots: [root],
-      patchPlan: new Map()});
-  assert.equal(unplanned.isError, true);
+  // A delete is classified as 'delete' even though apply_patch is one tool.
+  const deleteOps = [];
+  const deletePolicy = new FileAuthorizationPolicy({
+    approve: request => {deleteOps.push(request.operation); return request.operation === 'delete';},
+  });
+  const deleted = await invokeFileToolWithPolicy('apply_patch',
+    {patch: '*** Begin Patch\n*** Delete File: a.txt\n*** End Patch'},
+    {policy: deletePolicy, owner, workspaceRoots: [root]});
+  assert.equal(deleted.isError, undefined, deleted.text);
+  assert.deepEqual(deleteOps, ['delete']);
+  await assert.rejects(readFile(target), {code: 'ENOENT'});
+
+  // An unparseable patch authorizes nothing and changes nothing.
+  const unparseable = await invokeFileToolWithPolicy('apply_patch', {patch: 'not a patch'},
+    {policy: new FileAuthorizationPolicy({approve: allow}), owner, workspaceRoots: [root]});
+  assert.equal(unparseable.isError, true);
+  assert.equal(await readFile(path.join(root, 'nested', 'b.txt'), 'utf8'), 'gamma\n');
+
+  // A missing or non-Map plan must DENY, and must never reach the approver:
+  // "no plan" must not degrade into "no checks". Asserted on the raw callback
+  // and on the policy, so the defensive try/catch cannot mask a real regression.
+  for (const patchPlan of [undefined, null, {}, new Map()]) {
+    let consulted = 0;
+    const noPlan = createPermissionCallback({
+      policy: new FileAuthorizationPolicy({approve: () => {consulted++; return true;}}), owner,
+      tool: 'apply_patch', workspaceRoots: () => [root], patchPlan,
+    });
+    assert.equal(await noPlan(path.join(root, 'nested', 'b.txt')), false,
+      `plan ${JSON.stringify(patchPlan)} must deny`);
+    assert.equal(consulted, 0, 'an unclassifiable path must not reach the approver');
+  }
+
+  // And end to end: if plan derivation fails, nothing is authorized or changed.
+  let approverCalls = 0;
+  const derailed = await invokeFileToolWithPolicy('apply_patch',
+    {patch: '*** Begin Patch\n*** Update File: missing-file.txt\n@@\n-x\n+y\n*** End Patch'},
+    {policy: new FileAuthorizationPolicy({approve: () => {approverCalls++; return true;}}),
+      owner, workspaceRoots: [root]});
+  assert.equal(derailed.isError, true);
+  assert.equal(approverCalls, 0, 'an unresolvable patch authorizes nothing');
+});
+
+test('a caller cannot mislabel a delete by supplying its own patch plan', async t => {
+  const root = await fixture(t);
+  const secret = path.join(root, 'a.txt');
+  const seen = [];
+  // Host allows modify but refuses delete.
+  const policy = new FileAuthorizationPolicy({
+    approve: request => {seen.push(request.operation); return request.operation === 'modify';},
+  });
+  const result = await invokeFileToolWithPolicy('apply_patch',
+    {patch: '*** Begin Patch\n*** Delete File: a.txt\n*** End Patch'},
+    // A caller-supplied plan claiming this is an 'update' must be ignored: the
+    // operation is derived from the patch by the original parser.
+    {policy, owner: bridgeOwner(), workspaceRoots: [root],
+      patchPlan: new Map([[secret, 'update']])});
+  assert.deepEqual(seen, ['delete'], 'derived from the patch, not from the caller');
+  assert.equal(result.isError, true);
+  assert.equal(await readFile(secret, 'utf8'), CONTENT, 'the refused delete did not happen');
+});
+
+test('a move authorizes both the source and the destination', async t => {
+  const root = await fixture(t);
+  const owner = bridgeOwner();
+  const seen = [];
+  // Approve the source modify but refuse the destination: the move must not happen.
+  const partial = new FileAuthorizationPolicy({
+    approve: request => {seen.push([request.operation, path.basename(request.absolutePath)]);
+      return request.operation === 'modify';},
+  });
+  const patch = {patch: '*** Begin Patch\n*** Update File: a.txt\n*** Move to: moved.txt\n@@\n-alpha\n+CHANGED\n*** End Patch'};
+  const refused = await invokeFileToolWithPolicy('apply_patch', patch,
+    {policy: partial, owner, workspaceRoots: [root]});
+  assert.equal(refused.isError, true);
+  assert.ok(seen.some(([operation]) => operation === 'move'), 'destination evaluated as a move');
+  await assert.rejects(readFile(path.join(root, 'moved.txt')), {code: 'ENOENT'});
+  assert.equal(await readFile(path.join(root, 'a.txt'), 'utf8'), CONTENT, 'source untouched');
+
+  const full = new FileAuthorizationPolicy({approve: allow});
+  const moved = await invokeFileToolWithPolicy('apply_patch', patch,
+    {policy: full, owner, workspaceRoots: [root]});
+  assert.equal(moved.isError, undefined, moved.text);
+  assert.equal(await readFile(path.join(root, 'moved.txt'), 'utf8'), 'CHANGED\nbeta\n');
 });
 
 test('an approved add creates the file and a denied add does not', async t => {
@@ -466,17 +544,19 @@ test('patch plans survive a root whose realpath differs from the host spelling',
   });
   const created = await invokeFileToolWithPolicy('apply_patch',
     {patch: '*** Begin Patch\n*** Add File: new.txt\n+hello\n*** End Patch'},
-    {policy, owner, workspaceRoots: [link], patchPlan: new Map([[path.join(link, 'new.txt'), 'add']])});
+    {policy, owner, workspaceRoots: [link]});
 
   assert.equal(created.isError, undefined, created.text);
   assert.equal(await readFile(path.join(real, 'new.txt'), 'utf8'), 'hello\n');
   assert.deepEqual(seen.map(([operation]) => operation), ['create']);
+  // The approver must see the resolved path, matching what the executor uses.
+  assert.equal(seen[0][1], path.join(resolvedRoot, 'new.txt'));
 
-  // A path genuinely absent from the plan must still fail closed.
-  const unplanned = await invokeFileToolWithPolicy('apply_patch',
+  // Denial still works through the same resolved-root path.
+  const denied = await invokeFileToolWithPolicy('apply_patch',
     {patch: '*** Begin Patch\n*** Update File: a.txt\n@@\n-alpha\n+CHANGED\n*** End Patch'},
-    {policy, owner, workspaceRoots: [link], patchPlan: new Map([[path.join(link, 'new.txt'), 'add']])});
-  assert.equal(unplanned.isError, true);
+    {policy: new FileAuthorizationPolicy({approve: () => false}), owner, workspaceRoots: [link]});
+  assert.equal(denied.isError, true);
   assert.equal(await readFile(path.join(real, 'a.txt'), 'utf8'), CONTENT);
 });
 

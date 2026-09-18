@@ -6,7 +6,14 @@
   ],
   "tests": {
     "file": "tests/bridge-core-file-authorization.test.mjs",
-    "cases": 18
+    "cases": 20,
+    "addedThisRound": [
+      "delete is classified as delete and actually deletes",
+      "an unparseable patch authorizes nothing and changes nothing",
+      "a caller cannot mislabel a delete by supplying its own patch plan",
+      "a move authorizes both the source and the destination",
+      "a missing or non-Map plan denies and never reaches the approver"
+    ]
   },
   "newDesignNotRecoveredOriginal": "checkPermission appears 0 times in recovered/shuncode-extension/src/*.ts and the original callback has no operation parameter. The operation-aware contract is new maintenance design.",
   "guarantees": [
@@ -21,7 +28,8 @@
     "grants are cached within TTL because applyPatch runs preflight twice",
     "modern-era owners have no teardown hook and rely on expiry alone",
     "supplying the callback downgrades find/search from ripgrep to the Node walker",
-    "native-chat is a fallback constant, not an authenticated subject"
+    "native-chat is a fallback constant, not an authenticated subject",
+    "Two surviving mutants (M12, M13) are equivalent mutants, proven by differential probe rather than assumed; see mutationTesting.round3.equivalentMutants."
   ],
   "mutationTesting": {
     "mutants": 8,
@@ -30,7 +38,51 @@
       "cache key without operation (test crossed tools, so keys differed anyway)",
       "removed pre-await closed check (masked by the post-await check)"
     ],
-    "resolution": "Both were test gaps; assertions were strengthened rather than the finding softened."
+    "resolution": "Both were test gaps; assertions were strengthened rather than the finding softened.",
+    "round3": {
+      "target": "plan derivation and the no-plan guard",
+      "killed": [
+        {
+          "id": "M9",
+          "mutation": "trust the caller-supplied patchPlan again",
+          "failingTests": 4
+        },
+        {
+          "id": "M10",
+          "mutation": "do not record the move destination",
+          "failingTests": 1
+        },
+        {
+          "id": "M11",
+          "mutation": "record every operation as update",
+          "failingTests": 2
+        },
+        {
+          "id": "M14",
+          "mutation": "classification catch returns true instead of false",
+          "failingTests": 1
+        }
+      ],
+      "equivalentMutants": [
+        {
+          "id": "M12",
+          "mutation": "on derivation failure set resolvedPlan = undefined instead of an empty Map",
+          "survived": true,
+          "verdict": "EQUIVALENT MUTANT, not a gap in the tests and not a vulnerability.",
+          "proof": "A differential probe recorded every observable output (callback return value, thrown code, approver call count, isError, file contents) for plans undefined/null/{}/empty Map/wrong-path and for two end-to-end derivation failures. Baseline and mutant outputs were byte-identical: all deny, approver consulted 0 times, files intact.",
+          "why": "Both an empty Map and a missing plan reach the same guard and produce the same denial, so no test can distinguish them by observable behaviour."
+        },
+        {
+          "id": "M13",
+          "mutation": "remove the explicit \"plan is not a Map\" guard",
+          "survived": true,
+          "verdict": "EQUIVALENT MUTANT under the current code, retained deliberately as defence in depth.",
+          "proof": "Same differential probe: outputs identical to baseline.",
+          "why": "The lookup below the guard uses a Map-shaped access that already yields undefined for a non-Map plan, which denies. The explicit guard is redundant TODAY; it is kept so that a future refactor of the lookup cannot silently turn \"no plan\" into \"no checks\"."
+        }
+      ],
+      "honestyNote": "These two mutants are reported as surviving rather than being papered over with a test that asserts an internal detail purely to force a kill. A test that cannot observe a behavioural difference would be testing the implementation, not the contract."
+    }
   },
   "crossPlatformDefectFoundByCI": {
     "failingRun": 35351320215,
@@ -65,7 +117,44 @@
     "portableSha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa"
   },
   "releaseGate": {
-    "authorizationIntegration": "BLOCKED",
-    "why": "No host UI approval, no source build entry, no real extension activation."
-  }
+    "authorization-integration": "BLOCKED",
+    "reason": "The policy is exercised only by maintenance tests. No real host UI constructs it yet, and the shipped portable bundle does not contain it."
+  },
+  "planDerivation": {
+    "change": "The apply_patch authorization plan is now derived inside the policy module from the patch text, using the original parsePatch + resolveExistingPath/resolveNewPath exported by reconstructed/bridge-core/src/apply-patch.js. It is no longer supplied by the caller.",
+    "whyTwoReasons": [
+      "Correctness: a caller-supplied plan had to spell paths exactly as the executors resolve them. It did not on Windows (mkdtemp short names expand under realpath), which shipped a Windows-only defect caught by CI run 35351320215.",
+      "Trust boundary: a wrong or hostile caller could mislabel an operation, e.g. present a Delete File patch while declaring the path as \"update\", so a host that only granted modify rights would have destroyed the file."
+    ],
+    "apiChange": "invokeFileToolWithPolicy no longer accepts a patchPlan parameter. createPermissionCallback still accepts one so unit tests can inject a plan directly.",
+    "failClosed": "If derivation throws, the plan becomes an empty Map and every path is unclassifiable, so nothing is authorized. The executor re-parses and reports the authoritative error.",
+    "hostileProbe": {
+      "scenario": "Caller passes patchPlan [secretPath, \"update\"] while the patch body is \"*** Delete File: secret.txt\".",
+      "beforeChange": "Policy would have seen operation \"modify\" and a modify-only grant would have authorized the delete.",
+      "afterChange": {
+        "operationsSeenByPolicy": [
+          "delete"
+        ],
+        "isError": true,
+        "fileSurvived": true
+      },
+      "note": "The forged plan is ignored entirely; the operation comes from the real parse."
+    }
+  },
+  "verification": {
+    "npmTest": "164/164",
+    "pythonUnittest": "39 run, 36 pass, 3 skipped (Windows-only)",
+    "learnCheck": "exit 0",
+    "checkRelease": "exit 2 (7 gates BLOCKED, unchanged and expected)",
+    "portableBundle": {
+      "inputs": 75,
+      "outputSha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa",
+      "outputBytes": 1677498,
+      "byteIdenticalToBaseline": true,
+      "note": "The community authorization modules are still not in the portable graph, so the shipped artifact is unchanged. authorization-integration stays BLOCKED."
+    },
+    "immutableOriginals": "recovered/, reconstructed/, reference/ unchanged (git status clean)"
+  },
+  "updatedAt": "2026-09-18",
+  "baseCommit": "0823b760b3c7024cc2cdfbf5a6b1402ac0dfd198"
 }
