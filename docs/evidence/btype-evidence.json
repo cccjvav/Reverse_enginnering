@@ -1,0 +1,1027 @@
+{
+  "scope": "Evidence inventory for typing the 41 rebuilt B-layer modules. Reports only; writes no type definitions.",
+  "whyNotSimplyRecovered": "Unlike the Electron 44 clipboard adaptation, the original .ts for these modules was never shipped: the installer contains no source maps (inventory.maps_total == 0) and none of the 41 module stems appear among the 28 recovered .ts files. Types are erased at compile time, so they must be reconstructed from use, not read back.",
+  "moduleCount": 41,
+  "totalExports": 392,
+  "tierA_firstHand": {
+    "meaning": "Names the author themselves wrote in recovered .ts files. Spelling and generic arity are authoritative.",
+    "modulesReferenced": 24,
+    "valueSymbols": 51,
+    "typeSymbols": 9,
+    "typeImports": {
+      "custom-tools": {
+        "CustomToolStatusEntry": [
+          "CustomToolStatusEntry",
+          "CustomToolStatusEntry[]"
+        ],
+        "__files__": [
+          "bridge-constants.ts",
+          "bridge-mcp-transport.ts",
+          "bridge-server.ts",
+          "bridge-tool-dispatcher.ts"
+        ],
+        "CustomToolManifest": [
+          "CustomToolManifest",
+          "CustomToolManifest[]"
+        ]
+      },
+      "custom-tool-skill-import": {
+        "SkillImportResult": [
+          "SkillImportResult"
+        ],
+        "__files__": [
+          "bridge-server.ts"
+        ],
+        "SkillRunnerResult": [
+          "SkillRunnerResult"
+        ]
+      },
+      "custom-tool-skill": {
+        "SkillLoadDiagnosis": [
+          "SkillLoadDiagnosis",
+          "SkillLoadDiagnosis[]"
+        ],
+        "__files__": [
+          "bridge-server.ts"
+        ]
+      },
+      "bridge-activity-tracker": {
+        "BridgeActivitySnapshot": [
+          "BridgeActivitySnapshot",
+          "BridgeActivitySnapshot<BridgeActivityPresentation>"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "file-tool-registry": {
+        "ToolContentBlock": [
+          "ToolContentBlock",
+          "ToolContentBlock[]"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "managed-command-cancellation": {
+        "ManagedCommandCancellationPreview": [
+          "ManagedCommandCancellationPreview"
+        ],
+        "__files__": [
+          "ide-tool-broker.ts"
+        ],
+        "ManagedCommandCancellationTarget": [
+          "ManagedCommandCancellationTarget"
+        ]
+      }
+    },
+    "valueImports": {
+      "file-tool-registry": {
+        "FILE_TOOL_DEFINITIONS": [
+          "FILE_TOOL_DEFINITIONS"
+        ],
+        "__files__": [
+          "bridge-constants.ts",
+          "bridge-tool-dispatcher.ts"
+        ],
+        "invokeFileTool": [
+          "invokeFileTool"
+        ],
+        "isFileToolName": [
+          "isFileToolName"
+        ]
+      },
+      "ide-tool-definitions": {
+        "BRIDGE_EXCLUDED_TOOL_NAMES": [
+          "BRIDGE_EXCLUDED_TOOL_NAMES"
+        ],
+        "__files__": [
+          "bridge-constants.ts",
+          "bridge-tool-dispatcher.ts",
+          "ide-tool-broker.ts"
+        ],
+        "IDE_TOOL_DEFINITIONS": [
+          "IDE_TOOL_DEFINITIONS"
+        ],
+        "getIdeToolDefinition": [
+          "getIdeToolDefinition"
+        ]
+      },
+      "custom-tools": {
+        "CUSTOM_TOOL_OUTPUT_SCHEMA": [
+          "CUSTOM_TOOL_OUTPUT_SCHEMA"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts",
+          "bridge-server.ts",
+          "bridge-tool-dispatcher.ts"
+        ],
+        "CUSTOM_TOOLS_DIR_NAME": [
+          "CUSTOM_TOOLS_DIR_NAME"
+        ],
+        "customToolsFingerprint": [
+          "customToolsFingerprint"
+        ],
+        "listEnabledCustomTools": [
+          "listEnabledCustomTools"
+        ],
+        "loadCustomTools": [
+          "loadCustomTools"
+        ],
+        "toStatusEntries": [
+          "toStatusEntries"
+        ],
+        "executeCustomTool": [
+          "executeCustomTool"
+        ],
+        "findCustomTool": [
+          "findCustomTool"
+        ]
+      },
+      "bridge-event-store": {
+        "BoundedInMemoryEventStore": [
+          "BoundedInMemoryEventStore"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts"
+        ]
+      },
+      "bridge-http-router": {
+        "createBridgeHttpRoutes": [
+          "createBridgeHttpRoutes"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts"
+        ],
+        "handleBridgeHttpRequest": [
+          "handleBridgeHttpRequest"
+        ],
+        "writeBridgeJsonError": [
+          "writeBridgeJsonError"
+        ],
+        "writeBridgeJsonRpcError": [
+          "writeBridgeJsonRpcError"
+        ]
+      },
+      "jsonrpc-request-id-registry": {
+        "JsonRpcRequestIdRegistry": [
+          "JsonRpcRequestIdRegistry"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts"
+        ],
+        "requestIdsOfRequest": [
+          "requestIdsOfRequest"
+        ]
+      },
+      "bridge-session-registry": {
+        "BridgeSessionRegistry": [
+          "BridgeSessionRegistry",
+          "BridgeSessionRegistry<McpSession>"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts"
+        ]
+      },
+      "managed-command-cancellation": {
+        "bridgeManagedCommandOwnerId": [
+          "bridgeManagedCommandOwnerId"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts",
+          "bridge-tool-dispatcher.ts",
+          "ide-tool-broker.ts"
+        ],
+        "NATIVE_MANAGED_COMMAND_OWNER_ID": [
+          "NATIVE_MANAGED_COMMAND_OWNER_ID"
+        ],
+        "ManagedCommandCanceller": [
+          "ManagedCommandCanceller"
+        ],
+        "forceCancellationRequiresConfirmation": [
+          "forceCancellationRequiresConfirmation"
+        ],
+        "managedCommandNotAccessibleError": [
+          "managedCommandNotAccessibleError"
+        ]
+      },
+      "version": {
+        "SHUNCODE_BEHAVIOR_VERSION": [
+          "SHUNCODE_BEHAVIOR_VERSION"
+        ],
+        "__files__": [
+          "bridge-mcp-transport.ts"
+        ]
+      },
+      "custom-tool-admin": {
+        "deleteCustomTool": [
+          "deleteCustomTool"
+        ],
+        "__files__": [
+          "bridge-server.ts"
+        ],
+        "toggleCustomTool": [
+          "toggleCustomTool"
+        ]
+      },
+      "custom-tool-migration": {
+        "migrateLegacySkillDirs": [
+          "migrateLegacySkillDirs"
+        ],
+        "__files__": [
+          "bridge-server.ts"
+        ]
+      },
+      "custom-tool-skill-import": {
+        "generateSkillRunner": [
+          "generateSkillRunner"
+        ],
+        "__files__": [
+          "bridge-server.ts"
+        ],
+        "importSkill": [
+          "importSkill"
+        ]
+      },
+      "custom-tool-skill": {
+        "diagnoseSkillTools": [
+          "diagnoseSkillTools"
+        ],
+        "__files__": [
+          "bridge-server.ts"
+        ]
+      },
+      "bridge-activity-tracker": {
+        "BridgeActivityTracker": [
+          "BridgeActivityTracker",
+          "BridgeActivityTracker<BridgeActivityPresentation>"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "bridge-coordination-validation": {
+        "parseBridgePlan": [
+          "parseBridgePlan"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ],
+        "parseBridgeProgress": [
+          "parseBridgeProgress"
+        ],
+        "parseBridgeTodos": [
+          "parseBridgeTodos"
+        ]
+      },
+      "bridge-tool-name": {
+        "resolveBridgeToolName": [
+          "resolveBridgeToolName"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "bridge-usage-counter": {
+        "BridgeUsageCounter": [
+          "BridgeUsageCounter"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "file-tool-input-compat": {
+        "isFileToolCompatibilityAlias": [
+          "isFileToolCompatibilityAlias"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ],
+        "normalizeFileToolInput": [
+          "normalizeFileToolInput"
+        ],
+        "normalizeFileToolName": [
+          "normalizeFileToolName"
+        ]
+      },
+      "tool-input-validation": {
+        "validateToolInput": [
+          "validateToolInput"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "concurrency": {
+        "Semaphore": [
+          "Semaphore"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "adaptive-concurrency": {
+        "AdaptiveConcurrencyController": [
+          "AdaptiveConcurrencyController"
+        ],
+        "__files__": [
+          "bridge-tool-dispatcher.ts"
+        ]
+      },
+      "managed-command-id": {
+        "createManagedCommandId": [
+          "createManagedCommandId"
+        ],
+        "__files__": [
+          "ide-tool-broker.ts"
+        ],
+        "normalizeManagedCommandId": [
+          "normalizeManagedCommandId"
+        ]
+      },
+      "managed-command-retention": {
+        "managedCommandStateIdsToPrune": [
+          "managedCommandStateIdsToPrune"
+        ],
+        "__files__": [
+          "ide-tool-broker.ts"
+        ]
+      },
+      "managed-terminal-lifecycle": {
+        "isManagedTerminalIdleExpired": [
+          "isManagedTerminalIdleExpired"
+        ],
+        "__files__": [
+          "ide-tool-broker.ts"
+        ],
+        "managedTerminalIdleDelay": [
+          "managedTerminalIdleDelay"
+        ]
+      }
+    }
+  },
+  "tierB_structural": {
+    "meaning": "JSON Schemas embedded as runtime values; they survived compilation and pin down tool input shapes exactly.",
+    "modules": {
+      "custom-tool-contract": {
+        "inputSchemaBlocks": 0,
+        "typedProperties": 3,
+        "sampleProperties": [
+          "timed_out: boolean",
+          "aborted: boolean",
+          "duration_ms: integer"
+        ]
+      },
+      "file-tool-registry": {
+        "inputSchemaBlocks": 5,
+        "typedProperties": 121,
+        "sampleProperties": [
+          "inputSchema: object",
+          "patch: string",
+          "expected_versions: object",
+          "additionalProperties: string",
+          "outputSchema: object",
+          "status: string",
+          "files: array",
+          "items: object"
+        ]
+      },
+      "ide-tool-definitions": {
+        "inputSchemaBlocks": 8,
+        "typedProperties": 43,
+        "sampleProperties": [
+          "command_id: string",
+          "terminal_id: string",
+          "status: string",
+          "output: string",
+          "cwd: string",
+          "inputSchema: object",
+          "path: string",
+          "depth: integer"
+        ]
+      }
+    }
+  },
+  "tierC_inferred": {
+    "meaning": "Whatever tsc --declaration derives from the JS. Measured separately by diagnose_btypes; it degrades to `any` wherever inference fails."
+  },
+  "modules": {
+    "adaptive-concurrency": {
+      "exports": [
+        "AdaptiveConcurrencyController",
+        "DEFAULT_SLOW_CALL_MS",
+        "DEFAULT_WINDOW"
+      ],
+      "exportCount": 3
+    },
+    "apply-patch": {
+      "exports": [
+        "DEFAULT_APPLY_PATCH_CONFIG",
+        "Mutex",
+        "PatchToolError",
+        "applyHunks",
+        "applyPatch",
+        "assertSourceUnchanged",
+        "canonicalRoots",
+        "commitPlans",
+        "decodeSnapshot",
+        "encodeText",
+        "expectedVersionForSource",
+        "fileLocks",
+        "findSequence",
+        "formatApplyPatchForModel",
+        "hashBytes",
+        "import_node_crypto3",
+        "import_node_path",
+        "import_promises2",
+        "installNewFromStage",
+        "isInsideRoot",
+        "loadSnapshot",
+        "lockFor",
+        "normalizeError",
+        "normalizePatchPath",
+        "normalizedExpectedVersions",
+        "parsePatch",
+        "pathExists",
+        "pathIdentity",
+        "preflight",
+        "replaceExistingFromStage",
+        "resolveExistingPath",
+        "resolveExistingPathSpelling",
+        "resolveNewPath",
+        "restoreExistingFile",
+        "restoreMissingFile",
+        "rollbackPlans",
+        "stageBytes",
+        "stagePlans",
+        "stagedFor",
+        "tempPathFor",
+        "truncateUtf8",
+        "withFileLocks"
+      ],
+      "exportCount": 42
+    },
+    "bridge-activity-tracker": {
+      "exports": [
+        "BridgeActivityTracker"
+      ],
+      "exportCount": 1
+    },
+    "bridge-coordination-validation": {
+      "exports": [
+        "asRecord2",
+        "assertSingleInProgress",
+        "assertTodoStatus",
+        "parseBridgePlan",
+        "parseBridgeProgress",
+        "parseBridgeTodos"
+      ],
+      "exportCount": 6
+    },
+    "bridge-event-store": {
+      "exports": [
+        "BoundedInMemoryEventStore",
+        "import_node_crypto5"
+      ],
+      "exportCount": 2
+    },
+    "bridge-http-router": {
+      "exports": [
+        "createBridgeHttpRoutes",
+        "handleBridgeHttpRequest",
+        "readJsonBody",
+        "writeBridgeJsonError",
+        "writeBridgeJsonRpcError"
+      ],
+      "exportCount": 5
+    },
+    "bridge-session-registry": {
+      "exports": [
+        "BridgeSessionRegistry"
+      ],
+      "exportCount": 1
+    },
+    "bridge-tool-name": {
+      "exports": [
+        "resolveBridgeToolName"
+      ],
+      "exportCount": 1
+    },
+    "bridge-usage-counter": {
+      "exports": [
+        "BridgeUsageCounter"
+      ],
+      "exportCount": 1
+    },
+    "build-info": {
+      "exports": [
+        "asNonEmptyString",
+        "getBuildInfo",
+        "injectedBuildInfo"
+      ],
+      "exportCount": 3
+    },
+    "canonical-diff": {
+      "exports": [
+        "DEFAULT_CONTEXT_LINES",
+        "MAX_MYERS_EDIT_DISTANCE",
+        "annotateEdits",
+        "backtrackMyers",
+        "createCanonicalUnifiedDiff",
+        "decodeLines",
+        "diffLines",
+        "fallbackReplace",
+        "formatRange",
+        "myersDiff",
+        "renderFileDiff",
+        "renderHunks"
+      ],
+      "exportCount": 12
+    },
+    "concurrency": {
+      "exports": [
+        "DEFAULT_MCP_CONCURRENCY",
+        "Semaphore",
+        "mcpConcurrencyLimiter",
+        "toAbortError"
+      ],
+      "exportCount": 4
+    },
+    "custom-tool-admin": {
+      "exports": [
+        "deleteCustomTool",
+        "import_node_fs7",
+        "import_node_path11",
+        "toggleCustomTool"
+      ],
+      "exportCount": 4
+    },
+    "custom-tool-contract": {
+      "exports": [
+        "CUSTOM_TOOLS_DIR_NAME",
+        "CUSTOM_TOOL_OUTPUT_SCHEMA",
+        "DEFAULT_TIMEOUT_MS",
+        "LEGACY_SKILLS_DIR_NAME",
+        "MAX_DESCRIPTION_LENGTH",
+        "MAX_TIMEOUT_MS",
+        "MIN_DESCRIPTION_LENGTH",
+        "MIN_TIMEOUT_MS",
+        "RESERVED_TOOL_NAMES",
+        "SKILLS_DIR_NAME",
+        "TOOL_NAME_PATTERN",
+        "isRecord"
+      ],
+      "exportCount": 12
+    },
+    "custom-tool-manifest": {
+      "exports": [
+        "MAX_COMMAND_PARTS",
+        "MAX_COMMAND_PART_LENGTH",
+        "MAX_MANIFEST_BYTES",
+        "import_node_fs2",
+        "import_node_path6",
+        "parseManifest",
+        "readManifest"
+      ],
+      "exportCount": 7
+    },
+    "custom-tool-migration": {
+      "exports": [
+        "import_node_fs3",
+        "import_node_path7",
+        "migrateLegacySkillDirs",
+        "migratedLegacyRoots"
+      ],
+      "exportCount": 4
+    },
+    "custom-tool-sandbox": {
+      "exports": [
+        "CUSTOM_TOOL_ARGS_ENV",
+        "CUSTOM_TOOL_NAME_ENV",
+        "FORCE_KILL_GRACE_MS",
+        "MAX_OUTPUT_BYTES",
+        "SKILL_INTERPRETERS",
+        "executeCustomTool",
+        "import_node_child_process4",
+        "import_node_fs5",
+        "import_node_path9",
+        "runChild"
+      ],
+      "exportCount": 10
+    },
+    "custom-tool-skill-import": {
+      "exports": [
+        "GENERATED_RUNNER_REL",
+        "GENERATED_RUNNER_SOURCE",
+        "MAX_ARCHIVE_BYTES",
+        "MAX_ENTRIES",
+        "NAME_PATTERN",
+        "SKILL_FILE",
+        "availableSkillName",
+        "countEntries",
+        "declaredFrontmatterEntry",
+        "extractArchive",
+        "generateSkillRunner",
+        "importSkill",
+        "import_node_child_process5",
+        "import_node_fs8",
+        "import_node_os",
+        "import_node_path12",
+        "locateSkillRoot",
+        "safeArchiveEntry",
+        "skillNameFromMarkdown",
+        "writeSkillRunner"
+      ],
+      "exportCount": 20
+    },
+    "custom-tool-skill": {
+      "exports": [
+        "MAX_SKILLS_PER_ROOT",
+        "MAX_SKILL_BYTES",
+        "SKILL_ENTRY_CANDIDATES",
+        "SKILL_LOAD_FIXES",
+        "SKILL_LOAD_REASONS",
+        "SKILL_SIDECAR_FILE",
+        "buildDescription",
+        "diagnoseSkillTools",
+        "entryCommand",
+        "failSkill",
+        "findSkillEntryScript",
+        "import_node_fs4",
+        "import_node_path8",
+        "loadSkillTools",
+        "parseFrontmatter",
+        "parseSkillDocument",
+        "readSidecar",
+        "readSkillManifest",
+        "resolveSkillDir",
+        "unquote"
+      ],
+      "exportCount": 20
+    },
+    "custom-tools": {
+      "exports": [
+        "CUSTOM_TOOLS_DIR_NAME",
+        "CUSTOM_TOOL_OUTPUT_SCHEMA",
+        "MAX_MANIFESTS_PER_ROOT",
+        "customToolsFingerprint",
+        "executeCustomTool",
+        "findCustomTool",
+        "import_node_fs6",
+        "import_node_path10",
+        "listEnabledCustomTools",
+        "loadCustomTools",
+        "toStatusEntries"
+      ],
+      "exportCount": 11
+    },
+    "file-tool-input-compat": {
+      "exports": [
+        "READ_END_KEYS",
+        "READ_START_KEYS",
+        "foldLineAliases",
+        "hasOwn",
+        "invalid",
+        "isFileToolCompatibilityAlias",
+        "isObject2",
+        "normalizeFileToolInput",
+        "normalizeFileToolName",
+        "normalizeReadCollection",
+        "normalizeReadInput",
+        "normalizeReadRequest",
+        "normalizeSearchInput",
+        "sameJsonValue",
+        "singleSearchScope"
+      ],
+      "exportCount": 15
+    },
+    "file-tool-registry": {
+      "exports": [
+        "APPLY_PATCH_TOOL",
+        "FILE_TOOL_DEFINITIONS",
+        "FILE_TOOL_ERROR_TAGS",
+        "FILE_TOOL_NAMES",
+        "FIND_FILES_TOOL",
+        "READ_FILES_TOOL",
+        "READ_IMAGE_TOOL",
+        "SEARCH_FILES_TOOL",
+        "asObjectRow",
+        "assertOptionalBooleans",
+        "assertOptionalIntegers",
+        "assertOptionalNonEmptyString",
+        "assertOptionalStringArrays",
+        "buildFileToolErrorResult",
+        "dispatchFileTool",
+        "invokeFileTool",
+        "isFileToolName",
+        "parseApplyPatchInput",
+        "parseFindFilesInput",
+        "parseReadFilesInput",
+        "parseReadImageInput",
+        "parseSearchFilesInput",
+        "resolveFileToolErrorCode"
+      ],
+      "exportCount": 23
+    },
+    "find-files": {
+      "exports": [
+        "DEFAULT_FIND_FILES_CONFIG",
+        "FindFilesError",
+        "MACOS_PROTECTED_VOLUME_GLOBS",
+        "buildRipgrepArgs",
+        "canonicalRoots2",
+        "displayPath",
+        "enrichFiles",
+        "findFiles",
+        "findWithNode",
+        "findWithPreferredEngine",
+        "formatFindFilesForModel",
+        "gitignoreMatches",
+        "import_node_child_process2",
+        "import_node_path2",
+        "import_promises3",
+        "isHiddenPath",
+        "isInsideRoot2",
+        "loadRootGitignore",
+        "mapWithConcurrency",
+        "matchesAny",
+        "matchesGlob",
+        "matchesScopedAny",
+        "normalizeError2",
+        "normalizeInput",
+        "planInvalidGlobRetry",
+        "resolveSafeScope",
+        "ripgrepCandidates",
+        "toRipgrepFailure",
+        "tryFindWithRipgrep",
+        "validateGlob"
+      ],
+      "exportCount": 30
+    },
+    "ide-tool-definitions": {
+      "exports": [
+        "BRIDGE_EXCLUDED_TOOL_NAMES",
+        "GENERIC_OUTPUT_SCHEMA",
+        "IDE_TOOL_DEFINITIONS",
+        "IDE_TOOL_NAMES",
+        "MANAGED_SHELL_DESCRIPTION",
+        "RUN_COMMAND_OUTPUT_SCHEMA",
+        "getIdeToolDefinition"
+      ],
+      "exportCount": 7
+    },
+    "jsonrpc-request-id-registry": {
+      "exports": [
+        "JsonRpcRequestIdRegistry",
+        "keyOf",
+        "requestIdOf",
+        "requestIdsOfRequest"
+      ],
+      "exportCount": 4
+    },
+    "managed-command-cancellation": {
+      "exports": [
+        "DEFAULT_CANCELLATION_LIMIT",
+        "DEFAULT_CANCELLATION_WINDOW_MS",
+        "DEFAULT_FORCE_PROMPT_COOLDOWN_MS",
+        "DEFAULT_FORCE_PROMPT_LIMIT",
+        "DEFAULT_FORCE_PROMPT_WINDOW_MS",
+        "DEFAULT_FORCE_RESERVATION_TTL_MS",
+        "ManagedCommandCanceller",
+        "NATIVE_MANAGED_COMMAND_OWNER_ID",
+        "PerOwnerCancellationRateLimiter",
+        "bridgeManagedCommandOwnerId",
+        "forceCancellationRequiresConfirmation",
+        "managedCommandNotAccessibleError",
+        "waitForCommandOrGrace"
+      ],
+      "exportCount": 13
+    },
+    "managed-command-id": {
+      "exports": [
+        "MANAGED_COMMAND_ENTROPY_BYTES",
+        "MANAGED_COMMAND_ID",
+        "MANAGED_COMMAND_ID_LABEL",
+        "createManagedCommandId",
+        "import_node_crypto10",
+        "normalizeManagedCommandId"
+      ],
+      "exportCount": 6
+    },
+    "managed-command-retention": {
+      "exports": [
+        "MANAGED_COMMAND_COMPLETED_STATE_TTL_MS",
+        "MAX_COMPLETED_COMMAND_STATES_PER_OWNER",
+        "managedCommandStateIdsToPrune"
+      ],
+      "exportCount": 3
+    },
+    "managed-command-risk": {
+      "exports": [
+        "ARCHIVE_SCRIPT",
+        "NORMAL_RISK",
+        "PACKAGE_INSPECTION",
+        "PACKAGE_MUTATIONS",
+        "RELEASE_SCRIPT",
+        "classifyManagedCommandRisk",
+        "classifyPackageManager",
+        "classifyWords",
+        "executableName",
+        "highRisk",
+        "parseInvocations",
+        "stripLeadingOptions",
+        "tarMutates",
+        "unwrapInvocation"
+      ],
+      "exportCount": 14
+    },
+    "managed-terminal-lifecycle": {
+      "exports": [
+        "MANAGED_TERMINAL_IDLE_TIMEOUT_MS",
+        "isManagedTerminalIdleExpired",
+        "managedTerminalIdleDelay"
+      ],
+      "exportCount": 3
+    },
+    "mcp-protocol": {
+      "exports": [
+        "LEGACY_PROTOCOL_VERSIONS",
+        "MODERN_ERA_MIN_VERSION",
+        "MODERN_PROTOCOL_VERSION",
+        "NEGOTIABLE_LATEST_PROTOCOL_VERSION",
+        "NEGOTIABLE_PROTOCOL_VERSIONS",
+        "PROTOCOL_TRANSPORT_MODE",
+        "SUPPORTS_STATELESS_TRANSPORT",
+        "classifyProtocolEra",
+        "describeProtocolSupport"
+      ],
+      "exportCount": 9
+    },
+    "read-files": {
+      "exports": [
+        "DEFAULT_READ_FILES_CONFIG",
+        "ReadToolError",
+        "appearsBinary",
+        "applyBatchBudget",
+        "estimateTokens",
+        "formatReadFilesForModel",
+        "import_node_crypto4",
+        "import_node_fs",
+        "import_node_path3",
+        "import_promises4",
+        "isInsideRoot3",
+        "mapWithConcurrency2",
+        "normalizeError3",
+        "readFiles",
+        "readSingleFile",
+        "readTextRange",
+        "resolveSafePath",
+        "validateRange"
+      ],
+      "exportCount": 18
+    },
+    "read-image": {
+      "exports": [
+        "DEFAULT_READ_IMAGE_CONFIG",
+        "ReadImageToolError",
+        "detectImageFormat",
+        "formatAspectRatio",
+        "formatBytes",
+        "formatReadImageForModel",
+        "gcd",
+        "import_node_path4",
+        "import_promises5",
+        "isInsideRoot4",
+        "normalizeError4",
+        "parseBmpDimensions",
+        "parseGifDimensions",
+        "parseIcoDimensions",
+        "parseJpegDimensions",
+        "parsePngDimensions",
+        "parseSvgDimensions",
+        "parseWebPDimensions",
+        "readImage",
+        "resolveSafePath2"
+      ],
+      "exportCount": 20
+    },
+    "ripgrep-diagnostics": {
+      "exports": [
+        "INVALID_GLOB_SIGNATURE",
+        "INVALID_REGEX_SIGNATURE",
+        "attributeGlobFailure",
+        "classifyRipgrepStderr",
+        "echoedNeedleHit",
+        "formatGlobFailureLocation",
+        "globErrorEchoBodies"
+      ],
+      "exportCount": 7
+    },
+    "search-files": {
+      "exports": [
+        "DEFAULT_SEARCH_FILES_CONFIG",
+        "MACOS_PROTECTED_VOLUME_GLOBS2",
+        "SearchToolError",
+        "addContext",
+        "appearsBinary2",
+        "applyOutputBudget",
+        "boundedInteger",
+        "buildRipgrepArgs2",
+        "canonicalRoots3",
+        "collectCandidateFiles",
+        "compileFallbackMatcher",
+        "displayPath2",
+        "estimateTokens2",
+        "formatSearchFilesForModel",
+        "gitignorePatternMatches",
+        "ignoredByRootGitignore",
+        "import_node_child_process3",
+        "import_node_path5",
+        "import_promises6",
+        "isInsideRoot5",
+        "loadRootGitignore2",
+        "matchesAnyGlob",
+        "normalizeError5",
+        "normalizeInput2",
+        "resolveSafeScope2",
+        "ripgrepCandidates2",
+        "searchFiles",
+        "searchWithNode",
+        "searchWithPreferredEngine",
+        "serializedMatchSize",
+        "shouldIncludePath",
+        "smartCaseSensitive",
+        "toSearchRipgrepFailure",
+        "truncateLine",
+        "trySearchWithRipgrep"
+      ],
+      "exportCount": 35
+    },
+    "snapshot-build-metadata": {
+      "exports": [
+        "define_SHUNCODE_BUILD_INFO_default"
+      ],
+      "exportCount": 1
+    },
+    "snapshot-packaged-ripgrep": {
+      "exports": [
+        "rgPath"
+      ],
+      "exportCount": 1
+    },
+    "snapshot-sdk-versions": {
+      "exports": [
+        "LATEST_PROTOCOL_VERSION",
+        "SUPPORTED_PROTOCOL_VERSIONS"
+      ],
+      "exportCount": 2
+    },
+    "tool-input-validation": {
+      "exports": [
+        "fail",
+        "sameJsonValue2",
+        "schemaObject",
+        "validateSchema",
+        "validateToolInput",
+        "validateType",
+        "valueType"
+      ],
+      "exportCount": 7
+    },
+    "version": {
+      "exports": [
+        "SHUNCODE_BEHAVIOR_VERSION"
+      ],
+      "exportCount": 1
+    },
+    "workspace-paths": {
+      "exports": [
+        "STALE_ROOT_CODES",
+        "canonicalizeWorkspaceRoots",
+        "import_promises",
+        "literalFirstPathSpellings"
+      ],
+      "exportCount": 4
+    }
+  },
+  "unreferencedByAuthorSources": [
+    "apply-patch",
+    "build-info",
+    "canonical-diff",
+    "custom-tool-contract",
+    "custom-tool-manifest",
+    "custom-tool-sandbox",
+    "find-files",
+    "managed-command-risk",
+    "mcp-protocol",
+    "read-files",
+    "read-image",
+    "ripgrep-diagnostics",
+    "search-files",
+    "snapshot-build-metadata",
+    "snapshot-packaged-ripgrep",
+    "snapshot-sdk-versions",
+    "workspace-paths"
+  ],
+  "doesNotClaim": "Tier A covers only the surface the extension imports. Everything else is reconstruction from behaviour, and must be labelled as such rather than presented as the author's original types."
+}

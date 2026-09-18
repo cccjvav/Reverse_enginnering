@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 179,
-    "lines": 33622,
+    "files": 182,
+    "lines": 34002,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -982,6 +982,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/test_btype_evidence.py",
+      "sha256": "1ee8d47cb687d8cf198ecf7aac99ff85938608958f2f3108ef1c3bebce288d07",
+      "lines": 76,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/test_carrier_electron44_patch.py",
       "sha256": "a4700c6ac53fba8374332071552b2ad67aeda571fc855f6f4d703ec412ce59ab",
       "lines": 74,
@@ -1143,9 +1150,23 @@
       "status": "pending"
     },
     {
+      "source": "tools/diagnose_btypes.py",
+      "sha256": "c284552bc230cb65083c10ee7b1883efcbe743d40052bca2d3872e81b0f16723",
+      "lines": 131,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/diagnose_linked_types.mjs",
       "sha256": "f79af13984dc7f3f9308a24bedba55c8d598efdf042c4b4f285bbb31e951463f",
       "lines": 98,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/harvest_btype_evidence.py",
+      "sha256": "635b43bfa7ab7830fb5ff3d46053f11173d991be1b567caa1245e0c650e2e4c1",
+      "lines": 173,
       "explainedLines": 0,
       "status": "pending"
     },

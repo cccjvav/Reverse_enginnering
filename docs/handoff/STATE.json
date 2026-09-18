@@ -158,9 +158,9 @@
     "P4": "BLOCKED",
     "P5": "BLOCKED",
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
-    "P7": "BLOCKED: learning can continue"
+    "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Step 1 is done: the carrier is buildable. Move to step 2 - restore TypeScript types for the 41 rebuilt B-layer modules in reconstructed/bridge-core/src so they become editable rather than read-only.",
+  "nextAction": "Continue step 2: type the remaining tier-A modules (file-tool-registry, bridge-activity-tracker, custom-tool-skill/-import, custom-tools), re-running tools/diagnose_btypes.py so the 32.8% baseline moves on evidence rather than assertion.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -361,5 +361,28 @@
     },
     "doesNotClaim": "A clean typecheck of one region is not a full npm run compile. The carrier build probe decides that.",
     "ciVerification": "Carrier probe run 35371925282: patch applied 13/13 in CI, full npm run compile finished with 0 errors."
+  },
+  "bTypeRecovery": {
+    "goal": "Make the 41 rebuilt B-layer modules editable by giving them TypeScript types.",
+    "plan": "docs/handoff/BTYPE_PLAN.md",
+    "evidenceInventory": "docs/evidence/btype-evidence.json",
+    "qualityBaseline": "docs/evidence/btype-baseline.json",
+    "notRecoverable": "Unlike the Electron 44 clipboard adaptation, the original .ts was never shipped: inventory.maps_total == 0 and none of the 41 stems appear among the 28 recovered .ts files. These types are reconstructed from use, not read back.",
+    "fakeMetricAvoided": "'41 of 41 modules have .d.ts' is meaningless: tsc emits all 41 immediately, with 995 occurrences of any.",
+    "baseline": {
+      "exportedDeclarations": 354,
+      "fullyTyped": 116,
+      "percent": 32.8,
+      "anyOccurrences": 995
+    },
+    "evidenceTiers": {
+      "A_firstHand": "24 of 41 modules imported by the author's own .ts; 51 value symbols and 9 authored type names incl. generic arity",
+      "B_structural": "JSON Schemas embedded as runtime values in 3 modules",
+      "C_inferred": "tsc inference; degrades to any",
+      "unreferenced": "17 modules referenced by no author source - behaviour-only reconstruction"
+    },
+    "done": "reconstructed/bridge-core/types/managed-command-cancellation.d.ts (the highest-any tier-A module). Verified by typechecking the author's own construction site from ide-tool-broker.ts:1712, plus a negative probe proving the types reject unknown members and bad assignments.",
+    "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
+    "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone."
   }
 }
