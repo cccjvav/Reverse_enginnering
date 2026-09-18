@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Step 2 continues with the lower-evidence modules: file-tool-input-compat (27 any), tool-input-validation, custom-tool-admin, bridge-event-store, then the 17 modules no author source references - those are behaviour-only reconstruction and must be labelled as such.",
+  "nextAction": "Step 2 continues: custom-tool-admin, bridge-event-store, jsonrpc-request-id-registry, adaptive-concurrency, then the 17 modules no author source references - behaviour-only reconstruction, to be labelled as such.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -386,9 +386,9 @@
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 409,
-      "fullyTyped": 231,
-      "percent": 56.5,
+      "exportedDeclarations": 411,
+      "fullyTyped": 253,
+      "percent": 61.6,
       "anyOccurrences": null,
       "handWrittenModules": [
         "bridge-activity-tracker",
@@ -401,8 +401,10 @@
         "custom-tool-skill",
         "custom-tool-skill-import",
         "custom-tools",
+        "file-tool-input-compat",
         "file-tool-registry",
-        "managed-command-cancellation"
+        "managed-command-cancellation",
+        "tool-input-validation"
       ],
       "note": "all six hand-written modules measure 0 any; the diagnostic strips comments so prose using the word 'any' cannot skew it"
     },
@@ -415,7 +417,9 @@
       "BridgeSessionRegistry": "Generic in the session type: the author writes BridgeSessionRegistry<McpSession> (bridge-mcp-transport.ts:183,202). The destroy reason is deliberately a widened string, not a closed union - the module emits four values but the author passes 'bridge-shutdown' and 'initialize-error' from the extension, so a closed union would reject their own code.",
       "Semaphore.setLimit": "Lowering the ceiling never revokes a held permit, so `active` can legitimately exceed `limit` until in-flight work drains. Documented on the type because callers must not assume active <= limit.",
       "SkillRunnerResult": "Discriminated union on `generated`: runnerRel exists only on the generated branch, so reading it forces a check first. The JS returns two differently-shaped literals (lines 157 and 160), which a single optional-field interface would have flattened and lost.",
-      "parseBridgePlan": "Assigns positional ids plan-1, plan-2 on every call. A plan is replaced wholesale rather than patched, so the ids are deliberately not stable across calls."
+      "parseBridgePlan": "Assigns positional ids plan-1, plan-2 on every call. A plan is replaced wholesale rather than patched, so the ids are deliberately not stable across calls.",
+      "normalizeFileToolInput": "Returns unknown, not a record. The author's own cast at bridge-tool-dispatcher.ts:301 ('as Record<string, unknown>') is the evidence: the function passes non-objects straight through, so typing the return as a record would contradict their code.",
+      "validateToolInput": "Validates by throwing; it returns void, not a verdict. Also worth stating on the type: it enforces only a subset of JSON Schema (type/enum/length/range/required/properties/items/additionalProperties). $ref, oneOf, allOf, anyOf, pattern and format are silently accepted, so callers must not assume full coverage."
     },
     "verification": {
       "command": "npm run verify:btypes",

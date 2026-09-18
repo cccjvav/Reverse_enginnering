@@ -63,7 +63,7 @@ from asking the question. Where evidence runs out, the type says so.
 
 ## Done so far
 
-Coverage has moved **32.8% → 56.5%** (116/354 → 231/409 declarations), measured
+Coverage has moved **32.8% → 61.6%** (116/354 → 253/411 declarations), measured
 by `tools/diagnose_btypes.py` rather than asserted. Twelve modules typed, each measuring 0 `any` — this now covers **every Tier A
 module whose types the author's own sources name**:
 
@@ -81,6 +81,8 @@ module whose types the author's own sources name**:
 | `custom-tool-skill-import` | 27 `any` | 20/20 typed |
 | `bridge-coordination-validation` | 17 `any` | 9/9 typed |
 | `bridge-http-router` | 16 `any` | 9/9 typed |
+| `file-tool-input-compat` | 27 `any` | 15/15 typed |
+| `tool-input-validation` | 16 `any` | 8/8 typed |
 
 Three findings worth keeping, none of which the JavaScript alone would give up:
 
@@ -106,6 +108,14 @@ Three findings worth keeping, none of which the JavaScript alone would give up:
   code returns two differently-shaped literals, and `runnerRel` exists only on
   the generated branch. A single interface with an optional field would have
   flattened that and let callers read a field that isn't there.
+- **`normalizeFileToolInput` returns `unknown`, not a record.** The author's own
+  cast (`as Record<string, unknown>`, `bridge-tool-dispatcher.ts:301`) is the
+  proof: non-objects pass straight through, so the tidier-looking return type
+  would contradict their code.
+- **`validateToolInput` enforces only a subset of JSON Schema.** `$ref`,
+  `oneOf`, `allOf`, `anyOf`, `pattern` and `format` are accepted silently. The
+  type says so, because a caller assuming full validation would be trusting a
+  check that never runs.
 - **`findCustomTool` returns `| undefined`** — the author's own wrapper declares
   that return type (`bridge-tool-dispatcher.ts:219`), and disabled tools are
   invisible to it, so a caller cannot accidentally execute one.
