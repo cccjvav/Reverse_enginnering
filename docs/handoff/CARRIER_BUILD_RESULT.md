@@ -125,3 +125,30 @@ type docs\evidence\carrier-build-probe.json
 REM 只看结论
 python -c "import json;d=json.load(open('docs/evidence/carrier-build-probe.json'));print(d['conclusion']);[print(s['stage'],s['ok'],s['exit_code']) for s in d['stages']]"
 ```
+
+---
+
+## Update: the answer is now YES
+
+The first probe stopped at `compile` with 11 errors. Those turned out to be one
+cause, not eleven: Electron 44.0.0 rewrote the clipboard API.
+
+Rather than invent a replacement, the author's own adaptation was recovered from
+the shipped, unminified `out/main.js` (see `CLIPBOARD_RECOVERY.md`). Applying it
+as 13 exact-match edits clears the build:
+
+| Stage | Result |
+| --- | --- |
+| clone-upstream | ok, 14.8s |
+| verify-commit | ok |
+| apply-electron44-patch | ok, 13/13 edits |
+| npm-install | ok, 679.8s |
+| **compile** | **ok, 86.7s — `Finished compilation with 0 errors`** |
+
+Carrier build probe run `35371925282`, `allStagesPassed: true`.
+
+**What this does and does not prove.** It proves the carrier — the Code OSS base
+that ShunCode is built on — can be rebuilt from source with the Electron version
+the product actually shipped. It does **not** mean ShunCode has been rebuilt: the
+author's own customisations (the extension, the Bridge UI, branding) still have
+to be layered on, and no installer has been produced yet.

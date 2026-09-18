@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/179 个纳入范围的文件完整逐行解释；363/33602 行已解释。
+当前：6/179 个纳入范围的文件完整逐行解释；363/33622 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -16,7 +16,7 @@
 | 文件 | 总行数 | 已解释 | 状态 |
 |---|---:|---:|---|
 | [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 116 | 0 | 待逐行讲解 |
-| [.github/workflows/carrier-build-probe.yml](../../.github/workflows/carrier-build-probe.yml) | 114 | 0 | 待逐行讲解 |
+| [.github/workflows/carrier-build-probe.yml](../../.github/workflows/carrier-build-probe.yml) | 134 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 121 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 49 | 0 | 待逐行讲解 |
 | [community/bridge-core/authorized-file-tools.mjs](../../community/bridge-core/authorized-file-tools.mjs) | 173 | 0 | 待逐行讲解 |

@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 179,
-    "lines": 33602,
+    "lines": 33622,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -31,8 +31,8 @@
     },
     {
       "source": ".github/workflows/carrier-build-probe.yml",
-      "sha256": "0cbc7add41da81bcb6418d85db54aaeb308356a29640f835d3a8575e92c432f9",
-      "lines": 114,
+      "sha256": "df7f91fe5360b07d7ba44e13267ad8df41be605158555969967ea3b29bea9721",
+      "lines": 134,
       "explainedLines": 0,
       "status": "pending"
     },

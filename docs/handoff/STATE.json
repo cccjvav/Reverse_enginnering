@@ -157,10 +157,10 @@
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
     "P5": "BLOCKED",
-    "P6": "BLOCKED, but the blocker is now understood and addressed: Electron 44.0.0 rewrote the clipboard API. The author's own adaptation has been recovered from the shipped main.js and encoded as 13 exact-match edits in tools/patch_carrier_electron44.py, which aborts rather than writing a half-patch. Typechecks clean against real Electron 44 types; full compile pending the carrier probe run for commit 197c469.",
+    "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Read the carrier build probe run triggered by commit 197c469: confirm whether compile now passes, and if errors remain, whether any fall outside the clipboard region.",
+  "nextAction": "Step 1 is done: the carrier is buildable. Move to step 2 - restore TypeScript types for the 41 rebuilt B-layer modules in reconstructed/bridge-core/src so they become editable rather than read-only.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -323,7 +323,7 @@
       "npmInstall": "OK, 667s - all native modules rebuilt against Electron 44 headers",
       "compile": "FAILED with exactly 11 TypeScript errors, 86s"
     },
-    "headline": "Dependency layer is compatible with Electron 44.2.0. The only blocker is 11 type errors in 3 Code OSS files, all caused by Electron 42->44 API signature changes (6 of them clipboard, plus auth interface and argument counts).",
+    "headline": "ANSWERED YES. With the Electron 44 clipboard adaptation restored, upstream Code OSS 1.132.0 installs and compiles cleanly against Electron 44.2.0.",
     "errorFiles": {
       "src/vs/platform/native/electron-main/nativeHostMainService.ts": 9,
       "src/vs/platform/browserView/electron-main/browserViewMainService.ts": 1,
@@ -331,11 +331,10 @@
     },
     "inference": "The author must have fixed these same 11 errors to ship 0.7.4, so these patches are part of the lost customisation and may be recoverable by diffing the shipped main.js.",
     "harnessBugFound": "The FIRST run reported npm-install failing, but that was my own defect: on Windows npm is npm.cmd and subprocess without shell=True ignores PATHEXT. Left unexamined it would have produced the false conclusion \"Electron 44 cannot install\". Fixed with shutil.which, plus two guards: missing tools now report harnessError/INCONCLUSIVE, and install failures are classified so network errors report INCONCLUSIVE instead of blaming Electron.",
-    "doesNotClaim": [
-      "Compiling is not running; startup, packaging and installer remain unverified.",
-      "No author customisation was applied; this was pure upstream plus an Electron bump.",
-      "The 11 fixes have not been attempted yet."
-    ]
+    "doesNotClaim": "Compiling upstream Code OSS is not the same as rebuilding ShunCode. It proves the carrier is buildable; the author's own customisations (the extension, the Bridge UI, branding) still have to be layered on, and no installer has been produced.",
+    "resolvedRun": "35371925282",
+    "resolvedStages": "clone 14.8s / verify / apply-electron44-patch / npm-install 679.8s / compile 86.7s - all ok, allStagesPassed true",
+    "compileEvidence": "gulp log: 'Finished compile-src ... with 0 errors' and 'Finished compilation with 0 errors after 39152 ms'"
   },
   "clipboardRecovery": {
     "question": "How did the author make Code OSS compile against Electron 44, which deleted 13 clipboard methods?",
@@ -360,6 +359,7 @@
       "control": "unpatched upstream clipboard region = 9 errors, matching CI for that file",
       "result": "recovered implementation = 0 errors"
     },
-    "doesNotClaim": "A clean typecheck of one region is not a full npm run compile. The carrier build probe decides that."
+    "doesNotClaim": "A clean typecheck of one region is not a full npm run compile. The carrier build probe decides that.",
+    "ciVerification": "Carrier probe run 35371925282: patch applied 13/13 in CI, full npm run compile finished with 0 errors."
   }
 }
