@@ -1,0 +1,113 @@
+name: Carrier build probe
+
+# Answers the master-switch question for repackaging a full ShunCode:
+# can upstream Code OSS 1.132.0 be built with the Electron 44.2.0 that the
+# shipped product actually used?
+#
+# A FAILING run is a legitimate result. It tells us the carrier cannot be
+# rebuilt as-is and shows exactly which stage stops it, which is information we
+# cannot get any other way. The evidence file is committed either way.
+#
+# Manual trigger only: this clones a large upstream tree and installs its full
+# dependency set, so it must not run on every push.
+
+on:
+  # workflow_dispatch alone is not usable here: GitHub only offers it for
+  # workflows present on the default branch, and this session may not push to
+  # main. So the probe is also triggered by pushing its own files, which is the
+  # same mechanism the other workflows in this repo rely on.
+  push:
+    branches: ['arena/**']
+    paths:
+      - .github/workflows/carrier-build-probe.yml
+      - tools/probe_carrier_build.py
+  workflow_dispatch:
+    inputs:
+      electron:
+        description: 'Electron version to target'
+        required: false
+        default: '44.2.0'
+      skip_compile:
+        description: 'Stop after dependency install (faster triage)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: carrier-build-probe-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: startsWith(github.ref, 'refs/heads/arena/')
+    runs-on: windows-2022
+    timeout-minutes: 180
+    steps:
+      - name: Check out this branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref }}
+          lfs: false
+
+      # Upstream pins its Node version in .nvmrc (24.18.0 for 1.132.0).
+      # Using a different major is a common cause of spurious build failures,
+      # so pin it explicitly rather than inheriting the runner default.
+      - name: Use the Node version upstream pins
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.18.0'
+
+      - name: Report toolchain before building
+        shell: cmd
+        run: |
+          node --version
+          npm --version
+          python --version
+          git --version
+
+      # Note: no line continuations here. An empty optional flag would leave a
+      # dangling `^` and silently truncate the command.
+      - name: Probe the carrier build
+        id: probe
+        continue-on-error: true
+        shell: cmd
+        env:
+          PROBE_ELECTRON: ${{ github.event.inputs.electron || '44.2.0' }}
+          PROBE_SKIP: ${{ github.event.inputs.skip_compile == 'true' && '--skip-compile' || '' }}
+        run: python tools/probe_carrier_build.py --output docs/evidence/carrier-build-probe.json --work-dir .work/carrier-build --electron "%PROBE_ELECTRON%" %PROBE_SKIP%
+
+      - name: Show the outcome in the log
+        if: always()
+        shell: cmd
+        run: |
+          if exist docs\evidence\carrier-build-probe.json (
+            python -c "import json;d=json.load(open('docs/evidence/carrier-build-probe.json'));print('allStagesPassed:',d['allStagesPassed']);print('failed:',d['failedStages']);print(d['conclusion'])"
+          ) else (
+            echo No report produced.
+          )
+
+      # Commit the evidence whether the build passed or failed. A recorded
+      # failure is the point of the probe.
+      - name: Save the report to this branch
+        if: always()
+        shell: cmd
+        run: |
+          if not exist docs\evidence\carrier-build-probe.json exit /b 0
+          python -c "import os;p='docs/evidence/carrier-build-probe.json';print('report bytes:',os.path.getsize(p));raise SystemExit(0 if os.path.getsize(p)<2000000 else 1)"
+          if errorlevel 1 exit /b 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/evidence/carrier-build-probe.json
+          git diff --cached --quiet && exit /b 0
+          git commit -m "Record carrier build probe result"
+          git push origin HEAD:${{ github.ref }}
+
+      - name: Fail the run if the build did not complete
+        if: always() && steps.probe.outcome != 'success'
+        shell: cmd
+        run: |
+          echo The carrier build did not complete. See docs/evidence/carrier-build-probe.json.
+          exit /b 1

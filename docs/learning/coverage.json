@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 174,
-    "lines": 32599,
+    "files": 176,
+    "lines": 32933,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -26,6 +26,13 @@
       "source": ".github/workflows/bridge-core-tests.yml",
       "sha256": "4034c8a43ba3e7662b5c6aa1ede8960a7cc1aab7c0dd56f7906b2fac1d77bfcd",
       "lines": 116,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": ".github/workflows/carrier-build-probe.yml",
+      "sha256": "00acfd6ab2f38a3eefb0d0d81713d85c8d2a6f696aa7b3e687a380e5cb4be09f",
+      "lines": 113,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1195,6 +1202,13 @@
       "source": "tools/portable_presentation_inputs.mjs",
       "sha256": "ef8e6487b298b3859a74f7a9e7ab94a22e305d609c658fab835975750df86175",
       "lines": 26,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/probe_carrier_build.py",
+      "sha256": "66096f6c8639dd2b41c1b8163f9bfe3ea6bd1a7a51ed980535f86d3ebe65671b",
+      "lines": 221,
       "explainedLines": 0,
       "status": "pending"
     },
