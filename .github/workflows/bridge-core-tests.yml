@@ -36,6 +36,7 @@ on:
       - tools/check_release_readiness.mjs
       - tools/audit_authorization_wiring.mjs
       - docs/evidence/authorization-wiring.json
+      - docs/evidence/ci-branch-binding.json
       - reference/vscode-types/**
       - tools/reconstruct_bridge_core.mjs
       - tools/patch_utils.mjs
