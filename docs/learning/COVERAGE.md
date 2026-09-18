@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/172 个纳入范围的文件完整逐行解释；363/32442 行已解释。
+当前：6/174 个纳入范围的文件完整逐行解释；363/32599 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -141,6 +141,7 @@
 | [tests/bridge-core-linked-extension.test.mjs](../../tests/bridge-core-linked-extension.test.mjs) | 60 | 0 | 待逐行讲解 |
 | [tests/bridge-core-maintenance-boundaries.test.mjs](../../tests/bridge-core-maintenance-boundaries.test.mjs) | 129 | 0 | 待逐行讲解 |
 | [tests/bridge-core-patch.test.mjs](../../tests/bridge-core-patch.test.mjs) | 136 | 0 | 待逐行讲解 |
+| [tests/bridge-core-permission-producers.test.mjs](../../tests/bridge-core-permission-producers.test.mjs) | 62 | 0 | 待逐行讲解 |
 | [tests/bridge-core-portable-chat.test.mjs](../../tests/bridge-core-portable-chat.test.mjs) | 84 | 0 | 待逐行讲解 |
 | [tests/bridge-core-reconstruction.test.mjs](../../tests/bridge-core-reconstruction.test.mjs) | 103 | 0 | 待逐行讲解 |
 | [tests/bridge-core-state.test.mjs](../../tests/bridge-core-state.test.mjs) | 113 | 0 | 待逐行讲解 |
@@ -162,6 +163,7 @@
 | [tools/audit_authorization_wiring.mjs](../../tools/audit_authorization_wiring.mjs) | 50 | 0 | 待逐行讲解 |
 | [tools/audit_custom_boundary.mjs](../../tools/audit_custom_boundary.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/audit_extension_runtime.mjs](../../tools/audit_extension_runtime.mjs) | 48 | 0 | 待逐行讲解 |
+| [tools/audit_permission_producers.mjs](../../tools/audit_permission_producers.mjs) | 95 | 0 | 待逐行讲解 |
 | [tools/audit_recovered_extension.py](../../tools/audit_recovered_extension.py) | 79 | 0 | 待逐行讲解 |
 | [tools/build_community.mjs](../../tools/build_community.mjs) | 137 | 137 | 本组已逐行解释 |
 | [tools/build_extractor.py](../../tools/build_extractor.py) | 25 | 0 | 待逐行讲解 |

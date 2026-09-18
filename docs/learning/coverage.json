@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 172,
-    "lines": 32442,
+    "files": 174,
+    "lines": 32599,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -905,6 +905,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/bridge-core-permission-producers.test.mjs",
+      "sha256": "d21fc46d2569915a430c187a839310571f8f976444182ae54d129edcdedd26d8",
+      "lines": 62,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/bridge-core-portable-chat.test.mjs",
       "sha256": "8c8eb952b3847d92f8e853c715b112328411c090a58ac89d79c385e8f0a2cb48",
       "lines": 84,
@@ -1052,6 +1059,13 @@
       "status": "pending"
     },
     {
+      "source": "tools/audit_permission_producers.mjs",
+      "sha256": "45273441a4fba02e9f00b7124f33d84212ba5d390ad1386273535cfcb74cb3e2",
+      "lines": 95,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/audit_recovered_extension.py",
       "sha256": "f87daaf22015b638d004cc11eef4581edf6ba21c711c2e75e3e50501ed2c8608",
       "lines": 79,
@@ -1102,7 +1116,7 @@
     },
     {
       "source": "tools/check_release_readiness.mjs",
-      "sha256": "d5f6e8b526c74d750111f57b173e7b079b2f25da8b643ea92197c790a47ac83f",
+      "sha256": "19aa1e375662e65bd5171aa45d8fc75cce0aed4d75536e150cc54c01ed3e5383",
       "lines": 54,
       "explainedLines": 0,
       "status": "pending"

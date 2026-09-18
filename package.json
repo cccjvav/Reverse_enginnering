@@ -24,7 +24,8 @@
     "build:portable-extension": "node tools/build_linked_extension.mjs --portable-chat",
     "check:portable-extension": "node tools/build_linked_extension.mjs --portable-chat --check",
     "diagnose:portable-types": "node tools/diagnose_linked_types.mjs --portable-chat",
-    "audit:authorization-wiring": "node tools/audit_authorization_wiring.mjs"
+    "audit:authorization-wiring": "node tools/audit_authorization_wiring.mjs",
+    "audit:permission-producers": "node tools/audit_permission_producers.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

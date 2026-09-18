@@ -45,7 +45,7 @@
     "pythonVersion": "3.11.2",
     "npmTest": {
       "exitCode": 0,
-      "passed": 164,
+      "passed": 167,
       "failed": 0
     },
     "pythonUnittest": {
@@ -152,7 +152,7 @@
   },
   "tasks": {
     "P0": "DONE",
-    "P1": "PARTIAL: P1.1 design record, P1.2 host-owned fail-closed policy, and P1.3 step 1 (self-derived patch plan, caller can no longer mislabel an operation) done; P1.3 build integration and real host UI approval NOT started",
+    "P1": "SPLIT after audit. P1a (policy module) DONE: self-derived patch plan, 20 tests, mutation-verified, forged-plan probe. P1b (host UI integration) PAUSED: the audit shows per-file approval never shipped, so adding it is a product decision awaiting the author.",
     "P2": "PARTIAL: inert HTTP fixtures only",
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
@@ -160,7 +160,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "P1.3 step 2: integrate the policy behind a SEPARATE experimental build flag (must NOT change the default 75-input portable bundle or its SHA 635190e6...a2daa), wiring facade -> dispatcher -> file entry so the extension actually constructs a host policy instead of only tests injecting one. The patchPlan question is settled: the module derives the plan itself, so integration does not need to supply one. If no host UI can safely present the approval, stop at default-deny and keep authorization-integration BLOCKED rather than weakening the gate.",
+  "nextAction": "Await the author's choice on carrier strategy (A: patch Code OSS source tree to restore the workbench-internal Bridge UI 1:1, higher maintenance; B: rewrite the UI as extension + webview, far more maintainable but not pixel-identical). This decision determines all of P4/P5/P6. Meanwhile the unblocked work is: write the A/B comparison document, correct the user-facing security wording, and run a CI probe on building upstream 1.132.0 with Electron 44.2.0. Do NOT integrate a fake host approval UI to close authorization-integration.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -203,5 +203,59 @@
       ],
       "note": "Caught a real Windows-only defect first (run 35351320215): patch plan keys were not realpath-resolved. Linux alone would have shipped it."
     }
+  },
+  "projectAudit2026_09_18": {
+    "document": "docs/handoff/PROJECT_AUDIT_2026-09-18.md",
+    "trigger": "The author asked for a review of prior assistants' work quality and invited a different approach if the reverse-engineering direction looked wrong.",
+    "priorWorkQuality": "Above average. Evidence is checkable (spot-checked ~10 of 45 files, no fabrication found), gates were never faked, candidate vs confirmed was kept distinct, immutable originals are intact.",
+    "findings": [
+      {
+        "id": "F1",
+        "severity": "high",
+        "finding": "checkPermission has ZERO producers in the shipped bundles; every call site short-circuits via `context.checkPermission && ...`. Per-file approval never ran in 0.7.4.",
+        "tool": "npm run audit:permission-producers",
+        "evidence": "docs/evidence/permission-producer-audit.json",
+        "regressionTest": "tests/bridge-core-permission-producers.test.mjs",
+        "consequence": "P1 is authoring a NEW control, not restoring a regressed one. Real 0.7.4 file safety is workspace-root containment. Whether to add approval is a product decision for the author."
+      },
+      {
+        "id": "F2",
+        "severity": "medium",
+        "finding": "The roadmap understates available material: 34 original .ts files are already recovered with matching hashes, and CI fully extracts the installer (9875 files / 1GB, exit 0). The sandbox cannot fetch LFS only because egress to the GitHub CDN is blocked.",
+        "consequence": "Several tasks were treated as blocked on material that is already in hand or reachable in CI."
+      },
+      {
+        "id": "F3",
+        "severity": "high",
+        "finding": "The custom Bridge UI is a workbench-internal class compiled into workbench.desktop.main.js using Disposable/append/$ internals, so it cannot be reproduced as an extension.",
+        "consequence": "The A (patch Code OSS) vs B (extension + webview) decision determines all of P4/P5/P6 and must come FIRST, but the roadmap placed it at P3 while making P1 the sole priority."
+      },
+      {
+        "id": "F4",
+        "severity": "low",
+        "finding": "Carrier identity was labelled unknown because Electron 44.2.0 != 42.7.1. No upstream tag 1.132-1.138 ships 44.2.0, and product.json commit 09533f92 does not exist upstream.",
+        "consequence": "Reframed from \"unidentified base\" to \"author-built fork of 1.132.0 with Electron raised\". Gate stays BLOCKED; only the wording changed."
+      }
+    ],
+    "changesMadeThisTurn": [
+      "Added tools/audit_permission_producers.mjs + npm script audit:permission-producers.",
+      "Added docs/evidence/permission-producer-audit.json.",
+      "Added tests/bridge-core-permission-producers.test.mjs (3 tests) so the finding cannot silently rot.",
+      "Reworded carrier-identity and authorization-integration gate details to state facts. Gate STATUSES UNCHANGED, check:release still exits 2.",
+      "Annotated ROADMAP.md with a revision section."
+    ],
+    "recommendedPriority": [
+      "1. NEW P1.5 carrier strategy A/B decision document (doable now, no GUI/Windows/network needed; needs author sign-off).",
+      "2. Rewrite user-facing security wording: 0.7.4 had NO per-file approval, so the community policy is an ENHANCEMENT, not a restoration.",
+      "3. CI probe: can upstream 1.132.0 + Electron 44.2.0 build on a Windows runner? Pure CI, unblocks P6 design.",
+      "4. P3 static inventory.",
+      "5. P1b approval UI integration - PAUSED pending the author decision in item 1.",
+      "6. P4/P5/P6 - need Windows + GUI."
+    ],
+    "auditLimits": [
+      "Static analysis only; no installer run, no GUI, no real MCP.",
+      "Producer-absence is inferred from text analysis of esbuild output, not an execution trace.",
+      "About 10 of 45 evidence files were spot-checked."
+    ]
   }
 }
