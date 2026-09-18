@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/176 个纳入范围的文件完整逐行解释；363/32933 行已解释。
+当前：6/176 个纳入范围的文件完整逐行解释；363/32999 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -184,7 +184,7 @@
 | [tools/patch_bridge_ui.mjs](../../tools/patch_bridge_ui.mjs) | 72 | 72 | 本组已逐行解释 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
 | [tools/portable_presentation_inputs.mjs](../../tools/portable_presentation_inputs.mjs) | 26 | 0 | 待逐行讲解 |
-| [tools/probe_carrier_build.py](../../tools/probe_carrier_build.py) | 221 | 0 | 待逐行讲解 |
+| [tools/probe_carrier_build.py](../../tools/probe_carrier_build.py) | 287 | 0 | 待逐行讲解 |
 | [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 210 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
 | [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |

@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 176,
-    "lines": 32933,
+    "lines": 32999,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1207,8 +1207,8 @@
     },
     {
       "source": "tools/probe_carrier_build.py",
-      "sha256": "66096f6c8639dd2b41c1b8163f9bfe3ea6bd1a7a51ed980535f86d3ebe65671b",
-      "lines": 221,
+      "sha256": "31d336b24a5e64c9a466875e3ea94dff1426736737c499684e20f288094dd24e",
+      "lines": 287,
       "explainedLines": 0,
       "status": "pending"
     },

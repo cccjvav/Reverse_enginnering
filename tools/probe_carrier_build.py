@@ -35,8 +35,21 @@ UPSTREAM_COMMIT = "df53daabb18cd157bdb08c7f01c34df936cf12f4"
 TARGET_ELECTRON = "44.2.0"
 
 
+def resolve_executable(name):
+    """Return a runnable path for `name`.
+
+    On Windows, npm/npx are `.cmd` shims, and subprocess without shell=True
+    does not apply PATHEXT, so a bare "npm" raises WinError 2. shutil.which
+    applies PATHEXT and returns the real shim path. Resolving explicitly keeps
+    shell=False, so arguments are never re-parsed by cmd.
+    """
+    found = shutil.which(name)
+    return found or name
+
+
 def run(cmd, cwd=None, timeout=3600, env=None):
     """Run a command, capturing a bounded transcript and the true exit code."""
+    cmd = [resolve_executable(str(cmd[0]))] + [str(c) for c in cmd[1:]]
     started = time.time()
     merged = os.environ.copy()
     if env:
@@ -74,6 +87,16 @@ def tool_versions():
         versions[name] = (result["log_tail"].strip().splitlines() or [""])[0] \
             if result["exit_code"] == 0 else None
     return versions
+
+
+def missing_tools(versions):
+    """Tools the probe cannot run without.
+
+    A missing tool must not be reported as a build failure: that would blame
+    the carrier for a defect in this harness, which is exactly what happened on
+    the first run when npm.cmd could not be resolved on Windows.
+    """
+    return [name for name in ("node", "npm", "git") if not versions.get(name)]
 
 
 def main() -> int:
@@ -115,6 +138,17 @@ def main() -> int:
         print(f"[{'ok' if entry['ok'] else 'FAIL'}] {name} "
               f"(exit={result['exit_code']}, {result['duration_s']}s)", flush=True)
         return entry["ok"]
+
+    absent = missing_tools(report["toolVersions"])
+    if absent:
+        report["harnessError"] = {
+            "missingTools": absent,
+            "detail": ("The probe could not run these tools, so no conclusion about "
+                       "the carrier build is possible. This is a defect in the probe "
+                       "environment, NOT evidence that the carrier cannot be built."),
+        }
+        report["stages"] = []
+        return finish(report, args.output)
 
     work.mkdir(parents=True, exist_ok=True)
     if src.exists():
@@ -169,6 +203,31 @@ def main() -> int:
         cwd=src, timeout=args.install_timeout,
         env={"npm_config_build_from_source": "true"}),
         note="npm install, not npm ci: the lockfile still pins the old Electron")
+    if not ok:
+        # Distinguish "Electron 44 is incompatible" from "this machine could not
+        # reach the download servers". Conflating them would turn an
+        # environment limit into a false verdict about the carrier.
+        tail = report["stages"][-1]["log_tail"]
+        network_markers = ("ECONNRESET", "ETIMEDOUT", "ENOTFOUND", "EAI_AGAIN",
+                           "socket disconnected", "network socket")
+        resolution_markers = ("ERESOLVE", "No matching version", "notarget",
+                              "peer dep", "ETARGET")
+        hit_network = [m for m in network_markers if m in tail]
+        hit_resolution = [m for m in resolution_markers if m in tail]
+        report["installFailureAnalysis"] = {
+            "networkMarkers": hit_network,
+            "resolutionMarkers": hit_resolution,
+            "reachedNativeBuild": "node-gyp" in tail or "build-from-source" in tail,
+            "verdict": (
+                "INCONCLUSIVE: dependency resolution succeeded and the failure is a "
+                "download/network error, so this machine cannot answer the question. "
+                "Re-run somewhere with unrestricted egress."
+                if hit_network and not hit_resolution else
+                "Electron version appears genuinely unsatisfiable: npm could not "
+                "resolve a dependency tree."
+                if hit_resolution else
+                "Install failed for another reason; read log_tail."),
+        }
     if not ok or args.skip_compile:
         if ok:
             report["stoppedEarly"] = "--skip-compile requested"
@@ -197,15 +256,22 @@ def finish(report, output):
     report["allStagesPassed"] = bool(stages) and all(s["ok"] for s in stages)
     failed = [s["stage"] for s in stages if not s["ok"]]
     report["failedStages"] = failed
-    report["conclusion"] = (
-        "Carrier builds from upstream sources with the shipped Electron version. "
-        "Repackaging a full ShunCode is therefore feasible in principle; the "
-        "remaining work is applying the author's own customisations."
-        if report["allStagesPassed"] else
-        f"Build did not complete. First failure: {failed[0] if failed else 'unknown'}. "
-        "This is a real answer, not a setup error to paper over: it tells us the "
-        "carrier cannot currently be rebuilt as-is and shows exactly where it stops."
-    )
+    if report.get("harnessError"):
+        report["conclusion"] = (
+            "INCONCLUSIVE. The probe itself could not run: missing "
+            f"{report['harnessError']['missingTools']}. This says nothing about "
+            "whether the carrier can be built; fix the harness and re-run."
+        )
+    else:
+        report["conclusion"] = (
+            "Carrier builds from upstream sources with the shipped Electron version. "
+            "Repackaging a full ShunCode is therefore feasible in principle; the "
+            "remaining work is applying the author's own customisations."
+            if report["allStagesPassed"] else
+            f"Build did not complete. First failure: {failed[0] if failed else 'unknown'}. "
+            "This is a real answer, not a setup error to paper over: it tells us the "
+            "carrier cannot currently be rebuilt as-is and shows exactly where it stops."
+        )
 
     path = Path(output)
     path.parent.mkdir(parents=True, exist_ok=True)
