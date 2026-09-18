@@ -728,3 +728,23 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 但三个run全部`failure`，原因不是代码：GitHub注解为“The job was not started because recent account payments have failed or your spending limit needs to be increased.”，API显示每个job的`steps`长度为**0**，即checkout/依赖安装/测试一步都没跑。
 
 因此本轮**不存在本分支的绿色CI结果**，也不能据此宣称跨平台通过。已如实记录在`docs/evidence/ci-branch-binding.json`，明确区分“触发绑定已验证”与“作业未执行”，并列出未被本次run证明的项（任何测试/类型/门槛结果、Windows CMD行为、证据写回是否正确——写回步骤根本没到达）。需仓库所有者先解除计费限制再重跑。本地Linux替代验证（144 Node、39 Python、check:release退出2）仅为沙箱结果，不能冒充GitHub runner或Windows验收。
+
+### 30.6 计费解除后的首个绿色CI，以及被CI抓到的自身失误
+
+用户解除计费限制后重跑。`gh run rerun`报"workflow file may be broken"、`gh workflow run`返回403（令牌无dispatch权限），故改为向被监听路径提交真实变更触发——把新证据`docs/evidence/ci-branch-binding.json`加入core工作流的paths，本身也是应有的配置。
+
+第一次重跑`35346260051`**失败，且是我自己的过错**：上一条提交给workflow加了一行paths，却没按仓库自身的完成定义重跑`learn:build`，导致`docs/learning`覆盖数据停留在旧值（该文件115行/全库31412行，实际应为116/31413），`tests/bridge-core-learning.test.mjs`的新鲜度断言失败。远端日志blob在本沙箱多次EOF/404取不到，于是**克隆推送后的提交到干净目录复现**，确认只有这一项失败且与CI环境无关，再`learn:build`修正。这正是该测试存在的意义，不是flaky，不做重试绕过。
+
+修正后`35346853707`三作业全部success：`core (ubuntu-24.04)`、`core (windows-2022)`、`windows-cmd-conda`（普通CMD+conda）。这是**本分支第一份真实跨平台绿色结果**，证据存入`docs/evidence/ci-branch-binding.json`，并在其中写明范围仅为静态分析/测试，不含扩展激活、GUI、MCP、Electron ABI与安装器验收，不改变任何发布门槛。
+
+### 30.7 P1.1：可信主体与生命周期设计记录
+
+按NEXT_AUTHORIZATION.md P1.1完成源码跟读，产出`docs/handoff/P1_1_OWNER_LIFECYCLE.md`（设计记录，未实现）：
+
+- 厘清三种"看起来像授权"但都不是逐文件授权的机制：`BridgeAccessController`/License为商业可用性、HTTP bearer为连接级准入、`commandOwnerId`为命令归属作用域。
+- `commandOwnerId`三条真实来源：传统会话`bridge:<sessionId>`（transport.ts:678）、现代请求`modern:<sha256身份信封>`（bridge-mcp-modern.ts:36）、本机兜底`native-chat`。`bridgeManagedCommandOwnerId`对空会话抛`MCP_SESSION_UNAVAILABLE`，是fail-closed的，新策略应保持。
+- 生命周期汇聚点：`onSessionDestroyed`（transport.ts:207）→`endRemoteConversation`+`releaseCommandOwner`→`terminalManager.releaseOwner`（ide-tool-broker.ts:1780）；触发自DELETE/传输关闭/空闲裁剪。**发现缺口：现代路径无会话销毁事件、不调用releaseCommandOwner**，故授权记录必须自带有限TTL，不能只依赖会话销毁。
+- 再次核验断线：`grep checkPermission recovered/shuncode-extension/src/*.ts`命中**0**处，原扩展TS从未构造文件权限服务，P1产物只能是新维护设计，不得标成找回的原始d.ts。
+- 另记录两项容易被忽略的副作用：接入回调会使find/search从首选引擎（ripgrep）降级为逐条过滤的Node实现（find-files.js:372、search-files.js:534）；原回调签名`(absolutePath)`不含操作类型，而apply_patch内部横跨新增/修改/移动/删除四种检查点，仅凭工具名无法区分"允许读"与"允许删"，P1.2须新增宿主上下文并如实标注为偏离原件的新设计。
+
+文档中22处源码行号/符号引用全部用脚本逐条核对，修正了1处偏移（transport取消信号应为:677）。本轮仍未接入任何策略，`check:release`维持退出2、七门槛BLOCKED。

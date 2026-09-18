@@ -103,7 +103,8 @@
     "evidence": "docs/evidence/authorization-wiring.json",
     "authorizedDispatcherBundled": false,
     "authorizationIntegrationVerified": false,
-    "implementedThisTurn": "Hash-verified AST and portable input-graph audit only; no host permission service or runtime integration"
+    "implementedThisTurn": "CI branch-binding fix and P1.1 source trace/design record only. Still no host permission service, no runtime integration, no change to any release gate.",
+    "p11DesignRecord": "docs/handoff/P1_1_OWNER_LIFECYCLE.md"
   },
   "learning": {
     "files": 169,
@@ -114,7 +115,7 @@
   },
   "tasks": {
     "P0": "DONE",
-    "P1": "READY: audit complete; implementation not started",
+    "P1": "READY: audit + P1.1 owner/lifecycle design record complete (docs/handoff/P1_1_OWNER_LIFECYCLE.md); P1.2 policy service implementation not started",
     "P2": "PARTIAL: inert HTTP fixtures only",
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
@@ -122,7 +123,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Ask the repository owner to clear the GitHub Actions billing/spending-limit block, then re-run the three workflows to get the first real cross-platform result for this branch. Independently, start docs/handoff/NEXT_AUTHORIZATION.md P1.1: trace trusted session owner and cancellation lifecycle, then design the fail-closed host-owned file permission contract before wiring the maintained dispatcher.",
+  "nextAction": "Start NEXT_AUTHORIZATION.md P1.2 using docs/handoff/P1_1_OWNER_LIFECYCLE.md section 5: add a host-owned, fail-closed permission service under community/ that carries ownerId, sessionKind, tool, operation, realpath, roots snapshot and expiry; cover the P1.4 denial matrix with fixture files before any build integration. Note the contract gap: the original callback has no operation field, so apply_patch add/modify/move/delete needs new host context and must be labelled new maintenance design, not recovered original.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -148,13 +149,13 @@
     "detail": "All three workflows previously hardcoded arena/01a09d2c-...: new session branches got no trigger, job guards skipped everything, and the two evidence workflows checked out AND pushed back to the retired branch. Now: push filter arena/**, guards startsWith(refs/heads/arena/), checkout/push use ${{ github.ref }}, per-branch concurrency groups.",
     "regression": "tests/test_ci_workflow_branch_binding.py (5 assertions, mutation-verified)",
     "verifiedOnThisBranch": true,
-    "note": "Trigger binding CONFIRMED: push to this branch created all three runs with this branch/SHA (was zero runs before). Jobs did NOT execute - GitHub blocked startup for an account billing/spending-limit state, 0 steps recorded. No green CI result exists for this branch yet.",
+    "note": "Trigger binding confirmed AND jobs now execute: after the owner cleared the billing block, run 35346853707 is green on ubuntu-24.04, windows-2022 and windows-cmd-conda. An intervening run (35346260051) correctly failed on my own stale learning coverage.",
     "runs": {
       "bridgeCoreTests": 35345456845,
       "installerForensics": 35345456314,
       "windowsStaticProbe": 35345456431
     },
     "evidence": "docs/evidence/ci-branch-binding.json",
-    "blockedBy": "GitHub account billing / spending limit (repository owner action required)"
+    "firstGreenRunOnThisBranch": 35346853707
   }
 }
