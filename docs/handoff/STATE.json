@@ -157,10 +157,10 @@
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
     "P5": "BLOCKED",
-    "P6": "BLOCKED",
+    "P6": "BLOCKED, but the path is now concrete: carrier dependencies install cleanly with Electron 44.2.0 and only 11 Electron-API type errors block compilation.",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Run the CI probe first: attempt to build the carrier (upstream 1.132.0 tree with Electron 44.2.0) on a Windows runner. It is the master switch for repackaging a full ShunCode and requires no author hardware. Do NOT continue the webview prototype yet - it is step 5, not step 1.",
+  "nextAction": "Fix the 11 Electron 42->44 type errors in the three Code OSS files so the carrier actually compiles, since that turns \"can it be built\" into \"it is built\" and may reverse-engineer the author's own patches. Alternative if preferred: restore TypeScript types for the 41 reconstructed modules first. Do NOT relax any release gate on the strength of this probe; source-built-installer stays BLOCKED.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -311,5 +311,30 @@
       "5. Rebuild the kernel Bridge UI - this is where the A/B choice finally applies."
     ],
     "note": "Removing the paywall only needs layer A: bridge-license-service.ts, bridge-access-controller.ts and bridge-license-config.ts are all original TypeScript."
+  },
+  "carrierBuildProbe": {
+    "question": "Can upstream Code OSS 1.132.0 be built with Electron 44.2.0, the version the shipped ShunCode used?",
+    "ciRun": 35365439853,
+    "evidence": "docs/evidence/carrier-build-probe.json",
+    "document": "docs/handoff/CARRIER_BUILD_RESULT.md",
+    "stages": {
+      "clone": "ok (commit matches df53daab)",
+      "electronRepoint": "ok (only devDependencies.electron changed; other 103 deps untouched)",
+      "npmInstall": "OK, 667s - all native modules rebuilt against Electron 44 headers",
+      "compile": "FAILED with exactly 11 TypeScript errors, 86s"
+    },
+    "headline": "Dependency layer is compatible with Electron 44.2.0. The only blocker is 11 type errors in 3 Code OSS files, all caused by Electron 42->44 API signature changes (6 of them clipboard, plus auth interface and argument counts).",
+    "errorFiles": {
+      "src/vs/platform/native/electron-main/nativeHostMainService.ts": 9,
+      "src/vs/platform/browserView/electron-main/browserViewMainService.ts": 1,
+      "src/vs/platform/native/electron-main/auth.ts": 1
+    },
+    "inference": "The author must have fixed these same 11 errors to ship 0.7.4, so these patches are part of the lost customisation and may be recoverable by diffing the shipped main.js.",
+    "harnessBugFound": "The FIRST run reported npm-install failing, but that was my own defect: on Windows npm is npm.cmd and subprocess without shell=True ignores PATHEXT. Left unexamined it would have produced the false conclusion \"Electron 44 cannot install\". Fixed with shutil.which, plus two guards: missing tools now report harnessError/INCONCLUSIVE, and install failures are classified so network errors report INCONCLUSIVE instead of blaming Electron.",
+    "doesNotClaim": [
+      "Compiling is not running; startup, packaging and installer remain unverified.",
+      "No author customisation was applied; this was pure upstream plus an Electron bump.",
+      "The 11 fixes have not been attempted yet."
+    ]
   }
 }
