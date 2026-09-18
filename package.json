@@ -26,7 +26,8 @@
     "diagnose:portable-types": "node tools/diagnose_linked_types.mjs --portable-chat",
     "audit:authorization-wiring": "node tools/audit_authorization_wiring.mjs",
     "audit:permission-producers": "node tools/audit_permission_producers.mjs",
-    "verify:btypes": "node tools/verify_btypes.mjs"
+    "verify:btypes": "node tools/verify_btypes.mjs",
+    "check:btypes": "python3 tools/check_btype_arity.py --output docs/evidence/btype-arity.json"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

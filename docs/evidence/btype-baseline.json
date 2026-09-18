@@ -5,6 +5,7 @@
   "tscErrorCount": 0,
   "handWrittenModules": [
     "adaptive-concurrency",
+    "apply-patch",
     "bridge-activity-tracker",
     "bridge-coordination-validation",
     "bridge-event-store",
@@ -24,10 +25,10 @@
     "tool-input-validation"
   ],
   "moduleCount": 41,
-  "declarationsTotal": 422,
-  "fullyTypedDeclarations": 270,
-  "anyOccurrences": 517,
-  "fullyTypedPercent": 64.0,
+  "declarationsTotal": 414,
+  "fullyTypedDeclarations": 298,
+  "anyOccurrences": 399,
+  "fullyTypedPercent": 72.0,
   "modules": {
     "adaptive-concurrency": {
       "declarations": 7,
@@ -36,9 +37,10 @@
       "handWritten": true
     },
     "apply-patch": {
-      "declarations": 39,
-      "fullyTyped": 3,
-      "anyOccurrences": 118
+      "declarations": 31,
+      "fullyTyped": 31,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "bridge-activity-tracker": {
       "declarations": 6,
@@ -255,12 +257,6 @@
   },
   "worstModules": [
     {
-      "module": "apply-patch",
-      "declarations": 39,
-      "fullyTyped": 3,
-      "anyOccurrences": 118
-    },
-    {
       "module": "search-files",
       "declarations": 32,
       "fullyTyped": 3,
@@ -313,8 +309,14 @@
       "declarations": 3,
       "fullyTyped": 2,
       "anyOccurrences": 4
+    },
+    {
+      "module": "bridge-tool-name",
+      "declarations": 1,
+      "fullyTyped": 0,
+      "anyOccurrences": 3
     }
   ],
-  "interpretation": "270 of 422 exported declarations (64.0%) carry a type with no `any`. The remaining 152 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
+  "interpretation": "298 of 414 exported declarations (72.0%) carry a type with no `any`. The remaining 116 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
   "doesNotClaim": "A declaration without `any` is not proof the type is correct, only that inference produced something specific. Correctness still depends on the evidence tiers in docs/evidence/btype-evidence.json."
 }

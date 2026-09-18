@@ -72,6 +72,28 @@ class HandWrittenTypeTests(unittest.TestCase):
         self.assertIn("FORCE_CONFIRMATION_REQUIRED", text)
 
 
+class ArityCrossCheckTests(unittest.TestCase):
+    """Declarations must agree with the code they describe."""
+
+    def test_no_parameter_mismatches(self):
+        out = REPO / "docs" / "evidence" / "btype-arity.json"
+        result = subprocess.run(
+            [sys.executable, str(REPO / "tools" / "check_btype_arity.py"),
+             "--output", str(out)],
+            capture_output=True, text=True)
+        report = json.loads(out.read_text(encoding="utf8"))
+        self.assertGreater(report["functionsChecked"], 50,
+                           "cross-check is not actually inspecting the declarations")
+        self.assertEqual(report["findingCount"], 0, result.stdout)
+
+    def test_states_its_own_limits(self):
+        out = REPO / "docs" / "evidence" / "btype-arity.json"
+        if not out.exists():
+            self.skipTest("run check:btypes first")
+        report = json.loads(out.read_text(encoding="utf8"))
+        self.assertIn("not proof of full agreement", report["limits"])
+
+
 class VerificationHarnessTests(unittest.TestCase):
     """The verifier must be able to fail; a check that cannot fail is noise."""
 

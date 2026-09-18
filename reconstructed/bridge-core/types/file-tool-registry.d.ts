@@ -125,7 +125,16 @@ export function parseReadImageInput(args: unknown): Record<string, unknown>;
 export function parseSearchFilesInput(args: unknown): Record<string, unknown>;
 
 // Shared argument validators used by the parsers above.
-export function asObjectRow(value: unknown, label: string): Record<string, unknown>;
+/**
+ * Asserts the value is an object and returns it.
+ *
+ * Takes no label: the error message is the fixed
+ * "INVALID_ARGUMENT: expected an object." An earlier draft of this file
+ * declared a `label` parameter that does not exist.
+ *
+ * @throws if the value is null or not an object.
+ */
+export function asObjectRow(value: unknown): Record<string, unknown>;
 export function assertOptionalBooleans(
 	args: Record<string, unknown>, keys: readonly string[]): void;
 export function assertOptionalIntegers(
