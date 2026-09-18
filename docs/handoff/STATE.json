@@ -160,7 +160,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Await the author's choice on carrier strategy (A: patch Code OSS source tree to restore the workbench-internal Bridge UI 1:1, higher maintenance; B: rewrite the UI as extension + webview, far more maintainable but not pixel-identical). This decision determines all of P4/P5/P6. Meanwhile the unblocked work is: write the A/B comparison document, correct the user-facing security wording, and run a CI probe on building upstream 1.132.0 with Electron 44.2.0. Do NOT integrate a fake host approval UI to close authorization-integration.",
+  "nextAction": "Build a Skills-card webview prototype (about 20 of the 85 methods) as a WebviewView, wired to the existing shuncode.skills.* commands, so the author can judge real fidelity before committing to a full migration. Do not migrate the remaining methods until the author approves the prototype. Keep the default portable bundle byte-identical; the prototype must live behind its own build path.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -256,6 +256,29 @@
       "Static analysis only; no installer run, no GUI, no real MCP.",
       "Producer-absence is inferred from text analysis of esbuild output, not an execution trace.",
       "About 10 of 45 evidence files were spot-checked."
+    ]
+  },
+  "carrierDecision": {
+    "status": "AUTHOR LEANS B (extension + webview); prototype-first agreed as the way to confirm.",
+    "documents": [
+      "docs/handoff/CARRIER_STRATEGY_A_OR_B.md",
+      "docs/handoff/B_PLAN_FOUR_QUESTIONS.md"
+    ],
+    "whyBIsViable": [
+      "The 122966-byte kernel UI class implements no business logic: 14 executeCommand calls all target shuncode.* commands the extension already registers.",
+      "All 44 internal service calls have one-to-one public API equivalents; zero hits for layoutService/viewsRegistry/themeService/ICodeEditor/storageService/keybindingService/notificationService.",
+      "The author already ships two webview UIs in this same extension: workspace-hub.ts:268 (WebviewPanel) and codex-account-view.ts:14 (WebviewView)."
+    ],
+    "answersToAuthorQuestions": {
+      "install": "Existing users install a ~2-3 MB vsix instead of reinstalling a 240 MB EXE. New users still need a full installer. B also allows shipping the extension first, which A cannot.",
+      "functionalityLoss": "No business functionality is lost; the kernel class is a remote control. The only real loss is the embedding location plus visual fidelity (~90-95%, estimated not measured). Recommended placement is WebviewView (dockable sidebar), matching codex-account-view precedent.",
+      "plainVSCode": "Not directly: package.json declares 7 proposed APIs (all Chat-related) that only run on a self-built carrier. A cut-down build dropping Chat integration could run on stock VS Code, keeping MCP Bridge, Skills, file tools and Workspace Hub. Separate task, not part of the B mainline.",
+      "upstreamUpgrade": "Upstream = microsoft/vscode releases. A means re-applying two patch sets (workbench + sessions) on every upgrade; B relies on stable public APIs. Caveat: the 7 proposed APIs are NOT covered by compatibility guarantees, so Chat integration still tracks upstream under B."
+    },
+    "unverified": [
+      "Whether a rebuilt extension installs and activates in a real ShunCode 0.7.4 (needs Windows hardware).",
+      "Actual visual gap versus the original (needs GUI comparison).",
+      "90-95% fidelity is an estimate."
     ]
   }
 }
