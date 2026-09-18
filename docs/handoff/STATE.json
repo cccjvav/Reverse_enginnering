@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Step 2 continues: custom-tool-admin, bridge-event-store, jsonrpc-request-id-registry, adaptive-concurrency, then the 17 modules no author source references - behaviour-only reconstruction, to be labelled as such.",
+  "nextAction": "Step 2 final phase: the 17 modules no author source references. These are behaviour-only reconstruction with no first-hand evidence, so each must be labelled as such in its PROVENANCE block.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -386,16 +386,19 @@
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 411,
-      "fullyTyped": 253,
-      "percent": 61.6,
+      "exportedDeclarations": 422,
+      "fullyTyped": 270,
+      "percent": 64.0,
       "anyOccurrences": null,
       "handWrittenModules": [
+        "adaptive-concurrency",
         "bridge-activity-tracker",
         "bridge-coordination-validation",
+        "bridge-event-store",
         "bridge-http-router",
         "bridge-session-registry",
         "concurrency",
+        "custom-tool-admin",
         "custom-tool-contract",
         "custom-tool-sandbox",
         "custom-tool-skill",
@@ -403,6 +406,7 @@
         "custom-tools",
         "file-tool-input-compat",
         "file-tool-registry",
+        "jsonrpc-request-id-registry",
         "managed-command-cancellation",
         "tool-input-validation"
       ],
@@ -430,7 +434,8 @@
         "keeps skipLibCheck off, because turning it on hides errors inside .d.ts bodies"
       ],
       "provenTwoWays": "Injecting `export const broken: NoSuchTypeAnywhere;` makes it exit 1; removing it returns exit 0."
-    }
+    },
+    "mistakeCaughtAndCorrected": "While typing custom-tool-admin I added a `path` field to CustomToolToggleResult. It looked reasonable - the function does write a file - but the return literal is only `{ name, enabled }`. Caught by reading the actual return statement rather than reasoning about what the function ought to expose. This is the exact failure mode the plan warns about, so it is recorded rather than quietly fixed."
   },
   "sandboxNote": "The sandbox was re-provisioned mid-session: the checkout reappeared at base commit df7dde3 with node_modules absent, which made a tsc probe silently pass by not running at all. Recovered with git fetch + reset --mixed FETCH_HEAD against the pushed branch; no committed work was lost. Lesson recorded: a verification that reports zero errors must be checked for having actually executed."
 }

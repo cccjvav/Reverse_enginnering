@@ -61,9 +61,20 @@ justification so a later reader can audit it:
 A wrong-but-plausible type is worse than `any`, because it stops the compiler
 from asking the question. Where evidence runs out, the type says so.
 
+## A mistake worth recording
+
+While typing `custom-tool-admin` I gave `CustomToolToggleResult` a `path` field.
+It was plausible — the function does write a file — and it was simply **not
+there**: the return literal is `{ name, enabled }`. Caught by reading the actual
+`return` statement instead of reasoning about what the function ought to expose.
+
+That is precisely the failure mode this plan warns about, so it is recorded
+rather than quietly corrected. The negative probe now asserts the field does not
+exist.
+
 ## Done so far
 
-Coverage has moved **32.8% → 61.6%** (116/354 → 253/411 declarations), measured
+Coverage has moved **32.8% → 64.0%** (116/354 → 270/422 declarations), measured
 by `tools/diagnose_btypes.py` rather than asserted. Twelve modules typed, each measuring 0 `any` — this now covers **every Tier A
 module whose types the author's own sources name**:
 
@@ -83,6 +94,10 @@ module whose types the author's own sources name**:
 | `bridge-http-router` | 16 `any` | 9/9 typed |
 | `file-tool-input-compat` | 27 `any` | 15/15 typed |
 | `tool-input-validation` | 16 `any` | 8/8 typed |
+| `custom-tool-admin` | 10 `any` | 6/6 typed |
+| `bridge-event-store` | 10 `any` | 3/3 typed |
+| `jsonrpc-request-id-registry` | 9 `any` | 8/8 typed |
+| `adaptive-concurrency` | 9 `any` | 6/6 typed |
 
 Three findings worth keeping, none of which the JavaScript alone would give up:
 

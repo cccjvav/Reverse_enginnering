@@ -4,11 +4,14 @@
   "tscExitCode": 0,
   "tscErrorCount": 0,
   "handWrittenModules": [
+    "adaptive-concurrency",
     "bridge-activity-tracker",
     "bridge-coordination-validation",
+    "bridge-event-store",
     "bridge-http-router",
     "bridge-session-registry",
     "concurrency",
+    "custom-tool-admin",
     "custom-tool-contract",
     "custom-tool-sandbox",
     "custom-tool-skill",
@@ -16,19 +19,21 @@
     "custom-tools",
     "file-tool-input-compat",
     "file-tool-registry",
+    "jsonrpc-request-id-registry",
     "managed-command-cancellation",
     "tool-input-validation"
   ],
   "moduleCount": 41,
-  "declarationsTotal": 411,
-  "fullyTypedDeclarations": 253,
-  "anyOccurrences": 555,
-  "fullyTypedPercent": 61.6,
+  "declarationsTotal": 422,
+  "fullyTypedDeclarations": 270,
+  "anyOccurrences": 517,
+  "fullyTypedPercent": 64.0,
   "modules": {
     "adaptive-concurrency": {
-      "declarations": 3,
-      "fullyTyped": 2,
-      "anyOccurrences": 9
+      "declarations": 7,
+      "fullyTyped": 7,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "apply-patch": {
       "declarations": 39,
@@ -48,9 +53,10 @@
       "handWritten": true
     },
     "bridge-event-store": {
-      "declarations": 1,
-      "fullyTyped": 1,
-      "anyOccurrences": 10
+      "declarations": 2,
+      "fullyTyped": 2,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "bridge-http-router": {
       "declarations": 8,
@@ -91,9 +97,10 @@
       "handWritten": true
     },
     "custom-tool-admin": {
-      "declarations": 2,
-      "fullyTyped": 1,
-      "anyOccurrences": 10
+      "declarations": 4,
+      "fullyTyped": 4,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "custom-tool-contract": {
       "declarations": 13,
@@ -158,9 +165,10 @@
       "anyOccurrences": 1
     },
     "jsonrpc-request-id-registry": {
-      "declarations": 4,
-      "fullyTyped": 0,
-      "anyOccurrences": 9
+      "declarations": 8,
+      "fullyTyped": 8,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "managed-command-cancellation": {
       "declarations": 19,
@@ -301,12 +309,12 @@
       "anyOccurrences": 12
     },
     {
-      "module": "bridge-event-store",
-      "declarations": 1,
-      "fullyTyped": 1,
-      "anyOccurrences": 10
+      "module": "workspace-paths",
+      "declarations": 3,
+      "fullyTyped": 2,
+      "anyOccurrences": 4
     }
   ],
-  "interpretation": "253 of 411 exported declarations (61.6%) carry a type with no `any`. The remaining 158 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
+  "interpretation": "270 of 422 exported declarations (64.0%) carry a type with no `any`. The remaining 152 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
   "doesNotClaim": "A declaration without `any` is not proof the type is correct, only that inference produced something specific. Correctness still depends on the evidence tiers in docs/evidence/btype-evidence.json."
 }
