@@ -90,6 +90,16 @@ jobs:
             echo No report produced.
           )
 
+      # Upload before attempting to commit. A push race must never destroy a
+      # result that costs ~13 minutes of build time to reproduce.
+      - name: Keep the report as an artifact regardless of the push outcome
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: carrier-build-probe
+          path: docs/evidence/carrier-build-probe.json
+          if-no-files-found: warn
+
       # Commit the evidence whether the build passed or failed. A recorded
       # failure is the point of the probe.
       - name: Save the report to this branch
@@ -104,7 +114,17 @@ jobs:
           git add -- docs/evidence/carrier-build-probe.json
           git diff --cached --quiet && exit /b 0
           git commit -m "Record carrier build probe result"
-          git push origin HEAD:${{ github.ref }}
+          rem This job runs for tens of minutes, so the branch has usually moved
+          rem on by the time it finishes. Rebase and retry rather than losing a
+          rem result that costs ~13 minutes of build time to reproduce.
+          for /l %%i in (1,1,5) do (
+            git fetch origin ${{ github.ref }} && git rebase FETCH_HEAD || exit /b 1
+            git push origin HEAD:${{ github.ref }} && exit /b 0
+            echo Push rejected, retrying after remote update...
+            ping -n 6 127.0.0.1 > nul
+          )
+          echo Could not push the report after 5 attempts.
+          exit /b 1
 
       - name: Fail the run if the build did not complete
         if: always() && steps.probe.outcome != 'success'
