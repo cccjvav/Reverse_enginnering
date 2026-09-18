@@ -43,8 +43,14 @@ export type PatchErrorCode =
 	| 'TOO_MANY_OPERATIONS'
 	| 'UNSUPPORTED_ENCODING';
 
-/** What a patch does to one file. */
-export type PatchAction = 'add' | 'update' | 'delete';
+/**
+ * What a patch does to one file.
+ *
+ * 'move' is a distinct action, not an update with a destination: the planner
+ * emits it at line 505 and canonical-diff renders rename headers for it. An
+ * earlier draft of this file omitted it.
+ */
+export type PatchAction = 'add' | 'update' | 'delete' | 'move';
 
 /**
  * Thrown for every failure.

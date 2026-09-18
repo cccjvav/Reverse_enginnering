@@ -147,11 +147,19 @@ def main():
     report["worstModules"] = sorted(
         ({"module": k, **v} for k, v in modules.items()),
         key=lambda m: -m["anyOccurrences"])[:10]
-    report["interpretation"] = (
-        f"{total_clean} of {total_decl} exported declarations ({pct}%) carry a "
-        f"type with no `any`. The remaining {total_decl - total_clean} compile "
-        f"but describe nothing, so the modules are readable, not yet editable "
-        f"with confidence.")
+    remaining = total_decl - total_clean
+    if remaining:
+        report["interpretation"] = (
+            f"{total_clean} of {total_decl} exported declarations ({pct}%) carry "
+            f"a type with no `any`. The remaining {remaining} compile but "
+            f"describe nothing, so those modules are readable, not yet editable "
+            f"with confidence.")
+    else:
+        report["interpretation"] = (
+            f"All {total_decl} exported declarations carry a type with no `any`. "
+            f"That measures specificity, not correctness: see "
+            f"docs/evidence/btype-evidence.json for which modules rest on "
+            f"first-hand evidence and which are reconstruction from behaviour.")
     report["doesNotClaim"] = (
         "A declaration without `any` is not proof the type is correct, only "
         "that inference produced something specific. Correctness still depends "

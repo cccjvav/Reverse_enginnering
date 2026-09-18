@@ -158,9 +158,9 @@
     "P4": "BLOCKED",
     "P5": "BLOCKED",
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
-    "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
+    "P7": "Step 2 COMPLETE. All 41 B-layer modules typed (398/398 declarations, 0 any), verified by npm run verify:btypes (strict-mode typecheck with a must-fail control) and npm run check:btypes (159 functions cross-checked against their implementations). The modules are now editable, not merely readable."
   },
-  "nextAction": "Finish step 2: read-files, read-image, then the small remainder (managed-command-risk, canonical-diff, custom-tool-manifest, ripgrep-diagnostics, workspace-paths, mcp-protocol, build-info, the three snapshot modules). Run npm run verify:btypes and npm run check:btypes each time.",
+  "nextAction": "Step 3 of the corrected plan: assemble the A layer and B layer into a project skeleton that really runs npm run compile. The carrier is proven buildable (run 35371925282) and the B layer is now typed, so this is the next blocker.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -382,14 +382,13 @@
       "C_inferred": "tsc inference; degrades to any",
       "unreferenced": "17 modules referenced by no author source - behaviour-only reconstruction"
     },
-    "done": "12 modules typed, covering every tier-A module the author's sources name a type from. Each verified twice - the author's own call site reproduced verbatim typechecks with 0 errors, and a negative probe confirms the types reject real mistakes.",
+    "done": "STEP 2 COMPLETE. All 41 rebuilt B-layer modules are typed; 398/398 exported declarations carry a real type. 37 hand-written .d.ts files, each with a PROVENANCE block distinguishing first-hand evidence from reconstruction from behaviour.",
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 386,
-      "fullyTyped": 323,
-      "percent": 83.7,
-      "anyOccurrences": null,
+      "exportedDeclarations": 398,
+      "fullyTyped": 398,
+      "percent": 100.0,
       "handWrittenModules": [
         "adaptive-concurrency",
         "apply-patch",
@@ -398,9 +397,15 @@
         "bridge-event-store",
         "bridge-http-router",
         "bridge-session-registry",
+        "bridge-tool-name",
+        "bridge-usage-counter",
+        "build-info",
+        "canonical-diff",
         "concurrency",
         "custom-tool-admin",
         "custom-tool-contract",
+        "custom-tool-manifest",
+        "custom-tool-migration",
         "custom-tool-sandbox",
         "custom-tool-skill",
         "custom-tool-skill-import",
@@ -408,12 +413,22 @@
         "file-tool-input-compat",
         "file-tool-registry",
         "find-files",
+        "ide-tool-definitions",
         "jsonrpc-request-id-registry",
         "managed-command-cancellation",
+        "managed-command-id",
+        "managed-command-retention",
+        "managed-command-risk",
+        "managed-terminal-lifecycle",
+        "mcp-protocol",
+        "read-files",
+        "read-image",
+        "ripgrep-diagnostics",
         "search-files",
-        "tool-input-validation"
+        "tool-input-validation",
+        "workspace-paths"
       ],
-      "note": "all six hand-written modules measure 0 any; the diagnostic strips comments so prose using the word 'any' cannot skew it"
+      "note": "Every exported declaration carries a type with no any. That measures specificity, not correctness."
     },
     "keyRecoveries": {
       "BridgeActivitySnapshot": "Generic in the presentation payload. Only discoverable from the author's use site (bridge-tool-dispatcher.ts:126); nothing in the JavaScript reveals the generic arity.",
@@ -449,12 +464,14 @@
         "canonicalRoots declared sync when it is async",
         "stagePlans declared with a signal parameter it does not take",
         "asObjectRow declared with an invented `label` parameter",
-        "validateGlob declared with an invented `label` parameter"
+        "validateGlob declared with an invented `label` parameter",
+        "PatchAction and CanonicalDiffFile.action both omitted 'move', a real fourth action"
       ],
-      "status": "112 functions checked, 0 findings",
+      "status": "159 functions checked, 0 findings",
       "limits": "Only top-level export function declarations are compared; class methods and re-exports are out of scope, so a clean report is not proof of full agreement."
     },
-    "weakerEvidenceTier": "apply-patch is the first module with NO first-hand evidence - no recovered .ts imports it, so none of its type names are known to be the author's. Its input contract is still exact, because APPLY_PATCH_TOOL.inputSchema survived compilation as a runtime value. The PROVENANCE block says so explicitly."
+    "weakerEvidenceTier": "apply-patch is the first module with NO first-hand evidence - no recovered .ts imports it, so none of its type names are known to be the author's. Its input contract is still exact, because APPLY_PATCH_TOOL.inputSchema survived compilation as a runtime value. The PROVENANCE block says so explicitly.",
+    "honestCaveat": "100% is a coverage number, not a correctness proof. 17 modules have no first-hand evidence at all - no recovered .ts imports them - so their type NAMES are mine, not the author's. Only the shapes are evidenced. Each such file says so in its PROVENANCE block."
   },
   "sandboxNote": "The sandbox was re-provisioned mid-session: the checkout reappeared at base commit df7dde3 with node_modules absent, which made a tsc probe silently pass by not running at all. Recovered with git fetch + reset --mixed FETCH_HEAD against the pushed branch; no committed work was lost. Lesson recorded: a verification that reports zero errors must be checked for having actually executed."
 }

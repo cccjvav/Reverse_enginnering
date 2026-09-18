@@ -86,9 +86,20 @@ That is precisely the failure mode this plan warns about, so it is recorded
 rather than quietly corrected. The negative probe now asserts the field does not
 exist.
 
+## Step 2 is complete
+
+All 41 rebuilt modules are typed: **398 of 398 exported declarations** carry a
+real type, across 37 hand-written `.d.ts` files.
+
+**What 100% does and does not mean.** It measures *specificity* — no `any` — not
+correctness. Seventeen modules have no first-hand evidence at all: no recovered
+`.ts` imports them, so their type **names are mine, not the author's**. Only
+their shapes are evidenced, from return literals, JSON Schemas that survived
+compilation, and value domains. Every such file says exactly that at the top.
+
 ## Done so far
 
-Coverage has moved **32.8% → 83.7%** (116/354 → 323/386 declarations), measured
+Coverage has moved **32.8% → 100%** (116/354 → 398/398 declarations), measured
 by `tools/diagnose_btypes.py` rather than asserted. Twelve modules typed, each measuring 0 `any` — this now covers **every Tier A
 module whose types the author's own sources name**:
 

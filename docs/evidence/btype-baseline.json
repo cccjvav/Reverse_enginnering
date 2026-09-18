@@ -11,9 +11,15 @@
     "bridge-event-store",
     "bridge-http-router",
     "bridge-session-registry",
+    "bridge-tool-name",
+    "bridge-usage-counter",
+    "build-info",
+    "canonical-diff",
     "concurrency",
     "custom-tool-admin",
     "custom-tool-contract",
+    "custom-tool-manifest",
+    "custom-tool-migration",
     "custom-tool-sandbox",
     "custom-tool-skill",
     "custom-tool-skill-import",
@@ -21,16 +27,26 @@
     "file-tool-input-compat",
     "file-tool-registry",
     "find-files",
+    "ide-tool-definitions",
     "jsonrpc-request-id-registry",
     "managed-command-cancellation",
+    "managed-command-id",
+    "managed-command-retention",
+    "managed-command-risk",
+    "managed-terminal-lifecycle",
+    "mcp-protocol",
+    "read-files",
+    "read-image",
+    "ripgrep-diagnostics",
     "search-files",
-    "tool-input-validation"
+    "tool-input-validation",
+    "workspace-paths"
   ],
   "moduleCount": 41,
-  "declarationsTotal": 386,
-  "fullyTypedDeclarations": 323,
-  "anyOccurrences": 191,
-  "fullyTypedPercent": 83.7,
+  "declarationsTotal": 398,
+  "fullyTypedDeclarations": 398,
+  "anyOccurrences": 0,
+  "fullyTypedPercent": 100.0,
   "modules": {
     "adaptive-concurrency": {
       "declarations": 7,
@@ -76,23 +92,27 @@
     },
     "bridge-tool-name": {
       "declarations": 1,
-      "fullyTyped": 0,
-      "anyOccurrences": 3
+      "fullyTyped": 1,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "bridge-usage-counter": {
       "declarations": 1,
-      "fullyTyped": 0,
-      "anyOccurrences": 1
+      "fullyTyped": 1,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "build-info": {
-      "declarations": 3,
-      "fullyTyped": 2,
-      "anyOccurrences": 1
+      "declarations": 4,
+      "fullyTyped": 4,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "canonical-diff": {
-      "declarations": 12,
-      "fullyTyped": 2,
-      "anyOccurrences": 22
+      "declarations": 15,
+      "fullyTyped": 15,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "concurrency": {
       "declarations": 5,
@@ -114,13 +134,15 @@
     },
     "custom-tool-manifest": {
       "declarations": 5,
-      "fullyTyped": 4,
-      "anyOccurrences": 12
+      "fullyTyped": 5,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "custom-tool-migration": {
       "declarations": 2,
-      "fullyTyped": 1,
-      "anyOccurrences": 3
+      "fullyTyped": 2,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "custom-tool-sandbox": {
       "declarations": 11,
@@ -165,9 +187,10 @@
       "handWritten": true
     },
     "ide-tool-definitions": {
-      "declarations": 7,
-      "fullyTyped": 6,
-      "anyOccurrences": 1
+      "declarations": 9,
+      "fullyTyped": 9,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "jsonrpc-request-id-registry": {
       "declarations": 8,
@@ -184,42 +207,50 @@
     "managed-command-id": {
       "declarations": 5,
       "fullyTyped": 5,
-      "anyOccurrences": 2
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "managed-command-retention": {
-      "declarations": 3,
-      "fullyTyped": 2,
-      "anyOccurrences": 2
+      "declarations": 4,
+      "fullyTyped": 4,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "managed-command-risk": {
-      "declarations": 14,
-      "fullyTyped": 5,
-      "anyOccurrences": 22
+      "declarations": 18,
+      "fullyTyped": 18,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "managed-terminal-lifecycle": {
       "declarations": 3,
-      "fullyTyped": 1,
-      "anyOccurrences": 2
+      "fullyTyped": 3,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "mcp-protocol": {
-      "declarations": 9,
-      "fullyTyped": 8,
-      "anyOccurrences": 1
+      "declarations": 10,
+      "fullyTyped": 10,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "read-files": {
-      "declarations": 14,
-      "fullyTyped": 2,
-      "anyOccurrences": 53
+      "declarations": 17,
+      "fullyTyped": 17,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "read-image": {
-      "declarations": 18,
-      "fullyTyped": 2,
-      "anyOccurrences": 50
+      "declarations": 12,
+      "fullyTyped": 12,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "ripgrep-diagnostics": {
-      "declarations": 7,
-      "fullyTyped": 2,
-      "anyOccurrences": 12
+      "declarations": 10,
+      "fullyTyped": 10,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "search-files": {
       "declarations": 15,
@@ -255,72 +286,83 @@
     },
     "workspace-paths": {
       "declarations": 3,
-      "fullyTyped": 2,
-      "anyOccurrences": 4
+      "fullyTyped": 3,
+      "anyOccurrences": 0,
+      "handWritten": true
     }
   },
   "worstModules": [
     {
-      "module": "read-files",
-      "declarations": 14,
-      "fullyTyped": 2,
-      "anyOccurrences": 53
-    },
-    {
-      "module": "read-image",
-      "declarations": 18,
-      "fullyTyped": 2,
-      "anyOccurrences": 50
-    },
-    {
-      "module": "canonical-diff",
-      "declarations": 12,
-      "fullyTyped": 2,
-      "anyOccurrences": 22
-    },
-    {
-      "module": "managed-command-risk",
-      "declarations": 14,
-      "fullyTyped": 5,
-      "anyOccurrences": 22
-    },
-    {
-      "module": "custom-tool-manifest",
-      "declarations": 5,
-      "fullyTyped": 4,
-      "anyOccurrences": 12
-    },
-    {
-      "module": "ripgrep-diagnostics",
+      "module": "adaptive-concurrency",
       "declarations": 7,
-      "fullyTyped": 2,
-      "anyOccurrences": 12
+      "fullyTyped": 7,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     {
-      "module": "workspace-paths",
-      "declarations": 3,
+      "module": "apply-patch",
+      "declarations": 31,
+      "fullyTyped": 31,
+      "anyOccurrences": 0,
+      "handWritten": true
+    },
+    {
+      "module": "bridge-activity-tracker",
+      "declarations": 6,
+      "fullyTyped": 6,
+      "anyOccurrences": 0,
+      "handWritten": true
+    },
+    {
+      "module": "bridge-coordination-validation",
+      "declarations": 9,
+      "fullyTyped": 9,
+      "anyOccurrences": 0,
+      "handWritten": true
+    },
+    {
+      "module": "bridge-event-store",
+      "declarations": 2,
       "fullyTyped": 2,
-      "anyOccurrences": 4
+      "anyOccurrences": 0,
+      "handWritten": true
+    },
+    {
+      "module": "bridge-http-router",
+      "declarations": 8,
+      "fullyTyped": 8,
+      "anyOccurrences": 0,
+      "handWritten": true
+    },
+    {
+      "module": "bridge-session-registry",
+      "declarations": 4,
+      "fullyTyped": 4,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     {
       "module": "bridge-tool-name",
       "declarations": 1,
-      "fullyTyped": 0,
-      "anyOccurrences": 3
-    },
-    {
-      "module": "custom-tool-migration",
-      "declarations": 2,
       "fullyTyped": 1,
-      "anyOccurrences": 3
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     {
-      "module": "managed-command-id",
-      "declarations": 5,
-      "fullyTyped": 5,
-      "anyOccurrences": 2
+      "module": "bridge-usage-counter",
+      "declarations": 1,
+      "fullyTyped": 1,
+      "anyOccurrences": 0,
+      "handWritten": true
+    },
+    {
+      "module": "build-info",
+      "declarations": 4,
+      "fullyTyped": 4,
+      "anyOccurrences": 0,
+      "handWritten": true
     }
   ],
-  "interpretation": "323 of 386 exported declarations (83.7%) carry a type with no `any`. The remaining 63 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
+  "interpretation": "All 398 exported declarations carry a type with no `any`. That measures specificity, not correctness: see docs/evidence/btype-evidence.json for which modules rest on first-hand evidence and which are reconstruction from behaviour.",
   "doesNotClaim": "A declaration without `any` is not proof the type is correct, only that inference produced something specific. Correctness still depends on the evidence tiers in docs/evidence/btype-evidence.json."
 }

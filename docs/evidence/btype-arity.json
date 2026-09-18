@@ -1,7 +1,7 @@
 {
   "scope": "Cross-checks hand-written .d.ts parameter lists against the implementations they describe.",
   "why": "A declaration compiles whether or not it matches the JavaScript. Two real defects prompted this: encodeText was declared (text: string) against an implementation taking (lines, endsWithNewline, eol, bom), and isInsideRoot was declared with its two arguments reversed.",
-  "functionsChecked": 112,
+  "functionsChecked": 159,
   "findingCount": 0,
   "modules": {},
   "limits": "Only top-level `export function` declarations matched to `function` implementations are compared. Class methods, re-exports and const-assigned arrow functions are out of scope, so a clean report is not proof of full agreement."
