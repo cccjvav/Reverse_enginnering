@@ -1,0 +1,84 @@
+{
+  "scope": "Build feasibility probe only. Not a signed installer, no author customisations applied, and success does not mean the shipped product is reproducible.",
+  "question": "Can upstream Code OSS 1.132.0 build with Electron 44.2.0, the version the shipped ShunCode used?",
+  "upstream": {
+    "tag": "1.132.0",
+    "commit": "df53daabb18cd157bdb08c7f01c34df936cf12f4",
+    "checkedOutCommit": "df53daabb18cd157bdb08c7f01c34df936cf12f4"
+  },
+  "targetElectron": "44.2.0",
+  "runner": {
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "machine": "AMD64",
+    "python": "3.12.10"
+  },
+  "toolVersions": {
+    "node": "v24.18.0",
+    "npm": null,
+    "python": "Python 3.12.10",
+    "git": "git version 2.55.0.windows.5"
+  },
+  "stages": [
+    {
+      "stage": "clone-upstream",
+      "command": [
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "--branch",
+        "1.132.0",
+        "https://github.com/microsoft/vscode.git",
+        "D:\\a\\Reverse_enginnering\\Reverse_enginnering\\.work\\carrier-build\\vscode"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_s": 12.6,
+      "log_tail": "5426/17139)\nUpdating files:  91% (15597/17139)\nUpdating files:  92% (15768/17139)\nUpdating files:  93% (15940/17139)\nUpdating files:  93% (16040/17139)\nUpdating files:  94% (16111/17139)\nUpdating files:  95% (16283/17139)\nUpdating files:  96% (16454/17139)\nUpdating files:  97% (16625/17139)\nUpdating files:  98% (16797/17139)\nUpdating files:  99% (16968/17139)\nUpdating files: 100% (17139/17139)\nUpdating files: 100% (17139/17139), done.\nFiltering content:   1% (1/97)\nFiltering content:   2% (2/97)\nFiltering content:   3% (3/97)\nFiltering content:   4% (4/97)\nFiltering content:   5% (5/97), 36.68 MiB | 54.33 MiB/s\nFiltering content:   6% (6/97), 36.68 MiB | 54.33 MiB/s\nFiltering content:   7% (7/97), 36.68 MiB | 54.33 MiB/s\nFiltering content:   8% (8/97), 36.68 MiB | 54.33 MiB/s\nFiltering content:   9% (9/97), 36.68 MiB | 54.33 MiB/s\nFiltering content:  10% (10/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  11% (11/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  12% (12/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  13% (13/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  14% (14/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  15% (15/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  16% (16/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  17% (17/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  18% (18/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  19% (19/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  20% (20/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  21% (21/97), 95.90 MiB | 77.73 MiB/s\nFiltering content:  22% (22/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  23% (23/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  24% (24/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  25% (25/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  26% (26/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  27% (27/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  28% (28/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  29% (29/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  30% (30/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  31% (31/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  32% (32/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  34% (33/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  35% (34/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  36% (35/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  37% (36/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  38% (37/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  39% (38/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  40% (39/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  41% (40/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  42% (41/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  43% (42/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  44% (43/97), 164.73 MiB | 94.73 MiB/s\nFiltering content:  45% (44/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  46% (45/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  47% (46/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  48% (47/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  49% (48/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  50% (49/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  51% (50/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  52% (51/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  53% (52/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  54% (53/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  55% (54/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  56% (55/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  57% (56/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  58% (57/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  59% (58/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  60% (59/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  61% (60/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  62% (61/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  63% (62/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  64% (63/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  65% (64/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  67% (65/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  68% (66/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  69% (67/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  70% (68/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  71% (69/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  72% (70/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  73% (71/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  74% (72/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  75% (73/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  76% (74/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  77% (75/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  78% (76/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  79% (77/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  80% (78/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  81% (79/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  82% (80/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  83% (81/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  84% (82/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  85% (83/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  86% (84/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  87% (85/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  88% (86/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  89% (87/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  90% (88/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  91% (89/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  92% (90/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  93% (91/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  94% (92/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  95% (93/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  96% (94/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  97% (95/97), 219.04 MiB | 97.47 MiB/s\nFiltering content:  98% (96/97), 219.04 MiB | 97.47 MiB/s\nFiltering content: 100% (97/97), 219.04 MiB | 97.47 MiB/s\nFiltering content: 100% (97/97), 259.70 MiB | 65.58 MiB/s, done.\n",
+      "log_bytes": 9003,
+      "ok": true
+    },
+    {
+      "stage": "verify-commit",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_s": 0.0,
+      "log_tail": "df53daabb18cd157bdb08c7f01c34df936cf12f4\n",
+      "log_bytes": 41,
+      "ok": true,
+      "note": "expected df53daabb18cd157bdb08c7f01c34df936cf12f4"
+    },
+    {
+      "stage": "npm-install",
+      "command": [
+        "npm",
+        "install",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": null,
+      "timed_out": false,
+      "duration_s": 0.0,
+      "log_tail": "executable not found: [WinError 2] The system cannot find the file specified",
+      "log_bytes": 76,
+      "ok": false,
+      "note": "npm install, not npm ci: the lockfile still pins the old Electron"
+    }
+  ],
+  "electronRepoint": {
+    "packageJsonBefore": "42.7.1",
+    "packageJsonAfter": "44.2.0",
+    "npmrcTargetAfter": "44.2.0",
+    "ok": true
+  },
+  "allStagesPassed": false,
+  "failedStages": [
+    "npm-install"
+  ],
+  "conclusion": "Build did not complete. First failure: npm-install. This is a real answer, not a setup error to paper over: it tells us the carrier cannot currently be rebuilt as-is and shows exactly where it stops."
+}
