@@ -45,7 +45,7 @@
     "pythonVersion": "3.11.2",
     "npmTest": {
       "exitCode": 0,
-      "passed": 161,
+      "passed": 162,
       "failed": 0
     },
     "pythonUnittest": {
@@ -100,7 +100,10 @@
     "scope": "Audit implementation commit tested; later evidence/documentation-only commit is not claimed as this run head."
   },
   "authorization": {
-    "evidence": "docs/evidence/authorization-wiring.json",
+    "evidence": [
+      "docs/evidence/authorization-wiring.json",
+      "docs/evidence/file-authorization-policy.json"
+    ],
     "authorizedDispatcherBundled": false,
     "authorizationIntegrationVerified": false,
     "implementedThisTurn": "P1.2 maintenance policy: host-injected approve callback, literal-true only, per owner+tool+operation+realpath grants with bounded TTL, roots-snapshot invalidation, owner revoke and close. Scripted approvers over temp fixture files. NOT wired into any bundle, NOT a GUI approval flow, NOT an OS sandbox, does not close TOCTOU.",
@@ -109,12 +112,12 @@
       "community/bridge-core/file-authorization-policy.mjs",
       "community/bridge-core/authorized-file-tools.mjs"
     ],
-    "p12Tests": "tests/bridge-core-file-authorization.test.mjs (17 tests, 8 mutations verified)",
+    "p12Tests": "tests/bridge-core-file-authorization.test.mjs (18 tests, 8 mutations verified, includes the Windows realpath regression)",
     "newDesignNotRecoveredOriginal": "The original extension TS contains zero checkPermission call sites and the original callback has no operation field; the operation-aware contract is new maintenance design and must not be presented as a recovered d.ts."
   },
   "learning": {
     "files": 172,
-    "lines": 32241,
+    "lines": 32335,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -162,6 +165,15 @@
       "windowsStaticProbe": 35345456431
     },
     "evidence": "docs/evidence/ci-branch-binding.json",
-    "firstGreenRunOnThisBranch": 35346853707
+    "firstGreenRunOnThisBranch": 35346853707,
+    "latestGreenRun": {
+      "runId": 35352008638,
+      "jobs": [
+        "core (ubuntu-24.04)",
+        "core (windows-2022)",
+        "windows-cmd-conda"
+      ],
+      "note": "Caught a real Windows-only defect first (run 35351320215): patch plan keys were not realpath-resolved. Linux alone would have shipped it."
+    }
   }
 }

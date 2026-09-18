@@ -1,0 +1,71 @@
+{
+  "scope": "P1.2 maintenance file-authorization policy: unit/boundary evidence only. NOT a GUI approval flow, NOT an OS sandbox, NOT extension activation, and it does not close the TOCTOU window between a permission check and the executor's open/write.",
+  "modules": [
+    "community/bridge-core/file-authorization-policy.mjs",
+    "community/bridge-core/authorized-file-tools.mjs"
+  ],
+  "tests": {
+    "file": "tests/bridge-core-file-authorization.test.mjs",
+    "cases": 18
+  },
+  "newDesignNotRecoveredOriginal": "checkPermission appears 0 times in recovered/shuncode-extension/src/*.ts and the original callback has no operation parameter. The operation-aware contract is new maintenance design.",
+  "guarantees": [
+    "literal true only; false/truthy-non-boolean/throw/reject all deny",
+    "grant keyed by owner + tool + operation + realpath",
+    "bounded TTL; workspace-roots snapshot change invalidates",
+    "revokeOwner for session teardown; close() denies and clears",
+    "cancellation checked before and after the host await"
+  ],
+  "knownLimitations": [
+    "TOCTOU window between check and open remains",
+    "grants are cached within TTL because applyPatch runs preflight twice",
+    "modern-era owners have no teardown hook and rely on expiry alone",
+    "supplying the callback downgrades find/search from ripgrep to the Node walker",
+    "native-chat is a fallback constant, not an authenticated subject"
+  ],
+  "mutationTesting": {
+    "mutants": 8,
+    "allDetected": true,
+    "initiallySurvived": [
+      "cache key without operation (test crossed tools, so keys differed anyway)",
+      "removed pre-await closed check (masked by the post-await check)"
+    ],
+    "resolution": "Both were test gaps; assertions were strengthened rather than the finding softened."
+  },
+  "crossPlatformDefectFoundByCI": {
+    "failingRun": 35351320215,
+    "symptom": "ubuntu-24.04 passed; windows-2022 and windows-cmd-conda failed in npm test.",
+    "cause": "Executors realpath() workspace roots before calling checkPermission, but patchPlan was keyed by the host's raw spelling. Windows mkdtemp returns an 8.3 short name that realpath expands, so no key matched and every apply_patch checkpoint was denied.",
+    "fix": "canonicalizePatchPlan resolves plan keys like the executors do; case-folded index on win32.",
+    "regressionTest": "symlink/junction root case, skipped explicitly where unsupported"
+  },
+  "greenRun": {
+    "runId": 35352008638,
+    "headSha": "b9288ce5877f5bc6108abe09dea1e1ac41cc279c",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "conclusion": "success",
+        "name": "core (windows-2022)"
+      },
+      {
+        "conclusion": "success",
+        "name": "core (ubuntu-24.04)"
+      },
+      {
+        "conclusion": "success",
+        "name": "windows-cmd-conda"
+      }
+    ],
+    "url": "https://github.com/cccjvav/Reverse_enginnering/actions/runs/35352008638"
+  },
+  "bundleImpact": {
+    "bundled": false,
+    "portableInputs": 75,
+    "portableSha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa"
+  },
+  "releaseGate": {
+    "authorizationIntegration": "BLOCKED",
+    "why": "No host UI approval, no source build entry, no real extension activation."
+  }
+}
