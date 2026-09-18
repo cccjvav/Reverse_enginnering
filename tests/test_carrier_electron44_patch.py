@@ -1,4 +1,4 @@
-"""The Electron 44 carrier patch must stay exact-match and honest about losses.
+"""The Electron 44 carrier patch must stay exact-match and faithful to the original.
 
 The patch is defined as byte-exact replacements against upstream 1.132.0. These
 tests guard the properties that make it trustworthy, without needing a network
@@ -36,11 +36,19 @@ class CarrierPatchTests(unittest.TestCase):
         self.assertFalse(report["allApplied"])
         self.assertIn("Refusing to write a partial patch", report["conclusion"])
 
-    def test_does_not_claim_to_be_the_authors_recovered_patch(self):
-        """It is a re-implementation; overstating that would be a false claim."""
+    def test_states_what_is_recovered_and_what_is_reconstructed(self):
+        """Transcribed logic and reconstructed types must not be conflated."""
         with tempfile.TemporaryDirectory() as tmp:
             _, report = run_tool(tmp)
-        self.assertIn("NOT the author's recovered patch", report["scope"])
+        self.assertIn("not invented here", report["scope"])
+        self.assertIn("reconstructed", report["scope"])
+
+    def test_preserves_the_features_the_author_kept(self):
+        """The author kept find-text and the selection buffer; we must not drop them."""
+        source = TOOL.read_text(encoding="utf8")
+        self.assertIn("electron application/findtext", source)
+        self.assertIn("clipboard.selection", source)
+        self.assertIn("osclipboard", source)
 
     def test_every_removed_api_is_handled_and_losses_are_declared(self):
         source = TOOL.read_text(encoding="utf8")
@@ -48,9 +56,8 @@ class CarrierPatchTests(unittest.TestCase):
         for gone in ("readImage", "readFindText", "writeFindText",
                      "writeBuffer", "readBuffer"):
             self.assertIn(gone, source, f"{gone} is not addressed by the patch")
-        # Degradations must be user-visible in the report, not buried.
-        for loss in ("find pasteboard", "selection"):
-            self.assertIn(loss, source)
+        # Degradations, where any remain, must be user-visible in the report.
+        self.assertIn("featureLosses", source)
 
     def test_check_mode_writes_nothing(self):
         with tempfile.TemporaryDirectory() as tmp:

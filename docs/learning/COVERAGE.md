@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/179 个纳入范围的文件完整逐行解释；363/33541 行已解释。
+当前：6/179 个纳入范围的文件完整逐行解释；363/33602 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -152,7 +152,7 @@
 | [tests/community-ui.test.mjs](../../tests/community-ui.test.mjs) | 64 | 0 | 待逐行讲解 |
 | [tests/helpers/bridge-core-baseline.mjs](../../tests/helpers/bridge-core-baseline.mjs) | 30 | 0 | 待逐行讲解 |
 | [tests/test_apply_community.py](../../tests/test_apply_community.py) | 86 | 0 | 待逐行讲解 |
-| [tests/test_carrier_electron44_patch.py](../../tests/test_carrier_electron44_patch.py) | 67 | 0 | 待逐行讲解 |
+| [tests/test_carrier_electron44_patch.py](../../tests/test_carrier_electron44_patch.py) | 74 | 0 | 待逐行讲解 |
 | [tests/test_ci_windows_probe.py](../../tests/test_ci_windows_probe.py) | 33 | 0 | 待逐行讲解 |
 | [tests/test_ci_workflow_branch_binding.py](../../tests/test_ci_workflow_branch_binding.py) | 101 | 0 | 待逐行讲解 |
 | [tests/test_cmd_environment.py](../../tests/test_cmd_environment.py) | 125 | 0 | 待逐行讲解 |
@@ -183,11 +183,11 @@
 | [tools/learning_ui_lab.mjs](../../tools/learning_ui_lab.mjs) | 23 | 0 | 待逐行讲解 |
 | [tools/package_community.py](../../tools/package_community.py) | 53 | 0 | 待逐行讲解 |
 | [tools/patch_bridge_ui.mjs](../../tools/patch_bridge_ui.mjs) | 72 | 72 | 本组已逐行解释 |
-| [tools/patch_carrier_electron44.py](../../tools/patch_carrier_electron44.py) | 292 | 0 | 待逐行讲解 |
+| [tools/patch_carrier_electron44.py](../../tools/patch_carrier_electron44.py) | 324 | 0 | 待逐行讲解 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
 | [tools/portable_presentation_inputs.mjs](../../tools/portable_presentation_inputs.mjs) | 26 | 0 | 待逐行讲解 |
 | [tools/probe_carrier_build.py](../../tools/probe_carrier_build.py) | 303 | 0 | 待逐行讲解 |
-| [tools/probe_clipboard_adaptation.py](../../tools/probe_clipboard_adaptation.py) | 155 | 0 | 待逐行讲解 |
+| [tools/probe_clipboard_adaptation.py](../../tools/probe_clipboard_adaptation.py) | 177 | 0 | 待逐行讲解 |
 | [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 210 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
 | [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |

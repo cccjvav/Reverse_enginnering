@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 179,
-    "lines": 33541,
+    "lines": 33602,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -983,8 +983,8 @@
     },
     {
       "source": "tests/test_carrier_electron44_patch.py",
-      "sha256": "d5621a85afc5f896ffd55e45b65f31ec493a4e970d0134a501ceae64bb5c81b2",
-      "lines": 67,
+      "sha256": "a4700c6ac53fba8374332071552b2ad67aeda571fc855f6f4d703ec412ce59ab",
+      "lines": 74,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1200,8 +1200,8 @@
     },
     {
       "source": "tools/patch_carrier_electron44.py",
-      "sha256": "8cdea00ef1ae320edeb98c49698e1e47e8f21f48907b1bc068f2967138a081ed",
-      "lines": 292,
+      "sha256": "2abcf53fdcdc12135ceb3e2980b756eec09ff1849117519d1830fce40cfe99e9",
+      "lines": 324,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1228,8 +1228,8 @@
     },
     {
       "source": "tools/probe_clipboard_adaptation.py",
-      "sha256": "7af20eea591a6a8da791bf96684dbc556ca7549f441370c9e45cca89cf44ad76",
-      "lines": 155,
+      "sha256": "fa69b65f5ccb151b92f45fe63b3e066af9472b6667906c3926aec4ee93d0a169",
+      "lines": 177,
       "explainedLines": 0,
       "status": "pending"
     },

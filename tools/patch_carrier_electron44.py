@@ -39,6 +39,23 @@ AUTH = "src/vs/platform/native/electron-main/auth.ts"
 EDITS = [
     (
         NATIVE,
+        """	//#region Clipboard
+
+	async readClipboardText(windowId: number | undefined, type?: 'selection' | 'clipboard'): Promise<string> {""",
+        """	//#region Clipboard
+
+	// Electron 44 dropped the `type` argument from the clipboard methods and
+	// exposes the X11 selection buffer as its own clipboard object instead.
+	private clipboardForType(type?: 'selection' | 'clipboard') {
+		return type === 'selection' ? clipboard.selection : clipboard;
+	}
+
+	async readClipboardText(windowId: number | undefined, type?: 'selection' | 'clipboard'): Promise<string> {""",
+        "Electron 44 moves the selection buffer to clipboard.selection; add the helper the call sites use",
+        "None",
+    ),
+    (
+        NATIVE,
         """	async readClipboardText(windowId: number | undefined, type?: 'selection' | 'clipboard'): Promise<string> {
 		this.logService.trace(`readClipboardText in window ${windowId} with type:`, type);
 		const clipboardText = clipboard.readText(type);
@@ -47,15 +64,12 @@ EDITS = [
 	}""",
         """	async readClipboardText(windowId: number | undefined, type?: 'selection' | 'clipboard'): Promise<string> {
 		this.logService.trace(`readClipboardText in window ${windowId} with type:`, type);
-		// Electron 44: clipboard.readText() is async and no longer takes a
-		// selection/clipboard type. The X11 'selection' buffer is not reachable
-		// through the new API, so the parameter is accepted and ignored.
-		const clipboardText = await clipboard.readText();
+		const clipboardText = await this.clipboardForType(type).readText();
 		this.logService.trace(`clipboardText.length :`, clipboardText.length);
 		return clipboardText;
 	}""",
-        "readText became async and dropped its type argument",
-        "Linux 'selection' clipboard no longer distinguishable from the normal clipboard",
+        "readText became async; selection buffer reached via clipboard.selection",
+        "None",
     ),
     (
         NATIVE,
@@ -63,23 +77,31 @@ EDITS = [
 		return clipboard.readImage().toPNG();
 	}""",
         """	async readImage(): Promise<Uint8Array> {
-		// Electron 44 removed clipboard.readImage(). Images must now be pulled
-		// out of a ClipboardItem blob. Return an empty buffer when the
-		// clipboard holds no image rather than throwing into callers.
-		for (const item of await clipboard.read()) {
-			const type = item.types.find(candidate => candidate.startsWith('image/'));
-			if (!type) {
+		// Electron 44 removed clipboard.readImage(). Pull the image out of a
+		// ClipboardItem blob, preferring PNG, and re-encode through nativeImage
+		// so callers still receive PNG bytes as before.
+		const items = await clipboard.read();
+		for (const item of items) {
+			const imageType = item.types.includes('image/png')
+				? 'image/png'
+				: item.types.find(type => type.startsWith('image/'));
+			if (!imageType) {
 				continue;
 			}
-			const blob = await item.getType(type);
-			if (blob instanceof Blob) {
-				return new Uint8Array(await blob.arrayBuffer());
+			try {
+				// getType() is typed Blob | ClipboardBookmark; only the bookmark
+				// MIME type yields the latter, so narrow to Blob here.
+				const blob = await item.getType(imageType) as Blob;
+				const buffer = Buffer.from(await blob.arrayBuffer());
+				return Uint8Array.from(nativeImage.createFromBuffer(buffer).toPNG());
+			} catch {
+				continue;
 			}
 		}
 		return new Uint8Array(0);
 	}""",
         "clipboard.readImage() removed; read images via ClipboardItem blobs",
-        "Result is the raw clipboard image bytes, not necessarily re-encoded PNG",
+        "None; re-encoded to PNG via nativeImage as before",
     ),
     (
         NATIVE,
@@ -87,11 +109,10 @@ EDITS = [
 		return clipboard.writeText(text, type);
 	}""",
         """	async writeClipboardText(windowId: number | undefined, text: string, type?: 'selection' | 'clipboard'): Promise<void> {
-		// Electron 44: writeText is async and no longer takes a type.
-		return clipboard.writeText(text);
+		return this.clipboardForType(type).writeText(text);
 	}""",
-        "writeText became async and dropped its type argument",
-        "Cannot target the Linux 'selection' buffer specifically",
+        "writeText became async; selection buffer reached via clipboard.selection",
+        "None",
     ),
     (
         NATIVE,
@@ -99,13 +120,20 @@ EDITS = [
 		return clipboard.readFindText();
 	}""",
         """	async readClipboardFindText(windowId: number | undefined,): Promise<string> {
-		// Electron 44 removed the macOS find pasteboard API. Degrade to empty
-		// rather than silently returning the main clipboard, which would leak
-		// unrelated content into the find box.
+		// Electron 44 removed the find-pasteboard API. Carry find text in a
+		// dedicated custom MIME type instead, so the feature survives.
+		const findFormat = 'electron application/findtext';
+		const items = await clipboard.read();
+		for (const item of items) {
+			if (item.types.includes(findFormat)) {
+				const blob = await item.getType(findFormat) as Blob;
+				return blob.text();
+			}
+		}
 		return '';
 	}""",
         "clipboard.readFindText() removed in Electron 44",
-        "macOS find-pasteboard sharing is lost; find box no longer prefills from it",
+        "None; find text preserved under a custom MIME type",
     ),
     (
         NATIVE,
@@ -113,12 +141,12 @@ EDITS = [
 		return clipboard.writeFindText(text);
 	}""",
         """	async writeClipboardFindText(windowId: number | undefined, text: string): Promise<void> {
-		// Electron 44 removed the macOS find pasteboard API. No-op rather than
-		// overwriting the user's real clipboard.
-		return;
+		// Electron 44 removed the find-pasteboard API; round-trip through the
+		// matching custom MIME type used by readClipboardFindText.
+		return clipboard.write([new ClipboardItem({ 'electron application/findtext': text })]);
 	}""",
         "clipboard.writeFindText() removed in Electron 44",
-        "macOS find-pasteboard sharing is lost",
+        "None; find text preserved under a custom MIME type",
     ),
     (
         NATIVE,
@@ -126,14 +154,16 @@ EDITS = [
 		return clipboard.writeBuffer(format, Buffer.from(buffer.buffer), type);
 	}""",
         """	async writeClipboardBuffer(windowId: number | undefined, format: string, buffer: VSBuffer, type?: 'selection' | 'clipboard'): Promise<void> {
-		// Electron 44 removed writeBuffer. Custom formats now go through
-		// ClipboardItem, whose payload for a custom MIME type is a Blob.
-		await clipboard.write([new ClipboardItem({
-			[format]: new Blob([buffer.buffer as unknown as BlobPart])
+		// Electron 44 removed writeBuffer. Custom formats now travel as a
+		// ClipboardItem under a namespaced MIME type so they cannot collide
+		// with real web formats.
+		const rawFormat = `electron application/osclipboard;format="${format}"`;
+		return this.clipboardForType(type).write([new ClipboardItem({
+			[rawFormat]: new Blob([Buffer.from(buffer.buffer)])
 		})]);
 	}""",
         "clipboard.writeBuffer() removed; custom formats go through ClipboardItem",
-        "Writing a custom format now replaces clipboard contents rather than adding to them",
+        "None; custom formats round-trip under a namespaced MIME type",
     ),
     (
         NATIVE,
@@ -141,18 +171,17 @@ EDITS = [
 		return VSBuffer.wrap(clipboard.readBuffer(format));
 	}""",
         """	async readClipboardBuffer(windowId: number | undefined, format: string): Promise<VSBuffer> {
-		// Electron 44 removed readBuffer. Locate the matching ClipboardItem and
-		// read its blob; return empty when the format is absent.
-		for (const item of await clipboard.read()) {
-			if (!item.types.includes(format)) {
-				continue;
-			}
-			const blob = await item.getType(format);
-			if (blob instanceof Blob) {
+		// Electron 44 removed readBuffer. Read back the namespaced MIME type
+		// written by writeClipboardBuffer.
+		const rawFormat = `electron application/osclipboard;format="${format}"`;
+		const items = await clipboard.read();
+		for (const item of items) {
+			if (item.types.includes(rawFormat)) {
+				const blob = await item.getType(rawFormat) as Blob;
 				return VSBuffer.wrap(new Uint8Array(await blob.arrayBuffer()));
 			}
 		}
-		return VSBuffer.alloc(0);
+		return VSBuffer.wrap(new Uint8Array(0));
 	}""",
         "clipboard.readBuffer() removed; read custom formats via ClipboardItem",
         "None expected; empty buffer when the format is not present, as before",
@@ -163,11 +192,10 @@ EDITS = [
 		return clipboard.has(format, type);
 	}""",
         """	async hasClipboard(windowId: number | undefined, format: string, type?: 'selection' | 'clipboard'): Promise<boolean> {
-		// Electron 44: has() is async and no longer takes a type.
-		return clipboard.has(format);
+		return this.clipboardForType(type).has(`electron application/osclipboard;format="${format}"`);
 	}""",
-        "has() became async and dropped its type argument",
-        "Cannot query the Linux 'selection' buffer specifically",
+        "has() became async; namespaced format matches writeClipboardBuffer",
+        "None",
     ),
     (
         BROWSER,
@@ -209,8 +237,8 @@ IMPORT_FIX = (
 NATIVE_IMPORT_FIX = (
     NATIVE,
     "import { app, BrowserWindow, clipboard, contentTracing, Display, Menu, MessageBoxOptions, MessageBoxReturnValue, Notification, OpenDevToolsOptions, OpenDialogOptions, OpenDialogReturnValue, powerMonitor, powerSaveBlocker, SaveDialogOptions, SaveDialogReturnValue, screen, shell, systemPreferences, webContents } from 'electron';",
-    "import { app, BrowserWindow, clipboard, ClipboardItem, contentTracing, Display, Menu, MessageBoxOptions, MessageBoxReturnValue, Notification, OpenDevToolsOptions, OpenDialogOptions, OpenDialogReturnValue, powerMonitor, powerSaveBlocker, SaveDialogOptions, SaveDialogReturnValue, screen, shell, systemPreferences, webContents } from 'electron';",
-    "ClipboardItem must be imported to construct clipboard entries",
+    "import { app, BrowserWindow, clipboard, ClipboardItem, contentTracing, Display, Menu, MessageBoxOptions, MessageBoxReturnValue, Notification, OpenDevToolsOptions, OpenDialogOptions, OpenDialogReturnValue, nativeImage, powerMonitor, powerSaveBlocker, SaveDialogOptions, SaveDialogReturnValue, screen, shell, systemPreferences, webContents } from 'electron';",
+    "ClipboardItem and nativeImage must be imported to construct clipboard entries",
     "None",
 )
 
@@ -225,9 +253,13 @@ def main() -> int:
 
     tree = Path(args.tree)
     report = {
-        "scope": ("Re-implementation that makes Code OSS 1.132.0 compile on Electron "
-                  "44. NOT the author's recovered patch; their solution is still "
-                  "being read out of the shipped main.js."),
+        "scope": ("Restores the Electron 44 clipboard adaptation that ShunCode 0.7.4 "
+                  "actually shipped. The logic is transcribed from the unminified "
+                  "out/main.js of the installed product (see "
+                  "docs/evidence/clipboard-adaptation.json), not invented here. Type "
+                  "annotations and three `as Blob` narrowings are reconstructed, "
+                  "because types are erased during compilation and cannot be "
+                  "recovered from the shipped JavaScript."),
         "electronChange": "Electron 44.0.0 removed 13 clipboard methods and made the rest async.",
         "mode": "check" if args.check else "apply",
         "edits": [],
@@ -254,7 +286,7 @@ def main() -> int:
                  "applied": count == 1}
         if count == 1:
             contents[path] = text.replace(old, new, 1)
-            if impact and impact != "None":
+            if impact and not impact.startswith("None"):
                 report["featureLosses"].append({"file": rel, "why": why,
                                                 "impact": impact})
         elif count == 0:
