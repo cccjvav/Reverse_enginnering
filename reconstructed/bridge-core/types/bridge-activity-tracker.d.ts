@@ -67,11 +67,23 @@ export interface BridgeActivityStats {
  */
 export interface BridgeActivitySnapshot<TPresentation = unknown> {
 	readonly stats: BridgeActivityStats;
-	readonly activities: readonly BridgeActivityEntry<TPresentation>[];
+	/**
+	 * Not `readonly BridgeActivityEntry[]`: snapshot() returns a fresh sliced
+	 * array and the author assigns it straight to a mutable BridgeActivity[]
+	 * field (bridge-server.ts:274). A readonly element type would reject their
+	 * own code.
+	 */
+	readonly activities: BridgeActivityEntry<TPresentation>[];
 }
 
 export class BridgeActivityTracker<TPresentation = unknown> {
-	constructor(options?: { limit?: number; now?: () => string });
+	/**
+	 * Two positional arguments, not an options bag: the author calls
+	 * `new BridgeActivityTracker<BridgeActivityPresentation>(MAX_ACTIVITY)`
+	 * (bridge-tool-dispatcher.ts:85). `now` returns an ISO timestamp string,
+	 * not epoch millis.
+	 */
+	constructor(limit: number, now?: () => string);
 	/**
 	 * Records a new activity and returns its id.
 	 *

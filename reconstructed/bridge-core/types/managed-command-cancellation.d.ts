@@ -110,8 +110,18 @@ export const DEFAULT_FORCE_PROMPT_WINDOW_MS: number;
 export const DEFAULT_FORCE_RESERVATION_TTL_MS: number;
 export const NATIVE_MANAGED_COMMAND_OWNER_ID: string;
 
-/** Derives the owner id used for bridge-initiated commands. */
-export function bridgeManagedCommandOwnerId(sessionId: string): string;
+/**
+ * Derives the owner id used for bridge-initiated commands.
+ *
+ * Accepts undefined deliberately: the implementation writes `sessionId?.trim()`
+ * and throws MCP_SESSION_UNAVAILABLE when it is missing or blank. The author
+ * relies on that, passing a possibly-undefined session id straight in
+ * (bridge-mcp-transport.ts:678). Declaring `string` would reject their code and
+ * hide the real failure mode.
+ *
+ * @throws when the session id is absent or whitespace-only.
+ */
+export function bridgeManagedCommandOwnerId(sessionId?: string): string;
 
 /** High-risk commands require explicit local confirmation before force-kill. */
 export function forceCancellationRequiresConfirmation(
@@ -129,25 +139,43 @@ export function waitForCommandOrGrace(
 
 /** Per-owner rate limiting for cancellations and force prompts. */
 export class PerOwnerCancellationRateLimiter {
-	constructor(options?: {
-		limit?: number;
-		windowMs?: number;
-		forcePromptLimit?: number;
-		forcePromptWindowMs?: number;
-		forcePromptCooldownMs?: number;
-		forceReservationTtlMs?: number;
-	});
+	/**
+	 * Six positional arguments, not an options object. An earlier draft of this
+	 * file declared an options bag, which would have silently accepted a call
+	 * that left every limit undefined.
+	 */
+	constructor(
+		cancellationLimit: number,
+		cancellationWindowMs: number,
+		forcePromptLimit: number,
+		forcePromptWindowMs: number,
+		forcePromptCooldownMs: number,
+		forceReservationTtlMs: number
+	);
 	recordCancellation(ownerId: string, now: number): void;
 	reserveForcePrompt(ownerId: string, commandId: string, now: number): void;
 	consumeForceReservation(ownerId: string, commandId: string, now: number): void;
 	releaseOwner(ownerId: string): void;
 }
 
+/** Injectable collaborators and limits. Field names from the constructor. */
+export interface ManagedCommandCancellerOptions {
+	now?: () => number;
+	/** Overridable so tests need not wait out a real grace period. */
+	waitForGrace?: (
+		target: ManagedCommandCancellationTarget,
+		graceMs: number
+	) => Promise<void>;
+	cancellationLimit?: number;
+	cancellationWindowMs?: number;
+	forcePromptLimit?: number;
+	forcePromptWindowMs?: number;
+	forcePromptCooldownMs?: number;
+	forceReservationTtlMs?: number;
+}
+
 export class ManagedCommandCanceller {
-	constructor(options?: {
-		now?: () => number;
-		limiter?: PerOwnerCancellationRateLimiter;
-	});
+	constructor(options?: ManagedCommandCancellerOptions);
 	/** Throws if ownerId does not own the target. */
 	preview(
 		target: ManagedCommandCancellationTarget,
@@ -162,4 +190,6 @@ export class ManagedCommandCanceller {
 		target: ManagedCommandCancellationTarget,
 		request: ManagedCommandCancellationRequest
 	): Promise<ManagedCommandCancellationResult>;
+	/** @throws when ownerId does not own the target. */
+	assertOwner(target: ManagedCommandCancellationTarget, ownerId: string): void;
 }

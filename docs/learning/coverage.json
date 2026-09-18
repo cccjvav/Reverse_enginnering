@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 184,
-    "lines": 34333,
+    "files": 186,
+    "lines": 34655,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -983,8 +983,8 @@
     },
     {
       "source": "tests/test_btype_evidence.py",
-      "sha256": "6647621e28a3e2f2bc1b1dd0849fdd4cb11fea1d207abfdfaafd0cb81eba2837",
-      "lines": 119,
+      "sha256": "a33dc291d782ec758a1b8df2dea058cb59230ed7a3b83ce3019c5eb3c02c181d",
+      "lines": 142,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1130,8 +1130,8 @@
     },
     {
       "source": "tools/check_btype_arity.py",
-      "sha256": "0b3ef87fcc50b7033eaffd2ba8654ff01ec0d86a3140bbfcffa2f91f6556a5f7",
-      "lines": 156,
+      "sha256": "7baba2eedf1443d0903c958a2db7cf54178b19bb8e03b86dace8c90d491f824b",
+      "lines": 198,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1153,6 +1153,13 @@
       "source": "tools/ci_windows_probe.py",
       "sha256": "bba1a91ca71a1a5e437a249532b6df950484164276f7824228585e08e74c993c",
       "lines": 82,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/diagnose_btype_linkage.mjs",
+      "sha256": "41344f51440802c9acac1b0dd2c0c1964d949f9b52016e8f03a935725b0a2ab3",
+      "lines": 154,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1279,6 +1286,13 @@
       "source": "tools/recover_custom_extension.py",
       "sha256": "57910875931ec6a12ce4ff62a9b8857c64b2f4b5b909ad1d897100b2415f567c",
       "lines": 154,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/register_btype_contracts.py",
+      "sha256": "e796cc82f1dd6b156fad2f02a15e838dd779944d527b8a7c5ca185155dfa7916",
+      "lines": 103,
       "explainedLines": 0,
       "status": "pending"
     },

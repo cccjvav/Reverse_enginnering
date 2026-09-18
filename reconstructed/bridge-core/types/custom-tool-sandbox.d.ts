@@ -51,6 +51,13 @@ export interface CustomToolStructuredContent {
 	readonly timed_out: boolean;
 	readonly aborted: boolean;
 	readonly duration_ms: number;
+	/**
+	 * CUSTOM_TOOL_OUTPUT_SCHEMA sets additionalProperties: true, so a tool may
+	 * return extra keys. The index signature also lets the author pass this
+	 * straight where a Record<string, unknown> is expected
+	 * (bridge-tool-dispatcher.ts:349).
+	 */
+	readonly [key: string]: unknown;
 }
 
 /** What the dispatcher receives back. */

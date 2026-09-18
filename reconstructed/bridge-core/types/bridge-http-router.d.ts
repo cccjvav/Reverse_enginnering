@@ -49,21 +49,39 @@ export interface BridgeHttpRouterOptions {
  */
 export interface BridgeHttpHandlers {
 	getSessionCount(): number;
+	/**
+	 * Receives the parsed body plus four request headers.
+	 *
+	 * The router passes seven arguments; the author's own handler declares only
+	 * the first four (bridge-mcp-transport.ts:425) and ignores the rest, which
+	 * JavaScript permits. The trailing three are therefore declared optional so
+	 * either arity type-checks.
+	 *
+	 * Header values come straight from Node, so they are
+	 * `string | string[] | undefined` - a repeated header yields an array.
+	 */
 	handlePost(
 		request: IncomingMessage,
 		response: ServerResponse,
 		body: unknown,
-		sessionId: string | undefined
+		sessionId: string | string[] | undefined,
+		protocolVersion?: string | string[] | undefined,
+		mcpMethod?: string | string[] | undefined,
+		mcpName?: string | string[] | undefined
 	): void | Promise<void>;
+	/**
+	 * Only reached with a session id present: the router answers 400 itself
+	 * when the header is missing, so this never sees undefined.
+	 */
 	handleGet(
 		request: IncomingMessage,
 		response: ServerResponse,
-		sessionId: string | undefined
+		sessionId: string | string[]
 	): void | Promise<void>;
 	handleDelete(
 		request: IncomingMessage,
 		response: ServerResponse,
-		sessionId: string | undefined
+		sessionId: string | string[]
 	): void | Promise<void>;
 }
 

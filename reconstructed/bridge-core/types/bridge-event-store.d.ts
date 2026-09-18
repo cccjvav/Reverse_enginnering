@@ -9,15 +9,23 @@
 //               implements the MCP SDK's EventStore contract for resumable
 //               Streamable HTTP, which is why storeEvent and replayEventsAfter
 //               are async and why replay returns the stream id.
-//   INFERRED    `message` is typed `unknown`: the store never inspects it, only
-//               hands it back to `send`. Naming a JSON-RPC message type here
-//               would claim knowledge the module does not have.
+//   INTEROP     `message` is the MCP SDK's JSONRPCMessage, and `send` must
+//               return Promise<void>, not void | Promise<void>. The store
+//               itself never inspects the message, so `unknown` looked
+//               defensible - but this class is handed to the SDK as its
+//               eventStore (bridge-mcp-transport.ts:551), and callback
+//               parameters are checked contravariantly: a looser parameter
+//               type makes the whole options object unassignable. Typing it
+//               loosely produced a real error at the SDK boundary, so the
+//               precise type is the correct one here.
+
+import type { JSONRPCMessage } from '@modelcontextprotocol/server';
 
 /** Callback used to re-emit one buffered event during replay. */
 export type BridgeEventSender = (
 	eventId: string,
-	message: unknown
-) => void | Promise<void>;
+	message: JSONRPCMessage
+) => Promise<void>;
 
 /**
  * Ring buffer of recent events, keyed by event id, for stream resumption.
@@ -37,7 +45,7 @@ export class BoundedInMemoryEventStore {
 	 * Ids are monotonic per process and carry a random suffix, so they are
 	 * unique across restarts as well as within one.
 	 */
-	storeEvent(streamId: string, message: unknown): Promise<string>;
+	storeEvent(streamId: string, message: JSONRPCMessage): Promise<string>;
 
 	/**
 	 * Replays everything buffered after `lastEventId` on the same stream.

@@ -22,5 +22,12 @@ export function createManagedCommandId(
 	entropy?: (size: number) => Uint8Array
 ): string;
 
-/** Strips a `command_id:` label and whitespace. Undefined if not a valid id. */
-export function normalizeManagedCommandId(value: unknown): string | undefined;
+/**
+ * Strips a `command_id:` label and surrounding whitespace.
+ *
+ * Always returns a string - never undefined. An unrecognised value comes back
+ * trimmed rather than rejected, leaving the caller's own lookup to fail. It
+ * also calls `.trim()` directly, so the parameter is `string`, not `unknown`:
+ * passing undefined would throw a TypeError rather than return a default.
+ */
+export function normalizeManagedCommandId(value: string): string;

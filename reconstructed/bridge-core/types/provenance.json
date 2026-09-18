@@ -1,0 +1,230 @@
+{
+  "scope": "Candidate type declarations for the rebuilt bridge-core modules, hand-written during step 2 and hash-pinned to the implementations they describe. Reconstruction from use, not recovered original types: see the PROVENANCE block in each declaration for which parts rest on first-hand evidence.",
+  "declarationRoot": "reconstructed/bridge-core/types",
+  "relationshipToOriginalContracts": "Superset of reconstructed/type-contracts (14 modules): same coverage plus 23 more. Kept separate because the original files are imported by path in tests/bridge-core-type-contracts.test.mjs and tests/bridge-core-http-linkage.test.mjs.",
+  "verification": "npm run verify:btypes typechecks every declaration under strict mode; npm run check:btypes cross-checks parameter lists against the implementations.",
+  "modules": [
+    {
+      "declaration": "adaptive-concurrency.d.ts",
+      "sha256": "53392ad8094fbc5650e11aa216a48023c3c51dc91e5835be542f0cc6247155c6",
+      "implementation": "reconstructed/bridge-core/src/adaptive-concurrency.js",
+      "implementationSha256": "e0a92f25570ef7bbbd310bbee31652fd14419a258a2645252a9741fb58b424e7"
+    },
+    {
+      "declaration": "apply-patch.d.ts",
+      "sha256": "32845e04f6ace4a189833432555adbdb4a4313b0817b56b0c3380de8f400b2f3",
+      "implementation": "reconstructed/bridge-core/src/apply-patch.js",
+      "implementationSha256": "53921c589672601f011d72bb300ed929269586f2e0364d43d620199d44a57001"
+    },
+    {
+      "declaration": "bridge-activity-tracker.d.ts",
+      "sha256": "e3e2aa8fcf3c79d4328047932bc961b15655b56a43192aa02087fe78b10025d6",
+      "implementation": "reconstructed/bridge-core/src/bridge-activity-tracker.js",
+      "implementationSha256": "fc698f0ecb5df49b879713ab92df287d85414443d1f2604a69ecb34a5c90a662"
+    },
+    {
+      "declaration": "bridge-coordination-validation.d.ts",
+      "sha256": "1a1de60431ac3bf6c029b9a9e44015a5445b138b86afaad8ffb58cfa22fc55a5",
+      "implementation": "reconstructed/bridge-core/src/bridge-coordination-validation.js",
+      "implementationSha256": "247eaa0ac56408131d3a48c9c8769b766ee544effc20824839065020f59e9a66"
+    },
+    {
+      "declaration": "bridge-event-store.d.ts",
+      "sha256": "052b8a681216ad634f74227f0435d2a314eb175dc33191b09402e5ce6ab94c92",
+      "implementation": "reconstructed/bridge-core/src/bridge-event-store.js",
+      "implementationSha256": "04f49f8c0300eae09795367f46f8ce611a1da0eb420c8615efb6eadd8be87995"
+    },
+    {
+      "declaration": "bridge-http-router.d.ts",
+      "sha256": "21ae8e26833bbd77edfb4c92ebecdbd194f29cc5f561d307ce12cb926ae85163",
+      "implementation": "reconstructed/bridge-core/src/bridge-http-router.js",
+      "implementationSha256": "e62762f79c0119a9274474465e65a9cd361dfd30ad62d6241b493303596da1a1"
+    },
+    {
+      "declaration": "bridge-session-registry.d.ts",
+      "sha256": "67e997b8a793fecdf61e8563edbbc0a8ab2f68f79227087d22b13c2502aa40b8",
+      "implementation": "reconstructed/bridge-core/src/bridge-session-registry.js",
+      "implementationSha256": "84c6d949895e84426a200d4eafd0b8e250faa2cc08f5174bd2af011b5c377e56"
+    },
+    {
+      "declaration": "bridge-tool-name.d.ts",
+      "sha256": "70f3a0280f06b57c1a03cf2a0d20ba9a8c1b03e42008ec4a26639f7cb2fb3864",
+      "implementation": "reconstructed/bridge-core/src/bridge-tool-name.js",
+      "implementationSha256": "7069bc0b4cdf9f5c403b9ee81066b2c786fbb32b61c2aedbfaf412be920b7119"
+    },
+    {
+      "declaration": "bridge-usage-counter.d.ts",
+      "sha256": "14c634139e09e6abe64c0000b1f0a1bc295557d47e9f7aba511f54d3d9650984",
+      "implementation": "reconstructed/bridge-core/src/bridge-usage-counter.js",
+      "implementationSha256": "9f284c6ab520043a16a05259a24d4c1b9fc045b27864dc62bbfcba282420b795"
+    },
+    {
+      "declaration": "build-info.d.ts",
+      "sha256": "568d0693ecc0279a3e9b3cc682924e2dc8f64e96b0dcd573629318fd3f361174",
+      "implementation": "reconstructed/bridge-core/src/build-info.js",
+      "implementationSha256": "f3f7db262437cdf11e072ac86034b79110c74af064532f457cd4c4b23bfbea1d"
+    },
+    {
+      "declaration": "canonical-diff.d.ts",
+      "sha256": "5059ca9d16586b9cb3ec18dc5ca89b4912b82c10ac4ddc3ccbfa84798f8cc6b4",
+      "implementation": "reconstructed/bridge-core/src/canonical-diff.js",
+      "implementationSha256": "71b81e6fd0c66efb76ee32b8e0a7df0098b708e895bfca30140f9559c839f62c"
+    },
+    {
+      "declaration": "concurrency.d.ts",
+      "sha256": "637c6b24a06cf652e92453aa7fdce52e67a924adf8f0db5df207f537f4bb2e5a",
+      "implementation": "reconstructed/bridge-core/src/concurrency.js",
+      "implementationSha256": "92cfef7b5cd5a6a6a13474b6e985062e6c138ece63c494bee05e6ed4e9839b15"
+    },
+    {
+      "declaration": "custom-tool-admin.d.ts",
+      "sha256": "c38643cf33ed01742dc034f3e419884ebaebf90d210dfda9176066506722f909",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-admin.js",
+      "implementationSha256": "923c7207a9a8f97edff4f83bb6de01606ee145729d5b0f292b1008c2d9c90b84"
+    },
+    {
+      "declaration": "custom-tool-contract.d.ts",
+      "sha256": "feca1caea9f5acca740688b32834ccbed1534976ff5d3d031e665c778d22abc1",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-contract.js",
+      "implementationSha256": "643a04115889ed8097c614a4ed1ebc9e396f95ca66fa0451c5b41bd0e1fa74d4"
+    },
+    {
+      "declaration": "custom-tool-manifest.d.ts",
+      "sha256": "877ea36319b233ac6eca11a18ebcf269f99d2cc8fa9a0f33be0fe90984a6771b",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-manifest.js",
+      "implementationSha256": "6c56616131d347699fd4e61009981a359ba9632b3b912612a730254972f55472"
+    },
+    {
+      "declaration": "custom-tool-migration.d.ts",
+      "sha256": "0e9a1d55089005b8264a620766663e1c89b13377bb8b12b4a39f6b351c768683",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-migration.js",
+      "implementationSha256": "e4aff9d3aa896b45c32976b74fa202f5283cd6d5e6371ecc7c438932c7b8f63f"
+    },
+    {
+      "declaration": "custom-tool-sandbox.d.ts",
+      "sha256": "0db6ace66752e0b9578552a1dde4f50365e7fa2c49e52bbc80b6a70c171eefdb",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-sandbox.js",
+      "implementationSha256": "3944a504397bb2b2495373e22b95484ba669453245c1beb1bf0c0059dbd87f66"
+    },
+    {
+      "declaration": "custom-tool-skill-import.d.ts",
+      "sha256": "e9b943064504398b73aab5cc61d0c32d2bc49e67e607fe1a5d50bcf257ec46cf",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-skill-import.js",
+      "implementationSha256": "890a061e1942412b5e2d34dfb80c70d5df04f209381aad8bb27a0ad1e5bbd400"
+    },
+    {
+      "declaration": "custom-tool-skill.d.ts",
+      "sha256": "b4137bb4498dc2ca80af64d3fcb2de4340e8b550b753102989338ae56e1e01cc",
+      "implementation": "reconstructed/bridge-core/src/custom-tool-skill.js",
+      "implementationSha256": "b0b75831968e27c6ef66aa8acdd0f9b27556a53eb97a617e887cb70acc52d406"
+    },
+    {
+      "declaration": "custom-tools.d.ts",
+      "sha256": "1639f2e5e173062a6734324ca50c5678d9fee57d7136fed87c1c037bf6324836",
+      "implementation": "reconstructed/bridge-core/src/custom-tools.js",
+      "implementationSha256": "f3194837be4a4ae4f4b2e79409bc15a57aacd3908c7808d0a452b2e763d16048"
+    },
+    {
+      "declaration": "file-tool-input-compat.d.ts",
+      "sha256": "72e3ecf04cf69148086aba8516a2637017f4564d849a40d949f6ed56906a7a73",
+      "implementation": "reconstructed/bridge-core/src/file-tool-input-compat.js",
+      "implementationSha256": "c07a9f151149dff602dbcbbf82a6aa58e72196056c63e7480818ed926713448c"
+    },
+    {
+      "declaration": "file-tool-registry.d.ts",
+      "sha256": "bbac593272488b7ac7e51334231e4e96db58e7a5a61af1dffcdfd8646d225873",
+      "implementation": "reconstructed/bridge-core/src/file-tool-registry.js",
+      "implementationSha256": "c7f9373b292a11f2c2b6072a57566460c36bf86a3ca7043dd75c193fd550ff35"
+    },
+    {
+      "declaration": "find-files.d.ts",
+      "sha256": "e2c9b39394b017681bf6cd0f5863c66b0a148bbe9505d9881f81bbad8e2e81ff",
+      "implementation": "reconstructed/bridge-core/src/find-files.js",
+      "implementationSha256": "94ecd0454a155393f09845ff6c1c162776058354129b2e9c5fd9a4ee40e5c7c2"
+    },
+    {
+      "declaration": "ide-tool-definitions.d.ts",
+      "sha256": "f846311d1c93e7864517176d02beaf222fc231de15321085359ea654bca65713",
+      "implementation": "reconstructed/bridge-core/src/ide-tool-definitions.js",
+      "implementationSha256": "82586332fe707db7de18910374b7dd113ce94ec09b3e23a387c20508c7779d60"
+    },
+    {
+      "declaration": "jsonrpc-request-id-registry.d.ts",
+      "sha256": "d3d1b0fc9b62093ae7d2ff0c471344b356a1654158e4b29dfef8006691aceb58",
+      "implementation": "reconstructed/bridge-core/src/jsonrpc-request-id-registry.js",
+      "implementationSha256": "d69e55e73f6d771b0710889360a79541c7c85475445e07cc73f0506ab149f977"
+    },
+    {
+      "declaration": "managed-command-cancellation.d.ts",
+      "sha256": "95d02435d9cda54bcceb12e4b426cf53eee6d364b52aeb7527116e7a82dd1b63",
+      "implementation": "reconstructed/bridge-core/src/managed-command-cancellation.js",
+      "implementationSha256": "1a2d8cc585b0d64ea26aedf44d5f1c0a86aa8f91fb69c3b05bce7607b330a6b0"
+    },
+    {
+      "declaration": "managed-command-id.d.ts",
+      "sha256": "947fe8add5f9ce6a8562cb345b5f1310e79e12cbf5ad77c36123e9128e435297",
+      "implementation": "reconstructed/bridge-core/src/managed-command-id.js",
+      "implementationSha256": "fc5664984cf72b2cea4f0430f350970bc2709b2e9c60af82081f1d99ccb23581"
+    },
+    {
+      "declaration": "managed-command-retention.d.ts",
+      "sha256": "fa9d0f520ead5a07a036ad01843f7560aeba043230e966cade7cb3882fa1ca85",
+      "implementation": "reconstructed/bridge-core/src/managed-command-retention.js",
+      "implementationSha256": "92b73a406bb14d0279b5f13428eac39709b1ba3e25845a16e75370b68e88c3a5"
+    },
+    {
+      "declaration": "managed-command-risk.d.ts",
+      "sha256": "b373e86a4f171e5c7da6c12100834ced55638c6f3422cfc040990732b655dfb1",
+      "implementation": "reconstructed/bridge-core/src/managed-command-risk.js",
+      "implementationSha256": "aea0023597c8fd6f7fa4663ab4f80fedf2378cfd1bac83ea206f1c0ce9fa035e"
+    },
+    {
+      "declaration": "managed-terminal-lifecycle.d.ts",
+      "sha256": "8cc18f8386b417e4d0dbefb8643f15ca57f7c3de5649dbf949e086849c1c95a8",
+      "implementation": "reconstructed/bridge-core/src/managed-terminal-lifecycle.js",
+      "implementationSha256": "b0ca965c917998d8a6740ca38300e12e118b04306d8d44c88b5a40aa8708245f"
+    },
+    {
+      "declaration": "mcp-protocol.d.ts",
+      "sha256": "a7aa43ab9c0e284e134c241b9aac5c9c78560c2bae046cb3deb36e1ffd55f7b3",
+      "implementation": "reconstructed/bridge-core/src/mcp-protocol.js",
+      "implementationSha256": "4594032d8415276341efa9c0a5d547500c2d488139ee25ac33ba01a71d7076b3"
+    },
+    {
+      "declaration": "read-files.d.ts",
+      "sha256": "eeeca7a46c2e696b1ec7f50249f9e082a6fd72fa362e12a2b0899f4b9d7a8349",
+      "implementation": "reconstructed/bridge-core/src/read-files.js",
+      "implementationSha256": "748632eb72c187174296ce569402a29460a06906b70184b5c6dcf0eb88ec9820"
+    },
+    {
+      "declaration": "read-image.d.ts",
+      "sha256": "4b5b118379b01b12dbab37f4aa018daefcef1a986092d59a9483afc2bf3c28a0",
+      "implementation": "reconstructed/bridge-core/src/read-image.js",
+      "implementationSha256": "1a5bc1cb1c0fb904a5e2e8a153fccb6d90adbc1df791940f294ef4ec4db4b21b"
+    },
+    {
+      "declaration": "ripgrep-diagnostics.d.ts",
+      "sha256": "7ff7110c6507810fd1dd0d88f66e129d0d55d15690c1e6002646cf9aa804600d",
+      "implementation": "reconstructed/bridge-core/src/ripgrep-diagnostics.js",
+      "implementationSha256": "60512c37b5dd79d4f028f1423566407e89d186621689207e2b0e40ca66b05963"
+    },
+    {
+      "declaration": "search-files.d.ts",
+      "sha256": "a8b391571886c569a74cbb0141bef08e1677b284a4e89d59567670afd1b5ac36",
+      "implementation": "reconstructed/bridge-core/src/search-files.js",
+      "implementationSha256": "13e1966d574df9547f66a502a99448d096d473bfea81832329d985445497d111"
+    },
+    {
+      "declaration": "tool-input-validation.d.ts",
+      "sha256": "ef80ba6da4baf10bd534bd67901571199c2b24ad25eb7b86956aa1f96e40b3ad",
+      "implementation": "reconstructed/bridge-core/src/tool-input-validation.js",
+      "implementationSha256": "3757e12f94795620a6e27ec7900e3d21ff4b76f7a718cf71cd3c14cf6db954b2"
+    },
+    {
+      "declaration": "workspace-paths.d.ts",
+      "sha256": "0dc2e734f165fab1c8e740520109b2d025aaff39f80f19c7f8528dab22c048af",
+      "implementation": "reconstructed/bridge-core/src/workspace-paths.js",
+      "implementationSha256": "2c896a3bb746d613d16cfed75c773392f0ec68e7a8cc9efcd43c38bff5c54a80"
+    }
+  ]
+}

@@ -117,3 +117,26 @@ class VerificationHarnessTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ContractIndexTests(unittest.TestCase):
+    """The step-2 index must stay current and must not disturb the original."""
+
+    def test_index_is_current(self):
+        result = subprocess.run(
+            [sys.executable, str(REPO / "tools" / "register_btype_contracts.py"),
+             "--check"], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_does_not_overwrite_the_original_contracts(self):
+        """Those files are imported by path in existing tests; replacing their
+        index broke four of them."""
+        original = json.loads(
+            (REPO / "reconstructed" / "type-contracts" / "provenance.json")
+            .read_text(encoding="utf8"))
+        self.assertEqual(len(original["modules"]), 14)
+        step2 = json.loads(
+            (REPO / "reconstructed" / "bridge-core" / "types" / "provenance.json")
+            .read_text(encoding="utf8"))
+        self.assertGreater(len(step2["modules"]), len(original["modules"]))
+        self.assertIn("Kept separate", step2["relationshipToOriginalContracts"])

@@ -32,6 +32,17 @@ TYPES = REPO / "reconstructed" / "bridge-core" / "types"
 
 IMPL_RE = re.compile(
     r"^(?P<async>async\s+)?function\s+(?P<name>\w+)\s*\((?P<params>[^)]*)\)", re.M)
+# Classes are emitted as `var Name = class {` with a `constructor(...)` inside.
+# Constructors were originally out of scope, and that gap hid a real defect:
+# PerOwnerCancellationRateLimiter takes six positional arguments and had been
+# declared as taking a single options object.
+IMPL_CLASS_RE = re.compile(
+    r"^var\s+(?P<name>\w+)\s*=\s*class\b(?P<body>.*?)^\};", re.M | re.S)
+CTOR_RE = re.compile(r"^\s{2}constructor\s*\((?P<params>[^)]*)\)", re.M)
+DECL_CLASS_RE = re.compile(
+    r"^export\s+(?:declare\s+)?class\s+(?P<name>\w+)(?:<[^>]*>)?[^{]*\{(?P<body>.*?)^\}",
+    re.M | re.S)
+DECL_CTOR_RE = re.compile(r"^\tconstructor\s*\((?P<params>.*?)\);", re.M | re.S)
 DECL_RE = re.compile(
     r"^export\s+(?:declare\s+)?function\s+(?P<name>\w+)\s*(?:<[^>]*>)?\s*\((?P<params>.*?)\)\s*:\s*(?P<ret>[^;]+);",
     re.M | re.S)
@@ -122,6 +133,37 @@ def main():
                     "kind": "ASYNC", "function": name,
                     "declared": ret,
                     "detail": "implementation is async but the declaration does not return a Promise",
+                })
+
+        # Constructor arity, same rules as functions.
+        impl_ctors = {}
+        for m in IMPL_CLASS_RE.finditer(impl_text):
+            ctor = CTOR_RE.search(m.group("body"))
+            if ctor:
+                impl_ctors[m.group("name")] = param_names(
+                    split_params(ctor.group("params")))
+        for m in DECL_CLASS_RE.finditer(decl_text):
+            name = m.group("name")
+            if name not in impl_ctors:
+                continue
+            ctor = DECL_CTOR_RE.search(m.group("body"))
+            if not ctor:
+                continue
+            checked += 1
+            declared = param_names(split_params(ctor.group("params")))
+            actual = impl_ctors[name]
+            if len(declared) > len(actual):
+                module_findings.append({
+                    "kind": "ARITY", "function": f"{name}.constructor",
+                    "declared": declared, "implementation": actual,
+                    "detail": "declaration takes more parameters than the implementation",
+                })
+            elif (len(declared) == len(actual) and declared != actual
+                  and sorted(declared) == sorted(actual)):
+                module_findings.append({
+                    "kind": "ORDER", "function": f"{name}.constructor",
+                    "declared": declared, "implementation": actual,
+                    "detail": "same parameter names in a different order",
                 })
 
         if module_findings:

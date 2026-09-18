@@ -27,7 +27,9 @@
     "audit:authorization-wiring": "node tools/audit_authorization_wiring.mjs",
     "audit:permission-producers": "node tools/audit_permission_producers.mjs",
     "verify:btypes": "node tools/verify_btypes.mjs",
-    "check:btypes": "python3 tools/check_btype_arity.py --output docs/evidence/btype-arity.json"
+    "check:btypes": "python3 tools/check_btype_arity.py --output docs/evidence/btype-arity.json",
+    "register:btypes": "python3 tools/register_btype_contracts.py",
+    "diagnose:btype-linkage": "node tools/diagnose_btype_linkage.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",
