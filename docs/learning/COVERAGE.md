@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/182 个纳入范围的文件完整逐行解释；363/34038 行已解释。
+当前：6/183 个纳入范围的文件完整逐行解释；363/34147 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -152,7 +152,7 @@
 | [tests/community-ui.test.mjs](../../tests/community-ui.test.mjs) | 64 | 0 | 待逐行讲解 |
 | [tests/helpers/bridge-core-baseline.mjs](../../tests/helpers/bridge-core-baseline.mjs) | 30 | 0 | 待逐行讲解 |
 | [tests/test_apply_community.py](../../tests/test_apply_community.py) | 86 | 0 | 待逐行讲解 |
-| [tests/test_btype_evidence.py](../../tests/test_btype_evidence.py) | 76 | 0 | 待逐行讲解 |
+| [tests/test_btype_evidence.py](../../tests/test_btype_evidence.py) | 97 | 0 | 待逐行讲解 |
 | [tests/test_carrier_electron44_patch.py](../../tests/test_carrier_electron44_patch.py) | 74 | 0 | 待逐行讲解 |
 | [tests/test_ci_windows_probe.py](../../tests/test_ci_windows_probe.py) | 33 | 0 | 待逐行讲解 |
 | [tests/test_ci_workflow_branch_binding.py](../../tests/test_ci_workflow_branch_binding.py) | 101 | 0 | 待逐行讲解 |
@@ -196,4 +196,5 @@
 | [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |
 | [tools/run-learning.cmd](../../tools/run-learning.cmd) | 27 | 0 | 待逐行讲解 |
 | [tools/validate_community.py](../../tools/validate_community.py) | 40 | 0 | 待逐行讲解 |
+| [tools/verify_btypes.mjs](../../tools/verify_btypes.mjs) | 88 | 0 | 待逐行讲解 |
 | [tools/windows_inspect.py](../../tools/windows_inspect.py) | 263 | 0 | 待逐行讲解 |

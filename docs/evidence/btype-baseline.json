@@ -6,16 +6,17 @@
   "handWrittenModules": [
     "bridge-activity-tracker",
     "custom-tool-contract",
+    "custom-tool-sandbox",
     "custom-tool-skill",
     "custom-tools",
     "file-tool-registry",
     "managed-command-cancellation"
   ],
   "moduleCount": 41,
-  "declarationsTotal": 389,
-  "fullyTypedDeclarations": 186,
-  "anyOccurrences": 709,
-  "fullyTypedPercent": 47.8,
+  "declarationsTotal": 393,
+  "fullyTypedDeclarations": 191,
+  "anyOccurrences": 695,
+  "fullyTypedPercent": 48.6,
   "modules": {
     "adaptive-concurrency": {
       "declarations": 3,
@@ -100,9 +101,10 @@
       "anyOccurrences": 3
     },
     "custom-tool-sandbox": {
-      "declarations": 7,
-      "fullyTyped": 6,
-      "anyOccurrences": 14
+      "declarations": 11,
+      "fullyTyped": 11,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "custom-tool-skill-import": {
       "declarations": 16,
@@ -291,6 +293,6 @@
       "anyOccurrences": 20
     }
   ],
-  "interpretation": "186 of 389 exported declarations (47.8%) carry a type with no `any`. The remaining 203 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
+  "interpretation": "191 of 393 exported declarations (48.6%) carry a type with no `any`. The remaining 202 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
   "doesNotClaim": "A declaration without `any` is not proof the type is correct, only that inference produced something specific. Correctness still depends on the evidence tiers in docs/evidence/btype-evidence.json."
 }

@@ -72,5 +72,26 @@ class HandWrittenTypeTests(unittest.TestCase):
         self.assertIn("FORCE_CONFIRMATION_REQUIRED", text)
 
 
+class VerificationHarnessTests(unittest.TestCase):
+    """The verifier must be able to fail; a check that cannot fail is noise."""
+
+    def test_keeps_skiplibcheck_off_with_the_reason_recorded(self):
+        # skipLibCheck: true suppresses checking of .d.ts bodies, so a
+        # declaration naming a nonexistent type compiles clean. This was a real
+        # false pass, not a hypothetical.
+        source = (REPO / "tools" / "verify_btypes.mjs").read_text(encoding="utf8")
+        self.assertIn("skipLibCheck: false", source)
+        self.assertIn("must stay OFF", source)
+
+    def test_refuses_to_pass_when_the_compiler_is_missing(self):
+        source = (REPO / "tools" / "verify_btypes.mjs").read_text(encoding="utf8")
+        self.assertIn("tsc not found", source)
+        self.assertIn("do not treat a missing compiler as a pass", source)
+
+    def test_includes_a_control_that_must_fail(self):
+        source = (REPO / "tools" / "verify_btypes.mjs").read_text(encoding="utf8")
+        self.assertIn("deliberately broken control compiled", source)
+
+
 if __name__ == "__main__":
     unittest.main()

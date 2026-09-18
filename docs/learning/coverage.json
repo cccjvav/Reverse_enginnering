@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 182,
-    "lines": 34038,
+    "files": 183,
+    "lines": 34147,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -983,8 +983,8 @@
     },
     {
       "source": "tests/test_btype_evidence.py",
-      "sha256": "1ee8d47cb687d8cf198ecf7aac99ff85938608958f2f3108ef1c3bebce288d07",
-      "lines": 76,
+      "sha256": "2fe2c99048d6983bd4837956fba2db006f60996cef0989ad419aac2977438dcd",
+      "lines": 97,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1286,6 +1286,13 @@
       "source": "tools/validate_community.py",
       "sha256": "615a9bd2b227cf483f5754b96d9fbf9944fe2349e5712e4d63e17690cf56c68a",
       "lines": 40,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/verify_btypes.mjs",
+      "sha256": "2c73befd37ddac96badd40bc02c2551f16f617d727931a6e9bb249250ce909c6",
+      "lines": 88,
       "explainedLines": 0,
       "status": "pending"
     },
