@@ -63,8 +63,28 @@ from asking the question. Where evidence runs out, the type says so.
 
 ## Done so far
 
-`reconstructed/bridge-core/types/managed-command-cancellation.d.ts` — the
-highest-`any` Tier A module (109). Verified two ways:
+Coverage has moved **32.8% → 41.5%** (116/354 → 154/371 declarations), measured
+by `tools/diagnose_btypes.py` rather than asserted. Three Tier A modules typed,
+each measuring 0 `any`:
+
+| Module | Was | Now |
+| --- | --- | --- |
+| `managed-command-cancellation` | 109 `any` | 19/19 typed |
+| `file-tool-registry` | 94 `any` | 29/29 typed |
+| `bridge-activity-tracker` | — | 6/6 typed |
+
+Three findings worth keeping, none of which the JavaScript alone would give up:
+
+- **`BridgeActivitySnapshot` is generic** in its presentation payload. Only the
+  author's use site (`bridge-tool-dispatcher.ts:126`) reveals the arity; a
+  non-generic reconstruction would have been confidently wrong.
+- **`workspaceRoots` may be a thunk.** `invokeFileTool` resolves it lazily so a
+  root-resolution failure is enveloped as a tool error rather than thrown, and
+  the author depends on it ("Lazy on purpose").
+- **`FileToolResult.content` is optional**, evidenced by the author's
+  `result.content ?? [...]` fallback — a mandatory field makes that dead code.
+
+Each declaration is verified two ways:
 
 - the author's own construction site (`ide-tool-broker.ts:1712`, reproduced
   verbatim including its getters) typechecks against it with 0 errors

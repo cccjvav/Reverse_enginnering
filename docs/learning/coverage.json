@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 182,
-    "lines": 34002,
+    "lines": 34038,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1151,8 +1151,8 @@
     },
     {
       "source": "tools/diagnose_btypes.py",
-      "sha256": "c284552bc230cb65083c10ee7b1883efcbe743d40052bca2d3872e81b0f16723",
-      "lines": 131,
+      "sha256": "9673764820b2fc0907ce145bfdbbc8b532a070662f584f47bedc74126a2a6e17",
+      "lines": 167,
       "explainedLines": 0,
       "status": "pending"
     },

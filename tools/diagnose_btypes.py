@@ -21,6 +21,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 BSRC = REPO / "reconstructed" / "bridge-core" / "src"
+HAND = REPO / "reconstructed" / "bridge-core" / "types"
 
 TSCONFIG = {
     "compilerOptions": {
@@ -40,6 +41,14 @@ TSCONFIG = {
 # An `any` anywhere in a declaration means that declaration is not carrying real
 # information, whether it is a parameter, a return, or a property.
 ANY_RE = re.compile(r"\bany\b")
+# Comments mention the word "any" in ordinary prose ("converting any throw",
+# "worse than `any`"). Counting those would understate hand-written coverage,
+# so strip comments before measuring.
+COMMENT_RE = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
+
+
+def without_comments(text):
+    return COMMENT_RE.sub("", text)
 DECL_RE = re.compile(
     r"^export\s+(?:declare\s+)?(?:function|const|class|type|interface|var|let|namespace)\s+(\w+)",
     re.M)
@@ -85,7 +94,7 @@ def main():
         modules = {}
         total_decl = total_clean = total_any = 0
         for dts in sorted((work / "out").rglob("*.d.ts")):
-            text = dts.read_text(encoding="utf8", errors="replace")
+            text = without_comments(dts.read_text(encoding="utf8", errors="replace"))
             decls = DECL_RE.findall(text)
             # Split per declaration so a single `any` does not condemn the file.
             chunks = re.split(r"(?=^export\s)", text, flags=re.M)
@@ -100,6 +109,33 @@ def main():
             total_decl += len(decls)
             total_clean += clean
             total_any += anys
+
+    # Hand-written declarations override inference for their module. Count them
+    # as the real answer, otherwise the metric can never move no matter how much
+    # typing gets done.
+    handwritten = {}
+    for path in sorted(HAND.glob("*.d.ts")):
+        text = without_comments(path.read_text(encoding="utf8", errors="replace"))
+        chunks = re.split(r"(?=^export\s)", text, flags=re.M)
+        decls = [c for c in chunks if c.strip().startswith("export")]
+        clean = sum(1 for c in decls if not ANY_RE.search(c))
+        handwritten[path.name.removesuffix(".d.ts")] = {
+            "declarations": len(decls),
+            "fullyTyped": clean,
+            "anyOccurrences": len(ANY_RE.findall(text)),
+            "handWritten": True,
+        }
+    for name, stats in handwritten.items():
+        inferred = modules.get(name)
+        if inferred:
+            total_decl -= inferred["declarations"]
+            total_clean -= inferred["fullyTyped"]
+            total_any -= inferred["anyOccurrences"]
+        total_decl += stats["declarations"]
+        total_clean += stats["fullyTyped"]
+        total_any += stats["anyOccurrences"]
+        modules[name] = stats
+    report["handWrittenModules"] = sorted(handwritten)
 
     report["moduleCount"] = len(modules)
     report["declarationsTotal"] = total_decl

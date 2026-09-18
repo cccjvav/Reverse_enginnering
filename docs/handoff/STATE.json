@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Continue step 2: type the remaining tier-A modules (file-tool-registry, bridge-activity-tracker, custom-tool-skill/-import, custom-tools), re-running tools/diagnose_btypes.py so the 32.8% baseline moves on evidence rather than assertion.",
+  "nextAction": "Continue step 2: type the remaining tier-A modules (custom-tools, custom-tool-skill, custom-tool-skill-import, bridge-http-router, bridge-session-registry), then tier-B schema modules. Re-run tools/diagnose_btypes.py each time so the 41.5% moves on measurement, not assertion.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -373,7 +373,8 @@
       "exportedDeclarations": 354,
       "fullyTyped": 116,
       "percent": 32.8,
-      "anyOccurrences": 995
+      "anyOccurrences": 995,
+      "note": "starting point before any hand-written types"
     },
     "evidenceTiers": {
       "A_firstHand": "24 of 41 modules imported by the author's own .ts; 51 value symbols and 9 authored type names incl. generic arity",
@@ -381,8 +382,25 @@
       "C_inferred": "tsc inference; degrades to any",
       "unreferenced": "17 modules referenced by no author source - behaviour-only reconstruction"
     },
-    "done": "reconstructed/bridge-core/types/managed-command-cancellation.d.ts (the highest-any tier-A module). Verified by typechecking the author's own construction site from ide-tool-broker.ts:1712, plus a negative probe proving the types reject unknown members and bad assignments.",
+    "done": "3 tier-A modules typed: managed-command-cancellation, file-tool-registry, bridge-activity-tracker. Each verified twice - the author's own call site reproduced verbatim typechecks with 0 errors, and a negative probe confirms the types reject unknown members, bad literals and wrong assignments.",
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
-    "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone."
+    "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
+    "current": {
+      "exportedDeclarations": 371,
+      "fullyTyped": 154,
+      "percent": 41.5,
+      "anyOccurrences": 779,
+      "handWrittenModules": [
+        "bridge-activity-tracker",
+        "file-tool-registry",
+        "managed-command-cancellation"
+      ],
+      "note": "each hand-written module measures 0 any; the diagnostic strips comments so prose using the word 'any' cannot skew it"
+    },
+    "keyRecoveries": {
+      "BridgeActivitySnapshot": "Generic in the presentation payload. Only discoverable from the author's use site (bridge-tool-dispatcher.ts:126); nothing in the JavaScript reveals the generic arity.",
+      "FileToolContext.workspaceRoots": "Allowed to be a thunk, because invokeFileTool resolves it lazily so root-resolution failures are enveloped as tool errors rather than thrown. The author relies on this ('Lazy on purpose').",
+      "FileToolResult.content": "Optional, evidenced by the author's `result.content ?? [...]` fallback; a mandatory field would make that dead code."
+    }
   }
 }
