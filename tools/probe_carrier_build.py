@@ -104,6 +104,8 @@ def main() -> int:
     parser.add_argument("--work-dir", default=".work/carrier-build")
     parser.add_argument("--output", required=True)
     parser.add_argument("--electron", default=TARGET_ELECTRON)
+    parser.add_argument("--no-patch", action="store_true",
+                        help="Skip the Electron 44 patch, to re-measure the raw failure.")
     parser.add_argument("--skip-compile", action="store_true",
                         help="Stop after dependency install (faster triage run).")
     parser.add_argument("--install-timeout", type=int, default=3600)
@@ -189,6 +191,20 @@ def main() -> int:
     except Exception as exc:  # noqa: BLE001 - report, do not mask
         report["electronRepoint"] = {"ok": False, "error": repr(exc)}
         return finish(report, args.output)
+
+    # 2b. Apply the Electron 44 compatibility patch. Without it the tree cannot
+    #     compile, because Electron 44 deleted 13 clipboard methods.
+    if not args.no_patch:
+        patch = Path(__file__).with_name("patch_carrier_electron44.py")
+        result = run([sys.executable, str(patch), "--tree", str(src),
+                      "--output", str(work / "electron44-patch.json")], timeout=300)
+        if not stage("apply-electron44-patch", result):
+            return finish(report, args.output)
+        try:
+            report["electron44Patch"] = json.loads(
+                (work / "electron44-patch.json").read_text(encoding="utf8"))
+        except Exception:  # noqa: BLE001 - the stage log already carries detail
+            pass
 
     # 3. Install dependencies. This is where an unsupported Electron usually
     #    fails first, because native modules are rebuilt against its headers.

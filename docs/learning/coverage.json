@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 176,
-    "lines": 32999,
+    "files": 179,
+    "lines": 33541,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -31,15 +31,15 @@
     },
     {
       "source": ".github/workflows/carrier-build-probe.yml",
-      "sha256": "00acfd6ab2f38a3eefb0d0d81713d85c8d2a6f696aa7b3e687a380e5cb4be09f",
-      "lines": 113,
+      "sha256": "0cbc7add41da81bcb6418d85db54aaeb308356a29640f835d3a8575e92c432f9",
+      "lines": 114,
       "explainedLines": 0,
       "status": "pending"
     },
     {
       "source": ".github/workflows/installer-forensics.yml",
-      "sha256": "0073fc35941266fd41ab3d376f4c98faf51e3ede71e2cae178fbcf53b6961cc1",
-      "lines": 110,
+      "sha256": "e32872a802c90d234ed2fb55b2372a69560216ae3c2164c1e24d8c7b53adb929",
+      "lines": 121,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -982,6 +982,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/test_carrier_electron44_patch.py",
+      "sha256": "d5621a85afc5f896ffd55e45b65f31ec493a4e970d0134a501ceae64bb5c81b2",
+      "lines": 67,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/test_ci_windows_probe.py",
       "sha256": "9ef29c9f633f4458e3b9286fb6ce7dc12693bc3626b70081d21a85df1aa20e6b",
       "lines": 33,
@@ -1192,6 +1199,13 @@
       "status": "line-by-line-authored"
     },
     {
+      "source": "tools/patch_carrier_electron44.py",
+      "sha256": "8cdea00ef1ae320edeb98c49698e1e47e8f21f48907b1bc068f2967138a081ed",
+      "lines": 292,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/patch_utils.mjs",
       "sha256": "db740e6555b7631b873fa313372ad2f76498625ee431e72da07d8109a9d7fb4b",
       "lines": 31,
@@ -1207,8 +1221,15 @@
     },
     {
       "source": "tools/probe_carrier_build.py",
-      "sha256": "31d336b24a5e64c9a466875e3ea94dff1426736737c499684e20f288094dd24e",
-      "lines": 287,
+      "sha256": "8355ec137dc74661e7e4ed7c35b712024c5fcc9f61dfdc85f7cdd7cce1e4f090",
+      "lines": 303,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/probe_clipboard_adaptation.py",
+      "sha256": "7af20eea591a6a8da791bf96684dbc556ca7549f441370c9e45cca89cf44ad76",
+      "lines": 155,
       "explainedLines": 0,
       "status": "pending"
     },

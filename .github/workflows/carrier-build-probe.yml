@@ -21,6 +21,7 @@ on:
     paths:
       - .github/workflows/carrier-build-probe.yml
       - tools/probe_carrier_build.py
+      - tools/patch_carrier_electron44.py
   workflow_dispatch:
     inputs:
       electron:
