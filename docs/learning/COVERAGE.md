@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/168 个纳入范围的文件完整逐行解释；363/31303 行已解释。
+当前：6/169 个纳入范围的文件完整逐行解释；363/31412 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -15,9 +15,9 @@
 
 | 文件 | 总行数 | 已解释 | 状态 |
 |---|---:|---:|---|
-| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 112 | 0 | 待逐行讲解 |
-| [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 107 | 0 | 待逐行讲解 |
-| [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 47 | 0 | 待逐行讲解 |
+| [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 115 | 0 | 待逐行讲解 |
+| [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 110 | 0 | 待逐行讲解 |
+| [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 49 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
 | [community/bridge-core/file-tool-dispatcher.mjs](../../community/bridge-core/file-tool-dispatcher.mjs) | 63 | 0 | 待逐行讲解 |
 | [community/bridge-core/http-router-types.d.ts](../../community/bridge-core/http-router-types.d.ts) | 11 | 0 | 待逐行讲解 |
@@ -148,6 +148,7 @@
 | [tests/helpers/bridge-core-baseline.mjs](../../tests/helpers/bridge-core-baseline.mjs) | 30 | 0 | 待逐行讲解 |
 | [tests/test_apply_community.py](../../tests/test_apply_community.py) | 86 | 0 | 待逐行讲解 |
 | [tests/test_ci_windows_probe.py](../../tests/test_ci_windows_probe.py) | 33 | 0 | 待逐行讲解 |
+| [tests/test_ci_workflow_branch_binding.py](../../tests/test_ci_workflow_branch_binding.py) | 101 | 0 | 待逐行讲解 |
 | [tests/test_cmd_environment.py](../../tests/test_cmd_environment.py) | 125 | 0 | 待逐行讲解 |
 | [tests/test_custom_recovery.py](../../tests/test_custom_recovery.py) | 56 | 0 | 待逐行讲解 |
 | [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 53 | 0 | 待逐行讲解 |

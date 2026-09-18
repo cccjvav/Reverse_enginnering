@@ -1,10 +1,11 @@
 # ShunCode恢复项目交接入口
 
-**更新：2026-09-17。当前结论：NOT_READY。** 这是给下一位助手/开发者的操作交接，不需要先读完整聊天。路线图见[ROADMAP.md](ROADMAP.md)，第一项工作详案见[NEXT_AUTHORIZATION.md](NEXT_AUTHORIZATION.md)，机器可读快照见[STATE.json](STATE.json)。
+**更新：2026-09-18。当前结论：NOT_READY。当前会话分支：`arena/01a0afd4-reverse-enginnering-of-shun`。** 这是给下一位助手/开发者的操作交接，不需要先读完整聊天。路线图见[ROADMAP.md](ROADMAP.md)，第一项工作详案见[NEXT_AUTHORIZATION.md](NEXT_AUTHORIZATION.md)，机器可读快照见[STATE.json](STATE.json)。
 
 ## 1. 接手后先纠正三个容易误判的事实
 
-1. **以仓库/远端提交和实际证据为准，不以聊天最后一条为准。** 本次交接发现远端已到`b77a9e5`，比聊天中`97099c5`多了公共Chat文本回退及CI；已经核验并快进同步，没有重复“修复11条错误”。`b77a9e5`是本交接开始时的基线，不是今后永远的最新提交。
+1. **以仓库/远端提交和实际证据为准，不以聊天最后一条为准。** 上一轮交接时远端为`b77a9e5`；2026-09-18接手时远端`arena/01a09d2c-...`与本地HEAD同为`df7dde3`，已核验无需快进。这些都只是当时的基线，不是今后永远的最新提交，每次接手都要重新`git ls-remote`核对。
+   - **本轮已修复一处交接文档未记录的阻断缺陷：三个workflow把会话分支ID写死在`arena/01a09d2c-...`。**后果不止是不跑CI——两个证据型workflow还会检出并把报告写回**旧分支**，产生张冠李戴的证据。现改为`arena/**`族匹配、`startsWith`守卫、检出/写回用`${{ github.ref }}`、并发组按分支隔离，并由`tests/test_ci_workflow_branch_binding.py`回归保护。新分支上的真实触发结果仍需推送后凭run ID确认。
 2. **当前可选portable变体候选类型为0错误，但产品仍不可放行。** 它只用公共`input/output`显示文本，原富卡片、点击跳转和交互diff没有因此恢复。不要给公共vscode命名空间补假字段来宣称原宿主已实现。
 3. **下一项优先工作是授权整合，不是再刷类型错误数。** 维护文件调度器缺策略时会拒绝，但它尚未进入实验扩展；当前应用图仍使用不转发逐文件权限的原调度器。
 
@@ -15,7 +16,7 @@
 - 最终要可维护工程、完整Windows构建/安装器，以及已有用户可自行应用和回退的教程。现有overlay是固定旧版补丁，不是新源码完整安装器。
 - 用户不是专业开发者。终端固定**普通Windows CMD中激活conda**，不是Anaconda Prompt或PowerShell。教学要细致、如实记录操作和失败。
 - 用户要求成果推送分支，不能只给聊天附件；不需要让用户反复决定技术工具，也不要求提供真实密钥/密码/证书私钥。
-- 工作固定在`arena/01a09d2c-reverse-enginnering-of-shun`。不得强推、切到main、创建另一个工作分支或覆盖他人的更新。保留原件，新增维护层。
+- 每轮工作固定在**该会话自己的**Arena分支（当前`arena/01a0afd4-reverse-enginnering-of-shun`，上一轮为`arena/01a09d2c-...`）。不得强推、切到main、创建额外工作分支或覆盖他人的更新。分支ID会轮换，因此CI与文档不应再写死某一个ID。保留原件，新增维护层。
 
 ## 3. 四种模式与默认门槛
 
@@ -58,7 +59,8 @@
 git status --short
 git branch --show-current
 git log -5 --oneline
-git fetch origin arena/01a09d2c-reverse-enginnering-of-shun
+git fetch origin arena/01a0afd4-reverse-enginnering-of-shun
+REM 分支ID每轮会换：用 git branch --show-current 的输出替换上面的名字，不要照抄历史ID。
 ```
 
 有本地改动或远端新增提交，先核对差异。**不要复制历史日志里的reset/rebase作为通用修复命令。** 本次只有核验所有文件与97099c5一致（除会话未保存的六个dist）后才恢复本地索引并快进；这不是允许丢弃下一位助手的改动。若分支干净且可快进，用`git merge --ff-only FETCH_HEAD`；不能快进就先分析，禁止强推。

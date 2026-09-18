@@ -22,7 +22,8 @@
 
 ### 0.2 取得一份学习副本
 
-1. 打开[本项目的固定工作分支](https://github.com/cccjvav/Reverse_enginnering_of_shun/tree/arena/01a09d2c-reverse-enginnering-of-shun)。确认分支栏显示 `arena/01a09d2c-reverse-enginnering-of-shun`。
+1. 打开[本项目当前的工作分支](https://github.com/cccjvav/Reverse_enginnering_of_shun/tree/arena/01a0afd4-reverse-enginnering-of-shun)。确认分支栏显示 `arena/01a0afd4-reverse-enginnering-of-shun`。
+   - 每一轮接力会换一个 `arena/` 开头的新分支名。若上面的链接打不开，回到仓库首页的分支下拉框，选最新的那个 `arena/...` 分支即可，其余步骤不变。
 2. 点击 **Code → Download ZIP**。这是源码下载，不是社区更新包。
 3. 在你有写入权限的位置建立学习目录，例如“下载”文件夹内的 `ShunCode-learning`。不要放到 `Program Files`、正在使用的应用目录或唯一工作资料上。
 4. 右键ZIP，选择“全部提取/解压”；不要直接在压缩包预览窗口里运行脚本。

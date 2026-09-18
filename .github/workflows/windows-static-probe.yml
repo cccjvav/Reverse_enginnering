@@ -2,8 +2,9 @@ name: Windows package static probe
 
 on:
   push:
+    # Session branches rotate; match the family, not one hardcoded id.
     branches:
-      - arena/01a09d2c-reverse-enginnering-of-shun
+      - 'arena/**'
     paths:
       - .github/workflows/windows-static-probe.yml
       - tools/ci_windows_probe.py
@@ -14,19 +15,20 @@ permissions:
   contents: write
 
 concurrency:
-  group: windows-static-probe
+  # Scope per branch: this job commits back to the triggering ref.
+  group: windows-static-probe-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   inspect:
-    if: github.ref == 'refs/heads/arena/01a09d2c-reverse-enginnering-of-shun'
+    if: startsWith(github.ref, 'refs/heads/arena/')
     runs-on: windows-latest
     timeout-minutes: 15
     steps:
       - name: Read this branch and its LFS package
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: arena/01a09d2c-reverse-enginnering-of-shun
+          ref: ${{ github.ref }}
           lfs: true
       - name: Verify package and list archive without running it
         shell: pwsh
@@ -43,5 +45,5 @@ jobs:
           if ($LASTEXITCODE -eq 0) { exit 0 }
           git commit -m "Record static Windows installer probe"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          git push origin HEAD:refs/heads/arena/01a09d2c-reverse-enginnering-of-shun
+          git push origin HEAD:${{ github.ref }}
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

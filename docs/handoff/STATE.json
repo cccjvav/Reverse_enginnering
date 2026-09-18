@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-17",
+  "updated": "2026-09-18",
   "purpose": "Handoff snapshot, not a release attestation. Verify current git HEAD and re-run commands before trusting it.",
-  "branch": "arena/01a09d2c-reverse-enginnering-of-shun",
-  "baseCommitBeforeHandoff": "b77a9e512cd491de1efa2101ee578a5e647a2de5",
+  "branch": "arena/01a0afd4-reverse-enginnering-of-shun",
+  "baseCommitBeforeHandoff": "df7dde398d7d24e544bf233064743c89474cdd35",
   "portableImplementationCommit": "ee8ebed225e64fd0987f611a8f16a048d993a3f0",
   "release": {
     "status": "NOT_READY",
@@ -40,7 +40,7 @@
     "richCardsRestored": false
   },
   "localVerification": {
-    "scope": "This handoff working tree: static audit/test/docs additions, no application source changes; Linux, not Windows/GUI. Raw transient logs in .work, summarized here rather than published.",
+    "scope": "This handoff working tree: CI branch-binding fix, new structural workflow regression, docs/coverage regeneration. No application source, authorization or release-gate changes. Linux, not Windows/GUI.",
     "nodeVersion": "v22.22.3",
     "pythonVersion": "3.11.2",
     "npmTest": {
@@ -50,19 +50,22 @@
     },
     "pythonUnittest": {
       "exitCode": 0,
-      "run": 34,
-      "passed": 31,
+      "run": 39,
+      "passed": 36,
       "skippedWindowsOnly": 3
     },
     "commandsPassed": [
       "npm run check:bridge-core",
+      "npm run check:linked-extension",
+      "npm run check:http-extension",
       "npm run build:portable-extension",
       "npm run check:portable-extension",
       "npm run diagnose:portable-types",
       "npm run learn:build",
       "npm run learn:check",
-      "node tools/audit_authorization_wiring.mjs --write",
-      "node --test tests/bridge-core-authorization-wiring.test.mjs"
+      "npm run audit:boundary",
+      "npm run audit:authorization-wiring",
+      "python3 -m unittest tests.test_ci_workflow_branch_binding"
     ],
     "expectedNonzero": {
       "npm run check:release": 2
@@ -103,8 +106,8 @@
     "implementedThisTurn": "Hash-verified AST and portable input-graph audit only; no host permission service or runtime integration"
   },
   "learning": {
-    "files": 168,
-    "lines": 31303,
+    "files": 169,
+    "lines": 31412,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -119,7 +122,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Follow docs/handoff/NEXT_AUTHORIZATION.md P1.1: trace trusted session owner and cancellation lifecycle; design fail-closed host-owned file permission contract before wiring maintained dispatcher.",
+  "nextAction": "Confirm this branch's first CI run id/conclusion after push, then start docs/handoff/NEXT_AUTHORIZATION.md P1.1: trace trusted session owner and cancellation lifecycle; design fail-closed host-owned file permission contract before wiring the maintained dispatcher. The CI fix changed no release gate.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -137,6 +140,14 @@
   "freshnessRules": [
     "Do not treat baseCommitBeforeHandoff as the newest HEAD. Fetch and inspect remote before merging or pushing.",
     "Distinguish freshly rerun local tests from previous CI evidence.",
-    "Update task status, journal and evidence after implementation; never force release gates to PASS."
-  ]
+    "Update task status, journal and evidence after implementation; never force release gates to PASS.",
+    "Workflows must stay branch-family matched. If a future session branch leaves the arena/** family, fix the workflows and tests/test_ci_workflow_branch_binding.py together, never by re-hardcoding an id."
+  ],
+  "ci": {
+    "branchBinding": "fixed-this-turn",
+    "detail": "All three workflows previously hardcoded arena/01a09d2c-...: new session branches got no trigger, job guards skipped everything, and the two evidence workflows checked out AND pushed back to the retired branch. Now: push filter arena/**, guards startsWith(refs/heads/arena/), checkout/push use ${{ github.ref }}, per-branch concurrency groups.",
+    "regression": "tests/test_ci_workflow_branch_binding.py (5 assertions, mutation-verified)",
+    "verifiedOnThisBranch": false,
+    "note": "Static assertions only. Real trigger behaviour on this branch must be confirmed by run id after push."
+  }
 }

@@ -685,3 +685,38 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 - `gh run watch 35232127826 --exit-status`作为后台进程等待，退出0：Ubuntu job105238656156（1分17秒）、Windows 2022 job105238656709（1分38秒）、普通CMD+conda job105238656649（3分39秒）均success。
 - 从GitHub API保存run和3个jobs的步骤/起止时间到`docs/evidence/handoff-integration-tests.json`。保留Action Node20弃用/被迫Node24告警；这是Action运行时，不是项目Node22错误。未归档完整逐条远端日志，不扩张证据范围。
 - STATE.json和交接入口补上本轮真实CI，不再pending-push。后续仅证据/文档提交，明确CI被测代码SHA为2d26aca；P1仍READY（审计完成、宿主服务实现未开始），下一步按P1.1确认可信owner/取消生命周期后设计策略。
+
+## 30. 接手校正：CI分支绑定失效与回归护栏（2026-09-18）
+
+新一轮会话分支为`arena/01a0afd4-reverse-enginnering-of-shun`。按交接要求先核验远端：`git ls-remote`显示`arena/01a09d2c-reverse-enginnering-of-shun`与本地HEAD同为`df7dde398d7d24e544bf233064743c89474cdd35`，无需快进，也没有可合并的新提交；工作树干净。
+
+### 30.1 复现基线（Linux，非Windows/GUI）
+
+- `npm ci --ignore-scripts --no-audit --no-fund`成功，23包；Node v22.22.3、Python 3.11.2。
+- `check:bridge-core`41模块/389声明/262904字节通过；`build/check:portable-extension`与`diagnose:portable-types`退出0，75输入/31alias/2政策替换/1677498字节、候选类型0错误。
+- 交接前基线：`npm test` 144/144通过；`python3 -m unittest discover -s tests` 34运行/31通过/3项Windows专属跳过；`check:release`退出2、NOT_READY、2PASS+7BLOCKED。
+- 另核验`check:linked-extension`、`check:http-extension`、`learn:check`、`audit:boundary`、`audit:authorization-wiring`全部退出0，无证据漂移。以上为复现，不是新进展。
+
+### 30.2 交接文档未记录的阻断缺陷：CI仍绑定已退役分支
+
+三个workflow把上一条会话分支ID写死，接手后实际后果不是“少跑一点”，而是：
+
+- `push.branches`只列`arena/01a09d2c-...`，本分支推送**不触发任何workflow**；
+- 即便手动`workflow_dispatch`，job级`if: github.ref == 'refs/heads/arena/01a09d2c-...'`会把全部job判为skipped；
+- 更严重的是两个证据型workflow用`ref: arena/01a09d2c-...`检出、并`git push origin HEAD:refs/heads/arena/01a09d2c-...`写回**旧分支**。在新分支触发却测旧代码、把报告提交到旧分支，属于会产生错误证据的行为，不只是覆盖缺失。
+
+修正为会话分支族匹配，不是放开到所有分支：`branches: ['arena/**']`；job守卫`startsWith(github.ref, 'refs/heads/arena/')`；检出与写回一律用触发态`${{ github.ref }}`；两个写回型workflow的`concurrency.group`追加`-${{ github.ref }}`，避免不同会话分支互相串行或抢同一组。保留原有paths过滤、pinned action SHA、LFS与失败传播设置，未放宽`permissions`，未新增部署或密钥步骤。
+
+### 30.3 新增结构回归，避免再次静默退化
+
+新增`tests/test_ci_workflow_branch_binding.py`（5项）：断言无workflow残留具体会话ID（正则兜底任意`arena/<8位hex>-*`）、push触发匹配`arena/**`、job守卫分支无关、证据型workflow检出/写回使用触发ref（允许40位pinned SHA形式的action ref）、写回型并发组按分支隔离。仓库未声明PyYAML、恢复conda环境也不含，故按GitHub实际求值的字面串做结构断言，并在文件头写明该测试不代表workflow运行成功或任何门槛通过。
+
+首次运行因把`git push origin \S+`写成非贪婪单词匹配，截断`${{ github.ref }}`导致误报；修正为行尾匹配后通过。变异验证：把push触发改回硬编码分支、把写回目标改回固定分支，两次分别有2项失败，确认断言不是恒真。同时给CI paths加入该测试文件。
+
+### 30.4 本轮复验与边界
+
+- `python3 -m unittest discover -s tests -q`：39运行、36通过、3项Windows专属跳过（新增5项后由34→39）。
+- `npm test`仍144/144通过；`learn:build`更新为169文件/31412行，`learn:check`退出0；6文件363行人工解释与full:false不变，新增测试尚无逐行教程。
+- `check:release`仍退出2/NOT_READY，七门槛维持BLOCKED。**本次是CI基础设施与回归护栏修复，不触碰授权实现，不改变任何发布门槛。**
+- `git diff`确认`recovered/`、`reconstructed/`、`community/`、`reference/`、ZIP与EXE零改动；portable bundle SHA仍`635190e...a2daa`。
+- 未验证项：workflow在新分支的真实触发结果需推送后以实际run ID为准，本地静态断言不能替代；Windows/GUI/安装器与P1宿主授权仍未开始，P1状态不变。

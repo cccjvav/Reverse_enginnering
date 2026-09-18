@@ -2,7 +2,8 @@ name: Windows installer forensics
 
 on:
   push:
-    branches: [arena/01a09d2c-reverse-enginnering-of-shun]
+    # Session branches rotate; match the family, not one hardcoded id.
+    branches: ['arena/**']
     paths:
       - .github/workflows/installer-forensics.yml
       - tools/installer_forensics.py
@@ -22,19 +23,21 @@ permissions:
   contents: write
 
 concurrency:
-  group: windows-installer-forensics
+  # Scope per branch: evidence is committed back to the triggering ref, so
+  # two session branches must not serialise behind one global group.
+  group: windows-installer-forensics-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   inspect:
-    if: github.ref == 'refs/heads/arena/01a09d2c-reverse-enginnering-of-shun'
+    if: startsWith(github.ref, 'refs/heads/arena/')
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Checkout this branch with the original LFS sample
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: arena/01a09d2c-reverse-enginnering-of-shun
+          ref: ${{ github.ref }}
           lfs: true
       - name: Install static archive readers (not the application)
         run: |
@@ -101,7 +104,7 @@ jobs:
           git add -- docs/evidence/extractor-build.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Record installer identification and static extraction evidence"
-          git push origin HEAD:refs/heads/arena/01a09d2c-reverse-enginnering-of-shun
+          git push origin HEAD:${{ github.ref }}
       - name: Propagate extractor build failure after saving diagnostics
         if: steps.build.outcome != 'success' || steps.community.outcome != 'success'
         run: exit 1

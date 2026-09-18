@@ -59,7 +59,7 @@ python .\apply_community.py --app-dir "C:\Test\ShunCode" --restore "C:\Test\Shun
 
 ## 路线二：从公开维护代码自行生成相同补丁（开发者）
 
-先按 [CMD+conda指南](../docs/WINDOWS_CMD_CONDA.md) 创建并激活恢复环境，再在 GitHub 选择 `arena/01a09d2c-reverse-enginnering-of-shun` 分支下载源码，或克隆该分支。不需要从聊天下载附件。源码 ZIP 中的 EXE 可能只是 Git LFS 指针，不能当安装器使用；复现当前补丁不需要下载那个 EXE。
+先按 [CMD+conda指南](../docs/WINDOWS_CMD_CONDA.md) 创建并激活恢复环境，再在 GitHub 选择当前工作分支（现为 `arena/01a0afd4-reverse-enginnering-of-shun`；每轮接力会换成新的 `arena/...` 名字，打不开就在分支下拉框里选最新的那个）下载源码，或克隆该分支。不需要从聊天下载附件。源码 ZIP 中的 EXE 可能只是 Git LFS 指针，不能当安装器使用；复现当前补丁不需要下载那个 EXE。
 
 仓库根目录，普通CMD中激活 `shuncode-recovery` 后（不要用py -3切到全局Python）：
 

@@ -2,7 +2,9 @@ name: Reconstructed Bridge core tests
 
 on:
   push:
-    branches: [arena/01a09d2c-reverse-enginnering-of-shun]
+    # Session branches rotate (arena/<id>-...). Match the family instead of one
+    # hardcoded id so a handoff to a new branch keeps its own CI coverage.
+    branches: ['arena/**']
     paths:
       - .github/workflows/bridge-core-tests.yml
       - .gitattributes
@@ -44,6 +46,7 @@ on:
       - tests/helpers/**
       - tests/bridge-core-*.test.mjs
       - tests/community-*.test.mjs
+      - tests/test_ci_workflow_branch_binding.py
   workflow_dispatch:
 
 permissions:
@@ -51,7 +54,7 @@ permissions:
 
 jobs:
   core:
-    if: github.ref == 'refs/heads/arena/01a09d2c-reverse-enginnering-of-shun'
+    if: startsWith(github.ref, 'refs/heads/arena/')
     strategy:
       fail-fast: false
       matrix:
@@ -79,7 +82,7 @@ jobs:
         run: python3 -m unittest discover -s tests -q
 
   windows-cmd-conda:
-    if: github.ref == 'refs/heads/arena/01a09d2c-reverse-enginnering-of-shun'
+    if: startsWith(github.ref, 'refs/heads/arena/')
     runs-on: windows-2022
     timeout-minutes: 20
     defaults:

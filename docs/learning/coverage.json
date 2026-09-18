@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 168,
-    "lines": 31303,
+    "files": 169,
+    "lines": 31412,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,22 +24,22 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "828a6899c35408a0fe39f7adf1987df5513426a666fd7bbad5223b8f232862fd",
-      "lines": 112,
+      "sha256": "2585b9e269617408b4754c763d9254fec195680794a7fa3e4c4f346d7dac1050",
+      "lines": 115,
       "explainedLines": 0,
       "status": "pending"
     },
     {
       "source": ".github/workflows/installer-forensics.yml",
-      "sha256": "2da2877545a503f3e605768b7a2e0ff795d288ff81f55d26b068b683eb3c8cf1",
-      "lines": 107,
+      "sha256": "0073fc35941266fd41ab3d376f4c98faf51e3ede71e2cae178fbcf53b6961cc1",
+      "lines": 110,
       "explainedLines": 0,
       "status": "pending"
     },
     {
       "source": ".github/workflows/windows-static-probe.yml",
-      "sha256": "b5b16489afb1f3e851ae5d20a09d4a91791105ee39e255592722c0d994500f32",
-      "lines": 47,
+      "sha256": "e49fb90ad05d9adf8786de7ded1fd8d93356bcf7e5a0ab58545ef54ca879a597",
+      "lines": 49,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -950,6 +950,13 @@
       "source": "tests/test_ci_windows_probe.py",
       "sha256": "9ef29c9f633f4458e3b9286fb6ce7dc12693bc3626b70081d21a85df1aa20e6b",
       "lines": 33,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/test_ci_workflow_branch_binding.py",
+      "sha256": "47c36efec7f8a97b8f27f97fc9ad0c73bef710b2c7ef0208968dea04bedcf371",
+      "lines": 101,
       "explainedLines": 0,
       "status": "pending"
     },
