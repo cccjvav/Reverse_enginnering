@@ -20,15 +20,17 @@
     "custom-tools",
     "file-tool-input-compat",
     "file-tool-registry",
+    "find-files",
     "jsonrpc-request-id-registry",
     "managed-command-cancellation",
+    "search-files",
     "tool-input-validation"
   ],
   "moduleCount": 41,
-  "declarationsTotal": 414,
-  "fullyTypedDeclarations": 298,
-  "anyOccurrences": 399,
-  "fullyTypedPercent": 72.0,
+  "declarationsTotal": 386,
+  "fullyTypedDeclarations": 323,
+  "anyOccurrences": 191,
+  "fullyTypedPercent": 83.7,
   "modules": {
     "adaptive-concurrency": {
       "declarations": 7,
@@ -157,9 +159,10 @@
       "handWritten": true
     },
     "find-files": {
-      "declarations": 27,
-      "fullyTyped": 3,
-      "anyOccurrences": 94
+      "declarations": 16,
+      "fullyTyped": 16,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "ide-tool-definitions": {
       "declarations": 7,
@@ -219,9 +222,10 @@
       "anyOccurrences": 12
     },
     "search-files": {
-      "declarations": 32,
-      "fullyTyped": 3,
-      "anyOccurrences": 114
+      "declarations": 15,
+      "fullyTyped": 15,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "snapshot-build-metadata": {
       "declarations": 1,
@@ -256,18 +260,6 @@
     }
   },
   "worstModules": [
-    {
-      "module": "search-files",
-      "declarations": 32,
-      "fullyTyped": 3,
-      "anyOccurrences": 114
-    },
-    {
-      "module": "find-files",
-      "declarations": 27,
-      "fullyTyped": 3,
-      "anyOccurrences": 94
-    },
     {
       "module": "read-files",
       "declarations": 14,
@@ -315,8 +307,20 @@
       "declarations": 1,
       "fullyTyped": 0,
       "anyOccurrences": 3
+    },
+    {
+      "module": "custom-tool-migration",
+      "declarations": 2,
+      "fullyTyped": 1,
+      "anyOccurrences": 3
+    },
+    {
+      "module": "managed-command-id",
+      "declarations": 5,
+      "fullyTyped": 5,
+      "anyOccurrences": 2
     }
   ],
-  "interpretation": "298 of 414 exported declarations (72.0%) carry a type with no `any`. The remaining 116 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
+  "interpretation": "323 of 386 exported declarations (83.7%) carry a type with no `any`. The remaining 63 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
   "doesNotClaim": "A declaration without `any` is not proof the type is correct, only that inference produced something specific. Correctness still depends on the evidence tiers in docs/evidence/btype-evidence.json."
 }

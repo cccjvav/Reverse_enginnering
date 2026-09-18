@@ -61,6 +61,20 @@ justification so a later reader can audit it:
 A wrong-but-plausible type is worse than `any`, because it stops the compiler
 from asking the question. Where evidence runs out, the type says so.
 
+## Cross-checking declarations against the code
+
+A declaration compiles whether or not it matches the JavaScript it describes, so
+`npm run check:btypes` compares every exported function's parameter list against
+its implementation. It has caught six real defects so far, including
+`isInsideRoot` declared with its two arguments **reversed** — which would have
+sent callers' arguments through backwards while compiling perfectly — and three
+separate invented parameters (`asObjectRow(label)`, `validateGlob(label)`,
+`stagePlans(signal)`).
+
+112 functions now cross-check clean. The tool reports its own limits: class
+methods, re-exports and const-assigned arrows are out of scope, so a clean run
+is not proof of full agreement.
+
 ## A mistake worth recording
 
 While typing `custom-tool-admin` I gave `CustomToolToggleResult` a `path` field.
@@ -74,7 +88,7 @@ exist.
 
 ## Done so far
 
-Coverage has moved **32.8% → 64.0%** (116/354 → 270/422 declarations), measured
+Coverage has moved **32.8% → 83.7%** (116/354 → 323/386 declarations), measured
 by `tools/diagnose_btypes.py` rather than asserted. Twelve modules typed, each measuring 0 `any` — this now covers **every Tier A
 module whose types the author's own sources name**:
 

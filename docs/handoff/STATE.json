@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Continue the behaviour-only modules: search-files (114 any), find-files (94), read-files (53), read-image (50), then the smaller remainder. Run npm run verify:btypes and npm run check:btypes each time.",
+  "nextAction": "Finish step 2: read-files, read-image, then the small remainder (managed-command-risk, canonical-diff, custom-tool-manifest, ripgrep-diagnostics, workspace-paths, mcp-protocol, build-info, the three snapshot modules). Run npm run verify:btypes and npm run check:btypes each time.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -386,9 +386,9 @@
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 414,
-      "fullyTyped": 298,
-      "percent": 72.0,
+      "exportedDeclarations": 386,
+      "fullyTyped": 323,
+      "percent": 83.7,
       "anyOccurrences": null,
       "handWrittenModules": [
         "adaptive-concurrency",
@@ -407,8 +407,10 @@
         "custom-tools",
         "file-tool-input-compat",
         "file-tool-registry",
+        "find-files",
         "jsonrpc-request-id-registry",
         "managed-command-cancellation",
+        "search-files",
         "tool-input-validation"
       ],
       "note": "all six hand-written modules measure 0 any; the diagnostic strips comments so prose using the word 'any' cannot skew it"
@@ -446,9 +448,10 @@
         "isInsideRoot declared with its two arguments reversed - the real order is (root, target)",
         "canonicalRoots declared sync when it is async",
         "stagePlans declared with a signal parameter it does not take",
-        "asObjectRow declared with an invented `label` parameter"
+        "asObjectRow declared with an invented `label` parameter",
+        "validateGlob declared with an invented `label` parameter"
       ],
-      "status": "105 functions checked, 0 findings",
+      "status": "112 functions checked, 0 findings",
       "limits": "Only top-level export function declarations are compared; class methods and re-exports are out of scope, so a clean report is not proof of full agreement."
     },
     "weakerEvidenceTier": "apply-patch is the first module with NO first-hand evidence - no recovered .ts imports it, so none of its type names are known to be the author's. Its input contract is still exact, because APPLY_PATCH_TOOL.inputSchema survived compilation as a runtime value. The PROVENANCE block says so explicitly."
