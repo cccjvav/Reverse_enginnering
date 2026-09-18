@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Continue step 2: type custom-tool-skill-import, bridge-http-router and bridge-coordination-validation (remaining tier-A), then the tier-B schema modules. Run npm run verify:btypes and tools/diagnose_btypes.py each time.",
+  "nextAction": "Step 2 continues with the lower-evidence modules: file-tool-input-compat (27 any), tool-input-validation, custom-tool-admin, bridge-event-store, then the 17 modules no author source references - those are behaviour-only reconstruction and must be labelled as such.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -382,21 +382,24 @@
       "C_inferred": "tsc inference; degrades to any",
       "unreferenced": "17 modules referenced by no author source - behaviour-only reconstruction"
     },
-    "done": "6 tier-A modules typed: managed-command-cancellation, file-tool-registry, bridge-activity-tracker, custom-tool-contract, custom-tools, custom-tool-skill. Each verified twice - the author's own call site reproduced verbatim typechecks with 0 errors, and a negative probe confirms the types reject real mistakes.",
+    "done": "12 modules typed, covering every tier-A module the author's sources name a type from. Each verified twice - the author's own call site reproduced verbatim typechecks with 0 errors, and a negative probe confirms the types reject real mistakes.",
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 397,
-      "fullyTyped": 199,
-      "percent": 50.1,
+      "exportedDeclarations": 409,
+      "fullyTyped": 231,
+      "percent": 56.5,
       "anyOccurrences": null,
       "handWrittenModules": [
         "bridge-activity-tracker",
+        "bridge-coordination-validation",
+        "bridge-http-router",
         "bridge-session-registry",
         "concurrency",
         "custom-tool-contract",
         "custom-tool-sandbox",
         "custom-tool-skill",
+        "custom-tool-skill-import",
         "custom-tools",
         "file-tool-registry",
         "managed-command-cancellation"
@@ -410,7 +413,9 @@
       "SkillLoadDiagnosis": "Modelled as a discriminated union on `loaded`. The author's own code (bridge-server.ts:308-318) both maps over it and hand-builds a failing entry that still carries `name`, which is why the failure branch keeps name optional rather than omitting it.",
       "findCustomTool": "Returns CustomToolManifest | undefined - not a guess: the author's wrapper at bridge-tool-dispatcher.ts:219 declares exactly that return type. Disabled tools are invisible to it, so a caller cannot accidentally execute one.",
       "BridgeSessionRegistry": "Generic in the session type: the author writes BridgeSessionRegistry<McpSession> (bridge-mcp-transport.ts:183,202). The destroy reason is deliberately a widened string, not a closed union - the module emits four values but the author passes 'bridge-shutdown' and 'initialize-error' from the extension, so a closed union would reject their own code.",
-      "Semaphore.setLimit": "Lowering the ceiling never revokes a held permit, so `active` can legitimately exceed `limit` until in-flight work drains. Documented on the type because callers must not assume active <= limit."
+      "Semaphore.setLimit": "Lowering the ceiling never revokes a held permit, so `active` can legitimately exceed `limit` until in-flight work drains. Documented on the type because callers must not assume active <= limit.",
+      "SkillRunnerResult": "Discriminated union on `generated`: runnerRel exists only on the generated branch, so reading it forces a check first. The JS returns two differently-shaped literals (lines 157 and 160), which a single optional-field interface would have flattened and lost.",
+      "parseBridgePlan": "Assigns positional ids plan-1, plan-2 on every call. A plan is replaced wholesale rather than patched, so the ids are deliberately not stable across calls."
     },
     "verification": {
       "command": "npm run verify:btypes",

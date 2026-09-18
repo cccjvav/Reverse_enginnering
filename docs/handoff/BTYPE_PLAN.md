@@ -63,9 +63,9 @@ from asking the question. Where evidence runs out, the type says so.
 
 ## Done so far
 
-Coverage has moved **32.8% → 50.1%** (116/354 → 199/397 declarations), measured
-by `tools/diagnose_btypes.py` rather than asserted. Six Tier A modules typed,
-each measuring 0 `any`:
+Coverage has moved **32.8% → 56.5%** (116/354 → 231/409 declarations), measured
+by `tools/diagnose_btypes.py` rather than asserted. Twelve modules typed, each measuring 0 `any` — this now covers **every Tier A
+module whose types the author's own sources name**:
 
 | Module | Was | Now |
 | --- | --- | --- |
@@ -78,6 +78,9 @@ each measuring 0 `any`:
 | `custom-tool-sandbox` | — | 4/4 typed |
 | `concurrency` | 20 `any` | 4/4 typed |
 | `bridge-session-registry` | 17 `any` | 2/2 typed |
+| `custom-tool-skill-import` | 27 `any` | 20/20 typed |
+| `bridge-coordination-validation` | 17 `any` | 9/9 typed |
+| `bridge-http-router` | 16 `any` | 9/9 typed |
 
 Three findings worth keeping, none of which the JavaScript alone would give up:
 
@@ -99,6 +102,10 @@ Three findings worth keeping, none of which the JavaScript alone would give up:
 - **`Semaphore.setLimit` never revokes held permits**, so `active` can exceed
   `limit` until in-flight work drains — documented on the type, because a caller
   assuming otherwise would be wrong.
+- **`SkillRunnerResult` is a discriminated union** on `generated`: the shipped
+  code returns two differently-shaped literals, and `runnerRel` exists only on
+  the generated branch. A single interface with an optional field would have
+  flattened that and let callers read a field that isn't there.
 - **`findCustomTool` returns `| undefined`** — the author's own wrapper declares
   that return type (`bridge-tool-dispatcher.ts:219`), and disabled tools are
   invisible to it, so a caller cannot accidentally execute one.
