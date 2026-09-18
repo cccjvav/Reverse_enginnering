@@ -435,6 +435,51 @@ test('each tool is authorized on its own; read approval does not unlock the othe
   assert.equal(found.isError, undefined);
 });
 
+test('patch plans survive a root whose realpath differs from the host spelling', async t => {
+  // Regression: the executors realpath() workspace roots before calling
+  // checkPermission, so a plan keyed by the host's raw spelling never matched.
+  // On Windows this fires by default because mkdtemp/TEMP hands back an 8.3
+  // short name (RUNNER~1) that realpath expands; a symlinked root reproduces
+  // the identical mismatch on POSIX. CI caught this on windows-2022 only.
+  const base = await mkdtemp(path.join(os.tmpdir(), 'shuncode-authz-link-'));
+  t.after(() => rm(base, {recursive: true, force: true}));
+  const real = path.join(base, 'real');
+  const link = path.join(base, 'link');
+  await mkdir(real, {recursive: true});
+  await writeFile(path.join(real, 'a.txt'), CONTENT);
+  const {symlink, realpath} = await import('node:fs/promises');
+  try {
+    await symlink(real, link, 'junction');
+  } catch (error) {
+    t.skip(`symlinked roots unavailable here: ${error.code}`);
+    return;
+  }
+
+  // Only run the assertion when the two spellings genuinely differ.
+  const resolvedRoot = await realpath(link);
+  assert.notEqual(resolvedRoot, link, 'fixture must produce a differing realpath');
+
+  const owner = bridgeOwner();
+  const seen = [];
+  const policy = new FileAuthorizationPolicy({
+    approve: request => {seen.push([request.operation, request.absolutePath]); return true;},
+  });
+  const created = await invokeFileToolWithPolicy('apply_patch',
+    {patch: '*** Begin Patch\n*** Add File: new.txt\n+hello\n*** End Patch'},
+    {policy, owner, workspaceRoots: [link], patchPlan: new Map([[path.join(link, 'new.txt'), 'add']])});
+
+  assert.equal(created.isError, undefined, created.text);
+  assert.equal(await readFile(path.join(real, 'new.txt'), 'utf8'), 'hello\n');
+  assert.deepEqual(seen.map(([operation]) => operation), ['create']);
+
+  // A path genuinely absent from the plan must still fail closed.
+  const unplanned = await invokeFileToolWithPolicy('apply_patch',
+    {patch: '*** Begin Patch\n*** Update File: a.txt\n@@\n-alpha\n+CHANGED\n*** End Patch'},
+    {policy, owner, workspaceRoots: [link], patchPlan: new Map([[path.join(link, 'new.txt'), 'add']])});
+  assert.equal(unplanned.isError, true);
+  assert.equal(await readFile(path.join(real, 'a.txt'), 'utf8'), CONTENT);
+});
+
 test('cancelling mid-call denies and the permission callback reports the owner scope', async t => {
   const root = await fixture(t);
   const controller = new AbortController();

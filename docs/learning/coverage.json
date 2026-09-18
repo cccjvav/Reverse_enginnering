@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 172,
-    "lines": 32241,
+    "lines": 32335,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -45,8 +45,8 @@
     },
     {
       "source": "community/bridge-core/authorized-file-tools.mjs",
-      "sha256": "45c82066bda5ee09c19a91b16e1a43e08f47446e2669f3c987cf75469035e739",
-      "lines": 97,
+      "sha256": "5e2cc1ac3702c7236c6026290a921d0c612f8c0159e5a18c049343ce62bf134d",
+      "lines": 146,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -843,8 +843,8 @@
     },
     {
       "source": "tests/bridge-core-file-authorization.test.mjs",
-      "sha256": "3026c6de469ce0f6fb728197ffa4732c1f2ab6c45169266a4a3018d9bd0cd675",
-      "lines": 453,
+      "sha256": "58311973f8c65df10b234d44b811845e4c1f05be2c4c6b730882931d03d8d0c8",
+      "lines": 498,
       "explainedLines": 0,
       "status": "pending"
     },

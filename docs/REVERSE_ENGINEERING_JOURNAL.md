@@ -778,3 +778,15 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 `npm test` 161/161通过（新增17项）；Python 39运行/36通过/3项Windows专属跳过；`learn:build`更新为172文件/32241行、`learn:check`退出0；7个check/audit命令全部退出0；**portable包仍75输入、SHA仍`635190e6…a2daa`**，两个新模块确认未进入任何bundle；原件、reconstructed、既有维护模块零改动。
 
 `check:release`仍退出2、NOT_READY，`authorization-integration`维持BLOCKED——本轮只有维护层策略与单测，**没有宿主UI审批、没有源码构建入口、没有真实扩展激活**，按NEXT_AUTHORIZATION.md的完成边界这些都不足以改门槛。
+
+### 31.4 Windows专属缺陷：CI抓到Linux测不出的真实问题
+
+P1.2首次推送后CI结果分裂：`core (ubuntu-24.04)`成功，**`core (windows-2022)`与`windows-cmd-conda`双双失败**（分别停在`npm test`与`run-learning.cmd`调用的`npm test`，即同一根因）。远端日志blob在本沙箱仍多次EOF取不到，故改用源码推理+本地复现。
+
+根因是我的实现缺陷，不是测试环境问题：原执行器在调用`checkPermission`前会对工作区根做`realpath()`（`workspace-paths.js:16`），因此回调收到的是**解析后的真实路径**；而我要求宿主提供的`patchPlan`用的是调用方原始拼写。两者在Linux的`/tmp`下恰好一致，掩盖了问题。Windows上`mkdtemp`落在`C:\Users\RUNNER~1\...`这类8.3短名目录，`realpath`会展开为长名，键永远对不上，于是所有`apply_patch`授权都被判为"不在计划内"而拒绝。
+
+用符号链接根在Linux复现了完全相同的不匹配（approver看到`/real/a.txt`，计划键是`/link/a.txt`，`MATCH? false`，apply_patch报"touched a path that was not in the authorized plan"）。修复：`authorized-file-tools.mjs`新增`canonicalizePatchPlan`，按执行器同样的方式解析计划键——存在的路径用`realpath`，新增文件（尚不存在）回退为"父目录realpath + basename"，与`apply-patch.js`的`resolveNewPath`一致；Windows额外按小写索引以容忍大小写不敏感文件系统。**失败仍然是fail-closed的**：真正不在计划内的路径照旧拒绝。
+
+新增第18项测试覆盖该情形，使用`symlink(..., 'junction')`（Windows上junction亦可用），当平台不支持时`t.skip`而非静默通过，并断言两种拼写确实不同才继续。变异验证：去掉`canonicalizePatchPlan`调用后该测试失败，恢复后通过。
+
+这条正好说明修CI分支绑定的价值：**只有Linux通过是不够的，这个缺陷只有Windows作业能暴露。** 本地162 Node全通过、Python 39运行/36通过/3跳过、portable包仍75输入且SHA不变、`check:release`仍退出2。

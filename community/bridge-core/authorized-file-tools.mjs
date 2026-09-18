@@ -17,11 +17,57 @@
 //   * The executors re-resolve paths after the callback returns; this narrows
 //     but does not eliminate TOCTOU.
 
+import path from 'node:path';
+import {realpath} from 'node:fs/promises';
 import {
   FileAuthorizationError, FileAuthorizationPolicy, operationForCheckpoint, resolveOwnerScope,
 } from './file-authorization-policy.mjs';
 import {invokeAuthorizedFileTool} from './file-tool-dispatcher.mjs';
 import {normalizeFileToolName} from '../../reconstructed/bridge-core/src/file-tool-input-compat.js';
+
+/**
+ * Canonicalize a plan key so host-supplied spellings match what the executors
+ * actually report.
+ *
+ * The executors resolve workspace roots through realpath() before handing a
+ * path to checkPermission, so the callback receives a fully resolved path. A
+ * host building its plan from the raw root would never match on platforms
+ * where the two differ. Windows is the common case: mkdtemp/TEMP frequently
+ * yields an 8.3 short name (RUNNER~1) that realpath expands, and drive-letter
+ * case can differ; POSIX hits the same thing through symlinked roots.
+ *
+ * Resolution is best-effort: a path that cannot be resolved (for example the
+ * destination of an add, which does not exist yet) falls back to its parent's
+ * real path plus the base name, mirroring resolveNewPath in apply-patch.js.
+ */
+async function canonicalPlanKey(candidate) {
+  try {
+    return await realpath(candidate);
+  } catch {
+    try {
+      return path.join(await realpath(path.dirname(candidate)), path.basename(candidate));
+    } catch {
+      return path.resolve(candidate);
+    }
+  }
+}
+
+/**
+ * Normalize a caller-supplied patch plan into canonical absolute paths.
+ *
+ * Windows filesystems are case-insensitive, so keys are additionally indexed
+ * case-folded there to avoid a spelling mismatch denying a legitimate grant.
+ */
+async function canonicalizePatchPlan(patchPlan) {
+  const canonical = new Map();
+  if (!patchPlan) return canonical;
+  for (const [candidate, action] of patchPlan) {
+    const key = await canonicalPlanKey(candidate);
+    canonical.set(key, action);
+    if (process.platform === 'win32') canonical.set(key.toLowerCase(), action);
+  }
+  return canonical;
+}
 
 /**
  * Infer the apply_patch checkpoint for a path.
@@ -31,7 +77,8 @@ import {normalizeFileToolName} from '../../reconstructed/bridge-core/src/file-to
  * arguments. An unmapped path fails closed rather than defaulting to `modify`.
  */
 function patchActionForPath(plan, absolutePath) {
-  const entry = plan?.get(absolutePath);
+  const entry = plan?.get(absolutePath)
+    ?? (process.platform === 'win32' ? plan?.get(absolutePath.toLowerCase()) : undefined);
   if (!entry) {
     throw new FileAuthorizationError('INVALID_AUTHORIZATION_REQUEST',
       'apply_patch touched a path that was not in the authorized plan.');
@@ -82,6 +129,8 @@ export async function invokeFileToolWithPolicy(name, args, {policy, owner, works
   }
   const canonical = normalizeFileToolName(name);
   const roots = typeof workspaceRoots === 'function' ? workspaceRoots : () => workspaceRoots;
+  // Resolve plan keys the same way the executors resolve the paths they report.
+  const resolvedPlan = canonical === 'apply_patch' ? await canonicalizePatchPlan(patchPlan) : undefined;
   return await invokeAuthorizedFileTool(name, args, {
     workspaceRoots: roots,
     signal,
@@ -89,7 +138,7 @@ export async function invokeFileToolWithPolicy(name, args, {policy, owner, works
     // The dispatcher calls this as (absolutePath, canonicalToolName) and
     // requires a literal true; the policy returns exactly that.
     checkPermission: createPermissionCallback({
-      policy, owner, tool: canonical, workspaceRoots: roots, signal, patchPlan,
+      policy, owner, tool: canonical, workspaceRoots: roots, signal, patchPlan: resolvedPlan,
     }),
   });
 }
