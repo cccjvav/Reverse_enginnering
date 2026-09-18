@@ -82,6 +82,28 @@ def analyse(text: str):
             break  # first occurrence per method is enough to show the shape
     report["excerpts"] = excerpts
 
+    # The shipped main.js turned out to be unminified, so the author's actual
+    # implementation is readable verbatim. Capture the whole contiguous
+    # clipboard region (and the clipboardForType helper it relies on) instead of
+    # only keyhole windows, so the real source can be recovered rather than
+    # guessed at.
+    regions = []
+    for start_name, end_name in (("async readClipboardText(", "async hasClipboard("),
+                                 ("clipboardForType(", None)):
+        i = text.find(start_name)
+        if i < 0:
+            continue
+        i = max(0, i - 40)
+        if end_name:
+            j = text.find(end_name, i)
+            j = len(text) if j < 0 else text.find("}", text.find("\n", j + 200)) + 1
+        else:
+            j = i + 700
+        chunk = text[i:min(j, i + 12000)]
+        regions.append({"anchor": start_name.strip(), "offset": i,
+                        "chars": len(chunk), "text": chunk})
+    report["authorImplementation"] = regions
+
     # Did the author keep a compatibility shim? Such code usually still mentions
     # the old names as strings or property keys even when the API is gone.
     report["oldNamesAsStrings"] = {
