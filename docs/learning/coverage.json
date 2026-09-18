@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 169,
-    "lines": 31412,
+    "lines": 31413,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -24,8 +24,8 @@
   "files": [
     {
       "source": ".github/workflows/bridge-core-tests.yml",
-      "sha256": "2585b9e269617408b4754c763d9254fec195680794a7fa3e4c4f346d7dac1050",
-      "lines": 115,
+      "sha256": "4034c8a43ba3e7662b5c6aa1ede8960a7cc1aab7c0dd56f7906b2fac1d77bfcd",
+      "lines": 116,
       "explainedLines": 0,
       "status": "pending"
     },
