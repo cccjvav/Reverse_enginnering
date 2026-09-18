@@ -720,3 +720,11 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 - `check:release`仍退出2/NOT_READY，七门槛维持BLOCKED。**本次是CI基础设施与回归护栏修复，不触碰授权实现，不改变任何发布门槛。**
 - `git diff`确认`recovered/`、`reconstructed/`、`community/`、`reference/`、ZIP与EXE零改动；portable bundle SHA仍`635190e...a2daa`。
 - 未验证项：workflow在新分支的真实触发结果需推送后以实际run ID为准，本地静态断言不能替代；Windows/GUI/安装器与P1宿主授权仍未开始，P1状态不变。
+
+### 30.5 推送后实测：触发已修复，但账号计费拦截使作业未执行
+
+推送`c8d2191`后，本分支**首次**产生三个workflow run（此前为0个，是修复生效的直接对照）：`35345456845`（Reconstructed Bridge core tests）、`35345456314`（Windows installer forensics）、`35345456431`（Windows package static probe），`head_branch`均为`arena/01a0afd4-reverse-enginnering-of-shun`、`head_sha`均为`c8d2191`，说明分支族匹配与job守卫确实放行了本分支。
+
+但三个run全部`failure`，原因不是代码：GitHub注解为“The job was not started because recent account payments have failed or your spending limit needs to be increased.”，API显示每个job的`steps`长度为**0**，即checkout/依赖安装/测试一步都没跑。
+
+因此本轮**不存在本分支的绿色CI结果**，也不能据此宣称跨平台通过。已如实记录在`docs/evidence/ci-branch-binding.json`，明确区分“触发绑定已验证”与“作业未执行”，并列出未被本次run证明的项（任何测试/类型/门槛结果、Windows CMD行为、证据写回是否正确——写回步骤根本没到达）。需仓库所有者先解除计费限制再重跑。本地Linux替代验证（144 Node、39 Python、check:release退出2）仅为沙箱结果，不能冒充GitHub runner或Windows验收。

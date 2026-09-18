@@ -122,7 +122,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Confirm this branch's first CI run id/conclusion after push, then start docs/handoff/NEXT_AUTHORIZATION.md P1.1: trace trusted session owner and cancellation lifecycle; design fail-closed host-owned file permission contract before wiring the maintained dispatcher. The CI fix changed no release gate.",
+  "nextAction": "Ask the repository owner to clear the GitHub Actions billing/spending-limit block, then re-run the three workflows to get the first real cross-platform result for this branch. Independently, start docs/handoff/NEXT_AUTHORIZATION.md P1.1: trace trusted session owner and cancellation lifecycle, then design the fail-closed host-owned file permission contract before wiring the maintained dispatcher.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -147,7 +147,14 @@
     "branchBinding": "fixed-this-turn",
     "detail": "All three workflows previously hardcoded arena/01a09d2c-...: new session branches got no trigger, job guards skipped everything, and the two evidence workflows checked out AND pushed back to the retired branch. Now: push filter arena/**, guards startsWith(refs/heads/arena/), checkout/push use ${{ github.ref }}, per-branch concurrency groups.",
     "regression": "tests/test_ci_workflow_branch_binding.py (5 assertions, mutation-verified)",
-    "verifiedOnThisBranch": false,
-    "note": "Static assertions only. Real trigger behaviour on this branch must be confirmed by run id after push."
+    "verifiedOnThisBranch": true,
+    "note": "Trigger binding CONFIRMED: push to this branch created all three runs with this branch/SHA (was zero runs before). Jobs did NOT execute - GitHub blocked startup for an account billing/spending-limit state, 0 steps recorded. No green CI result exists for this branch yet.",
+    "runs": {
+      "bridgeCoreTests": 35345456845,
+      "installerForensics": 35345456314,
+      "windowsStaticProbe": 35345456431
+    },
+    "evidence": "docs/evidence/ci-branch-binding.json",
+    "blockedBy": "GitHub account billing / spending limit (repository owner action required)"
   }
 }

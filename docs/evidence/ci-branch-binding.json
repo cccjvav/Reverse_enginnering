@@ -1,0 +1,101 @@
+{
+  "scope": "Evidence that CI trigger binding now resolves to THIS session branch. Jobs were blocked by a GitHub account billing state before any step executed, so this is NOT a green test result and NOT product/gate evidence.",
+  "branchBindingFixCommit": "c8d21910217aec47bcfaa34ec1a470279f590ad5",
+  "triggerBindingWorks": true,
+  "triggerEvidence": "Before the fix, workflows listed only arena/01a09d2c-... and no run was created for this branch. After the fix, a push to arena/01a0afd4-... created all three workflow runs with head_branch set to this branch and head_sha of this commit.",
+  "jobsExecuted": false,
+  "blockingReason": "GitHub Actions refused to start the jobs: 'The job was not started because recent account payments have failed or your spending limit needs to be increased.' All jobs report 0 recorded steps, so no checkout, install or test ran.",
+  "notProvenByThisRun": [
+    "Any test, typecheck, learning or release-gate result on this branch",
+    "Windows/CMD/conda job behaviour on this branch",
+    "That the evidence-writing workflows push back correctly (they never reached that step)"
+  ],
+  "actionRequiredByRepositoryOwner": "Resolve the GitHub billing/spending-limit state, then re-run these workflows to obtain real cross-platform results for this branch.",
+  "localSubstituteVerification": {
+    "note": "Run on Linux in the agent sandbox, not a GitHub runner and not Windows/GUI.",
+    "nodeTest": {
+      "passed": 144,
+      "failed": 0
+    },
+    "pythonUnittest": {
+      "run": 39,
+      "passed": 36,
+      "skippedWindowsOnly": 3
+    },
+    "checkRelease": {
+      "exitCode": 2,
+      "overall": "NOT_READY"
+    }
+  },
+  "runs": {
+    "Reconstructed Bridge core tests": {
+      "conclusion": "failure",
+      "created_at": "2026-09-18T12:35:12Z",
+      "event": "push",
+      "head_branch": "arena/01a0afd4-reverse-enginnering-of-shun",
+      "head_sha": "c8d21910217aec47bcfaa34ec1a470279f590ad5",
+      "html_url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35345456845",
+      "id": 35345456845,
+      "name": "Reconstructed Bridge core tests",
+      "status": "completed",
+      "jobs": [
+        {
+          "conclusion": "failure",
+          "name": "windows-cmd-conda",
+          "status": "completed",
+          "steps_recorded": 0
+        },
+        {
+          "conclusion": "failure",
+          "name": "core (ubuntu-24.04)",
+          "status": "completed",
+          "steps_recorded": 0
+        },
+        {
+          "conclusion": "failure",
+          "name": "core (windows-2022)",
+          "status": "completed",
+          "steps_recorded": 0
+        }
+      ]
+    },
+    "Windows installer forensics": {
+      "conclusion": "failure",
+      "created_at": "2026-09-18T12:35:12Z",
+      "event": "push",
+      "head_branch": "arena/01a0afd4-reverse-enginnering-of-shun",
+      "head_sha": "c8d21910217aec47bcfaa34ec1a470279f590ad5",
+      "html_url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35345456314",
+      "id": 35345456314,
+      "name": "Windows installer forensics",
+      "status": "completed",
+      "jobs": [
+        {
+          "conclusion": "failure",
+          "name": "inspect",
+          "status": "completed",
+          "steps_recorded": 0
+        }
+      ]
+    },
+    "Windows package static probe": {
+      "conclusion": "failure",
+      "created_at": "2026-09-18T12:35:12Z",
+      "event": "push",
+      "head_branch": "arena/01a0afd4-reverse-enginnering-of-shun",
+      "head_sha": "c8d21910217aec47bcfaa34ec1a470279f590ad5",
+      "html_url": "https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35345456431",
+      "id": 35345456431,
+      "name": "Windows package static probe",
+      "status": "completed",
+      "jobs": [
+        {
+          "conclusion": "failure",
+          "name": "inspect",
+          "status": "completed",
+          "steps_recorded": 0
+        }
+      ]
+    }
+  }
+}
