@@ -63,14 +63,17 @@ from asking the question. Where evidence runs out, the type says so.
 
 ## Done so far
 
-Coverage has moved **32.8% → 41.5%** (116/354 → 154/371 declarations), measured
-by `tools/diagnose_btypes.py` rather than asserted. Three Tier A modules typed,
+Coverage has moved **32.8% → 47.8%** (116/354 → 186/389 declarations), measured
+by `tools/diagnose_btypes.py` rather than asserted. Six Tier A modules typed,
 each measuring 0 `any`:
 
 | Module | Was | Now |
 | --- | --- | --- |
 | `managed-command-cancellation` | 109 `any` | 19/19 typed |
 | `file-tool-registry` | 94 `any` | 29/29 typed |
+| `custom-tool-skill` | 53 `any` | 28/28 typed |
+| `custom-tools` | 14 `any` | 13/13 typed |
+| `custom-tool-contract` | — | 13/13 typed |
 | `bridge-activity-tracker` | — | 6/6 typed |
 
 Three findings worth keeping, none of which the JavaScript alone would give up:
@@ -83,6 +86,12 @@ Three findings worth keeping, none of which the JavaScript alone would give up:
   the author depends on it ("Lazy on purpose").
 - **`FileToolResult.content` is optional**, evidenced by the author's
   `result.content ?? [...]` fallback — a mandatory field makes that dead code.
+- **`SkillLoadDiagnosis` is a discriminated union** on `loaded`, and its failure
+  branch keeps `name` optional because the author hand-builds a `duplicate-name`
+  failure that still carries the clashing name (`bridge-server.ts:310`).
+- **`findCustomTool` returns `| undefined`** — the author's own wrapper declares
+  that return type (`bridge-tool-dispatcher.ts:219`), and disabled tools are
+  invisible to it, so a caller cannot accidentally execute one.
 
 Each declaration is verified two ways:
 
