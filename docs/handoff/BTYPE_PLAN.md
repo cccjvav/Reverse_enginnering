@@ -63,7 +63,7 @@ from asking the question. Where evidence runs out, the type says so.
 
 ## Done so far
 
-Coverage has moved **32.8% → 47.8%** (116/354 → 186/389 declarations), measured
+Coverage has moved **32.8% → 50.1%** (116/354 → 199/397 declarations), measured
 by `tools/diagnose_btypes.py` rather than asserted. Six Tier A modules typed,
 each measuring 0 `any`:
 
@@ -75,6 +75,9 @@ each measuring 0 `any`:
 | `custom-tools` | 14 `any` | 13/13 typed |
 | `custom-tool-contract` | — | 13/13 typed |
 | `bridge-activity-tracker` | — | 6/6 typed |
+| `custom-tool-sandbox` | — | 4/4 typed |
+| `concurrency` | 20 `any` | 4/4 typed |
+| `bridge-session-registry` | 17 `any` | 2/2 typed |
 
 Three findings worth keeping, none of which the JavaScript alone would give up:
 
@@ -89,6 +92,13 @@ Three findings worth keeping, none of which the JavaScript alone would give up:
 - **`SkillLoadDiagnosis` is a discriminated union** on `loaded`, and its failure
   branch keeps `name` optional because the author hand-builds a `duplicate-name`
   failure that still carries the clashing name (`bridge-server.ts:310`).
+- **`BridgeSessionRegistry` is generic** in the session type, and its destroy
+  reason is deliberately a widened `string`: the module emits four values, but
+  the author passes `"bridge-shutdown"` and `"initialize-error"` from the
+  extension, so a closed union would reject their own code.
+- **`Semaphore.setLimit` never revokes held permits**, so `active` can exceed
+  `limit` until in-flight work drains — documented on the type, because a caller
+  assuming otherwise would be wrong.
 - **`findCustomTool` returns `| undefined`** — the author's own wrapper declares
   that return type (`bridge-tool-dispatcher.ts:219`), and disabled tools are
   invisible to it, so a caller cannot accidentally execute one.

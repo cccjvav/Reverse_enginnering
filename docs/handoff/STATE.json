@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "IN PROGRESS (step 2 of the corrected plan). B-layer typing baseline measured honestly at 116/354 declarations (32.8%) with 995 any. Evidence tiers inventoried in docs/evidence/btype-evidence.json; first hand-written declaration landed for managed-command-cancellation. See docs/handoff/BTYPE_PLAN.md."
   },
-  "nextAction": "Continue step 2 with the remaining tier-A modules (custom-tool-skill-import, bridge-http-router, bridge-session-registry, bridge-coordination-validation, concurrency), then the tier-B schema modules. Run npm run verify:btypes and tools/diagnose_btypes.py each time.",
+  "nextAction": "Continue step 2: type custom-tool-skill-import, bridge-http-router and bridge-coordination-validation (remaining tier-A), then the tier-B schema modules. Run npm run verify:btypes and tools/diagnose_btypes.py each time.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -386,12 +386,14 @@
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 393,
-      "fullyTyped": 191,
-      "percent": 48.6,
+      "exportedDeclarations": 397,
+      "fullyTyped": 199,
+      "percent": 50.1,
       "anyOccurrences": null,
       "handWrittenModules": [
         "bridge-activity-tracker",
+        "bridge-session-registry",
+        "concurrency",
         "custom-tool-contract",
         "custom-tool-sandbox",
         "custom-tool-skill",
@@ -406,7 +408,9 @@
       "FileToolContext.workspaceRoots": "Allowed to be a thunk, because invokeFileTool resolves it lazily so root-resolution failures are enveloped as tool errors rather than thrown. The author relies on this ('Lazy on purpose').",
       "FileToolResult.content": "Optional, evidenced by the author's `result.content ?? [...]` fallback; a mandatory field would make that dead code.",
       "SkillLoadDiagnosis": "Modelled as a discriminated union on `loaded`. The author's own code (bridge-server.ts:308-318) both maps over it and hand-builds a failing entry that still carries `name`, which is why the failure branch keeps name optional rather than omitting it.",
-      "findCustomTool": "Returns CustomToolManifest | undefined - not a guess: the author's wrapper at bridge-tool-dispatcher.ts:219 declares exactly that return type. Disabled tools are invisible to it, so a caller cannot accidentally execute one."
+      "findCustomTool": "Returns CustomToolManifest | undefined - not a guess: the author's wrapper at bridge-tool-dispatcher.ts:219 declares exactly that return type. Disabled tools are invisible to it, so a caller cannot accidentally execute one.",
+      "BridgeSessionRegistry": "Generic in the session type: the author writes BridgeSessionRegistry<McpSession> (bridge-mcp-transport.ts:183,202). The destroy reason is deliberately a widened string, not a closed union - the module emits four values but the author passes 'bridge-shutdown' and 'initialize-error' from the extension, so a closed union would reject their own code.",
+      "Semaphore.setLimit": "Lowering the ceiling never revokes a held permit, so `active` can legitimately exceed `limit` until in-flight work drains. Documented on the type because callers must not assume active <= limit."
     },
     "verification": {
       "command": "npm run verify:btypes",

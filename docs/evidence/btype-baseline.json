@@ -5,6 +5,8 @@
   "tscErrorCount": 0,
   "handWrittenModules": [
     "bridge-activity-tracker",
+    "bridge-session-registry",
+    "concurrency",
     "custom-tool-contract",
     "custom-tool-sandbox",
     "custom-tool-skill",
@@ -13,10 +15,10 @@
     "managed-command-cancellation"
   ],
   "moduleCount": 41,
-  "declarationsTotal": 393,
-  "fullyTypedDeclarations": 191,
-  "anyOccurrences": 695,
-  "fullyTypedPercent": 48.6,
+  "declarationsTotal": 397,
+  "fullyTypedDeclarations": 199,
+  "anyOccurrences": 658,
+  "fullyTypedPercent": 50.1,
   "modules": {
     "adaptive-concurrency": {
       "declarations": 3,
@@ -50,9 +52,10 @@
       "anyOccurrences": 16
     },
     "bridge-session-registry": {
-      "declarations": 1,
-      "fullyTyped": 0,
-      "anyOccurrences": 17
+      "declarations": 4,
+      "fullyTyped": 4,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "bridge-tool-name": {
       "declarations": 1,
@@ -75,9 +78,10 @@
       "anyOccurrences": 22
     },
     "concurrency": {
-      "declarations": 4,
-      "fullyTyped": 1,
-      "anyOccurrences": 20
+      "declarations": 5,
+      "fullyTyped": 5,
+      "anyOccurrences": 0,
+      "handWritten": true
     },
     "custom-tool-admin": {
       "declarations": 2,
@@ -287,12 +291,12 @@
       "anyOccurrences": 22
     },
     {
-      "module": "concurrency",
-      "declarations": 4,
-      "fullyTyped": 1,
-      "anyOccurrences": 20
+      "module": "bridge-coordination-validation",
+      "declarations": 6,
+      "fullyTyped": 0,
+      "anyOccurrences": 17
     }
   ],
-  "interpretation": "191 of 393 exported declarations (48.6%) carry a type with no `any`. The remaining 202 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
+  "interpretation": "199 of 397 exported declarations (50.1%) carry a type with no `any`. The remaining 198 compile but describe nothing, so the modules are readable, not yet editable with confidence.",
   "doesNotClaim": "A declaration without `any` is not proof the type is correct, only that inference produced something specific. Correctness still depends on the evidence tiers in docs/evidence/btype-evidence.json."
 }
