@@ -157,10 +157,10 @@
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
     "P5": "BLOCKED",
-    "P6": "BLOCKED, but the path is now concrete: carrier dependencies install cleanly with Electron 44.2.0 and only 11 Electron-API type errors block compilation.",
+    "P6": "BLOCKED, but the blocker is now understood and addressed: Electron 44.0.0 rewrote the clipboard API. The author's own adaptation has been recovered from the shipped main.js and encoded as 13 exact-match edits in tools/patch_carrier_electron44.py, which aborts rather than writing a half-patch. Typechecks clean against real Electron 44 types; full compile pending the carrier probe run for commit 197c469.",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Fix the 11 Electron 42->44 type errors in the three Code OSS files so the carrier actually compiles, since that turns \"can it be built\" into \"it is built\" and may reverse-engineer the author's own patches. Alternative if preferred: restore TypeScript types for the 41 reconstructed modules first. Do NOT relax any release gate on the strength of this probe; source-built-installer stays BLOCKED.",
+  "nextAction": "Read the carrier build probe run triggered by commit 197c469: confirm whether compile now passes, and if errors remain, whether any fall outside the clipboard region.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -336,5 +336,30 @@
       "No author customisation was applied; this was pure upstream plus an Electron bump.",
       "The 11 fixes have not been attempted yet."
     ]
+  },
+  "clipboardRecovery": {
+    "question": "How did the author make Code OSS compile against Electron 44, which deleted 13 clipboard methods?",
+    "answer": "Recovered from the shipped, unminified out/main.js rather than reinvented.",
+    "evidence": "docs/evidence/clipboard-adaptation.json",
+    "writeup": "docs/handoff/CLIPBOARD_RECOVERY.md",
+    "patch": "tools/patch_carrier_electron44.py",
+    "breakingVersion": "44.0.0 (42.7.1 and 43.0.0 still expose all 19 methods; 44 exposes 6, all async)",
+    "authorTechniques": {
+      "selectionBuffer": "clipboard.selection still exists in 44; reached through a clipboardForType() helper",
+      "findText": "preserved under the custom MIME type 'electron application/findtext'",
+      "customBuffers": "namespaced as 'electron application/osclipboard;format=\"<fmt>\"'",
+      "readImage": "prefers image/png, re-encodes via nativeImage.createFromBuffer().toPNG(), try/catch per item"
+    },
+    "recoveredVsReconstructed": {
+      "recovered": "control flow, MIME strings, helper and fallbacks, transcribed from the shipped JS",
+      "reconstructed": "TypeScript annotations and three 'as Blob' narrowings; types are erased at compile time and cannot be read back from main.js"
+    },
+    "correctionToEarlierWork": "An earlier reconstruction dropped the Linux selection buffer and degraded macOS find text to a no-op. The shipped product keeps both, so declared feature losses went from 6 to 0.",
+    "localVerification": {
+      "method": "tsc against the real electron 44.2.0 .d.ts",
+      "control": "unpatched upstream clipboard region = 9 errors, matching CI for that file",
+      "result": "recovered implementation = 0 errors"
+    },
+    "doesNotClaim": "A clean typecheck of one region is not a full npm run compile. The carrier build probe decides that."
   }
 }
