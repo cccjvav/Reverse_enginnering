@@ -90,8 +90,8 @@
       "ShunCode-0.7.4-win32-x64-Setup.exe"
     ],
     "exit_code": 2,
-    "log_bytes": 478,
-    "log_head": "\n7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20\n 64-bit locale=C.UTF-8 Threads:2 OPEN_MAX:65536\n\nScanning the drive for archives:\n1 file, 240559253 bytes (230 MiB)\n\nListing archive: ShunCode-0.7.4-win32-x64-Setup.exe\n\n\nERROR: ShunCode-0.7.4-win32-x64-Setup.exe : Cannot open the file as archive\n\n\n\nErrors: 1\n",
+    "log_bytes": 446,
+    "log_head": "\n7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20\n 64-bit locale=C.UTF-8 Threads:4 OPEN_MAX:65536\n\nScanning the drive for archives:\n1 file, 240559253 bytes (230 MiB)\n\nListing archive: ShunCode-0.7.4-win32-x64-Setup.exe\n\n\nERROR: ShunCode-0.7.4-win32-x64-Setup.exe : Cannot open the file as archive\n\n\n\nErrors: 1\n",
     "log_truncated": false
   },
   "innoextract_version": {

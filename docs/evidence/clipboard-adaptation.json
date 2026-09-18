@@ -1,0 +1,102 @@
+{
+  "question": "How did the author make Code OSS 1.132.0 compile and run on Electron 44.2.0, whose clipboard API dropped 13 methods?",
+  "electronApiChange": {
+    "removedIn44": [
+      "availableFormats",
+      "readBookmark",
+      "readBuffer",
+      "readFindText",
+      "readHTML",
+      "readImage",
+      "readRTF",
+      "writeBookmark",
+      "writeBuffer",
+      "writeFindText",
+      "writeHTML",
+      "writeImage",
+      "writeRTF"
+    ],
+    "survivingIn44": [
+      "clear",
+      "has",
+      "read",
+      "readText",
+      "write",
+      "writeText"
+    ],
+    "note": "Surviving methods also became Promise-based in 44."
+  },
+  "upstreamCallsRemovedApis": 5,
+  "scope": "Static analysis of compiled main.js. Inlined or renamed helpers may be unrecoverable; absence of a finding is reported, not guessed.",
+  "mainJs": {
+    "path": "code$GetDestDir/resources/app/out/main.js",
+    "bytes": 2614987
+  },
+  "analysis": {
+    "bytes": 2614551,
+    "removedApiCallSites": {
+      "availableFormats": 0,
+      "readBookmark": 0,
+      "readBuffer": 0,
+      "readFindText": 0,
+      "readHTML": 0,
+      "readImage": 1,
+      "readRTF": 0,
+      "writeBookmark": 0,
+      "writeBuffer": 0,
+      "writeFindText": 0,
+      "writeHTML": 0,
+      "writeImage": 0,
+      "writeRTF": 0
+    },
+    "survivingApiCallSites": {
+      "clear": 120,
+      "has": 140,
+      "read": 32,
+      "readText": 2,
+      "write": 72,
+      "writeText": 2
+    },
+    "usesAnyRemovedApi": true,
+    "channelHints": {
+      "readClipboardText": 1,
+      "writeClipboardText": 2,
+      "readClipboardFindText": 1,
+      "writeClipboardFindText": 1,
+      "readClipboardBuffer": 1,
+      "writeClipboardBuffer": 1,
+      "readImage": 1,
+      "triggerPaste": 1,
+      "hasClipboard": 1
+    },
+    "excerpts": [
+      {
+        "method": "readClipboardFindText",
+        "offset": 1270100,
+        "excerpt": "Uint8Array(0);\n      }\n      async writeClipboardText(windowId, text, type3) {\n        return this.clipboardForType(type3).writeText(text);\n      }\n      async readClipboardFindText(windowId) {\n        const findFormat = \"electron application/findtext\";\n        const items = await clipboard.read();\n        for (const item of items) {\n          if (item.types.includes(findFormat)) {\n            const blob = await item.getType(findFormat);\n            return blob.text();\n          }\n        }\n        return \"\";\n      }\n      async writeClipboardFindText(windowId, text) {\n    "
+      },
+      {
+        "method": "writeClipboardFindText",
+        "offset": 1270475,
+        "excerpt": "ormat)) {\n            const blob = await item.getType(findFormat);\n            return blob.text();\n          }\n        }\n        return \"\";\n      }\n      async writeClipboardFindText(windowId, text) {\n        return clipboard.write([new ClipboardItem({ \"electron application/findtext\": text })]);\n      }\n      async writeClipboardBuffer(windowId, format4, buffer, type3) {\n        const rawFormat = `electron application/osclipboard;format=\"${format4}\"`;\n        return this.clipboardForType(type3).write([new ClipboardItem({ [rawFormat]: new Blob([Buffer.from(buffer.buffer)]) }"
+      },
+      {
+        "method": "readClipboardBuffer",
+        "offset": 1270920,
+        "excerpt": "ormat4}\"`;\n        return this.clipboardForType(type3).write([new ClipboardItem({ [rawFormat]: new Blob([Buffer.from(buffer.buffer)]) })]);\n      }\n      async readClipboardBuffer(windowId, format4) {\n        const rawFormat = `electron application/osclipboard;format=\"${format4}\"`;\n        const items = await clipboard.read();\n        for (const item of items) {\n          if (item.types.includes(rawFormat)) {\n            const blob = await item.getType(rawFormat);\n            return VSBuffer.wrap(new Uint8Array(await blob.arrayBuffer()));\n          }\n        }\n        retur"
+      },
+      {
+        "method": "writeClipboardBuffer",
+        "offset": 1270632,
+        "excerpt": "nc writeClipboardFindText(windowId, text) {\n        return clipboard.write([new ClipboardItem({ \"electron application/findtext\": text })]);\n      }\n      async writeClipboardBuffer(windowId, format4, buffer, type3) {\n        const rawFormat = `electron application/osclipboard;format=\"${format4}\"`;\n        return this.clipboardForType(type3).write([new ClipboardItem({ [rawFormat]: new Blob([Buffer.from(buffer.buffer)]) })]);\n      }\n      async readClipboardBuffer(windowId, format4) {\n        const rawFormat = `electron application/osclipboard;format=\"${format4}\"`;\n        c"
+      },
+      {
+        "method": "readImage",
+        "offset": 1269346,
+        "excerpt": "   const window = this.windowById(options?.targetWindowId, windowId);\n        return window?.win?.webContents.paste() ?? Promise.resolve();\n      }\n      async readImage() {\n        const items = await clipboard.read();\n        for (const item of items) {\n          const imageType = item.types.includes(\"image/png\") ? \"image/png\" : item.types.find((type3) => type3.startsWith(\"image/\"));\n          if (!imageType) {\n            continue;\n          }\n          try {\n            const blob = await item.getType(imageType);\n            const buffer = Buffer.from(await blob.arrayBu"
+      }
+    ],
+    "oldNamesAsStrings": {}
+  },
+  "finding": "The shipped main.js still references clipboard APIs that Electron 44 removed. Either those code paths are dead, or the carrier bundles a shim. Read the excerpts before concluding."
+}
