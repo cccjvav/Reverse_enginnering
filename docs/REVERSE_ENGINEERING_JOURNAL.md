@@ -748,3 +748,33 @@ Python34项发现、31通过、3Windows专属本地跳过；核心/默认/HTTP/p
 - 另记录两项容易被忽略的副作用：接入回调会使find/search从首选引擎（ripgrep）降级为逐条过滤的Node实现（find-files.js:372、search-files.js:534）；原回调签名`(absolutePath)`不含操作类型，而apply_patch内部横跨新增/修改/移动/删除四种检查点，仅凭工具名无法区分"允许读"与"允许删"，P1.2须新增宿主上下文并如实标注为偏离原件的新设计。
 
 文档中22处源码行号/符号引用全部用脚本逐条核对，修正了1处偏移（transport取消信号应为:677）。本轮仍未接入任何策略，`check:release`维持退出2、七门槛BLOCKED。
+
+## 31. P1.2：宿主拥有的文件授权策略与边界测试（2026-09-18）
+
+按P1.1设计记录实现，新增两个维护模块（均在`community/`，未接入任何实验包）：
+
+- `file-authorization-policy.mjs`：宿主注入`approve`回调，构造时缺回调即抛`PERMISSION_POLICY_REQUIRED`，不存在"默认允许"分支。授权键为**owner+工具+操作+规范路径**，带有限TTL、工作区根快照比对、`revokeOwner`与`close`。只认字面`true`。
+- `authorized-file-tools.mjs`：把策略绑成原执行器期望的`checkPermission(absolutePath)`回调，复用既有`invokeAuthorizedFileTool`，不复制41个原模块、不改原件。
+
+### 31.1 三项如实记录的设计取舍
+
+1. **操作类型是新增契约，不是找回原字段。** 原回调只有路径；`apply_patch`内部却横跨新增/修改/移动/删除四个检查点（apply-patch.js:438/460/498）。因此由宿主传入已解析的`patchPlan`（路径→动作），计划外路径直接拒绝而不猜测。再次核验`grep checkPermission recovered/shuncode-extension/src/*.ts`为0命中，故此接口只能标为新维护设计。
+2. **授权在TTL内可复用，这是有代价的可用性决定。** `applyPatch`会跑两次preflight（第713、715行：先收集锁、再在锁内重跑），若不缓存则同一次操作会重复打扰宿主。代价是授权不是严格一次性，所以必须有TTL并在会话销毁时撤销；现代MCP路径无销毁事件，只能靠过期。
+3. **接入回调会改变搜索执行路径**（find-files.js:372、search-files.js:534：从ripgrep降级为Node逐条过滤），属行为与性能变化，不是纯增强。
+
+### 31.2 测试与变异验证
+
+`tests/bridge-core-file-authorization.test.mjs`共17项，临时虚构文件+脚本化审批器：拒绝矩阵（无策略/undefined/对象/字符串/false/抛错/Promise拒绝）、结构非法请求不打扰审批器、授权只覆盖单一owner+工具+操作+路径、审批器只看到冻结的宿主事实、过期/根变更/撤销、取消与关闭（含await期间变化）、A/B双会话互不复用、五工具各自授权、apply_patch四种操作正反向并核验磁盘前后内容。
+
+用8种变异确认断言不是恒真：放宽为真值、缓存键丢弃操作、丢弃owner、去掉await后取消复查、永不过期、忽略根变更、撤销空转、去掉关闭前拦截——**其中两次变异最初存活**：
+
+- 缓存键丢弃`operation`时全部通过，原因是我的升级测试跨了不同工具（read_files→apply_patch），键本就不同。改为**同工具同路径**的modify→delete/move升级后捕获。
+- 去掉"关闭前拦截"时全部通过，因为await后的复查掩盖了它。补断言"已关闭的策略必须完全不调用审批器"且close需清空已有授权后捕获。
+
+这两处是我的测试缺陷而非实现缺陷，如实记录，不把"变异存活"轻描淡写为覆盖充分。
+
+### 31.3 边界与本轮验证
+
+`npm test` 161/161通过（新增17项）；Python 39运行/36通过/3项Windows专属跳过；`learn:build`更新为172文件/32241行、`learn:check`退出0；7个check/audit命令全部退出0；**portable包仍75输入、SHA仍`635190e6…a2daa`**，两个新模块确认未进入任何bundle；原件、reconstructed、既有维护模块零改动。
+
+`check:release`仍退出2、NOT_READY，`authorization-integration`维持BLOCKED——本轮只有维护层策略与单测，**没有宿主UI审批、没有源码构建入口、没有真实扩展激活**，按NEXT_AUTHORIZATION.md的完成边界这些都不足以改门槛。

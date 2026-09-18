@@ -45,7 +45,7 @@
     "pythonVersion": "3.11.2",
     "npmTest": {
       "exitCode": 0,
-      "passed": 144,
+      "passed": 161,
       "failed": 0
     },
     "pythonUnittest": {
@@ -103,19 +103,25 @@
     "evidence": "docs/evidence/authorization-wiring.json",
     "authorizedDispatcherBundled": false,
     "authorizationIntegrationVerified": false,
-    "implementedThisTurn": "CI branch-binding fix and P1.1 source trace/design record only. Still no host permission service, no runtime integration, no change to any release gate.",
-    "p11DesignRecord": "docs/handoff/P1_1_OWNER_LIFECYCLE.md"
+    "implementedThisTurn": "P1.2 maintenance policy: host-injected approve callback, literal-true only, per owner+tool+operation+realpath grants with bounded TTL, roots-snapshot invalidation, owner revoke and close. Scripted approvers over temp fixture files. NOT wired into any bundle, NOT a GUI approval flow, NOT an OS sandbox, does not close TOCTOU.",
+    "p11DesignRecord": "docs/handoff/P1_1_OWNER_LIFECYCLE.md",
+    "p12Modules": [
+      "community/bridge-core/file-authorization-policy.mjs",
+      "community/bridge-core/authorized-file-tools.mjs"
+    ],
+    "p12Tests": "tests/bridge-core-file-authorization.test.mjs (17 tests, 8 mutations verified)",
+    "newDesignNotRecoveredOriginal": "The original extension TS contains zero checkPermission call sites and the original callback has no operation field; the operation-aware contract is new maintenance design and must not be presented as a recovered d.ts."
   },
   "learning": {
-    "files": 169,
-    "lines": 31412,
+    "files": 172,
+    "lines": 32241,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
   },
   "tasks": {
     "P0": "DONE",
-    "P1": "READY: audit + P1.1 owner/lifecycle design record complete (docs/handoff/P1_1_OWNER_LIFECYCLE.md); P1.2 policy service implementation not started",
+    "P1": "PARTIAL: P1.1 design record + P1.2 host-owned fail-closed policy and boundary tests done; P1.3 build integration and real host UI approval NOT started",
     "P2": "PARTIAL: inert HTTP fixtures only",
     "P3": "BLOCKED: static inventory may proceed",
     "P4": "BLOCKED",
@@ -123,7 +129,7 @@
     "P6": "BLOCKED",
     "P7": "BLOCKED: learning can continue"
   },
-  "nextAction": "Start NEXT_AUTHORIZATION.md P1.2 using docs/handoff/P1_1_OWNER_LIFECYCLE.md section 5: add a host-owned, fail-closed permission service under community/ that carries ownerId, sessionKind, tool, operation, realpath, roots snapshot and expiry; cover the P1.4 denial matrix with fixture files before any build integration. Note the contract gap: the original callback has no operation field, so apply_patch add/modify/move/delete needs new host context and must be labelled new maintenance design, not recovered original.",
+  "nextAction": "P1.3: integrate the policy behind a SEPARATE experimental build flag (do not change the default 75-input portable bundle or its SHA), wiring facade -> dispatcher -> file entry so the extension actually constructs a host policy instead of only tests injecting one. Must supply patchPlan from the parsed patch, record provenance hashes/exact transform counts, and document that find/search drop to the Node engine. If a safe host UI is not yet possible, stop at deny-all and keep the gate BLOCKED rather than shipping a fixed true callback.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",

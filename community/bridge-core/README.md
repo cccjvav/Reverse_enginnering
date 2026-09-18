@@ -33,6 +33,22 @@
 
 configByTool是可信宿主配置，不是模型输入。权限回调必须绑定当前会话和用户确认，不应固定返回true。新的入口不会替你实现宿主UI、会话所有权、审批存储或操作系统沙箱。
 
+## P1.2 宿主文件授权策略（新增，仍未接入扩展）
+
+`file-authorization-policy.mjs`与`authorized-file-tools.mjs`是**本次恢复新写的维护设计，不是找回的原实现**。原扩展TS中`checkPermission`命中0处，原回调签名也只有`(absolutePath)`，因此不能标成还原的原始d.ts。
+
+与既有`file-tool-dispatcher.mjs`的区别：那一层只要求"宿主必须传回调"，这一层回答"回调该怎么判"。策略由宿主持有并注入`approve`，请求携带owner、sessionKind、工具、**操作类型**、规范路径、工作区根快照、有效期与取消信号；只有字面`true`放行，false/真值非布尔/抛错/超时/取消/关闭一律拒绝。
+
+三点必须照实说明：
+
+- **操作类型是新增字段。** `apply_patch`内部横跨新增/修改/移动/删除四个检查点，仅凭工具名无法区分"允许读"与"允许删"，故由宿主从已解析的补丁计划提供`patchPlan`；计划里没有的路径直接拒绝，不猜测默认操作。这是有意偏离原签名的新设计。
+- **授权会被缓存到owner+工具+操作+路径。** 因为`applyPatch`会跑两次preflight（先收集锁、再在锁内重跑），不缓存就会重复打扰宿主。代价是授权在TTL内可复用，因此必须有有限TTL，并在会话销毁时`revokeOwner`。现代MCP路径没有服务端销毁事件，只能靠TTL过期。
+- **传入权限回调会改变搜索执行路径。** `find-files.js:372`与`search-files.js:534`在有回调时从首选引擎（ripgrep）降级为逐条过滤的Node实现，行为与性能都会变，不是纯增强。
+
+`tests/bridge-core-file-authorization.test.mjs`共17项，使用临时虚构文件与**脚本化审批器**，覆盖拒绝矩阵、双会话隔离、取消/过期/根变更/撤销、逐工具与apply_patch四种操作的正反向，并核验被拒时磁盘内容不变。已用8种变异验证断言有效（放宽为真值、丢弃操作、丢弃owner、去掉await后取消复查、永不过期、忽略根变更、撤销空转、去掉关闭前拦截各有测试失败）。
+
+**这不是用户GUI审批，不是OS沙箱，也不关闭TOCTOU窗口。** 两个模块均未进入portable/HTTP实验包（bundle仍75输入、SHA仍635190e6…），`authorization-integration`门槛保持BLOCKED。
+
 `http-router.mjs`在正确端点拒绝数组型/重复协议请求头，并检查rawHeaders，覆盖Node已经把重复头合成字符串的情况。错误返回400，不回显令牌或具体头值；错误令牌仍走原404路由。测试使用本机回环HTTP和空处理器，不连接真实MCP、隧道或GUI。没有改变原CORS、OAuth或文件授权机制。
 
 默认旧实验bundle和已发布overlay仍不含这两模块。新增HTTP专用实验变体已接入http-router.mjs，file-tool-dispatcher.mjs仍未接入；见[HTTP接入说明](../../docs/HTTP_EXTENSION_INTEGRATION.md)。原扩展没有传入新入口需要的宿主权限策略，因此不能靠修改一条import就宣布整合完成。现有图像/搜索/写入竞态与非OS隔离限制仍存在，read_files检查点也不能关闭所有TOCTOU窗口。

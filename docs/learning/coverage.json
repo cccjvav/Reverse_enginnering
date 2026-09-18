@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 169,
-    "lines": 31413,
+    "files": 172,
+    "lines": 32241,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -44,9 +44,23 @@
       "status": "pending"
     },
     {
+      "source": "community/bridge-core/authorized-file-tools.mjs",
+      "sha256": "45c82066bda5ee09c19a91b16e1a43e08f47446e2669f3c987cf75469035e739",
+      "lines": 97,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "community/bridge-core/concurrency.mjs",
       "sha256": "3c508831701a3a24b08c3c42fa9e7d2a20049745fc6b6572fa54777fef91fdf0",
       "lines": 101,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/bridge-core/file-authorization-policy.mjs",
+      "sha256": "7fdb71b69ecf809c8306e2fdce008f3a6f48541c8059ce264881cd3a6901514a",
+      "lines": 278,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -824,6 +838,13 @@
       "source": "tests/bridge-core-custom-tools.test.mjs",
       "sha256": "55ccfe2da930251e8ec67466f008f6042b5603fb1f7f4d29c5167b37a410bcfc",
       "lines": 145,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tests/bridge-core-file-authorization.test.mjs",
+      "sha256": "3026c6de469ce0f6fb728197ffa4732c1f2ab6c45169266a4a3018d9bd0cd675",
+      "lines": 453,
       "explainedLines": 0,
       "status": "pending"
     },
