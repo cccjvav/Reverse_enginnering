@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "The Chat host shapes are reconstructed and verified (docs/evidence/host-chat-shapes). Closing the last 11 errors needs the author's own forked vscode.d.ts to confirm them - an input only they can supply. Everything mechanically derivable from the shipped product has now been derived.",
+  "nextAction": "Everything mechanically derivable from the shipped product has been derived, and the last avenue (the installer's own vscode.d.ts) is now checked and closed - it is byte-identical to the public one. Closing the final 11 errors requires the author's build-time vscode.proposed.chatParticipantAdditions.d.ts, which was never packaged. See docs/handoff/WHAT_THE_AUTHOR_MUST_SUPPLY.md.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -542,6 +542,13 @@
       "lowConfidence": "presentationStyle - only one literal ('shuncode') is ever used, so the real domain may be wider.",
       "knownDiscrepancy": "The bundle has a second copy of parseUnifiedDiffPreview building { oldPath, newPath, hunks } rather than { path, hunks }. Either the host element permits both or the copies drifted. Not resolved.",
       "stillNotFixed": "The 11 errors remain by choice. The shapes are now good enough to write a faithful declaration, but writing one would still be fabricating the host onto the public vscode namespace. Recorded as evidence so the author, who has the real vscode.d.ts, can confirm or correct it."
+    },
+    "shippedHostDtsChecked": {
+      "question": "The installer ships out/vscode-dts/vscode.d.ts (742072 bytes). Does it declare the five missing members?",
+      "answer": "No. It is byte-identical to the pinned public candidate (sha256 ee11e767c8ab76f6...), declares no ChatSimpleToolResultData at all, and carries none of the five members.",
+      "meaning": "Only the STABLE API surface shipped. The proposed declarations - vscode.proposed.chatParticipantAdditions.d.ts and siblings - were build-time inputs the author's fork never packaged. So the forked Chat surface cannot be recovered from the installer at all; that avenue is now closed rather than untried.",
+      "valueOfTheNegative": "It also confirms the carrier's stable API matches upstream 1.132.0 exactly, so the fork's divergence is in the proposed surface and the Electron bump, not the public API.",
+      "costToEstablish": "One forensics CI run, after fixing tools/recover_custom_extension.py which had been walking only .js/.css/.html under out/ and skipping declarations entirely."
     }
   },
   "headerNarrowing": {
