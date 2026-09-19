@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 192,
-    "lines": 35642,
+    "files": 194,
+    "lines": 36009,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -124,6 +124,13 @@
       "source": "community/extension/src/portable-tool-presentation.ts",
       "sha256": "e1773f1162347bf77843066bbc2601f51f12742cf33b6f82cd40a1afd5c0c1c5",
       "lines": 54,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "community/host-types/chat-surface.d.ts",
+      "sha256": "46dae515b356db2f956065b2e07faa56f817760a9afcd9ba3c24fdc82c94670f",
+      "lines": 126,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1039,8 +1046,8 @@
     },
     {
       "source": "tests/test_skeleton_layout.py",
-      "sha256": "e412fb70f7537ef581c0e3bc0eaf48e23f76eeddef9fd62039f521f29e993a60",
-      "lines": 187,
+      "sha256": "b7f889a44b0b0b5e3bb6a6f3e76811f5dd7094f2496b8e531967dd70873640c5",
+      "lines": 227,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1067,8 +1074,8 @@
     },
     {
       "source": "tools/assemble_skeleton.py",
-      "sha256": "99a52ce2db89463088b98e36cff35976180037c26051e12420ef3b76f06d78b7",
-      "lines": 228,
+      "sha256": "8d5dbdfbd35c2979f7cc3756f55cfeeb88b697ef859c62fea89212020cfbc95d",
+      "lines": 248,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1193,8 +1200,15 @@
     },
     {
       "source": "tools/diagnose_skeleton.mjs",
-      "sha256": "ee5176ce60044a31d34ca54c2c7dbc85a013c79d09f63a32dc3d601f889a9e32",
-      "lines": 122,
+      "sha256": "6686006f17a7ec9dee11bc5af8645b2154b9a26f5fc878d176d7f8641bcd626e",
+      "lines": 141,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/download_server.mjs",
+      "sha256": "06128f6b8d67f9735e0164fb5900389eeebf4b3972945760e36ef8fa2eb287cb",
+      "lines": 162,
       "explainedLines": 0,
       "status": "pending"
     },

@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/192 个纳入范围的文件完整逐行解释；363/35642 行已解释。
+当前：6/194 个纳入范围的文件完整逐行解释；363/36009 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -30,6 +30,7 @@
 | [community/extension/src/bridge-access-controller.ts](../../community/extension/src/bridge-access-controller.ts) | 30 | 30 | 本组已逐行解释 |
 | [community/extension/src/bridge-license-service.ts](../../community/extension/src/bridge-license-service.ts) | 73 | 73 | 本组已逐行解释 |
 | [community/extension/src/portable-tool-presentation.ts](../../community/extension/src/portable-tool-presentation.ts) | 54 | 0 | 待逐行讲解 |
+| [community/host-types/chat-surface.d.ts](../../community/host-types/chat-surface.d.ts) | 126 | 0 | 待逐行讲解 |
 | [community/ui/access-card.js.txt](../../community/ui/access-card.js.txt) | 8 | 0 | 待逐行讲解 |
 | [community/ui/access-methods.mjs](../../community/ui/access-methods.mjs) | 20 | 20 | 本组已逐行解释 |
 | [reconstructed/bridge-core/src/adaptive-concurrency.js](../../reconstructed/bridge-core/src/adaptive-concurrency.js) | 68 | 0 | 待逐行讲解 |
@@ -160,11 +161,11 @@
 | [tests/test_custom_recovery.py](../../tests/test_custom_recovery.py) | 56 | 0 | 待逐行讲解 |
 | [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 53 | 0 | 待逐行讲解 |
 | [tests/test_recover.py](../../tests/test_recover.py) | 47 | 0 | 待逐行讲解 |
-| [tests/test_skeleton_layout.py](../../tests/test_skeleton_layout.py) | 187 | 0 | 待逐行讲解 |
+| [tests/test_skeleton_layout.py](../../tests/test_skeleton_layout.py) | 227 | 0 | 待逐行讲解 |
 | [tests/test_windows_inspect.py](../../tests/test_windows_inspect.py) | 71 | 0 | 待逐行讲解 |
 | [tools/apply-community.cmd](../../tools/apply-community.cmd) | 31 | 0 | 待逐行讲解 |
 | [tools/apply_community.py](../../tools/apply_community.py) | 196 | 0 | 待逐行讲解 |
-| [tools/assemble_skeleton.py](../../tools/assemble_skeleton.py) | 228 | 0 | 待逐行讲解 |
+| [tools/assemble_skeleton.py](../../tools/assemble_skeleton.py) | 248 | 0 | 待逐行讲解 |
 | [tools/audit_authorization_wiring.mjs](../../tools/audit_authorization_wiring.mjs) | 50 | 0 | 待逐行讲解 |
 | [tools/audit_custom_boundary.mjs](../../tools/audit_custom_boundary.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/audit_extension_runtime.mjs](../../tools/audit_extension_runtime.mjs) | 48 | 0 | 待逐行讲解 |
@@ -182,7 +183,8 @@
 | [tools/diagnose_btype_linkage.mjs](../../tools/diagnose_btype_linkage.mjs) | 154 | 0 | 待逐行讲解 |
 | [tools/diagnose_btypes.py](../../tools/diagnose_btypes.py) | 175 | 0 | 待逐行讲解 |
 | [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 98 | 0 | 待逐行讲解 |
-| [tools/diagnose_skeleton.mjs](../../tools/diagnose_skeleton.mjs) | 122 | 0 | 待逐行讲解 |
+| [tools/diagnose_skeleton.mjs](../../tools/diagnose_skeleton.mjs) | 141 | 0 | 待逐行讲解 |
+| [tools/download_server.mjs](../../tools/download_server.mjs) | 162 | 0 | 待逐行讲解 |
 | [tools/harvest_btype_evidence.py](../../tools/harvest_btype_evidence.py) | 173 | 0 | 待逐行讲解 |
 | [tools/http_maintenance_inputs.mjs](../../tools/http_maintenance_inputs.mjs) | 20 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |

@@ -2,6 +2,8 @@
   "scope": "The assembled skeleton typechecked through the author's own shipped tsconfig.json, with no custom module resolver. Diagnostic only.",
   "workspace": ".work/skeleton",
   "configUsed": "extensions/shuncode/tsconfig.json (shipped verbatim)",
+  "hostTypesOverlay": true,
+  "hostTypesCaveat": "The Chat surface comes from community/host-types, which is RECONSTRUCTED from the author's code, not their original declarations. A zero here means the reconstruction satisfies their sources, not that the original host was recovered.",
   "droppedFromFiles": [
     "../../src/file-tool-registry.ts",
     "../../src/ide-tool-definitions.ts",
@@ -9,96 +11,13 @@
   ],
   "droppedReason": "Declared by the author but never recovered: two B-layer modules exist only as compiled .js (reached via their .d.ts instead), and the test file did not ship.",
   "typescriptVersion": "5.9.3",
-  "filesCompiled": 30,
-  "errorCount": 11,
-  "counts": {
-    "TS2339": 10,
-    "TS2353": 1
-  },
-  "errorsBySource": {
-    "extensions/shuncode/src/tool-presentation.ts": 11
-  },
+  "filesCompiled": 31,
+  "errorCount": 0,
+  "counts": {},
+  "errorsBySource": {},
   "unresolvedModuleCount": 0,
   "layoutResolves": true,
   "layoutVerdict": "Every cross-layer import resolved with no custom resolver, so the directory layout read out of the author's tsconfig is correct.",
   "doesNotClaim": "Typechecking is not building. This produces no bundle, runs no npm install, and does not touch the Code OSS carrier.",
-  "errors": [
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 17,
-      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 18,
-      "message": "Property 'metrics' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 22,
-      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 220,
-      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 223,
-      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 224,
-      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 225,
-      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 27,
-      "message": "Property 'presentationKind' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 295,
-      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2339,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 319,
-      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2353,
-      "category": "Error",
-      "source": "extensions/shuncode/src/tool-presentation.ts",
-      "line": 443,
-      "message": "Object literal may only specify known properties, and 'presentationStyle' does not exist in type 'ChatSimpleToolResultData'."
-    }
-  ]
+  "errors": []
 }

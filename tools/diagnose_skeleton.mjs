@@ -46,6 +46,18 @@ export function diagnoseSkeleton(workspace = '.work/skeleton') {
     return false;
   });
 
+  // The author's tsconfig uses an explicit `files` whitelist, so a declaration
+  // dropped into src/ is NOT picked up automatically. If the reconstructed Chat
+  // surface overlay is present, add it - and record that it was used, because
+  // the resulting error count then depends on a RECONSTRUCTED declaration
+  // rather than the author's own.
+  let hostTypesOverlay = false;
+  const overlay = path.join(extDir, 'src', 'chat-surface.d.ts');
+  if (fs.existsSync(overlay)) {
+    files.push('src/chat-surface.d.ts');
+    hostTypesOverlay = true;
+  }
+
   const parsed = ts.parseJsonConfigFileContent(
     { ...raw.config, files }, ts.sys, extDir, undefined, configPath);
   if (parsed.errors.length) {
@@ -89,6 +101,13 @@ export function diagnoseSkeleton(workspace = '.work/skeleton') {
       + 'tsconfig.json, with no custom module resolver. Diagnostic only.'),
     workspace,
     configUsed: 'extensions/shuncode/tsconfig.json (shipped verbatim)',
+    hostTypesOverlay,
+    hostTypesCaveat: hostTypesOverlay
+      ? ('The Chat surface comes from community/host-types, which is '
+        + "RECONSTRUCTED from the author's code, not their original "
+        + 'declarations. A zero here means the reconstruction satisfies their '
+        + 'sources, not that the original host was recovered.')
+      : undefined,
     droppedFromFiles: dropped,
     droppedReason: ('Declared by the author but never recovered: two B-layer '
       + 'modules exist only as compiled .js (reached via their .d.ts instead), '

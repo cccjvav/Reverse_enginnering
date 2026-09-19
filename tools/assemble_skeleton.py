@@ -72,6 +72,10 @@ def main():
                         help="workspace to materialise (kept out of git)")
     parser.add_argument("--report", required=True)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--host-types", action="store_true",
+                        help=("overlay community/host-types/chat-surface.d.ts, "
+                              "the RECONSTRUCTED Chat surface - not the "
+                              "author's original declarations"))
     parser.add_argument("--maintenance", action="store_true",
                         help=("overlay community/bridge-core/http-router.mjs, "
                               "which rejects ambiguous MCP headers"))
@@ -180,6 +184,17 @@ def main():
             header + overlaid, encoding="utf8")
         maintenance_applied = True
 
+    # Optional reconstructed host surface. Copied into the extension directory
+    # so the author's own tsconfig picks it up as an ambient declaration
+    # without reference/vscode-types being touched.
+    host_types_applied = False
+    if args.host_types and not args.dry_run:
+        overlay = REPO / "community" / "host-types" / "chat-surface.d.ts"
+        if overlay.exists():
+            shutil.copy2(overlay,
+                         work / layout["extensionDir"] / "src" / "chat-surface.d.ts")
+            host_types_applied = True
+
     # What the author's tsconfig asks for that we cannot supply.
     missing = []
     for declared, target in layout["declaredFiles"].items():
@@ -206,6 +221,11 @@ def main():
         "workspace": args.output,
         "typeRootsLinked": types_linked if not args.dry_run else None,
         "maintenanceOverlay": maintenance_applied,
+        "hostTypesOverlay": host_types_applied,
+        "hostTypesCaveat": ("When --host-types is used the Chat surface comes "
+                            "from community/host-types, which is RECONSTRUCTED "
+                            "from the author's code, not their original "
+                            "declarations."),
         "hostCaveat": ("vscode-main here holds the pinned PUBLIC Code OSS 1.132.0 "
                        "declarations, not the author's private host. Chat-surface "
                        "fields their build had are absent, which is why "

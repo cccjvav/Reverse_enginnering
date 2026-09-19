@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Awaiting the author's decision on publishing the verified Chat-surface reconstruction as a labelled candidate declaration under community/ (would take the skeleton from 11 errors to 0 without fabricating the host). Monetisation settled: keep as-is.",
+  "nextAction": "Step 3 is complete: the assembled skeleton compiles to 0 errors with the reconstructed Chat surface overlaid, and to 14/11 without it. Remaining work needs the author's Windows machine (real activation, GUI, installer) or their original repository (authentic proposed declarations).",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -605,5 +605,26 @@
       "honestFraming": "The prompt explicitly tells the other assistant NOT to treat this as a way to avoid merchant registration - the requirement is relocated to the server, not removed - and asks it to state required qualifications plainly.",
       "pointerForAuthor": "Config comments reference bridge-license-worker/scripts/configure-client.mjs, so the server was a separate project in the author's Cloudflare account. Its source is not in this repository."
     }
+  },
+  "candidateHostTypes": {
+    "decision": "Author approved publishing the verified reconstruction as a labelled candidate.",
+    "location": "community/host-types/chat-surface.d.ts (+ README.md)",
+    "whyNotReference": "reference/vscode-types holds the pinned PUBLIC declarations and stays byte-unmodified; a test asserts they never gain these members.",
+    "mechanism": "declare module 'vscode' interface merging, so public input/output are untouched.",
+    "memberCountCorrection": "Found while writing it: the gap is ELEVEN members, not five. TypeScript only reported the first excess property per object literal, so the earlier probe undercounted. The six extra - isError, durationMs, terminalId, diff, summary, detailsLabel - are all evidenced by the author's own ParsedPresentation interface (tool-presentation.ts:14-23) and construction sites.",
+    "skeletonModes": {
+      "default": "14 errors - faithful to the shipped router and public host",
+      "--maintenance": "11 errors - community HTTP adapter guarantees scalar headers",
+      "--maintenance --host-types": "0 errors, 31 files - full compile against the reconstruction"
+    },
+    "zeroMeans": "The reconstruction satisfies every one of the author's sources. It does NOT mean the original host was recovered; the report carries that caveat and a test pins it.",
+    "confidenceGraded": "presentationStyle LOW (one literal observed), detailsLabel MEDIUM, the rest HIGH. One unresolved discrepancy recorded: a second copy of parseUnifiedDiffPreview builds { oldPath, newPath, hunks }."
+  },
+  "downloadServer": {
+    "command": "npm run serve:downloads",
+    "port": 8080,
+    "serves": ".work/downloads - handoff docs plus a paste-ready plain-text prompt",
+    "features": "index, per-file download, online view with one-click copy",
+    "safety": "Read-only. Every request is resolved against the one directory and rejected if it escapes; verified that ../../package.json and its URL-encoded form both return 404."
   }
 }

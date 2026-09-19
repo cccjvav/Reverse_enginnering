@@ -185,3 +185,43 @@ class HostShapeReconstructionTests(unittest.TestCase):
         # Confidence must be graded, not uniform.
         self.assertIn("presentationStyle", data["lowConfidence"])
         self.assertIn("Not resolved", data["knownDiscrepancy"])
+
+
+class CandidateHostTypesTests(unittest.TestCase):
+    """The published reconstruction must never pass as the author's original."""
+
+    DECL = REPO / "community" / "host-types" / "chat-surface.d.ts"
+
+    def test_labelled_as_reconstruction(self):
+        text = self.DECL.read_text(encoding="utf8")
+        self.assertIn("RECONSTRUCTED candidate declaration - NOT the author's "
+                      "original", text)
+        self.assertIn("never packaged", text)
+
+    def test_lives_outside_the_pinned_reference_tree(self):
+        """reference/vscode-types holds the public declarations and is pinned;
+        the reconstruction must not be placed there."""
+        self.assertTrue(self.DECL.is_relative_to(REPO / "community"))
+        for path in (REPO / "reference" / "vscode-types").glob("*.d.ts"):
+            body = path.read_text(encoding="utf8", errors="replace")
+            self.assertNotIn("presentationKind", body)
+
+    def test_grades_its_confidence(self):
+        text = self.DECL.read_text(encoding="utf8")
+        self.assertIn("LOW confidence", text)
+        self.assertIn("MEDIUM confidence", text)
+        self.assertIn("KNOWN UNRESOLVED", text)
+
+    def test_zero_error_claim_carries_its_caveat(self):
+        """A clean skeleton built on the overlay must say the surface is
+        reconstructed, so nobody reads 0 as 'the host was recovered'."""
+        report = REPO / "docs" / "evidence" / "skeleton-typecheck.json"
+        if not report.exists():
+            self.skipTest("run diagnose:skeleton first")
+        data = json.loads(report.read_text(encoding="utf8"))
+        if not data.get("hostTypesOverlay"):
+            self.skipTest("skeleton assembled without --host-types")
+        self.assertEqual(data["errorCount"], 0)
+        self.assertIn("RECONSTRUCTED", data["hostTypesCaveat"])
+        self.assertIn("not that the original host was recovered",
+                      data["hostTypesCaveat"])
