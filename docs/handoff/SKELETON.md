@@ -81,7 +81,33 @@ building against a forked host, not the public proposed API. And the fields were
 real, not aspirational — the shipped bundle constructs all five at runtime
 (`items` 53×, `metrics` 10×, `diffPreview` 3×).
 
-**Why this is not "fixed".** Declaring those members ourselves would turn 11 red
+**The shapes are now reconstructed.** `npm run verify:host-shapes` proves it:
+all five field shapes were read out of the author's own type annotations — they
+annotated their locals against the host type, e.g.
+
+```ts
+const items: Array<{ label: string; description?: string;
+                     resource?: vscode.Uri | vscode.Location }> = [];
+let currentHunk: NonNullable<...["diffPreview"]>[number]["hunks"][number];
+```
+
+Those annotations had to match the real declaration to compile, so they are
+first-hand evidence of it. The reconstruction is verified by compiling the
+author's real code against it verbatim, and three tampering tests confirm the
+check can fail.
+
+One subtlety worth recording: a two-way `extends` check does **not** catch a
+missing optional member — TypeScript treats `{ label }` and
+`{ label; description? }` as mutually assignable. The first version of the probe
+passed while `description` was deleted. Comparing key sets via `keyof` is what
+actually catches it.
+
+Graded confidence: `presentationStyle` is low — only one literal is ever used,
+so the real domain may be wider. And the bundle contains a second copy of
+`parseUnifiedDiffPreview` building `{ oldPath, newPath, hunks }` instead of
+`{ path, hunks }`; that discrepancy is recorded, not resolved.
+
+**Why this is still not "fixed".** Declaring those members ourselves would turn 11 red
 errors green while recovering nothing, and would put fabricated fields on the
 public `vscode` namespace. That is precisely the false-host claim this project
 refuses to make, so a test now guards the pinned declarations against being

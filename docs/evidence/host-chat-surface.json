@@ -31,6 +31,11 @@
           "parseUnifiedDiffPreview2(diff)",
           "presentation.diffPreview"
         ]
+      },
+      "reconstructedShape": {
+        "type": "Array<{ path: string; hunks: Array<{ lines: Array<{ kind: 'add'; newLine: number; text: string } | { kind: 'delete'; oldLine: number; text: string } | { kind: 'context'; oldLine: number; newLine: number; text: string }>; truncated?: boolean }>; truncated?: boolean }>",
+        "evidence": "parseUnifiedDiffPreview (tool-presentation.ts:220-275) indexes the host type three levels deep - [\"diffPreview\"][number][\"hunks\"][number] - and the line literals at :265-269 give the discriminated union.",
+        "notes": "The shipped bundle also builds `currentFile = { oldPath, newPath, hunks: [] }` in a second copy of this function, so the host element may permit oldPath/newPath in addition to path. Recorded as a discrepancy rather than resolved."
       }
     },
     "items": {
@@ -43,6 +48,11 @@
           "object({ anyOf: array(object({",
           "object({"
         ]
+      },
+      "reconstructedShape": {
+        "type": "Array<{ label: string; description?: string; resource?: vscode.Uri | vscode.Location }>",
+        "evidence": "tool-presentation.ts:129 and :153 declare exactly this element type for a local that is then assigned to the field, so it must be assignable to the host's own.",
+        "notes": "withOverflowItem (line 99) appends a label-only element, which is why description and resource are optional."
       }
     },
     "metrics": {
@@ -55,6 +65,11 @@
           "[{ label: \"Matches\"",
           "["
         ]
+      },
+      "reconstructedShape": {
+        "type": "Array<{ label: string; value: string }>",
+        "evidence": "Constructed inline at tool-presentation.ts:120, :144, :170, :199 and :289, always with exactly these two string members.",
+        "notes": "value is always stringified at the call site, never a number."
       }
     },
     "presentationKind": {
@@ -65,6 +80,11 @@
         "samples": [
           "kind"
         ]
+      },
+      "reconstructedShape": {
+        "type": "'files' | 'search' | 'edit' | 'terminal' | 'diagnostics' | 'lsp' | 'generic'",
+        "evidence": "The seven return values of presentationKind() (tool-presentation.ts:27), whose declared return type is NonNullable<vscode.ChatSimpleToolResultData[\"presentationKind\"]>.",
+        "notes": "Matches the kind union the author declares independently on BridgeActivityPresentation in bridge-constants.ts:261, which is a useful cross-check."
       }
     },
     "presentationStyle": {
@@ -75,10 +95,20 @@
         "samples": [
           "options.useShunCodeStyle ? \"shuncode\" : void 0"
         ]
+      },
+      "reconstructedShape": {
+        "type": "'shuncode' | undefined",
+        "evidence": "tool-presentation.ts:443 assigns \"shuncode\" or undefined. Only one literal is ever used, so the full domain may be wider than observed.",
+        "notes": "LOW CONFIDENCE on the domain: one observed value only."
       }
     }
   },
   "conclusion": "The public ChatSimpleToolResultData declares 2 members (input, output). The author's sources rely on 5 more, using constructs such as NonNullable<vscode.ChatSimpleToolResultData[\"items\"]> that only compile if their vscode.d.ts declared them. They built against a forked Code OSS host, and the shipped bundle constructs these fields at runtime, so they were real rather than aspirational.",
   "whyNotFixedHere": "Declaring these members ourselves would turn 11 red errors green without recovering anything. It would also put fabricated fields on the public vscode namespace, which is exactly the kind of false-host claim this project refuses to make. The honest fix is to obtain the author's host declarations.",
+  "shapeRecovery": "All five shapes are reconstructible from the author's own type annotations, which had to match their host declaration to compile. That is enough to write a faithful declaration once someone decides to - but writing one here would still be fabricating the host, so the shapes are recorded as evidence instead.",
+  "lowConfidence": [
+    "presentationStyle"
+  ],
+  "knownDiscrepancy": "The shipped bundle contains a second copy of parseUnifiedDiffPreview that builds { oldPath, newPath, hunks } rather than { path, hunks }. Either the host element allows both spellings or the two copies drifted. Not resolved.",
   "consequence": "Until then the skeleton's floor is 11 errors in tool-presentation.ts. That number is the size of one missing input, not a defect in the recovered sources or the B-layer types."
 }

@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 191,
-    "lines": 35437,
+    "files": 192,
+    "lines": 35621,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1039,8 +1039,8 @@
     },
     {
       "source": "tests/test_skeleton_layout.py",
-      "sha256": "3b9136620890021419d458017ee76c0d4528a2d304b9ccc7772f47ac4e908d83",
-      "lines": 146,
+      "sha256": "e412fb70f7537ef581c0e3bc0eaf48e23f76eeddef9fd62039f521f29e993a60",
+      "lines": 187,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1298,8 +1298,8 @@
     },
     {
       "source": "tools/probe_host_chat_surface.py",
-      "sha256": "e46634c569c4fe1387b8d59ed486bdee13263f15a16904718853dea0f68af28a",
-      "lines": 131,
+      "sha256": "78fc25de60de59d59d001181a3f90c755ebad77df1d5a6c3b58d1774f6180ae3",
+      "lines": 214,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1349,6 +1349,13 @@
       "source": "tools/verify_btypes.mjs",
       "sha256": "2c73befd37ddac96badd40bc02c2551f16f617d727931a6e9bb249250ce909c6",
       "lines": 88,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/verify_host_shapes.mjs",
+      "sha256": "752902de7823e977e216cfd2de6f236e7f0138cc9172f6c9d0f16ecac3cede26",
+      "lines": 60,
       "explainedLines": 0,
       "status": "pending"
     },

@@ -144,3 +144,44 @@ class MaintenanceOverlayTests(unittest.TestCase):
             self.skipTest("skeleton assembled without --maintenance")
         self.assertIn("Valid ONLY when", text)
         self.assertIn("does not exclude string[]", text)
+
+
+class HostShapeReconstructionTests(unittest.TestCase):
+    """The reconstructed Chat shapes must stay evidence, and stay checkable."""
+
+    PROBE = (REPO / "docs" / "evidence" / "host-chat-shapes"
+             / "reconstruction-probe.ts")
+
+    def test_probe_declares_itself_evidence_not_a_host(self):
+        text = self.PROBE.read_text(encoding="utf8")
+        self.assertIn("EVIDENCE, NOT A HOST DECLARATION", text)
+        self.assertIn("Do not import this file into the build", text)
+        self.assertIn("NOT a claim to have\n// recovered the host", text)
+
+    def test_probe_typechecks_and_the_control_fails(self):
+        result = subprocess.run(
+            ["node", str(REPO / "tools" / "verify_host_shapes.mjs")],
+            capture_output=True, text=True, cwd=REPO)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("mutated control was correctly rejected", result.stdout)
+
+    def test_uses_key_set_comparison_not_bare_extends(self):
+        """A two-way `extends` treats { label } and { label; description? } as
+        equal, so an optional member can vanish unnoticed. That actually
+        happened here before the helper was changed."""
+        text = self.PROBE.read_text(encoding="utf8")
+        self.assertIn("KeysEqual", text)
+        self.assertIn("an optional member can vanish unnoticed", text)
+
+    def test_shapes_are_recorded_with_their_evidence(self):
+        report = REPO / "docs" / "evidence" / "host-chat-surface.json"
+        if not report.exists():
+            self.skipTest("run probe:host-chat first")
+        data = json.loads(report.read_text(encoding="utf8"))
+        for name, detail in data["fields"].items():
+            shape = detail.get("reconstructedShape")
+            self.assertIsNotNone(shape, name)
+            self.assertTrue(shape["evidence"], name)
+        # Confidence must be graded, not uniform.
+        self.assertIn("presentationStyle", data["lowConfidence"])
+        self.assertIn("Not resolved", data["knownDiscrepancy"])

@@ -22,10 +22,23 @@ So the 11 errors are not a defect in the recovered sources and not something the
 B-layer types can fix. They are the measurable size of one missing input: the
 author's private host declarations.
 
-This tool reports that gap and reconstructs the field shapes from the shipped
-implementation, so the eventual fix can be evidence-led. It deliberately does
-NOT write an augmentation: fabricating members on the public vscode namespace
-would manufacture a green typecheck while leaving the real host unrecovered.
+This tool reports that gap and reconstructs the field shapes, so the eventual
+fix can be evidence-led. It deliberately does NOT write an augmentation:
+fabricating members on the public vscode namespace would manufacture a green
+typecheck while leaving the real host unrecovered.
+
+HOW MUCH OF THE SHAPE SURVIVES. More than expected. The author annotated their
+own locals against the host type, so the structure is readable from their code
+without guessing:
+
+    const items: Array<{ label: string; description?: string;
+                         resource?: vscode.Uri | vscode.Location }> = [];
+    let currentHunk: NonNullable<...["diffPreview"]>[number]["hunks"][number];
+
+Those annotations had to match the host declaration to compile, so they are
+first-hand evidence of it. The shipped bundle corroborates independently: it
+constructs the same members at runtime. Both are recorded per field below, and
+where they disagree that is reported rather than smoothed over.
 """
 
 import argparse
@@ -67,6 +80,63 @@ def runtime_witness(field):
     return {"occurrences": len(hits), "samples": [h.strip() for h in hits[:3]]}
 
 
+# Shapes read out of the author's own annotations in tool-presentation.ts. Each
+# entry records the line that evidences it, so a reader can re-derive rather
+# than take it on trust.
+RECONSTRUCTED_SHAPES = {
+    "items": {
+        "type": ("Array<{ label: string; description?: string; "
+                 "resource?: vscode.Uri | vscode.Location }>"),
+        "evidence": ("tool-presentation.ts:129 and :153 declare exactly this "
+                     "element type for a local that is then assigned to the "
+                     "field, so it must be assignable to the host's own."),
+        "notes": ("withOverflowItem (line 99) appends a label-only element, "
+                  "which is why description and resource are optional."),
+    },
+    "metrics": {
+        "type": "Array<{ label: string; value: string }>",
+        "evidence": ("Constructed inline at tool-presentation.ts:120, :144, "
+                     ":170, :199 and :289, always with exactly these two "
+                     "string members."),
+        "notes": "value is always stringified at the call site, never a number.",
+    },
+    "presentationKind": {
+        "type": ("'files' | 'search' | 'edit' | 'terminal' | 'diagnostics' "
+                 "| 'lsp' | 'generic'"),
+        "evidence": ("The seven return values of presentationKind() "
+                     "(tool-presentation.ts:27), whose declared return type is "
+                     'NonNullable<vscode.ChatSimpleToolResultData'
+                     '["presentationKind"]>.'),
+        "notes": ("Matches the kind union the author declares independently on "
+                  "BridgeActivityPresentation in bridge-constants.ts:261, which "
+                  "is a useful cross-check."),
+    },
+    "presentationStyle": {
+        "type": "'shuncode' | undefined",
+        "evidence": ("tool-presentation.ts:443 assigns "
+                     '"shuncode" or undefined. Only one literal is ever used, '
+                     "so the full domain may be wider than observed."),
+        "notes": "LOW CONFIDENCE on the domain: one observed value only.",
+    },
+    "diffPreview": {
+        "type": ("Array<{ path: string; hunks: Array<{ lines: Array<"
+                 "{ kind: 'add'; newLine: number; text: string } | "
+                 "{ kind: 'delete'; oldLine: number; text: string } | "
+                 "{ kind: 'context'; oldLine: number; newLine: number; "
+                 "text: string }>; truncated?: boolean }>; "
+                 "truncated?: boolean }>"),
+        "evidence": ("parseUnifiedDiffPreview (tool-presentation.ts:220-275) "
+                     "indexes the host type three levels deep - "
+                     '["diffPreview"][number]["hunks"][number] - and the line '
+                     "literals at :265-269 give the discriminated union."),
+        "notes": ("The shipped bundle also builds `currentFile = { oldPath, "
+                  "newPath, hunks: [] }` in a second copy of this function, so "
+                  "the host element may permit oldPath/newPath in addition to "
+                  "path. Recorded as a discrepancy rather than resolved."),
+    },
+}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", required=True)
@@ -86,6 +156,7 @@ def main():
             "declaredByPublicHost": False,
             "usedByAuthorSource": name in used,
             "runtimeWitness": runtime_witness(name),
+            "reconstructedShape": RECONSTRUCTED_SHAPES.get(name),
         }
 
     report = {
@@ -111,6 +182,18 @@ def main():
             "on the public vscode namespace, which is exactly the kind of "
             "false-host claim this project refuses to make. The honest fix is "
             "to obtain the author's host declarations."),
+        "shapeRecovery": (
+            "All five shapes are reconstructible from the author's own type "
+            "annotations, which had to match their host declaration to compile. "
+            "That is enough to write a faithful declaration once someone "
+            "decides to - but writing one here would still be fabricating the "
+            "host, so the shapes are recorded as evidence instead."),
+        "lowConfidence": ["presentationStyle"],
+        "knownDiscrepancy": (
+            "The shipped bundle contains a second copy of "
+            "parseUnifiedDiffPreview that builds { oldPath, newPath, hunks } "
+            "rather than { path, hunks }. Either the host element allows both "
+            "spellings or the two copies drifted. Not resolved."),
         "consequence": (
             "Until then the skeleton's floor is 11 errors in "
             "tool-presentation.ts. That number is the size of one missing "
