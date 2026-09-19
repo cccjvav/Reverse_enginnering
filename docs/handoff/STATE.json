@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Bridge source package delivered for web_agent. Remaining ShunCode work still needs the author's Windows machine (installer, activation, GUI, native ABI) or their original repository.",
+  "nextAction": "Author has a step-by-step guide (docs/handoff/你现在该做什么.md). Waiting on them to hand the Bridge package to the web_agent assistant, and optionally to look for the original vscode-dts directory.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -718,5 +718,24 @@
       "safetyChecks": "Refuses to build if a credential pattern appears, or if any packaged file imports an excluded licence module. Both proven to fire.",
       "hashing": "The archive sha256 changes between builds because zip entries carry mtimes; the report also records a contentSha256 that is stable across rebuilds."
     }
+  },
+  "authorNextSteps": {
+    "writeup": "docs/handoff/你现在该做什么.md",
+    "step1": "Download shuncode-bridge-source.zip and web_agent提示词-修正版-纯净.txt from the download page. The prompt inside WEB_AGENT_HANDOVER.md is superseded and marked as such.",
+    "step2": "Upload the zip to the web_agent session and paste the corrected prompt. It asks for selective adoption of four modules, not wholesale replacement, and invites the other assistant to reject the package outright.",
+    "step3": "Optional: paste 支付架构提示词-纯净版.txt into the other project. It states plainly that the architecture relocates the merchant requirement to the server rather than removing it.",
+    "step4": "Optional: run the verification commands locally. Every verifier carries a deliberately broken control, so a pass proves the check is running.",
+    "step5": "Highest value if available: look for vscode-main/src/vscode-dts/ or the bridge-license-worker project in old backups.",
+    "explicitlyNotNeeded": [
+      "reinstalling ShunCode to browse the install directory - src/ and the proposed declarations were never packaged",
+      "building an installer now - only worth it if a new release is actually wanted",
+      "acting on the 7 BLOCKED gates - red is the honest state"
+    ]
+  },
+  "downloadsReproducible": {
+    "tool": "python3 tools/prepare_downloads.py",
+    "why": ".work/ is gitignored and has been wiped by sandbox resets twice, losing the hand-assembled download directory and one of the extracted prompts.",
+    "what": "Copies the handoff documents, extracts the paste-ready prompts from between their scissor markers, and rebuilds the Bridge package.",
+    "failsLoudly": "Raises if a source document is missing or its scissor markers are absent, rather than silently producing an empty prompt."
   }
 }

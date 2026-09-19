@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/197 个纳入范围的文件完整逐行解释；363/36453 行已解释。
+当前：6/198 个纳入范围的文件完整逐行解释；363/36541 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -187,7 +187,7 @@
 | [tools/diagnose_btypes.py](../../tools/diagnose_btypes.py) | 175 | 0 | 待逐行讲解 |
 | [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 98 | 0 | 待逐行讲解 |
 | [tools/diagnose_skeleton.mjs](../../tools/diagnose_skeleton.mjs) | 169 | 0 | 待逐行讲解 |
-| [tools/download_server.mjs](../../tools/download_server.mjs) | 168 | 0 | 待逐行讲解 |
+| [tools/download_server.mjs](../../tools/download_server.mjs) | 169 | 0 | 待逐行讲解 |
 | [tools/harvest_btype_evidence.py](../../tools/harvest_btype_evidence.py) | 173 | 0 | 待逐行讲解 |
 | [tools/http_maintenance_inputs.mjs](../../tools/http_maintenance_inputs.mjs) | 20 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |
@@ -199,6 +199,7 @@
 | [tools/patch_carrier_electron44.py](../../tools/patch_carrier_electron44.py) | 324 | 0 | 待逐行讲解 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
 | [tools/portable_presentation_inputs.mjs](../../tools/portable_presentation_inputs.mjs) | 26 | 0 | 待逐行讲解 |
+| [tools/prepare_downloads.py](../../tools/prepare_downloads.py) | 87 | 0 | 待逐行讲解 |
 | [tools/probe_carrier_build.py](../../tools/probe_carrier_build.py) | 303 | 0 | 待逐行讲解 |
 | [tools/probe_clipboard_adaptation.py](../../tools/probe_clipboard_adaptation.py) | 177 | 0 | 待逐行讲解 |
 | [tools/probe_header_narrowing.py](../../tools/probe_header_narrowing.py) | 155 | 0 | 待逐行讲解 |
