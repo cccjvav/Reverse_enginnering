@@ -68,7 +68,8 @@ def recover(tree, output):
     report = {'origin': extension.relative_to(tree).as_posix(), 'copied': [], 'skipped': [],
               'scope': 'Exact shipped text files, not original source reconstruction. Do not execute before review.',
               'secret_scan': 'Heuristic gate for common private keys/tokens only; NOT a security audit.',
-              'core_code_index': [], 'asar_indexes': [], 'excluded_trees': {}}
+              'core_code_index': [], 'asar_indexes': [], 'excluded_trees': {},
+              'host_declarations': []}
     selected = []
     total = 0
     for path in sorted(extension.rglob('*')):
@@ -110,6 +111,26 @@ def recover(tree, output):
                                  'source_mapping_url_present': 'sourceMappingURL=' in text,
                                  'inline_source_map_present': bool(re.search(r'sourceMappingURL=data:', text)),
                                  'is_declaration': path.name.endswith(('.d.ts', '.d.cts', '.d.mts'))})
+    # The carrier's own bundled declarations. The product ships
+    # out/vscode-dts/vscode.d.ts, which is the host API the author's fork
+    # actually exposed - the single most useful artefact for confirming the
+    # Chat surface reconstructed in docs/evidence/host-chat-shapes. It was
+    # previously missed because the index below only walks .js/.css/.html.
+    for path in sorted((app / 'out' / 'vscode-dts').glob('*.d.ts')) if (app / 'out' / 'vscode-dts').is_dir() else []:
+        if path.is_symlink() or not path.is_file():
+            continue
+        data = path.read_bytes()
+        rel = path.relative_to(app).as_posix()
+        report['host_declarations'].append({
+            'path': rel, 'size': len(data), 'sha256': digest(data),
+            'declares_chat_simple_tool_result': b'ChatSimpleToolResultData' in data,
+            'chat_surface_members': sorted(
+                m for m in (b'items', b'metrics', b'diffPreview',
+                            b'presentationKind', b'presentationStyle')
+                if m in data and b'ChatSimpleToolResultData' in data),
+        })
+        selected.append((rel, data))
+
     # Core paths and keyword counts guide later targeted comparison, without dumping bundles.
     for path in sorted((app / 'out').rglob('*')):
         if path.is_symlink() or not path.is_file() or path.suffix not in ('.js', '.css', '.html'):

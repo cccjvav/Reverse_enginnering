@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/192 个纳入范围的文件完整逐行解释；363/35621 行已解释。
+当前：6/192 个纳入范围的文件完整逐行解释；363/35642 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -200,7 +200,7 @@
 | [tools/probe_host_chat_surface.py](../../tools/probe_host_chat_surface.py) | 214 | 0 | 待逐行讲解 |
 | [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 210 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
-| [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 154 | 0 | 待逐行讲解 |
+| [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 175 | 0 | 待逐行讲解 |
 | [tools/register_btype_contracts.py](../../tools/register_btype_contracts.py) | 103 | 0 | 待逐行讲解 |
 | [tools/run-learning.cmd](../../tools/run-learning.cmd) | 27 | 0 | 待逐行讲解 |
 | [tools/validate_community.py](../../tools/validate_community.py) | 40 | 0 | 待逐行讲解 |

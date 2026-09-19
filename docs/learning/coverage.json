@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 192,
-    "lines": 35621,
+    "lines": 35642,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1319,8 +1319,8 @@
     },
     {
       "source": "tools/recover_custom_extension.py",
-      "sha256": "57910875931ec6a12ce4ff62a9b8857c64b2f4b5b909ad1d897100b2415f567c",
-      "lines": 154,
+      "sha256": "0835de8660408cb87ff9f32c886ed8ae50bc4e793769ddf7dd15d678fd161013",
+      "lines": 175,
       "explainedLines": 0,
       "status": "pending"
     },
