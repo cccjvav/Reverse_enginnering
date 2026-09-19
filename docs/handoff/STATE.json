@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Everything mechanically derivable from the shipped product has been derived, and the last avenue (the installer's own vscode.d.ts) is now checked and closed - it is byte-identical to the public one. Closing the final 11 errors requires the author's build-time vscode.proposed.chatParticipantAdditions.d.ts, which was never packaged. See docs/handoff/WHAT_THE_AUTHOR_MUST_SUPPLY.md.",
+  "nextAction": "Awaiting the author on two points: (a) whether to publish the verified Chat-surface reconstruction as a labelled candidate declaration under community/ so the skeleton reaches 0 errors, and (b) whether any backup of the original repository exists. Monetisation is settled: keep as-is.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -564,5 +564,24 @@
       "--maintenance": "11 errors - overlays the narrowed declaration, valid only with the community adapter in front. The generated file states that precondition in its own header."
     },
     "agreement": "The maintenance skeleton's 11 matches diagnoseTypes({httpMaintenance:true}) exactly, from two independent routes."
+  },
+  "authorQuestionsAnswered": {
+    "writeup": "docs/handoff/ANSWERS_FOR_AUTHOR.md",
+    "q1_src_directory": {
+      "question": "Can the author find the original src/ by reinstalling and browsing the install directory?",
+      "answer": "No. Reinstalling will not help.",
+      "proof": "recover_custom_extension.py walks the whole extensions/shuncode tree with rglob('*'), and src/ yielded exactly 34 files (28 .ts + 6 .mts). The 41 B-layer module names have an EMPTY intersection with those 34, so they were never packaged - they lived in <root>/src/, a sibling of the extension directory, and only reached the installer already bundled into dist/extension.js.",
+      "impact": "Low. The B layer is already rebuilt, compilable and 100% typed. Only the original .ts spelling is lost, which is archaeological rather than functional."
+    },
+    "q2_proposed_dts": {
+      "status": "Confirmed absent from the installer in the previous turn: the shipped out/vscode-dts/vscode.d.ts is byte-identical to the public candidate and declares none of the five members.",
+      "fallbackOffered": "Publish the verified reconstruction as a CANDIDATE declaration under community/, clearly labelled, without touching the public vscode namespace. Would take the skeleton to 0 errors without fabricating the host. Awaiting the author's go-ahead."
+    },
+    "q3_monetisation": {
+      "decision": "AUTHOR SAID KEEP IT. No de-monetisation work; community/ conversions stay out of the mainline.",
+      "architectureFound": "The client never touches payment. bridge-license-service.ts:396 POSTs {planId, paymentType} to a Cloudflare Worker (shuncode-bridge-license.2357872806.workers.dev), receives a checkoutUrl, validates it, opens it with openExternal(), and polls the order. Sign-in is Gitee OAuth with a 127.0.0.1 loopback callback.",
+      "answerToPortingQuestion": "The assistant on the other project is right that WeChat Pay needs a merchant ID. ShunCode does not avoid that requirement - it relocates it to the server. The merchant account still has to exist behind the Worker; only the client is freed from handling credentials. What is portable is the pattern: client receives a checkoutUrl and nothing else, payment channel is a parameter, OAuth replaces a bespoke account system.",
+      "caveat": "The Worker's own source is NOT in this repository. Server-side Alipay integration lives in the author's Cloudflare account."
+    }
   }
 }
