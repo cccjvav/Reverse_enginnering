@@ -107,12 +107,30 @@ so the real domain may be wider. And the bundle contains a second copy of
 `parseUnifiedDiffPreview` building `{ oldPath, newPath, hunks }` instead of
 `{ path, hunks }`; that discrepancy is recorded, not resolved.
 
-**Why this is still not "fixed".** Declaring those members ourselves would turn 11 red
-errors green while recovering nothing, and would put fabricated fields on the
-public `vscode` namespace. That is precisely the false-host claim this project
-refuses to make, so a test now guards the pinned declarations against being
-edited. The error floor stays at 11 until the author's host declarations are
-actually obtained — the number measures a missing input, not a defect.
+**Resolved as a labelled candidate (2026-09-19).** The author approved
+publishing the verified reconstruction, so it now lives in
+`community/host-types/chat-surface.d.ts` — outside the pinned `reference/` tree,
+declared via interface merging, and headed *"RECONSTRUCTED candidate declaration
+— NOT the author's original"*. A test still guards `reference/vscode-types`
+against ever gaining these members.
+
+Writing it corrected the count: the gap is **11 members, not 5**. TypeScript
+reports only the first excess property per object literal, so the earlier probe
+undercounted. The six extra (`isError`, `durationMs`, `terminalId`, `diff`,
+`summary`, `detailsLabel`) are equally presentational, so the "look only, no
+function" finding stands.
+
+The skeleton therefore has three honest gradations:
+
+| Mode | Errors |
+| --- | --- |
+| `npm run assemble:skeleton` | 14 |
+| `npm run assemble:skeleton-maintenance` | 11 |
+| `npm run assemble:skeleton-full` | **0** |
+
+A zero means the reconstruction satisfies every one of the author's sources. It
+does **not** mean the original host was recovered, and both the report and a
+test carry that caveat.
 
 ## The three transport errors were misdiagnosed
 

@@ -1,6 +1,31 @@
 # ShunCode恢复项目交接入口
 
-**更新：2026-09-18。当前结论：NOT_READY。当前会话分支：`arena/01a0afd4-reverse-enginnering-of-shun`。** 这是给下一位助手/开发者的操作交接，不需要先读完整聊天。路线图见[ROADMAP.md](ROADMAP.md)，第一项工作详案见[NEXT_AUTHORIZATION.md](NEXT_AUTHORIZATION.md)，机器可读快照见[STATE.json](STATE.json)。
+**更新：2026-09-19。发布结论仍为 NOT_READY（7 项门槛 BLOCKED，`check:release` 退出 2）。当前会话分支：`arena/01a0afd4-reverse-enginnering-of-shun`。** 这是给下一位助手/开发者的操作交接，不需要先读完整聊天。
+
+> ## 先读这一段：2026-09-19 的状态变化
+>
+> **源码层面的恢复已完成；产品层面的验收一步都还没做。** 这两件事必须分开看。
+>
+> 本轮新增的事实（每条都有证据文件与可复跑命令）：
+>
+> | 成果 | 证据 |
+> | --- | --- |
+> | 载体能从上游源码重建（依赖安装 + 编译 **0 错误**） | CI run `35371925282`、`docs/evidence/carrier-build-probe.json` |
+> | 作者的 Electron 44 剪贴板适配**逐字恢复**（非猜测） | [CLIPBOARD_RECOVERY.md](CLIPBOARD_RECOVERY.md) |
+> | B 层 41 个模块 **399/399 声明有真类型** | `npm run verify:btypes`、`npm run check:btypes` |
+> | 工程布局**从作者自己的 tsconfig 恢复**，0 个未解析模块 | [SKELETON.md](SKELETON.md) |
+> | A 层 + B 层**完整编译到 0 错误** | `npm run assemble:skeleton-full && npm run diagnose:skeleton` |
+> | Chat 宿主 11 个成员重建并验证，作为**标注清楚的候选声明** | `community/host-types/`、`npm run verify:host-shapes` |
+>
+> **仍然没有做到的**：没有产出过任何新安装器，没有在真机上启动验证过。
+> 这就是 7 项门槛依然 BLOCKED 的原因——**不要把上面的「0 错误」当成可发布**。
+>
+> 当前状态总览与"还差什么"见 **[STATUS_NOW.md](STATUS_NOW.md)**；
+> 需要作者本人提供的东西见 **[WHAT_THE_AUTHOR_MUST_SUPPLY.md](WHAT_THE_AUTHOR_MUST_SUPPLY.md)**。
+
+路线图见[ROADMAP.md](ROADMAP.md)，机器可读快照见[STATE.json](STATE.json)。
+
+> **注意**：[NEXT_AUTHORIZATION.md](NEXT_AUTHORIZATION.md) 写于 2026-09-17，其"文件授权为唯一优先项"的排序**已被 [PROJECT_AUDIT_2026-09-18.md](PROJECT_AUDIT_2026-09-18.md) 判定为错误优先级**；且审计发现 0.7.4 中 `checkPermission` 从无生产者，逐文件授权当年**根本没启用过**。该文档保留作历史记录，不要按它安排工作。
 
 ## 1. 接手后先纠正三个容易误判的事实
 

@@ -386,8 +386,8 @@
     "safetyPropertyPinned": "ManagedCommandCancellationRequest.forceConfirmed documented as never defaultable; the implementation throws FORCE_CONFIRMATION_REQUIRED without it.",
     "doesNotClaim": "A type without any is not proof of correctness, only of specificity. 17 modules still rest on behaviour alone.",
     "current": {
-      "exportedDeclarations": 398,
-      "fullyTyped": 398,
+      "exportedDeclarations": 399,
+      "fullyTyped": 399,
       "percent": 100.0,
       "handWrittenModules": [
         "adaptive-concurrency",

@@ -99,7 +99,7 @@ compilation, and value domains. Every such file says exactly that at the top.
 
 ## Done so far
 
-Coverage has moved **32.8% → 100%** (116/354 → 398/398 declarations), measured
+Coverage has moved **32.8% → 100%** (116/354 → 399/399 declarations), measured
 by `tools/diagnose_btypes.py` rather than asserted. Twelve modules typed, each measuring 0 `any` — this now covers **every Tier A
 module whose types the author's own sources name**:
 
