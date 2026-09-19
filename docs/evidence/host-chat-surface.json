@@ -1,0 +1,84 @@
+{
+  "scope": "Measures the gap between the author's Chat host and the pinned public one. Reports only; writes no type augmentation.",
+  "interface": "ChatSimpleToolResultData",
+  "publicMembers": [
+    "input",
+    "output"
+  ],
+  "membersTheAuthorRelliedOn": [
+    "diffPreview",
+    "items",
+    "metrics",
+    "presentationKind",
+    "presentationStyle"
+  ],
+  "missingFromPublicHost": [
+    "diffPreview",
+    "items",
+    "metrics",
+    "presentationKind",
+    "presentationStyle"
+  ],
+  "missingCount": 5,
+  "fields": {
+    "diffPreview": {
+      "declaredByPublicHost": false,
+      "usedByAuthorSource": true,
+      "runtimeWitness": {
+        "occurrences": 3,
+        "samples": [
+          "parseUnifiedDiffPreview(diff)",
+          "parseUnifiedDiffPreview2(diff)",
+          "presentation.diffPreview"
+        ]
+      }
+    },
+    "items": {
+      "declaredByPublicHost": false,
+      "usedByAuthorSource": true,
+      "runtimeWitness": {
+        "occurrences": 53,
+        "samples": [
+          "object({",
+          "object({ anyOf: array(object({",
+          "object({"
+        ]
+      }
+    },
+    "metrics": {
+      "declaredByPublicHost": false,
+      "usedByAuthorSource": true,
+      "runtimeWitness": {
+        "occurrences": 10,
+        "samples": [
+          "[{ label: \"Files\"",
+          "[{ label: \"Matches\"",
+          "["
+        ]
+      }
+    },
+    "presentationKind": {
+      "declaredByPublicHost": false,
+      "usedByAuthorSource": true,
+      "runtimeWitness": {
+        "occurrences": 1,
+        "samples": [
+          "kind"
+        ]
+      }
+    },
+    "presentationStyle": {
+      "declaredByPublicHost": false,
+      "usedByAuthorSource": false,
+      "runtimeWitness": {
+        "occurrences": 1,
+        "samples": [
+          "options.useShunCodeStyle ? \"shuncode\" : void 0"
+        ]
+      }
+    }
+  },
+  "conclusion": "The public ChatSimpleToolResultData declares 2 members (input, output). The author's sources rely on 5 more, using constructs such as NonNullable<vscode.ChatSimpleToolResultData[\"items\"]> that only compile if their vscode.d.ts declared them. They built against a forked Code OSS host, and the shipped bundle constructs these fields at runtime, so they were real rather than aspirational.",
+  "whyNotFixedHere": "Declaring these members ourselves would turn 11 red errors green without recovering anything. It would also put fabricated fields on the public vscode namespace, which is exactly the kind of false-host claim this project refuses to make. The honest fix is to obtain the author's host declarations.",
+  "consequence": "Until then the skeleton's floor is 11 errors in tool-presentation.ts. That number is the size of one missing input, not a defect in the recovered sources or the B-layer types."
+}

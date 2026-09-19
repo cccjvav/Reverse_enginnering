@@ -54,12 +54,39 @@ And the check has teeth: removing one B-layer module from the tree flips it to
 
 | File | Count | Cause |
 | --- | --- | --- |
-| `tool-presentation.ts` | 11 | The pinned **public** `vscode.d.ts` has no custom Chat result fields (`items`, `metrics`, `diffPreview`, `presentationKind`). The author's private host had them. |
+| `tool-presentation.ts` | 11 | The author built against a **forked** Code OSS host — see below. |
 | `bridge-mcp-transport.ts` | 3 | MCP SDK transport options differ from the version the author built against. |
 
 Two independent routes — the custom-resolver linkage and this unmodified
 tsconfig — report **the same 14 errors in the same two files**. Neither is a
 B-layer typing gap.
+
+## The Chat host gap, measured
+
+`npm run probe:host-chat` quantifies the 11 errors instead of guessing at them:
+
+- the public `ChatSimpleToolResultData` declares exactly **two** members,
+  `input` and `output`
+- the author's sources rely on **five more**: `items`, `metrics`, `diffPreview`,
+  `presentationKind`, `presentationStyle`
+
+The decisive evidence is how they write it:
+
+```ts
+items?: NonNullable<vscode.ChatSimpleToolResultData["items"]>
+```
+
+That only compiles if **their** `vscode.d.ts` declared `items`. They were
+building against a forked host, not the public proposed API. And the fields were
+real, not aspirational — the shipped bundle constructs all five at runtime
+(`items` 53×, `metrics` 10×, `diffPreview` 3×).
+
+**Why this is not "fixed".** Declaring those members ourselves would turn 11 red
+errors green while recovering nothing, and would put fabricated fields on the
+public `vscode` namespace. That is precisely the false-host claim this project
+refuses to make, so a test now guards the pinned declarations against being
+edited. The error floor stays at 11 until the author's host declarations are
+actually obtained — the number measures a missing input, not a defect.
 
 ## What was never recovered
 

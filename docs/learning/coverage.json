@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 189,
-    "lines": 35022,
+    "files": 190,
+    "lines": 35191,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1039,8 +1039,8 @@
     },
     {
       "source": "tests/test_skeleton_layout.py",
-      "sha256": "22bec57848b3e05706f49a27202ca9790b1caad2dafc7b0661db0fda0a155323",
-      "lines": 59,
+      "sha256": "44b91fdfa8c84fe5df92b4c912cfa2def08a9c9b39c7c049af693f3f544f81dd",
+      "lines": 97,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1286,6 +1286,13 @@
       "source": "tools/probe_clipboard_adaptation.py",
       "sha256": "fa69b65f5ccb151b92f45fe63b3e066af9472b6667906c3926aec4ee93d0a169",
       "lines": 177,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/probe_host_chat_surface.py",
+      "sha256": "e46634c569c4fe1387b8d59ed486bdee13263f15a16904718853dea0f68af28a",
+      "lines": 131,
       "explainedLines": 0,
       "status": "pending"
     },

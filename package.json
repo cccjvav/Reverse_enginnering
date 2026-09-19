@@ -31,7 +31,8 @@
     "register:btypes": "python3 tools/register_btype_contracts.py",
     "diagnose:btype-linkage": "node tools/diagnose_btype_linkage.mjs",
     "assemble:skeleton": "python3 tools/assemble_skeleton.py --report docs/evidence/skeleton.json",
-    "diagnose:skeleton": "node tools/diagnose_skeleton.mjs"
+    "diagnose:skeleton": "node tools/diagnose_skeleton.mjs",
+    "probe:host-chat": "python3 tools/probe_host_chat_surface.py --output docs/evidence/host-chat-surface.json"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

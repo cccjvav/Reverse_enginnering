@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Close the two host-surface gaps so the skeleton reaches 0 errors: the 11 tool-presentation.ts errors need the custom Chat result fields the author's private host declared, and the 3 bridge-mcp-transport.ts errors need the MCP SDK version they actually built against. Both are evidence questions, not typing work.",
+  "nextAction": "Two separable gaps remain before the skeleton reaches zero: (1) the author's forked Chat host declarations - an evidence-gathering problem, see hostChatSurfaceGap; (2) 3 errors from MCP SDK drift in bridge-mcp-transport.ts, which needs identifying the SDK version they built against. Neither is typing work.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -516,5 +516,20 @@
       "test/workspace-hub-store.test.ts - did not ship"
     ],
     "doesNotClaim": "Typechecking is not building. No bundle, no npm install, no carrier involvement. Host types are public candidates, not the author's private host."
+  },
+  "hostChatSurfaceGap": {
+    "question": "Why does the assembled skeleton still report 11 errors in tool-presentation.ts?",
+    "answer": "Because the author built against a FORKED Code OSS host. The public ChatSimpleToolResultData declares exactly two members, input and output; their sources rely on five more.",
+    "evidence": "docs/evidence/host-chat-surface.json",
+    "proof": "The author writes NonNullable<vscode.ChatSimpleToolResultData[\"items\"]>, which only compiles if their vscode.d.ts declared items. All five fields are constructed at runtime in the shipped bundle (items 53x, metrics 10x, diffPreview 3x, presentationKind 1x, presentationStyle 1x), so they were real, not aspirational.",
+    "missingFields": [
+      "diffPreview",
+      "items",
+      "metrics",
+      "presentationKind",
+      "presentationStyle"
+    ],
+    "deliberatelyNotFixed": "Declaring these members ourselves would turn 11 errors green without recovering anything, and would put fabricated fields on the public vscode namespace - the exact false-host claim this project refuses to make. A test guards the public declarations against being edited.",
+    "consequence": "The skeleton's error floor is 11 until the author's host declarations are obtained. That number measures one missing input, not a defect in the recovered sources or the B-layer types."
   }
 }

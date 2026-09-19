@@ -57,3 +57,41 @@ class LayoutProvenanceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class HostSurfaceGapTests(unittest.TestCase):
+    """The missing Chat fields must stay described as a missing input, never
+    fabricated onto the public vscode namespace."""
+
+    def setUp(self):
+        self.report = REPO / "docs" / "evidence" / "host-chat-surface.json"
+        if not self.report.exists():
+            self.skipTest("run probe_host_chat_surface.py first")
+        self.data = json.loads(self.report.read_text(encoding="utf8"))
+
+    def test_public_interface_really_is_smaller(self):
+        self.assertEqual(self.data["publicMembers"], ["input", "output"])
+        self.assertGreater(self.data["missingCount"], 0)
+
+    def test_refuses_to_fabricate_the_host(self):
+        self.assertIn("would turn 11 red errors green without recovering",
+                      self.data["whyNotFixedHere"].replace("\n", " "))
+        self.assertIn("false-host claim", self.data["whyNotFixedHere"])
+
+    def test_every_missing_field_has_a_runtime_witness(self):
+        """A field claimed missing must be shown to exist in the shipped
+        product, otherwise it is speculation."""
+        for name, detail in self.data["fields"].items():
+            witness = detail["runtimeWitness"]
+            self.assertIsNotNone(witness, name)
+            self.assertGreater(witness["occurrences"], 0, name)
+
+    def test_no_augmentation_file_was_written(self):
+        """Guard against a later shortcut that declares these members."""
+        for path in (REPO / "reference" / "vscode-types").glob("*.d.ts"):
+            text = path.read_text(encoding="utf8", errors="replace")
+            if "interface ChatSimpleToolResultData" in text:
+                start = text.index("interface ChatSimpleToolResultData")
+                body = text[start:text.index("\n\t}", start)]
+                self.assertNotIn("presentationKind", body,
+                                 "public host declarations must stay unmodified")
