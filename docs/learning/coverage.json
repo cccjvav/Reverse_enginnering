@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 194,
-    "lines": 36009,
+    "lines": 36038,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1200,15 +1200,15 @@
     },
     {
       "source": "tools/diagnose_skeleton.mjs",
-      "sha256": "6686006f17a7ec9dee11bc5af8645b2154b9a26f5fc878d176d7f8641bcd626e",
-      "lines": 141,
+      "sha256": "b5c98b0f1fa4476e3454f0a617f89fc1a577789c88f7c01a94e0da350984b90b",
+      "lines": 169,
       "explainedLines": 0,
       "status": "pending"
     },
     {
       "source": "tools/download_server.mjs",
-      "sha256": "06128f6b8d67f9735e0164fb5900389eeebf4b3972945760e36ef8fa2eb287cb",
-      "lines": 162,
+      "sha256": "03fded54c62240804b67f3eb4425d6810f037451c778f8db6413a233f82e4b8a",
+      "lines": 163,
       "explainedLines": 0,
       "status": "pending"
     },

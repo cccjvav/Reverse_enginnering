@@ -84,6 +84,23 @@ export function diagnoseSkeleton(workspace = '.work/skeleton') {
     };
   }).sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), 'en'));
 
+  // Coverage, reported alongside the error count. "0 errors" over a subset
+  // would be a flattering number, so say plainly how much of each layer the
+  // program actually reached.
+  const inProgram = new Set(program.getSourceFiles().map(f => path.resolve(f.fileName)));
+  const extSrc = path.join(extDir, 'src');
+  const extAll = fs.existsSync(extSrc)
+    ? fs.readdirSync(extSrc).filter(f => /\.(ts|mts)$/.test(f) && f !== 'chat-surface.d.ts')
+    : [];
+  const extMissed = extAll.filter(f => !inProgram.has(path.join(extSrc, f)));
+  const coreDir = path.join(root, 'src');
+  const coreAll = fs.existsSync(coreDir)
+    ? fs.readdirSync(coreDir).filter(f => f.endsWith('.js'))
+    : [];
+  const coreMissed = coreAll.filter(f =>
+    !inProgram.has(path.join(coreDir, f))
+    && !inProgram.has(path.join(coreDir, f.replace(/\.js$/, '.d.ts'))));
+
   const errors = diagnostics.filter(d => d.category === 'Error');
   const counts = {};
   const bySource = {};
@@ -114,6 +131,17 @@ export function diagnoseSkeleton(workspace = '.work/skeleton') {
       + 'and the test file did not ship.'),
     typescriptVersion: ts.version,
     filesCompiled: parsed.fileNames.length,
+    coverage: {
+      extensionSources: { total: extAll.length, reached: extAll.length - extMissed.length, notReached: extMissed },
+      coreModules: { total: coreAll.length, reached: coreAll.length - coreMissed.length, notReached: coreMissed },
+      note: ("Modules not reached are simply not imported from the extension "
+        + "entry graph: the file tools (apply-patch, read-files, find-files, "
+        + "search-files, read-image) are called by the bridge at runtime rather "
+        + "than imported by the extension, and codex-account-view.ts is not "
+        + "imported by anything. They are typechecked separately by "
+        + "npm run verify:btypes, so they are not unverified - just outside "
+        + "this program."),
+    },
     errorCount: errors.length,
     counts,
     errorsBySource: bySource,

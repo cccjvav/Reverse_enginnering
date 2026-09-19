@@ -12,6 +12,37 @@
   "droppedReason": "Declared by the author but never recovered: two B-layer modules exist only as compiled .js (reached via their .d.ts instead), and the test file did not ship.",
   "typescriptVersion": "5.9.3",
   "filesCompiled": 31,
+  "coverage": {
+    "extensionSources": {
+      "total": 34,
+      "reached": 33,
+      "notReached": [
+        "codex-account-view.ts"
+      ]
+    },
+    "coreModules": {
+      "total": 41,
+      "reached": 26,
+      "notReached": [
+        "apply-patch.js",
+        "build-info.js",
+        "canonical-diff.js",
+        "custom-tool-manifest.js",
+        "find-files.js",
+        "managed-command-risk.js",
+        "mcp-protocol.js",
+        "read-files.js",
+        "read-image.js",
+        "ripgrep-diagnostics.js",
+        "search-files.js",
+        "snapshot-build-metadata.js",
+        "snapshot-packaged-ripgrep.js",
+        "snapshot-sdk-versions.js",
+        "workspace-paths.js"
+      ]
+    },
+    "note": "Modules not reached are simply not imported from the extension entry graph: the file tools (apply-patch, read-files, find-files, search-files, read-image) are called by the bridge at runtime rather than imported by the extension, and codex-account-view.ts is not imported by anything. They are typechecked separately by npm run verify:btypes, so they are not unverified - just outside this program."
+  },
   "errorCount": 0,
   "counts": {},
   "errorsBySource": {},

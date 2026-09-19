@@ -18,6 +18,7 @@ const DIR = path.join(ROOT, '.work', 'downloads');
 const PORT = Number(process.env.PORT || 8080);
 
 const TITLES = {
+	'STATUS_NOW.md': '现在还差什么（当前状态总览）',
 	'支付架构提示词-纯净版.txt': '支付架构提示词（纯净版，可直接粘贴给助手）',
 	'PAYMENT_ARCHITECTURE_PROMPT.md': '支付架构提示词（完整版，含给你本人的补充说明）',
 	'CHAT_FIELDS_IMPACT.md': '那 5 个 Chat 字段到底影响什么',

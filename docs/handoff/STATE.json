@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Step 3 is complete: the assembled skeleton compiles to 0 errors with the reconstructed Chat surface overlaid, and to 14/11 without it. Remaining work needs the author's Windows machine (real activation, GUI, installer) or their original repository (authentic proposed declarations).",
+  "nextAction": "Nothing further is mechanically derivable from the shipped product. Remaining work needs the author's Windows machine (installer, activation, GUI, native ABI) or their original repository. Cheapest useful next step for the author: run the skeleton compile on Windows to confirm the Linux result holds there.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -626,5 +626,40 @@
     "serves": ".work/downloads - handoff docs plus a paste-ready plain-text prompt",
     "features": "index, per-file download, online view with one-click copy",
     "safety": "Read-only. Every request is resolved against the one directory and rejected if it escapes; verified that ../../package.json and its URL-encoded form both return 404."
+  },
+  "coverageHonesty": {
+    "why": "'0 errors' could sound larger than it is, so the diagnostic now reports how much of each layer the program actually reached.",
+    "aLayer": "33 of 34 files. The one not reached, codex-account-view.ts, is imported by nothing - dead code. Adding it to the program explicitly also gives 0 errors; verified.",
+    "bLayer": "26 of 41 modules. The other 15 are not in the extension's import graph: the file tools are invoked by the bridge at runtime rather than imported. They are typechecked separately by npm run verify:btypes, also 0 errors, so they are outside this program but not unverified.",
+    "whereRecorded": "docs/evidence/skeleton-typecheck.json -> coverage"
+  },
+  "statusSummary": {
+    "writeup": "docs/handoff/STATUS_NOW.md",
+    "achieved": [
+      "carrier rebuildable from source (CI: install + compile 0 errors)",
+      "author's Electron 44 clipboard adaptation recovered verbatim",
+      "B layer 398/398 declarations typed, linkage-verified",
+      "project layout recovered from the author's own tsconfig, 0 unresolved imports",
+      "A+B compile together to 0 errors with the reconstructed Chat surface"
+    ],
+    "notAchieved": [
+      "no new installer has ever been produced",
+      "nothing has been launched or verified on real hardware",
+      "7 release gates remain BLOCKED"
+    ],
+    "oneLine": "Source-level recovery is done; product-level acceptance has not started.",
+    "needsAuthorMachine": [
+      "build a new installer",
+      "real activation and GUI acceptance",
+      "native module ABI under Electron 44",
+      "end-to-end MCP bridge with a real client"
+    ],
+    "needsOriginalRepo": [
+      "the fork's proposed chat declarations (currently substituted by a labelled reconstruction)",
+      "the 41 original .ts (currently rebuilt and fully typed)",
+      "the Code OSS fork itself",
+      "the bridge-license-worker project"
+    ],
+    "noneOfTheRepoItemsBlock": "The author's original goal - editable, recompilable source - is met without them."
   }
 }
