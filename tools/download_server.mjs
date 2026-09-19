@@ -18,6 +18,8 @@ const DIR = path.join(ROOT, '.work', 'downloads');
 const PORT = Number(process.env.PORT || 8080);
 
 const TITLES = {
+	'web_agent提示词-修正版-纯净.txt': 'web_agent 提示词（修正版·纯净，直接粘贴）',
+	'WEB_AGENT_EXTENSION_REVIEW.md': '看过对方扩展后的修正评估（先读这份）',
 	'shuncode-bridge-source.zip': 'Bridge 源码包（转交 web_agent 用）',
 	'BRIDGE_PACKAGE_README.md': 'Bridge 源码包说明（先读这份）',
 	'WEB_AGENT_HANDOVER.md': '转交 web_agent 的说明＋给对方助手的提示词',

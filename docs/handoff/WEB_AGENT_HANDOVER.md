@@ -1,7 +1,15 @@
 # 转交 web_agent 项目:Bridge 源码包
 
-下载:`shuncode-bridge-source.zip`(208,323 字节,92 个文件,
-SHA256 `404ef1f615ee9b3607ecf9940cc8be538327d119b022383fe0251f3ea92127d1`)
+下载:`shuncode-bridge-source.zip`(87 个文件)
+
+内容哈希 `8dd74e29241437c405188751eec93ea59ebcd30ac6576800c096652f0245fa10`(重建后稳定;
+压缩包本身的 sha256 每次不同,因为 zip 条目带时间戳)。
+由 `python3 tools/build_bridge_package.py` 可重复生成。
+
+> **重要更正**:我最初判断"Chat 做不成普通扩展"。看过你们现有扩展后确认
+> **这话作为一般结论是错的**——你们已经用稳定 API 做出来了。
+> 详见 [WEB_AGENT_EXTENSION_REVIEW.md](WEB_AGENT_EXTENSION_REVIEW.md),
+> **那份里的提示词才是最终版**,本文的提示词已过时。
 
 ---
 

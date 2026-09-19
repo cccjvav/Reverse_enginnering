@@ -702,6 +702,21 @@
     "packaged": "shuncode-bridge-source.zip - 92 files, 208323 bytes, sha256 404ef1f615ee9b3607ecf9940cc8be538327d119b022383fe0251f3ea92127d1",
     "excluded": "All licence/payment code. bridge-access-controller.ts was dropped during packaging because it imports bridge-license-service and would not compile; verified bridge-server.ts has no licence coupling, so Bridge runs independently of monetisation. Secret scan clean.",
     "honestyInPackage": "README grades provenance in three tiers (original source / rebuilt JS / hand-written types) and warns that 17 modules' type NAMES were invented during recovery. Also documents 5 real pitfalls including the string[] header defect.",
-    "writeup": "docs/handoff/WEB_AGENT_HANDOVER.md - includes a paste-ready prompt for the other project's assistant that explicitly invites 'if it is not worth using, say so'."
+    "writeup": "docs/handoff/WEB_AGENT_HANDOVER.md - includes a paste-ready prompt for the other project's assistant that explicitly invites 'if it is not worth using, say so'.",
+    "correctionAfterReadingTheirExtension": {
+      "whatIGotWrong": "I told the author that the Chat half 'cannot be a normal VS Code extension'. True of ShunCode's implementation, but wrong as a general claim - web_agent already built one.",
+      "evidence": "webagent-core/extension/: enabledApiProposals is absent, engines.vscode is ^1.90.0, and it uses the STABLE vscode.chat.createChatParticipant. Grep confirms toolSpecificData, presentationKind, diffPreview and metrics all appear 0 times. Tool output goes through stream.markdown/progress/reference.",
+      "accurateStatement": "ShunCode needed a bespoke IDE because it chose proposed APIs to get richer cards. That is a trade-off, not the only option. web_agent took the other side: plainer cards, but installable from the Marketplace.",
+      "theirArchitecture": "Thin extension (7 JS files, no MCP code at all) talking HTTP to agent-host on 127.0.0.1:48271. The engine lives in the host - which is exactly the shape the author wanted, and means the Bridge package belongs in agent-host, not the extension.",
+      "revisedRecommendation": "Do NOT propose replacing their MCP server: it works and is coupled to their approval/audit system. Cherry-pick four modules instead, all vscode-free and SDK-free: bridge-session-registry (they only have a flat 24h TTL; ShunCode never evicts active sessions), adaptive-concurrency, concurrency, jsonrpc-request-id-registry.",
+      "theirsIsBetterAt": "OAuth (oauth.js, 573 lines), outbound external MCP clients, approval and audit controls. Leave those alone.",
+      "writeup": "docs/handoff/WEB_AGENT_EXTENSION_REVIEW.md - contains the FINAL prompt; the one in WEB_AGENT_HANDOVER.md is superseded."
+    },
+    "packaging": {
+      "tool": "python3 tools/build_bridge_package.py",
+      "why": "The first package was hand-assembled in .work/, which is gitignored and did not survive a sandbox reset. Everything needed to rebuild now lives in the repository.",
+      "safetyChecks": "Refuses to build if a credential pattern appears, or if any packaged file imports an excluded licence module. Both proven to fire.",
+      "hashing": "The archive sha256 changes between builds because zip entries carry mtimes; the report also records a contentSha256 that is stable across rebuilds."
+    }
   }
 }

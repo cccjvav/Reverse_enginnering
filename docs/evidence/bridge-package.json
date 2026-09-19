@@ -1,0 +1,28 @@
+{
+  "scope": "Build record for the Bridge source package handed to the web_agent project. Records what was packaged and what was deliberately left out; claims nothing about whether the code runs in that project.",
+  "archive": ".work/downloads/shuncode-bridge-source.zip",
+  "archiveSha256": "4114d6e8d583cea5193b48d53e8137921803a681006914a943abf804aa847188",
+  "archiveSha256Note": "Changes between builds: zip entries carry mtimes. Compare contentSha256 instead.",
+  "contentSha256": "8dd74e29241437c405188751eec93ea59ebcd30ac6576800c096652f0245fa10",
+  "bytes": 201993,
+  "coreModules": 41,
+  "typeDeclarations": 37,
+  "extensionLayer": [
+    "bridge-constants.ts",
+    "bridge-mcp-modern.ts",
+    "bridge-mcp-transport.ts",
+    "bridge-server.ts",
+    "bridge-tool-dispatcher.ts",
+    "bridge-tunnel-lease.ts",
+    "bridge-utils.ts",
+    "extension-host-proxy.mts"
+  ],
+  "excluded": [
+    "bridge-access-controller.ts",
+    "bridge-license-config.ts",
+    "bridge-license-service.ts"
+  ],
+  "exclusionReason": "Licence and payment code, kept by the author. bridge-access-controller.ts imports bridge-license-service and would not compile without it; bridge-server.ts was verified to have no licence coupling.",
+  "secretScan": "clean",
+  "danglingImportCheck": "clean"
+}
