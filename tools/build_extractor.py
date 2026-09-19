@@ -6,7 +6,13 @@ from installer_forensics import command_report
 
 
 def main():
-    result = {'repository': 'dscharrer/innoextract', 'commit': '6e9e34ed0876014fdb46e684103ef8c3605e382e'}
+    result = {
+        'scope': ('Build log for the pinned innoextract extractor used to open '
+                  'the installer. Records whether the tool compiled - it says '
+                  'nothing about what was extracted or about ShunCode itself.'),
+        'repository': 'dscharrer/innoextract',
+        'commit': '6e9e34ed0876014fdb46e684103ef8c3605e382e',
+    }
     result['cmake_version'] = command_report(['cmake', '--version'])
     result['configure'] = command_report(['cmake', '-S', '.work/innoextract-source', '-B', '.work/innoextract-build', '-DCMAKE_BUILD_TYPE=Release', '-DUSE_LTO=OFF'])
     code = result['configure']['exit_code']

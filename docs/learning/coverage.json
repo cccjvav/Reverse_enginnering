@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 196,
-    "lines": 36237,
+    "lines": 36317,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1032,8 +1032,8 @@
     },
     {
       "source": "tests/test_docs_audit.py",
-      "sha256": "9397ea7a6986346015fd7b7b013f17fdc325f281e836b8b9d71df1cf12ab9f60",
-      "lines": 46,
+      "sha256": "326111e11c3cdb8e7415d78a57c3147316e52fa49b1a7d55d95e89661e571df0",
+      "lines": 60,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1102,8 +1102,8 @@
     },
     {
       "source": "tools/audit_docs.py",
-      "sha256": "f060396ecdf5df01fcd28709f6446836c2f8cd6f7393c16738d90e6efc854a41",
-      "lines": 153,
+      "sha256": "0f8e8a013344b186dd0ae89803888b4c7cfbd2adcb4ba27816d40bc897371f9e",
+      "lines": 213,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1137,8 +1137,8 @@
     },
     {
       "source": "tools/build_extractor.py",
-      "sha256": "6b751ce943cc09db9904403e4d21595c38f027a0f1177f96d14ed6b513ddfaaa",
-      "lines": 25,
+      "sha256": "a0018c1dea19f17eafb0c29d89ed14ceb64d244d36eb0e0dd02b5f5d10832ca7",
+      "lines": 31,
       "explainedLines": 0,
       "status": "pending"
     },

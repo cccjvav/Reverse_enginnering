@@ -27,11 +27,25 @@ class DocsAuditTests(unittest.TestCase):
         out.unlink(missing_ok=True)
         return result, report
 
-    def test_all_markdown_is_consistent(self):
+    def test_every_file_under_docs_is_consistent(self):
+        """Not just markdown. The second review pass found 65 of the 103 files
+        under docs/ had never been checked at all."""
         result, report = self.run_audit()
-        self.assertGreater(report["filesReviewed"], 50,
-                           "audit is not reaching the whole repository")
+        self.assertGreater(report["markdownReviewed"], 50)
+        self.assertGreater(report["nonMarkdownReviewed"], 60,
+                           "audit is skipping the JSON evidence")
         self.assertEqual(report["findingCount"], 0, result.stdout)
+
+    def test_every_evidence_file_declares_its_scope(self):
+        """A probe with no scope statement can be mistaken for a broad claim."""
+        source = TOOL.read_text(encoding="utf8")
+        self.assertIn("doesNotClaim", source)
+        self.assertIn("cannot tell what it does not claim", source)
+
+    def test_scans_for_secrets(self):
+        source = TOOL.read_text(encoding="utf8")
+        self.assertIn("SECRET_RE", source)
+        self.assertIn("PRIVATE KEY", source)
 
     def test_knows_upstream_scripts_are_not_ours(self):
         """`npm run compile` belongs to the Code OSS carrier; flagging it would

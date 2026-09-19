@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/196 个纳入范围的文件完整逐行解释；363/36237 行已解释。
+当前：6/196 个纳入范围的文件完整逐行解释；363/36317 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -159,7 +159,7 @@
 | [tests/test_ci_workflow_branch_binding.py](../../tests/test_ci_workflow_branch_binding.py) | 101 | 0 | 待逐行讲解 |
 | [tests/test_cmd_environment.py](../../tests/test_cmd_environment.py) | 125 | 0 | 待逐行讲解 |
 | [tests/test_custom_recovery.py](../../tests/test_custom_recovery.py) | 56 | 0 | 待逐行讲解 |
-| [tests/test_docs_audit.py](../../tests/test_docs_audit.py) | 46 | 0 | 待逐行讲解 |
+| [tests/test_docs_audit.py](../../tests/test_docs_audit.py) | 60 | 0 | 待逐行讲解 |
 | [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 53 | 0 | 待逐行讲解 |
 | [tests/test_recover.py](../../tests/test_recover.py) | 47 | 0 | 待逐行讲解 |
 | [tests/test_skeleton_layout.py](../../tests/test_skeleton_layout.py) | 227 | 0 | 待逐行讲解 |
@@ -169,12 +169,12 @@
 | [tools/assemble_skeleton.py](../../tools/assemble_skeleton.py) | 248 | 0 | 待逐行讲解 |
 | [tools/audit_authorization_wiring.mjs](../../tools/audit_authorization_wiring.mjs) | 50 | 0 | 待逐行讲解 |
 | [tools/audit_custom_boundary.mjs](../../tools/audit_custom_boundary.mjs) | 54 | 0 | 待逐行讲解 |
-| [tools/audit_docs.py](../../tools/audit_docs.py) | 153 | 0 | 待逐行讲解 |
+| [tools/audit_docs.py](../../tools/audit_docs.py) | 213 | 0 | 待逐行讲解 |
 | [tools/audit_extension_runtime.mjs](../../tools/audit_extension_runtime.mjs) | 48 | 0 | 待逐行讲解 |
 | [tools/audit_permission_producers.mjs](../../tools/audit_permission_producers.mjs) | 95 | 0 | 待逐行讲解 |
 | [tools/audit_recovered_extension.py](../../tools/audit_recovered_extension.py) | 79 | 0 | 待逐行讲解 |
 | [tools/build_community.mjs](../../tools/build_community.mjs) | 137 | 137 | 本组已逐行解释 |
-| [tools/build_extractor.py](../../tools/build_extractor.py) | 25 | 0 | 待逐行讲解 |
+| [tools/build_extractor.py](../../tools/build_extractor.py) | 31 | 0 | 待逐行讲解 |
 | [tools/build_learning.mjs](../../tools/build_learning.mjs) | 62 | 0 | 待逐行讲解 |
 | [tools/build_linked_extension.mjs](../../tools/build_linked_extension.mjs) | 156 | 0 | 待逐行讲解 |
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |

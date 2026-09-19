@@ -15,8 +15,17 @@ this automates the parts that can be checked mechanically:
   LINKS     relative markdown links pointing at files that do not exist
   BRANCH    the current session branch named as something else
 
+A second pass then asked about *every* file under docs/, not just markdown -
+103 files, of which 65 are not .md. Those are checked too:
+
+  JSON      every evidence file must parse
+  SCOPE     every evidence file must carry a scope/doesNotClaim statement, so a
+            reader cannot mistake a narrow probe for a broad claim
+  SECRETS   no API keys, tokens or private keys anywhere under docs/
+
 It deliberately does NOT try to judge prose. Stale narrative still needs a human
-- what it guarantees is that the numbers, commands and links stay honest.
+- what it guarantees is that the numbers, commands, links, evidence structure
+and absence of secrets stay honest.
 """
 
 import argparse
@@ -112,6 +121,50 @@ def check_branch(text, path, findings):
                              "detail": f"names an old branch as current: {sentence[:70]!r}"})
 
 
+SECRET_RE = re.compile(
+    r"sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{30,}|BEGIN (?:RSA |EC )?PRIVATE KEY")
+
+
+def check_non_markdown(findings):
+    """Everything under docs/ that is not a .md file."""
+    checked = 0
+    for path in sorted((REPO / "docs").rglob("*")):
+        if not path.is_file() or path.suffix == ".md":
+            continue
+        if any(part in SKIP_DIRS for part in path.relative_to(REPO).parts):
+            continue
+        checked += 1
+        rel = str(path.relative_to(REPO))
+        try:
+            text = path.read_text(encoding="utf8", errors="replace")
+        except OSError as error:
+            findings.append({"kind": "JSON", "file": rel, "detail": str(error)})
+            continue
+
+        if SECRET_RE.search(text):
+            findings.append({"kind": "SECRETS", "file": rel,
+                             "detail": "looks like a credential or private key"})
+
+        if path.suffix != ".json":
+            continue
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError as error:
+            findings.append({"kind": "JSON", "file": rel,
+                             "detail": f"does not parse: {error}"})
+            continue
+        # STATE.json and the learning data are indexes, not evidence claims.
+        if path.parent.name != "evidence" or path.name == "docs-audit.json":
+            continue
+        if isinstance(data, dict) and not any(
+                k in data for k in ("scope", "doesNotClaim", "notAClaim",
+                                    "question", "trigger")):
+            findings.append({"kind": "SCOPE", "file": rel,
+                             "detail": ("evidence file states no scope, so a "
+                                        "reader cannot tell what it does not claim")})
+    return checked
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", required=True)
@@ -128,17 +181,24 @@ def main():
         check_links(text, path, findings)
         check_branch(text, path, findings)
 
+    non_md = check_non_markdown(findings)
+
     report = {
-        "scope": ("Mechanical consistency check of every markdown file against "
-                  "the evidence it cites. Does not judge prose."),
+        "scope": ("Mechanical consistency check of every file under docs/ - "
+                  "markdown against the evidence it cites, plus JSON validity, "
+                  "evidence scope statements and a secret scan. Does not judge "
+                  "prose."),
         "why": ("A manual review missed the root README and RECOVERY_STATUS, "
                 "both of which described a two-day-old state at the front door "
                 "of the repository. Eyeballing 57 files does not stay true."),
-        "filesReviewed": reviewed,
+        "markdownReviewed": reviewed,
+        "nonMarkdownReviewed": non_md,
+        "filesReviewed": reviewed + non_md,
         "findingCount": len(findings),
         "findings": findings,
-        "limits": ("Checks numbers, npm commands, relative links and stale "
-                   "branch claims. Narrative that is merely out of date still "
+        "limits": ("Checks numbers, npm commands, relative links, stale branch "
+                   "claims, JSON validity, evidence scope statements and "
+                   "obvious secrets. Narrative that is merely out of date still "
                    "needs a human reader."),
     }
     (REPO / args.output).write_text(
