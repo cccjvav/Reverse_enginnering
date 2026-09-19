@@ -95,3 +95,52 @@ class HostSurfaceGapTests(unittest.TestCase):
                 body = text[start:text.index("\n\t}", start)]
                 self.assertNotIn("presentationKind", body,
                                  "public host declarations must stay unmodified")
+
+
+class HeaderNarrowingTests(unittest.TestCase):
+    """The three transport errors were misdiagnosed as SDK drift; keep the
+    corrected explanation and the credit for the existing fix."""
+
+    def setUp(self):
+        self.report = REPO / "docs" / "evidence" / "header-narrowing.json"
+        if not self.report.exists():
+            self.skipTest("run probe_header_narrowing.py first")
+        self.data = json.loads(self.report.read_text(encoding="utf8"))
+
+    def test_sdk_drift_hypothesis_is_recorded_as_rejected(self):
+        rejected = self.data["hypothesisRejected"]
+        self.assertTrue(rejected["match"],
+                        "shipped and rebuilt protocol versions must agree")
+        self.assertEqual(rejected["shippedProtocolVersion"], "2025-11-25")
+
+    def test_defect_is_attributed_to_the_code_not_the_declarations(self):
+        self.assertFalse(self.data["actualCause"]["guardRulesOutArray"])
+        self.assertIn("would make the types lie", self.data["notADeclarationBug"])
+
+    def test_credits_the_existing_maintenance_fix(self):
+        """A fix already existed; re-solving it would have been waste."""
+        addressed = self.data["alreadyAddressed"]
+        self.assertIn("community/bridge-core/http-router.mjs", addressed["where"])
+        self.assertIn("11 errors against 14", addressed["measuredEffect"])
+
+
+class MaintenanceOverlayTests(unittest.TestCase):
+    """The overlay must be honest about when it is valid."""
+
+    def test_overlay_states_its_precondition(self):
+        """The narrowed declaration is only true with the adapter in front, and
+        the generated file must say so. Assert on the emitted text rather than
+        the generator source, which wraps the sentence across lines."""
+        source = (REPO / "tools" / "assemble_skeleton.py").read_text(encoding="utf8")
+        self.assertIn("Valid ONLY when", source)
+        self.assertIn("Without the adapter the unmodified declaration is the ",
+                      source)
+        overlaid = (REPO / ".work" / "skeleton" / "src"
+                    / "bridge-http-router.d.ts")
+        if not overlaid.exists():
+            self.skipTest("run npm run assemble:skeleton-maintenance first")
+        text = overlaid.read_text(encoding="utf8")
+        if "MAINTENANCE OVERLAY" not in text:
+            self.skipTest("skeleton assembled without --maintenance")
+        self.assertIn("Valid ONLY when", text)
+        self.assertIn("does not exclude string[]", text)

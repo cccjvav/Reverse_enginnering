@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Two separable gaps remain before the skeleton reaches zero: (1) the author's forked Chat host declarations - an evidence-gathering problem, see hostChatSurfaceGap; (2) 3 errors from MCP SDK drift in bridge-mcp-transport.ts, which needs identifying the SDK version they built against. Neither is typing work.",
+  "nextAction": "One gap remains before the skeleton reaches zero: the author's forked Chat host declarations (11 errors in tool-presentation.ts). That is evidence gathering, not typing - see hostChatSurfaceGap. The header issue is closed: already fixed in community/bridge-core/http-router.mjs.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -506,7 +506,8 @@
       "filesCompiled": 30,
       "unresolvedModules": 0,
       "layoutResolves": true,
-      "errorCount": 14
+      "errorCountDefault": 14,
+      "errorCountWithMaintenance": 11
     },
     "whyStronger": "Earlier diagnostics used a custom module resolver that rewrote cross-layer imports by hand, which papers over the layout. This runs the author's tsconfig as written with no custom resolution, so zero unresolved imports means the structure itself is right.",
     "checkHasTeeth": "Removing one B-layer module flips the report to unresolved=1, layoutResolves=false.",
@@ -531,5 +532,19 @@
     ],
     "deliberatelyNotFixed": "Declaring these members ourselves would turn 11 errors green without recovering anything, and would put fabricated fields on the public vscode namespace - the exact false-host claim this project refuses to make. A test guards the public declarations against being edited.",
     "consequence": "The skeleton's error floor is 11 until the author's host declarations are obtained. That number measures one missing input, not a defect in the recovered sources or the B-layer types."
+  },
+  "headerNarrowing": {
+    "question": "What were the 3 remaining bridge-mcp-transport.ts errors?",
+    "originalHypothesis": "MCP SDK version drift. WRONG.",
+    "evidence": "docs/evidence/header-narrowing.json",
+    "whyRejected": "The shipped bundle, the rebuilt snapshot module and the installed SDK all report LATEST_PROTOCOL_VERSION 2025-11-25. No drift.",
+    "actualCause": "bridge-http-router.js reads four custom headers off request.headers, which Node types string | string[] | undefined because HTTP allows repeats. The router guards only `if (!sessionId)`, which excludes undefined but NOT string[]. The author's handlers declare `sessionId: string`, so a duplicated Mcp-Session-Id header would hand them an array.",
+    "latentDefect": "Real defect in the shipped product, exposed by honest typechecking rather than caused by it.",
+    "alreadyFixed": "community/bridge-core/http-router.mjs already answers 400 'Ambiguous MCP protocol header' for repeated or non-scalar headers. Found by checking for an existing fix before writing one; re-solving it would have been waste.",
+    "skeletonModes": {
+      "default": "14 errors - faithful to the shipped router, which really can pass string[]",
+      "--maintenance": "11 errors - overlays the narrowed declaration, valid only with the community adapter in front. The generated file states that precondition in its own header."
+    },
+    "agreement": "The maintenance skeleton's 11 matches diagnoseTypes({httpMaintenance:true}) exactly, from two independent routes."
   }
 }

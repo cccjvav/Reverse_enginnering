@@ -32,7 +32,7 @@
   "missingCount": 3,
   "workspace": ".work/skeleton",
   "typeRootsLinked": true,
-  "maintenanceOverlay": false,
+  "maintenanceOverlay": true,
   "hostCaveat": "vscode-main here holds the pinned PUBLIC Code OSS 1.132.0 declarations, not the author's private host. Chat-surface fields their build had are absent, which is why tool-presentation.ts still reports errors.",
   "doesNotClaim": "Materialising the layout is not a build. Nothing here runs npm install or tsc; see diagnose_skeleton for that."
 }

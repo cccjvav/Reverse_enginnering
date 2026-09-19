@@ -10,15 +10,13 @@
   "droppedReason": "Declared by the author but never recovered: two B-layer modules exist only as compiled .js (reached via their .d.ts instead), and the test file did not ship.",
   "typescriptVersion": "5.9.3",
   "filesCompiled": 30,
-  "errorCount": 14,
+  "errorCount": 11,
   "counts": {
     "TS2339": 10,
-    "TS2345": 3,
     "TS2353": 1
   },
   "errorsBySource": {
-    "extensions/shuncode/src/tool-presentation.ts": 11,
-    "extensions/shuncode/src/bridge-mcp-transport.ts": 3
+    "extensions/shuncode/src/tool-presentation.ts": 11
   },
   "unresolvedModuleCount": 0,
   "layoutResolves": true,
@@ -94,27 +92,6 @@
       "source": "extensions/shuncode/src/tool-presentation.ts",
       "line": 319,
       "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
-    },
-    {
-      "code": 2345,
-      "category": "Error",
-      "source": "extensions/shuncode/src/bridge-mcp-transport.ts",
-      "line": 381,
-      "message": "Argument of type 'string | string[] | undefined' is not assignable to parameter of type 'string | undefined'.\n  Type 'string[]' is not assignable to type 'string'."
-    },
-    {
-      "code": 2345,
-      "category": "Error",
-      "source": "extensions/shuncode/src/bridge-mcp-transport.ts",
-      "line": 382,
-      "message": "Argument of type 'string | string[]' is not assignable to parameter of type 'string'.\n  Type 'string[]' is not assignable to type 'string'."
-    },
-    {
-      "code": 2345,
-      "category": "Error",
-      "source": "extensions/shuncode/src/bridge-mcp-transport.ts",
-      "line": 383,
-      "message": "Argument of type 'string | string[]' is not assignable to parameter of type 'string'.\n  Type 'string[]' is not assignable to type 'string'."
     },
     {
       "code": 2353,

@@ -1,0 +1,41 @@
+{
+  "scope": "Explains the three remaining bridge-mcp-transport.ts errors. Reports only; changes no code.",
+  "originalHypothesis": "MCP SDK version drift.",
+  "hypothesisRejected": {
+    "shippedProtocolVersion": "2025-11-25",
+    "rebuiltSnapshotVersion": "2025-11-25",
+    "match": true,
+    "installedSdk": "2.0.0",
+    "note": "The shipped bundle, the rebuilt snapshot module and the installed SDK agree on the protocol version, so drift was the wrong explanation."
+  },
+  "actualCause": {
+    "customHeadersRead": [
+      "Mcp-Method",
+      "Mcp-Name",
+      "mcp-method",
+      "mcp-name",
+      "mcp-protocol-version",
+      "mcp-session-id"
+    ],
+    "nodeTypesThemAs": "string | string[] | undefined",
+    "reason": "HTTP allows a header to repeat, so Node cannot narrow it.",
+    "routerGuard": "if (!sessionId) -> 400",
+    "guardRulesOutUndefined": true,
+    "guardRulesOutArray": false,
+    "routerNormalisesArrays": false,
+    "authorHandlerSignatures": {
+      "handlePost": "sessionId: string | undefined",
+      "handleGet": "sessionId: string",
+      "handleDelete": "sessionId: string"
+    }
+  },
+  "latentDefect": "A client sending a duplicated Mcp-Session-Id header passes a string[] into handlers that declare `sessionId: string`. The emptiness check does not exclude arrays. This is a real defect in the shipped product, exposed by typechecking rather than caused by it.",
+  "notADeclarationBug": "The B-layer declarations describe what the JavaScript actually does. Loosening them to `string` would make the types lie and would erase the finding.",
+  "alreadyAddressed": {
+    "where": "community/bridge-core/http-router.mjs",
+    "how": "Wraps handleBridgeHttpRequest and answers 400 'Ambiguous MCP protocol header' when any of the four headers is repeated or non-scalar, so handlers only ever see a scalar.",
+    "measuredEffect": "diagnoseTypes({httpMaintenance:true}) reports 11 errors against 14 without it - exactly these three.",
+    "note": "Found by checking for an existing fix before writing one. The skeleton does not yet wire in the maintenance layer, which is why it still reports 14."
+  },
+  "errorCountExplained": 3
+}

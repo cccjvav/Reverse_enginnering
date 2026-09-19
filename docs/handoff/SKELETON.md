@@ -55,7 +55,7 @@ And the check has teeth: removing one B-layer module from the tree flips it to
 | File | Count | Cause |
 | --- | --- | --- |
 | `tool-presentation.ts` | 11 | The author built against a **forked** Code OSS host — see below. |
-| `bridge-mcp-transport.ts` | 3 | MCP SDK transport options differ from the version the author built against. |
+| `bridge-mcp-transport.ts` | 3 | **Not** SDK drift — a latent header bug, see below. Already fixed in `community/`. |
 
 Two independent routes — the custom-resolver linkage and this unmodified
 tsconfig — report **the same 14 errors in the same two files**. Neither is a
@@ -87,6 +87,40 @@ public `vscode` namespace. That is precisely the false-host claim this project
 refuses to make, so a test now guards the pinned declarations against being
 edited. The error floor stays at 11 until the author's host declarations are
 actually obtained — the number measures a missing input, not a defect.
+
+## The three transport errors were misdiagnosed
+
+I had filed these as MCP SDK version drift. That was wrong, and checking beat
+assuming: the shipped bundle, the rebuilt snapshot module and the installed SDK
+all report `LATEST_PROTOCOL_VERSION = "2025-11-25"`. No drift at all.
+
+The real cause is a **latent defect in the shipped product**. The router reads
+four custom headers straight off `request.headers`, which Node types
+`string | string[] | undefined` because HTTP permits a header to repeat. The
+guard is only:
+
+```js
+if (!sessionId) { ...400... }
+await handlers.handleGet(request, response, sessionId);
+```
+
+An emptiness check excludes `undefined`. It does **not** exclude `string[]`. The
+author's handlers declare `sessionId: string`, so a client sending a duplicated
+`Mcp-Session-Id` hands them an array. Typechecking the recovered sources honestly
+is what exposed it.
+
+**It was already fixed.** Before writing a patch I checked, and
+`community/bridge-core/http-router.mjs` already answers 400 "Ambiguous MCP
+protocol header" for exactly this case. So the skeleton has two modes:
+
+| Mode | Errors | Meaning |
+| --- | --- | --- |
+| default | 14 | faithful to the shipped router, which really can pass `string[]` |
+| `--maintenance` | **11** | with the community adapter's guarantee in front |
+
+The narrowed declaration is only true when that adapter is present, so the
+generated file says so in its own header rather than leaving a reader to assume
+it holds unconditionally.
 
 ## What was never recovered
 

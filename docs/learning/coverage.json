@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 190,
-    "lines": 35191,
+    "files": 191,
+    "lines": 35437,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1039,8 +1039,8 @@
     },
     {
       "source": "tests/test_skeleton_layout.py",
-      "sha256": "44b91fdfa8c84fe5df92b4c912cfa2def08a9c9b39c7c049af693f3f544f81dd",
-      "lines": 97,
+      "sha256": "3b9136620890021419d458017ee76c0d4528a2d304b9ccc7772f47ac4e908d83",
+      "lines": 146,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1067,8 +1067,8 @@
     },
     {
       "source": "tools/assemble_skeleton.py",
-      "sha256": "c94e23d5d827842981d10bbb66799b160b664da54cfb20b2021ce6eb91e1a0fb",
-      "lines": 186,
+      "sha256": "99a52ce2db89463088b98e36cff35976180037c26051e12420ef3b76f06d78b7",
+      "lines": 228,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1286,6 +1286,13 @@
       "source": "tools/probe_clipboard_adaptation.py",
       "sha256": "fa69b65f5ccb151b92f45fe63b3e066af9472b6667906c3926aec4ee93d0a169",
       "lines": 177,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/probe_header_narrowing.py",
+      "sha256": "437c2d0ef3e19184fefde61e7a8fef5b4650ac92f5c9e3cb20355f156a636582",
+      "lines": 155,
       "explainedLines": 0,
       "status": "pending"
     },

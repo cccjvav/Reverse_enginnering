@@ -32,7 +32,9 @@
     "diagnose:btype-linkage": "node tools/diagnose_btype_linkage.mjs",
     "assemble:skeleton": "python3 tools/assemble_skeleton.py --report docs/evidence/skeleton.json",
     "diagnose:skeleton": "node tools/diagnose_skeleton.mjs",
-    "probe:host-chat": "python3 tools/probe_host_chat_surface.py --output docs/evidence/host-chat-surface.json"
+    "probe:host-chat": "python3 tools/probe_host_chat_surface.py --output docs/evidence/host-chat-surface.json",
+    "probe:headers": "python3 tools/probe_header_narrowing.py --output docs/evidence/header-narrowing.json",
+    "assemble:skeleton-maintenance": "python3 tools/assemble_skeleton.py --report docs/evidence/skeleton-maintenance.json --maintenance"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",
