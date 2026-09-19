@@ -158,9 +158,9 @@
     "P4": "BLOCKED",
     "P5": "BLOCKED",
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
-    "P7": "Step 2 COMPLETE. All 41 B-layer modules typed (398/398 declarations, 0 any), verified by npm run verify:btypes (strict-mode typecheck with a must-fail control) and npm run check:btypes (159 functions cross-checked against their implementations). The modules are now editable, not merely readable."
+    "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Step 3 proper: assemble a project skeleton that really runs npm run compile. The B-layer declarations are now linkage-verified against the real extension sources, and the remaining 14 errors are host/SDK surface gaps rather than core typing gaps.",
+  "nextAction": "Close the two host-surface gaps so the skeleton reaches 0 errors: the 11 tool-presentation.ts errors need the custom Chat result fields the author's private host declared, and the 3 bridge-mcp-transport.ts errors need the MCP SDK version they actually built against. Both are evidence questions, not typing work.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -488,5 +488,33 @@
     "priorWorkComparison": "An earlier assistant had already written 14 declarations in reconstructed/type-contracts. Mine duplicated them. Comparing rather than assuming mine were better was worthwhile: the older set was RIGHT about PerOwnerCancellationRateLimiter's six positional arguments, ManagedCommandCanceller's injectable waitForGrace, bridgeManagedCommandOwnerId's optional parameter and the raw Node header types. All folded into the step-2 files.",
     "indexesKeptSeparate": "reconstructed/bridge-core/types/provenance.json is a SECOND index, not a replacement. Overwriting the original broke four tests that import those .d.ts by path and assert a count of 14."
   },
-  "sandboxNote": "The sandbox was re-provisioned mid-session: the checkout reappeared at base commit df7dde3 with node_modules absent, which made a tsc probe silently pass by not running at all. Recovered with git fetch + reset --mixed FETCH_HEAD against the pushed branch; no committed work was lost. Lesson recorded: a verification that reports zero errors must be checked for having actually executed."
+  "sandboxNote": "The sandbox was re-provisioned mid-session: the checkout reappeared at base commit df7dde3 with node_modules absent, which made a tsc probe silently pass by not running at all. Recovered with git fetch + reset --mixed FETCH_HEAD against the pushed branch; no committed work was lost. Lesson recorded: a verification that reports zero errors must be checked for having actually executed.",
+  "skeleton": {
+    "goal": "Step 3: assemble the A and B layers into a project that really compiles together.",
+    "writeup": "docs/handoff/SKELETON.md",
+    "layoutProvenance": "RECOVERED, not designed. The shipped extensions/shuncode/tsconfig.json is the author's real build config; its relative paths pin the tree: <root>/src for the 41 bridge-core modules, <root>/extensions/shuncode/src for the 34 recovered .ts, <root>/vscode-main/src/vscode-dts for host declarations.",
+    "crossCheck": "../../src/x.ts from the extension dir and ../../../src/x.js from its src/ both normalise to <root>/src/x. Self-consistent. An initial misreading that assumed an extra nesting level was corrected by the arithmetic.",
+    "commands": {
+      "assemble": "npm run assemble:skeleton",
+      "typecheck": "npm run diagnose:skeleton"
+    },
+    "evidence": [
+      "docs/evidence/skeleton.json",
+      "docs/evidence/skeleton-typecheck.json"
+    ],
+    "result": {
+      "filesCompiled": 30,
+      "unresolvedModules": 0,
+      "layoutResolves": true,
+      "errorCount": 14
+    },
+    "whyStronger": "Earlier diagnostics used a custom module resolver that rewrote cross-layer imports by hand, which papers over the layout. This runs the author's tsconfig as written with no custom resolution, so zero unresolved imports means the structure itself is right.",
+    "checkHasTeeth": "Removing one B-layer module flips the report to unresolved=1, layoutResolves=false.",
+    "remainingErrors": "14, all pre-existing: 11 in tool-presentation.ts (the pinned PUBLIC vscode.d.ts lacks the custom Chat result fields the author's private host had) and 3 in bridge-mcp-transport.ts (MCP SDK transport options differ). Two independent routes report the same 14 in the same two files, so they are not B-layer gaps.",
+    "neverRecovered": [
+      "../../src/file-tool-registry.ts and ../../src/ide-tool-definitions.ts - held only as compiled .js, reached via their .d.ts",
+      "test/workspace-hub-store.test.ts - did not ship"
+    ],
+    "doesNotClaim": "Typechecking is not building. No bundle, no npm install, no carrier involvement. Host types are public candidates, not the author's private host."
+  }
 }

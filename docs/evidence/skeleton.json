@@ -1,0 +1,37 @@
+{
+  "scope": "Assembles the recovered A layer and rebuilt B layer into the author's original project layout. Does not compile, install, or execute anything.",
+  "layoutProvenance": "Paths taken from the shipped extensions/shuncode/tsconfig.json. Cross-checked: ../../src/<m>.ts from the extension directory and ../../../src/<m>.js from its src/ both resolve to <root>/src/<m>.",
+  "layout": {
+    "extensionDir": "extensions/shuncode",
+    "coreDir": "src",
+    "hostDir": "vscode-main/src/vscode-dts",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "evidence": "Paths taken from the shipped extensions/shuncode/tsconfig.json. Cross-checked: ../../src/<m>.ts from the extension directory and ../../../src/<m>.js from its src/ both resolve to <root>/src/<m>."
+  },
+  "coreModules": 41,
+  "coreDeclarations": 37,
+  "extensionSources": 34,
+  "hostDeclarations": 8,
+  "declaredByAuthorTsconfig": 33,
+  "missingFromAuthorTsconfig": [
+    {
+      "declared": "../../src/file-tool-registry.ts",
+      "resolvesTo": "src/file-tool-registry.ts"
+    },
+    {
+      "declared": "../../src/ide-tool-definitions.ts",
+      "resolvesTo": "src/ide-tool-definitions.ts"
+    },
+    {
+      "declared": "test/workspace-hub-store.test.ts",
+      "resolvesTo": "extensions/shuncode/test/workspace-hub-store.test.ts"
+    }
+  ],
+  "missingCount": 3,
+  "workspace": ".work/skeleton",
+  "typeRootsLinked": true,
+  "hostCaveat": "vscode-main here holds the pinned PUBLIC Code OSS 1.132.0 declarations, not the author's private host. Chat-surface fields their build had are absent, which is why tool-presentation.ts still reports errors.",
+  "doesNotClaim": "Materialising the layout is not a build. Nothing here runs npm install or tsc; see diagnose_skeleton for that."
+}

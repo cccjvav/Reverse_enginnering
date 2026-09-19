@@ -29,7 +29,9 @@
     "verify:btypes": "node tools/verify_btypes.mjs",
     "check:btypes": "python3 tools/check_btype_arity.py --output docs/evidence/btype-arity.json",
     "register:btypes": "python3 tools/register_btype_contracts.py",
-    "diagnose:btype-linkage": "node tools/diagnose_btype_linkage.mjs"
+    "diagnose:btype-linkage": "node tools/diagnose_btype_linkage.mjs",
+    "assemble:skeleton": "python3 tools/assemble_skeleton.py --report docs/evidence/skeleton.json",
+    "diagnose:skeleton": "node tools/diagnose_skeleton.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

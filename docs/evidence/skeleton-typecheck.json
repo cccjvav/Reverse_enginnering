@@ -1,0 +1,127 @@
+{
+  "scope": "The assembled skeleton typechecked through the author's own shipped tsconfig.json, with no custom module resolver. Diagnostic only.",
+  "workspace": ".work/skeleton",
+  "configUsed": "extensions/shuncode/tsconfig.json (shipped verbatim)",
+  "droppedFromFiles": [
+    "../../src/file-tool-registry.ts",
+    "../../src/ide-tool-definitions.ts",
+    "test/workspace-hub-store.test.ts"
+  ],
+  "droppedReason": "Declared by the author but never recovered: two B-layer modules exist only as compiled .js (reached via their .d.ts instead), and the test file did not ship.",
+  "typescriptVersion": "5.9.3",
+  "filesCompiled": 30,
+  "errorCount": 14,
+  "counts": {
+    "TS2339": 10,
+    "TS2345": 3,
+    "TS2353": 1
+  },
+  "errorsBySource": {
+    "extensions/shuncode/src/tool-presentation.ts": 11,
+    "extensions/shuncode/src/bridge-mcp-transport.ts": 3
+  },
+  "unresolvedModuleCount": 0,
+  "layoutResolves": true,
+  "layoutVerdict": "Every cross-layer import resolved with no custom resolver, so the directory layout read out of the author's tsconfig is correct.",
+  "doesNotClaim": "Typechecking is not building. This produces no bundle, runs no npm install, and does not touch the Code OSS carrier.",
+  "errors": [
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 17,
+      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 18,
+      "message": "Property 'metrics' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 22,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 220,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 223,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 224,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 225,
+      "message": "Property 'diffPreview' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 27,
+      "message": "Property 'presentationKind' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 295,
+      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2339,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 319,
+      "message": "Property 'items' does not exist on type 'ChatSimpleToolResultData'."
+    },
+    {
+      "code": 2345,
+      "category": "Error",
+      "source": "extensions/shuncode/src/bridge-mcp-transport.ts",
+      "line": 381,
+      "message": "Argument of type 'string | string[] | undefined' is not assignable to parameter of type 'string | undefined'.\n  Type 'string[]' is not assignable to type 'string'."
+    },
+    {
+      "code": 2345,
+      "category": "Error",
+      "source": "extensions/shuncode/src/bridge-mcp-transport.ts",
+      "line": 382,
+      "message": "Argument of type 'string | string[]' is not assignable to parameter of type 'string'.\n  Type 'string[]' is not assignable to type 'string'."
+    },
+    {
+      "code": 2345,
+      "category": "Error",
+      "source": "extensions/shuncode/src/bridge-mcp-transport.ts",
+      "line": 383,
+      "message": "Argument of type 'string | string[]' is not assignable to parameter of type 'string'.\n  Type 'string[]' is not assignable to type 'string'."
+    },
+    {
+      "code": 2353,
+      "category": "Error",
+      "source": "extensions/shuncode/src/tool-presentation.ts",
+      "line": 443,
+      "message": "Object literal may only specify known properties, and 'presentationStyle' does not exist in type 'ChatSimpleToolResultData'."
+    }
+  ]
+}

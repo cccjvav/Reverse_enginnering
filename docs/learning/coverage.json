@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 186,
-    "lines": 34655,
+    "files": 189,
+    "lines": 35022,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1038,6 +1038,13 @@
       "status": "pending"
     },
     {
+      "source": "tests/test_skeleton_layout.py",
+      "sha256": "22bec57848b3e05706f49a27202ca9790b1caad2dafc7b0661db0fda0a155323",
+      "lines": 59,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tests/test_windows_inspect.py",
       "sha256": "b870f03bec7843b891672f5303c61d1cd3b9d41d9d94ef95e650a0f4fc99c772",
       "lines": 71,
@@ -1055,6 +1062,13 @@
       "source": "tools/apply_community.py",
       "sha256": "2ccea15173ea9d7e2f84e2a7339c73e8f7af9cdd773665ad1609bdda1bd668e3",
       "lines": 196,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/assemble_skeleton.py",
+      "sha256": "c94e23d5d827842981d10bbb66799b160b664da54cfb20b2021ce6eb91e1a0fb",
+      "lines": 186,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1174,6 +1188,13 @@
       "source": "tools/diagnose_linked_types.mjs",
       "sha256": "f79af13984dc7f3f9308a24bedba55c8d598efdf042c4b4f285bbb31e951463f",
       "lines": 98,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/diagnose_skeleton.mjs",
+      "sha256": "ee5176ce60044a31d34ca54c2c7dbc85a013c79d09f63a32dc3d601f889a9e32",
+      "lines": 122,
       "explainedLines": 0,
       "status": "pending"
     },
