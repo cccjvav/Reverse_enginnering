@@ -1,0 +1,8 @@
+{
+  "scope": "Mechanical consistency check of every markdown file against the evidence it cites. Does not judge prose.",
+  "why": "A manual review missed the root README and RECOVERY_STATUS, both of which described a two-day-old state at the front door of the repository. Eyeballing 57 files does not stay true.",
+  "filesReviewed": 57,
+  "findingCount": 0,
+  "findings": [],
+  "limits": "Checks numbers, npm commands, relative links and stale branch claims. Narrative that is merely out of date still needs a human reader."
+}

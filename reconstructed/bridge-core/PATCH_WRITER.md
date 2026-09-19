@@ -1,6 +1,8 @@
 # 补丁写入恢复（第三组，未部署）
 
-新增 `apply-patch.js` 与 `canonical-diff.js`，共 54 个原声明。当前重建总计 **28 模块 / 206 声明 / 151,272 字节 JS**。函数体仍来自已发布 0.7.4 bundle，ESM 依赖连线由恢复工具生成，不是原始 TypeScript。
+新增 `apply-patch.js` 与 `canonical-diff.js`，共 54 个原声明。当时重建总计 **28 模块 / 206 声明 / 151,272 字节 JS**（该数字是本文成文时的快照；
+**最终为 41 模块**，并已于 2026-09-19 全部补上 TypeScript 声明，见
+`../bridge-core/types/README.md`）。函数体仍来自已发布 0.7.4 bundle，ESM 依赖连线由恢复工具生成，不是原始 TypeScript。
 
 ## 已恢复的行为
 

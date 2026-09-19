@@ -1,6 +1,25 @@
 # ShunCode Windows 源码恢复
 
-> **助手接力 / 当前路线图（2026-09-17）：** 请先读[交接与路线图](docs/handoff/README.md)。最新portable文本回退候选类型0错误，产品仍NOT_READY；下一优先项为宿主文件授权接线，不要重复历史11错误工作。本文早期调查/数字属于历史记录。
+> ## 当前状态（2026-09-19）
+>
+> **源码层面的恢复已完成；产品层面的验收一步都还没做。** 这两件事请分开看。
+>
+> | 已达成 | 证据 / 复跑命令 |
+> | --- | --- |
+> | 载体能从上游源码重建（依赖安装 + 编译 **0 错误**） | CI run [35371925282](https://github.com/cccjvav/Reverse_enginnering_of_shun/actions/runs/35371925282) |
+> | 作者的 Electron 44 剪贴板适配**逐字恢复**（非猜测） | [CLIPBOARD_RECOVERY.md](docs/handoff/CLIPBOARD_RECOVERY.md) |
+> | B 层 41 个模块 **399/399 导出声明有真类型** | `npm run verify:btypes`、`npm run check:btypes` |
+> | 工程布局**从作者自己的 tsconfig 恢复**，0 个未解析模块 | [SKELETON.md](docs/handoff/SKELETON.md) |
+> | A 层 + B 层**完整编译到 0 错误** | `npm run assemble:skeleton-full && npm run diagnose:skeleton` |
+> | Bridge 与 Chat 源码为**安装器自带的原件**（34 文件哈希全匹配） | `docs/evidence/source-completeness.json` |
+>
+> **仍未做到**：从未产出任何新安装器，从未在真机启动验证。
+> `check:release` 退出 2，**7 项门槛 BLOCKED**——请勿把上面的「0 错误」当成可发布。
+>
+> 👉 状态总览与「还差什么」：**[STATUS_NOW.md](docs/handoff/STATUS_NOW.md)**
+> 👉 助手接力入口：**[交接与路线图](docs/handoff/README.md)**
+>
+> 本文其余早期调查/数字属于**历史记录**，可能与上表不一致，以上表和 `docs/evidence/` 为准。
 
 > **[当前工程恢复汇总](docs/RECOVERY_STATUS.md)**：本轮类型/维护运行时/发布门槛成果，以及完整宿主、真实激活与安装器仍未完成的具体项目。总状态NOT_READY。
 
@@ -8,7 +27,7 @@
 
 > **[普通CMD+conda：逐步验收手册](docs/acceptance/README.md)**：宿主、原生资产、实际激活、GUI/MCP和安装/升级/卸载的操作、预期、失败处理及空白结果表。当前A可复现，A05仍59个类型错误，B/C/D尚阻塞；不是已完成验收报告。
 
-优先恢复作者自己的 MCP Bridge、工具、定制 UI 等内容；VS Code 只作为运行载体，不追求完整逆向本体。后续目标是建立可维护的定制工程和 Windows 社区版。所有工作在 `arena/01a09d2c-reverse-enginnering-of-shun` 分支进行。
+优先恢复作者自己的 MCP Bridge、工具、定制 UI 等内容；VS Code 只作为运行载体，不追求完整逆向本体。后续目标是建立可维护的定制工程和 Windows 社区版。当前会话分支为 `arena/01a0afd4-reverse-enginnering-of-shun`（早前为 `arena/01a09d2c-...`）。
 
 ## 你的操作环境：普通 Windows CMD + conda
 

@@ -661,5 +661,23 @@
       "the bridge-license-worker project"
     ],
     "noneOfTheRepoItemsBlock": "The author's original goal - editable, recompilable source - is met without them."
+  },
+  "docsAudit": {
+    "trigger": "The author asked whether every document had really been reviewed. It had not - the first pass covered docs/handoff only, 17 of 57 markdown files.",
+    "whatWasMissed": "The two most-read files in the repository: the root README.md and docs/RECOVERY_STATUS.md. Both described a state from 2026-09-17, told readers the next priority was file authorization (already judged wrong), and the README named the old branch as current. A reader entering at the front door would have been misinformed.",
+    "fixed": [
+      "root README.md - dated status table, correct branch, pointer to STATUS_NOW",
+      "docs/RECOVERY_STATUS.md - superseded banner; stale 11/14/59 error figures marked as historical",
+      "docs/RECOVERY_PLAN.md - obsolete 'file authorization first' priority flagged",
+      "docs/handoff/PROJECT_AUDIT_2026-09-18.md - follow-up banner; the README branch defect it raised is now marked resolved",
+      "reconstructed/type-contracts/README.md - records that its 14 declarations are superseded by 37, why both are kept, and that the older set was right about four things",
+      "reconstructed/bridge-core/PATCH_WRITER.md - '28 modules' marked as a snapshot; final is 41"
+    ],
+    "tool": "npm run audit:docs (tools/audit_docs.py)",
+    "checks": "numbers contradicting docs/evidence/*.json, npm scripts that do not exist, broken relative links, an old branch named as current",
+    "currentResult": "57 files reviewed, 0 findings",
+    "provenFallible": "Injecting a wrong count, a nonexistent npm script and a broken link produced 4 findings and exit 1; reverting returned exit 0.",
+    "falsePositivesFixed": "First run flagged 6 items that were all correct as written: `npm run compile` refers to the upstream Code OSS carrier, and SKELETON.md's 'unresolved=1' describes the deliberate tamper test. The checker now understands both.",
+    "limits": "Mechanical only. Narrative that is merely out of date still needs a human reader."
   }
 }

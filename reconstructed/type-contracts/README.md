@@ -1,5 +1,20 @@
 # 可追溯的候选类型契约（累计14模块）
 
+> **2026-09-19 状态：本目录的 14 份声明已被更完整的一套取代。**
+>
+> `reconstructed/bridge-core/types/` 现有 **37 份**手写声明，覆盖同样这 14 个模块外加
+> 23 个，并逐一记录了证据来源（一手 / 结构性 / 推断）。
+>
+> **本目录仍保留且仍在使用**：`tests/bridge-core-type-contracts.test.mjs` 与
+> `tests/bridge-core-http-linkage.test.mjs` 按路径 import 这里的文件，
+> `tools/diagnose_linked_types.mjs --contracts` 也仍以它为准（14 模块基线）。
+> 曾尝试用新索引覆盖本目录，导致 4 个测试失败，已回退——两套索引并存是有意为之。
+>
+> 对比时发现**旧的这一套在几处比新写的更准确**（`PerOwnerCancellationRateLimiter`
+> 的六个位置参数、`ManagedCommandCanceller` 可注入的 `waitForGrace`、
+> `bridgeManagedCommandOwnerId` 的可选参数、HTTP 头的 `string | string[]`），
+> 这些更正已并入新的一套。
+
 > 最新 [HTTP接入实验](../../docs/HTTP_EXTENSION_INTEGRATION.md)使用已实现并单独严格检查的维护路由契约，诊断11条；下面的14条指保留原路由的合同模式，两者都未通过完整门槛。
 
 这些是**新重建的声明**，不是找回原始.d.ts，更不是已经恢复完整宿主。只改变候选类型解析，不改41个提取JS模块、原51文件或实验bundle。原JavaScript依然未受TypeScript实现级检查，声明不能替代实现验证。
