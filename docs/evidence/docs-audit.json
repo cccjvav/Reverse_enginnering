@@ -1,9 +1,9 @@
 {
   "scope": "Mechanical consistency check of every file under docs/ - markdown against the evidence it cites, plus JSON validity, evidence scope statements and a secret scan. Does not judge prose.",
   "why": "A manual review missed the root README and RECOVERY_STATUS, both of which described a two-day-old state at the front door of the repository. Eyeballing 57 files does not stay true.",
-  "markdownReviewed": 57,
+  "markdownReviewed": 58,
   "nonMarkdownReviewed": 65,
-  "filesReviewed": 122,
+  "filesReviewed": 123,
   "findingCount": 0,
   "findings": [],
   "limits": "Checks numbers, npm commands, relative links, stale branch claims, JSON validity, evidence scope statements and obvious secrets. Narrative that is merely out of date still needs a human reader."

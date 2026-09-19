@@ -160,7 +160,7 @@
     "P6": "UNBLOCKED. Carrier build probe run 35371925282 completed every stage: dependencies install and the tree compiles with 0 errors against Electron 44.2.0, once the author's recovered clipboard adaptation is applied (tools/patch_carrier_electron44.py, 13/13 edits). Remaining carrier work is layering the author's customisations, not the base build.",
     "P7": "Step 2 COMPLETE (all 41 B-layer modules typed). Step 3 layout COMPLETE: the project structure is recovered from the author's own tsconfig and verified by compiling through it unmodified - 0 unresolved imports. Remaining 14 errors are host/SDK surface gaps, not core typing gaps."
   },
-  "nextAction": "Documentation is now consistent across all 122 files under docs/ and the repository root, verified mechanically by npm run audit:docs. Remaining project work needs the author's Windows machine (installer, activation, GUI, native ABI) or their original repository.",
+  "nextAction": "Bridge source package delivered for web_agent. Remaining ShunCode work still needs the author's Windows machine (installer, activation, GUI, native ABI) or their original repository.",
   "protected": [
     "recovered originals",
     "reconstructed original-shape sources",
@@ -693,5 +693,15 @@
       "auditorExtended": "npm run audit:docs now covers all 122 files (57 markdown + 65 non-markdown), adding JSON validity, evidence scope statements and a secret scan.",
       "provenFallible": "Injecting malformed JSON, a scope-less evidence file and a fake token each produced the matching finding and exit 1."
     }
+  },
+  "webAgentHandover": {
+    "request": "Author wants to ship Bridge and Chat as a VS Code extension instead of a bespoke IDE, and asked whether the recovered source helps their web_agent project.",
+    "verdict": "Half feasible. Bridge yes, Chat no.",
+    "bridgePortable": "Verified: 0 of the 41 core modules import vscode. 6 of 9 extension-layer files also avoid it. The MCP server, tool dispatch, session management and file tools can move into any Node host.",
+    "chatBlocked": "native-chat.ts needs 7 proposed APIs (defaultChatParticipant, chatParticipantAdditions, chatParticipantPrivate, chatReferenceBinaryData, chatPromptFiles, chatProvider, languageModelThinkingPart) plus the forked host's 11 extra ChatSimpleToolResultData members. Proposed APIs cannot be published to the Marketplace and need Insiders with --enable-proposed-api, so a normal extension cannot carry them. This is why ShunCode had to ship its own IDE.",
+    "packaged": "shuncode-bridge-source.zip - 92 files, 208323 bytes, sha256 404ef1f615ee9b3607ecf9940cc8be538327d119b022383fe0251f3ea92127d1",
+    "excluded": "All licence/payment code. bridge-access-controller.ts was dropped during packaging because it imports bridge-license-service and would not compile; verified bridge-server.ts has no licence coupling, so Bridge runs independently of monetisation. Secret scan clean.",
+    "honestyInPackage": "README grades provenance in three tiers (original source / rebuilt JS / hand-written types) and warns that 17 modules' type NAMES were invented during recovery. Also documents 5 real pitfalls including the string[] header defect.",
+    "writeup": "docs/handoff/WEB_AGENT_HANDOVER.md - includes a paste-ready prompt for the other project's assistant that explicitly invites 'if it is not worth using, say so'."
   }
 }

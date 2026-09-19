@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 196,
-    "lines": 36317,
+    "lines": 36320,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1221,8 +1221,8 @@
     },
     {
       "source": "tools/download_server.mjs",
-      "sha256": "03fded54c62240804b67f3eb4425d6810f037451c778f8db6413a233f82e4b8a",
-      "lines": 163,
+      "sha256": "06952eab77ae51f229da7c586e44a2d7c92306a9ea9e8c8d85bf60094614eff6",
+      "lines": 166,
       "explainedLines": 0,
       "status": "pending"
     },

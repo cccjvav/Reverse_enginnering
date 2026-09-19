@@ -18,6 +18,9 @@ const DIR = path.join(ROOT, '.work', 'downloads');
 const PORT = Number(process.env.PORT || 8080);
 
 const TITLES = {
+	'shuncode-bridge-source.zip': 'Bridge 源码包（转交 web_agent 用）',
+	'BRIDGE_PACKAGE_README.md': 'Bridge 源码包说明（先读这份）',
+	'WEB_AGENT_HANDOVER.md': '转交 web_agent 的说明＋给对方助手的提示词',
 	'STATUS_NOW.md': '现在还差什么（当前状态总览）',
 	'支付架构提示词-纯净版.txt': '支付架构提示词（纯净版，可直接粘贴给助手）',
 	'PAYMENT_ARCHITECTURE_PROMPT.md': '支付架构提示词（完整版，含给你本人的补充说明）',
