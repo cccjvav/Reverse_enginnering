@@ -1,0 +1,1133 @@
+{
+  "origin": "code$GetDestDir/resources/app/extensions/shuncode",
+  "discovery_method": "exact-path",
+  "copied": [
+    {
+      "path": "agents/shuncode-ask.agent.md",
+      "size": 795,
+      "sha256": "71e3aa01b829972e970dd71390041d25b45be9bf1e94ab3d3d80e6d94e82528a",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "agents/shuncode-code.agent.md",
+      "size": 575,
+      "sha256": "2d0eda547f82297dfeb1a6902bb48a484543b64aa34687a3fc7c472a5582569e",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "agents/shuncode-plan.agent.md",
+      "size": 683,
+      "sha256": "226adcc38621410667e3aff75dd173a857c4819ae3c357c2129770bd885222b0",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/extension.js",
+      "size": 2786087,
+      "sha256": "81f043b4bb9f80bd34aac4cbd2d8a48c02b89f9c9f78824b0e3680d746670f0a",
+      "source_mapping_url_present": true,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/skill-archive-worker.js",
+      "size": 23319,
+      "sha256": "8f2adc006d4f253db5014447eabeee0b3736f246a9af9af4f1b33a3bd5e16c0e",
+      "source_mapping_url_present": true,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/src/bridge-tunnel-lease.js",
+      "size": 18294,
+      "sha256": "4186abb8fdea1c79e21be25988037c17a3df3fb29042c9bdbcfb690aaeb8b3c6",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/src/workspace-hub-store.js",
+      "size": 23049,
+      "sha256": "bfcad7d04babb7ae148b5c241fbe7cf60724f5ce6265341005da6555429a7f5d",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/src/workspace-hub-types.js",
+      "size": 1346,
+      "sha256": "cc798b6b29af59a7a9d0197c6e8a91c5e404ad6ad650309211eb4240b21ecbd6",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/test/workspace-hub-store.test.cjs",
+      "size": 45973,
+      "sha256": "951b580e22f295c0982db3ec415b9a4bfedbec2252852d73326d529d289f74ec",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "dist/tests/workspace-hub-store.test.cjs",
+      "size": 46465,
+      "sha256": "15997837928437599462b3dc309a84fe2608ab34d3d21a3b512ffc5487e75c56",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "media/shuncode.svg",
+      "size": 3910,
+      "sha256": "b8b52ea62d53f994e9c7543eef20b39ee3eb444fff895b5b53428f1c7908a83a",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "media/skills.svg",
+      "size": 248,
+      "sha256": "59e78076ff21dbec0b1e12123bfed7c7a764c7a38c63cf19739dfb31ea462493",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "media/workspace-hub.css",
+      "size": 8756,
+      "sha256": "f9b453c93536421d465d4329bc259b01f31aaa036cbd0b2badaa8c37b00a6a82",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "media/workspace-hub.html",
+      "size": 3024,
+      "sha256": "98aadb5c313314ca4b2e6accdeb02cbecf61aba514cecde9e526240e4800e4db",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "media/workspace-hub.js",
+      "size": 14646,
+      "sha256": "14e48fac257596f00e4e74a32c9f3087ab293480a81c561042d758e8c8d52ea8",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "package.json",
+      "size": 30321,
+      "sha256": "0f793829f73a795d351fceef8b30204f8c456c7959a736f65d10ddaa5eed45c0",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "runtime/agent-host.js",
+      "size": 961243,
+      "sha256": "a434e7ba75886619642b454aec0c7996419becfeb16f6a28288cfe15b41947a3",
+      "source_mapping_url_present": true,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "runtime/mcp-server.js",
+      "size": 1294738,
+      "sha256": "01befafe39e92a743538cca1643bdd3272537602371a69f93b20792af7b15157",
+      "source_mapping_url_present": true,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/agent-checkpoint-store.ts",
+      "size": 6951,
+      "sha256": "5d236820b67279a34e470019b607e0a4a4f4be45645f0630f5fb04be73ae1100",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/branch-state.ts",
+      "size": 4797,
+      "sha256": "6ca137af058f413dae0bce2fc4674428255af25c1b35d410d0ea29a6453ddca2",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-access-controller.ts",
+      "size": 6029,
+      "sha256": "78f50bb0f1eebc7b14df11b5e16ae0fa3a366f96f2b384158c79002502f0e1d4",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-constants.ts",
+      "size": 30319,
+      "sha256": "f64589217e0664fdc91961f647ae4c0273834be5fa96f23493e6979c2f11190e",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-conversation-overview-prompt.ts",
+      "size": 1072,
+      "sha256": "4f278b3417ff3c79e7ce2015e2a0688861ab2717d5409f6bd2147700c51c3cfe",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-license-claims.d.ts",
+      "size": 142,
+      "sha256": "080309db7efb1c3c2c57239f26114c01cdab153031efe7c5f99df8809ea51f43",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": true
+    },
+    {
+      "path": "src/bridge-license-claims.js",
+      "size": 1802,
+      "sha256": "2eb2710ffed69aa2cdf5fc42d7867e26288c8534f722a4dad2d8843480c0f3f8",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-license-config.ts",
+      "size": 1012,
+      "sha256": "d410fab21d2e7675dc5f340605d04eaddd03e9f5d562dbfd7c9bd7077e67758f",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-license-network-policy.mts",
+      "size": 1930,
+      "sha256": "6bb3923eb1b792b665a77a89be6cb6bc1985c1ecd8807d030df3ed14d16eb99f",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-license-service.ts",
+      "size": 66032,
+      "sha256": "d46b47f5971bd6bba127112b9e413bd2adc1f326d679359262e05c55b46132c5",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-mcp-modern.ts",
+      "size": 6893,
+      "sha256": "6244d900d61d8a9f3c4e6128801e1fc5318ba9b4ea2e3e26504a78f7ce2b3033",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-mcp-transport.ts",
+      "size": 29820,
+      "sha256": "f736d36e95f9da6ce526b4f7c32a23cf1eb3a9e97413b21b09fb204a5cbde3dd",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-notices.ts",
+      "size": 4294,
+      "sha256": "0e1c81fbaf2d98a5264be0e8e5c3b3e63f2e2b320ed4905b011dde06a07f90eb",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-payment-network.mts",
+      "size": 3431,
+      "sha256": "dec753e9241be8bb069c0570a62ad228b509adb35e39f5f78c7ba9cddd3f8ae0",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-quick-tunnel.ts",
+      "size": 3497,
+      "sha256": "babb648c25f3b7e86e4fee9f5127b148eecc7ab95a5978b2945c47dbfae16f8e",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-route-token-storage.ts",
+      "size": 1396,
+      "sha256": "0ebecad0899099a9441b642f12895632f02888cae27ca6d18b7d89adc5bcf8d6",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-route-token.ts",
+      "size": 1383,
+      "sha256": "7eba0630d9b0879901514e005785aef35f6f5ed40dd75abdcf66ed8ebe2b6e73",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-server.ts",
+      "size": 102568,
+      "sha256": "28a748376021a5394e81852e81e373f4a3ab0966e3e3bd7051f7c8c002be62fc",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-start-failure.ts",
+      "size": 11676,
+      "sha256": "4d0990db8e661f0d80cac49f0d470d640e80386530dea497775dd66835f28910",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-tool-dispatcher.ts",
+      "size": 28425,
+      "sha256": "93653d5339159b267047db96a43bc3191a87cce84c61a07322e1a2d26db3cc25",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-tunnel-lease.ts",
+      "size": 23806,
+      "sha256": "49b592e499820ec436ce443e99ffd0223e6bccb17b1a0db82cc0987c82b3f3ae",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/bridge-utils.ts",
+      "size": 16669,
+      "sha256": "ab11c87b637023fc126a6204cb3a36cbbbe0f93955dd73c1e85588b202b622b5",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/chat-history.mts",
+      "size": 9256,
+      "sha256": "ec47043d4fdd139bc3c38828f3577e2828ff91b0b3102be12cd1d506c6e151a8",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/cloudflare-edge-relay.ts",
+      "size": 7849,
+      "sha256": "4c4d2b9dd8948b2bfdd51e073ea7eae6c23fd34e0b1faf6a11f90eb27bd60dc6",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/codex-account-view.ts",
+      "size": 12740,
+      "sha256": "437c54da599fa933b04fe1621802983c11c703c222caca433bc29c656aea0d0c",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/codex-auth.ts",
+      "size": 20583,
+      "sha256": "cb8b4339c63352e73c680bcac6c98f4217c9e6fc3169d75fe926717a6ff00a9e",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/config.ts",
+      "size": 2695,
+      "sha256": "9c6cbc96b2ba6c923ef0d15e6079fc6fe25802cb9aa11ad412cf14e5df4ca260",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/custom-agents.ts",
+      "size": 610,
+      "sha256": "d74afadef6a9682c7eff49b0721ff712979e5fa9bc4c08fb752bbdbdb3c754f9",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/deepseek-compat.mts",
+      "size": 1350,
+      "sha256": "1282a9ec9b91c26955023889b9b2d6462427a56b9fb8401c45d2afd71bcbb939",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/extension-host-proxy.mts",
+      "size": 47798,
+      "sha256": "c64bc604edb3f8b9160a57f0f9e8773091a700654e61d08fd75e918018831b0b",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/extension.ts",
+      "size": 30757,
+      "sha256": "0c78b8648c5a1e0abb48ae1acbd936ab1f92149af3e051514f3ff2e396b85ad0",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-catalog.ts",
+      "size": 29926,
+      "sha256": "2a479a1b01f846d0a173a16112134457e42f4acb420d706aa72a6ecaaf66e6f7",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-center.ts",
+      "size": 17176,
+      "sha256": "0aa708fce74a3343f5cd55fe163f4fab48160a0c284a9b162991a8c992b36c59",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-connection.ts",
+      "size": 5738,
+      "sha256": "21289dafd63287834c926492fa11b5ca231d0edbe9c02ac740c2ef53af79364b",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-diagnose.ts",
+      "size": 7632,
+      "sha256": "daa57ec6bd23d57e2ba8ab06dfb62401bd10dec56a410f4a7dcf2420512391c3",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-native-refs.ts",
+      "size": 2574,
+      "sha256": "95cd08733888d406b37e3f9b5858dd3344404fe4b59dfc1339b56ed162b0f255",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-network-commands.ts",
+      "size": 2329,
+      "sha256": "99f81d85a887f6805885f2e3ab572f982a73680f155c677722f5375ce2333d9d",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-network.ts",
+      "size": 4686,
+      "sha256": "9b41f1289cfcbdc1653c2c1ee628bb5eb996d258ec6ce669524ce545f688435c",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-oauth-commands.ts",
+      "size": 5733,
+      "sha256": "00478cda88886dcc8ab764af2816a375afac64c43ea2d2fa7174f776a220636d",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-oauth-flow.ts",
+      "size": 17528,
+      "sha256": "29c015d7397a79ed7f21dbcd763ed8d303efebee11f56e02ed1a036b143f6e21",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-oauth.ts",
+      "size": 10386,
+      "sha256": "dbc18a2adb52a923a8495130c0a9d896385e78aacbc0f517b316273d6ba09976",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-preview-token.ts",
+      "size": 507,
+      "sha256": "27f6e4988289f0aa368c08f4ad9beee483ab17571f76ef6421a8c223fe54bf57",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-registry.ts",
+      "size": 14585,
+      "sha256": "b1d7245e5bbfecb8e9d52867871c05b482737df24e40256d722d30abdff01bf1",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-secret-admin.ts",
+      "size": 8433,
+      "sha256": "b94411cd501f53ce60e672da32d9dda36f4a57ac81e37362ce34c6d35d45d390",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-secret-commands.ts",
+      "size": 1709,
+      "sha256": "10ebedbde97846f29c15f754b6fe40c00f3d99938ddbdcf440aaab0fc406b5c5",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-secret-fields.ts",
+      "size": 7343,
+      "sha256": "36578871ebf84c921f28701fa2babadd7c137ce210ff4fd764e01ba0adb7662c",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-status.ts",
+      "size": 3114,
+      "sha256": "cfd864257a5656dd3f450443da273361a3deebb117e35a129c62f002ec1e92a8",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/external-mcp-stdio-env.ts",
+      "size": 5918,
+      "sha256": "c02765344bef73f556a279df18ea7a877d4eca28caac98c604181df9810335a6",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/ide-tool-broker.ts",
+      "size": 101704,
+      "sha256": "4d643880e514f1a78481aa6112ce20f6281960b03ced4b9114eccd96dec52f0a",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/instance-launcher.ts",
+      "size": 9621,
+      "sha256": "bef1840f4c7424a0b3bba2c34b5bebd58654fb0b5c4946d6116402859d20d02a",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/lsp-tool.ts",
+      "size": 21546,
+      "sha256": "ee8349346a8ac498f822b4efca97c3d864fd90a9a760f631fe393dfd2265f195",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/managed-bash-protocol.ts",
+      "size": 3742,
+      "sha256": "5f9027c83044932cc3e1e980e702245ada0bc9cdd23e4d3c705e14006100f8d3",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/mcp-runtime-host.ts",
+      "size": 2569,
+      "sha256": "eaf0fcd6e5045f40964bb314cf5275616ece7ed1d95db296ee08dc996b7562a7",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/merge-contract.ts",
+      "size": 4256,
+      "sha256": "dc7786d6e1c50189949932e26ce51db70a521e6b3612bea65247f329c036d8c9",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/model-defaults.mts",
+      "size": 859,
+      "sha256": "438d55d602eba21d84f09986931672a4a8ef737fe5c69ca217845c8864c73285",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/model-endpoint-url.mts",
+      "size": 3584,
+      "sha256": "d326a2d20b7c6e5f7d86d16333f61d852af5a3b91d1258a7f2a45489403237bb",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/model-provider-identifiers.mts",
+      "size": 1063,
+      "sha256": "1dc13b5a14e0d732efde77a081e045924a2e3e0ab30f3d9f21bcb76f7a209af5",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/model-provider.ts",
+      "size": 83909,
+      "sha256": "b32dea0763cc403abb21ee013b5e8532508025900059d137e807485c4aa3d16a",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/model-reasoning.mts",
+      "size": 3445,
+      "sha256": "7a2f097af659daaf171c77734513f13013e3e80821b2f7405057cb392160a2f7",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/native-chat.ts",
+      "size": 50206,
+      "sha256": "90f33135350830810ff8f48e44071c37410b847eb4003441f465402c8130393c",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/proxy-bypass.mts",
+      "size": 3992,
+      "sha256": "482c9f173bdc61a917964c48b78e23c227bd221f4225b90c1116836bc0badb32",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/runtime-client.ts",
+      "size": 19952,
+      "sha256": "c87ee44b3b92c6d4c062ab7448c6fda3365aeb32345905f2aef73cf8f83cf903",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/skill-center.ts",
+      "size": 25840,
+      "sha256": "0293be919ee75e541e97306adb466667588a37804b479cecb9bc4b8f397f52c7",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/skill-list-tool.ts",
+      "size": 3651,
+      "sha256": "0939dc70a381dc1bb6350ad91db12ef569068852464ceda86ae02cf6926059df",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/tool-presentation.ts",
+      "size": 23695,
+      "sha256": "7a50bb8d5b1bf66ce4cbb1641e34233bfe6e5e227b4db2f084f258e76a45b7a4",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/workspace-hub-store.ts",
+      "size": 21919,
+      "sha256": "a86533c65920c9ebe1e0646f468c22686be38fcbe7c548e235c6b8df88993f39",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/workspace-hub-types.ts",
+      "size": 2173,
+      "sha256": "60e0e7f584e8bb3bde8f70e360d7a9be7579c27d671aed8fd58258682934ad30",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "src/workspace-hub.ts",
+      "size": 23253,
+      "sha256": "439b8127baaccd3bb43761bf7b976140f37fac857bfa4299e46fa476883672a4",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "test/workspace-hub-adapter.test.cjs",
+      "size": 9813,
+      "sha256": "dc5940ca890a2f3eb6158c30a7d824b8e8cc3811eb8ac2ea04701163339f94c4",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "test/workspace-hub-store.test.ts",
+      "size": 17885,
+      "sha256": "27c0583e17ff2a605cf7d16ea4114317b0738035e9e2aabd9369fa13c9f54ce9",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "test/workspace-hub-ui.test.cjs",
+      "size": 10552,
+      "sha256": "5295d257d10e4c12b23075e9e1b31c6875621bfb5bb0c7269d8ff42f491d484e",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    },
+    {
+      "path": "tsconfig.json",
+      "size": 1469,
+      "sha256": "9f3326cbad5fc0f72c35deb3aefbc71941183f214d58432f930e34f9f1764ee8",
+      "source_mapping_url_present": false,
+      "inline_source_map_present": false,
+      "is_declaration": false
+    }
+  ],
+  "skipped": [
+    {
+      "path": "runtime/bin/rg.exe",
+      "size": 5430784,
+      "reason": "non-text or non-allowlisted file"
+    },
+    {
+      "path": "runtime/bin/uv.exe",
+      "size": 42417456,
+      "reason": "non-text or non-allowlisted file"
+    },
+    {
+      "path": "runtime/bin/uvx.exe",
+      "size": 348976,
+      "reason": "non-text or non-allowlisted file"
+    }
+  ],
+  "scope": "Exact shipped text files, not original source reconstruction. Do not execute before review.",
+  "secret_scan": "Heuristic gate for common private keys/tokens only; NOT a security audit.",
+  "core_code_index": [
+    {
+      "path": "out/bootstrap-fork.js",
+      "size": 39746,
+      "sha256": "bfd52e90f1e9b3e749500902ec271ff5f9ce42e33e98106be6e6223200952554",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/cli.js",
+      "size": 457671,
+      "sha256": "d6451b23bf331df7f1ff7cc7cb3fe5467acb25775d541d2ea252388e39e067fa",
+      "shuncode_occurrences": 26,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/main.js",
+      "size": 2744861,
+      "sha256": "c3e542ed4c56f7d441333eed6231a766fd8bad7ca11022bb2419f4cc6058f027",
+      "shuncode_occurrences": 74,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/nls.messages.js",
+      "size": 1159782,
+      "sha256": "660fefee3930b88758be1de6a9e02cf656f12d5e6ea2f218d5555af96b9c73e1",
+      "shuncode_occurrences": 22,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/base/parts/sandbox/electron-browser/preload-aux.js",
+      "size": 1290,
+      "sha256": "adb8f8bae292d2b51829a3e06c3409d1d81f6094ed30840311d1c01d0bfdb9e6",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/base/parts/sandbox/electron-browser/preload.js",
+      "size": 5286,
+      "sha256": "d76aaac2538afa8e1f43c8b974e3ef08ce593e72f7b3e38996d5824b19f0e548",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/code/electron-browser/workbench/workbench.html",
+      "size": 1487,
+      "sha256": "272d9965dac310e2243551481909ede717e31077dcd1faa5be34272f1f15edc9",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/code/electron-browser/workbench/workbench.js",
+      "size": 49710,
+      "sha256": "d67dbb586f661589147146de801c210ae37eb5f50b7bfb5ac958cdd1874d091f",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/code/electron-utility/sharedProcess/sharedProcessMain.js",
+      "size": 2225004,
+      "sha256": "0215756c440659724ea36317a865de437d601eda50ef4724ea730e86d04607d3",
+      "shuncode_occurrences": 25,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/code/node/cliProcessMain.js",
+      "size": 1377363,
+      "sha256": "f43e7a31d7b54b4135e4c1e97457f1f3ea59b8a6d993503a09f8981e5a469d39",
+      "shuncode_occurrences": 25,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/editor/common/services/editorWebWorkerMain.js",
+      "size": 686715,
+      "sha256": "20b618a1aff830a5d11bcfcc9424484cc543a7d8ac5571d6c0a842f5cb735d2f",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/agentHost/node/agentHostMain.js",
+      "size": 4963859,
+      "sha256": "be389baf523627526ea465718eb2fc29abf02c012a2088a9b8f573743dd7767f",
+      "shuncode_occurrences": 26,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/agentHost/node/diffWorkerMain.js",
+      "size": 293259,
+      "sha256": "9292b8b609093b7ac9686077dd9ddcb4cff38e4c198ad66e54d265b222a8e535",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/browserView/electron-browser/preload-browserView.js",
+      "size": 75011,
+      "sha256": "e4524f9c1be60eedfc042da10393c141e7f942eb83913460600bc86e5294ae1a",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/files/node/watcher/watcherMain.js",
+      "size": 426600,
+      "sha256": "4c979aed0970539ceb250f5f3f6f0a46e844aaf815f505939498d191f7c83810",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/localTranscription/node/localTranscriptionMain.js",
+      "size": 341234,
+      "sha256": "c4667872b8f3f2df2bac60df0ce11e6c422b6ebc53c7f654d900fb2c90933970",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/profiling/electron-browser/profileAnalysisWorkerMain.js",
+      "size": 327525,
+      "sha256": "8daf8a0d95781f52753a590fbc6e9311fa5503fb1d0f19fb17a56d8667be8ced",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/platform/terminal/node/ptyHostMain.js",
+      "size": 664699,
+      "sha256": "0a8c56033df3dd9c7543a3c240f3f125894f6206e32322130fc5d457540ce571",
+      "shuncode_occurrences": 25,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/sessions/electron-browser/sessions.html",
+      "size": 1469,
+      "sha256": "f17b5160fd13b21d206aa55e48ed88d00a023299c54e2784fdc742f38a508b50",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/sessions/electron-browser/sessions.js",
+      "size": 30337,
+      "sha256": "7e2b3c86faf8cbe235a78bfde14ff37f9b22f84db5b2c3c02c485a78e4fdc788",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/sessions/sessions.desktop.main.css",
+      "size": 2065446,
+      "sha256": "fadbd4a8d1043ed9b5cb86afb53a488613b3dd04bf620753af31c92bc4fc8e87",
+      "shuncode_occurrences": 940,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/sessions/sessions.desktop.main.js",
+      "size": 39608975,
+      "sha256": "2361c539d74803bed83bca21e31603f70b8c1abdea046ba6c4c1825ea8916ba0",
+      "shuncode_occurrences": 2162,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/api/node/extensionHostProcess.js",
+      "size": 4312586,
+      "sha256": "dcd9a064fc509ff889e8096b1b205bd1cdb39d0ddb9c0efe5f84f2235bc552a7",
+      "shuncode_occurrences": 131,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/api/worker/extensionHostWorkerMain.js",
+      "size": 3767087,
+      "sha256": "090d35858cc3c0ebdeb57119fb574b6b7dbe8246a0071b26072ea03fdf43671c",
+      "shuncode_occurrences": 106,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/contrib/debug/node/telemetryApp.js",
+      "size": 357267,
+      "sha256": "febbfc26dcfa62a3249fba6f47e6611198e2abaf34dad33540f28d3c606e6533",
+      "shuncode_occurrences": 25,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/contrib/notebook/common/services/notebookWebWorkerMain.js",
+      "size": 528559,
+      "sha256": "cab8f1561e3aa54bf65cc12bae24c7a6e453f7f2f4f245f7df4ba31664efcd0b",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/contrib/output/common/outputLinkComputerMain.js",
+      "size": 283887,
+      "sha256": "e32488d87b69efcdcb9597adbdde1dccc337a3f8d2fb15e21fecf27f30be20f8",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/contrib/webview/browser/pre/fake.html",
+      "size": 188,
+      "sha256": "dfa91b189b7df71b814d1f3ef98ce5d561309de2c069cd23c49d45c76bd947d5",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/workbench/contrib/webview/browser/pre/index.html",
+      "size": 39688,
+      "sha256": "9f4a216e3c7abfa81d3afa9e215a36e935eb92b9193ae244cf80b1904d3fae0c",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/workbench/contrib/webview/browser/pre/service-worker.js",
+      "size": 20189,
+      "sha256": "411abe3177fe8a7fb355bdf310b12b3938d5476e509dd1fb59d5c621ffd5fad0",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/workbench/services/extensions/worker/webWorkerExtensionHostIframe.html",
+      "size": 6015,
+      "sha256": "a48c34d2ff0f30ff53fc7475c507e5be21412bea6edc013129214968154006c1",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": false
+    },
+    {
+      "path": "out/vs/workbench/services/languageDetection/browser/languageDetectionWebWorkerMain.js",
+      "size": 294458,
+      "sha256": "2f3b969acca2a03b5c90e670daf1ce9ebb379f39fb2b2b1a9748a91df7d67c7c",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/services/search/worker/localFileSearchMain.js",
+      "size": 304644,
+      "sha256": "4e5db6bb7e110107f3e3721285368ef4da325bf25b2c67730b543eca0c909815",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/services/textMate/browser/backgroundTokenization/worker/textMateTokenizationWorker.workerMain.js",
+      "size": 486348,
+      "sha256": "a0c6f25ed0da58bac3b51f85641fdbd0b8bccd394a4c117aae57a2568581c21c",
+      "shuncode_occurrences": 0,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/workbench.desktop.main.css",
+      "size": 1888947,
+      "sha256": "eae3eb27fddaf603f9914b25f3c1e7ee68c0a8677532cd19b2462f94917d457c",
+      "shuncode_occurrences": 940,
+      "source_mapping_url_present": true
+    },
+    {
+      "path": "out/vs/workbench/workbench.desktop.main.js",
+      "size": 38850332,
+      "sha256": "327d42bd49005d0ed76ee98afd9a38bdd92882b322dfde17cab7bfb714ec094f",
+      "shuncode_occurrences": 2167,
+      "source_mapping_url_present": true
+    }
+  ],
+  "asar_indexes": [
+    {
+      "path": "node_modules.asar",
+      "size": 85963165,
+      "files": 5808,
+      "maps": 1292,
+      "typescript": 0,
+      "map_paths": [
+        "@anthropic-ai/sdk/api-promise.d.mts.map",
+        "@anthropic-ai/sdk/api-promise.d.ts.map",
+        "@anthropic-ai/sdk/api-promise.js.map",
+        "@anthropic-ai/sdk/api-promise.mjs.map",
+        "@anthropic-ai/sdk/client.d.mts.map",
+        "@anthropic-ai/sdk/client.d.ts.map",
+        "@anthropic-ai/sdk/client.js.map",
+        "@anthropic-ai/sdk/client.mjs.map",
+        "@anthropic-ai/sdk/error.d.mts.map",
+        "@anthropic-ai/sdk/error.d.ts.map",
+        "@anthropic-ai/sdk/error.js.map",
+        "@anthropic-ai/sdk/error.mjs.map",
+        "@anthropic-ai/sdk/index.d.mts.map",
+        "@anthropic-ai/sdk/index.d.ts.map",
+        "@anthropic-ai/sdk/index.js.map",
+        "@anthropic-ai/sdk/index.mjs.map",
+        "@anthropic-ai/sdk/pagination.d.mts.map",
+        "@anthropic-ai/sdk/pagination.d.ts.map",
+        "@anthropic-ai/sdk/pagination.js.map",
+        "@anthropic-ai/sdk/pagination.mjs.map",
+        "@anthropic-ai/sdk/resource.d.mts.map",
+        "@anthropic-ai/sdk/resource.d.ts.map",
+        "@anthropic-ai/sdk/resource.js.map",
+        "@anthropic-ai/sdk/resource.mjs.map",
+        "@anthropic-ai/sdk/resources.d.mts.map",
+        "@anthropic-ai/sdk/resources.d.ts.map",
+        "@anthropic-ai/sdk/resources.js.map",
+        "@anthropic-ai/sdk/resources.mjs.map",
+        "@anthropic-ai/sdk/streaming.d.mts.map",
+        "@anthropic-ai/sdk/streaming.d.ts.map",
+        "@anthropic-ai/sdk/streaming.js.map",
+        "@anthropic-ai/sdk/streaming.mjs.map",
+        "@anthropic-ai/sdk/uploads.d.mts.map",
+        "@anthropic-ai/sdk/uploads.d.ts.map",
+        "@anthropic-ai/sdk/uploads.js.map",
+        "@anthropic-ai/sdk/uploads.mjs.map",
+        "@anthropic-ai/sdk/version.d.mts.map",
+        "@anthropic-ai/sdk/version.d.ts.map",
+        "@anthropic-ai/sdk/version.js.map",
+        "@anthropic-ai/sdk/version.mjs.map",
+        "@anthropic-ai/sdk/helpers/index.d.mts.map",
+        "@anthropic-ai/sdk/helpers/index.d.ts.map",
+        "@anthropic-ai/sdk/helpers/index.js.map",
+        "@anthropic-ai/sdk/helpers/index.mjs.map",
+        "@anthropic-ai/sdk/helpers/json-schema.d.mts.map",
+        "@anthropic-ai/sdk/helpers/json-schema.d.ts.map",
+        "@anthropic-ai/sdk/helpers/json-schema.js.map",
+        "@anthropic-ai/sdk/helpers/json-schema.mjs.map",
+        "@anthropic-ai/sdk/helpers/zod.d.mts.map",
+        "@anthropic-ai/sdk/helpers/zod.d.ts.map",
+        "@anthropic-ai/sdk/helpers/zod.js.map",
+        "@anthropic-ai/sdk/helpers/zod.mjs.map",
+        "@anthropic-ai/sdk/helpers/beta/json-schema.d.mts.map",
+        "@anthropic-ai/sdk/helpers/beta/json-schema.d.ts.map",
+        "@anthropic-ai/sdk/helpers/beta/json-schema.js.map",
+        "@anthropic-ai/sdk/helpers/beta/json-schema.mjs.map",
+        "@anthropic-ai/sdk/helpers/beta/mcp.d.mts.map",
+        "@anthropic-ai/sdk/helpers/beta/mcp.d.ts.map",
+        "@anthropic-ai/sdk/helpers/beta/mcp.js.map",
+        "@anthropic-ai/sdk/helpers/beta/mcp.mjs.map",
+        "@anthropic-ai/sdk/helpers/beta/memory.d.mts.map",
+        "@anthropic-ai/sdk/helpers/beta/memory.d.ts.map",
+        "@anthropic-ai/sdk/helpers/beta/memory.js.map",
+        "@anthropic-ai/sdk/helpers/beta/memory.mjs.map",
+        "@anthropic-ai/sdk/helpers/beta/zod.d.mts.map",
+        "@anthropic-ai/sdk/helpers/beta/zod.d.ts.map",
+        "@anthropic-ai/sdk/helpers/beta/zod.js.map",
+        "@anthropic-ai/sdk/helpers/beta/zod.mjs.map",
+        "@anthropic-ai/sdk/core/api-promise.d.mts.map",
+        "@anthropic-ai/sdk/core/api-promise.d.ts.map",
+        "@anthropic-ai/sdk/core/api-promise.js.map",
+        "@anthropic-ai/sdk/core/api-promise.mjs.map",
+        "@anthropic-ai/sdk/core/error.d.mts.map",
+        "@anthropic-ai/sdk/core/error.d.ts.map",
+        "@anthropic-ai/sdk/core/error.js.map",
+        "@anthropic-ai/sdk/core/error.mjs.map",
+        "@anthropic-ai/sdk/core/pagination.d.mts.map",
+        "@anthropic-ai/sdk/core/pagination.d.ts.map",
+        "@anthropic-ai/sdk/core/pagination.js.map",
+        "@anthropic-ai/sdk/core/pagination.mjs.map",
+        "@anthropic-ai/sdk/core/resource.d.mts.map",
+        "@anthropic-ai/sdk/core/resource.d.ts.map",
+        "@anthropic-ai/sdk/core/resource.js.map",
+        "@anthropic-ai/sdk/core/resource.mjs.map",
+        "@anthropic-ai/sdk/core/streaming.d.mts.map",
+        "@anthropic-ai/sdk/core/streaming.d.ts.map",
+        "@anthropic-ai/sdk/core/streaming.js.map",
+        "@anthropic-ai/sdk/core/streaming.mjs.map",
+        "@anthropic-ai/sdk/core/uploads.d.mts.map",
+        "@anthropic-ai/sdk/core/uploads.d.ts.map",
+        "@anthropic-ai/sdk/core/uploads.js.map",
+        "@anthropic-ai/sdk/core/uploads.mjs.map",
+        "@anthropic-ai/sdk/lib/beta-parser.d.mts.map",
+        "@anthropic-ai/sdk/lib/beta-parser.d.ts.map",
+        "@anthropic-ai/sdk/lib/beta-parser.js.map",
+        "@anthropic-ai/sdk/lib/beta-parser.mjs.map",
+        "@anthropic-ai/sdk/lib/BetaMessageStream.d.mts.map",
+        "@anthropic-ai/sdk/lib/BetaMessageStream.d.ts.map",
+        "@anthropic-ai/sdk/lib/BetaMessageStream.js.map",
+        "@anthropic-ai/sdk/lib/BetaMessageStream.mjs.map"
+      ]
+    }
+  ],
+  "excluded_trees": {
+    "runtime/git/": {
+      "files": 8319,
+      "bytes": 386139446,
+      "reason": "bundled third-party runtime/vendor tree"
+    },
+    "vendor/": {
+      "files": 15,
+      "bytes": 631254,
+      "reason": "bundled third-party runtime/vendor tree"
+    }
+  },
+  "host_declarations": [
+    {
+      "path": "out/vscode-dts/vscode.d.ts",
+      "size": 742177,
+      "sha256": "4624902099d3eeb466fbb2422c09690143120e94a4cb70047c41f92058eae889",
+      "declares_chat_simple_tool_result": false,
+      "chat_surface_members": []
+    }
+  ],
+  "copied_count": 91,
+  "copied_bytes": 6347069
+}

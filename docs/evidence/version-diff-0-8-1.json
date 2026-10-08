@@ -1,0 +1,300 @@
+{
+  "scope": "File-level and manifest-level comparison of a newly extracted ShunCode against the recovered 0.7.4 baseline. Identifies what changed; does not judge the changes or decompile bundles.",
+  "baseline": "recovered/shuncode-extension",
+  "baselineFiles": 52,
+  "newFiles": 91,
+  "addedCount": 39,
+  "removedCount": 0,
+  "changedCount": 23,
+  "unchangedCount": 29,
+  "added": [
+    "dist/skill-archive-worker.js",
+    "media/skills.svg",
+    "src/bridge-conversation-overview-prompt.ts",
+    "src/bridge-license-claims.d.ts",
+    "src/bridge-license-claims.js",
+    "src/bridge-license-network-policy.mts",
+    "src/bridge-notices.ts",
+    "src/bridge-payment-network.mts",
+    "src/bridge-quick-tunnel.ts",
+    "src/bridge-route-token-storage.ts",
+    "src/bridge-route-token.ts",
+    "src/bridge-start-failure.ts",
+    "src/cloudflare-edge-relay.ts",
+    "src/external-mcp-catalog.ts",
+    "src/external-mcp-center.ts",
+    "src/external-mcp-connection.ts",
+    "src/external-mcp-diagnose.ts",
+    "src/external-mcp-native-refs.ts",
+    "src/external-mcp-network-commands.ts",
+    "src/external-mcp-network.ts",
+    "src/external-mcp-oauth-commands.ts",
+    "src/external-mcp-oauth-flow.ts",
+    "src/external-mcp-oauth.ts",
+    "src/external-mcp-preview-token.ts",
+    "src/external-mcp-registry.ts",
+    "src/external-mcp-secret-admin.ts",
+    "src/external-mcp-secret-commands.ts",
+    "src/external-mcp-secret-fields.ts",
+    "src/external-mcp-status.ts",
+    "src/external-mcp-stdio-env.ts",
+    "src/managed-bash-protocol.ts",
+    "src/mcp-runtime-host.ts",
+    "src/model-endpoint-url.mts",
+    "src/proxy-bypass.mts",
+    "src/skill-center.ts",
+    "src/skill-list-tool.ts",
+    "test/workspace-hub-adapter.test.cjs",
+    "test/workspace-hub-store.test.ts",
+    "test/workspace-hub-ui.test.cjs"
+  ],
+  "removed": [],
+  "changed": [
+    "dist/extension.js",
+    "out/vscode-dts/vscode.d.ts",
+    "package.json",
+    "runtime/agent-host.js",
+    "runtime/mcp-server.js",
+    "src/bridge-access-controller.ts",
+    "src/bridge-constants.ts",
+    "src/bridge-license-service.ts",
+    "src/bridge-mcp-modern.ts",
+    "src/bridge-mcp-transport.ts",
+    "src/bridge-server.ts",
+    "src/bridge-tool-dispatcher.ts",
+    "src/codex-auth.ts",
+    "src/extension-host-proxy.mts",
+    "src/extension.ts",
+    "src/ide-tool-broker.ts",
+    "src/merge-contract.ts",
+    "src/model-provider.ts",
+    "src/model-reasoning.mts",
+    "src/native-chat.ts",
+    "src/runtime-client.ts",
+    "src/tool-presentation.ts",
+    "tsconfig.json"
+  ],
+  "newSourceFiles": [
+    "src/bridge-conversation-overview-prompt.ts",
+    "src/bridge-license-claims.d.ts",
+    "src/bridge-license-network-policy.mts",
+    "src/bridge-notices.ts",
+    "src/bridge-payment-network.mts",
+    "src/bridge-quick-tunnel.ts",
+    "src/bridge-route-token-storage.ts",
+    "src/bridge-route-token.ts",
+    "src/bridge-start-failure.ts",
+    "src/cloudflare-edge-relay.ts",
+    "src/external-mcp-catalog.ts",
+    "src/external-mcp-center.ts",
+    "src/external-mcp-connection.ts",
+    "src/external-mcp-diagnose.ts",
+    "src/external-mcp-native-refs.ts",
+    "src/external-mcp-network-commands.ts",
+    "src/external-mcp-network.ts",
+    "src/external-mcp-oauth-commands.ts",
+    "src/external-mcp-oauth-flow.ts",
+    "src/external-mcp-oauth.ts",
+    "src/external-mcp-preview-token.ts",
+    "src/external-mcp-registry.ts",
+    "src/external-mcp-secret-admin.ts",
+    "src/external-mcp-secret-commands.ts",
+    "src/external-mcp-secret-fields.ts",
+    "src/external-mcp-status.ts",
+    "src/external-mcp-stdio-env.ts",
+    "src/managed-bash-protocol.ts",
+    "src/mcp-runtime-host.ts",
+    "src/model-endpoint-url.mts",
+    "src/proxy-bypass.mts",
+    "src/skill-center.ts",
+    "src/skill-list-tool.ts"
+  ],
+  "changedSourceFiles": [
+    "src/bridge-access-controller.ts",
+    "src/bridge-constants.ts",
+    "src/bridge-license-service.ts",
+    "src/bridge-mcp-modern.ts",
+    "src/bridge-mcp-transport.ts",
+    "src/bridge-server.ts",
+    "src/bridge-tool-dispatcher.ts",
+    "src/codex-auth.ts",
+    "src/extension-host-proxy.mts",
+    "src/extension.ts",
+    "src/ide-tool-broker.ts",
+    "src/merge-contract.ts",
+    "src/model-provider.ts",
+    "src/model-reasoning.mts",
+    "src/native-chat.ts",
+    "src/runtime-client.ts",
+    "src/tool-presentation.ts"
+  ],
+  "manifest": {
+    "versionBefore": "0.7.4",
+    "versionAfter": "0.8.1",
+    "engineBefore": "^1.132.0",
+    "engineAfter": "^1.132.0",
+    "commands": {
+      "added": [
+        "shuncode.bridge.cleanupProcesses",
+        "shuncode.bridge.license.signInWithGitee",
+        "shuncode.bridge.showLog",
+        "shuncode.mcp.open",
+        "shuncode.skills.center",
+        "shuncode.skills.changeLocation",
+        "shuncode.skills.import",
+        "shuncode.skills.openDirectory",
+        "shuncode.skills.refresh",
+        "shuncode.skills.search"
+      ],
+      "removed": []
+    },
+    "settings": {
+      "added": [
+        "shuncode.bridge.cloudflareEdgeRoute",
+        "shuncode.bridge.settingsPageFloating",
+        "shuncode.bridge.startupPinPage",
+        "shuncode.mcp.extraCaCertificates"
+      ],
+      "removed": []
+    },
+    "activationEvents": {
+      "added": [
+        "onCommand:shuncode.bridge.cleanupProcesses",
+        "onCommand:shuncode.bridge.clearTasksConfirmed",
+        "onCommand:shuncode.bridge.license.signInWithGitee",
+        "onCommand:shuncode.bridge.showLog",
+        "onCommand:shuncode.mcp.getCatalog",
+        "onCommand:shuncode.mcp.import",
+        "onCommand:shuncode.mcp.open",
+        "onCommand:shuncode.mcp.preview",
+        "onCommand:shuncode.mcp.remove",
+        "onCommand:shuncode.mcp.retry",
+        "onCommand:shuncode.mcp.setEnabled",
+        "onCommand:shuncode.skills.action",
+        "onCommand:shuncode.skills.center",
+        "onCommand:shuncode.skills.getCatalog",
+        "onCommand:shuncode.skills.import",
+        "onCommand:shuncode.skills.setEnabled"
+      ],
+      "removed": []
+    }
+  },
+  "sizeDeltas": {
+    "dist/extension.js": {
+      "before": 1670771,
+      "after": 2786087,
+      "delta": 1115316
+    },
+    "out/vscode-dts/vscode.d.ts": {
+      "before": 742072,
+      "after": 742177,
+      "delta": 105
+    },
+    "package.json": {
+      "before": 24361,
+      "after": 30321,
+      "delta": 5960
+    },
+    "runtime/agent-host.js": {
+      "before": 943158,
+      "after": 961243,
+      "delta": 18085
+    },
+    "runtime/mcp-server.js": {
+      "before": 1286417,
+      "after": 1294738,
+      "delta": 8321
+    },
+    "src/bridge-access-controller.ts": {
+      "before": 4538,
+      "after": 6029,
+      "delta": 1491
+    },
+    "src/bridge-constants.ts": {
+      "before": 15240,
+      "after": 30319,
+      "delta": 15079
+    },
+    "src/bridge-license-service.ts": {
+      "before": 42603,
+      "after": 66032,
+      "delta": 23429
+    },
+    "src/bridge-mcp-modern.ts": {
+      "before": 6133,
+      "after": 6893,
+      "delta": 760
+    },
+    "src/bridge-mcp-transport.ts": {
+      "before": 28810,
+      "after": 29820,
+      "delta": 1010
+    },
+    "src/bridge-server.ts": {
+      "before": 82642,
+      "after": 102568,
+      "delta": 19926
+    },
+    "src/bridge-tool-dispatcher.ts": {
+      "before": 19795,
+      "after": 28425,
+      "delta": 8630
+    },
+    "src/codex-auth.ts": {
+      "before": 20565,
+      "after": 20583,
+      "delta": 18
+    },
+    "src/extension-host-proxy.mts": {
+      "before": 11234,
+      "after": 47798,
+      "delta": 36564
+    },
+    "src/extension.ts": {
+      "before": 27629,
+      "after": 30757,
+      "delta": 3128
+    },
+    "src/ide-tool-broker.ts": {
+      "before": 92279,
+      "after": 101704,
+      "delta": 9425
+    },
+    "src/merge-contract.ts": {
+      "before": 2737,
+      "after": 4256,
+      "delta": 1519
+    },
+    "src/model-provider.ts": {
+      "before": 79339,
+      "after": 83909,
+      "delta": 4570
+    },
+    "src/model-reasoning.mts": {
+      "before": 2640,
+      "after": 3445,
+      "delta": 805
+    },
+    "src/native-chat.ts": {
+      "before": 44808,
+      "after": 50206,
+      "delta": 5398
+    },
+    "src/runtime-client.ts": {
+      "before": 18270,
+      "after": 19952,
+      "delta": 1682
+    },
+    "src/tool-presentation.ts": {
+      "before": 23280,
+      "after": 23695,
+      "delta": 415
+    },
+    "tsconfig.json": {
+      "before": 1447,
+      "after": 1469,
+      "delta": 22
+    }
+  },
+  "doesNotClaim": "A changed dist/extension.js means the bundle differs, not what differs - bundles are build output. Source-level answers come from the .ts files listed above. Nothing here is copied into the protected recovered/ tree."
+}
