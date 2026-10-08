@@ -8,7 +8,6 @@ tools/** -text
 tests/** -text
 .github/workflows/** -text
 docs/learning/** -text
-
 # Pinned upstream candidate declarations retain their evidence bytes.
 reference/** -text
 package.json -text
@@ -18,3 +17,4 @@ docs/evidence/contract-type-diagnostics.json -text
 docs/evidence/http-*.json -text
 docs/evidence/portable-*.json -text
 docs/evidence/authorization-wiring.json -text
+*.exe filter=lfs diff=lfs merge=lfs -text
