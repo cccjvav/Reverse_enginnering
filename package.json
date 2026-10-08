@@ -38,7 +38,8 @@
     "verify:host-shapes": "node tools/verify_host_shapes.mjs",
     "assemble:skeleton-full": "python3 tools/assemble_skeleton.py --report docs/evidence/skeleton-full.json --maintenance --host-types",
     "serve:downloads": "node tools/download_server.mjs",
-    "audit:docs": "python3 tools/audit_docs.py --output docs/evidence/docs-audit.json"
+    "audit:docs": "python3 tools/audit_docs.py --output docs/evidence/docs-audit.json",
+    "build:mcp-skills-package": "python3 tools/build_mcp_skills_package.py"
   },
   "devDependencies": {
     "@modelcontextprotocol/node": "2.0.0",

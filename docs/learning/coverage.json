@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 202,
-    "lines": 37472,
+    "files": 203,
+    "lines": 37667,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1144,8 +1144,8 @@
     },
     {
       "source": "tools/build_bridge_package.py",
-      "sha256": "4ea9592adc36bd930a3fd478c752839bf17ae607c8bc93d634a9fa023562fa95",
-      "lines": 131,
+      "sha256": "bbf33ddd2d401e11e3471b4f467ff729655dc70937995d36a941cb7afeb243e4",
+      "lines": 147,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1174,6 +1174,13 @@
       "source": "tools/build_linked_extension.mjs",
       "sha256": "4cfea5175bce508839ad073fec5f6b793440ac09372be026ce7b429c37184cfa",
       "lines": 156,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/build_mcp_skills_package.py",
+      "sha256": "6a9c802221ac2c1f5a6a3738d7f31938dbbb41a80e47a4fdfff04130ea3920fe",
+      "lines": 173,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1340,8 +1347,8 @@
     },
     {
       "source": "tools/prepare_downloads.py",
-      "sha256": "b54e8a0759d1dc77e1af1643a12d55a384ecaee96e66366f985941be680aacdf",
-      "lines": 87,
+      "sha256": "6ab2119548878de68975e6e9309f16bbc1810c9cac6301b99b14fd8c7b564e0f",
+      "lines": 93,
       "explainedLines": 0,
       "status": "pending"
     },

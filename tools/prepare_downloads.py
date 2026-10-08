@@ -26,12 +26,15 @@ DOCS = [
     "WEB_AGENT_EXTENSION_REVIEW.md", "WEB_AGENT_HANDOVER.md", "STATUS_NOW.md",
     "PAYMENT_ARCHITECTURE_PROMPT.md", "CHAT_FIELDS_IMPACT.md",
     "ANSWERS_FOR_AUTHOR.md", "WHAT_THE_AUTHOR_MUST_SUPPLY.md",
+    "WEB_AGENT_MCP_SKILLS_PLAN.md", "web_agent-对照-0.8.1.md",
+    "0.8.1-新版有什么变化.md",
 ]
 
 # (source document, output filename) - the text between the scissor markers.
 PROMPTS = [
     ("WEB_AGENT_EXTENSION_REVIEW.md", "web_agent提示词-修正版-纯净.txt"),
     ("PAYMENT_ARCHITECTURE_PROMPT.md", "支付架构提示词-纯净版.txt"),
+    ("WEB_AGENT_MCP_SKILLS_PLAN.md", "web_agent-MCP与Skills提示词-纯净.txt"),
 ]
 
 START = "## ✂️ 从这里开始复制 ✂️"
@@ -76,6 +79,9 @@ def main():
         subprocess.run([sys.executable, str(REPO / "tools" / "build_bridge_package.py")],
                        check=True, cwd=REPO)
         written.append("shuncode-bridge-source.zip")
+        subprocess.run([sys.executable, str(REPO / "tools" / "build_mcp_skills_package.py")],
+                       check=True, cwd=REPO)
+        written.append("shuncode-0.8.1-mcp-skills.zip")
 
     print(f"prepared {len(written)} file(s) in .work/downloads")
     for name in sorted(written):

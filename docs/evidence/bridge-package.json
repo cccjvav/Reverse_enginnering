@@ -1,8 +1,8 @@
 {
   "scope": "Build record for the Bridge source package handed to the web_agent project. Records what was packaged and what was deliberately left out; claims nothing about whether the code runs in that project.",
   "archive": ".work/downloads/shuncode-bridge-source.zip",
-  "archiveSha256": "4114d6e8d583cea5193b48d53e8137921803a681006914a943abf804aa847188",
-  "archiveSha256Note": "Changes between builds: zip entries carry mtimes. Compare contentSha256 instead.",
+  "archiveSha256": "71c9d680b566ab48ec638bc121336059ed8e604629b6b6e52a941ed6aa8410cf",
+  "archiveSha256Note": "Reproducible: zip entries are pinned to a fixed timestamp, so rebuilding identical content yields this same digest.",
   "contentSha256": "8dd74e29241437c405188751eec93ea59ebcd30ac6576800c096652f0245fa10",
   "bytes": 201993,
   "coreModules": 41,

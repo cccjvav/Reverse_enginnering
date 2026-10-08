@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/202 个纳入范围的文件完整逐行解释；363/37472 行已解释。
+当前：6/203 个纳入范围的文件完整逐行解释；363/37667 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -175,11 +175,12 @@
 | [tools/audit_extension_runtime.mjs](../../tools/audit_extension_runtime.mjs) | 48 | 0 | 待逐行讲解 |
 | [tools/audit_permission_producers.mjs](../../tools/audit_permission_producers.mjs) | 95 | 0 | 待逐行讲解 |
 | [tools/audit_recovered_extension.py](../../tools/audit_recovered_extension.py) | 79 | 0 | 待逐行讲解 |
-| [tools/build_bridge_package.py](../../tools/build_bridge_package.py) | 131 | 0 | 待逐行讲解 |
+| [tools/build_bridge_package.py](../../tools/build_bridge_package.py) | 147 | 0 | 待逐行讲解 |
 | [tools/build_community.mjs](../../tools/build_community.mjs) | 137 | 137 | 本组已逐行解释 |
 | [tools/build_extractor.py](../../tools/build_extractor.py) | 31 | 0 | 待逐行讲解 |
 | [tools/build_learning.mjs](../../tools/build_learning.mjs) | 62 | 0 | 待逐行讲解 |
 | [tools/build_linked_extension.mjs](../../tools/build_linked_extension.mjs) | 156 | 0 | 待逐行讲解 |
+| [tools/build_mcp_skills_package.py](../../tools/build_mcp_skills_package.py) | 173 | 0 | 待逐行讲解 |
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |
 | [tools/check_btype_arity.py](../../tools/check_btype_arity.py) | 198 | 0 | 待逐行讲解 |
 | [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
@@ -203,7 +204,7 @@
 | [tools/patch_carrier_electron44.py](../../tools/patch_carrier_electron44.py) | 324 | 0 | 待逐行讲解 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
 | [tools/portable_presentation_inputs.mjs](../../tools/portable_presentation_inputs.mjs) | 26 | 0 | 待逐行讲解 |
-| [tools/prepare_downloads.py](../../tools/prepare_downloads.py) | 87 | 0 | 待逐行讲解 |
+| [tools/prepare_downloads.py](../../tools/prepare_downloads.py) | 93 | 0 | 待逐行讲解 |
 | [tools/probe_carrier_build.py](../../tools/probe_carrier_build.py) | 303 | 0 | 待逐行讲解 |
 | [tools/probe_clipboard_adaptation.py](../../tools/probe_clipboard_adaptation.py) | 177 | 0 | 待逐行讲解 |
 | [tools/probe_header_narrowing.py](../../tools/probe_header_narrowing.py) | 155 | 0 | 待逐行讲解 |

@@ -1,0 +1,138 @@
+{
+  "scope": "Reference sources for the web_agent external-MCP/Skills plan. Mixed provenance: original TypeScript plus compiler output recovered from the shipped bundle.",
+  "output": ".work/downloads/shuncode-0.8.1-mcp-skills.zip",
+  "fileCount": 18,
+  "originalCount": 14,
+  "compilerOutputCount": 4,
+  "totalLines": 2587,
+  "contentSha256": "7fb978c9b59df55ecd51ddbd52bc741267c65a72c081860599365f7ebc47c7e4",
+  "secretScan": "Heuristic private-key/token patterns only; not a security audit.",
+  "files": [
+    {
+      "path": "original-typescript/external-mcp-connection.ts",
+      "kind": "original",
+      "lines": 93,
+      "sha256": "21289dafd63287834c926492fa11b5ca231d0edbe9c02ac740c2ef53af79364b",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-stdio-env.ts",
+      "kind": "original",
+      "lines": 99,
+      "sha256": "c02765344bef73f556a279df18ea7a877d4eca28caac98c604181df9810335a6",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-secret-fields.ts",
+      "kind": "original",
+      "lines": 95,
+      "sha256": "36578871ebf84c921f28701fa2babadd7c137ce210ff4fd764e01ba0adb7662c",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-diagnose.ts",
+      "kind": "original",
+      "lines": 114,
+      "sha256": "daa57ec6bd23d57e2ba8ab06dfb62401bd10dec56a410f4a7dcf2420512391c3",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-network.ts",
+      "kind": "original",
+      "lines": 75,
+      "sha256": "9b41f1289cfcbdc1653c2c1ee628bb5eb996d258ec6ce669524ce545f688435c",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-status.ts",
+      "kind": "original",
+      "lines": 47,
+      "sha256": "cfd864257a5656dd3f450443da273361a3deebb117e35a129c62f002ec1e92a8",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-oauth-flow.ts",
+      "kind": "original",
+      "lines": 235,
+      "sha256": "29c015d7397a79ed7f21dbcd763ed8d303efebee11f56e02ed1a036b143f6e21",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-oauth.ts",
+      "kind": "original",
+      "lines": 163,
+      "sha256": "dbc18a2adb52a923a8495130c0a9d896385e78aacbc0f517b316273d6ba09976",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-preview-token.ts",
+      "kind": "original",
+      "lines": 11,
+      "sha256": "27f6e4988289f0aa368c08f4ad9beee483ab17571f76ef6421a8c223fe54bf57",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-native-refs.ts",
+      "kind": "original",
+      "lines": 52,
+      "sha256": "95cd08733888d406b37e3f9b5858dd3344404fe4b59dfc1339b56ed162b0f255",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-registry.ts",
+      "kind": "original",
+      "lines": 260,
+      "sha256": "c6dd4b1e06411835d5e7dc9a73ed8f0d906db4887465432f2c53596dd22793ff",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-catalog.ts",
+      "kind": "original",
+      "lines": 533,
+      "sha256": "2a479a1b01f846d0a173a16112134457e42f4acb420d706aa72a6ecaaf66e6f7",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/proxy-bypass.mts",
+      "kind": "original",
+      "lines": 89,
+      "sha256": "482c9f173bdc61a917964c48b78e23c227bd221f4225b90c1116836bc0badb32",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/skill-list-tool.ts",
+      "kind": "original",
+      "lines": 59,
+      "sha256": "0939dc70a381dc1bb6350ad91db12ef569068852464ceda86ae02cf6926059df",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "recovered-from-bundle/external-mcp-network-errors.js",
+      "kind": "compiler-output",
+      "lines": 85,
+      "sha256": "f969695a36ceaadf2a0322173a857c22df5ac7996cef739acab743034bb1ceeb",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/external-mcp-oauth-config.js",
+      "kind": "compiler-output",
+      "lines": 30,
+      "sha256": "f17bdb02026fb6410b462a3427978f992a9a4cea6c274d6b95f1f84108c9c47a",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/external-mcp-import.js",
+      "kind": "compiler-output",
+      "lines": 230,
+      "sha256": "2a7d57f362fdc52725d863d7ffd5483a84ebaa445531b8832773042eb72c735f",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-skill.js",
+      "kind": "compiler-output",
+      "lines": 317,
+      "sha256": "9efbc590f773f6f84486e9bed0f39719700d59f3d23ae021864df3f866dd85a8",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    }
+  ]
+}

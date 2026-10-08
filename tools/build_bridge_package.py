@@ -19,6 +19,20 @@ import shutil
 import zipfile
 from pathlib import Path
 
+# Zip entries normally carry each file's mtime, so two builds of identical
+# content produce different archive bytes. Pin every entry to a fixed
+# timestamp and mode so the archive itself is byte-reproducible.
+FIXED_DATE = (1980, 1, 1, 0, 0, 0)
+
+
+def _add(archive, arcname, data):
+    info = zipfile.ZipInfo(str(arcname), date_time=FIXED_DATE)
+    info.compress_type = zipfile.ZIP_DEFLATED
+    info.external_attr = 0o644 << 16
+    archive.writestr(info, data)
+
+
+
 REPO = Path(__file__).resolve().parent.parent
 CORE = REPO / "reconstructed" / "bridge-core" / "src"
 TYPES = REPO / "reconstructed" / "bridge-core" / "types"
@@ -84,7 +98,8 @@ def main():
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(staging.rglob("*")):
             if path.is_file():
-                archive.write(path, Path("handoff-pkg") / path.relative_to(staging))
+                _add(archive, Path("handoff-pkg") / path.relative_to(staging),
+                     path.read_bytes())
 
     # The archive embeds file mtimes, so its sha256 changes between builds even
     # when the contents are identical. Hash the contents instead, so the report
@@ -103,8 +118,9 @@ def main():
                   "runs in that project."),
         "archive": args.output,
         "archiveSha256": digest,
-        "archiveSha256Note": ("Changes between builds: zip entries carry "
-                              "mtimes. Compare contentSha256 instead."),
+        "archiveSha256Note": ("Reproducible: zip entries are pinned to a "
+                              "fixed timestamp, so rebuilding identical "
+                              "content yields this same digest."),
         "contentSha256": content_digest,
         "bytes": out.stat().st_size,
         "coreModules": len(list(CORE.glob("*.js"))),
