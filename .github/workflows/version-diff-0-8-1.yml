@@ -190,7 +190,10 @@ jobs:
         if: always()
         run: |
           test -d recovered/shuncode-0.8.1 || { echo "nothing recovered"; exit 0; }
-          git add -- recovered/shuncode-0.8.1
+          # -f because .gitignore excludes dist/, which here is shipped
+          # evidence rather than local build output. Without it the bundles
+          # silently never reach the branch, as happened on the first run.
+          git add -f -- recovered/shuncode-0.8.1
           if git diff --cached --quiet; then
             echo "no sources to commit"
             exit 0
