@@ -141,7 +141,20 @@ jobs:
             fi
           done
 
-      - name: Stage the evidence and the recovered 0.8.1 sources
+      - name: Show what else the run left modified
+        if: always()
+        run: |
+          # build_extractor.py rewrites a tracked evidence file. Unstaged
+          # tracked changes make git rebase refuse outright, which is what
+          # sank the previous attempt five times in a row.
+          git status --porcelain
+
+      # Two commits on purpose. The diff is the actual answer to "what
+      # changed" and is a few kilobytes; the recovered tree is bulk. Pushing
+      # the small one first means a problem with the bulk cannot cost the
+      # result of a 3-minute extraction.
+      - name: Commit and push the evidence first
+        id: push_evidence
         if: always()
         run: |
           git config user.name "github-actions[bot]"
@@ -149,63 +162,48 @@ jobs:
           for f in docs/evidence/installer-0-8-1.json \
                    docs/evidence/custom-extension-0-8-1.json \
                    docs/evidence/version-diff-0-8-1.json \
-                   docs/evidence/clipboard-adaptation-0-8-1.json; do
+                   docs/evidence/clipboard-adaptation-0-8-1.json \
+                   docs/evidence/extractor-build.json; do
             test -f "$f" && git add -- "$f"
           done
-          test -d recovered/shuncode-0.8.1 && git add -- recovered/shuncode-0.8.1
-          git status --porcelain | head -40
-          echo "staged files: $(git diff --cached --name-only | wc -l)"
-
-      - name: Refuse to touch the 0.7.4 baseline
-        if: always()
-        run: |
-          # The whole comparison is meaningless if this run rewrote the
-          # hash-verified originals it compares against.
           if git diff --cached --name-only | grep -q '^recovered/shuncode-extension/'; then
             echo "this run modified the protected 0.7.4 tree"
-            git diff --cached --name-only | grep '^recovered/shuncode-extension/'
             exit 1
           fi
-          echo "0.7.4 baseline untouched"
-
-      - name: Commit the result
-        id: commit
-        if: always()
-        run: |
           if git diff --cached --quiet; then
-            echo "nothing to commit"
-            echo "committed=false" >> "$GITHUB_OUTPUT"
+            echo "no evidence to commit"
             exit 0
           fi
-          git commit -m "Record ShunCode 0.8.1 extraction and diff against 0.7.4"
-          echo "committed=true" >> "$GITHUB_OUTPUT"
-
-      - name: Push, rebasing onto whatever landed meanwhile
-        if: always() && steps.commit.outputs.committed == 'true'
-        run: |
-          # Sibling workflows commit evidence to this same branch, so a race is
-          # normal rather than exceptional; a lost result costs a full
-          # extraction to reproduce.
+          git commit -m "Record ShunCode 0.8.1 identification and the diff against 0.7.4"
           for attempt in 1 2 3 4 5; do
-            if ! git fetch origin "${GITHUB_REF}"; then
-              echo "fetch failed on attempt $attempt"
-              sleep 5
-              continue
-            fi
-            if ! git rebase FETCH_HEAD; then
-              echo "rebase failed on attempt $attempt"
-              git rebase --abort || true
-              sleep 5
-              continue
-            fi
-            if git push origin "HEAD:${GITHUB_REF}"; then
-              echo "pushed on attempt $attempt"
-              exit 0
-            fi
-            echo "push rejected on attempt $attempt"
+            git fetch origin "${GITHUB_REF}" || { sleep 5; continue; }
+            # --autostash: sibling workflows leave tracked evidence files
+            # dirty, and without it rebase aborts before trying anything.
+            git rebase --autostash FETCH_HEAD || { git rebase --abort || true; sleep 5; continue; }
+            git push origin "HEAD:${GITHUB_REF}" && exit 0
             sleep 5
           done
-          echo "could not push after 5 attempts"
+          echo "could not push the evidence after 5 attempts"
+          exit 1
+
+      - name: Commit and push the recovered 0.8.1 sources
+        if: always()
+        run: |
+          test -d recovered/shuncode-0.8.1 || { echo "nothing recovered"; exit 0; }
+          git add -- recovered/shuncode-0.8.1
+          if git diff --cached --quiet; then
+            echo "no sources to commit"
+            exit 0
+          fi
+          echo "staging $(git diff --cached --name-only | wc -l) files"
+          git commit -m "Recover the ShunCode 0.8.1 extension sources"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "${GITHUB_REF}" || { sleep 5; continue; }
+            git rebase --autostash FETCH_HEAD || { git rebase --abort || true; sleep 5; continue; }
+            git push origin "HEAD:${GITHUB_REF}" && exit 0
+            sleep 5
+          done
+          echo "could not push the sources after 5 attempts"
           exit 1
 
       - name: Propagate failure after the diagnostics are safely on the branch
