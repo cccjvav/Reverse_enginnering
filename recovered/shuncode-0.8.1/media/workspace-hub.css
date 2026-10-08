@@ -1,0 +1,88 @@
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--vscode-editor-background,#17191e);color:var(--vscode-editor-foreground,#ddd);font:13px var(--vscode-font-family,system-ui);line-height:1.55}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 32px 24px;border-bottom:1px solid var(--vscode-widget-border,#333)}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.badge.instance{opacity:.75;font-weight:normal}
+h1{font-size:25px;letter-spacing:-.7px;margin:4px 0 7px}
+h2{font-size:16px;margin:0}
+p{margin:0;color:var(--vscode-descriptionForeground,#a6a6ad)}
+.eyebrow{font-size:10px;letter-spacing:1.6px;color:var(--vscode-descriptionForeground,#9c9eaa);font-weight:600}
+.primary,button{font:inherit;cursor:pointer;border:1px solid var(--vscode-button-border,transparent);border-radius:5px;padding:7px 12px;background:var(--vscode-button-secondaryBackground,#343841);color:var(--vscode-button-secondaryForeground,#ddd)}
+.primary{background:var(--vscode-button-background,#376de0);color:var(--vscode-button-foreground,#fff)}
+button:hover{filter:brightness(1.12)}
+button:focus-visible,input:focus-visible{outline:1px solid var(--vscode-focusBorder,#5b9bf5);outline-offset:2px}
+button:disabled{opacity:.45;cursor:default;filter:none}
+.tabs{display:flex;align-items:center;gap:4px;padding:12px 32px 0;border-bottom:1px solid var(--vscode-widget-border,#333)}
+.tabs button{background:transparent;border:0;border-radius:0;padding:9px 14px 13px;border-bottom:2px solid transparent;color:var(--vscode-descriptionForeground,#aaa)}
+.tabs button.selected{border-color:var(--vscode-focusBorder,#5b9bf5);color:var(--vscode-editor-foreground,#fff)}
+.tabs button span{font-size:10px;border-radius:10px;background:var(--vscode-badge-background,#343a46);color:var(--vscode-badge-foreground,#ddd);padding:1px 6px;margin-left:4px}
+.live{margin-left:auto;font-size:11px;display:flex;align-items:center;gap:7px;color:var(--vscode-descriptionForeground,#999)}
+.live i,.status-dot{width:6px;height:6px;border-radius:50%;display:inline-block;background:var(--vscode-testing-iconPassed,#70ba8a)}
+main{padding:24px 32px;min-height:450px}
+.section-heading{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:17px}
+.section-heading span{color:var(--vscode-descriptionForeground,#999);font-size:11px}
+.window-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.window-card{max-width:720px;border:1px solid var(--vscode-widget-border,#353840);border-radius:8px;padding:19px;background:var(--vscode-sideBar-background,#1e2128)}
+.window-card.current{border-color:var(--vscode-focusBorder,#548cef)}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
+.project-name{font-size:16px;font-weight:600;overflow-wrap:anywhere}
+.badge{font-size:10px;border:1px solid var(--vscode-widget-border,#404551);padding:1px 7px;border-radius:20px;white-space:nowrap}
+.current .badge{color:var(--vscode-textLink-foreground,#7fb6ff)}
+.project-path{font:11px var(--vscode-editor-font-family,monospace);color:var(--vscode-descriptionForeground,#aaa);overflow-wrap:anywhere;min-height:34px}
+.bridge-status{display:flex;align-items:center;gap:8px;font-size:11px;margin:16px 0 8px}
+.status-dot.stopped{background:var(--vscode-descriptionForeground,#777)}
+.status-dot.error{background:var(--vscode-errorForeground,#ed716a)}
+.status-dot.starting{background:var(--vscode-editorWarning-foreground,#d6aa63)}
+.address-row{display:flex;gap:8px;align-items:stretch}
+.address-input{flex:1;min-width:0;padding:9px 10px;font:11px var(--vscode-editor-font-family,monospace);border-radius:5px;background:var(--vscode-textCodeBlock-background,#171a20);border:1px solid transparent;color:var(--vscode-editor-foreground,#ddd)}
+.reveal{flex-shrink:0;font-size:11px;padding:7px 10px}
+.task{border-top:1px solid var(--vscode-widget-border,#333);padding-top:12px;margin-top:14px}
+.task-label{font-size:10px;color:var(--vscode-descriptionForeground,#999);margin-bottom:5px}
+.task-title{white-space:pre-line;min-height:38px;overflow-wrap:anywhere}
+.task-meta{font-size:11px;color:var(--vscode-descriptionForeground,#aaa);display:flex;justify-content:space-between;margin:9px 0}
+.task progress{width:100%;height:4px;accent-color:var(--vscode-progressBar-background,#578bee)}
+.card-actions{display:flex;gap:8px;margin-top:16px}
+.card-actions button{flex:1;font-size:11px}
+.empty{padding:50px 20px;text-align:center;color:var(--vscode-descriptionForeground,#999);line-height:1.9}
+.chat-layout{display:grid;grid-template-columns:270px minmax(0,1fr);border:1px solid var(--vscode-widget-border,#343840);border-radius:8px;overflow:hidden;min-height:520px;height:calc(100vh - 266px)}
+.chat-sidebar{border-right:1px solid var(--vscode-widget-border,#343840);background:var(--vscode-sideBar-background,#1d2027);display:flex;flex-direction:column;min-height:0}
+.search{display:flex;gap:8px;align-items:center;margin:15px;border:1px solid var(--vscode-input-border,#3a3e46);background:var(--vscode-input-background,#292d35);border-radius:4px;padding:5px 9px}
+.search input{min-width:0;width:100%;background:transparent;border:0;color:var(--vscode-input-foreground,#ddd);font:inherit}
+.chat-list{overflow:auto;flex:1;padding:0 8px 12px}
+.chat-item{display:block;text-align:left;width:100%;border:1px solid transparent;background:transparent;color:inherit;margin-bottom:4px;padding:11px}
+.chat-item.selected{border-color:var(--vscode-focusBorder,#568be8);background:var(--vscode-list-activeSelectionBackground,#25415e)}
+.chat-item .title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-item .meta{font-size:10px;display:flex;justify-content:space-between;gap:5px;margin-top:5px;color:var(--vscode-descriptionForeground,#aaa)}
+.conversation{display:flex;flex-direction:column;min-width:0;min-height:0}
+.conversation-header{padding:18px 22px;border-bottom:1px solid var(--vscode-widget-border,#333);display:flex;align-items:center;justify-content:space-between;gap:15px}
+.conversation-header h2{margin:5px 0;overflow-wrap:anywhere}
+.conversation-header button{font-size:11px;flex-shrink:0}
+.header-actions{display:flex;gap:8px;flex-shrink:0}
+.danger{border-color:var(--vscode-errorForeground,#e66);color:var(--vscode-errorForeground,#e88);background:transparent}
+.muted{font-size:11px;color:var(--vscode-descriptionForeground,#aaa)}
+.messages{padding:22px;overflow:auto;flex:1;min-height:0}
+.turn{margin-bottom:24px}
+.role{font-size:10px;font-weight:600;letter-spacing:1px;color:var(--vscode-descriptionForeground,#aaa);margin-bottom:8px}
+.turn.user .bubble{background:var(--vscode-textCodeBlock-background,#242932);padding:12px 15px;border-radius:7px;border:1px solid var(--vscode-widget-border,#333)}
+.bubble{overflow-wrap:anywhere;white-space:pre-wrap;line-height:1.75}
+.bubble pre{white-space:pre;overflow:auto;background:var(--vscode-textCodeBlock-background,#20242a);padding:12px;border-radius:5px;font:12px/1.65 var(--vscode-editor-font-family,monospace);border:1px solid var(--vscode-widget-border,#333)}
+.bubble .tool{font-size:11px;padding:5px 9px;margin:6px 0;border-left:2px solid var(--vscode-progressBar-background,#568beb);color:var(--vscode-descriptionForeground,#aaa)}
+.reader-note{padding:11px 18px;background:var(--vscode-sideBar-background,#1d2027);font-size:10px;color:var(--vscode-descriptionForeground,#999);border-top:1px solid var(--vscode-widget-border,#333)}
+footer{padding:12px 32px 20px;display:flex;gap:15px;flex-wrap:wrap;align-items:center;color:var(--vscode-descriptionForeground,#888);font-size:10px}
+footer .link{font-size:11px;background:transparent;color:var(--vscode-textLink-foreground,#78aeff);border:0;padding:0}
+#folder-path{font-family:var(--vscode-editor-font-family,monospace);overflow-wrap:anywhere;flex:1}
+#notice{margin:14px 32px 0;padding:8px 12px;border:1px solid var(--vscode-focusBorder,#548ce0);border-radius:5px;color:var(--vscode-editor-foreground,#ddd)}
+#notice.error{border-color:var(--vscode-errorForeground,#e66);color:var(--vscode-errorForeground,#e88)}
+[hidden]{display:none!important}
+@media(max-width:720px){.topbar{padding:20px;align-items:flex-start;flex-direction:column;gap:15px}
+.tabs{padding-left:16px;padding-right:16px}
+main{padding:18px}
+.section-heading{align-items:flex-start;flex-direction:column}
+.chat-layout{grid-template-columns:1fr;height:auto;min-height:600px}
+.chat-sidebar{border-right:0;border-bottom:1px solid var(--vscode-widget-border,#333);max-height:240px}
+.messages{min-height:320px;max-height:65vh}
+.conversation-header{flex-wrap:wrap}
+footer{padding:10px 18px 20px}
+.window-grid{grid-template-columns:1fr}
+}
