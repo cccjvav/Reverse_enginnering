@@ -1,0 +1,497 @@
+{
+  "scope": "Compiled module bodies sliced out of a shipped esbuild bundle. Readable JavaScript, NOT original TypeScript: type annotations and most comments are erased by the compiler and are not recoverable from the bundle.",
+  "notRunnable": "Imports are not rewired; slices may reference helpers esbuild hoisted elsewhere. For reading and rebuilding, not execution.",
+  "bundle": "recovered/shuncode-0.8.1/dist/extension.js",
+  "bundleSha256": "81f043b4bb9f80bd34aac4cbd2d8a48c02b89f9c9f78824b0e3680d746670f0a",
+  "mode": "all-src-modules-in-bundle",
+  "directImportCount": 40,
+  "wantedCount": 60,
+  "modules": [
+    {
+      "module": "adaptive-concurrency",
+      "originLabel": "src/adaptive-concurrency.ts",
+      "codeLines": 60,
+      "occurrencesInBundle": 1,
+      "file": "adaptive-concurrency.js",
+      "sha256": "7ffd4257845419f0c283e3118d603456ac49e75aabce7c0936804f1b8d71a23d"
+    },
+    {
+      "module": "apply-patch",
+      "originLabel": "src/apply-patch.ts",
+      "codeLines": 761,
+      "occurrencesInBundle": 2,
+      "file": "apply-patch.js",
+      "sha256": "9a9cba56e13a96d7269ad50dad4865863d6f56908af07b75cfcf7bd644e514e8"
+    },
+    {
+      "module": "apply-patch-directories",
+      "originLabel": "src/apply-patch-directories.ts",
+      "codeLines": 120,
+      "occurrencesInBundle": 1,
+      "file": "apply-patch-directories.js",
+      "sha256": "3b6ee35a8cf3bbf5580ef78bed5d88082b04c515bbbb245405cca5622a174e42"
+    },
+    {
+      "module": "bridge-activity-tracker",
+      "originLabel": "src/bridge-activity-tracker.ts",
+      "codeLines": 96,
+      "occurrencesInBundle": 1,
+      "file": "bridge-activity-tracker.js",
+      "sha256": "d38d464a72be97028ea2031519d58f131a064fe4a0000fca28e61bcea2751072"
+    },
+    {
+      "module": "bridge-agent-instructions",
+      "originLabel": "src/bridge-agent-instructions.ts",
+      "codeLines": 8,
+      "occurrencesInBundle": 1,
+      "file": "bridge-agent-instructions.js",
+      "sha256": "2163e2941697e3225c38b1528e90a9e88de421951aa1b130ccacb219712ba36a"
+    },
+    {
+      "module": "bridge-coordination-validation",
+      "originLabel": "src/bridge-coordination-validation.ts",
+      "codeLines": 79,
+      "occurrencesInBundle": 1,
+      "file": "bridge-coordination-validation.js",
+      "sha256": "0e78ce8ea869906419d3a519cbd51423b9e6ab28e8971abf93a42444c7cd9271"
+    },
+    {
+      "module": "bridge-event-store",
+      "originLabel": "src/bridge-event-store.ts",
+      "codeLines": 37,
+      "occurrencesInBundle": 1,
+      "file": "bridge-event-store.js",
+      "sha256": "aad4a7d051afea59090ca38d092b75b136f1c077c011dd2d80cbd918318b32ac"
+    },
+    {
+      "module": "bridge-http-router",
+      "originLabel": "src/bridge-http-router.ts",
+      "codeLines": 119,
+      "occurrencesInBundle": 2,
+      "file": "bridge-http-router.js",
+      "sha256": "3cb0ce2d4852ce2819ba8647b158c2ff42df6c2a10793d31daeb0980bf2b6ab0"
+    },
+    {
+      "module": "bridge-ngrok-failure",
+      "originLabel": "src/bridge-ngrok-failure.ts",
+      "codeLines": 24,
+      "occurrencesInBundle": 1,
+      "file": "bridge-ngrok-failure.js",
+      "sha256": "70962a84ab17e17a25d4e3d4e9545d7c93e2d940dbaa4bf9a020caeb5e458796"
+    },
+    {
+      "module": "bridge-session-registry",
+      "originLabel": "src/bridge-session-registry.ts",
+      "codeLines": 68,
+      "occurrencesInBundle": 1,
+      "file": "bridge-session-registry.js",
+      "sha256": "cf3add0f433a4b2b91e0d153554f9b17bdce18990163e1c230da292e1a5581c4"
+    },
+    {
+      "module": "bridge-task-owner",
+      "originLabel": "src/bridge-task-owner.ts",
+      "codeLines": 9,
+      "occurrencesInBundle": 1,
+      "file": "bridge-task-owner.js",
+      "sha256": "447c411971d0260b73f7558027325f83e0edaf5e024ecd4c5a8d36334ccd34e5"
+    },
+    {
+      "module": "bridge-task-store",
+      "originLabel": "src/bridge-task-store.ts",
+      "codeLines": 252,
+      "occurrencesInBundle": 2,
+      "file": "bridge-task-store.js",
+      "sha256": "2778b2f2ca93c525f571f53a781bef57e8330167763609baa09a0e3ef4f4c661"
+    },
+    {
+      "module": "bridge-tool-name",
+      "originLabel": "src/bridge-tool-name.ts",
+      "codeLines": 17,
+      "occurrencesInBundle": 1,
+      "file": "bridge-tool-name.js",
+      "sha256": "7ef8b8d07d8c200497f2c3f1c77e39525db9099c8898e268b5fe6e8b27450e3b"
+    },
+    {
+      "module": "build-info",
+      "originLabel": "src/build-info.ts",
+      "codeLines": 16,
+      "occurrencesInBundle": 2,
+      "file": "build-info.js",
+      "sha256": "8066b2d93a4e07020ee4dffada4c5790d5d3b81f2d82ec4a077a1ab8fdf75abe"
+    },
+    {
+      "module": "canonical-diff",
+      "originLabel": "src/canonical-diff.ts",
+      "codeLines": 155,
+      "occurrencesInBundle": 1,
+      "file": "canonical-diff.js",
+      "sha256": "410559cbca2fa73c6e75e6a2a1b95338bd45723ac76142d8cf76da15133afa6f"
+    },
+    {
+      "module": "concurrency",
+      "originLabel": "src/concurrency.ts",
+      "codeLines": 95,
+      "occurrencesInBundle": 1,
+      "file": "concurrency.js",
+      "sha256": "ae9c58930a03fb2078d4b852b29d006ded6f96523d2d286f8b3d74892c7028b5"
+    },
+    {
+      "module": "configure-mcp",
+      "originLabel": "src/configure-mcp.ts",
+      "codeLines": 230,
+      "occurrencesInBundle": 2,
+      "file": "configure-mcp.js",
+      "sha256": "1e0e39db659dc9ec387ce0e0f5a31b420047285ba3b9a394af289869ee85bb5a"
+    },
+    {
+      "module": "custom-tool-admin",
+      "originLabel": "src/custom-tool-admin.ts",
+      "codeLines": 38,
+      "occurrencesInBundle": 1,
+      "file": "custom-tool-admin.js",
+      "sha256": "81d92f730ff9a7a441dcf0afdad9799b77b8f667a1ae5244609557261cf59673"
+    },
+    {
+      "module": "custom-tool-contract",
+      "originLabel": "src/custom-tool-contract.ts",
+      "codeLines": 24,
+      "occurrencesInBundle": 2,
+      "file": "custom-tool-contract.js",
+      "sha256": "0d1a8481650bc4fe61bdd5719e5075f38120d7deeaa24d12a8a9b5fdf2fbeb28"
+    },
+    {
+      "module": "custom-tool-manifest",
+      "originLabel": "src/custom-tool-manifest.ts",
+      "codeLines": 49,
+      "occurrencesInBundle": 1,
+      "file": "custom-tool-manifest.js",
+      "sha256": "c5a00a3690ea8d8a68dea75e9b2db3dd4792411342fd7c5fd5bfbc373bb2d2dc"
+    },
+    {
+      "module": "custom-tool-migration",
+      "originLabel": "src/custom-tool-migration.ts",
+      "codeLines": 37,
+      "occurrencesInBundle": 1,
+      "file": "custom-tool-migration.js",
+      "sha256": "fef29e85d0a9811d551dcd10583ca0321f6bb82ae7567ce84a461c42eb8e092c"
+    },
+    {
+      "module": "custom-tool-sandbox",
+      "originLabel": "src/custom-tool-sandbox.ts",
+      "codeLines": 74,
+      "occurrencesInBundle": 1,
+      "file": "custom-tool-sandbox.js",
+      "sha256": "b34d3edccfc345aa3d9c64f1f64c2fa61e9f2008ad56288ff2ff3d73feb9a646"
+    },
+    {
+      "module": "custom-tool-skill",
+      "originLabel": "src/custom-tool-skill.ts",
+      "codeLines": 313,
+      "occurrencesInBundle": 2,
+      "file": "custom-tool-skill.js",
+      "sha256": "9efbc590f773f6f84486e9bed0f39719700d59f3d23ae021864df3f866dd85a8"
+    },
+    {
+      "module": "custom-tool-skill-import",
+      "originLabel": "src/custom-tool-skill-import.ts",
+      "codeLines": 88,
+      "occurrencesInBundle": 1,
+      "file": "custom-tool-skill-import.js",
+      "sha256": "ce95f59210d61b2255ebf2f7fb7d50a1ced8817c315036aeab2192fa982c809f"
+    },
+    {
+      "module": "custom-tools",
+      "originLabel": "src/custom-tools.ts",
+      "codeLines": 45,
+      "occurrencesInBundle": 2,
+      "file": "custom-tools.js",
+      "sha256": "817a6eff18ef97fdaad1559b6bf67c815e9b6a23595c71e1ae25beec8467c4dc"
+    },
+    {
+      "module": "explicit-folder-target",
+      "originLabel": "src/explicit-folder-target.ts",
+      "codeLines": 75,
+      "occurrencesInBundle": 1,
+      "file": "explicit-folder-target.js",
+      "sha256": "c0e002181968ae9831340fc00010b30badf061258e3a3190cc9b68cd2793d376"
+    },
+    {
+      "module": "external-mcp-import",
+      "originLabel": "src/external-mcp-import.ts",
+      "codeLines": 226,
+      "occurrencesInBundle": 2,
+      "file": "external-mcp-import.js",
+      "sha256": "2a7d57f362fdc52725d863d7ffd5483a84ebaa445531b8832773042eb72c735f"
+    },
+    {
+      "module": "external-mcp-network-errors",
+      "originLabel": "src/external-mcp-network-errors.ts",
+      "codeLines": 81,
+      "occurrencesInBundle": 1,
+      "file": "external-mcp-network-errors.js",
+      "sha256": "f969695a36ceaadf2a0322173a857c22df5ac7996cef739acab743034bb1ceeb"
+    },
+    {
+      "module": "external-mcp-oauth-config",
+      "originLabel": "src/external-mcp-oauth-config.ts",
+      "codeLines": 26,
+      "occurrencesInBundle": 1,
+      "file": "external-mcp-oauth-config.js",
+      "sha256": "f17bdb02026fb6410b462a3427978f992a9a4cea6c274d6b95f1f84108c9c47a"
+    },
+    {
+      "module": "file-tool-input-compat",
+      "originLabel": "src/file-tool-input-compat.ts",
+      "codeLines": 140,
+      "occurrencesInBundle": 1,
+      "file": "file-tool-input-compat.js",
+      "sha256": "5205c51f5f334a9e34100ee1f64f1035126fd8d28a0d22a7d5491a53f2da6e53"
+    },
+    {
+      "module": "file-tool-registry",
+      "originLabel": "src/file-tool-registry.ts",
+      "codeLines": 720,
+      "occurrencesInBundle": 2,
+      "file": "file-tool-registry.js",
+      "sha256": "9ed446f8cd4ec29e67377afc9c09f1d59a2fdc656f3412d3639d51e0fc516515"
+    },
+    {
+      "module": "find-files",
+      "originLabel": "src/find-files.ts",
+      "codeLines": 466,
+      "occurrencesInBundle": 2,
+      "file": "find-files.js",
+      "sha256": "a894a9220302c81c500fd2f3f80b773f7d85923e9fa625dd1a60961ee27df640"
+    },
+    {
+      "module": "global-skill-catalog",
+      "originLabel": "src/global-skill-catalog.ts",
+      "codeLines": 30,
+      "occurrencesInBundle": 2,
+      "file": "global-skill-catalog.js",
+      "sha256": "4d91774c3b7faf34f06d385dd86ea2781c1e219e1b2842a5024f809031a17c91"
+    },
+    {
+      "module": "global-skill-import",
+      "originLabel": "src/global-skill-import.ts",
+      "codeLines": 79,
+      "occurrencesInBundle": 2,
+      "file": "global-skill-import.js",
+      "sha256": "1905d0bfc73c8dc78d9985a90342cde0e21c2a3272eded52ae284de61dd107f2"
+    },
+    {
+      "module": "global-skill-migration",
+      "originLabel": "src/global-skill-migration.ts",
+      "codeLines": 60,
+      "occurrencesInBundle": 1,
+      "file": "global-skill-migration.js",
+      "sha256": "6d9ddfd4658b98a473e15571bf9f12fd662eb97e91eb546b70f384502ae7589d"
+    },
+    {
+      "module": "global-skill-paths",
+      "originLabel": "src/global-skill-paths.ts",
+      "codeLines": 59,
+      "occurrencesInBundle": 1,
+      "file": "global-skill-paths.js",
+      "sha256": "cf620d40d433d1b7068e66f8ff1e3b0ea25110ec65b469401d00e06c31ef7231"
+    },
+    {
+      "module": "global-skill-settings",
+      "originLabel": "src/global-skill-settings.ts",
+      "codeLines": 28,
+      "occurrencesInBundle": 1,
+      "file": "global-skill-settings.js",
+      "sha256": "2ac59a6189c7139e0065b768d7e9facdaa74dd974a8d707f2ade23c99b316f43"
+    },
+    {
+      "module": "ide-tool-definitions",
+      "originLabel": "src/ide-tool-definitions.ts",
+      "codeLines": 261,
+      "occurrencesInBundle": 2,
+      "file": "ide-tool-definitions.js",
+      "sha256": "b45dfb0d7cb8762d9f39aec5871c01848ad684da7ea292821b0b8183951d4eca"
+    },
+    {
+      "module": "ide-tool-output",
+      "originLabel": "src/ide-tool-output.ts",
+      "codeLines": 51,
+      "occurrencesInBundle": 1,
+      "file": "ide-tool-output.js",
+      "sha256": "edc0a7f42b69ce363f62f1a63e0c85f66b1bdfbf5b0e651db42c20506b4e7854"
+    },
+    {
+      "module": "jsonrpc-request-id-registry",
+      "originLabel": "src/jsonrpc-request-id-registry.ts",
+      "codeLines": 34,
+      "occurrencesInBundle": 1,
+      "file": "jsonrpc-request-id-registry.js",
+      "sha256": "3d7aacf615d58e1001f3424fe1c2d738495062eef2a391e25fa15023750ab2be"
+    },
+    {
+      "module": "managed-command-cancellation",
+      "originLabel": "src/managed-command-cancellation.ts",
+      "codeLines": 205,
+      "occurrencesInBundle": 2,
+      "file": "managed-command-cancellation.js",
+      "sha256": "08677b3e149aecc14a5b43c3fdf8357a0133909093ad7e857c6d987b831a7e2f"
+    },
+    {
+      "module": "managed-command-id",
+      "originLabel": "src/managed-command-id.ts",
+      "codeLines": 19,
+      "occurrencesInBundle": 1,
+      "file": "managed-command-id.js",
+      "sha256": "8263047c244c34493a12cd74c298f12be0bc1440c2380d5a7dfa7e1c0ccbd5ba"
+    },
+    {
+      "module": "managed-command-retention",
+      "originLabel": "src/managed-command-retention.ts",
+      "codeLines": 21,
+      "occurrencesInBundle": 1,
+      "file": "managed-command-retention.js",
+      "sha256": "7018e74e57384f9405fd75b3f9cf4153f8a47f3ddb1501b0e21a1ece42a7c035"
+    },
+    {
+      "module": "managed-command-risk",
+      "originLabel": "src/managed-command-risk.ts",
+      "codeLines": 160,
+      "occurrencesInBundle": 1,
+      "file": "managed-command-risk.js",
+      "sha256": "51b29940e1902e9449d566e70a4c563b34fe87f5f0a0de37f883cdf4fd44f4c0"
+    },
+    {
+      "module": "managed-terminal-lifecycle",
+      "originLabel": "src/managed-terminal-lifecycle.ts",
+      "codeLines": 7,
+      "occurrencesInBundle": 1,
+      "file": "managed-terminal-lifecycle.js",
+      "sha256": "17bc6a733fa779400150a3347fd77fb5acf76f11bb1431e23717702fa08c909a"
+    },
+    {
+      "module": "mcp-protocol",
+      "originLabel": "src/mcp-protocol.ts",
+      "codeLines": 27,
+      "occurrencesInBundle": 1,
+      "file": "mcp-protocol.js",
+      "sha256": "e56349ea1145cd1d6e2f7de03c52144432233c3656b9d37a3856d3a651b7b168"
+    },
+    {
+      "module": "mcp-runtime-provision",
+      "originLabel": "src/mcp-runtime-provision.ts",
+      "codeLines": 41,
+      "occurrencesInBundle": 1,
+      "file": "mcp-runtime-provision.js",
+      "sha256": "cf9c09ee35e16d62905b0331051b5d7b51dd26ca94a383e99899fd7484dd95c9"
+    },
+    {
+      "module": "read-files",
+      "originLabel": "src/read-files.ts",
+      "codeLines": 379,
+      "occurrencesInBundle": 1,
+      "file": "read-files.js",
+      "sha256": "1307bd62cbb976f4478ee08b85b6d09a422f74822bd907d6bf5d8d17ae12672d"
+    },
+    {
+      "module": "read-image",
+      "originLabel": "src/read-image.ts",
+      "codeLines": 293,
+      "occurrencesInBundle": 1,
+      "file": "read-image.js",
+      "sha256": "e98f4ab576efae3c926df38897b6de38d74a142dbf49f28493bce597046e15d4"
+    },
+    {
+      "module": "ripgrep-diagnostics",
+      "originLabel": "src/ripgrep-diagnostics.ts",
+      "codeLines": 47,
+      "occurrencesInBundle": 1,
+      "file": "ripgrep-diagnostics.js",
+      "sha256": "70c2056bdec389f1688244c3621c8cdb60d054101a653ea30ad373c42a552d93"
+    },
+    {
+      "module": "search-files",
+      "originLabel": "src/search-files.ts",
+      "codeLines": 697,
+      "occurrencesInBundle": 1,
+      "file": "search-files.js",
+      "sha256": "a5ea06def62db2d86f24b185275a2e545be0bd1d35ac055c4e33e64da89cd698"
+    },
+    {
+      "module": "skill-archive",
+      "originLabel": "src/skill-archive.ts",
+      "codeLines": 119,
+      "occurrencesInBundle": 2,
+      "file": "skill-archive.js",
+      "sha256": "abe7b87feea40d8a84f89ef79054e6fc01701fb18d5a9771b6f086bc0190152d"
+    },
+    {
+      "module": "skill-archive-detect",
+      "originLabel": "src/skill-archive-detect.ts",
+      "codeLines": 16,
+      "occurrencesInBundle": 2,
+      "file": "skill-archive-detect.js",
+      "sha256": "85f742f3310cb166401076a96e6c4778fd6d2c651f240271044502c3c184dd73"
+    },
+    {
+      "module": "skill-archive-limits",
+      "originLabel": "src/skill-archive-limits.ts",
+      "codeLines": 22,
+      "occurrencesInBundle": 1,
+      "file": "skill-archive-limits.js",
+      "sha256": "cd5a7c98ab85d75cc1c6dba58b63ae274e71eed651b55066dedd90c31d11c79b"
+    },
+    {
+      "module": "skill-fs-retry",
+      "originLabel": "src/skill-fs-retry.ts",
+      "codeLines": 29,
+      "occurrencesInBundle": 1,
+      "file": "skill-fs-retry.js",
+      "sha256": "03cebc96ec8efd012fe2fee279dd666a88e24cfa51618c3c32b4c696ffdadb69"
+    },
+    {
+      "module": "skill-import-journal",
+      "originLabel": "src/skill-import-journal.ts",
+      "codeLines": 126,
+      "occurrencesInBundle": 1,
+      "file": "skill-import-journal.js",
+      "sha256": "649ebedfd4b1e8a1d8c4f7105bed5af5415d543ba44fb3ba88ddee248d54289d"
+    },
+    {
+      "module": "skill-import-recovery",
+      "originLabel": "src/skill-import-recovery.ts",
+      "codeLines": 50,
+      "occurrencesInBundle": 1,
+      "file": "skill-import-recovery.js",
+      "sha256": "6ca58400e01cc06c7d67c0efb9e9bc787aae133832db63acaa02038d5b2d0955"
+    },
+    {
+      "module": "tool-input-validation",
+      "originLabel": "src/tool-input-validation.ts",
+      "codeLines": 100,
+      "occurrencesInBundle": 1,
+      "file": "tool-input-validation.js",
+      "sha256": "c3b339e8a9d8c568bb9bc78333422c0dde51ca97ee07ceacfc44169a28070ad2"
+    },
+    {
+      "module": "version",
+      "originLabel": "src/version.ts",
+      "codeLines": 1,
+      "occurrencesInBundle": 1,
+      "file": "version.js",
+      "sha256": "2cd9359d76f6eeb6c4d098384c6ecd3250d2627fff78094e5dca97d27ec60d47"
+    },
+    {
+      "module": "workspace-paths",
+      "originLabel": "src/workspace-paths.ts",
+      "codeLines": 30,
+      "occurrencesInBundle": 1,
+      "file": "workspace-paths.js",
+      "sha256": "af7424857fbb76924b00b3ab1861a1926a87c3662f23559e1f4c4968afbd4bc9"
+    }
+  ],
+  "missing": [],
+  "extractedCount": 60,
+  "totalCodeLines": 7539,
+  "emptyAfterCompile": [
+    "version"
+  ]
+}

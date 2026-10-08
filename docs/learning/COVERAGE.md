@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/200 个纳入范围的文件完整逐行解释；363/37171 行已解释。
+当前：6/202 个纳入范围的文件完整逐行解释；363/37472 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -161,6 +161,7 @@
 | [tests/test_cmd_environment.py](../../tests/test_cmd_environment.py) | 125 | 0 | 待逐行讲解 |
 | [tests/test_custom_recovery.py](../../tests/test_custom_recovery.py) | 56 | 0 | 待逐行讲解 |
 | [tests/test_docs_audit.py](../../tests/test_docs_audit.py) | 60 | 0 | 待逐行讲解 |
+| [tests/test_extract_carrier_modules.py](../../tests/test_extract_carrier_modules.py) | 134 | 0 | 待逐行讲解 |
 | [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 166 | 0 | 待逐行讲解 |
 | [tests/test_recover.py](../../tests/test_recover.py) | 47 | 0 | 待逐行讲解 |
 | [tests/test_skeleton_layout.py](../../tests/test_skeleton_layout.py) | 227 | 0 | 待逐行讲解 |
@@ -190,6 +191,7 @@
 | [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 98 | 0 | 待逐行讲解 |
 | [tools/diagnose_skeleton.mjs](../../tools/diagnose_skeleton.mjs) | 169 | 0 | 待逐行讲解 |
 | [tools/download_server.mjs](../../tools/download_server.mjs) | 169 | 0 | 待逐行讲解 |
+| [tools/extract_carrier_modules.py](../../tools/extract_carrier_modules.py) | 167 | 0 | 待逐行讲解 |
 | [tools/harvest_btype_evidence.py](../../tools/harvest_btype_evidence.py) | 173 | 0 | 待逐行讲解 |
 | [tools/http_maintenance_inputs.mjs](../../tools/http_maintenance_inputs.mjs) | 20 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |

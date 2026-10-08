@@ -792,6 +792,27 @@
       "docs/evidence/clipboard-adaptation-0-8-1.json"
     ],
     "doc": "docs/handoff/0.8.1-新版有什么变化.md",
-    "notDone": "0.8.1 的载体 src/ 下 40 个模块仍未随包发布源码；未产出新安装器；未真机启动"
+    "notDone": "0.8.1 的载体 src/ 下 40 个模块仍未随包发布源码；未产出新安装器；未真机启动",
+    "carrierModuleExtraction": {
+      "question": "Is the carrier-side logic that never shipped as source lost for good?",
+      "answer": "No. The shipped bundle is unminified esbuild output with '// src/<name>.ts' markers before each module.",
+      "tool": "tools/extract_carrier_modules.py",
+      "output": "reconstructed/carrier-0.8.1/src",
+      "report": "docs/evidence/carrier-modules-0-8-1.json",
+      "extracted": {
+        "wanted": 60,
+        "extracted": 60,
+        "missing": 0,
+        "codeLines": 7539
+      },
+      "validatedAgainst074": "Same tool on the 0.7.4 bundle yields 38 modules; all 38 appear among the 41 reconstructed earlier. The 3 extras are snapshot-* build constants, not author source files, so real coverage is 38/38.",
+      "whatIsPermanentlyLost": [
+        "TypeScript annotations and interfaces (erased by the compiler; hand-rewritten for 0.7.4 as 37 .d.ts under reconstructed/bridge-core/types)",
+        "Most comments (156 code comments survive in the whole bundle)",
+        "Declaration order and formatting",
+        "Type-only files such as version.ts compile to nothing"
+      ],
+      "limitation": "Not dependency-closed and not runnable: esbuild hoists helpers, so imports need rewiring as reconstruct_bridge_core.mjs did for 0.7.4. These files are for reading and rebuilding from."
+    }
   }
 }
