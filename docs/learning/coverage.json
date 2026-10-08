@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 203,
-    "lines": 37667,
+    "lines": 37668,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1347,8 +1347,8 @@
     },
     {
       "source": "tools/prepare_downloads.py",
-      "sha256": "6ab2119548878de68975e6e9309f16bbc1810c9cac6301b99b14fd8c7b564e0f",
-      "lines": 93,
+      "sha256": "d259ff709c834d24aaa0675e3084e97adf312aab1c004644a4dec7e09bdc997e",
+      "lines": 94,
       "explainedLines": 0,
       "status": "pending"
     },

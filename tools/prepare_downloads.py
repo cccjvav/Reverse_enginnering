@@ -27,6 +27,7 @@ DOCS = [
     "PAYMENT_ARCHITECTURE_PROMPT.md", "CHAT_FIELDS_IMPACT.md",
     "ANSWERS_FOR_AUTHOR.md", "WHAT_THE_AUTHOR_MUST_SUPPLY.md",
     "WEB_AGENT_MCP_SKILLS_PLAN.md", "web_agent-对照-0.8.1.md",
+    "0.8.1-全部新增功能清单.md",
     "0.8.1-新版有什么变化.md",
 ]
 
