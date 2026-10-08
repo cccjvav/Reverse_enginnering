@@ -111,7 +111,37 @@ jobs:
             --tree .work/extracted-0-8-1 \
             --output docs/evidence/clipboard-adaptation-0-8-1.json
 
-      - name: Save bounded evidence and the recovered 0.8.1 sources
+      # Split into one step per operation on purpose. Actions log bodies are
+      # not reachable from the analysis sandbox, but per-step conclusions are
+      # available over the API, so narrow steps are the diagnosis channel.
+      - name: Report what the extraction produced
+        if: always()
+        run: |
+          echo "--- evidence files ---"
+          ls -l docs/evidence/*0-8-1* 2>/dev/null || echo "none"
+          echo "--- recovered tree ---"
+          if test -d recovered/shuncode-0.8.1; then
+            find recovered/shuncode-0.8.1 -type f | wc -l
+            du -sh recovered/shuncode-0.8.1
+          else
+            echo "absent"
+          fi
+
+      - name: Check every evidence file stays within the size bound
+        if: always()
+        run: |
+          for f in docs/evidence/installer-0-8-1.json \
+                   docs/evidence/custom-extension-0-8-1.json \
+                   docs/evidence/version-diff-0-8-1.json \
+                   docs/evidence/clipboard-adaptation-0-8-1.json; do
+            if test -f "$f"; then
+              size=$(stat -c%s "$f")
+              echo "$size $f"
+              test "$size" -lt 4000000
+            fi
+          done
+
+      - name: Stage the evidence and the recovered 0.8.1 sources
         if: always()
         run: |
           git config user.name "github-actions[bot]"
@@ -120,23 +150,59 @@ jobs:
                    docs/evidence/custom-extension-0-8-1.json \
                    docs/evidence/version-diff-0-8-1.json \
                    docs/evidence/clipboard-adaptation-0-8-1.json; do
-            if test -f "$f"; then
-              test $(stat -c%s "$f") -lt 4000000
-              git add -- "$f"
-            fi
+            test -f "$f" && git add -- "$f"
           done
-          if test -d recovered/shuncode-0.8.1; then
-            git add -- recovered/shuncode-0.8.1
+          test -d recovered/shuncode-0.8.1 && git add -- recovered/shuncode-0.8.1
+          git status --porcelain | head -40
+          echo "staged files: $(git diff --cached --name-only | wc -l)"
+
+      - name: Refuse to touch the 0.7.4 baseline
+        if: always()
+        run: |
+          # The whole comparison is meaningless if this run rewrote the
+          # hash-verified originals it compares against.
+          if git diff --cached --name-only | grep -q '^recovered/shuncode-extension/'; then
+            echo "this run modified the protected 0.7.4 tree"
+            git diff --cached --name-only | grep '^recovered/shuncode-extension/'
+            exit 1
           fi
-          git diff --cached --quiet && exit 0
+          echo "0.7.4 baseline untouched"
+
+      - name: Commit the result
+        id: commit
+        if: always()
+        run: |
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           git commit -m "Record ShunCode 0.8.1 extraction and diff against 0.7.4"
-          # This job takes many minutes; the branch usually moves meanwhile.
-          # Rebase and retry rather than discarding a result that costs a full
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Push, rebasing onto whatever landed meanwhile
+        if: always() && steps.commit.outputs.committed == 'true'
+        run: |
+          # Sibling workflows commit evidence to this same branch, so a race is
+          # normal rather than exceptional; a lost result costs a full
           # extraction to reproduce.
-          for i in 1 2 3 4 5; do
-            git fetch origin "${GITHUB_REF}" && git rebase FETCH_HEAD || exit 1
-            git push origin "HEAD:${GITHUB_REF}" && exit 0
-            echo "push rejected, retrying after remote update"
+          for attempt in 1 2 3 4 5; do
+            if ! git fetch origin "${GITHUB_REF}"; then
+              echo "fetch failed on attempt $attempt"
+              sleep 5
+              continue
+            fi
+            if ! git rebase FETCH_HEAD; then
+              echo "rebase failed on attempt $attempt"
+              git rebase --abort || true
+              sleep 5
+              continue
+            fi
+            if git push origin "HEAD:${GITHUB_REF}"; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push rejected on attempt $attempt"
             sleep 5
           done
           echo "could not push after 5 attempts"
