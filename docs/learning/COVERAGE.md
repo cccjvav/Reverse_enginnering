@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/198 个纳入范围的文件完整逐行解释；363/36541 行已解释。
+当前：6/200 个纳入范围的文件完整逐行解释；363/36913 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -18,6 +18,7 @@
 | [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 116 | 0 | 待逐行讲解 |
 | [.github/workflows/carrier-build-probe.yml](../../.github/workflows/carrier-build-probe.yml) | 134 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 121 | 0 | 待逐行讲解 |
+| [.github/workflows/version-diff-0-8-1.yml](../../.github/workflows/version-diff-0-8-1.yml) | 140 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 49 | 0 | 待逐行讲解 |
 | [community/bridge-core/authorized-file-tools.mjs](../../community/bridge-core/authorized-file-tools.mjs) | 173 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
@@ -166,7 +167,7 @@
 | [tests/test_windows_inspect.py](../../tests/test_windows_inspect.py) | 71 | 0 | 待逐行讲解 |
 | [tools/apply-community.cmd](../../tools/apply-community.cmd) | 31 | 0 | 待逐行讲解 |
 | [tools/apply_community.py](../../tools/apply_community.py) | 196 | 0 | 待逐行讲解 |
-| [tools/assemble_skeleton.py](../../tools/assemble_skeleton.py) | 248 | 0 | 待逐行讲解 |
+| [tools/assemble_skeleton.py](../../tools/assemble_skeleton.py) | 252 | 0 | 待逐行讲解 |
 | [tools/audit_authorization_wiring.mjs](../../tools/audit_authorization_wiring.mjs) | 50 | 0 | 待逐行讲解 |
 | [tools/audit_custom_boundary.mjs](../../tools/audit_custom_boundary.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/audit_docs.py](../../tools/audit_docs.py) | 213 | 0 | 待逐行讲解 |
@@ -183,6 +184,7 @@
 | [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
 | [tools/check_release_readiness.mjs](../../tools/check_release_readiness.mjs) | 54 | 0 | 待逐行讲解 |
 | [tools/ci_windows_probe.py](../../tools/ci_windows_probe.py) | 82 | 0 | 待逐行讲解 |
+| [tools/compare_versions.py](../../tools/compare_versions.py) | 190 | 0 | 待逐行讲解 |
 | [tools/diagnose_btype_linkage.mjs](../../tools/diagnose_btype_linkage.mjs) | 154 | 0 | 待逐行讲解 |
 | [tools/diagnose_btypes.py](../../tools/diagnose_btypes.py) | 175 | 0 | 待逐行讲解 |
 | [tools/diagnose_linked_types.mjs](../../tools/diagnose_linked_types.mjs) | 98 | 0 | 待逐行讲解 |
@@ -206,7 +208,7 @@
 | [tools/probe_host_chat_surface.py](../../tools/probe_host_chat_surface.py) | 214 | 0 | 待逐行讲解 |
 | [tools/reconstruct_bridge_core.mjs](../../tools/reconstruct_bridge_core.mjs) | 210 | 0 | 待逐行讲解 |
 | [tools/recover.py](../../tools/recover.py) | 135 | 0 | 待逐行讲解 |
-| [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 175 | 0 | 待逐行讲解 |
+| [tools/recover_custom_extension.py](../../tools/recover_custom_extension.py) | 213 | 0 | 待逐行讲解 |
 | [tools/register_btype_contracts.py](../../tools/register_btype_contracts.py) | 103 | 0 | 待逐行讲解 |
 | [tools/run-learning.cmd](../../tools/run-learning.cmd) | 27 | 0 | 待逐行讲解 |
 | [tools/validate_community.py](../../tools/validate_community.py) | 40 | 0 | 待逐行讲解 |

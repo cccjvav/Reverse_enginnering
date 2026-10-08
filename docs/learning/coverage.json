@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 198,
-    "lines": 36541,
+    "files": 200,
+    "lines": 36913,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -40,6 +40,13 @@
       "source": ".github/workflows/installer-forensics.yml",
       "sha256": "e32872a802c90d234ed2fb55b2372a69560216ae3c2164c1e24d8c7b53adb929",
       "lines": 121,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": ".github/workflows/version-diff-0-8-1.yml",
+      "sha256": "2067d18c77cfd4b79c0764b0f0f72f6b8529b5001ae6ee728e0995e183c046da",
+      "lines": 140,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1081,8 +1088,8 @@
     },
     {
       "source": "tools/assemble_skeleton.py",
-      "sha256": "8d5dbdfbd35c2979f7cc3756f55cfeeb88b697ef859c62fea89212020cfbc95d",
-      "lines": 248,
+      "sha256": "c673183756c5cda3371398a662760f8d2207ae9b42e629521a5cfd8469e27eb1",
+      "lines": 252,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1195,6 +1202,13 @@
       "source": "tools/ci_windows_probe.py",
       "sha256": "bba1a91ca71a1a5e437a249532b6df950484164276f7824228585e08e74c993c",
       "lines": 82,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
+      "source": "tools/compare_versions.py",
+      "sha256": "272e4c9b3961bfa416a9d28ae013db714ddf42b0960b431f25fed0cef894b834",
+      "lines": 190,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1361,8 +1375,8 @@
     },
     {
       "source": "tools/recover_custom_extension.py",
-      "sha256": "0835de8660408cb87ff9f32c886ed8ae50bc4e793769ddf7dd15d678fd161013",
-      "lines": 175,
+      "sha256": "d0d100db67c83e0886531bf90669f9a375140853766ca61d731b8a385fc9f18e",
+      "lines": 213,
       "explainedLines": 0,
       "status": "pending"
     },

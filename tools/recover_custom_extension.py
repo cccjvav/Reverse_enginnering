@@ -59,13 +59,51 @@ def asar_index(path):
     return {**report, **counts, 'map_paths': maps}
 
 
-def recover(tree, output):
+def discover_custom_extension(tree):
+    """Locate the author's own extension inside an extracted install tree.
+
+    The 0.7.4 layout puts it at extensions/shuncode, and that exact lookup is
+    kept first so the hash-verified baseline stays byte-for-byte reproducible.
+    A later release may rename the folder, which previously surfaced as
+    'found 0' only after a full extraction had already run, so fall back to
+    identifying it by publisher instead of by folder name.
+    """
     candidates = [p for p in tree.rglob('extensions/shuncode/package.json') if not p.is_symlink()]
-    if len(candidates) != 1:
+    if len(candidates) == 1:
+        return candidates[0].parent, 'exact-path'
+    if len(candidates) > 1:
         raise ValueError(f'Expected one custom extension; found {len(candidates)}')
-    extension = candidates[0].parent
+
+    # Nothing at the known path: identify by manifest rather than guess. The
+    # built-in extensions Microsoft ships are all publisher "vscode", so the
+    # author's own extension is whatever is not that.
+    found = []
+    for manifest in sorted(tree.rglob('extensions/*/package.json')):
+        if manifest.is_symlink():
+            continue
+        try:
+            data = json.loads(manifest.read_text(encoding='utf8'))
+        except (OSError, ValueError):
+            continue
+        publisher = str(data.get('publisher', '')).lower()
+        name = str(data.get('name', '')).lower()
+        if publisher in {'vscode', 'ms-vscode'}:
+            continue
+        if 'shuncode' in publisher or 'shuncode' in name or 'shuncode' in manifest.parent.name.lower():
+            found.append(manifest.parent)
+    if len(found) != 1:
+        raise ValueError(
+            f'Expected one custom extension; exact path found 0 and '
+            f'publisher-based discovery found {len(found)}: '
+            f'{[p.name for p in found]}')
+    return found[0], 'publisher-discovery'
+
+
+def recover(tree, output):
+    extension, discovery_method = discover_custom_extension(tree)
     app = extension.parent.parent
-    report = {'origin': extension.relative_to(tree).as_posix(), 'copied': [], 'skipped': [],
+    report = {'origin': extension.relative_to(tree).as_posix(),
+              'discovery_method': discovery_method, 'copied': [], 'skipped': [],
               'scope': 'Exact shipped text files, not original source reconstruction. Do not execute before review.',
               'secret_scan': 'Heuristic gate for common private keys/tokens only; NOT a security audit.',
               'core_code_index': [], 'asar_indexes': [], 'excluded_trees': {},

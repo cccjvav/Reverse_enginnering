@@ -234,7 +234,11 @@ def main():
                          "runs npm install or tsc; see diagnose_skeleton for that."),
     })
 
-    Path(REPO / args.report).write_text(
+    # Reports usually land in .work/, which is scratch and routinely absent on
+    # a fresh checkout; create the parent rather than failing after the work.
+    report_path = Path(REPO / args.report)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf8")
     print(f"core={len(core_modules)}(+{len(core_types)} d.ts) "
           f"extension={len(ext_sources)} host={len(host_files)} "

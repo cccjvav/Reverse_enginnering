@@ -1,0 +1,140 @@
+name: ShunCode 0.8.1 forensics and version diff
+
+# The author shipped 0.8.1 and asked what changed. The sandbox cannot resolve
+# Git LFS, so the installer can only be opened here, the same way 0.7.4 was.
+#
+# Deliberately a SEPARATE workflow rather than an edit to installer-forensics:
+# that one produces the hash-verified 0.7.4 baseline the whole project rests
+# on, and the comparison is only meaningful while that baseline stays
+# untouched. Nothing here writes into recovered/shuncode-extension.
+
+on:
+  push:
+    branches: ['arena/**']
+    paths:
+      - .github/workflows/version-diff-0-8-1.yml
+      - tools/compare_versions.py
+      - ShunCode-0.8.1-Windows-x64.exe
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shuncode-version-diff-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  diff:
+    if: startsWith(github.ref, 'refs/heads/arena/')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout this branch with the LFS installers
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.ref }}
+          lfs: true
+
+      - name: Confirm the new installer is a real file, not an LFS pointer
+        run: |
+          size=$(stat -c%s ShunCode-0.8.1-Windows-x64.exe)
+          echo "installer bytes: $size"
+          # A pointer is ~134 bytes; refuse to continue on one, because every
+          # later step would silently describe nothing.
+          test "$size" -gt 1000000
+
+      - name: Install static archive readers (not the application)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends p7zip-full cmake g++ make \
+            libboost-date-time-dev zlib1g-dev libbz2-dev libboost-filesystem-dev \
+            libboost-iostreams-dev libboost-system-dev libboost-program-options-dev liblzma-dev
+
+      - name: Read pinned upstream extractor source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: dscharrer/innoextract
+          ref: 6e9e34ed0876014fdb46e684103ef8c3605e382e
+          path: .work/innoextract-source
+          persist-credentials: false
+
+      - name: Build the static extractor, not the application
+        id: build
+        continue-on-error: true
+        run: |
+          python3 tools/build_extractor.py
+          echo "$GITHUB_WORKSPACE/.work/innoextract-build" >> "$GITHUB_PATH"
+
+      - name: Identify and statically extract 0.8.1
+        id: extract
+        if: steps.build.outcome == 'success'
+        run: |
+          python3 tools/installer_forensics.py \
+            --package ShunCode-0.8.1-Windows-x64.exe \
+            --extract-dir .work/extracted-0-8-1 \
+            --output docs/evidence/installer-0-8-1.json
+
+      - name: Recover the 0.8.1 extension into its own tree
+        id: recover
+        if: steps.extract.outcome == 'success'
+        run: |
+          # Separate output directory: the 0.7.4 originals are protected and
+          # their hashes are cited throughout the project.
+          python3 tools/recover_custom_extension.py \
+            --tree .work/extracted-0-8-1 \
+            --output recovered/shuncode-0.8.1 \
+            --report docs/evidence/custom-extension-0-8-1.json
+
+      # compare_versions.py prints the headline numbers itself, so there is no
+      # second step reformatting them - one source of truth for the summary.
+      - name: Compare 0.8.1 against the recovered 0.7.4 baseline
+        if: steps.recover.outcome == 'success'
+        run: |
+          python3 tools/compare_versions.py \
+            --new-tree recovered/shuncode-0.8.1 \
+            --baseline recovered/shuncode-extension \
+            --output docs/evidence/version-diff-0-8-1.json
+
+      - name: Recover how 0.8.1 adapts the clipboard, in case it moved again
+        if: steps.extract.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python3 tools/probe_clipboard_adaptation.py \
+            --tree .work/extracted-0-8-1 \
+            --output docs/evidence/clipboard-adaptation-0-8-1.json
+
+      - name: Save bounded evidence and the recovered 0.8.1 sources
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in docs/evidence/installer-0-8-1.json \
+                   docs/evidence/custom-extension-0-8-1.json \
+                   docs/evidence/version-diff-0-8-1.json \
+                   docs/evidence/clipboard-adaptation-0-8-1.json; do
+            if test -f "$f"; then
+              test $(stat -c%s "$f") -lt 4000000
+              git add -- "$f"
+            fi
+          done
+          if test -d recovered/shuncode-0.8.1; then
+            git add -- recovered/shuncode-0.8.1
+          fi
+          git diff --cached --quiet && exit 0
+          git commit -m "Record ShunCode 0.8.1 extraction and diff against 0.7.4"
+          # This job takes many minutes; the branch usually moves meanwhile.
+          # Rebase and retry rather than discarding a result that costs a full
+          # extraction to reproduce.
+          for i in 1 2 3 4 5; do
+            git fetch origin "${GITHUB_REF}" && git rebase FETCH_HEAD || exit 1
+            git push origin "HEAD:${GITHUB_REF}" && exit 0
+            echo "push rejected, retrying after remote update"
+            sleep 5
+          done
+          echo "could not push after 5 attempts"
+          exit 1
+
+      - name: Propagate extractor failure after saving diagnostics
+        if: steps.build.outcome != 'success' || steps.extract.outcome != 'success'
+        run: exit 1
