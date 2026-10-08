@@ -1,6 +1,22 @@
 # ShunCode恢复项目交接入口
 
-**更新：2026-09-19。发布结论仍为 NOT_READY（7 项门槛 BLOCKED，`check:release` 退出 2）。当前会话分支：`arena/01a0afd4-reverse-enginnering-of-shun`。** 这是给下一位助手/开发者的操作交接，不需要先读完整聊天。
+**更新：2026-10-08。发布结论仍为 NOT_READY（7 项门槛 BLOCKED，`check:release` 退出 2）。当前会话分支：`arena/01a0afd4-reverse-enginnering-of-shun`。** 这是给下一位助手/开发者的操作交接，不需要先读完整聊天。
+
+> ## 2026-10-08：新增 0.8.1 版本
+>
+> 作者提供了 `ShunCode-0.8.1-Windows-x64.exe`。源码已同样恢复，与 0.7.4 的
+> 逐文件对比也已完成：
+>
+> | 内容 | 位置 |
+> | --- | --- |
+> | **新版改了什么（先读这份）** | [0.8.1-新版有什么变化.md](0.8.1-新版有什么变化.md) |
+> | 恢复出的 0.8.1 源码（91 文件 / 68 个 `.ts`） | `recovered/shuncode-0.8.1/` |
+> | 逐文件哈希对比 | `docs/evidence/version-diff-0-8-1.json` |
+> | 0.8.1 取包证据 | `docs/evidence/installer-0-8-1.json`、`custom-extension-0-8-1.json` |
+>
+> 要点：源码 +40%（15076 → 21077 行），新增 39 文件、改动 23、**删除 0**。
+> 三大新功能是外部 MCP 接入、技能系统、网络/代理韧性。
+> **`recovered/shuncode-extension/`（0.7.4 原件）逐字节未动**，对比基准完好。
 
 > ## 先读这一段：2026-09-19 的状态变化
 >

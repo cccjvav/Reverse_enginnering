@@ -737,5 +737,61 @@
     "why": ".work/ is gitignored and has been wiped by sandbox resets twice, losing the hand-assembled download directory and one of the extracted prompts.",
     "what": "Copies the handoff documents, extracts the paste-ready prompts from between their scissor markers, and rebuilds the Bridge package.",
     "failsLoudly": "Raises if a source document is missing or its scissor markers are absent, rather than silently producing an empty prompt."
+  },
+  "version_0_8_1": {
+    "date": "2026-10-08",
+    "sample": "ShunCode-0.8.1-Windows-x64.exe",
+    "sampleSha256": "c1b5a8bbaa9c8b49a2116e1235f0fe13393d877321031e4812bd81a04e48ea6f",
+    "sampleBytes": 233014452,
+    "installerFormat": "Inno Setup (unchanged from 0.7.4; only the filename changed)",
+    "extractionMethod": "innoextract",
+    "installerFileCount": 10472,
+    "recoveredTo": "recovered/shuncode-0.8.1",
+    "recoveredFiles": 91,
+    "sourceFiles": {
+      "before": 34,
+      "after": 68
+    },
+    "sourceLines": {
+      "before": 15076,
+      "after": 21077
+    },
+    "fileDiff": {
+      "added": 39,
+      "changed": 23,
+      "removed": 0,
+      "unchanged": 29
+    },
+    "newFeatureClusters": [
+      "External MCP: 17 new files, OAuth + secret management + diagnostics",
+      "Skills: skill-center.ts, skill-list-tool.ts, dist/skill-archive-worker.js",
+      "Network resilience: extension-host-proxy.mts 11KB->47KB, proxy-bypass, Cloudflare edge relay, durable route tokens"
+    ],
+    "licensing": {
+      "endpointRemoved": "/v1/usage/report",
+      "moduleNoLongerReferenced": "bridge-usage-counter",
+      "newErrorTypes": [
+        "BridgeReauthenticationRequiredError",
+        "LicenseHttpError",
+        "TransientBridgeLicenseError"
+      ]
+    },
+    "carrierModulesReferenced": {
+      "before": 24,
+      "after": 40,
+      "added": 17,
+      "removed": [
+        "bridge-usage-counter"
+      ]
+    },
+    "baselineIntact": "recovered/shuncode-extension byte-identical; a workflow step fails the run if it is ever staged",
+    "evidence": [
+      "docs/evidence/version-diff-0-8-1.json",
+      "docs/evidence/installer-0-8-1.json",
+      "docs/evidence/custom-extension-0-8-1.json",
+      "docs/evidence/clipboard-adaptation-0-8-1.json"
+    ],
+    "doc": "docs/handoff/0.8.1-新版有什么变化.md",
+    "notDone": "0.8.1 的载体 src/ 下 40 个模块仍未随包发布源码；未产出新安装器；未真机启动"
   }
 }

@@ -108,6 +108,11 @@ class SevenZipFallbackTests(unittest.TestCase):
         def fake_command_report(argv, cwd=None, timeout=300):
             if argv[1] == 'x':
                 target = next(a[2:] for a in argv if a.startswith('-o'))
+                # An earlier version of this fake read the wrong argv slot,
+                # got an empty string, and wrote its fixtures into the repo
+                # root. Fail loudly instead of littering the working tree.
+                assert target and Path(target).is_absolute(), \
+                    f'refusing to extract to {target!r}'
                 return seven_zip_behaviour(Path(target))
             return {'exit_code': 0, 'log_head': ''}
 

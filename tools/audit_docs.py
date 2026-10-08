@@ -203,7 +203,11 @@ def main():
     }
     (REPO / args.output).write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf8")
-    print(f"reviewed {reviewed} markdown files; {len(findings)} finding(s)")
+    # Report both counts. Saying only "markdown" understated the scope, and
+    # mismatched coverage claims are exactly what this tool exists to catch.
+    print(f"reviewed {report['filesReviewed']} files "
+          f"({reviewed} markdown + {report['nonMarkdownReviewed']} non-markdown); "
+          f"{len(findings)} finding(s)")
     for finding in findings:
         print(f"  {finding['kind']}: {finding['file']} - {finding['detail']}")
     return 1 if findings else 0

@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 200,
-    "lines": 37095,
+    "lines": 37171,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -45,8 +45,8 @@
     },
     {
       "source": ".github/workflows/version-diff-0-8-1.yml",
-      "sha256": "24646d46419576f6d38be5d2a230156cc6232a1f2125a5128dc24556074900c5",
-      "lines": 151,
+      "sha256": "e035ebcf41ec06572053c7a1f9b0c6f9da81d4108a2f3d30295508fbadb36a03",
+      "lines": 218,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1046,8 +1046,8 @@
     },
     {
       "source": "tests/test_installer_forensics.py",
-      "sha256": "d6fbbb3fc6d74f7f1dfdbb744ebe0e73706e3320c9a999ad43cad1e7f044e2c2",
-      "lines": 161,
+      "sha256": "7b205ea04a653c3f61dac537f0fb0802391b4afb4cc1d11075df286756408958",
+      "lines": 166,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1109,8 +1109,8 @@
     },
     {
       "source": "tools/audit_docs.py",
-      "sha256": "0f8e8a013344b186dd0ae89803888b4c7cfbd2adcb4ba27816d40bc897371f9e",
-      "lines": 213,
+      "sha256": "406d5da27a9d08e1f31f86003bb1f5b28585cda1aacf8f4d6059dafbd2e8458c",
+      "lines": 217,
       "explainedLines": 0,
       "status": "pending"
     },
