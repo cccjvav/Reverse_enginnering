@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/200 个纳入范围的文件完整逐行解释；363/36913 行已解释。
+当前：6/200 个纳入范围的文件完整逐行解释；363/37095 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -18,7 +18,7 @@
 | [.github/workflows/bridge-core-tests.yml](../../.github/workflows/bridge-core-tests.yml) | 116 | 0 | 待逐行讲解 |
 | [.github/workflows/carrier-build-probe.yml](../../.github/workflows/carrier-build-probe.yml) | 134 | 0 | 待逐行讲解 |
 | [.github/workflows/installer-forensics.yml](../../.github/workflows/installer-forensics.yml) | 121 | 0 | 待逐行讲解 |
-| [.github/workflows/version-diff-0-8-1.yml](../../.github/workflows/version-diff-0-8-1.yml) | 140 | 0 | 待逐行讲解 |
+| [.github/workflows/version-diff-0-8-1.yml](../../.github/workflows/version-diff-0-8-1.yml) | 151 | 0 | 待逐行讲解 |
 | [.github/workflows/windows-static-probe.yml](../../.github/workflows/windows-static-probe.yml) | 49 | 0 | 待逐行讲解 |
 | [community/bridge-core/authorized-file-tools.mjs](../../community/bridge-core/authorized-file-tools.mjs) | 173 | 0 | 待逐行讲解 |
 | [community/bridge-core/concurrency.mjs](../../community/bridge-core/concurrency.mjs) | 101 | 0 | 待逐行讲解 |
@@ -161,7 +161,7 @@
 | [tests/test_cmd_environment.py](../../tests/test_cmd_environment.py) | 125 | 0 | 待逐行讲解 |
 | [tests/test_custom_recovery.py](../../tests/test_custom_recovery.py) | 56 | 0 | 待逐行讲解 |
 | [tests/test_docs_audit.py](../../tests/test_docs_audit.py) | 60 | 0 | 待逐行讲解 |
-| [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 53 | 0 | 待逐行讲解 |
+| [tests/test_installer_forensics.py](../../tests/test_installer_forensics.py) | 161 | 0 | 待逐行讲解 |
 | [tests/test_recover.py](../../tests/test_recover.py) | 47 | 0 | 待逐行讲解 |
 | [tests/test_skeleton_layout.py](../../tests/test_skeleton_layout.py) | 227 | 0 | 待逐行讲解 |
 | [tests/test_windows_inspect.py](../../tests/test_windows_inspect.py) | 71 | 0 | 待逐行讲解 |
@@ -193,7 +193,7 @@
 | [tools/harvest_btype_evidence.py](../../tools/harvest_btype_evidence.py) | 173 | 0 | 待逐行讲解 |
 | [tools/http_maintenance_inputs.mjs](../../tools/http_maintenance_inputs.mjs) | 20 | 0 | 待逐行讲解 |
 | [tools/inspect-windows.cmd](../../tools/inspect-windows.cmd) | 18 | 0 | 待逐行讲解 |
-| [tools/installer_forensics.py](../../tools/installer_forensics.py) | 172 | 0 | 待逐行讲解 |
+| [tools/installer_forensics.py](../../tools/installer_forensics.py) | 235 | 0 | 待逐行讲解 |
 | [tools/learning_lab.mjs](../../tools/learning_lab.mjs) | 40 | 0 | 待逐行讲解 |
 | [tools/learning_ui_lab.mjs](../../tools/learning_ui_lab.mjs) | 23 | 0 | 待逐行讲解 |
 | [tools/package_community.py](../../tools/package_community.py) | 53 | 0 | 待逐行讲解 |

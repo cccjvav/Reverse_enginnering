@@ -66,18 +66,25 @@ jobs:
           python3 tools/build_extractor.py
           echo "$GITHUB_WORKSPACE/.work/innoextract-build" >> "$GITHUB_PATH"
 
+      # continue-on-error so the identification report still reaches the branch
+      # when extraction fails: the first attempt crashed before writing it and
+      # left nothing to diagnose from, since Actions logs are not reachable
+      # from the analysis sandbox.
       - name: Identify and statically extract 0.8.1
         id: extract
         if: steps.build.outcome == 'success'
+        continue-on-error: true
         run: |
           python3 tools/installer_forensics.py \
             --package ShunCode-0.8.1-Windows-x64.exe \
             --extract-dir .work/extracted-0-8-1 \
-            --output docs/evidence/installer-0-8-1.json
+            --output docs/evidence/installer-0-8-1.json \
+            --require-extraction
 
       - name: Recover the 0.8.1 extension into its own tree
         id: recover
         if: steps.extract.outcome == 'success'
+        continue-on-error: true
         run: |
           # Separate output directory: the 0.7.4 originals are protected and
           # their hashes are cited throughout the project.
@@ -135,6 +142,10 @@ jobs:
           echo "could not push after 5 attempts"
           exit 1
 
-      - name: Propagate extractor failure after saving diagnostics
-        if: steps.build.outcome != 'success' || steps.extract.outcome != 'success'
-        run: exit 1
+      - name: Propagate failure after the diagnostics are safely on the branch
+        if: steps.build.outcome != 'success' || steps.extract.outcome != 'success' || steps.recover.outcome != 'success'
+        run: |
+          echo "build=${{ steps.build.outcome }}"
+          echo "extract=${{ steps.extract.outcome }}"
+          echo "recover=${{ steps.recover.outcome }}"
+          exit 1

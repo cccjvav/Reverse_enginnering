@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import shutil
 import struct
+import sys
 import subprocess
 import tempfile
 
@@ -23,10 +24,40 @@ def sha256(path):
     return h.hexdigest()
 
 
+# Each installer the author has supplied, pinned by the size and SHA-256 that
+# Git LFS already records for it (an LFS sha256 oid is the content hash, which
+# is why these can be registered without downloading the file first). The
+# integrity gate below still refuses anything not listed, so a swapped or
+# truncated download is rejected rather than silently analysed.
+KNOWN_INSTALLERS = {
+    'ShunCode-0.7.4-win32-x64-Setup.exe': (
+        240559253, 'fdc2328b2520a128fd3449ed2015a7383e2b7dafaae05c3892d5a4c11a671272'),
+    'ShunCode-0.8.1-Windows-x64.exe': (
+        233014452, 'c1b5a8bbaa9c8b49a2116e1235f0fe13393d877321031e4812bd81a04e48ea6f'),
+}
+
+
+def expected_for(path):
+    """Size and hash this file must have, by name, else the 0.7.4 defaults.
+
+    Falling back to the module constants keeps the original single-installer
+    behaviour working, including the tests that patch them.
+    """
+    return KNOWN_INSTALLERS.get(path.name, (EXPECTED_SIZE, EXPECTED_SHA256))
+
+
 def identify(path):
-    if path.stat().st_size != EXPECTED_SIZE or sha256(path) != EXPECTED_SHA256:
-        raise ValueError('Installer hash/size mismatch; refusing analysis')
-    result = {'file': path.name, 'size': EXPECTED_SIZE, 'sha256': EXPECTED_SHA256,
+    expected_size, expected_sha256 = expected_for(path)
+    actual_size = path.stat().st_size
+    actual_sha256 = sha256(path)
+    if actual_size != expected_size or actual_sha256 != expected_sha256:
+        # Say which file and what was seen: the previous message gave no way to
+        # tell an unregistered installer from a corrupted one.
+        raise ValueError(
+            f'Installer hash/size mismatch for {path.name}; refusing analysis. '
+            f'expected {expected_size} bytes / {expected_sha256}, '
+            f'got {actual_size} bytes / {actual_sha256}')
+    result = {'file': path.name, 'size': actual_size, 'sha256': actual_sha256,
               'markers': [], 'scope': 'Static parsing only. Installer code is never executed.'}
     with path.open('rb') as stream, mmap.mmap(stream.fileno(), 0, access=mmap.ACCESS_READ) as data:
         if data[:2] == b'MZ':
@@ -147,6 +178,8 @@ def main():
     parser.add_argument('--package', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--extract-dir', type=Path, required=True)
+    parser.add_argument('--require-extraction', action='store_true',
+                        help='exit non-zero if no extractor produced an inventory')
     args = parser.parse_args()
     report = identify(args.package)
     inno = shutil.which('innoextract')
@@ -162,11 +195,41 @@ def main():
             args.extract_dir.mkdir(parents=True)
             report['extraction'] = command_report([inno, '--extract', '--output-dir', str(args.extract_dir.resolve()), str(args.package.resolve())], timeout=600)
             if report['extraction']['exit_code'] == 0:
+                report['extraction_method'] = 'innoextract'
                 report['inventory'] = inventory(args.extract_dir)
+
+    # 0.7.4 was Inno Setup. A later release can be repackaged (electron-builder
+    # emits NSIS by default), which innoextract cannot read at all. 7-Zip
+    # handles NSIS and plain self-extracting archives, so try it rather than
+    # reporting "no extraction" for a file that is perfectly readable.
+    if 'inventory' not in report and seven:
+        if args.extract_dir.exists():
+            raise ValueError('Extraction directory must not exist')
+        args.extract_dir.mkdir(parents=True)
+        report['seven_zip_extraction'] = command_report(
+            [seven, 'x', '-y', '-o' + str(args.extract_dir.resolve()),
+             str(args.package.resolve())], timeout=900)
+        # 7z reports 1 for non-fatal warnings while still extracting usable
+        # files, so judge by what landed on disk, not by exit code alone.
+        produced = any(args.extract_dir.rglob('*')) if args.extract_dir.exists() else False
+        if report['seven_zip_extraction']['exit_code'] in (0, 1) and produced:
+            report['extraction_method'] = '7z'
+            report['inventory'] = inventory(args.extract_dir)
+
+    report['extracted'] = 'inventory' in report
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print('Static report saved; see the report for actual extraction success/failure.')
+    if report['extracted']:
+        print(f"extracted via {report['extraction_method']}: "
+              f"{report['inventory']['file_count']} files")
+    elif args.require_extraction:
+        # Opt-in: callers that exist to extract should fail loudly, while the
+        # original identify-only usage keeps returning 0.
+        print('no extraction method succeeded; see the report', file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())
