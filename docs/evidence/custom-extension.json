@@ -1,5 +1,6 @@
 {
   "origin": "code$GetDestDir/resources/app/extensions/shuncode",
+  "discovery_method": "exact-path",
   "copied": [
     {
       "path": "agents/shuncode-ask.agent.md",
