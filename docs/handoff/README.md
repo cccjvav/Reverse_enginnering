@@ -10,7 +10,7 @@
 > | 内容 | 位置 |
 > | --- | --- |
 > | **新版改了什么（先读这份）** | [0.8.1-新版有什么变化.md](0.8.1-新版有什么变化.md) |
-> | 恢复出的 0.8.1 源码（91 文件 / 68 个 `.ts`） | `recovered/shuncode-0.8.1/` |
+> | 恢复出的 0.8.1 源码（91 文件，`src/` 68 个 / 21077 行） | `recovered/shuncode-0.8.1/` |
 > | 逐文件哈希对比 | `docs/evidence/version-diff-0-8-1.json` |
 > | 0.8.1 取包证据 | `docs/evidence/installer-0-8-1.json`、`custom-extension-0-8-1.json` |
 >
@@ -38,6 +38,12 @@
 >
 > 当前状态总览与"还差什么"见 **[STATUS_NOW.md](STATUS_NOW.md)**；
 > 需要作者本人提供的东西见 **[WHAT_THE_AUTHOR_MUST_SUPPLY.md](WHAT_THE_AUTHOR_MUST_SUPPLY.md)**。
+
+> ## 如果你是接手的 AI 助手，先读 [`AGENTS.md`](../../AGENTS.md)（仓库根目录）
+>
+> 这份 README 讲的是**项目状态**；`AGENTS.md` 讲的是**怎么在这个项目里工作**：
+> 用户是谁、五条铁律、你可能接到的五类任务各自怎么做、沙箱的坑、
+> 以及前几轮踩出来的七条方法经验。**不读会重复踩坑。**
 
 路线图见[ROADMAP.md](ROADMAP.md)，机器可读快照见[STATE.json](STATE.json)。
 

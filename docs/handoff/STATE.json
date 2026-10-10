@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18",
+  "updated": "2026-10-10",
   "purpose": "Handoff snapshot, not a release attestation. Verify current git HEAD and re-run commands before trusting it.",
   "branch": "arena/01a0afd4-reverse-enginnering-of-shun",
   "baseCommitBeforeHandoff": "df7dde398d7d24e544bf233064743c89474cdd35",
@@ -40,7 +40,7 @@
     "richCardsRestored": false
   },
   "localVerification": {
-    "scope": "This handoff working tree: CI branch-binding fix, new structural workflow regression, docs/coverage regeneration. No application source, authorization or release-gate changes. Linux, not Windows/GUI.",
+    "scope": "This handoff working tree: agent handbook (AGENTS.md), web_agent package completion (Skills subsystem 19/19 carrier + 2/2 extension, dangling package reference fixed), doc count corrections. No application source, authorization or release-gate changes. Linux, not Windows/GUI.",
     "nodeVersion": "v22.22.3",
     "pythonVersion": "3.11.2",
     "npmTest": {
@@ -49,10 +49,8 @@
       "failed": 0
     },
     "pythonUnittest": {
-      "exitCode": 0,
-      "run": 39,
-      "passed": 36,
-      "skippedWindowsOnly": 3
+      "ok": 96,
+      "skipped": 4
     },
     "commandsPassed": [
       "npm run check:bridge-core",
@@ -75,6 +73,12 @@
       "outputSha256": "635190e62a2874fa9f07bad049e5da0944ef33f04456bb96da7fae5d823d2aaa",
       "outputBytes": 1677498,
       "byteIdenticalToBaseline": true
+    },
+    "docsAudit": {
+      "files": 144,
+      "markdown": 71,
+      "nonMarkdown": 73,
+      "findings": 0
     }
   },
   "previousCI": {
@@ -813,6 +817,20 @@
         "Type-only files such as version.ts compile to nothing"
       ],
       "limitation": "Not dependency-closed and not runnable: esbuild hoists helpers, so imports need rewiring as reconstruct_bridge_core.mjs did for 0.7.4. These files are for reading and rebuilding from."
+    }
+  },
+  "headCommit": "6edbf6b9691be9edb4bfc82b534c2b4553b57649",
+  "agentHandbook": {
+    "path": "AGENTS.md",
+    "purpose": "Working manual for the next AI assistant: user profile, five hard rules, five task playbooks, sandbox traps, seven method lessons. Read before acting."
+  },
+  "deliverables": {
+    "webagentPackage": {
+      "path": ".work/downloads/shuncode-0.8.1-webagent.zip",
+      "sourceFiles": 54,
+      "sourceLines": 6982,
+      "docs": 5,
+      "note": "Regenerate with: npm run build:webagent-0-8-1-package"
     }
   }
 }
