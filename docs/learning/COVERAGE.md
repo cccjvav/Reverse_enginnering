@@ -2,7 +2,7 @@
 
 **这是进度清单，不是完成声明。** 自动核验可以防止“源码变了、教程仍拿旧行号解释”，不能自动证明教学质量。
 
-当前：6/204 个纳入范围的文件完整逐行解释；363/37945 行已解释。
+当前：6/204 个纳入范围的文件完整逐行解释；363/37994 行已解释。
 
 统计包含注释、结构行和空行；不同原件/重建/维护文件分别计数，不把重复代码算成独立功能。分母随工程变化更新。
 
@@ -181,7 +181,7 @@
 | [tools/build_learning.mjs](../../tools/build_learning.mjs) | 62 | 0 | 待逐行讲解 |
 | [tools/build_linked_extension.mjs](../../tools/build_linked_extension.mjs) | 156 | 0 | 待逐行讲解 |
 | [tools/build_mcp_skills_package.py](../../tools/build_mcp_skills_package.py) | 173 | 0 | 待逐行讲解 |
-| [tools/build_webagent_0_8_1_package.py](../../tools/build_webagent_0_8_1_package.py) | 272 | 0 | 待逐行讲解 |
+| [tools/build_webagent_0_8_1_package.py](../../tools/build_webagent_0_8_1_package.py) | 319 | 0 | 待逐行讲解 |
 | [tools/capture_bridge_ui.mjs](../../tools/capture_bridge_ui.mjs) | 82 | 0 | 待逐行讲解 |
 | [tools/check_btype_arity.py](../../tools/check_btype_arity.py) | 198 | 0 | 待逐行讲解 |
 | [tools/check_cmd_environment.py](../../tools/check_cmd_environment.py) | 87 | 0 | 待逐行讲解 |
@@ -205,7 +205,7 @@
 | [tools/patch_carrier_electron44.py](../../tools/patch_carrier_electron44.py) | 324 | 0 | 待逐行讲解 |
 | [tools/patch_utils.mjs](../../tools/patch_utils.mjs) | 31 | 31 | 本组已逐行解释 |
 | [tools/portable_presentation_inputs.mjs](../../tools/portable_presentation_inputs.mjs) | 26 | 0 | 待逐行讲解 |
-| [tools/prepare_downloads.py](../../tools/prepare_downloads.py) | 99 | 0 | 待逐行讲解 |
+| [tools/prepare_downloads.py](../../tools/prepare_downloads.py) | 101 | 0 | 待逐行讲解 |
 | [tools/probe_carrier_build.py](../../tools/probe_carrier_build.py) | 303 | 0 | 待逐行讲解 |
 | [tools/probe_clipboard_adaptation.py](../../tools/probe_clipboard_adaptation.py) | 177 | 0 | 待逐行讲解 |
 | [tools/probe_header_narrowing.py](../../tools/probe_header_narrowing.py) | 155 | 0 | 待逐行讲解 |

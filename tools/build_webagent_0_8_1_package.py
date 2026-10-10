@@ -88,6 +88,35 @@ ORIGINAL = [
     ("bridge-mcp-modern.ts",
      "P3. The stateless 2026 request path: identity from credential/client/"
      "workspace instead of an MCP session."),
+    # Items 1-13: external MCP and Skills. Previously shipped in the separate
+    # shuncode-0.8.1-mcp-skills.zip, folded in here so there is one package.
+    ("external-mcp-oauth-flow.ts",
+     "Item 1. Outbound DCR + PKCE(S256) + refresh. web_agent accepts only a "
+     "static bearer token, so OAuth-gated servers are unreachable."),
+    ("external-mcp-oauth.ts", "Item 1. Outbound OAuth surface."),
+    ("external-mcp-stdio-env.ts",
+     "Item 2. Managed child environment. web_agent's BASE_ENV has 11 entries; "
+     "13 more are needed for npx/uvx/pip/git servers. Do NOT copy COMSPEC."),
+    ("external-mcp-connection.ts",
+     "Item 3. Transport negotiation; downgrade ONLY on 400/404/405/406/415, "
+     "never on auth/rate-limit/server/network errors."),
+    ("external-mcp-network.ts",
+     "Item 4. Extra CA certificates and the settings fingerprint that forces "
+     "a reconnect when proxy/CA settings change."),
+    ("external-mcp-diagnose.ts",
+     "Item 6. Staged route/dns/tcp/tls/http probe that carries no credential."),
+    ("external-mcp-status.ts",
+     "Item 7. Eight-state vocabulary; needs-auth and proxy-error are the two "
+     "web_agent is missing."),
+    ("external-mcp-secret-fields.ts",
+     "Items 10-11. Reserved headers and field limits (40 fields / 4096 B)."),
+    ("external-mcp-preview-token.ts",
+     "Item 12. Confirmation token from a random HMAC key, NOT a hash of the "
+     "input (the input contains credentials)."),
+    ("external-mcp-native-refs.ts",
+     "Item 13. Pass config by reference with a 5 min TTL, max 10 entries."),
+    ("external-mcp-registry.ts", "Item 3/7. Connection lifecycle."),
+    ("external-mcp-catalog.ts", "Reference. Config store, migration, validation."),
     # Small, directly reusable.
     ("model-endpoint-url.mts",
      "Small win. OpenAI-compatible base URL normalisation: repeated /v1, "
@@ -105,6 +134,13 @@ RECONSTRUCTED = [
      "P2. Task/todo store: 32 tasks, 8 history, 8 terminal entries, 24h TTL."),
     ("bridge-task-owner.js",
      "P3. Owner identity digest and the modern:/task-modern: prefixes."),
+    ("external-mcp-network-errors.js",
+     "Item 5. The nine-category network error taxonomy, keyed on error CODE "
+     "sets rather than message regexes."),
+    ("external-mcp-oauth-config.js", "Item 1. OAuth config shape."),
+    ("external-mcp-import.js", "Reference. Id/url validation and timeouts."),
+    ("custom-tool-skill.js",
+     "Item 8. Skill failure reason codes and fix hints."),
     ("ide-tool-output.js",
      "P2. Structured output tags for run_command / get_command_output / "
      "cancel_command / send_command_input."),
@@ -130,14 +166,19 @@ SECRET_RE = re.compile(
     r"|(xox[baprs]-[A-Za-z0-9-]{10,})"
     r"|(AKIA[0-9A-Z]{16})")
 
-PLAN = "docs/handoff/WEB_AGENT_0.8.1_整合方案.md"
+# (repo path, name inside the archive)
+DOCS = [
+    ("docs/handoff/WEB_AGENT_总方案-0.8.1.md", "总表.md"),
+    ("docs/handoff/WEB_AGENT_MCP_SKILLS_PLAN.md", "方案-外部MCP与Skills.md"),
+    ("docs/handoff/WEB_AGENT_0.8.1_整合方案.md", "方案-隧道代理终端.md"),
+]
 
 README = """ShunCode 0.8.1 - reference sources for web_agent
 ================================================
 
-Companion to 整合方案.md (included in this archive). Read that first: it says
-which of these files matter, in what order, and what NOT to change because
-web_agent already does it better.
+Read 总表.md first: it lists all 23 items with their benefit, cost and
+priority, plus 13 things NOT to change because web_agent already does them
+better. 方案-*.md expand each item.
 
 Scope: tunnel reachability, proxy support, startup failure codes, skill
 import, terminal contract, stateless request identity.
@@ -187,9 +228,12 @@ def main():
     if missing:
         raise SystemExit("missing source files:\n  " + "\n  ".join(missing))
 
-    plan = REPO / PLAN
-    if not plan.exists():
-        raise SystemExit(f"missing plan document: {plan}")
+    docs = []
+    for rel, arcname in DOCS:
+        path = REPO / rel
+        if not path.exists():
+            raise SystemExit(f"missing plan document: {path}")
+        docs.append((path, arcname, rel))
 
     manifest = []
     total_lines = 0
@@ -214,15 +258,19 @@ def main():
                        "Read it, do not run it."),
         })
 
-    plan_text = plan.read_text(encoding="utf8")
-    if SECRET_RE.search(plan_text):
-        raise SystemExit("refusing to package the plan: looks like a secret")
+    doc_blobs = []
+    for path, arcname, rel in docs:
+        text = path.read_text(encoding="utf8")
+        if SECRET_RE.search(text):
+            raise SystemExit(f"refusing to package {rel}: looks like a secret")
+        doc_blobs.append((arcname, text.encode("utf8")))
 
     output = REPO / args.output
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
         _add(archive, "README.txt", README)
-        _add(archive, "整合方案.md", plan_text.encode("utf8"))
+        for arcname, blob in doc_blobs:
+            _add(archive, arcname, blob)
         _add(archive, "MANIFEST.json",
              json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
         for path, arcname, _, _ in entries:
@@ -245,15 +293,14 @@ def main():
         "contentSha256Note": ("sha256 over the sorted per-file digests, so it "
                               "is independent of zip metadata."),
         "bytes": output.stat().st_size,
-        "fileCount": len(manifest) + 3,
+        "fileCount": len(manifest) + 2 + len(doc_blobs),
         "sourceCount": len(manifest),
         "totalLines": total_lines,
-        "plan": PLAN,
+        "plans": [rel for _, _, rel in docs],
         "comparedAgainst": ("web_agent branch arena/01a0e8ea-web-agent @ "
                             "cf313c1"),
-        "excluded": ["payment and licensing sources (user asked to skip)",
-                     "external-MCP sources already in "
-                     "shuncode-0.8.1-mcp-skills.zip"],
+        "excluded": ["payment and licensing sources (user asked to skip)"],
+        "supersedes": "shuncode-0.8.1-mcp-skills.zip",
         "secretScan": "passed",
         "files": manifest,
     }

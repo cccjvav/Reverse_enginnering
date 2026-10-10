@@ -28,6 +28,7 @@ DOCS = [
     "ANSWERS_FOR_AUTHOR.md", "WHAT_THE_AUTHOR_MUST_SUPPLY.md",
     "WEB_AGENT_MCP_SKILLS_PLAN.md", "web_agent-对照-0.8.1.md",
     "0.8.1-全部新增功能清单.md", "WEB_AGENT_0.8.1_整合方案.md",
+    "WEB_AGENT_总方案-0.8.1.md",
     "0.8.1-新版有什么变化.md",
 ]
 
@@ -37,6 +38,7 @@ PROMPTS = [
     ("PAYMENT_ARCHITECTURE_PROMPT.md", "支付架构提示词-纯净版.txt"),
     ("WEB_AGENT_MCP_SKILLS_PLAN.md", "web_agent-MCP与Skills提示词-纯净.txt"),
     ("WEB_AGENT_0.8.1_整合方案.md", "web_agent-0.8.1整合提示词-纯净.txt"),
+    ("WEB_AGENT_总方案-0.8.1.md", "web_agent-总提示词-纯净.txt"),
 ]
 
 START = "## ✂️ 从这里开始复制 ✂️"

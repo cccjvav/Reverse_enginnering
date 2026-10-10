@@ -1,20 +1,24 @@
 {
   "scope": "Build record for the 0.8.1 reference package handed to the web_agent project. Records what was packaged and why; claims nothing about whether the code runs there.",
   "archive": ".work/downloads/shuncode-0.8.1-webagent.zip",
-  "archiveSha256": "348c4ecf582e6bca536a9c766cdb724f7eede86e51054aacd549af80a0269cf8",
+  "archiveSha256": "a719931c26d414ce50153ded399fc9b39a17beea6b5e53beee5ec47ccdbf723d",
   "archiveSha256Note": "Reproducible: zip entries are pinned to a fixed timestamp, so rebuilding identical content yields this same digest.",
-  "contentSha256": "ccd1b8841823db63c832c0084af3a859af60989ced8c816f3159f364be2c90f2",
+  "contentSha256": "2ca8798edce487b775729e806c30a93e55d48127bccf57b3c895e5efc9b598dd",
   "contentSha256Note": "sha256 over the sorted per-file digests, so it is independent of zip metadata.",
-  "bytes": 89766,
-  "fileCount": 32,
-  "sourceCount": 29,
-  "totalLines": 4057,
-  "plan": "docs/handoff/WEB_AGENT_0.8.1_整合方案.md",
+  "bytes": 161263,
+  "fileCount": 50,
+  "sourceCount": 45,
+  "totalLines": 6496,
+  "plans": [
+    "docs/handoff/WEB_AGENT_总方案-0.8.1.md",
+    "docs/handoff/WEB_AGENT_MCP_SKILLS_PLAN.md",
+    "docs/handoff/WEB_AGENT_0.8.1_整合方案.md"
+  ],
   "comparedAgainst": "web_agent branch arena/01a0e8ea-web-agent @ cf313c1",
   "excluded": [
-    "payment and licensing sources (user asked to skip)",
-    "external-MCP sources already in shuncode-0.8.1-mcp-skills.zip"
+    "payment and licensing sources (user asked to skip)"
   ],
+  "supersedes": "shuncode-0.8.1-mcp-skills.zip",
   "secretScan": "passed",
   "files": [
     {
@@ -114,6 +118,102 @@
       "caveat": "Author's original TypeScript, types intact."
     },
     {
+      "path": "original-typescript/external-mcp-oauth-flow.ts",
+      "kind": "original",
+      "lines": 235,
+      "sha256": "29c015d7397a79ed7f21dbcd763ed8d303efebee11f56e02ed1a036b143f6e21",
+      "whyIncluded": "Item 1. Outbound DCR + PKCE(S256) + refresh. web_agent accepts only a static bearer token, so OAuth-gated servers are unreachable.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-oauth.ts",
+      "kind": "original",
+      "lines": 163,
+      "sha256": "dbc18a2adb52a923a8495130c0a9d896385e78aacbc0f517b316273d6ba09976",
+      "whyIncluded": "Item 1. Outbound OAuth surface.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-stdio-env.ts",
+      "kind": "original",
+      "lines": 99,
+      "sha256": "c02765344bef73f556a279df18ea7a877d4eca28caac98c604181df9810335a6",
+      "whyIncluded": "Item 2. Managed child environment. web_agent's BASE_ENV has 11 entries; 13 more are needed for npx/uvx/pip/git servers. Do NOT copy COMSPEC.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-connection.ts",
+      "kind": "original",
+      "lines": 93,
+      "sha256": "21289dafd63287834c926492fa11b5ca231d0edbe9c02ac740c2ef53af79364b",
+      "whyIncluded": "Item 3. Transport negotiation; downgrade ONLY on 400/404/405/406/415, never on auth/rate-limit/server/network errors.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-network.ts",
+      "kind": "original",
+      "lines": 75,
+      "sha256": "9b41f1289cfcbdc1653c2c1ee628bb5eb996d258ec6ce669524ce545f688435c",
+      "whyIncluded": "Item 4. Extra CA certificates and the settings fingerprint that forces a reconnect when proxy/CA settings change.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-diagnose.ts",
+      "kind": "original",
+      "lines": 114,
+      "sha256": "daa57ec6bd23d57e2ba8ab06dfb62401bd10dec56a410f4a7dcf2420512391c3",
+      "whyIncluded": "Item 6. Staged route/dns/tcp/tls/http probe that carries no credential.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-status.ts",
+      "kind": "original",
+      "lines": 47,
+      "sha256": "cfd864257a5656dd3f450443da273361a3deebb117e35a129c62f002ec1e92a8",
+      "whyIncluded": "Item 7. Eight-state vocabulary; needs-auth and proxy-error are the two web_agent is missing.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-secret-fields.ts",
+      "kind": "original",
+      "lines": 95,
+      "sha256": "36578871ebf84c921f28701fa2babadd7c137ce210ff4fd764e01ba0adb7662c",
+      "whyIncluded": "Items 10-11. Reserved headers and field limits (40 fields / 4096 B).",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-preview-token.ts",
+      "kind": "original",
+      "lines": 11,
+      "sha256": "27f6e4988289f0aa368c08f4ad9beee483ab17571f76ef6421a8c223fe54bf57",
+      "whyIncluded": "Item 12. Confirmation token from a random HMAC key, NOT a hash of the input (the input contains credentials).",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-native-refs.ts",
+      "kind": "original",
+      "lines": 52,
+      "sha256": "95cd08733888d406b37e3f9b5858dd3344404fe4b59dfc1339b56ed162b0f255",
+      "whyIncluded": "Item 13. Pass config by reference with a 5 min TTL, max 10 entries.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-registry.ts",
+      "kind": "original",
+      "lines": 260,
+      "sha256": "c6dd4b1e06411835d5e7dc9a73ed8f0d906db4887465432f2c53596dd22793ff",
+      "whyIncluded": "Item 3/7. Connection lifecycle.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/external-mcp-catalog.ts",
+      "kind": "original",
+      "lines": 533,
+      "sha256": "2a479a1b01f846d0a173a16112134457e42f4acb420d706aa72a6ecaaf66e6f7",
+      "whyIncluded": "Reference. Config store, migration, validation.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
       "path": "original-typescript/model-endpoint-url.mts",
       "kind": "original",
       "lines": 71,
@@ -151,6 +251,38 @@
       "lines": 13,
       "sha256": "447c411971d0260b73f7558027325f83e0edaf5e024ecd4c5a8d36334ccd34e5",
       "whyIncluded": "P3. Owner identity digest and the modern:/task-modern: prefixes.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/external-mcp-network-errors.js",
+      "kind": "compiler-output",
+      "lines": 85,
+      "sha256": "f969695a36ceaadf2a0322173a857c22df5ac7996cef739acab743034bb1ceeb",
+      "whyIncluded": "Item 5. The nine-category network error taxonomy, keyed on error CODE sets rather than message regexes.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/external-mcp-oauth-config.js",
+      "kind": "compiler-output",
+      "lines": 30,
+      "sha256": "f17bdb02026fb6410b462a3427978f992a9a4cea6c274d6b95f1f84108c9c47a",
+      "whyIncluded": "Item 1. OAuth config shape.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/external-mcp-import.js",
+      "kind": "compiler-output",
+      "lines": 230,
+      "sha256": "2a7d57f362fdc52725d863d7ffd5483a84ebaa445531b8832773042eb72c735f",
+      "whyIncluded": "Reference. Id/url validation and timeouts.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-skill.js",
+      "kind": "compiler-output",
+      "lines": 317,
+      "sha256": "9efbc590f773f6f84486e9bed0f39719700d59f3d23ae021864df3f866dd85a8",
+      "whyIncluded": "Item 8. Skill failure reason codes and fix hints.",
       "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
     },
     {
