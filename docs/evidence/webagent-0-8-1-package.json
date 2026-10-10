@@ -1,19 +1,20 @@
 {
   "scope": "Build record for the 0.8.1 reference package handed to the web_agent project. Records what was packaged and why; claims nothing about whether the code runs there.",
   "archive": ".work/downloads/shuncode-0.8.1-webagent.zip",
-  "archiveSha256": "2af477416e06264bd7f722888645a78f931e4c4cbfcc328809f7bca08ad46059",
+  "archiveSha256": "697567c0718997c9980745c2b535c18d0836f872294c97b12a94924ad47c3689",
   "archiveSha256Note": "Reproducible: zip entries are pinned to a fixed timestamp, so rebuilding identical content yields this same digest.",
-  "contentSha256": "2ca8798edce487b775729e806c30a93e55d48127bccf57b3c895e5efc9b598dd",
+  "contentSha256": "f27bb99ac3b82af4a34aa277a0a623cafad387c6018bdbba5ccd634f52750b1a",
   "contentSha256Note": "sha256 over the sorted per-file digests, so it is independent of zip metadata.",
-  "bytes": 173146,
-  "fileCount": 51,
-  "sourceCount": 45,
-  "totalLines": 6496,
+  "bytes": 194771,
+  "fileCount": 61,
+  "sourceCount": 54,
+  "totalLines": 6982,
   "plans": [
     "docs/handoff/WEB_AGENT_总方案-0.8.1.md",
     "docs/handoff/WEB_AGENT_MCP_SKILLS_PLAN.md",
     "docs/handoff/WEB_AGENT_0.8.1_整合方案.md",
-    "docs/handoff/WEB_AGENT_方法论优化-0.8.1.md"
+    "docs/handoff/WEB_AGENT_方法论优化-0.8.1.md",
+    "docs/handoff/0.8.1-全部新增功能清单.md"
   ],
   "comparedAgainst": "web_agent branch arena/01a0e8ea-web-agent @ cf313c1",
   "excluded": [
@@ -215,6 +216,22 @@
       "caveat": "Author's original TypeScript, types intact."
     },
     {
+      "path": "original-typescript/bridge-license-network-policy.mts",
+      "kind": "original",
+      "lines": 29,
+      "sha256": "6bb3923eb1b792b665a77a89be6cb6bc1985c1ecd8807d030df3ed14d16eb99f",
+      "whyIncluded": "N4. Object.freeze'd per-operation timeout budgets with a version string. The pattern, not the numbers.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/bridge-notices.ts",
+      "kind": "original",
+      "lines": 74,
+      "sha256": "0e1c81fbaf2d98a5264be0e8e5c3b3e63f2e2b320ed4905b011dde06a07f90eb",
+      "whyIncluded": "N1. Renders user-facing text from a code, never by concatenating the English original; picks zh-CN vs English without a language pack.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
       "path": "original-typescript/model-endpoint-url.mts",
       "kind": "original",
       "lines": 71,
@@ -380,6 +397,62 @@
       "lines": 54,
       "sha256": "6ca58400e01cc06c7d67c0efb9e9bc787aae133832db63acaa02038d5b2d0955",
       "whyIncluded": "P2. Sweeps interrupted imports at startup.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-manifest.js",
+      "kind": "compiler-output",
+      "lines": 53,
+      "sha256": "c5a00a3690ea8d8a68dea75e9b2db3dd4792411342fd7c5fd5bfbc373bb2d2dc",
+      "whyIncluded": "P2. Skill manifest/frontmatter shape and validation.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-sandbox.js",
+      "kind": "compiler-output",
+      "lines": 78,
+      "sha256": "b34d3edccfc345aa3d9c64f1f64c2fa61e9f2008ad56288ff2ff3d73feb9a646",
+      "whyIncluded": "P2. Sandbox constraints applied to a skill's scripts.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-contract.js",
+      "kind": "compiler-output",
+      "lines": 28,
+      "sha256": "0d1a8481650bc4fe61bdd5719e5075f38120d7deeaa24d12a8a9b5fdf2fbeb28",
+      "whyIncluded": "P2. The custom tool contract.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-skill-import.js",
+      "kind": "compiler-output",
+      "lines": 92,
+      "sha256": "ce95f59210d61b2255ebf2f7fb7d50a1ced8817c315036aeab2192fa982c809f",
+      "whyIncluded": "P2. Skill runner generation on import.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tools.js",
+      "kind": "compiler-output",
+      "lines": 49,
+      "sha256": "817a6eff18ef97fdaad1559b6bf67c815e9b6a23595c71e1ae25beec8467c4dc",
+      "whyIncluded": "P2. Loading installed custom tools.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-admin.js",
+      "kind": "compiler-output",
+      "lines": 42,
+      "sha256": "81d92f730ff9a7a441dcf0afdad9799b77b8f667a1ae5244609557261cf59673",
+      "whyIncluded": "P2. Enable/disable and delete.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/custom-tool-migration.js",
+      "kind": "compiler-output",
+      "lines": 41,
+      "sha256": "fef29e85d0a9811d551dcd10583ca0321f6bb82ae7567ce84a461c42eb8e092c",
+      "whyIncluded": "P2. Migration of older custom tools.",
       "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
     }
   ]

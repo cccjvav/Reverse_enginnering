@@ -4,7 +4,8 @@
 > 合并在这里，去重后共 **23 项**，每项都写清**好处**（不做会怎样、做了得到什么）。
 >
 > 配套源码包：`npm run build:webagent-0-8-1-package`
-> → `.work/downloads/shuncode-0.8.1-webagent.zip`（**45 份源码 / 6 496 行，已含两份旧方案引用的全部文件**，
+> → `.work/downloads/shuncode-0.8.1-webagent.zip`（**54 份源码 / 6 982 行 + 5 份文档**，
+> 含 Skills 子系统全部 21 个模块、两份旧方案引用的全部文件，
 > 取代更早的 `shuncode-0.8.1-mcp-skills.zip`）。
 >
 > 对照对象：web_agent 分支 `arena/01a0e8ea-web-agent` @ `cf313c1`。

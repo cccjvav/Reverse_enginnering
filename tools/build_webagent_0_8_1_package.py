@@ -117,6 +117,15 @@ ORIGINAL = [
      "Item 13. Pass config by reference with a 5 min TTL, max 10 entries."),
     ("external-mcp-registry.ts", "Item 3/7. Connection lifecycle."),
     ("external-mcp-catalog.ts", "Reference. Config store, migration, validation."),
+    # N4 reference. Named "license" but contains no credential or payment
+    # logic: a frozen, versioned per-operation timeout table plus a signal
+    # helper. Included as the budget-table pattern for proposal N4.
+    ("bridge-license-network-policy.mts",
+     "N4. Object.freeze'd per-operation timeout budgets with a version "
+     "string. The pattern, not the numbers."),
+    ("bridge-notices.ts",
+     "N1. Renders user-facing text from a code, never by concatenating the "
+     "English original; picks zh-CN vs English without a language pack."),
     # Small, directly reusable.
     ("model-endpoint-url.mts",
      "Small win. OpenAI-compatible base URL normalisation: repeated /v1, "
@@ -157,6 +166,18 @@ RECONSTRUCTED = [
     ("skill-fs-retry.js", "P2. Retry around Windows file locking."),
     ("skill-import-recovery.js",
      "P2. Sweeps interrupted imports at startup."),
+    # The custom-tool family predates 0.8.1 but is the layer the new global
+    # skill modules build on: manifest shape, sandbox, contract, admin.
+    # Included so the skill subsystem is complete rather than half a picture.
+    ("custom-tool-manifest.js",
+     "P2. Skill manifest/frontmatter shape and validation."),
+    ("custom-tool-sandbox.js",
+     "P2. Sandbox constraints applied to a skill's scripts."),
+    ("custom-tool-contract.js", "P2. The custom tool contract."),
+    ("custom-tool-skill-import.js", "P2. Skill runner generation on import."),
+    ("custom-tools.js", "P2. Loading installed custom tools."),
+    ("custom-tool-admin.js", "P2. Enable/disable and delete."),
+    ("custom-tool-migration.js", "P2. Migration of older custom tools."),
 ]
 
 SECRET_RE = re.compile(
@@ -172,6 +193,7 @@ DOCS = [
     ("docs/handoff/WEB_AGENT_MCP_SKILLS_PLAN.md", "方案-外部MCP与Skills.md"),
     ("docs/handoff/WEB_AGENT_0.8.1_整合方案.md", "方案-隧道代理终端.md"),
     ("docs/handoff/WEB_AGENT_方法论优化-0.8.1.md", "方法论优化.md"),
+    ("docs/handoff/0.8.1-全部新增功能清单.md", "背景-0.8.1全部新增功能.md"),
 ]
 
 README = """ShunCode 0.8.1 - reference sources for web_agent
