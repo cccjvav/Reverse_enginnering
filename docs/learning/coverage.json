@@ -15,8 +15,8 @@
     "Generated lesson documents/annotation data, images, binary installers, JSON configs and lockfiles; configuration reading is tracked separately in the curriculum"
   ],
   "summary": {
-    "files": 203,
-    "lines": 37668,
+    "files": 204,
+    "lines": 37945,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1185,6 +1185,13 @@
       "status": "pending"
     },
     {
+      "source": "tools/build_webagent_0_8_1_package.py",
+      "sha256": "e1942a6277f6e3e7ba4b46cd3d969b6cbd2d296d6139427ec302c3c5bae05e97",
+      "lines": 272,
+      "explainedLines": 0,
+      "status": "pending"
+    },
+    {
       "source": "tools/capture_bridge_ui.mjs",
       "sha256": "c64c635730cffce5d73bd4e005f0c014be842feb00018e56f0c3a762da802bce",
       "lines": 82,
@@ -1347,8 +1354,8 @@
     },
     {
       "source": "tools/prepare_downloads.py",
-      "sha256": "d259ff709c834d24aaa0675e3084e97adf312aab1c004644a4dec7e09bdc997e",
-      "lines": 94,
+      "sha256": "3480be11faacd5043bc83294efd280cf624db8d19544a39af3e5c2b022740e05",
+      "lines": 99,
       "explainedLines": 0,
       "status": "pending"
     },

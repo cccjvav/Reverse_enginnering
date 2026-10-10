@@ -1,0 +1,253 @@
+{
+  "scope": "Build record for the 0.8.1 reference package handed to the web_agent project. Records what was packaged and why; claims nothing about whether the code runs there.",
+  "archive": ".work/downloads/shuncode-0.8.1-webagent.zip",
+  "archiveSha256": "348c4ecf582e6bca536a9c766cdb724f7eede86e51054aacd549af80a0269cf8",
+  "archiveSha256Note": "Reproducible: zip entries are pinned to a fixed timestamp, so rebuilding identical content yields this same digest.",
+  "contentSha256": "ccd1b8841823db63c832c0084af3a859af60989ced8c816f3159f364be2c90f2",
+  "contentSha256Note": "sha256 over the sorted per-file digests, so it is independent of zip metadata.",
+  "bytes": 89766,
+  "fileCount": 32,
+  "sourceCount": 29,
+  "totalLines": 4057,
+  "plan": "docs/handoff/WEB_AGENT_0.8.1_整合方案.md",
+  "comparedAgainst": "web_agent branch arena/01a0e8ea-web-agent @ cf313c1",
+  "excluded": [
+    "payment and licensing sources (user asked to skip)",
+    "external-MCP sources already in shuncode-0.8.1-mcp-skills.zip"
+  ],
+  "secretScan": "passed",
+  "files": [
+    {
+      "path": "original-typescript/bridge-quick-tunnel.ts",
+      "kind": "original",
+      "lines": 56,
+      "sha256": "babb648c25f3b7e86e4fee9f5127b148eecc7ab95a5978b2945c47dbfae16f8e",
+      "whyIncluded": "P0. The --config and --protocol fixes. web_agent's cloudflared.js:228 has neither. Pure functions, no I/O, no vscode.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/cloudflare-edge-relay.ts",
+      "kind": "original",
+      "lines": 171,
+      "sha256": "4c4d2b9dd8948b2bfdd51e073ea7eae6c23fd34e0b1faf6a11f90eb27bd60dc6",
+      "whyIncluded": "P1. Local CONNECT relay so cloudflared can reach the edge through an HTTP proxy, which cloudflared itself cannot do.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/proxy-bypass.mts",
+      "kind": "original",
+      "lines": 89,
+      "sha256": "482c9f173bdc61a917964c48b78e23c227bd221f4225b90c1116836bc0badb32",
+      "whyIncluded": "P1. NO_PROXY matching, including host:port and macOS abbreviated networks such as 169.254/16.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/extension-host-proxy.mts",
+      "kind": "original",
+      "lines": 1107,
+      "sha256": "c64bc604edb3f8b9160a57f0f9e8773091a700654e61d08fd75e918018831b0b",
+      "whyIncluded": "P1. CANDIDATE_LOCAL_PROXY_PORTS: 14 local proxy clients with probing and a working-proxy cache. web_agent has no proxy support at all.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/bridge-start-failure.ts",
+      "kind": "original",
+      "lines": 243,
+      "sha256": "4d0990db8e661f0d80cac49f0d470d640e80386530dea497775dd66835f28910",
+      "whyIncluded": "P1. ~24 stable startup failure codes as a contract between host and UI. Pure module, unit-testable.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/bridge-tunnel-lease.ts",
+      "kind": "original",
+      "lines": 511,
+      "sha256": "49b592e499820ec436ce443e99ffd0223e6bccb17b1a0db82cc0987c82b3f3ae",
+      "whyIncluded": "Reference. Cross-process lease over an abstract socket / named pipe, plus reclaiming a stale tunnel owner.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/bridge-route-token.ts",
+      "kind": "original",
+      "lines": 36,
+      "sha256": "7eba0630d9b0879901514e005785aef35f6f5ed40dd75abdcf66ed8ebe2b6e73",
+      "whyIncluded": "Reference. Route identity is published only after durable storage succeeds; initialize/reset are serialized.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/bridge-route-token-storage.ts",
+      "kind": "original",
+      "lines": 29,
+      "sha256": "0ebecad0899099a9441b642f12895632f02888cae27ca6d18b7d89adc5bcf8d6",
+      "whyIncluded": "Reference. The lease retry loop around the route token.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/skill-center.ts",
+      "kind": "original",
+      "lines": 399,
+      "sha256": "0293be919ee75e541e97306adb466667588a37804b479cecb9bc4b8f397f52c7",
+      "whyIncluded": "P2. The import pipeline's orchestration and its three rules: import is a transaction, the previous directory is never modified, nothing in the package is executed.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/skill-list-tool.ts",
+      "kind": "original",
+      "lines": 59,
+      "sha256": "0939dc70a381dc1bb6350ad91db12ef569068852464ceda86ae02cf6926059df",
+      "whyIncluded": "P2. Read-only skill discovery shape for remote clients.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/managed-bash-protocol.ts",
+      "kind": "original",
+      "lines": 89,
+      "sha256": "5f9027c83044932cc3e1e980e702245ada0bc9cdd23e4d3c705e14006100f8d3",
+      "whyIncluded": "P2. Windows ConPTY + bundled PortableGit bash startup, including the stty -icanon fix for MSYS reporting a false EOF.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/bridge-mcp-modern.ts",
+      "kind": "original",
+      "lines": 171,
+      "sha256": "6244d900d61d8a9f3c4e6128801e1fc5318ba9b4ea2e3e26504a78f7ce2b3033",
+      "whyIncluded": "P3. The stateless 2026 request path: identity from credential/client/workspace instead of an MCP session.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "original-typescript/model-endpoint-url.mts",
+      "kind": "original",
+      "lines": 71,
+      "sha256": "d326a2d20b7c6e5f7d86d16333f61d852af5a3b91d1258a7f2a45489403237bb",
+      "whyIncluded": "Small win. OpenAI-compatible base URL normalisation: repeated /v1, pasted /chat/completions, and the api.deepseek.com exception.",
+      "caveat": "Author's original TypeScript, types intact."
+    },
+    {
+      "path": "recovered-from-bundle/bridge-ngrok-failure.js",
+      "kind": "compiler-output",
+      "lines": 28,
+      "sha256": "70962a84ab17e17a25d4e3d4e9545d7c93e2d940dbaa4bf9a020caeb5e458796",
+      "whyIncluded": "P1. ERR_NGROK_334 / 'endpoint is already online'; retryable vs not. web_agent uses ngrok too.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/bridge-agent-instructions.js",
+      "kind": "compiler-output",
+      "lines": 12,
+      "sha256": "2163e2941697e3225c38b1528e90a9e88de421951aa1b130ccacb219712ba36a",
+      "whyIncluded": "P2. The shell contract text given to the model. web_agent runs PowerShell on Windows, so rewrite rather than copy verbatim.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/bridge-task-store.js",
+      "kind": "compiler-output",
+      "lines": 256,
+      "sha256": "2778b2f2ca93c525f571f53a781bef57e8330167763609baa09a0e3ef4f4c661",
+      "whyIncluded": "P2. Task/todo store: 32 tasks, 8 history, 8 terminal entries, 24h TTL.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/bridge-task-owner.js",
+      "kind": "compiler-output",
+      "lines": 13,
+      "sha256": "447c411971d0260b73f7558027325f83e0edaf5e024ecd4c5a8d36334ccd34e5",
+      "whyIncluded": "P3. Owner identity digest and the modern:/task-modern: prefixes.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/ide-tool-output.js",
+      "kind": "compiler-output",
+      "lines": 55,
+      "sha256": "edc0a7f42b69ce363f62f1a63e0c85f66b1bdfbf5b0e651db42c20506b4e7854",
+      "whyIncluded": "P2. Structured output tags for run_command / get_command_output / cancel_command / send_command_input.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/skill-import-journal.js",
+      "kind": "compiler-output",
+      "lines": 130,
+      "sha256": "649ebedfd4b1e8a1d8c4f7105bed5af5415d543ba44fb3ba88ddee248d54289d",
+      "whyIncluded": "P2. Journalled commit: crash-safe rollback/resume.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/skill-archive.js",
+      "kind": "compiler-output",
+      "lines": 123,
+      "sha256": "abe7b87feea40d8a84f89ef79054e6fc01701fb18d5a9771b6f086bc0190152d",
+      "whyIncluded": "P2. Worker-thread archive extraction.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/skill-archive-limits.js",
+      "kind": "compiler-output",
+      "lines": 26,
+      "sha256": "cd5a7c98ab85d75cc1c6dba58b63ae274e71eed651b55066dedd90c31d11c79b",
+      "whyIncluded": "P2. Decompression-bomb limits.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/skill-archive-detect.js",
+      "kind": "compiler-output",
+      "lines": 20,
+      "sha256": "85f742f3310cb166401076a96e6c4778fd6d2c651f240271044502c3c184dd73",
+      "whyIncluded": "P2. Archive format detection.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/global-skill-import.js",
+      "kind": "compiler-output",
+      "lines": 83,
+      "sha256": "1905d0bfc73c8dc78d9985a90342cde0e21c2a3272eded52ae284de61dd107f2",
+      "whyIncluded": "P2. prepare -> preview -> commit.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/global-skill-migration.js",
+      "kind": "compiler-output",
+      "lines": 64,
+      "sha256": "6d9ddfd4658b98a473e15571bf9f12fd662eb97e91eb546b70f384502ae7589d",
+      "whyIncluded": "P2. Validated per-skill migration.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/global-skill-catalog.js",
+      "kind": "compiler-output",
+      "lines": 34,
+      "sha256": "4d91774c3b7faf34f06d385dd86ea2781c1e219e1b2842a5024f809031a17c91",
+      "whyIncluded": "P2. Load and diagnose.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/global-skill-paths.js",
+      "kind": "compiler-output",
+      "lines": 63,
+      "sha256": "cf620d40d433d1b7068e66f8ff1e3b0ea25110ec65b469401d00e06c31ef7231",
+      "whyIncluded": "P2. Directory resolution and versioning.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/global-skill-settings.js",
+      "kind": "compiler-output",
+      "lines": 32,
+      "sha256": "2ac59a6189c7139e0065b768d7e9facdaa74dd974a8d707f2ade23c99b316f43",
+      "whyIncluded": "P2. Shared location setting.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/skill-fs-retry.js",
+      "kind": "compiler-output",
+      "lines": 33,
+      "sha256": "03cebc96ec8efd012fe2fee279dd666a88e24cfa51618c3c32b4c696ffdadb69",
+      "whyIncluded": "P2. Retry around Windows file locking.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    },
+    {
+      "path": "recovered-from-bundle/skill-import-recovery.js",
+      "kind": "compiler-output",
+      "lines": 54,
+      "sha256": "6ca58400e01cc06c7d67c0efb9e9bc787aae133832db63acaa02038d5b2d0955",
+      "whyIncluded": "P2. Sweeps interrupted imports at startup.",
+      "caveat": "Compiler output from dist/extension.js: types and most comments are erased, imports are not rewired. Read it, do not run it."
+    }
+  ]
+}
