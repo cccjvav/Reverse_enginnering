@@ -171,6 +171,7 @@ DOCS = [
     ("docs/handoff/WEB_AGENT_总方案-0.8.1.md", "总表.md"),
     ("docs/handoff/WEB_AGENT_MCP_SKILLS_PLAN.md", "方案-外部MCP与Skills.md"),
     ("docs/handoff/WEB_AGENT_0.8.1_整合方案.md", "方案-隧道代理终端.md"),
+    ("docs/handoff/WEB_AGENT_方法论优化-0.8.1.md", "方法论优化.md"),
 ]
 
 README = """ShunCode 0.8.1 - reference sources for web_agent
@@ -179,6 +180,11 @@ README = """ShunCode 0.8.1 - reference sources for web_agent
 Read 总表.md first: it lists all 23 items with their benefit, cost and
 priority, plus 13 things NOT to change because web_agent already does them
 better. 方案-*.md expand each item.
+
+方法论优化.md is a different kind of document: instead of "web_agent is
+missing X", it distills the recurring *approach* in ShunCode's source and
+applies it to web_agent's own architecture. Most of its 8 proposals have no
+direct ShunCode counterpart.
 
 Scope: tunnel reachability, proxy support, startup failure codes, skill
 import, terminal contract, stateless request identity.

@@ -1,18 +1,19 @@
 {
   "scope": "Build record for the 0.8.1 reference package handed to the web_agent project. Records what was packaged and why; claims nothing about whether the code runs there.",
   "archive": ".work/downloads/shuncode-0.8.1-webagent.zip",
-  "archiveSha256": "a719931c26d414ce50153ded399fc9b39a17beea6b5e53beee5ec47ccdbf723d",
+  "archiveSha256": "2af477416e06264bd7f722888645a78f931e4c4cbfcc328809f7bca08ad46059",
   "archiveSha256Note": "Reproducible: zip entries are pinned to a fixed timestamp, so rebuilding identical content yields this same digest.",
   "contentSha256": "2ca8798edce487b775729e806c30a93e55d48127bccf57b3c895e5efc9b598dd",
   "contentSha256Note": "sha256 over the sorted per-file digests, so it is independent of zip metadata.",
-  "bytes": 161263,
-  "fileCount": 50,
+  "bytes": 173146,
+  "fileCount": 51,
   "sourceCount": 45,
   "totalLines": 6496,
   "plans": [
     "docs/handoff/WEB_AGENT_总方案-0.8.1.md",
     "docs/handoff/WEB_AGENT_MCP_SKILLS_PLAN.md",
-    "docs/handoff/WEB_AGENT_0.8.1_整合方案.md"
+    "docs/handoff/WEB_AGENT_0.8.1_整合方案.md",
+    "docs/handoff/WEB_AGENT_方法论优化-0.8.1.md"
   ],
   "comparedAgainst": "web_agent branch arena/01a0e8ea-web-agent @ cf313c1",
   "excluded": [

@@ -16,7 +16,7 @@
   ],
   "summary": {
     "files": 204,
-    "lines": 37994,
+    "lines": 38001,
     "fullyExplainedFiles": 6,
     "explainedLines": 363,
     "projectWideExplanationComplete": false
@@ -1186,8 +1186,8 @@
     },
     {
       "source": "tools/build_webagent_0_8_1_package.py",
-      "sha256": "7520f17a81d9a7d302e06de61df0830b243d62059228a3ed8a5f6d3b2f4fb6d1",
-      "lines": 319,
+      "sha256": "6b228ab21b2af972f62d0cd660918425664459e9b656856372a13663d86fae9a",
+      "lines": 325,
       "explainedLines": 0,
       "status": "pending"
     },
@@ -1354,8 +1354,8 @@
     },
     {
       "source": "tools/prepare_downloads.py",
-      "sha256": "d577877c5dfa7df9d01cbe4a58d0922568dc4f138211945f697f98e2b966c73c",
-      "lines": 101,
+      "sha256": "22a3fb6108d00bceafa2a86cec047362a32409bac401d348e795741c16796cd3",
+      "lines": 102,
       "explainedLines": 0,
       "status": "pending"
     },
